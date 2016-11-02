@@ -33,8 +33,25 @@
         return self.simpleRoutines().length > 0;
     });
 
+    self.toJSON = function() {
+        var model = {
+            title: self.title(),
+            roundsCount: self.roundsCount(),
+            timeToWork: self.timeToWork(),
+            restBetweenExercises: self.restBetweenExercises(),
+            restBetweenRounds: self.restBetweenRounds(),
+            exercisesToDoList: []
+        };
+        $.each(self.simpleRoutines(), function (index, routine) {
+            var innderRoutineJson = routine.toJSON();
+            model.exercisesToDoList.push(innderRoutineJson);
+        });
+
+        return model;
+    };
+
     self.createWorkout = function () {
-        service.createWorkout();
+        service.createWorkout(self.toJSON);
     };
 
     return self;
