@@ -14,7 +14,7 @@ namespace CrossfitDiary.Web.Api
         /// <param name="model"></param>
         [HttpPost]
         [Route("createWorkout")]
-        public void CreateWorkout()
+        public void CreateWorkout(WorkoutViewModel model)
         {
             var test = 123;
         }
@@ -22,5 +22,6 @@ namespace CrossfitDiary.Web.Api
 
     public class WorkoutViewModel
     {
+        public string Title { get; set; }
     }
 }

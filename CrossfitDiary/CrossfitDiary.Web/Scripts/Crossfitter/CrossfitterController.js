@@ -34,8 +34,18 @@
     });
 
     self.createWorkout = function () {
-        service.createWorkout();
+        var model = self.ToJs();
+        service.createWorkout(model);
     };
+
+    self.ToJs = function() {
+        var model = {
+            title : self.title()
+        };
+
+        return model;
+    };
+
 
     return self;
 };
