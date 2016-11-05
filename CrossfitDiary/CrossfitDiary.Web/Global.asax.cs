@@ -26,6 +26,7 @@ namespace CrossfitDiary.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             Bootstrapper.Run();
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
