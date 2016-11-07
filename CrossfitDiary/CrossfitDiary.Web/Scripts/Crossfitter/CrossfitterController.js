@@ -33,7 +33,7 @@
         return self.simpleRoutines().length > 0;
     });
 
-    self.toJSON = function() {
+    self.toJSON = function () {
         var model = {
             title: self.title(),
             roundsCount: self.roundsCount(),
@@ -51,7 +51,8 @@
     };
 
     self.createWorkout = function () {
-        service.createWorkout(self.toJSON);
+
+        service.createWorkout(self.toJSON());
     };
 
     return self;

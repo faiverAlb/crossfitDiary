@@ -18,16 +18,20 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
 
         protected override void Seed(CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryDbContext context)
         {
-            GetInitialExerciseMeasureTypes().ForEach(exerciseMeasureType => context.ExerciseMeasureTypes.Add(exerciseMeasureType));
-            context.Commit();
-            GetInitialExercises(context).ForEach(x => context.Exercises.Add(x));
-            context.Commit();
-            GetInitialRoutines(context).ForEach(x => context.ComplexRoutines.Add(x));
-            context.Commit();
-            GetInitialCrossfitters().ForEach(x => context.Crossfitters.Add(x));
-            context.Commit();
-            GetInitialCrossfitterWorkout(context).ForEach(x => context.CrossfitterWorkouts.Add(x));
-            context.Commit();
+            if (!context.ExerciseMeasureTypes.Any(x => x.MeasureType == MeasureType.Count))
+            {
+                GetInitialExerciseMeasureTypes()
+                    .ForEach(exerciseMeasureType => context.ExerciseMeasureTypes.Add(exerciseMeasureType));
+                context.Commit();
+                GetInitialExercises(context).ForEach(x => context.Exercises.Add(x));
+                context.Commit();
+                GetInitialRoutines(context).ForEach(x => context.ComplexRoutines.Add(x));
+                context.Commit();
+                GetInitialCrossfitters().ForEach(x => context.Crossfitters.Add(x));
+                context.Commit();
+                GetInitialCrossfitterWorkout(context).ForEach(x => context.CrossfitterWorkouts.Add(x));
+                context.Commit();
+            }
         }
 
         private static List<ExerciseMeasureType> GetInitialExerciseMeasureTypes()

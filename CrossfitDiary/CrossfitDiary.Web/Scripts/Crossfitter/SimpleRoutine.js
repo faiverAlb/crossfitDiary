@@ -9,6 +9,10 @@
         }
     };
 
+    self.toJSON = function() {
+        debugger;
+    };
+
     init();
     return self;
 };
