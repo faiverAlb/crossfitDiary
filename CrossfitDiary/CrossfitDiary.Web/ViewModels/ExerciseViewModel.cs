@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace CrossfitDiary.Web.ViewModels
@@ -27,6 +26,9 @@ namespace CrossfitDiary.Web.ViewModels
     {
         [JsonProperty("measureType")]
         public MeasureTypeViewModel MeasureType { get; set; }
+
+        [JsonProperty("measureValue")]
+        public string MeasureValue { get; set; }
 
         [JsonProperty("description")]
         public string Description { get; set; }

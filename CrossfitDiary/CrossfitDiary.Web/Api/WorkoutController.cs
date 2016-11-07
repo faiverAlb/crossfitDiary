@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using CrossfitDiary.Web.ViewModels;
+using Newtonsoft.Json;
 
 namespace CrossfitDiary.Web.Api
 {
@@ -22,21 +24,5 @@ namespace CrossfitDiary.Web.Api
         }
     }
 
-    public class WorkoutViewModel
-    {
-        public string Title { get; set; }
-        public int? RoundsCount { get; set; }
-
-        //TODO: Possible problems with time string from js: 31:23 - will not be passed
-        public TimeSpan? TimeToWork { get; set; }
-        public TimeSpan? RestBetweenExercises { get; set; }
-        public TimeSpan? RestBetweenRounds { get; set; }
-
-
-        public List<ExerciseToDoViewModel> ExercisesToDoList { get; set; }
-    }
-
-    public class ExerciseToDoViewModel
-    {
-    }
+    
 }
