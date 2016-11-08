@@ -14,6 +14,7 @@ namespace CrossfitDiary.Web.Mappings
             CreateMap<MeasureType, MeasureTypeViewModel>();
             CreateMap<ExerciseMeasureType, ExerciseMeasureTypeViewModel>();
             CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>();
+            CreateMap<RoutineComplexType, WorkoutTypeViewModel>();
         }
     }
 }

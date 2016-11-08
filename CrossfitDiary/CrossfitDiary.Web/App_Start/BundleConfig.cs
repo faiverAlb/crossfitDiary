@@ -34,6 +34,7 @@ namespace CrossfitDiary.Web
                 "~/Scripts/Crossfitter/CrossfitterController.js"
                 , "~/Scripts/Crossfitter/SimpleRoutine.js"
                 , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
+                , "~/Scripts/Crossfitter/WorkoutType.js"
                 , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
                 , "~/Scripts/Crossfitter/CrossfitterService.js"));
 

@@ -256,6 +256,7 @@
     <Compile Include="Mappings\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Configuration\ApplicationUserManager.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="MvcHelpers\EnumHelper.cs" />
     <Compile Include="MvcHelpers\MvcUIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedController.generated.cs">
@@ -271,6 +272,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ExerciseViewModel.cs" />
+    <Compile Include="ViewModels\WorkoutTypeViewModel.cs" />
     <Compile Include="ViewModels\WorkoutViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -442,6 +444,7 @@
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Crossfitter\CrossfitterService.js" />
+    <Content Include="Scripts\Crossfitter\WorkoutType.js" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureType.js" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureTypeValue.js" />
     <Content Include="Scripts\Crossfitter\SimpleRoutine.js" />

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
+using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.ViewModels;
-using Newtonsoft.Json;
 
 namespace CrossfitDiary.Web.Api
 {
@@ -11,6 +9,12 @@ namespace CrossfitDiary.Web.Api
     [RoutePrefix("api")]
     public class WorkoutController : ApiController
     {
+        private readonly ICrossfitterService _crossfitterService;
+
+        public WorkoutController(ICrossfitterService crossfitterService)
+        {
+            _crossfitterService = crossfitterService;
+        }
 
         /// <summary>
         /// Create workout by viewmodel
@@ -20,7 +24,7 @@ namespace CrossfitDiary.Web.Api
         [Route("createWorkout")]
         public void CreateWorkout(WorkoutViewModel model)
         {
-            var test = 123;
+            _crossfitterService.CreateWorkout();
         }
     }
 

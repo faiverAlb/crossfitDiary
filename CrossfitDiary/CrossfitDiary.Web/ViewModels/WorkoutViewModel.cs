@@ -14,6 +14,7 @@ namespace CrossfitDiary.Web.ViewModels
         public TimeSpan? RestBetweenExercises { get; set; }
         public TimeSpan? RestBetweenRounds { get; set; }
 
+        public WorkoutTypeViewModel WorkoutTypeViewModel { get; set; }
 
         [JsonProperty("exercisesToDoList")]
         public List<ExerciseViewModel> ExercisesToDoList { get; set; }

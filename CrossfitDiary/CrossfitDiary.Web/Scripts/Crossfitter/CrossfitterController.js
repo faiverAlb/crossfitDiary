@@ -1,9 +1,9 @@
 ﻿var CrossfitterController = function (parameters) {
     var self = this;
-
+    
     var service = new CrossfitterService(parameters.pathToApp);
 
-    self.exercises = ko.observableArray(parameters.exercises);
+    self.exercises = ko.observableArray(parameters.viewModel.exercises);
     self.selectedExercise = ko.observable();
 
     self.simpleRoutines = ko.observableArray([]);
@@ -14,6 +14,9 @@
     self.title = ko.observable();
     self.restBetweenExercises = ko.observable();
     self.restBetweenRounds = ko.observable();
+
+    self.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
+    self.selectedWorkoutType = ko.observable();
 
     ko.computed(function() {
         var exercise = self.selectedExercise();

@@ -41,6 +41,4 @@ namespace CrossfitDiary.Web.ViewModels
         Time = 2,
         Weight = 3
     }
-
-
 }

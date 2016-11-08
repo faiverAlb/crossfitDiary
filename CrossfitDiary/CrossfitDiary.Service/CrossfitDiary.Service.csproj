@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExerciseService.cs" />
+    <Compile Include="CrossfitterService.cs" />
+    <Compile Include="Interfaces\ICrossfitterService.cs" />
     <Compile Include="Interfaces\IExerciseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

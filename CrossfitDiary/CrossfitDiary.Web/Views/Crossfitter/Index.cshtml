@@ -2,7 +2,6 @@
     ViewBag.Title = "Crossfitter view";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IEnumerable<CrossfitDiary.Web.ViewModels.ExerciseViewModel>
 
 <div class="crossfitter-edit-workout-container">
     <div class="col-md-12 add-new-workout-container">
@@ -15,6 +14,9 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">General workout info</div>
                         <div class="panel-body">
+                            <div class="workout-type-selector">
+                                <select class="form-control" data-live-search="true" data-bind="options:workoutTypes, optionsText:'Key',value: selectedWorkoutType, optionsCaption: 'Choose a workoutType...',selectPicker: {}"></select>
+                            </div>
                             <form class="form-inline main-group">
                                 <div class="form-group">
                                     <label for="roundsInput">Rounds count</label>
@@ -29,7 +31,7 @@
                                 </div>
                             </form>
 
-                            <form class="form-inline collapse" id="optionsPanel" >
+                            <form class="form-inline collapse" id="optionsPanel">
                                 <div class="form-group">
                                     <label for="complexRoutineTitleInput">Title</label>
                                     <input type="text" class="form-control" id="complexRoutineTitleInput" placeholder="Title" data-bind="value: title">
@@ -42,7 +44,7 @@
                                     <label for="restRoundsInput">Rest between rounds</label>
                                     <input type="text" class="form-control" id="restRoundsInput" placeholder="Rest between rounds" data-bind="value: restBetweenRounds">
                                 </div>
-                               
+
                             </form>
 
                         </div>
@@ -92,7 +94,7 @@
             var path = "@Url.Content("~")";
             window.model = new CrossfitterController({
                 pathToApp: path,
-                exercises: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+                viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
             });
             ko.applyBindings(model);
         });
