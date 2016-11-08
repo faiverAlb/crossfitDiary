@@ -25,37 +25,3 @@
     return self;
 };
 
-var ExerciseMeasureTypeValue = function(model) {
-    var self = this;
-
-    self.measureType = ko.observable(model.measureType);
-    self.measureValue = ko.observable();
-    self.measureDesciption = ko.observable(model.description);
-
-    self.toJSON = function() {
-        return {
-            exerciseMeasureType: {
-                measureType: self.measureType(),
-                measureValue: self.measureValue()
-            }
-        };
-    };
-
-/*
-    ko.computed = function () {
-        switch (self.measureType()) {
-            case window.Crossfitter.ExerciseMeasureTypes.Distance:
-            break;
-            case window.Crossfitter.ExerciseMeasureTypes.Count:
-            break;
-        case window.Crossfitter.ExerciseMeasureTypes.Time:
-            break;
-        case window.Crossfitter.ExerciseMeasureTypes.Weight:
-            break;
-        }
-    };
-*/
-
-
-    return self;
-};

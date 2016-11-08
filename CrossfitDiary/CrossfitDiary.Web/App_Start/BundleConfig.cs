@@ -33,6 +33,8 @@ namespace CrossfitDiary.Web
                 .Include(
                 "~/Scripts/Crossfitter/CrossfitterController.js"
                 , "~/Scripts/Crossfitter/SimpleRoutine.js"
+                , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
+                , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
                 , "~/Scripts/Crossfitter/CrossfitterService.js"));
 
 

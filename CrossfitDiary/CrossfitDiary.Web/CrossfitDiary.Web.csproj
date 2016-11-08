@@ -443,6 +443,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Crossfitter\CrossfitterService.js" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureType.js" />
+    <Content Include="Scripts\Crossfitter\ExerciseMeasureTypeValue.js" />
     <Content Include="Scripts\Crossfitter\SimpleRoutine.js" />
     <Content Include="Scripts\Crossfitter\CrossfitterController.js" />
     <Content Include="Content\bootstrap-select\bootstrap-select.less" />
