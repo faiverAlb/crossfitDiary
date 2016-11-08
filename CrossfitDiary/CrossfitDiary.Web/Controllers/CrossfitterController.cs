@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using AutoMapper;
 using CrossfitDiary.Service;
+using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.ViewModels;
 
 namespace CrossfitDiary.Web.Controllers
