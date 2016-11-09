@@ -1,6 +1,6 @@
-﻿namespace CrossfitDiary.Model
+﻿namespace CrossfitDiary.Web.ViewModels
 {
-    public enum RoutineComplexType
+    public enum WorkoutTypeViewModel
     {
         ForTime = 0,
         AMRAP = 1,

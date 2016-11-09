@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CrossfitDiary.DAL.EF.Infrastructure;
 using CrossfitDiary.DAL.EF.Repositories;
 using CrossfitDiary.Model;
+using CrossfitDiary.Service.Interfaces;
 
 namespace CrossfitDiary.Service
 {
-
-    public interface IExerciseService
-    {
-        IEnumerable<Exercise> GetExercises(string title = null);
-        Exercise GetExercise(int id);
-
-        void CreateExercise(Exercise exercise);
-        void SaveExercise();
-    }
     public class ExerciseService: IExerciseService
     {
         private readonly IExerciseRepository _exerciseRepository;

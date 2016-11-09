@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using AutoMapper;
-using CrossfitDiary.Service;
+using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.ViewModels;
 
 namespace CrossfitDiary.Web.Api
