@@ -3,6 +3,7 @@
     
     var service = new CrossfitterService(parameters.pathToApp);
 
+   
     self.exercises = ko.observableArray(parameters.viewModel.exercises);
     self.selectedExercise = ko.observable();
 
@@ -17,6 +18,27 @@
 
     self.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
     self.selectedWorkoutType = ko.observable();
+
+    self.canSeeRoundsCount = ko.computed(function () {
+        if (!self.selectedWorkoutType()) {
+            return false;
+        }
+        var selectedType = self.selectedWorkoutType().Value;
+        return selectedType == Crossfitter.WorkoutTypes.RoundsForTime;
+    });
+
+
+    self.canSeeTimeToWork = ko.computed(function () {
+        if (!self.selectedWorkoutType()) {
+            return false;
+        }
+        var selectedType = self.selectedWorkoutType().Value;
+        return selectedType == Crossfitter.WorkoutTypes.ForTime
+            || selectedType == Crossfitter.WorkoutTypes.AMRAP
+            || selectedType == Crossfitter.WorkoutTypes.EMOM;
+    });
+
+
 
     ko.computed(function() {
         var exercise = self.selectedExercise();
