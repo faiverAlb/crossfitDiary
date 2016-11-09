@@ -10,76 +10,78 @@
                 Add new workout
             </div>
             <div class="panel-body clearfix">
-                <div class="routine-complex-info">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">General workout info</div>
-                        <div class="panel-body">
-                            <div class="workout-type-selector">
-                                <select class="form-control" data-live-search="true" data-bind="options:workoutTypes, optionsText:'Key',value: selectedWorkoutType, optionsCaption: 'Choose a workoutType...',selectPicker: {}"></select>
-                            </div>
-                            <form class="form-inline main-group">
-                                <div class="form-group">
-                                    <label for="roundsInput">Rounds count</label>
-                                    <input type="text" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: roundsCount">
-                                </div>
-                                <div class="form-group">
-                                    <label for="timeInput">Time to work</label>
-                                    <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="value: timeToWork">
-                                </div>
-                                <div class="form-group">
-                                    <a href="#" data-toggle="collapse" data-target="#optionsPanel">+ show more options</a>
-                                </div>
-                            </form>
-
-                            <form class="form-inline collapse" id="optionsPanel">
-                                <div class="form-group">
-                                    <label for="complexRoutineTitleInput">Title</label>
-                                    <input type="text" class="form-control" id="complexRoutineTitleInput" placeholder="Title" data-bind="value: title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="restExercisesInput">Rest between exercises</label>
-                                    <input type="text" class="form-control" id="restExercisesInput" placeholder="Rest between exercises" data-bind="value: restBetweenExercises">
-                                </div>
-                                <div class="form-group">
-                                    <label for="restRoundsInput">Rest between rounds</label>
-                                    <input type="text" class="form-control" id="restRoundsInput" placeholder="Rest between rounds" data-bind="value: restBetweenRounds">
-                                </div>
-
-                            </form>
-
-                        </div>
-                    </div>
-
+                <div class="workout-type-selector">
+                    <select class="form-control" data-live-search="true" data-bind="options:workoutTypes, optionsText:'Key',value: selectedWorkoutType, optionsCaption: 'Choose a workoutType...',selectPicker: {}"></select>
                 </div>
-                <select class="form-control exercise-selector" data-live-search="true" data-bind="options:exercises, optionsText:'title',value: selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
-                <div class="routines-container">
-                    <!-- ko foreach:simpleRoutines-->
-                    <div class="simple-routine-item">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="btn input-group-addon" data-bind="click:function(){ $parent.removeSimpleRoutineFromToDo($index)}">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </span>
-                                    <label class="form-control exercise-title" data-bind="text: exercise.title"></label>
-                                </div>
-                            </div>
-                            <!-- ko foreach:exerciseMeasures-->
-                            <div class="form-group">
-                                <input type="text" class="form-control" data-bind="value: measureValue, attr: { placeholder: measureDesciption}">
-                            </div>
-                            <!-- /ko -->
-                        </div>
-                    </div>
-                    <!-- /ko -->
-                    <!-- ko if: simpleRoutines().length == 0-->
-                    <div class="simple-routine-item text-center no-selected-container">
-                        No exercises selected
-                    </div>
-                    <!-- /ko -->
-                </div>
+                <div data-bind="if:selectedWorkoutType">
+                    <div class="routine-complex-info">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">General workout info</div>
+                            <div class="panel-body">
+                                <form class="form-inline main-group">
+                                    <div class="form-group">
+                                        <label for="roundsInput">Rounds count</label>
+                                        <input type="text" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: roundsCount">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="timeInput">Time to work</label>
+                                        <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="value: timeToWork">
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="#" data-toggle="collapse" data-target="#optionsPanel">+ show more options</a>
+                                    </div>
+                                </form>
 
-                <button class="btn btn-success pull-right" data-bind="click: createWorkout, enable: canCreateWorkout">Create workout</button>
+                                <form class="form-inline collapse" id="optionsPanel">
+                                    <div class="form-group">
+                                        <label for="complexRoutineTitleInput">Title</label>
+                                        <input type="text" class="form-control" id="complexRoutineTitleInput" placeholder="Title" data-bind="value: title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="restExercisesInput">Rest between exercises</label>
+                                        <input type="text" class="form-control" id="restExercisesInput" placeholder="Rest between exercises" data-bind="value: restBetweenExercises">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="restRoundsInput">Rest between rounds</label>
+                                        <input type="text" class="form-control" id="restRoundsInput" placeholder="Rest between rounds" data-bind="value: restBetweenRounds">
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <select class="form-control exercise-selector" data-live-search="true" data-bind="options:exercises, optionsText:'title',value: selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
+                    <div class="routines-container">
+                        <!-- ko foreach:simpleRoutines-->
+                        <div class="simple-routine-item">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="btn input-group-addon" data-bind="click:function(){ $parent.removeSimpleRoutineFromToDo($index)}">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </span>
+                                        <label class="form-control exercise-title" data-bind="text: exercise.title"></label>
+                                    </div>
+                                </div>
+                                <!-- ko foreach:exerciseMeasures-->
+                                <div class="form-group">
+                                    <input type="text" class="form-control" data-bind="value: measureValue, attr: { placeholder: measureDesciption}">
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: simpleRoutines().length == 0-->
+                        <div class="simple-routine-item text-center no-selected-container">
+                            No exercises selected
+                        </div>
+                        <!-- /ko -->
+                    </div>
+
+                    <button class="btn btn-success pull-right" data-bind="click: createWorkout, enable: canCreateWorkout">Create workout</button>
+                </div>
             </div>
         </div>
     </div>
