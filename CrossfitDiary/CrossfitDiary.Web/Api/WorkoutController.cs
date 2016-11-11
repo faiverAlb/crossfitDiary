@@ -1,4 +1,6 @@
 ﻿using System.Web.Http;
+using AutoMapper;
+using CrossfitDiary.Model;
 using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.ViewModels;
 
@@ -24,7 +26,7 @@ namespace CrossfitDiary.Web.Api
         [Route("createWorkout")]
         public void CreateWorkout(WorkoutViewModel model)
         {
-            _crossfitterService.CreateWorkout();
+            _crossfitterService.CreateWorkout(Mapper.Map<RoutineComplex>(model));
         }
     }
 
