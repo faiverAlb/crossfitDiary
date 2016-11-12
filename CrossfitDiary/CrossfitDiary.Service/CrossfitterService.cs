@@ -1,12 +1,13 @@
-﻿using CrossfitDiary.Service.Interfaces;
+﻿using CrossfitDiary.Model;
+using CrossfitDiary.Service.Interfaces;
 
 namespace CrossfitDiary.Service
 {
     public class CrossfitterService : ICrossfitterService
     {
-        public void CreateWorkout()
+        public void CreateWorkout(RoutineComplex map)
         {
-            throw new System.NotImplementedException();
+            var test = 123;
         }
     }
 }

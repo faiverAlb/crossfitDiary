@@ -1,7 +1,9 @@
-﻿namespace CrossfitDiary.Service.Interfaces
+﻿using CrossfitDiary.Model;
+
+namespace CrossfitDiary.Service.Interfaces
 {
     public interface ICrossfitterService
     {
-        void CreateWorkout();
+        void CreateWorkout(RoutineComplex map);
     }
 }
