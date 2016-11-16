@@ -23,8 +23,8 @@ namespace CrossfitDiary.Service
         {
             SetRoutineComplexTitle(routineComplexToSave);
 
-//            _routineComplexRepository.Add(routineComplexToSave);
-//            _unitOfWork.Commit();
+            _routineComplexRepository.Add(routineComplexToSave);
+            _unitOfWork.Commit();
         }
 
         private void SetRoutineComplexTitle(RoutineComplex routineComplexToSave)
