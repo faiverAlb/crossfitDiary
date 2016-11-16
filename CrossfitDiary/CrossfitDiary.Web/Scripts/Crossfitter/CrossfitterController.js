@@ -65,6 +65,7 @@
             timeToWork: self.timeToWork(),
             restBetweenExercises: self.restBetweenExercises(),
             restBetweenRounds: self.restBetweenRounds(),
+            workoutTypeViewModel: self.selectedWorkoutType().Value,
             exercisesToDoList: []
         };
         $.each(self.simpleRoutines(), function (index, routine) {
