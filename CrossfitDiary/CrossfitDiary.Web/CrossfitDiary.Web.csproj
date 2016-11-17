@@ -493,6 +493,7 @@
     <Content Include="Views\Crossfitter\Index.cshtml" />
     <Content Include="Views\Home\Secure.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Crossfitter\CreateNewWorkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -20,13 +20,20 @@ namespace CrossfitDiary.Web.Controllers
 
         public virtual ActionResult Index()
         {
+            
+            return View();
+        }
+
+        public virtual ActionResult CreateNewWorkout()
+        {
             IEnumerable<ExerciseViewModel> viewModels = Mapper.Map<IEnumerable<ExerciseViewModel>>(_exerciseService.GetExercises());
             var model = new
             {
                 exercises = viewModels,
-                workoutTypes = EnumHelper.ToList(typeof (WorkoutTypeViewModel))
+                workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel))
             };
             return View(model);
+
         }
 
     }
