@@ -20,7 +20,6 @@ namespace CrossfitDiary.Web.Controllers
 
         public virtual ActionResult Index()
         {
-            
             return View();
         }
 
