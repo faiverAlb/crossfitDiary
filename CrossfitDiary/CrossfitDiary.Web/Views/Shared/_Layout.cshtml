@@ -38,13 +38,10 @@
                             <i class="fa fa-universal-access" aria-hidden="true"></i>Crossfitter <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="@Url.Action(MVC.Crossfitter.ActionNames.Index, MVC.Crossfitter.Name)">Create workout</a></li>
+                            <li><a href="@Url.Action(MVC.Crossfitter.ActionNames.CreateNewWorkout, MVC.Crossfitter.Name)">Create workout</a></li>
                             <li><a href="#">Another action</a></li>
                         </ul>
 
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     </li>
                     <li class="@Html.IsSelected(MVC.Home.ActionNames.Secure)">
                         <a href="@Url.Action(MVC.Home.ActionNames.Secure, MVC.Home.Name)">Secure</a>

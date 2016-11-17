@@ -28,9 +28,6 @@ namespace CrossfitDiary.Web.Controllers
     public partial class CrossfitterController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CrossfitterController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected CrossfitterController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -76,12 +73,14 @@ namespace CrossfitDiary.Web.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string CreateNewWorkout = "CreateNewWorkout";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string CreateNewWorkout = "CreateNewWorkout";
         }
 
 
@@ -95,8 +94,10 @@ namespace CrossfitDiary.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string CreateNewWorkout = "CreateNewWorkout";
                 public readonly string Index = "Index";
             }
+            public readonly string CreateNewWorkout = "~/Views/Crossfitter/CreateNewWorkout.cshtml";
             public readonly string Index = "~/Views/Crossfitter/Index.cshtml";
         }
     }
@@ -114,6 +115,17 @@ namespace CrossfitDiary.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CreateNewWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult CreateNewWorkout()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateNewWorkout);
+            CreateNewWorkoutOverride(callInfo);
             return callInfo;
         }
 

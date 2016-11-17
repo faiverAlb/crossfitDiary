@@ -76,26 +76,75 @@ namespace Links
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
         public static readonly string _references_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/_references.min.js") ? Url("_references.min.js") : Url("_references.js");
-        public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class bootstrap_select {
+            public const string UrlPath = "~/Scripts/bootstrap-select";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string bootstrap_select_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap-select.min.js") ? Url("bootstrap-select.min.js") : Url("bootstrap-select.js");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class i18n {
+                public const string UrlPath = "~/Scripts/bootstrap-select/i18n";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string defaults_ar_AR_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-ar_AR.min.js") ? Url("defaults-ar_AR.min.js") : Url("defaults-ar_AR.js");
+                public static readonly string defaults_bg_BG_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-bg_BG.min.js") ? Url("defaults-bg_BG.min.js") : Url("defaults-bg_BG.js");
+                public static readonly string defaults_cro_CRO_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-cro_CRO.min.js") ? Url("defaults-cro_CRO.min.js") : Url("defaults-cro_CRO.js");
+                public static readonly string defaults_cs_CZ_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-cs_CZ.min.js") ? Url("defaults-cs_CZ.min.js") : Url("defaults-cs_CZ.js");
+                public static readonly string defaults_da_DK_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-da_DK.min.js") ? Url("defaults-da_DK.min.js") : Url("defaults-da_DK.js");
+                public static readonly string defaults_de_DE_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-de_DE.min.js") ? Url("defaults-de_DE.min.js") : Url("defaults-de_DE.js");
+                public static readonly string defaults_en_US_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-en_US.min.js") ? Url("defaults-en_US.min.js") : Url("defaults-en_US.js");
+                public static readonly string defaults_es_CL_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-es_CL.min.js") ? Url("defaults-es_CL.min.js") : Url("defaults-es_CL.js");
+                public static readonly string defaults_eu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-eu.min.js") ? Url("defaults-eu.min.js") : Url("defaults-eu.js");
+                public static readonly string defaults_fa_IR_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-fa_IR.min.js") ? Url("defaults-fa_IR.min.js") : Url("defaults-fa_IR.js");
+                public static readonly string defaults_fi_FI_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-fi_FI.min.js") ? Url("defaults-fi_FI.min.js") : Url("defaults-fi_FI.js");
+                public static readonly string defaults_fr_FR_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-fr_FR.min.js") ? Url("defaults-fr_FR.min.js") : Url("defaults-fr_FR.js");
+                public static readonly string defaults_hu_HU_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-hu_HU.min.js") ? Url("defaults-hu_HU.min.js") : Url("defaults-hu_HU.js");
+                public static readonly string defaults_id_ID_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-id_ID.min.js") ? Url("defaults-id_ID.min.js") : Url("defaults-id_ID.js");
+                public static readonly string defaults_it_IT_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-it_IT.min.js") ? Url("defaults-it_IT.min.js") : Url("defaults-it_IT.js");
+                public static readonly string defaults_ko_KR_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-ko_KR.min.js") ? Url("defaults-ko_KR.min.js") : Url("defaults-ko_KR.js");
+                public static readonly string defaults_lt_LT_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-lt_LT.min.js") ? Url("defaults-lt_LT.min.js") : Url("defaults-lt_LT.js");
+                public static readonly string defaults_nb_NO_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-nb_NO.min.js") ? Url("defaults-nb_NO.min.js") : Url("defaults-nb_NO.js");
+                public static readonly string defaults_nl_NL_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-nl_NL.min.js") ? Url("defaults-nl_NL.min.js") : Url("defaults-nl_NL.js");
+                public static readonly string defaults_pl_PL_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-pl_PL.min.js") ? Url("defaults-pl_PL.min.js") : Url("defaults-pl_PL.js");
+                public static readonly string defaults_pt_BR_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-pt_BR.min.js") ? Url("defaults-pt_BR.min.js") : Url("defaults-pt_BR.js");
+                public static readonly string defaults_pt_PT_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-pt_PT.min.js") ? Url("defaults-pt_PT.min.js") : Url("defaults-pt_PT.js");
+                public static readonly string defaults_ro_RO_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-ro_RO.min.js") ? Url("defaults-ro_RO.min.js") : Url("defaults-ro_RO.js");
+                public static readonly string defaults_ru_RU_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-ru_RU.min.js") ? Url("defaults-ru_RU.min.js") : Url("defaults-ru_RU.js");
+                public static readonly string defaults_sk_SK_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-sk_SK.min.js") ? Url("defaults-sk_SK.min.js") : Url("defaults-sk_SK.js");
+                public static readonly string defaults_sl_SI_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-sl_SI.min.js") ? Url("defaults-sl_SI.min.js") : Url("defaults-sl_SI.js");
+                public static readonly string defaults_sv_SE_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-sv_SE.min.js") ? Url("defaults-sv_SE.min.js") : Url("defaults-sv_SE.js");
+                public static readonly string defaults_tr_TR_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-tr_TR.min.js") ? Url("defaults-tr_TR.min.js") : Url("defaults-tr_TR.js");
+                public static readonly string defaults_ua_UA_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-ua_UA.min.js") ? Url("defaults-ua_UA.min.js") : Url("defaults-ua_UA.js");
+                public static readonly string defaults_zh_CN_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-zh_CN.min.js") ? Url("defaults-zh_CN.min.js") : Url("defaults-zh_CN.js");
+                public static readonly string defaults_zh_TW_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/defaults-zh_TW.min.js") ? Url("defaults-zh_TW.min.js") : Url("defaults-zh_TW.js");
+            }
+        
+        }
+    
         public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
-        public static readonly string jquery_3_1_0_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.0.intellisense.min.js") ? Url("jquery-3.1.0.intellisense.min.js") : Url("jquery-3.1.0.intellisense.js");
-        public static readonly string jquery_3_1_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.0.min.js") ? Url("jquery-3.1.0.min.js") : Url("jquery-3.1.0.js");
-        public static readonly string jquery_3_1_0_min_js = Url("jquery-3.1.0.min.js");
-        public static readonly string jquery_3_1_0_min_map = Url("jquery-3.1.0.min.map");
-        public static readonly string jquery_3_1_0_slim_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.0.slim.min.js") ? Url("jquery-3.1.0.slim.min.js") : Url("jquery-3.1.0.slim.js");
-        public static readonly string jquery_3_1_0_slim_min_js = Url("jquery-3.1.0.slim.min.js");
-        public static readonly string jquery_3_1_0_slim_min_map = Url("jquery-3.1.0.slim.min.map");
-        public static readonly string jquery_ui_1_12_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-ui-1.12.0.min.js") ? Url("jquery-ui-1.12.0.min.js") : Url("jquery-ui-1.12.0.js");
-        public static readonly string jquery_ui_1_12_0_min_js = Url("jquery-ui-1.12.0.min.js");
-        public static readonly string jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js") : Url("jquery.unobtrusive-ajax.js");
-        public static readonly string jquery_unobtrusive_ajax_min_js = Url("jquery.unobtrusive-ajax.min.js");
-        public static readonly string jquery_validate_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.validate-vsdoc.min.js") ? Url("jquery.validate-vsdoc.min.js") : Url("jquery.validate-vsdoc.js");
-        public static readonly string jquery_validate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.validate.min.js") ? Url("jquery.validate.min.js") : Url("jquery.validate.js");
-        public static readonly string jquery_validate_min_js = Url("jquery.validate.min.js");
-        public static readonly string jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js") : Url("jquery.validate.unobtrusive.js");
-        public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Crossfitter {
+            public const string UrlPath = "~/Scripts/Crossfitter";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string CrossfitterController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterController.min.js") ? Url("CrossfitterController.min.js") : Url("CrossfitterController.js");
+            public static readonly string CrossfitterService_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterService.min.js") ? Url("CrossfitterService.min.js") : Url("CrossfitterService.js");
+            public static readonly string ExerciseMeasureType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureType.min.js") ? Url("ExerciseMeasureType.min.js") : Url("ExerciseMeasureType.js");
+            public static readonly string ExerciseMeasureTypeValue_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureTypeValue.min.js") ? Url("ExerciseMeasureTypeValue.min.js") : Url("ExerciseMeasureTypeValue.js");
+            public static readonly string SimpleRoutine_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/SimpleRoutine.min.js") ? Url("SimpleRoutine.min.js") : Url("SimpleRoutine.js");
+            public static readonly string WorkoutType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/WorkoutType.min.js") ? Url("WorkoutType.min.js") : Url("WorkoutType.js");
+        }
+    
+        public static readonly string jquery_3_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.1.intellisense.min.js") ? Url("jquery-3.1.1.intellisense.min.js") : Url("jquery-3.1.1.intellisense.js");
+        public static readonly string jquery_3_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.1.min.js") ? Url("jquery-3.1.1.min.js") : Url("jquery-3.1.1.js");
+        public static readonly string jquery_3_1_1_min_js = Url("jquery-3.1.1.min.js");
+        public static readonly string jquery_3_1_1_min_map = Url("jquery-3.1.1.min.map");
+        public static readonly string jquery_3_1_1_slim_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.1.slim.min.js") ? Url("jquery-3.1.1.slim.min.js") : Url("jquery-3.1.1.slim.js");
+        public static readonly string jquery_3_1_1_slim_min_js = Url("jquery-3.1.1.slim.min.js");
+        public static readonly string jquery_3_1_1_slim_min_map = Url("jquery-3.1.1.slim.min.map");
         public static readonly string knockout_3_4_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/knockout-3.4.0.min.js") ? Url("knockout-3.4.0.min.js") : Url("knockout-3.4.0.js");
-        public static readonly string modernizr_2_6_2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/modernizr-2.6.2.min.js") ? Url("modernizr-2.6.2.min.js") : Url("modernizr-2.6.2.js");
+        public static readonly string ko_bindingHandlers_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ko.bindingHandlers.min.js") ? Url("ko.bindingHandlers.min.js") : Url("ko.bindingHandlers.js");
         public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
     }
 
@@ -190,8 +239,17 @@ namespace Links
             public static readonly string wells_less = Url("wells.less");
         }
     
-        public static readonly string bootstrap_less = Url("bootstrap.less");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class bootstrap_select {
+            public const string UrlPath = "~/Content/bootstrap-select";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string bootstrap_select_less = Url("bootstrap-select.less");
+            public static readonly string variables_less = Url("variables.less");
+        }
+    
         public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
+        public static readonly string bootstrap_less = Url("bootstrap.less");
         public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class css {
@@ -201,6 +259,7 @@ namespace Links
             public static readonly string font_awesome_min_css = Url("font-awesome.min.css");
         }
     
+        public static readonly string custom_variables_less = Url("custom-variables.less");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class fonts {
             public const string UrlPath = "~/Content/fonts";
@@ -219,6 +278,14 @@ namespace Links
             public const string UrlPath = "~/Content/pages";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class crossfitter {
+                public const string UrlPath = "~/Content/pages/crossfitter";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string crossfitter_less = Url("crossfitter.less");
+            }
+        
             public static readonly string login_page_less = Url("login-page.less");
             public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
             public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
@@ -308,26 +375,73 @@ namespace Links
     {
         public static partial class Scripts 
         {
+            public static partial class bootstrap_select 
+            {
+                public static partial class i18n 
+                {
+                    public static class Assets
+                    {
+                        public const string defaults_ar_AR_js = "~/Scripts/bootstrap-select/i18n/defaults-ar_AR.js"; 
+                        public const string defaults_bg_BG_js = "~/Scripts/bootstrap-select/i18n/defaults-bg_BG.js"; 
+                        public const string defaults_cro_CRO_js = "~/Scripts/bootstrap-select/i18n/defaults-cro_CRO.js"; 
+                        public const string defaults_cs_CZ_js = "~/Scripts/bootstrap-select/i18n/defaults-cs_CZ.js"; 
+                        public const string defaults_da_DK_js = "~/Scripts/bootstrap-select/i18n/defaults-da_DK.js"; 
+                        public const string defaults_de_DE_js = "~/Scripts/bootstrap-select/i18n/defaults-de_DE.js"; 
+                        public const string defaults_en_US_js = "~/Scripts/bootstrap-select/i18n/defaults-en_US.js"; 
+                        public const string defaults_es_CL_js = "~/Scripts/bootstrap-select/i18n/defaults-es_CL.js"; 
+                        public const string defaults_eu_js = "~/Scripts/bootstrap-select/i18n/defaults-eu.js"; 
+                        public const string defaults_fa_IR_js = "~/Scripts/bootstrap-select/i18n/defaults-fa_IR.js"; 
+                        public const string defaults_fi_FI_js = "~/Scripts/bootstrap-select/i18n/defaults-fi_FI.js"; 
+                        public const string defaults_fr_FR_js = "~/Scripts/bootstrap-select/i18n/defaults-fr_FR.js"; 
+                        public const string defaults_hu_HU_js = "~/Scripts/bootstrap-select/i18n/defaults-hu_HU.js"; 
+                        public const string defaults_id_ID_js = "~/Scripts/bootstrap-select/i18n/defaults-id_ID.js"; 
+                        public const string defaults_it_IT_js = "~/Scripts/bootstrap-select/i18n/defaults-it_IT.js"; 
+                        public const string defaults_ko_KR_js = "~/Scripts/bootstrap-select/i18n/defaults-ko_KR.js"; 
+                        public const string defaults_lt_LT_js = "~/Scripts/bootstrap-select/i18n/defaults-lt_LT.js"; 
+                        public const string defaults_nb_NO_js = "~/Scripts/bootstrap-select/i18n/defaults-nb_NO.js"; 
+                        public const string defaults_nl_NL_js = "~/Scripts/bootstrap-select/i18n/defaults-nl_NL.js"; 
+                        public const string defaults_pl_PL_js = "~/Scripts/bootstrap-select/i18n/defaults-pl_PL.js"; 
+                        public const string defaults_pt_BR_js = "~/Scripts/bootstrap-select/i18n/defaults-pt_BR.js"; 
+                        public const string defaults_pt_PT_js = "~/Scripts/bootstrap-select/i18n/defaults-pt_PT.js"; 
+                        public const string defaults_ro_RO_js = "~/Scripts/bootstrap-select/i18n/defaults-ro_RO.js"; 
+                        public const string defaults_ru_RU_js = "~/Scripts/bootstrap-select/i18n/defaults-ru_RU.js"; 
+                        public const string defaults_sk_SK_js = "~/Scripts/bootstrap-select/i18n/defaults-sk_SK.js"; 
+                        public const string defaults_sl_SI_js = "~/Scripts/bootstrap-select/i18n/defaults-sl_SI.js"; 
+                        public const string defaults_sv_SE_js = "~/Scripts/bootstrap-select/i18n/defaults-sv_SE.js"; 
+                        public const string defaults_tr_TR_js = "~/Scripts/bootstrap-select/i18n/defaults-tr_TR.js"; 
+                        public const string defaults_ua_UA_js = "~/Scripts/bootstrap-select/i18n/defaults-ua_UA.js"; 
+                        public const string defaults_zh_CN_js = "~/Scripts/bootstrap-select/i18n/defaults-zh_CN.js"; 
+                        public const string defaults_zh_TW_js = "~/Scripts/bootstrap-select/i18n/defaults-zh_TW.js"; 
+                    }
+                }
+                public static class Assets
+                {
+                    public const string bootstrap_select_js = "~/Scripts/bootstrap-select/bootstrap-select.js"; 
+                }
+            }
+            public static partial class Crossfitter 
+            {
+                public static class Assets
+                {
+                    public const string CrossfitterController_js = "~/Scripts/Crossfitter/CrossfitterController.js"; 
+                    public const string CrossfitterService_js = "~/Scripts/Crossfitter/CrossfitterService.js"; 
+                    public const string ExerciseMeasureType_js = "~/Scripts/Crossfitter/ExerciseMeasureType.js"; 
+                    public const string ExerciseMeasureTypeValue_js = "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"; 
+                    public const string SimpleRoutine_js = "~/Scripts/Crossfitter/SimpleRoutine.js"; 
+                    public const string WorkoutType_js = "~/Scripts/Crossfitter/WorkoutType.js"; 
+                }
+            }
             public static class Assets
             {
                 public const string _references_js = "~/Scripts/_references.js"; 
-                public const string bootstrap_js = "~/Scripts/bootstrap.js"; 
                 public const string bootstrap_min_js = "~/Scripts/bootstrap.min.js"; 
-                public const string jquery_3_1_0_intellisense_js = "~/Scripts/jquery-3.1.0.intellisense.js"; 
-                public const string jquery_3_1_0_js = "~/Scripts/jquery-3.1.0.js"; 
-                public const string jquery_3_1_0_min_js = "~/Scripts/jquery-3.1.0.min.js"; 
-                public const string jquery_3_1_0_slim_js = "~/Scripts/jquery-3.1.0.slim.js"; 
-                public const string jquery_3_1_0_slim_min_js = "~/Scripts/jquery-3.1.0.slim.min.js"; 
-                public const string jquery_ui_1_12_0_js = "~/Scripts/jquery-ui-1.12.0.js"; 
-                public const string jquery_ui_1_12_0_min_js = "~/Scripts/jquery-ui-1.12.0.min.js"; 
-                public const string jquery_unobtrusive_ajax_js = "~/Scripts/jquery.unobtrusive-ajax.js"; 
-                public const string jquery_unobtrusive_ajax_min_js = "~/Scripts/jquery.unobtrusive-ajax.min.js"; 
-                public const string jquery_validate_js = "~/Scripts/jquery.validate.js"; 
-                public const string jquery_validate_min_js = "~/Scripts/jquery.validate.min.js"; 
-                public const string jquery_validate_unobtrusive_js = "~/Scripts/jquery.validate.unobtrusive.js"; 
-                public const string jquery_validate_unobtrusive_min_js = "~/Scripts/jquery.validate.unobtrusive.min.js"; 
+                public const string jquery_3_1_1_intellisense_js = "~/Scripts/jquery-3.1.1.intellisense.js"; 
+                public const string jquery_3_1_1_js = "~/Scripts/jquery-3.1.1.js"; 
+                public const string jquery_3_1_1_min_js = "~/Scripts/jquery-3.1.1.min.js"; 
+                public const string jquery_3_1_1_slim_js = "~/Scripts/jquery-3.1.1.slim.js"; 
+                public const string jquery_3_1_1_slim_min_js = "~/Scripts/jquery-3.1.1.slim.min.js"; 
                 public const string knockout_3_4_0_js = "~/Scripts/knockout-3.4.0.js"; 
-                public const string modernizr_2_6_2_js = "~/Scripts/modernizr-2.6.2.js"; 
+                public const string ko_bindingHandlers_js = "~/Scripts/ko.bindingHandlers.js"; 
                 public const string modernizr_2_8_3_js = "~/Scripts/modernizr-2.8.3.js"; 
             }
         }
@@ -341,6 +455,12 @@ namespace Links
                     {
                     }
                 }
+                public static class Assets
+                {
+                }
+            }
+            public static partial class bootstrap_select 
+            {
                 public static class Assets
                 {
                 }
@@ -360,6 +480,12 @@ namespace Links
             }
             public static partial class pages 
             {
+                public static partial class crossfitter 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
                 public static class Assets
                 {
                 }
@@ -418,6 +544,8 @@ namespace Links
             }
             public static class Assets
             {
+                public const string bootstrap_css = "~/Content/bootstrap.css";
+                public const string bootstrap_min_css = "~/Content/bootstrap.min.css";
             }
         }
     }
