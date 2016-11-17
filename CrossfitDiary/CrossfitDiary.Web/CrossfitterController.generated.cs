@@ -74,6 +74,7 @@ namespace CrossfitDiary.Web.Controllers
         {
             public readonly string Index = "Index";
             public readonly string CreateNewWorkout = "CreateNewWorkout";
+            public readonly string LogWorkout = "LogWorkout";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -81,6 +82,7 @@ namespace CrossfitDiary.Web.Controllers
         {
             public const string Index = "Index";
             public const string CreateNewWorkout = "CreateNewWorkout";
+            public const string LogWorkout = "LogWorkout";
         }
 
 
@@ -96,9 +98,11 @@ namespace CrossfitDiary.Web.Controllers
             {
                 public readonly string CreateNewWorkout = "CreateNewWorkout";
                 public readonly string Index = "Index";
+                public readonly string LogWorkout = "LogWorkout";
             }
             public readonly string CreateNewWorkout = "~/Views/Crossfitter/CreateNewWorkout.cshtml";
             public readonly string Index = "~/Views/Crossfitter/Index.cshtml";
+            public readonly string LogWorkout = "~/Views/Crossfitter/LogWorkout.cshtml";
         }
     }
 
@@ -126,6 +130,17 @@ namespace CrossfitDiary.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateNewWorkout);
             CreateNewWorkoutOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void LogWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult LogWorkout()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LogWorkout);
+            LogWorkoutOverride(callInfo);
             return callInfo;
         }
 

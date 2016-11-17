@@ -32,8 +32,13 @@ namespace CrossfitDiary.Web.Controllers
                 workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel))
             };
             return View(model);
-
         }
+
+        public virtual ActionResult LogWorkout()
+        {
+            return View();
+        }
+        
 
     }
 }
