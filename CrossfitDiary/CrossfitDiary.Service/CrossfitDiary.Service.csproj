@@ -49,7 +49,9 @@
     <Compile Include="CrossfitterService.cs" />
     <Compile Include="Interfaces\ICrossfitterService.cs" />
     <Compile Include="Interfaces\IExerciseService.cs" />
+    <Compile Include="Interfaces\IWorkoutService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkoutService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrossfitDiary.DAL.EF\CrossfitDiary.DAL.EF.csproj">

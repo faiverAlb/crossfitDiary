@@ -12,10 +12,12 @@ namespace CrossfitDiary.Web.Controllers
     public partial class CrossfitterController : Controller
     {
         private readonly IExerciseService _exerciseService;
+        private readonly IWorkoutService _workoutService;
 
-        public CrossfitterController(IExerciseService exerciseService)
+        public CrossfitterController(IExerciseService exerciseService, IWorkoutService workoutService)
         {
             _exerciseService = exerciseService;
+            _workoutService = workoutService;
         }
 
         public virtual ActionResult Index()
@@ -36,7 +38,11 @@ namespace CrossfitDiary.Web.Controllers
 
         public virtual ActionResult LogWorkout()
         {
-            return View();
+            LogWorkoutViewModel logWorkoutViewModel = new LogWorkoutViewModel
+            {
+                AvailableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts())
+            };
+            return View(logWorkoutViewModel);
         }
         
 
