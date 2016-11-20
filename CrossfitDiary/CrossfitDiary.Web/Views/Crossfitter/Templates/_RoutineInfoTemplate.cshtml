@@ -16,7 +16,6 @@
                         <a href="#" data-toggle="collapse" data-target="#optionsPanel">+ show more options</a>
                     </div>
                 </form>
-
                 <form class="form-inline collapse" id="optionsPanel">
                     <div class="form-group">
                         <label for="complexRoutineTitleInput">Title</label>
@@ -30,12 +29,9 @@
                         <label for="restRoundsInput">Rest between rounds</label>
                         <input type="text" class="form-control" id="restRoundsInput" placeholder="Rest between rounds" data-bind="value: restBetweenRounds">
                     </div>
-
                 </form>
-
             </div>
         </div>
-
     </div>
     <select class="form-control exercise-selector" data-live-search="true" data-bind="options:exercises, optionsText:'title',value: selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
     <div class="routines-container">
