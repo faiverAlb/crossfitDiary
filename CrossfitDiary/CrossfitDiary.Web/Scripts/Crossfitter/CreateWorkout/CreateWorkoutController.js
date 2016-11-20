@@ -2,6 +2,7 @@
     var self = new CrossfitterController(parameters);
     self.exercises = ko.observableArray(parameters.viewModel.exercises);
     self.selectedExercise = ko.observable();
+    self.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
 
     ko.computed(function () {
         var exercise = self.selectedExercise();

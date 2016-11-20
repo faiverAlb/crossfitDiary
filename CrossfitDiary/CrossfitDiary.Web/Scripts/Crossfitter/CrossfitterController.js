@@ -14,7 +14,6 @@
     self.restBetweenExercises = ko.observable();
     self.restBetweenRounds = ko.observable();
 
-    self.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
     self.selectedWorkoutType = ko.observable();
 
     self.canSeeRoundsCount = ko.computed(function () {

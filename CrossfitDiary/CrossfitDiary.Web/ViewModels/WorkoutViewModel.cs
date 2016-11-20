@@ -6,6 +6,7 @@ namespace CrossfitDiary.Web.ViewModels
 {
     public class WorkoutViewModel
     {
+        [JsonProperty("title")]
         public string Title { get; set; }
         public int? RoundsCount { get; set; }
 
