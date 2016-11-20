@@ -8334,6 +8334,10 @@ select.selectpicker {
   width: 100%;
   float: none;
 }
+/*Create workout feature*/
+.crossfitter-edit-workout-container .add-new-workout-container .go-next-pointer {
+  margin: 6px 0;
+}
 .crossfitter-edit-workout-container .add-new-workout-container .workout-type-selector {
   padding-bottom: 6px;
 }
@@ -8358,5 +8362,32 @@ select.selectpicker {
   border-radius: 3px;
 }
 .crossfitter-edit-workout-container .add-new-workout-container .routines-container .no-selected-container {
+  color: #5bc0de;
+}
+/*Log workout feature*/
+.log-workout-container .add-new-workout-container .workout-type-selector {
+  padding-bottom: 6px;
+}
+.log-workout-container .add-new-workout-container .routine-complex-info {
+  padding: 0 0 6px 0;
+  color: #555555;
+}
+.log-workout-container .add-new-workout-container .routine-complex-info .main-group {
+  padding: 0 0 6px 0;
+}
+.log-workout-container .add-new-workout-container .exercise-selector {
+  margin-bottom: 15px;
+}
+.log-workout-container .add-new-workout-container .routines-container .exercise-title {
+  font-weight: bold;
+  background: #eeeeee;
+}
+.log-workout-container .add-new-workout-container .routines-container .simple-routine-item {
+  margin: 6px 0;
+  padding: 6px;
+  border: 1px #5bc0de dashed;
+  border-radius: 3px;
+}
+.log-workout-container .add-new-workout-container .routines-container .no-selected-container {
   color: #5bc0de;
 }

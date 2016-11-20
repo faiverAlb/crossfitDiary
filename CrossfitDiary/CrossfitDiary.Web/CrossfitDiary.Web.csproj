@@ -456,7 +456,8 @@
     <Content Include="Content\bootstrap-select\variables.less" />
     <Content Include="Content\bootstrap.less" />
     <Content Include="Content\custom-variables.less" />
-    <Content Include="Content\pages\crossfitter\crossfitter.less" />
+    <Content Include="Content\pages\crossfitter\create-workout\create-workout.less" />
+    <Content Include="Content\pages\crossfitter\log-workout\log-workout.less" />
     <None Include="Properties\PublishProfiles\SomeeBeta.pubxml" />
     <None Include="Properties\PublishProfiles\workouter.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
