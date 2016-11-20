@@ -12,7 +12,7 @@
         if (!workout) {
             return;
         }
-        debugger;
+
         self.workoutToDisplay(new CrossfitterController(workout));
 //        self.simpleRoutines.push(new SimpleRoutine(exercise));
 //        self.selectedExercise('');
