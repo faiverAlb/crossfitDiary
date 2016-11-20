@@ -103,6 +103,19 @@ namespace CrossfitDiary.Web.Controllers
             public readonly string CreateNewWorkout = "~/Views/Crossfitter/CreateNewWorkout.cshtml";
             public readonly string Index = "~/Views/Crossfitter/Index.cshtml";
             public readonly string LogWorkout = "~/Views/Crossfitter/LogWorkout.cshtml";
+            static readonly _TemplatesClass s_Templates = new _TemplatesClass();
+            public _TemplatesClass Templates { get { return s_Templates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _TemplatesClass
+            {
+                static readonly _ViewNamesClass s_ViewNames = new _ViewNamesClass();
+                public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
+                public class _ViewNamesClass
+                {
+                    public readonly string _RoutineInfoTemplate = "_RoutineInfoTemplate";
+                }
+                public readonly string _RoutineInfoTemplate = "~/Views/Crossfitter/Templates/_RoutineInfoTemplate.cshtml";
+            }
         }
     }
 

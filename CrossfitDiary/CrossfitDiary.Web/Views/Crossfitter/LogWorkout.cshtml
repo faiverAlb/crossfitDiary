@@ -6,7 +6,19 @@
 }
 
 <div class="log-workout-container">
-    
+    <div class="col-md-12 workout-container">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Log workout
+            </div>
+            <div class="panel-body">
+                <div class="existing-workout-selector">
+                    <select class="form-control"></select>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts{
@@ -16,8 +28,8 @@
             var path = "@Url.Content("~")";
             window.model = new LogWorkoutController({
                 pathToApp: path,
-                viewModel : @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
-                });
+                viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+            });
             ko.applyBindings(model);
         });
     </script>

@@ -4,8 +4,6 @@
     var service = new CrossfitterService(parameters.pathToApp);
     self.service = service;
    
-    self.exercises = ko.observableArray(parameters.viewModel.exercises);
-    self.selectedExercise = ko.observable();
 
     self.simpleRoutines = ko.observableArray([]);
 
@@ -40,15 +38,6 @@
 
 
 
-    ko.computed(function() {
-        var exercise = self.selectedExercise();
-        if (!exercise) {
-            return;
-        }
-
-        self.simpleRoutines.push(new SimpleRoutine(exercise));
-        self.selectedExercise('');
-    });
 
     self.removeSimpleRoutineFromToDo = function(index) {
         self.simpleRoutines.splice(index(), 1);

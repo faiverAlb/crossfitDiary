@@ -128,10 +128,26 @@ namespace Links
             public const string UrlPath = "~/Scripts/Crossfitter";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class CreateWorkout {
+                public const string UrlPath = "~/Scripts/Crossfitter/CreateWorkout";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string CreateWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CreateWorkoutController.min.js") ? Url("CreateWorkoutController.min.js") : Url("CreateWorkoutController.js");
+            }
+        
             public static readonly string CrossfitterController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterController.min.js") ? Url("CrossfitterController.min.js") : Url("CrossfitterController.js");
             public static readonly string CrossfitterService_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterService.min.js") ? Url("CrossfitterService.min.js") : Url("CrossfitterService.js");
             public static readonly string ExerciseMeasureType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureType.min.js") ? Url("ExerciseMeasureType.min.js") : Url("ExerciseMeasureType.js");
             public static readonly string ExerciseMeasureTypeValue_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureTypeValue.min.js") ? Url("ExerciseMeasureTypeValue.min.js") : Url("ExerciseMeasureTypeValue.js");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class LogWorkout {
+                public const string UrlPath = "~/Scripts/Crossfitter/LogWorkout";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string LogWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/LogWorkoutController.min.js") ? Url("LogWorkoutController.min.js") : Url("LogWorkoutController.js");
+            }
+        
             public static readonly string SimpleRoutine_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/SimpleRoutine.min.js") ? Url("SimpleRoutine.min.js") : Url("SimpleRoutine.js");
             public static readonly string WorkoutType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/WorkoutType.min.js") ? Url("WorkoutType.min.js") : Url("WorkoutType.js");
         }
@@ -283,7 +299,30 @@ namespace Links
                 public const string UrlPath = "~/Content/pages/crossfitter";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-                public static readonly string crossfitter_less = Url("crossfitter.less");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class create_workout {
+                    public const string UrlPath = "~/Content/pages/crossfitter/create-workout";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string create_workout_less = Url("create-workout.less");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class log_workout {
+                    public const string UrlPath = "~/Content/pages/crossfitter/log-workout";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string log_workout_less = Url("log-workout.less");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class workout_info {
+                    public const string UrlPath = "~/Content/pages/crossfitter/workout-info";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string workout_info_less = Url("workout-info.less");
+                }
+            
             }
         
             public static readonly string login_page_less = Url("login-page.less");
@@ -421,6 +460,20 @@ namespace Links
             }
             public static partial class Crossfitter 
             {
+                public static partial class CreateWorkout 
+                {
+                    public static class Assets
+                    {
+                        public const string CreateWorkoutController_js = "~/Scripts/Crossfitter/CreateWorkout/CreateWorkoutController.js"; 
+                    }
+                }
+                public static partial class LogWorkout 
+                {
+                    public static class Assets
+                    {
+                        public const string LogWorkoutController_js = "~/Scripts/Crossfitter/LogWorkout/LogWorkoutController.js"; 
+                    }
+                }
                 public static class Assets
                 {
                     public const string CrossfitterController_js = "~/Scripts/Crossfitter/CrossfitterController.js"; 
@@ -482,6 +535,24 @@ namespace Links
             {
                 public static partial class crossfitter 
                 {
+                    public static partial class create_workout 
+                    {
+                        public static class Assets
+                        {
+                        }
+                    }
+                    public static partial class log_workout 
+                    {
+                        public static class Assets
+                        {
+                        }
+                    }
+                    public static partial class workout_info 
+                    {
+                        public static class Assets
+                        {
+                        }
+                    }
                     public static class Assets
                     {
                     }
