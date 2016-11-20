@@ -10,5 +10,9 @@
         });
     };
 
+    self.logWorkout = function(model) {
+        debugger;
+    };
+
     return self;
 };

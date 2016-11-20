@@ -444,7 +444,9 @@
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_CN.js" />
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Crossfitter\CreateWorkout\CreateWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\CrossfitterService.js" />
+    <Content Include="Scripts\Crossfitter\LogWorkout\LogWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\WorkoutType.js" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureType.js" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureTypeValue.js" />

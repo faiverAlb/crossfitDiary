@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace CrossfitDiary.Web
 {
@@ -29,14 +28,28 @@ namespace CrossfitDiary.Web
 
 
             /*   Crossfitter   */
-            bundles.Add(new ScriptBundle("~/bundles/crossfitter")
+            
+            /*   Create workout   */
+            bundles.Add(new ScriptBundle("~/bundles/crossfitter/createWorkout")
                 .Include(
-                "~/Scripts/Crossfitter/CrossfitterController.js"
-                , "~/Scripts/Crossfitter/SimpleRoutine.js"
-                , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
-                , "~/Scripts/Crossfitter/WorkoutType.js"
-                , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
-                , "~/Scripts/Crossfitter/CrossfitterService.js"));
+                      "~/Scripts/Crossfitter/CrossfitterController.js"
+                    , "~/Scripts/Crossfitter/CreateWorkout/CreateWorkoutController.js"
+                    , "~/Scripts/Crossfitter/SimpleRoutine.js"
+                    , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
+                    , "~/Scripts/Crossfitter/WorkoutType.js"
+                    , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
+                    , "~/Scripts/Crossfitter/CrossfitterService.js"));
+
+            /*   Log workout   */
+            bundles.Add(new ScriptBundle("~/bundles/crossfitter/logWorkout")
+                .Include(
+                    "~/Scripts/Crossfitter/CrossfitterController.js"
+                    , "~/Scripts/Crossfitter/LogWorkout/LogWorkoutController.js"
+                    , "~/Scripts/Crossfitter/SimpleRoutine.js"
+                    , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
+                    , "~/Scripts/Crossfitter/WorkoutType.js"
+                    , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
+                    , "~/Scripts/Crossfitter/CrossfitterService.js"));
 
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/css/font-awesome.min.css"));

@@ -2,7 +2,7 @@
     var self = this;
     
     var service = new CrossfitterService(parameters.pathToApp);
-
+    self.service = service;
    
     self.exercises = ko.observableArray(parameters.viewModel.exercises);
     self.selectedExercise = ko.observable();
@@ -74,11 +74,6 @@
         });
 
         return model;
-    };
-
-    self.createWorkout = function () {
-
-        service.createWorkout(self.toJSON());
     };
 
     return self;

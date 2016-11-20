@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model CrossfitDiary.Web.ViewModels.LogWorkoutViewModel
 
 @{
     ViewBag.Title = "Log workout";
@@ -6,3 +6,17 @@
 }
 
 <h2>Log workout</h2>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/crossfitter/logWorkout")
+    <script>
+        $(function() {
+            var path = "@Url.Content("~")";
+            window.model = new LogWorkoutController({
+                pathToApp: path,
+                viewModel : @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+                });
+            ko.applyBindings(model);
+        });
+    </script>
+}

@@ -87,11 +87,11 @@
 </div>
 @section Scripts
 {
-    @Scripts.Render("~/bundles/crossfitter")
+    @Scripts.Render("~/bundles/crossfitter/createWorkout")
     <script>
         $(function() {
             var path = "@Url.Content("~")";
-            window.model = new CrossfitterController({
+            window.model = new CreateWorkoutController({
                 pathToApp: path,
                 viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
             });

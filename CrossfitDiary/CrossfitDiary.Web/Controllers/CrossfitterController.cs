@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
-using CrossfitDiary.Service;
 using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.MvcHelpers;
 using CrossfitDiary.Web.ViewModels;
@@ -38,7 +36,7 @@ namespace CrossfitDiary.Web.Controllers
 
         public virtual ActionResult LogWorkout()
         {
-            LogWorkoutViewModel logWorkoutViewModel = new LogWorkoutViewModel
+            var logWorkoutViewModel = new LogWorkoutViewModel
             {
                 AvailableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts())
             };
