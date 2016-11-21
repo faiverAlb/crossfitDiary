@@ -33,7 +33,9 @@
             </div>
         </div>
     </div>
-    <select class="form-control exercise-selector" data-live-search="true" data-bind="options:exercises, optionsText:'title',value: selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
+    <div data-bind="if: canSeeExercises">
+        <select class="form-control exercise-selector" data-live-search="true" data-bind="options:exercises, optionsText:'title',value: selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
+    </div>
     <div class="routines-container">
         <!-- ko foreach:simpleRoutines-->
         <div class="simple-routine-item">

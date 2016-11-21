@@ -3,6 +3,7 @@
     self.availableWorkouts = ko.observableArray(parameters.viewModel.availableWorkouts);
     self.selectedWorkout = ko.observable();
     
+    self.canSeeExercises = false;
     self.workoutToDisplay = ko.observable();
     self.logWorkout = function () {
         self.service.logWorkout(self.toJSON());
@@ -12,7 +13,7 @@
         if (!workout) {
             return;
         }
-
+        workout.canSeeExercises = false;
         self.workoutToDisplay(new CrossfitterController(workout));
 //        self.simpleRoutines.push(new SimpleRoutine(exercise));
 //        self.selectedExercise('');

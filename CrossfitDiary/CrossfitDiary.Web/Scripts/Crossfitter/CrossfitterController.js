@@ -3,7 +3,7 @@
     
     var service = new CrossfitterService(parameters.pathToApp);
     self.service = service;
-   
+    self.canSeeExercises = parameters.canSeeExercises != undefined? parameters.canSeeExercises : true;
 
     self.simpleRoutines = ko.observableArray([]);
 
