@@ -7,12 +7,12 @@
 
     self.simpleRoutines = ko.observableArray([]);
 
-    self.roundsCount = ko.observable();
-    self.timeToWork = ko.observable();
+    self.roundsCount = ko.observable(parameters.roundsCount);
+    self.timeToWork = ko.observable(parameters.timeToWork);
 
-    self.title = ko.observable();
-    self.restBetweenExercises = ko.observable();
-    self.restBetweenRounds = ko.observable();
+    self.title = ko.observable(parameters.title);
+    self.restBetweenExercises = ko.observable(parameters.restBetweenExercises);
+    self.restBetweenRounds = ko.observable(parameters.restBetweenRounds);
 
     self.selectedWorkoutType = ko.observable(parameters.selectedWorkoutType);
 
