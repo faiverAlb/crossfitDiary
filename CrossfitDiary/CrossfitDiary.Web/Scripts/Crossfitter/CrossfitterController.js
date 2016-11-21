@@ -4,8 +4,15 @@
     var service = new CrossfitterService(parameters.pathToApp);
     self.service = service;
     self.canSeeExercises = parameters.canSeeExercises != undefined? parameters.canSeeExercises : true;
-
     self.simpleRoutines = ko.observableArray([]);
+
+    if (parameters.exercisesToDoList) {
+        for (var i = 0; i < parameters.exercisesToDoList.length; i++) {
+            var exerciseToDo = parameters.exercisesToDoList[i];
+            self.simpleRoutines.push(new SimpleRoutine(exerciseToDo));
+        }
+    }
+
 
     self.roundsCount = ko.observable(parameters.roundsCount);
     self.timeToWork = ko.observable(parameters.timeToWork);

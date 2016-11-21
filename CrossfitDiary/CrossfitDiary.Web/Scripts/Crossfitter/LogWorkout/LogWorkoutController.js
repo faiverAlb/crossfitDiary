@@ -15,8 +15,6 @@
         }
         workout.canSeeExercises = false;
         self.workoutToDisplay(new CrossfitterController(workout));
-//        self.simpleRoutines.push(new SimpleRoutine(exercise));
-//        self.selectedExercise('');
     });
 
     return self;

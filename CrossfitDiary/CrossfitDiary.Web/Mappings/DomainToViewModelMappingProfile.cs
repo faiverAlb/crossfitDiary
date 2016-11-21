@@ -27,6 +27,7 @@ namespace CrossfitDiary.Web.Mappings
             CreateMap<RoutineSimple, ExerciseViewModel>()
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.ExerciseId))
                 .ForMember(x => x.ExerciseMeasures, opt => opt.Ignore())
+                .ForMember(x => x.Title, opt => opt.MapFrom(y => y.Exercise.Title))
                 .AfterMap((simple, dest) =>
                 {
                     var toMapExercises = new List<ExerciseMeasureViewModel>();

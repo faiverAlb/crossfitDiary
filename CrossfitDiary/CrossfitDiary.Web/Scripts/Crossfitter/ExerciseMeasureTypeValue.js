@@ -2,7 +2,7 @@
     var self = this;
 
     self.measureType = ko.observable(model.measureType);
-    self.measureValue = ko.observable();
+    self.measureValue = ko.observable(model.measureValue);
     self.measureDesciption = ko.observable(model.description);
 
     self.toJSON = function () {
