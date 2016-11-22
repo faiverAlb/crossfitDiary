@@ -8342,6 +8342,10 @@ select.selectpicker {
 .workout-container .routine-complex-info .main-group {
   padding: 0 0 6px 0;
 }
+.workout-container .selected-workout-type {
+  font-size: 18px;
+  font-weight: bold;
+}
 .workout-container .routines-container .exercise-title {
   font-weight: bold;
   background: #eeeeee;
