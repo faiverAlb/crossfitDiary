@@ -11,6 +11,7 @@ namespace CrossfitDiary.DAL.EF.Configuration
             Property(x => x.Id).IsRequired();
             Property(x => x.Description).IsRequired();
             Property(x => x.MeasureType).IsRequired();
+            Property(x => x.ShortMeasureDescription).IsRequired();
         }
 
         

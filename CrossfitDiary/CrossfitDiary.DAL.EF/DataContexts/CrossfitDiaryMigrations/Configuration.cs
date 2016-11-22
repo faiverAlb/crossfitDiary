@@ -41,22 +41,26 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                 new ExerciseMeasureType()
                 {
                     MeasureType = MeasureType.Distance,
-                    Description = "Passed Distance"
+                    Description = "Passed Distance",
+                    ShortMeasureDescription = "meters"
                 },
                 new ExerciseMeasureType()
                 {
                     MeasureType = MeasureType.Count,
-                    Description = "General count"
+                    Description = "General count",
+                    ShortMeasureDescription = "count"
                 },
                 new ExerciseMeasureType()
                 {
                     MeasureType = MeasureType.Time,
-                    Description = "Time"
+                    Description = "Time",
+                    ShortMeasureDescription = "min."
                 },
                 new ExerciseMeasureType()
                 {
                     MeasureType = MeasureType.Weight,
-                    Description = "Weight"
+                    Description = "Weight",
+                    ShortMeasureDescription = "lbs"
                 },
             };
         }

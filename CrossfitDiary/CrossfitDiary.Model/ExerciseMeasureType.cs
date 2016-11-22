@@ -6,6 +6,8 @@ namespace CrossfitDiary.Model
 
         public string Description { get; set; }
 
+        public string ShortMeasureDescription { get; set; }
+
     }
     public enum MeasureType
     {
