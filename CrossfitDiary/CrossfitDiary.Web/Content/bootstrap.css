@@ -8373,9 +8373,6 @@ select.selectpicker {
   color: #5bc0de;
 }
 /* Log workout feature */
-.log-workout-container .add-new-workout-container .workout-type-selector {
+.log-workout-container .existing-workout-selector {
   padding-bottom: 6px;
-}
-.log-workout-container .add-new-workout-container .no-selected-container {
-  color: #5bc0de;
 }
