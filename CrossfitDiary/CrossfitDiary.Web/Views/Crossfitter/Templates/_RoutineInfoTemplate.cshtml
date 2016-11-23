@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div data-bind="if: canSeeExercises">
+    <div data-bind="ifnot: isReadOnlyMode">
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options:exercises, optionsText:'title',value: selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
     </div>
     <div class="selected-workout-type">
@@ -53,13 +53,12 @@
             </div>
             <!-- ko foreach:exerciseMeasures-->
             <div class="form-group">
-                
                 <div class="input-group">
-                    <input type="text" class="form-control" data-bind="value: measureValue, attr: { placeholder: measureDesciption}">
+                    <input type="text" class="form-control measure-value-input" data-bind="value: measureValue, attr: { placeholder: measureDesciption, readonly: $root.isReadOnlyMode}">
                     <div class="input-group-addon" data-bind="text:'('+ shortMeasureDescription() + ')'"></div>
                 </div>
-                </div>
-                <!-- /ko -->
+            </div>
+            <!-- /ko -->
             </div>
         </div>
         <!-- /ko -->

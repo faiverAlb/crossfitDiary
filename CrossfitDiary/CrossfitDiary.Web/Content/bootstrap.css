@@ -8356,6 +8356,9 @@ select.selectpicker {
   border: 1px #5bc0de dashed;
   border-radius: 3px;
 }
+.workout-container .routines-container .simple-routine-item .measure-value-input {
+  width: 130px;
+}
 /* Create workout feature */
 .crossfitter-edit-workout-container .add-new-workout-container .go-next-pointer {
   margin: 6px 0;
