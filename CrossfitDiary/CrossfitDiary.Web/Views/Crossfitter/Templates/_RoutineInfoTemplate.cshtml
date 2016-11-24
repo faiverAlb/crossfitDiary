@@ -3,33 +3,67 @@
         <div class="panel panel-info">
             <div class="panel-heading">General workout info</div>
             <div class="panel-body">
-                <form class="form-inline main-group">
-                    <div class="form-group" data-bind="if: canSeeRoundsCount">
-                        <label for="roundsInput">Rounds count</label>
-                        <input type="text" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: roundsCount">
+                <div data-bind="if: isReadOnlyMode">
+                    <form class="">
+                        <!--ko if: canSeeRoundsCount-->
+                        <div>
+                            <label>Rounds count:</label>
+                            <label data-bind="text: roundsCount"></label>
+                        </div>
+                        <!-- /ko -->
+                        <!--ko if: canSeeTimeToWork-->
+                        <div>
+                            <label>Time to work:</label>
+                            <label data-bind="text: timeToWork"></label>
+                        </div>
+                        <!-- /ko -->
+                    </form>
+                    <div >
+                        <label for="complexRoutineTitleInput">Title:</label>
+                        <label data-bind="text: title"></label>
                     </div>
-                    <div class="form-group" data-bind="if: canSeeTimeToWork">
-                        <label for="timeInput">Time to work</label>
-                        <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="value: timeToWork">
+                    <!--ko if: restBetweenExercises-->
+                    <div >
+                        <label>Rest between exercises:</label>
+                        <label data-bind="text: restBetweenExercises"></label>
                     </div>
-                    <div class="form-group">
-                        <a href="#" data-toggle="collapse" data-target="#optionsPanel">+ show more options</a>
+                    <!-- /ko -->
+                    <!--ko if: restBetweenRounds-->
+                    <div >
+                        <label for="restRoundsInput">Rest between rounds:</label>
+                        <label data-bind="text: restBetweenRounds"></label>
                     </div>
-                </form>
-                <form class="form-inline collapse" id="optionsPanel">
-                    <div class="form-group">
-                        <label for="complexRoutineTitleInput">Title</label>
-                        <input type="text" class="form-control" id="complexRoutineTitleInput" placeholder="Title" data-bind="value: title">
-                    </div>
-                    <div class="form-group">
-                        <label for="restExercisesInput">Rest between exercises</label>
-                        <input type="text" class="form-control" id="restExercisesInput" placeholder="Rest between exercises" data-bind="value: restBetweenExercises">
-                    </div>
-                    <div class="form-group">
-                        <label for="restRoundsInput">Rest between rounds</label>
-                        <input type="text" class="form-control" id="restRoundsInput" placeholder="Rest between rounds" data-bind="value: restBetweenRounds">
-                    </div>
-                </form>
+                    <!-- /ko -->
+                </div>
+                <div data-bind="ifnot: isReadOnlyMode">
+                    <form class="form-inline main-group">
+                        <div class="form-group" data-bind="if: canSeeRoundsCount">
+                            <label for="roundsInput">Rounds count</label>
+                            <input type="text" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: roundsCount">
+                        </div>
+                        <div class="form-group" data-bind="if: canSeeTimeToWork">
+                            <label for="timeInput">Time to work</label>
+                            <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="value: timeToWork">
+                        </div>
+                        <div class="form-group">
+                            <a href="#" data-toggle="collapse" data-target="#optionsPanel">+ show more options</a>
+                        </div>
+                    </form>
+                    <form class="form-inline collapse" id="optionsPanel">
+                        <div class="form-group">
+                            <label for="complexRoutineTitleInput">Title</label>
+                            <input type="text" class="form-control" id="complexRoutineTitleInput" placeholder="Title" data-bind="value: title">
+                        </div>
+                        <div class="form-group">
+                            <label for="restExercisesInput">Rest between exercises</label>
+                            <input type="text" class="form-control" id="restExercisesInput" placeholder="Rest between exercises" data-bind="value: restBetweenExercises">
+                        </div>
+                        <div class="form-group">
+                            <label for="restRoundsInput">Rest between rounds</label>
+                            <input type="text" class="form-control" id="restRoundsInput" placeholder="Rest between rounds" data-bind="value: restBetweenRounds">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
