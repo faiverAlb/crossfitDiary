@@ -18,7 +18,7 @@
                 <div data-bind="if: selectedWorkout">
                     <div data-bind="template: { name: 'routine-info-template', data: workoutToDisplay }"></div>
                     <div class="log-workout-inputs">
-                        <div class="form-inline" data-bind="if:canSeeTotalRouns">
+                        <div class="form-inline" data-bind="if:canSeeTotalRounds">
                             <div class="form-group">
                                 <label for="generalRoundsFinishedInput">Rounds finished</label>
                                 <input type="text" class="form-control" id="generalRoundsFinishedInput" placeholder="Rounds finished" data-bind="value: totalRoundsFinished">

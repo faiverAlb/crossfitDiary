@@ -1,4 +1,4 @@
-﻿window.Crossfitter = {};
+﻿window.Crossfitter = window.Crossfitter || {};
 window.Crossfitter.WorkoutTypes = {
     ForTime : 0,
     AMRAP : 1,
