@@ -7,6 +7,8 @@
             url: pathToApp + "api/createWorkout",
             data: model,
             async: false
+        }).done(function() {
+            window.location = "/Home";
         });
     };
 
