@@ -17,6 +17,7 @@
 
     self.canSeeTotalRounds = ko.observable();
     self.canSeePassedDistance = ko.observable();
+    self.canSeeGeneralPoints = ko.observable();
 
 
     self.logWorkout = function() {
@@ -31,6 +32,9 @@
 
         /* Distance input */
         self.canSeePassedDistance(checkWorkoutContainsDistanceExercise() && selectedTypeValue == Crossfitter.WorkoutTypes.EMOM);
+
+        /* General points */
+        self.canSeeGeneralPoints(selectedTypeValue == Crossfitter.WorkoutTypes.Points);
     }
 
     function checkWorkoutContainsDistanceExercise() {
