@@ -8376,3 +8376,6 @@ select.selectpicker {
 .log-workout-container .existing-workout-selector {
   padding-bottom: 6px;
 }
+.log-workout-container .log-workout-inputs {
+  padding: 10px 0;
+}
