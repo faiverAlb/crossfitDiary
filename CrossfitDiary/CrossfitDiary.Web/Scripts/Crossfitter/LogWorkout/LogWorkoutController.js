@@ -1,11 +1,12 @@
 ﻿var LogWorkoutController = function (parameters) {
     var self = this;
+    self.service = new CrossfitterService(parameters.pathToApp);
     self.availableWorkouts = ko.observableArray(parameters.viewModel.availableWorkouts);
     self.selectedWorkout = ko.observable();
     self.isReadOnlyMode = true;
 
     self.totalRoundsFinished = ko.observable();
-    self.partialRoundsFinished = ko.observable();
+    self.partialRepsFinished = ko.observable();
 
     self.distance = ko.observable();
     self.generalPoints = ko.observable();
@@ -22,7 +23,7 @@
     self.canSeeTotalTime = ko.observable();
 
 
-    self.logWorkout = function() {
+    self.logWorkout = function () {
         self.service.logWorkout(self.toJSON());
     };
 
@@ -61,6 +62,21 @@
 
         updateInputsVisibility();
     });
+
+
+    self.toJSON = function() {
+        var model = {
+            selectedWorkoutId: self.selectedWorkout().id,
+            roundsFinished: self.totalRoundsFinished,
+            partialRepsFinished: self.partialRepsFinished,
+            timePassed: self.totalTime,
+            distance: self.distance,
+            points: self.generalPoints,
+            wasFinished: self.wasFinished,
+            isRx: self.isRx
+        };
+        return model;
+    };
 
     return self;
 };

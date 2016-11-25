@@ -13,7 +13,12 @@
     };
 
     self.logWorkout = function(model) {
-        debugger;
+        return $.post({
+            url: pathToApp + "api/logWorkout",
+            data: model
+        }).done(function() {
+            window.location = "/Home";
+        });
     };
 
     return self;

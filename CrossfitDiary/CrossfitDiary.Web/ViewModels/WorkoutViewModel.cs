@@ -8,6 +8,9 @@ namespace CrossfitDiary.Web.ViewModels
 {
     public class WorkoutViewModel
     {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
         [JsonProperty("title")]
         public string Title { get; set; }
 

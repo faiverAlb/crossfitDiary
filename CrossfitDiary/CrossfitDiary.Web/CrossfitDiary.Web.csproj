@@ -273,6 +273,7 @@
     </Compile>
     <Compile Include="ViewModels\ExerciseViewModel.cs" />
     <Compile Include="ViewModels\LogWorkoutViewModel.cs" />
+    <Compile Include="ViewModels\ToLogWorkoutViewModel.cs" />
     <Compile Include="ViewModels\WorkoutTypeViewModel.cs" />
     <Compile Include="ViewModels\WorkoutViewModel.cs" />
   </ItemGroup>

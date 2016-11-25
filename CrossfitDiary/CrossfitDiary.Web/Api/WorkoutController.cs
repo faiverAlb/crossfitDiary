@@ -28,6 +28,17 @@ namespace CrossfitDiary.Web.Api
         {
             _crossfitterService.CreateWorkout(Mapper.Map<RoutineComplex>(model));
         }
+
+        /// <summary>
+        /// Log workout
+        /// </summary>
+        /// <param name="model"></param>
+        [HttpPost]
+        [Route("logWorkout")]
+        public void LogWorkout(ToLogWorkoutViewModel model)
+        {
+//            _crossfitterService.LogWorkout(Mapper.Map<>());
+        }
     }
 
     

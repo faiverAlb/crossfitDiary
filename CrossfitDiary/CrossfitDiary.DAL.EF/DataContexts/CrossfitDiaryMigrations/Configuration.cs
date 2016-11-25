@@ -224,6 +224,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                 new CrossfitterWorkout
                 {
                     RoundsFinished = 30,
+                    PartialRepsFinished = 2,
                     RoutineComplex = context.ComplexRoutines.Single(x => x.Title == "Cindy"),
                     Crossfitter = context.Crossfitters.Single(x => x.FirstName == "Pukie")
                 },

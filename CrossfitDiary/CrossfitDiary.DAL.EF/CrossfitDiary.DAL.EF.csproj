@@ -78,6 +78,10 @@
     <Compile Include="DataContexts\CrossfitDiaryMigrations\201611220710538_MeasureType_Add_Column_ShortDescription.Designer.cs">
       <DependentUpon>201611220710538_MeasureType_Add_Column_ShortDescription.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201611250711108_AddPartialRepsColumn.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201611250711108_AddPartialRepsColumn.Designer.cs">
+      <DependentUpon>201611250711108_AddPartialRepsColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDbContext.cs" />
     <Compile Include="DataContexts\ApplicationUser.cs" />
@@ -121,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201611220710538_MeasureType_Add_Column_ShortDescription.resx">
       <DependentUpon>201611220710538_MeasureType_Add_Column_ShortDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201611250711108_AddPartialRepsColumn.resx">
+      <DependentUpon>201611250711108_AddPartialRepsColumn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201610311631358_InitialCreate.resx">
       <DependentUpon>201610311631358_InitialCreate.cs</DependentUpon>

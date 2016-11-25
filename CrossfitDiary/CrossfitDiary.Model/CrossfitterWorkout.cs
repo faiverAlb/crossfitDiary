@@ -19,6 +19,8 @@ namespace CrossfitDiary.Model
 
         public int? RoundsFinished { get; set; }
 
+        public int? PartialRepsFinished { get; set; }
+
         public TimeSpan? TimePassed { get; set; }
 
         public int? Distance { get; set; }
