@@ -14,10 +14,12 @@
     self.isRx = ko.observable();
     self.IsModified = ko.observable();
     self.workoutToDisplay = ko.observable();
+    self.totalTime = ko.observable();
 
     self.canSeeTotalRounds = ko.observable();
     self.canSeePassedDistance = ko.observable();
     self.canSeeGeneralPoints = ko.observable();
+    self.canSeeTotalTime = ko.observable();
 
 
     self.logWorkout = function() {
@@ -35,6 +37,9 @@
 
         /* General points */
         self.canSeeGeneralPoints(selectedTypeValue == Crossfitter.WorkoutTypes.Points);
+
+        /* General time */
+        self.canSeeTotalTime(selectedTypeValue == Crossfitter.WorkoutTypes.ForTime);
     }
 
     function checkWorkoutContainsDistanceExercise() {
