@@ -3,12 +3,17 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using CrossfitDiary.DAL.EF.Configuration;
 using CrossfitDiary.Model;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CrossfitDiary.DAL.EF.DataContexts
 {
     public class CrossfitDiaryDbContext : DbContext
     {
-        public CrossfitDiaryDbContext() : base("CrossfitDiaryEntities") { }
+        public CrossfitDiaryDbContext() : base("CrossfitDiaryEntities")
+        {
+            Database.SetInitializer<CrossfitDiaryDbContext>(null);
+
+        }
 
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<ExerciseMeasure> ExerciseMeasures { get; set; }
@@ -28,6 +33,8 @@ namespace CrossfitDiary.DAL.EF.DataContexts
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Configurations.Add(new ExerciseConfiguration());
             modelBuilder.Configurations.Add(new RoutineSimpleConfiguration());
             modelBuilder.Configurations.Add(new RoutineComplexConfiguration());
@@ -35,6 +42,10 @@ namespace CrossfitDiary.DAL.EF.DataContexts
             modelBuilder.Configurations.Add(new CrossfitterConfiguration());
             modelBuilder.Configurations.Add(new CrossfitterWorkoutConfiguration());
             modelBuilder.Configurations.Add(new ExerciseMeasureTypeConfiguration());
+
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId }).ToTable("AspNetUserLogins");
+            modelBuilder.Entity<IdentityRole>().HasKey(r => r.Id).ToTable("AspNetRoles");
+            modelBuilder.Entity<IdentityUserRole>().HasKey(ur => new { ur.UserId, ur.RoleId }).ToTable("AspNetUserRoles");
         }
     }
 }

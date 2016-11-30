@@ -13,7 +13,7 @@ namespace CrossfitDiary.Model
 
         public RoutineComplex RoutineComplex { get; set; }
 
-        public int CrossfitterId { get; set; }
+
 
         public Crossfitter Crossfitter { get; set; }
 

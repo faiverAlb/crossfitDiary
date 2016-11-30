@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using CrossfitDiary.DAL.EF.DataContexts;
+using CrossfitDiary.Model;
 using CrossfitDiary.Web.Configuration;
 using CrossfitDiary.Web.Models;
 using Microsoft.AspNet.Identity;

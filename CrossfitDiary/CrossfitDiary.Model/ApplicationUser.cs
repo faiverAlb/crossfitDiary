@@ -1,9 +1,11 @@
-﻿using System.Security.Claims;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace CrossfitDiary.DAL.EF.DataContexts
+namespace CrossfitDiary.Model
 {
     public class ApplicationUser : IdentityUser
     {
@@ -14,5 +16,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts
             // Add custom user claims here
             return userIdentity;
         }
+
+
     }
 }

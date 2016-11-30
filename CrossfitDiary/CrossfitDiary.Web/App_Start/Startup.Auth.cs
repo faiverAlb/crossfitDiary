@@ -1,5 +1,6 @@
 ﻿using System;
 using CrossfitDiary.DAL.EF.DataContexts;
+using CrossfitDiary.Model;
 using CrossfitDiary.Web.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
