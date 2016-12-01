@@ -70,8 +70,16 @@
     <Compile Include="Configuration\RoutineSimpleConfiguration.cs" />
     <Compile Include="Configuration\CrossfitterWorkoutConfiguration.cs" />
     <Compile Include="DataContexts\CrossfitDiaryDbContext.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201611300827547_Initial.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201611300827547_Initial.Designer.cs">
+      <DependentUpon>201611300827547_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDbContext.cs" />
+    <Compile Include="DataContexts\IdentityMigrations\201611300828167_Initial.cs" />
+    <Compile Include="DataContexts\IdentityMigrations\201611300828167_Initial.Designer.cs">
+      <DependentUpon>201611300828167_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
@@ -101,6 +109,14 @@
       <DependentUpon>App.config</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201611300827547_Initial.resx">
+      <DependentUpon>201611300827547_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\IdentityMigrations\201611300828167_Initial.resx">
+      <DependentUpon>201611300828167_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

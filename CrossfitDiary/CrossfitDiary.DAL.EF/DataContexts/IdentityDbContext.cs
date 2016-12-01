@@ -23,10 +23,11 @@ namespace CrossfitDiary.DAL.EF.DataContexts
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
-           modelBuilder.Entity<IdentityUserLogin>().HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId }).ToTable("AspNetUserLogins");
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId }).ToTable("AspNetUserLogins");
             modelBuilder.Entity<IdentityRole>().HasKey(r => r.Id).ToTable("AspNetRoles");
             modelBuilder.Entity<IdentityUserRole>().HasKey(ur => new { ur.UserId, ur.RoleId }).ToTable("AspNetUserRoles");
+            modelBuilder.Entity<IdentityUserClaim>().HasKey(claim => claim.UserId).ToTable("AspNetUserClaims");
+            modelBuilder.Entity<IdentityUser>().HasKey(user => user.Id).ToTable("AspNetUsers");
         }
     }
 }

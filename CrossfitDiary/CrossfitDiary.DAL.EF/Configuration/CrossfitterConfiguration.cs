@@ -12,6 +12,8 @@ namespace CrossfitDiary.DAL.EF.Configuration
 
             Property(x => x.FirstName).IsRequired();
             Property(x => x.LastName).IsRequired();
+
+            HasMany(x => x.CrossfitterWorkout);
         }
     }
 }
