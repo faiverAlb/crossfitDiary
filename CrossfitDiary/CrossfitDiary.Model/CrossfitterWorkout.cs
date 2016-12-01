@@ -15,7 +15,7 @@ namespace CrossfitDiary.Model
 
 
 
-        public Crossfitter Crossfitter { get; set; }
+        public ApplicationUser Crossfitter { get; set; }
 
         public int? RoundsFinished { get; set; }
 

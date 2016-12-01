@@ -21,7 +21,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts
         public DbSet<RoutineComplex> ComplexRoutines { get; set; }
         public DbSet<ExerciseMeasureType> ExerciseMeasureTypes { get; set; }
 
-        public DbSet<Crossfitter> Crossfitters { get; set; }
+//        public DbSet<ApplicationUser> Crossfitters { get; set; }
 
         public DbSet<CrossfitterWorkout> CrossfitterWorkouts { get; set; }
 
@@ -36,12 +36,12 @@ namespace CrossfitDiary.DAL.EF.DataContexts
             base.OnModelCreating(modelBuilder);
 
 
-
+            modelBuilder.Entity<ApplicationUser>().HasMany(x => x.CrossfitterWorkout);
             modelBuilder.Configurations.Add(new ExerciseConfiguration());
             modelBuilder.Configurations.Add(new RoutineSimpleConfiguration());
             modelBuilder.Configurations.Add(new RoutineComplexConfiguration());
             modelBuilder.Configurations.Add(new ExerciseMeasureConfiguration());
-            modelBuilder.Configurations.Add(new CrossfitterConfiguration());
+//            modelBuilder.Configurations.Add(new CrossfitterConfiguration());
             modelBuilder.Configurations.Add(new CrossfitterWorkoutConfiguration());
             modelBuilder.Configurations.Add(new ExerciseMeasureTypeConfiguration());
 

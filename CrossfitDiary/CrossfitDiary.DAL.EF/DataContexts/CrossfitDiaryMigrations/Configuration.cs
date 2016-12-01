@@ -27,10 +27,10 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                 context.Commit();
                 GetInitialRoutines(context).ForEach(x => context.ComplexRoutines.Add(x));
                 context.Commit();
-                GetInitialCrossfitters().ForEach(x => context.Crossfitters.Add(x));
-                context.Commit();
-                GetInitialCrossfitterWorkout(context).ForEach(x => context.CrossfitterWorkouts.Add(x));
-                context.Commit();
+//                GetInitialCrossfitters().ForEach(x => context.Crossfitters.Add(x));
+//                context.Commit();
+//                GetInitialCrossfitterWorkout(context).ForEach(x => context.CrossfitterWorkouts.Add(x));
+//                context.Commit();
             }
         }
 
@@ -85,17 +85,17 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
             };
         }
 
-        private static List<Crossfitter> GetInitialCrossfitters()
-        {
-            return new List<Crossfitter>()
-            {
-                new Crossfitter()
-                {
-                    FirstName = "Pukie",
-                    LastName = "Pukie"
-                }
-            };
-        }
+//        private static List<Crossfitter> GetInitialCrossfitters()
+//        {
+//            return new List<Crossfitter>()
+//            {
+//                new Crossfitter()
+//                {
+//                    FirstName = "Pukie",
+//                    LastName = "Pukie"
+//                }
+//            };
+//        }
 
         private static List<RoutineComplex> GetInitialRoutines(CrossfitDiaryDbContext context)
         {
@@ -216,20 +216,20 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
               };
         }
 
-        private static List<CrossfitterWorkout> GetInitialCrossfitterWorkout(CrossfitDiaryDbContext context)
-        {
-
-            return new List<CrossfitterWorkout>()
-            {
-                new CrossfitterWorkout
-                {
-                    RoundsFinished = 30,
-                    PartialRepsFinished = 2,
-                    RoutineComplex = context.ComplexRoutines.Single(x => x.Title == "Cindy"),
-                    Crossfitter = context.Crossfitters.Single(x => x.FirstName == "Pukie")
-                },
-
-            };
-        }
+//        private static List<CrossfitterWorkout> GetInitialCrossfitterWorkout(CrossfitDiaryDbContext context)
+//        {
+//
+//            return new List<CrossfitterWorkout>()
+//            {
+//                new CrossfitterWorkout
+//                {
+//                    RoundsFinished = 30,
+//                    PartialRepsFinished = 2,
+//                    RoutineComplex = context.ComplexRoutines.Single(x => x.Title == "Cindy"),
+//                    Crossfitter = context.Crossfitters.Single(x => x.FirstName == "Pukie")
+//                },
+//
+//            };
+//        }
     }
 }

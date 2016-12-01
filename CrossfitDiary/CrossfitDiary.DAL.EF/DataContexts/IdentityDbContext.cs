@@ -22,6 +22,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts
         {
             base.OnModelCreating(modelBuilder);
 
+            
 //            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 //            modelBuilder.Entity<IdentityUserLogin>().HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId }).ToTable("AspNetUserLogins");
 //            modelBuilder.Entity<IdentityRole>().HasKey(r => r.Id).ToTable("AspNetRoles");
