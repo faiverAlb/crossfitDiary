@@ -17,12 +17,9 @@ namespace CrossfitDiary.Web
         private void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(CrossfitDiaryDbContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-            app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+            AutofacDependencyResolver.Run(app);
 
-
-            var cookieOptions = new CookieAuthenticationOptions
+                        var cookieOptions = new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
@@ -46,8 +43,8 @@ namespace CrossfitDiary.Web
                 ClientId = "807578390975-ldab7hpsaa56tmtjl1fcdga6vhf3p36s.apps.googleusercontent.com",
                 ClientSecret = "78ZHtssCWBmtvt_w1Pfq-NHz"
             });
-//
-//
+
+          
 
         }
     }

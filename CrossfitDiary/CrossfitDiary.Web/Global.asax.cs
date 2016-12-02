@@ -25,7 +25,7 @@ namespace CrossfitDiary.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Bootstrapper.Run();
+            
             BundleTable.EnableOptimizations = false;
         }
     }

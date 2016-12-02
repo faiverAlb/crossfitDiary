@@ -14,19 +14,14 @@ namespace CrossfitDiary.Web.Controllers
     [AllowAnonymous]
     public partial class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private readonly ApplicationUserManager _userManager;
+        private readonly ApplicationSignInManager _applicationSignInManager;
 
-        public ApplicationUserManager UserManager
+
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager applicationSignInManager)
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            _userManager = userManager;
+            _applicationSignInManager = applicationSignInManager;
         }
 
 
@@ -62,17 +57,6 @@ namespace CrossfitDiary.Web.Controllers
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
 
 
         public virtual async Task<ActionResult> ExternalLoginCallback(string returnUrl)
@@ -82,7 +66,7 @@ namespace CrossfitDiary.Web.Controllers
                 return RedirectToAction(MVC.Account.Views.ExternalLoginFailure, new {ReturnUrl = returnUrl});
 
             
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var result = await _applicationSignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -93,13 +77,13 @@ namespace CrossfitDiary.Web.Controllers
                         return View(MVC.Account.Views.ExternalLoginFailure);
 
                     var user = new ApplicationUser { UserName = loginInfo.Email, Email = loginInfo.Email };
-                    var createdUser = await UserManager.CreateAsync(user);
+                    var createdUser = await _userManager.CreateAsync(user);
                     if (createdUser.Succeeded)
                     {
-                        createdUser = await UserManager.AddLoginAsync(user.Id, info.Login);
+                        createdUser = await _userManager.AddLoginAsync(user.Id, info.Login);
                         if (createdUser.Succeeded)
                         {
-                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            await _applicationSignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                             return RedirectToLocal(returnUrl);
                         }
                     }
