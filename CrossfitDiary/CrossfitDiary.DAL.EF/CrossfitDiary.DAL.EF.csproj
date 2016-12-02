@@ -70,9 +70,9 @@
     <Compile Include="Configuration\RoutineSimpleConfiguration.cs" />
     <Compile Include="Configuration\CrossfitterWorkoutConfiguration.cs" />
     <Compile Include="DataContexts\CrossfitDiaryDbContext.cs" />
-    <Compile Include="DataContexts\CrossfitDiaryMigrations\201612011406294_Initial.cs" />
-    <Compile Include="DataContexts\CrossfitDiaryMigrations\201612011406294_Initial.Designer.cs">
-      <DependentUpon>201612011406294_Initial.cs</DependentUpon>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201612020618169_Initial.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201612020618169_Initial.Designer.cs">
+      <DependentUpon>201612020618169_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDbContext.cs" />
@@ -107,8 +107,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201612011406294_Initial.resx">
-      <DependentUpon>201612011406294_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201612020618169_Initial.resx">
+      <DependentUpon>201612020618169_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

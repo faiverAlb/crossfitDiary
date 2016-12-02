@@ -13,7 +13,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201612011406294_Initial"; }
+            get { return "201612020618169_Initial"; }
         }
         
         string IMigrationMetadata.Source
