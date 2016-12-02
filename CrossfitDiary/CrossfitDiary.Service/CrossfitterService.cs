@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CrossfitDiary.DAL.EF.Infrastructure;
 using CrossfitDiary.DAL.EF.Repositories;
 using CrossfitDiary.Model;
@@ -11,12 +12,14 @@ namespace CrossfitDiary.Service
         private readonly IRoutineComplexRepository _routineComplexRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IExerciseRepository _exerciseRepository;
+        private readonly ICrossfitterWorkoutRepository _crossfitterWorkoutRepository;
 
-        public CrossfitterService(IRoutineComplexRepository routineComplexRepository, IUnitOfWork unitOfWork, IExerciseRepository exerciseRepository)
+        public CrossfitterService(IRoutineComplexRepository routineComplexRepository, IUnitOfWork unitOfWork, IExerciseRepository exerciseRepository, ICrossfitterWorkoutRepository crossfitterWorkoutRepository)
         {
             _routineComplexRepository = routineComplexRepository;
             _unitOfWork = unitOfWork;
             _exerciseRepository = exerciseRepository;
+            _crossfitterWorkoutRepository = crossfitterWorkoutRepository;
         }
 
         public void CreateWorkout(RoutineComplex routineComplexToSave)
@@ -24,6 +27,12 @@ namespace CrossfitDiary.Service
             SetRoutineComplexTitle(routineComplexToSave);
 
             _routineComplexRepository.Add(routineComplexToSave);
+            _unitOfWork.Commit();
+        }
+
+        public void LogWorkout(CrossfitterWorkout workoutToLog)
+        {
+            _crossfitterWorkoutRepository.AddOrUpdate(workoutToLog);
             _unitOfWork.Commit();
         }
 

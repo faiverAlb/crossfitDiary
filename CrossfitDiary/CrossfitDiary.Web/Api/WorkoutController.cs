@@ -1,8 +1,12 @@
-﻿using System.Web.Http;
+﻿using System.Web;
+using System.Web.Http;
 using AutoMapper;
 using CrossfitDiary.Model;
 using CrossfitDiary.Service.Interfaces;
+using CrossfitDiary.Web.Configuration;
 using CrossfitDiary.Web.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace CrossfitDiary.Web.Api
 {
@@ -37,7 +41,11 @@ namespace CrossfitDiary.Web.Api
         [Route("logWorkout")]
         public void LogWorkout(ToLogWorkoutViewModel model)
         {
-//            _crossfitterService.LogWorkout(Mapper.Map<>());
+            ApplicationUser user = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            var crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model);
+            crossfitterWorkout.Crossfitter = user;
+            _crossfitterService.LogWorkout(crossfitterWorkout);
         }
     }
 

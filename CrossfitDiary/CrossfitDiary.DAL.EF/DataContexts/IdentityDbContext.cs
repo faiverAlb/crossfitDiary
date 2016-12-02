@@ -11,12 +11,13 @@ namespace CrossfitDiary.DAL.EF.DataContexts
         public IdentityDbContext() : base("CrossfitDiaryEntities", throwIfV1Schema: false)
         {
             //            Database.SetInitializer(new IdentityDropCreateInitializer());
+//            Configuration.ProxyCreationEnabled = false;
         }
 
-        public static IdentityDbContext Create()
-        {
-            return new IdentityDbContext();
-        }
+//        public static IdentityDbContext Create()
+//        {
+//            return new IdentityDbContext();
+//        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

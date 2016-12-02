@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using CrossfitDiary.DAL.EF.DataContexts;
@@ -25,6 +26,10 @@ namespace CrossfitDiary.DAL.EF.Infrastructure
             _dbSet = DbContext.Set<T>();
         }
 
+        public virtual void AddOrUpdate(T entity)
+        {
+            _dbSet.AddOrUpdate(entity);
+        }
         public virtual void Add(T entity)
         {
             _dbSet.Add(entity);

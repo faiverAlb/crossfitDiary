@@ -28,6 +28,12 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.Count, opt => opt.ResolveUsing<CountResolver>())
                 .ForMember(x => x.Distance, opt => opt.ResolveUsing<DistanceResolver>())
                 .ForMember(x => x.Weight, opt => opt.ResolveUsing<WeightResolver>());
+
+            CreateMap<ToLogWorkoutViewModel, CrossfitterWorkout>()
+                .ForMember(x => x.RoutineComplexId, x => x.MapFrom(y => y.SelectedWorkoutId))
+                .ForMember(x => x.Date, x => x.MapFrom(y => DateTime.Now))
+                .ForMember(x => x.IsModified, x => x.MapFrom(y => !y.IsRx));
+//                .ForMember(x => x.Crossfitter, x => x.MapFrom(y => System.Web.HttpContext.Current.User));
         }
     }
 

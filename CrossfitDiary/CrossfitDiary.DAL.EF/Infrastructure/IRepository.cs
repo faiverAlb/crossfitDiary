@@ -11,6 +11,7 @@ namespace CrossfitDiary.DAL.EF.Infrastructure
     public interface IRepository<T> where T: class
     {
         void Add(T entity);
+        void AddOrUpdate(T entity);
 
         void Update(T entity);
 

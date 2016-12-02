@@ -4,20 +4,25 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using IdentityDbContext = CrossfitDiary.DAL.EF.DataContexts.IdentityDbContext;
+using CrossfitDiaryDbContext = CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryDbContext;
 
 namespace CrossfitDiary.Web.Configuration
 {
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
-            : base(store)
+        private ApplicationUserManager(IUserStore<ApplicationUser> store): base(store)
         {
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<IdentityDbContext>()));
+            var crossfitDiaryDbContext = context.Get<CrossfitDiaryDbContext>();
+            var userStore = new UserStore<ApplicationUser>(crossfitDiaryDbContext);
+            // During SaveChanges it will help not to create user
+            userStore.AutoSaveChanges = false;
+
+            var manager = new ApplicationUserManager(userStore);
+            
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {

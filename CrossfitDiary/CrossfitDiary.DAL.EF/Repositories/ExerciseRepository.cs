@@ -13,7 +13,7 @@ namespace CrossfitDiary.DAL.EF.Repositories
         {
         }
     }
-
     
+
 
 }
