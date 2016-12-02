@@ -1,11 +1,7 @@
-﻿using CrossfitDiary.DAL.EF.DataContexts;
-using CrossfitDiary.Model;
+﻿using CrossfitDiary.Model;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
 using Microsoft.Owin.Security.DataProtection;
-using CrossfitDiaryDbContext = CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryDbContext;
 
 namespace CrossfitDiary.Web.Configuration
 {

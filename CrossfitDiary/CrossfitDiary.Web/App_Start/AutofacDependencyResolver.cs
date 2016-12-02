@@ -32,16 +32,16 @@ namespace CrossfitDiary.Web
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<CrossfitDiaryDbContext>().AsSelf().InstancePerRequest();
+            builder.RegisterType<CrossfitDiaryDbContext>().AsSelf().SingleInstance();
             builder.Register(c => new UserStore<ApplicationUser>(c.Resolve<CrossfitDiaryDbContext>())).AsImplementedInterfaces().InstancePerRequest();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
-          
 
-                        builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();

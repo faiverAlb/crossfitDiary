@@ -16,10 +16,12 @@ namespace CrossfitDiary.Web.Api
     public class WorkoutController : ApiController
     {
         private readonly ICrossfitterService _crossfitterService;
+        private readonly ApplicationUserManager _applicationUserManager;
 
-        public WorkoutController(ICrossfitterService crossfitterService)
+        public WorkoutController(ICrossfitterService crossfitterService, ApplicationUserManager applicationUserManager)
         {
             _crossfitterService = crossfitterService;
+            _applicationUserManager = applicationUserManager;
         }
 
         /// <summary>
@@ -41,7 +43,7 @@ namespace CrossfitDiary.Web.Api
         [Route("logWorkout")]
         public void LogWorkout(ToLogWorkoutViewModel model)
         {
-            ApplicationUser user = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(HttpContext.Current.User.Identity.GetUserId());
+            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
 
             var crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model);
             crossfitterWorkout.Crossfitter = user;

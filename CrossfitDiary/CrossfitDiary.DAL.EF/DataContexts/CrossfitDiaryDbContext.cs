@@ -25,11 +25,6 @@ namespace CrossfitDiary.DAL.EF.DataContexts
 
         public DbSet<CrossfitterWorkout> CrossfitterWorkouts { get; set; }
 
-        public static CrossfitDiaryDbContext Create()
-        {
-            return new CrossfitDiaryDbContext();
-        }
-
 
         public virtual void Commit()
         {
@@ -52,7 +47,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts
                 }
                 throw;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 
                 throw;
