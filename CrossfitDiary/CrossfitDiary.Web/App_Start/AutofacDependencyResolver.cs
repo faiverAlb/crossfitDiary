@@ -10,6 +10,7 @@ using CrossfitDiary.DAL.EF.Infrastructure;
 using CrossfitDiary.DAL.EF.Repositories;
 using CrossfitDiary.Model;
 using CrossfitDiary.Service;
+using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.Configuration;
 using CrossfitDiary.Web.Mappings;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -39,12 +40,13 @@ namespace CrossfitDiary.Web
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
 
-
-
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
+
+
+            builder.RegisterType<CrossfitterService>().As<ICrossfitterService>();
 
             //Repositories
             builder.RegisterAssemblyTypes(typeof (ExerciseRepository).Assembly)
