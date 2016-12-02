@@ -46,8 +46,6 @@ namespace CrossfitDiary.Web
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
 
 
-            builder.RegisterType<CrossfitterService>().As<ICrossfitterService>();
-
             //Repositories
             builder.RegisterAssemblyTypes(typeof (ExerciseRepository).Assembly)
                 .Where(t => t.Name.EndsWith("Repository"))
