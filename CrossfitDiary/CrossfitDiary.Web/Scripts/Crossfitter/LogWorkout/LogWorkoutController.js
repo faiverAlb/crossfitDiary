@@ -12,7 +12,7 @@
     self.generalPoints = ko.observable();
 
     self.wasFinished = ko.observable();
-    self.isRx = ko.observable();
+    self.isRx = ko.observable(true);
     self.IsModified = ko.observable();
     self.workoutToDisplay = ko.observable();
     self.totalTime = ko.observable();
@@ -73,7 +73,7 @@
             distance: self.distance,
             points: self.generalPoints,
             wasFinished: self.wasFinished,
-            isRx: self.isRx
+            isRx: self.isRx()
         };
         return model;
     };
