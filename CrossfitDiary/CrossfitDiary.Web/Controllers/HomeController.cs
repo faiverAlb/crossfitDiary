@@ -8,7 +8,6 @@ namespace CrossfitDiary.Web.Controllers
 
         public virtual ActionResult Index()
         {
-            //TODO: Use or not Facade pattern?
             return View();
         }
 
