@@ -8424,12 +8424,8 @@ select.selectpicker {
 .home-container .activities-calendar .grid-calendar .grid-cell.next-month {
   background-color: #e1e1e1;
 }
-.home-container .activities-calendar .grid-calendar .grid-cell > div {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-.home-container .activities-calendar .grid-calendar .grid-cell > div > div {
-  height: 0;
+.home-container .activities-calendar .grid-calendar .grid-cell .content {
+  display: block;
+  text-align: center;
   padding: 50% 0;
 }
