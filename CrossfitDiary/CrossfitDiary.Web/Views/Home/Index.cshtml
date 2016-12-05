@@ -1,6 +1,8 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
 }
+@model CrossfitDiary.Web.ViewModels.HomeViewModel
+
 <div class="row home-container">
     <div class="col-md-12">
         <div class="container activities-calendar">
@@ -58,58 +60,17 @@
                 </div>
 
                 <div class="row calendar-week">
-                    <div class="col-xs-1 grid-cell previous-month">
-                        <div>
+                    @foreach(var workoutDay in Model.WeekWorkouts)
+                    { 
+                        <div class="col-xs-1 grid-cell ">
                             <div>
-                                <span>31</span>
+                                <div>
+                                    <span>@workoutDay.Date.Day</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>2</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>4</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>5</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell ">
-                        <div>
-                            <div>
-                                <span>6</span>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
-
-
             </div>
         </div>
     </div>
