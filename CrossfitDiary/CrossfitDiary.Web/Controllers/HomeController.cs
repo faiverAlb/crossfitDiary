@@ -1,16 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using CrossfitDiary.Model;
+using CrossfitDiary.Service.Interfaces;
+using CrossfitDiary.Web.Configuration;
 using CrossfitDiary.Web.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Controllers
 {
     [RequireHttps]
     public partial class HomeController : Controller
     {
+        private readonly ICrossfitterService _crossfitterService;
+        private readonly ApplicationUserManager _applicationUserManager;
 
+        public HomeController(ICrossfitterService crossfitterService, ApplicationUserManager applicationUserManager)
+        {
+            _crossfitterService = crossfitterService;
+            _applicationUserManager = applicationUserManager;
+        }
         public virtual ActionResult Index()
         {
+//            ApplicationUser user = _applicationUserManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+//            _crossfitterService.GetCrossfitterWorkouts(user);
             HomeViewModel homeViewModel = new HomeViewModel()
             {
                 WeekWorkouts = new List<DayWorkoutViewModel>()

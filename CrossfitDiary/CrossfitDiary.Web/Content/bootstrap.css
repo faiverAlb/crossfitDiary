@@ -8417,6 +8417,7 @@ select.selectpicker {
   padding: 0;
   position: relative;
   width: 14%;
+  text-align: center;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell.previous-month {
   color: #a6a6a6;

@@ -1,4 +1,5 @@
-﻿using CrossfitDiary.Model;
+﻿using System.Collections.Generic;
+using CrossfitDiary.Model;
 
 namespace CrossfitDiary.Service.Interfaces
 {
@@ -6,5 +7,7 @@ namespace CrossfitDiary.Service.Interfaces
     {
         void CreateWorkout(RoutineComplex map);
         void LogWorkout(CrossfitterWorkout map);
+
+        List<CrossfitterWorkout> GetCrossfitterWorkouts(ApplicationUser userId);
     }
 }

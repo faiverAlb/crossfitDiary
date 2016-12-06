@@ -49,5 +49,10 @@ namespace CrossfitDiary.Service
             }
             routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
         }
+
+        public List<CrossfitterWorkout> GetCrossfitterWorkouts(string user)
+        {
+//            return _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter == user).ToList();
+        }
     }
 }
