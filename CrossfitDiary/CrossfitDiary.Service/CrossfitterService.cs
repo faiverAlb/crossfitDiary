@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CrossfitDiary.DAL.EF.Infrastructure;
 using CrossfitDiary.DAL.EF.Repositories;
 using CrossfitDiary.Model;
@@ -50,9 +51,9 @@ namespace CrossfitDiary.Service
             routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
         }
 
-        public List<CrossfitterWorkout> GetCrossfitterWorkouts(string user)
+        public List<CrossfitterWorkout> GetCrossfitterWorkouts(string userId)
         {
-//            return _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter == user).ToList();
+            return _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId).ToList();
         }
     }
 }

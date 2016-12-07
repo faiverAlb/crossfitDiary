@@ -22,8 +22,7 @@ namespace CrossfitDiary.Web.Controllers
         }
         public virtual ActionResult Index()
         {
-//            ApplicationUser user = _applicationUserManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-//            _crossfitterService.GetCrossfitterWorkouts(user);
+            var test = _crossfitterService.GetCrossfitterWorkouts(System.Web.HttpContext.Current.User.Identity.GetUserId());
             HomeViewModel homeViewModel = new HomeViewModel()
             {
                 WeekWorkouts = new List<DayWorkoutViewModel>()

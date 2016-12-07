@@ -8,6 +8,6 @@ namespace CrossfitDiary.Service.Interfaces
         void CreateWorkout(RoutineComplex map);
         void LogWorkout(CrossfitterWorkout map);
 
-        List<CrossfitterWorkout> GetCrossfitterWorkouts(ApplicationUser userId);
+        List<CrossfitterWorkout> GetCrossfitterWorkouts(string userId);
     }
 }
