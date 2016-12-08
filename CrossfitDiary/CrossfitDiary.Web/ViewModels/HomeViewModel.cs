@@ -14,7 +14,7 @@ namespace CrossfitDiary.Web.ViewModels
 
         public string DayOfWeek { get; set; }
 
-        public List<ToLogWorkoutViewModel> Workouts { get; set; }
+        public List<ToLogWorkoutViewModel> Workouts { get; set; } = new List<ToLogWorkoutViewModel>();
 
     }
 }

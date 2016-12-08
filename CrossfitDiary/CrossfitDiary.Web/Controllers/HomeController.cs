@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using CrossfitDiary.Model;
 using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.Configuration;
@@ -9,6 +11,19 @@ using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Controllers
 {
+    public static class DateTimeExtensions
+    {
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = dt.DayOfWeek - startOfWeek;
+            if (diff < 0)
+            {
+                diff += 7;
+            }
+            return dt.AddDays(-1 * diff).Date;
+        }
+    }
+
     [RequireHttps]
     public partial class HomeController : Controller
     {
@@ -22,50 +37,48 @@ namespace CrossfitDiary.Web.Controllers
         }
         public virtual ActionResult Index()
         {
-            var test = _crossfitterService.GetCrossfitterWorkouts(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            
+
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                WeekWorkouts = new List<DayWorkoutViewModel>()
-                {
-                    new DayWorkoutViewModel()
-                    {
-                        Date = DateTime.Now,
-                        DayOfWeek = DateTime.Now.DayOfWeek.ToString()
-                    },
-                    new DayWorkoutViewModel()
-                    {
-                        Date = DateTime.Now.AddDays(1),
-                        DayOfWeek = DateTime.Now.DayOfWeek.ToString()
-                    },
-                    new DayWorkoutViewModel()
-                    {
-                        Date = DateTime.Now.AddDays(2),
-                        DayOfWeek = DateTime.Now.DayOfWeek.ToString()
-                    },
-                    new DayWorkoutViewModel()
-                    {
-                        Date = DateTime.Now.AddDays(3),
-                        DayOfWeek = DateTime.Now.DayOfWeek.ToString()
-                    },
-                    new DayWorkoutViewModel()
-                    {
-                        Date = DateTime.Now.AddDays(4),
-                        DayOfWeek = DateTime.Now.DayOfWeek.ToString()
-                    },
-                    new DayWorkoutViewModel()
-                    {
-                        Date = DateTime.Now.AddDays(5),
-                        DayOfWeek = DateTime.Now.DayOfWeek.ToString()
-                    },
-                    new DayWorkoutViewModel()
-                    {
-                        Date = DateTime.Now.AddDays(6),
-                        DayOfWeek = DateTime.Now.DayOfWeek.ToString()
-                    },
-                }
+                WeekWorkouts = GetWeekWorkouts()
             };
 
             return View(model: homeViewModel);
+        }
+
+        private List<DayWorkoutViewModel> GetWeekWorkouts()
+        {
+            var startOfWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+            List<ToLogWorkoutViewModel> crossfitterWorkoutsViewModels = _crossfitterService.GetCrossfitterWorkouts(System.Web.HttpContext.Current.User.Identity.GetUserId()
+                                                                                                                   , startOfWeek
+                                                                                                                   , startOfWeek.AddDays(6)).Select(x => Mapper.Map<ToLogWorkoutViewModel>(x)).ToList();
+            var groupedModels = crossfitterWorkoutsViewModels.GroupBy(x => x.Date.DayOfWeek);
+
+            var dayWorkouts = new List<DayWorkoutViewModel>
+            {
+                GetDayWorkoutViewModelByDate(DayOfWeek.Monday, startOfWeek, groupedModels),
+                GetDayWorkoutViewModelByDate(DayOfWeek.Tuesday, startOfWeek.AddDays(1), groupedModels),
+                GetDayWorkoutViewModelByDate(DayOfWeek.Wednesday, startOfWeek.AddDays(2), groupedModels),
+                GetDayWorkoutViewModelByDate(DayOfWeek.Thursday, startOfWeek.AddDays(3), groupedModels),
+                GetDayWorkoutViewModelByDate(DayOfWeek.Friday, startOfWeek.AddDays(4), groupedModels),
+                GetDayWorkoutViewModelByDate(DayOfWeek.Saturday, startOfWeek.AddDays(5), groupedModels),
+                GetDayWorkoutViewModelByDate(DayOfWeek.Sunday, startOfWeek.AddDays(6), groupedModels),
+            };
+            return dayWorkouts;
+        }
+
+
+        private DayWorkoutViewModel GetDayWorkoutViewModelByDate(DayOfWeek dayOfWeek, DateTime date, IEnumerable<IGrouping<DayOfWeek, ToLogWorkoutViewModel>> groupedModels)
+        {
+            var dayWorkout = groupedModels.SingleOrDefault(x => x.Key == dayOfWeek);
+            var workouts = dayWorkout?.ToList() ?? new List<ToLogWorkoutViewModel>();
+            return new DayWorkoutViewModel()
+            {
+                DayOfWeek = dayOfWeek.ToString(),
+                Date = date,
+                Workouts = workouts
+            };
         }
 
 

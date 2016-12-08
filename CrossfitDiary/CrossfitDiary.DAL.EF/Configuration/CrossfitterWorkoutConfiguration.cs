@@ -12,6 +12,7 @@ namespace CrossfitDiary.DAL.EF.Configuration
             Property(x => x.RoutineComplexId).IsRequired();
 //            Property(x => x.CrossfitterId).IsRequired();
             HasRequired(x => x.Crossfitter);
+            HasRequired(x => x.RoutineComplex);
 
             Property(x => x.Date).IsRequired();
         }

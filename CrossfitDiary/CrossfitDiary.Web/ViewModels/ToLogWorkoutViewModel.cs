@@ -14,7 +14,6 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("partialRepsFinished")]
         public int? PartialRepsFinished { get; set; }
 
-
         [JsonProperty("timePassed")]
         public TimeSpan? TimePassed { get; set; }
 
@@ -30,5 +29,12 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("isRx")]
         public bool IsRx { get; set; }
 
+        //TODO: Move to separate view model?
+
+        [JsonProperty("selectedWorkoutName")]
+        public string SelectedWorkoutName { get; set; }
+        
+        [JsonProperty("date")]
+        public DateTime Date { get; set; }
     }
 }

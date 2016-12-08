@@ -9,9 +9,9 @@ namespace CrossfitDiary.Model
             Date = DateTime.Now;
         }
 
-        public int RoutineComplexId { get; set; }
+        public virtual int RoutineComplexId { get; set; }
 
-        public RoutineComplex RoutineComplex { get; set; }
+        public virtual RoutineComplex RoutineComplex { get; set; }
 
 
 

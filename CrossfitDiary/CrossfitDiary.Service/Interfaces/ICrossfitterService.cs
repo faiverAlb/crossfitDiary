@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CrossfitDiary.Model;
 
 namespace CrossfitDiary.Service.Interfaces
@@ -8,6 +9,6 @@ namespace CrossfitDiary.Service.Interfaces
         void CreateWorkout(RoutineComplex map);
         void LogWorkout(CrossfitterWorkout map);
 
-        List<CrossfitterWorkout> GetCrossfitterWorkouts(string userId);
+        List<CrossfitterWorkout> GetCrossfitterWorkouts(string userId, DateTime fromDate, DateTime dueInterval);
     }
 }
