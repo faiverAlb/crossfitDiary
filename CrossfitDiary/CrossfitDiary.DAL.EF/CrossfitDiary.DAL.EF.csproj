@@ -62,7 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\CrossfitterConfiguration.cs" />
     <Compile Include="Configuration\ExerciseConfiguration.cs" />
     <Compile Include="Configuration\ExerciseMeasureConfiguration.cs" />
     <Compile Include="Configuration\ExerciseMeasureTypeConfiguration.cs" />
