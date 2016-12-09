@@ -75,3 +75,18 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/home")
+    <script>
+        $(function() {
+            var path = "@Url.Content("~")";
+            var model = new HomePageController({
+                pathToApp: path,
+                viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+            });
+            ko.applyBindings(model);
+        });
+    </script>
+}

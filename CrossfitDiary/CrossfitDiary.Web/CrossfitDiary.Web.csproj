@@ -240,6 +240,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CrossfitterController.cs" />
+    <Compile Include="MvcHelpers\DateTimeExtensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="CrossfitterController.generated.cs">
@@ -471,6 +472,7 @@
     <None Include="Properties\PublishProfiles\SomeeBeta.pubxml" />
     <None Include="Properties\PublishProfiles\workouter.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\Home\HomePageController.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />

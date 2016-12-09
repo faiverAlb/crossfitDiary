@@ -27,7 +27,7 @@ namespace CrossfitDiary.Web
                 ));
 
 
-            /*   Crossfitter   */
+            /*   --Crossfitter--   */
             
             /*   Create workout   */
             bundles.Add(new ScriptBundle("~/bundles/crossfitter/createWorkout")
@@ -50,6 +50,11 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Crossfitter/WorkoutType.js"
                     , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
                     , "~/Scripts/Crossfitter/CrossfitterService.js"));
+
+
+            /*   --Home--   */
+            bundles.Add(new ScriptBundle("~/bundles/home")
+                .Include("~/Scripts/Home/HomePageController.js"));
 
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/css/font-awesome.min.css"));

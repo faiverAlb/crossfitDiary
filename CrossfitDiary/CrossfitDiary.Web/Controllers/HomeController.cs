@@ -6,24 +6,12 @@ using AutoMapper;
 using CrossfitDiary.Model;
 using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.Configuration;
+using CrossfitDiary.Web.MvcHelpers;
 using CrossfitDiary.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Controllers
 {
-    public static class DateTimeExtensions
-    {
-        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
-        {
-            int diff = dt.DayOfWeek - startOfWeek;
-            if (diff < 0)
-            {
-                diff += 7;
-            }
-            return dt.AddDays(-1 * diff).Date;
-        }
-    }
-
     [RequireHttps]
     public partial class HomeController : Controller
     {
