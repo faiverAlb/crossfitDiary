@@ -59,17 +59,14 @@
                     </div>
                 </div>
 
-                <div class="row calendar-week">
-                    @foreach(var workoutDay in Model.WeekWorkouts)
-                    { 
+                <div class="row calendar-week" data-bind="foreach: weekWorkouts">
                         <div class="col-xs-1 grid-cell">
                             <div class="content">
                                 <div>
-                                    <span>@workoutDay.Date.Day</span>
+                                    <span data-bind="text:date"></span>
                                 </div>
                             </div>
                         </div>
-                    }
                 </div>
             </div>
         </div>

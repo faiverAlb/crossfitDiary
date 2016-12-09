@@ -1,9 +1,11 @@
 ﻿var HomePageController = function (parameters) {
     var self = this;
-    debugger;
+
+    self.weekWorkouts = parameters.viewModel.weekWorkouts;
+
+
     self.toJSON = function () {
-        var model = {
-        };
+        var model = {};
         return model;
     };
 
