@@ -15,6 +15,9 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("date")]
         public DateTime Date { get; set; }
 
+        [JsonProperty("displayDate")]
+        public string DisplayDate { get { return Date.ToString("d"); } }
+
         [JsonProperty("dayOfWeek")]
         public string DayOfWeek { get; set; }
 
