@@ -33,6 +33,9 @@ namespace CrossfitDiary.Web.ViewModels
 
         [JsonProperty("selectedWorkoutName")]
         public string SelectedWorkoutName { get; set; }
+
+        [JsonProperty("measureDisplayName")]
+        public string MeasureDisplayName { get; set; }
         
         [JsonProperty("date")]
         public DateTime Date { get; set; }

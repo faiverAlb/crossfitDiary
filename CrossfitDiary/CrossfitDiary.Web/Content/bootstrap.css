@@ -8395,6 +8395,17 @@ select.selectpicker {
   background-color: #e1e1e1;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content {
+  min-height: 150px;
+}
+.home-container .activities-calendar .grid-calendar .grid-cell .content .date {
+  font-weight: bold;
+  border-bottom: 1px dashed black;
   text-align: center;
-  padding: 50% 0;
+}
+.home-container .activities-calendar .grid-calendar .grid-cell .content .empty-row {
+  height: 15px;
+}
+.home-container .activities-calendar .grid-calendar .grid-cell .content .workout {
+  border-bottom: 1px dashed black;
+  border-top: 1px dashed black;
 }

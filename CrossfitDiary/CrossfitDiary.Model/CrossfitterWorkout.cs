@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CrossfitDiary.Model
 {
@@ -34,5 +35,8 @@ namespace CrossfitDiary.Model
         public bool IsRx { get; set; }
 
         public bool IsModified { get; set; }
+
+        [NotMapped]
+        public string MeasureDisplayName { get; set; }
     }
 }

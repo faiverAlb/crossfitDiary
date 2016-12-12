@@ -61,10 +61,15 @@
 
                 <div class="row calendar-week" data-bind="foreach: weekWorkouts">
                         <div class="col-xs-1 grid-cell">
-                            <div class="content">
-                                <div>
-                                    <span data-bind="text:displayDate"></span>
+                            <div class="content ">
+                                <div class="date" data-bind="text:displayDate"></div>
+                                <div class="empty-row"></div>
+                                <!-- ko foreach: workouts-->
+                                <div class="workout clearfix" >
+                                    <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
+                                    <div class="pull-right" data-bind="text: measureDisplayName"></div>
                                 </div>
+                                <!--/ko-->
                             </div>
                         </div>
                 </div>

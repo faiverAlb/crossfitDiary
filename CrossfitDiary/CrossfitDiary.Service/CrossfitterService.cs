@@ -53,7 +53,34 @@ namespace CrossfitDiary.Service
 
         public List<CrossfitterWorkout> GetCrossfitterWorkouts(string userId, DateTime fromDate, DateTime dueDate)
         {
-            return _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId && (fromDate < x.Date && x.Date <= dueDate)).ToList();
+            var crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId && (fromDate < x.Date && x.Date <= dueDate)).ToList();
+            foreach (var workout in crossfitterWorkouts)
+            {
+                if (workout.Distance.HasValue)
+                    workout.MeasureDisplayName = $"{workout.Distance.Value}m";
+                if (workout.Points.HasValue)
+                    workout.MeasureDisplayName = $"{workout.Points.Value} pts";
+                if (workout.RoundsFinished.HasValue)
+                { 
+                    workout.MeasureDisplayName = $"{workout.RoundsFinished.Value} rnds";
+                    if (workout.PartialRepsFinished.HasValue)
+                    {
+                        workout.MeasureDisplayName = $"{workout.MeasureDisplayName} + {workout.PartialRepsFinished.Value}";
+                    }
+                }
+
+                if (workout.TimePassed.HasValue )
+                {
+                    workout.MeasureDisplayName = $"{workout.TimePassed.Value.Minutes}min";
+                    if (workout.TimePassed.Value.Seconds>0)
+                    {
+                        workout.MeasureDisplayName = $"{workout.MeasureDisplayName}+{workout.TimePassed.Value.Seconds}sec";
+                    }
+
+                }
+
+            }
+            return crossfitterWorkouts;
         }
     }
 }
