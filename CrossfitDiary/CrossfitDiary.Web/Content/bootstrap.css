@@ -8395,7 +8395,8 @@ select.selectpicker {
   background-color: #e1e1e1;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content {
-  min-height: 150px;
+  height: 150px;
+  overflow: auto;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content .date {
   font-weight: bold;
@@ -8407,4 +8408,7 @@ select.selectpicker {
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content .workout {
   border-bottom: 1px dashed black;
+}
+.home-container .activities-calendar .grid-calendar .grid-cell .content .workout .measure {
+  font-size: 13px;
 }

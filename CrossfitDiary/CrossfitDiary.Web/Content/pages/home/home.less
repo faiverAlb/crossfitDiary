@@ -6,9 +6,11 @@
                 background-color: #f6f6f6;
                 border: 1px solid #fff;
             }
+
             .grid-cell {
                 width: 14%;
-                text-align:center;
+                text-align: center;
+
                 &.previous-month {
                     color: #a6a6a6;
                 }
@@ -19,18 +21,24 @@
 
                 .content {
                     //padding: 50% 0;
-                    min-height:150px;
+                    height: 150px;
+                    overflow: auto;
 
                     .date {
-                        font-weight:bold;
-                        border-bottom:1px dashed black;
+                        font-weight: bold;
+                        border-bottom: 1px dashed black;
                         text-align: center;
                     }
-                    .empty-row{
-                        height:15px
+
+                    .empty-row {
+                        height: 15px;
                     }
+
                     .workout {
-                        border-bottom:1px dashed black;
+                        border-bottom: 1px dashed black;
+                        .measure {
+                            font-size:13px;
+                        }
                     }
                 }
             }
