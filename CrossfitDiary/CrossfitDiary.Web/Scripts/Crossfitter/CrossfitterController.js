@@ -1,4 +1,11 @@
-﻿var CrossfitterController = function (parameters) {
+﻿ko.validation.init({
+    errorElementClass: 'has-error',
+    errorMessageClass: 'help-block',
+    decorateInputElement: true,
+    insertMessages: false
+});
+
+var CrossfitterController = function (parameters) {
     var self = this;
     
     var service = new CrossfitterService(parameters.pathToApp);
@@ -15,7 +22,7 @@
 
 
     self.roundsCount = ko.observable(parameters.roundsCount);
-    self.timeToWork = ko.observable(parameters.timeToWork);
+    self.timeToWork = ko.observable(parameters.timeToWork).extend({ required: true });
 
     self.title = ko.observable(parameters.title);
     self.restBetweenExercises = ko.observable(parameters.restBetweenExercises);
