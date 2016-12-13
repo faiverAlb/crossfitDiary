@@ -8396,6 +8396,15 @@ select.selectpicker {
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content {
   height: 200px;
+  font-size: 13px;
+}
+.home-container .activities-calendar .grid-calendar .grid-cell .content .date {
+  font-weight: bold;
+  border-bottom: 1px dashed black;
+  text-align: center;
+}
+.home-container .activities-calendar .grid-calendar .grid-cell .content .empty-row {
+  height: 15px;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container {
   border: 1px solid black;
@@ -8404,20 +8413,13 @@ select.selectpicker {
 .home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .header {
   width: 40px;
   margin-top: -10px;
-  margin-left: 5px;
+  margin-left: 33%;
   background-color: #f6f6f6;
-}
-.home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .date {
-  font-weight: bold;
-  border-bottom: 1px dashed #e1e1e1;
   text-align: center;
-}
-.home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .empty-row {
-  height: 15px;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .workout {
   border-bottom: 1px dashed black;
 }
-.home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .workout .measure {
-  font-size: 13px;
+.home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .workout:last-child {
+  border-bottom: none;
 }
