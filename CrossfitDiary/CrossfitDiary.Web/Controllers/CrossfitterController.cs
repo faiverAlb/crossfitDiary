@@ -30,7 +30,7 @@ namespace CrossfitDiary.Web.Controllers
             var model = new
             {
                 exercises = viewModels,
-                workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel))
+                workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key)
             };
             return View(model);
         }

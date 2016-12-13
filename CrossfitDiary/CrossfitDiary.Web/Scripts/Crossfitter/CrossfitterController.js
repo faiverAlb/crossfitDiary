@@ -28,7 +28,7 @@
             return false;
         }
         var selectedType = self.selectedWorkoutType().Value;
-        return selectedType == Crossfitter.WorkoutTypes.RoundsForTime;
+        return selectedType == Crossfitter.WorkoutTypes.ForTime;
     });
 
 
@@ -38,7 +38,8 @@
         }
         var selectedType = self.selectedWorkoutType().Value;
         return selectedType == Crossfitter.WorkoutTypes.AMRAP
-            || selectedType == Crossfitter.WorkoutTypes.EMOM;
+            || selectedType == Crossfitter.WorkoutTypes.EMOM
+            || selectedType == Crossfitter.WorkoutTypes.E2MOM;
     });
 
 

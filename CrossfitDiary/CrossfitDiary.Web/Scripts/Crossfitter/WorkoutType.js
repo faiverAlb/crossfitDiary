@@ -1,8 +1,10 @@
 ﻿window.Crossfitter = window.Crossfitter || {};
 window.Crossfitter.WorkoutTypes = {
-    ForTime : 0,
+    ForTime: 0,
     AMRAP : 1,
-    RoundsForTime : 2,
-    Points : 3,
-    EMOM : 4
+    Points : 2,
+    EMOM : 3,
+    E2MOM : 4,
+    NotForTime: 5,
+    Tabata : 6
 }

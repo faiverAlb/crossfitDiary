@@ -119,7 +119,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Air squat"), Count = 50}
                         }
                         , Title = "Barbara"
-                        , ComplexType = RoutineComplexType.RoundsForTime
+                        , ComplexType = RoutineComplexType.ForTime
                         , RoundCount = 5
                   }
                   ,new RoutineComplex
@@ -206,7 +206,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Pull-up"), Count = 12},
                         }
                         , Title = "Helen"
-                        , ComplexType = RoutineComplexType.RoundsForTime
+                        , ComplexType = RoutineComplexType.ForTime
                         , RoundCount = 3
                   }
               };
