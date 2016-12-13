@@ -21,23 +21,34 @@
 
                 .content {
                     //padding: 50% 0;
-                    height: 150px;
-                    overflow: auto;
+                    height: 200px;
 
-                    .date {
-                        font-weight: bold;
-                        border-bottom: 1px dashed black;
-                        text-align: center;
-                    }
+                    .workout-container {
+                        border: 1px solid black;
+                        padding:2px;
+                        .header {
+                            width: 40px;
+                            margin-top: -10px;
+                            margin-left: 5px;
+                            background-color: #f6f6f6;
+                        }
 
-                    .empty-row {
-                        height: 15px;
-                    }
+                        .date {
+                            font-weight: bold;
+                            border-bottom: 1px dashed #e1e1e1;
+                            text-align: center;
+                        }
 
-                    .workout {
-                        border-bottom: 1px dashed black;
-                        .measure {
-                            font-size:13px;
+                        .empty-row {
+                            height: 15px;
+                        }
+
+                        .workout {
+                            border-bottom: 1px dashed black;
+
+                            .measure {
+                                font-size: 13px;
+                            }
                         }
                     }
                 }

@@ -64,10 +64,15 @@
                             <div class="content ">
                                 <div class="date" data-bind="text:displayDate"></div>
                                 <div class="empty-row"></div>
-                                <!-- ko foreach: workouts-->
-                                <div class="workout clearfix" >
-                                    <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
-                                    <div class="measure pull-right" data-bind="text: measureDisplayName"></div>
+                                <!-- ko if: workouts.length > 0-->
+                                <div class="workout-container">
+                                    <div class="header">Done</div>
+                                    <!-- ko foreach: workouts-->
+                                    <div class="workout clearfix">
+                                        <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
+                                        <div class="pull-right" data-bind="text: measureDisplayName"></div>
+                                    </div>
+                                    <!--/ko-->
                                 </div>
                                 <!--/ko-->
                             </div>
