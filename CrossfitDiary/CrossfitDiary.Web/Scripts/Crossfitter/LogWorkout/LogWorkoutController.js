@@ -9,7 +9,6 @@
     self.partialRepsFinished = ko.observable();
 
     self.distance = ko.observable();
-    self.generalPoints = ko.observable();
 
     self.wasFinished = ko.observable();
     self.isRx = ko.observable(true);
@@ -19,7 +18,6 @@
 
     self.canSeeTotalRounds = ko.observable();
     self.canSeePassedDistance = ko.observable();
-    self.canSeeGeneralPoints = ko.observable();
     self.canSeeTotalTime = ko.observable();
 
 
@@ -35,9 +33,6 @@
 
         /* Distance input */
         self.canSeePassedDistance(checkWorkoutContainsDistanceExercise() && selectedTypeValue == Crossfitter.WorkoutTypes.EMOM);
-
-        /* General points */
-        self.canSeeGeneralPoints(selectedTypeValue == Crossfitter.WorkoutTypes.Points);
 
         /* General time */
         self.canSeeTotalTime(selectedTypeValue == Crossfitter.WorkoutTypes.ForTime);
@@ -71,7 +66,6 @@
             partialRepsFinished: self.partialRepsFinished,
             timePassed: self.totalTime,
             distance: self.distance,
-            points: self.generalPoints,
             wasFinished: self.wasFinished,
             isRx: self.isRx()
         };

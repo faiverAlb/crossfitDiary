@@ -28,7 +28,6 @@ namespace CrossfitDiary.Model
 
         public DateTime Date { get; set; }
 
-        public int? Points { get; set; }
 
         public bool WasFinished { get; set; }
 

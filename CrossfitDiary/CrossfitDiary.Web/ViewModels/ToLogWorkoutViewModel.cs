@@ -20,8 +20,6 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("distance")]
         public int? Distance { get; set; }
 
-        [JsonProperty("points")]
-        public int? Points { get; set; }
 
         [JsonProperty("wasFinished")]
         public bool WasFinished { get; set; }

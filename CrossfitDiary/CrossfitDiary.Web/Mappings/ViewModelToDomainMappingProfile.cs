@@ -24,7 +24,6 @@ namespace CrossfitDiary.Web.Mappings
             CreateMap<ExerciseViewModel, RoutineSimple>()
                 .ForMember(x => x.ExerciseId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.Id, x => x.Ignore())
-                .ForMember(x => x.TimeToWork, opt => opt.ResolveUsing<TimeSpanResolver>())
                 .ForMember(x => x.Count, opt => opt.ResolveUsing<CountResolver>())
                 .ForMember(x => x.Distance, opt => opt.ResolveUsing<DistanceResolver>())
                 .ForMember(x => x.Weight, opt => opt.ResolveUsing<WeightResolver>());
@@ -37,16 +36,6 @@ namespace CrossfitDiary.Web.Mappings
         }
     }
 
-    public class TimeSpanResolver : IValueResolver<ExerciseViewModel, RoutineSimple, TimeSpan?>
-    {
-        public TimeSpan? Resolve(ExerciseViewModel source, RoutineSimple destination, TimeSpan? destMember, ResolutionContext context)
-        {
-            ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Time);
-            if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
-                return null;
-            return TimeSpan.Parse(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
-        }
-    }
     public class CountResolver : IValueResolver<ExerciseViewModel, RoutineSimple, int?>
     {
         public int? Resolve(ExerciseViewModel source, RoutineSimple destination, int? destMember, ResolutionContext context)

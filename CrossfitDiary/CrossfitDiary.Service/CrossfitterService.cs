@@ -58,8 +58,6 @@ namespace CrossfitDiary.Service
             {
                 if (workout.Distance.HasValue)
                     workout.MeasureDisplayName = $"{workout.Distance.Value}m";
-                if (workout.Points.HasValue)
-                    workout.MeasureDisplayName = $"{workout.Points.Value} pts";
                 if (workout.RoundsFinished.HasValue)
                 { 
                     workout.MeasureDisplayName = $"{workout.RoundsFinished.Value} rnds";

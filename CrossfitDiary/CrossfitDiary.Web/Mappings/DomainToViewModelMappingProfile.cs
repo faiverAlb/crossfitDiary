@@ -52,12 +52,6 @@ namespace CrossfitDiary.Web.Mappings
                                 exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Count).ExerciseMeasureType.Description;
                                 exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Count).ExerciseMeasureType.ShortMeasureDescription;
                                 break;
-                            case MeasureType.Time:
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Time;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.TimeToWork?.ToString();
-                                exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Time).ExerciseMeasureType.Description;
-                                exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Time).ExerciseMeasureType.ShortMeasureDescription;
-                                break;
                             case MeasureType.Weight:
                                 exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Weight;
                                 exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Weight?.ToString();
