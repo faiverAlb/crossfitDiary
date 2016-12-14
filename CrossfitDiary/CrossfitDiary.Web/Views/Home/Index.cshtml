@@ -4,79 +4,28 @@
 @model CrossfitDiary.Web.ViewModels.HomeViewModel
 
 <div class="row home-container">
-    <div class="col-md-12">
+    <div class="">
         <div class="container activities-calendar">
             <div class="grid-calendar">
-                <div class="row calendar-week-header">
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>@DayOfWeek.Monday</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>@DayOfWeek.Tuesday</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>@DayOfWeek.Wednesday</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>@DayOfWeek.Thursday</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>@DayOfWeek.Friday</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>@DayOfWeek.Saturday</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-1 grid-cell">
-                        <div>
-                            <div>
-                                <span>@DayOfWeek.Sunday</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row calendar-week" data-bind="foreach: weekWorkouts">
-                        <div class="col-xs-1 grid-cell">
-                            <div class="content ">
-                                <div class="date" data-bind="text:displayDate"></div>
-                                <div class="empty-row"></div>
-                                <!-- ko if: workouts.length > 0-->
-                                <div class="workout-container">
-                                    <div class="header">Done</div>
-                                    <!-- ko foreach: workouts-->
-                                    <div class="workout clearfix">
-                                        <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
-                                        <div class="pull-right" data-bind="text: measureDisplayName"></div>
-                                    </div>
-                                    <!--/ko-->
+                <div class="row seven-cols" data-bind="foreach: weekWorkouts">
+                    <div class="col-md-1 grid-cell">
+                        <div data-bind ="text:dayOfWeek"></div>
+                        <div class="content ">
+                            <div class="date" data-bind="text:displayDate"></div>
+                            <div class="empty-row"></div>
+                            <!-- ko if: workouts.length > 0-->
+                            <div class="workout-container">
+                                <div class="header">Done</div>
+                                <!-- ko foreach: workouts-->
+                                <div class="workout clearfix">
+                                    <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
+                                    <div class="pull-right" data-bind="text: measureDisplayName"></div>
                                 </div>
                                 <!--/ko-->
                             </div>
+                            <!--/ko-->
                         </div>
+                    </div>
                 </div>
             </div>
         </div>

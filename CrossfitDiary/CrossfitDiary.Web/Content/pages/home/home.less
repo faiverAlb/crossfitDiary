@@ -2,13 +2,20 @@
     .activities-calendar {
         .grid-calendar {
 
-            .calendar-week .grid-cell {
-                background-color: #f6f6f6;
-                border: 1px solid #fff;
+            @media (min-width: 992px) {
+                .seven-cols .col-md-1,
+                .seven-cols .col-sm-1,
+                .seven-cols .col-lg-1 {
+                    width: 14.285714285714285714285714285714%;
+                    *width: 14.285714285714285714285714285714%;
+                }
             }
 
+            
+
             .grid-cell {
-                width: 14%;
+                background-color: #f6f6f6;
+                border: 1px solid #fff;
                 text-align: center;
 
                 &.previous-month {
@@ -37,20 +44,23 @@
                     .workout-container {
                         border: 1px solid black;
                         padding: 2px;
+
                         .header {
                             width: 40px;
                             margin-top: -10px;
-                            margin-left: 33%;
+                            
                             background-color: #f6f6f6;
                             text-align: center;
                         }
 
                         .workout {
                             border-bottom: 1px dashed black;
+
                             .measure {
                             }
                         }
-                        .workout:last-child{
+
+                        .workout:last-child {
                             border-bottom: none;
                         }
                     }

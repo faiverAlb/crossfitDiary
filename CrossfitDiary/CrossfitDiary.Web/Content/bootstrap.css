@@ -8380,12 +8380,17 @@ select.selectpicker {
   padding: 10px 0;
 }
 /* Home page */
-.home-container .activities-calendar .grid-calendar .calendar-week .grid-cell {
-  background-color: #f6f6f6;
-  border: 1px solid #fff;
+@media (min-width: 992px) {
+  .home-container .activities-calendar .grid-calendar .seven-cols .col-md-1,
+  .home-container .activities-calendar .grid-calendar .seven-cols .col-sm-1,
+  .home-container .activities-calendar .grid-calendar .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
 }
 .home-container .activities-calendar .grid-calendar .grid-cell {
-  width: 14%;
+  background-color: #f6f6f6;
+  border: 1px solid #fff;
   text-align: center;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell.previous-month {
@@ -8413,7 +8418,6 @@ select.selectpicker {
 .home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .header {
   width: 40px;
   margin-top: -10px;
-  margin-left: 33%;
   background-color: #f6f6f6;
   text-align: center;
 }
