@@ -4,6 +4,11 @@
     self.selectedExercise = ko.observable();
     self.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
 
+    ko.computed(function() {
+        if (self.selectedWorkoutType() || !self.selectedWorkoutType()) {
+            self.simpleRoutines([]);
+        }
+    });
     self.errors = ko.validation.group(self);
 
     ko.computed(function () {
