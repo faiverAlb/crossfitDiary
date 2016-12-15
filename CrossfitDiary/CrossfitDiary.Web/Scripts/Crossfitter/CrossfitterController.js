@@ -2,7 +2,12 @@
     errorElementClass: 'has-error',
     errorMessageClass: 'help-block',
     decorateInputElement: true,
-    insertMessages: false
+    insertMessages: false,
+    grouping: {
+        deep: true,
+        live: true,
+        observable: true
+    }
 });
 
 var CrossfitterController = function (parameters) {
@@ -22,7 +27,7 @@ var CrossfitterController = function (parameters) {
     self.selectedWorkoutType = ko.observable(parameters.selectedWorkoutType);
 
 
-    
+
 
     self.title = ko.observable(parameters.title);
     self.restBetweenExercises = ko.observable(parameters.restBetweenExercises);
@@ -86,8 +91,8 @@ var CrossfitterController = function (parameters) {
             exercisesToDoList: []
         };
         $.each(self.simpleRoutines(), function (index, routine) {
-            var innderRoutineJson = routine.toJSON();
-            model.exercisesToDoList.push(innderRoutineJson);
+            var innerRoutineJson = routine.toJSON();
+            model.exercisesToDoList.push(innerRoutineJson);
         });
 
         return model;
