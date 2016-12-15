@@ -37,9 +37,9 @@
                 </div>
                 <div data-bind="ifnot: isReadOnlyMode">
                     <form class="form-inline main-group">
-                        <div class="form-group" data-bind="if: canSeeRoundsCount">
+                        <div class="form-group" data-bind="if: canSeeRoundsCount, validationElement: roundsCount">
                             <label for="roundsInput">Rounds count</label>
-                            <input type="text" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: roundsCount">
+                            <input type="text" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: roundsCount, valueUpdate: 'afterkeydown'">
                         </div>
                         <div class="form-group" data-bind="if: canSeeTimeToWork, validationElement: timeToWork">
                             <label for="timeInput">Time to work</label>

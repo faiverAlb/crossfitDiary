@@ -19,16 +19,15 @@ var CrossfitterController = function (parameters) {
             self.simpleRoutines.push(new SimpleRoutine(exerciseToDo));
         }
     }
+    self.selectedWorkoutType = ko.observable(parameters.selectedWorkoutType);
 
 
-    self.roundsCount = ko.observable(parameters.roundsCount);
     
 
     self.title = ko.observable(parameters.title);
     self.restBetweenExercises = ko.observable(parameters.restBetweenExercises);
     self.restBetweenRounds = ko.observable(parameters.restBetweenRounds);
 
-    self.selectedWorkoutType = ko.observable(parameters.selectedWorkoutType);
 
     self.canSeeRoundsCount = ko.computed(function () {
         if (!self.selectedWorkoutType()) {
@@ -36,6 +35,14 @@ var CrossfitterController = function (parameters) {
         }
         var selectedType = self.selectedWorkoutType().Value;
         return selectedType == Crossfitter.WorkoutTypes.ForTime;
+    });
+
+    self.roundsCount = ko.observable(parameters.roundsCount).extend({
+        required: {
+            onlyIf:function() {
+                return self.canSeeRoundsCount();
+            }
+        }
     });
 
 

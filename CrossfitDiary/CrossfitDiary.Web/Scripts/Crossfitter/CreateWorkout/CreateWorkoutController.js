@@ -4,6 +4,8 @@
     self.selectedExercise = ko.observable();
     self.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
 
+    self.errors = ko.validation.group(self);
+
     ko.computed(function () {
         var exercise = self.selectedExercise();
         if (!exercise) {
@@ -16,6 +18,10 @@
 
 
     self.createWorkout = function () {
+        if (self.errors().length > 0) {
+            self.errors.showAllMessages();
+            return;
+        }
         self.service.createWorkout(self.toJSON());
     };
 
