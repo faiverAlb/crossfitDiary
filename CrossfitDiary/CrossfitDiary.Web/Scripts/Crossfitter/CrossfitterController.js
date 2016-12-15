@@ -22,7 +22,7 @@ var CrossfitterController = function (parameters) {
 
 
     self.roundsCount = ko.observable(parameters.roundsCount);
-    self.timeToWork = ko.observable(parameters.timeToWork).extend({ required: true });
+    
 
     self.title = ko.observable(parameters.title);
     self.restBetweenExercises = ko.observable(parameters.restBetweenExercises);
@@ -51,6 +51,14 @@ var CrossfitterController = function (parameters) {
 
 
 
+    self.timeToWork = ko.observable(parameters.timeToWork)
+        .extend({
+            required: {
+                onlyIf: function() {
+                    return self.canSeeTimeToWork();
+                }
+            }
+        });
 
     self.removeSimpleRoutineFromToDo = function(index) {
         self.simpleRoutines.splice(index(), 1);
