@@ -284,6 +284,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\img\curly-bracket.svg" />
     <Content Include="Content\pages\bootstrap.css">
       <DependentUpon>login-page.less</DependentUpon>
     </Content>
