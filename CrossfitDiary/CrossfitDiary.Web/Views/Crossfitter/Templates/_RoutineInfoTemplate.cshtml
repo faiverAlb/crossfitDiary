@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group" data-bind="if: canSeeTimeToWork, validationElement: timeToWork">
                             <label for="timeInput">Time to work</label>
-                            <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="value: timeToWork, valueUpdate: 'afterkeydown'">
+                            <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="inputmask:{value: timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                         </div>
                         <div class="form-group">
                             <a href="#" data-toggle="collapse" data-target="#optionsPanel">+ show more options</a>

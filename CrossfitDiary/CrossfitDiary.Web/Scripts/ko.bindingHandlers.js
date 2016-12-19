@@ -38,3 +38,33 @@ ko.bindingHandlers.selectPicker = {
     update: function (element, valueAccessor, allBindingsAccessor) {
     }
 };
+
+
+ko.bindingHandlers.inputmask =
+{
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var mask = valueAccessor();
+        var definitions = valueAccessor().definitions || {};
+        var observable = mask.value;
+        if (ko.isObservable(observable)) {
+            $(element)
+                .on('focusout change',
+                    function() {
+                        if ($(element).inputmask('isComplete')) {
+                            observable($(element).val());
+                        } else {
+                            observable(null);
+                        }
+                    });
+        }
+        $(element).inputmask({ mask: mask, definitions: definitions });
+    },
+    update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var mask = valueAccessor();
+        var observable = mask.value;
+        if (ko.isObservable(observable)) {
+            var valuetoWrite = observable();
+            $(element).val(valuetoWrite);
+        }
+    }
+};

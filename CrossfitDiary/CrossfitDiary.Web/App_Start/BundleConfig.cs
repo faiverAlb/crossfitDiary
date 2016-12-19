@@ -33,7 +33,8 @@ namespace CrossfitDiary.Web
             /*   Create workout   */
             bundles.Add(new ScriptBundle("~/bundles/crossfitter/createWorkout")
                 .Include(
-                      "~/Scripts/Crossfitter/CrossfitterController.js"
+                     "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"
+                    , "~/Scripts/Crossfitter/CrossfitterController.js"
                     , "~/Scripts/Crossfitter/CreateWorkout/CreateWorkoutController.js"
                     , "~/Scripts/Crossfitter/SimpleRoutine.js"
                     , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
