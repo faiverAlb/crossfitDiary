@@ -19,7 +19,7 @@ namespace CrossfitDiary.Web.ViewModels
 
         //TODO: Possible problems with time string from js, for example: 31:23 - will not be passed
         [JsonProperty("timeToWork")]
-        public TimeSpan? TimeToWork { get; set; }
+        public string TimeToWork { get; set; }
 
         [JsonProperty("restBetweenExercises")]
         public TimeSpan? RestBetweenExercises { get; set; }
