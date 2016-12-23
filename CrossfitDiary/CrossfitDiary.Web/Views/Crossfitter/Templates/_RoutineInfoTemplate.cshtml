@@ -90,7 +90,7 @@
             <!-- ko foreach:exerciseMeasures-->
             <div class="form-group" data-bind="validationElement: measureValue">
                 <div class="input-group">
-                    <input type="number" pattern="\d*"  class="form-control measure-value-input" data-bind="value: measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: measureDesciption, readonly: $root.isReadOnlyMode}">
+                    <input type="number"  min="0" class="form-control measure-value-input" data-bind="value: measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: measureDesciption, readonly: $root.isReadOnlyMode}">
                     <div class="input-group-addon" data-bind="text:'('+ shortMeasureDescription() + ')'"></div>
                 </div>
             </div>
