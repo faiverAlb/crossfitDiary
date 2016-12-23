@@ -39,16 +39,16 @@ namespace CrossfitDiary.Model
         /// <summary>
         /// Possible count to do for this routine
         /// </summary>
-        public int? Count { get; set; }
+        public decimal? Count { get; set; }
 
         /// <summary>
         /// Possible distance (meters) to pass
         /// </summary>
-        public int? Distance { get; set; }
+        public decimal? Distance { get; set; }
 
         /// <summary>
         /// Possible weight in lbs
         /// </summary>
-        public int? Weight { get; set; }
+        public decimal? Weight { get; set; }
     }
 }

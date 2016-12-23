@@ -38,36 +38,36 @@ namespace CrossfitDiary.Web.Mappings
         }
     }
 
-    public class CountResolver : IValueResolver<ExerciseViewModel, RoutineSimple, int?>
+    public class CountResolver : IValueResolver<ExerciseViewModel, RoutineSimple, decimal?>
     {
-        public int? Resolve(ExerciseViewModel source, RoutineSimple destination, int? destMember, ResolutionContext context)
+        public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
         {
             ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Count);
             if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
                 return null;
-            return int.Parse(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
+            return decimal.Parse(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
         }
     }
 
-    public class DistanceResolver : IValueResolver<ExerciseViewModel, RoutineSimple, int?>
+    public class DistanceResolver : IValueResolver<ExerciseViewModel, RoutineSimple, decimal?>
     {
-        public int? Resolve(ExerciseViewModel source, RoutineSimple destination, int? destMember, ResolutionContext context)
+        public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
         {
             ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Distance);
             if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
                 return null;
-            return int.Parse(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
+            return decimal.Parse(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
         }
     }
 
-    public class WeightResolver : IValueResolver<ExerciseViewModel, RoutineSimple, int?>
+    public class WeightResolver : IValueResolver<ExerciseViewModel, RoutineSimple, decimal?>
     {
-        public int? Resolve(ExerciseViewModel source, RoutineSimple destination, int? destMember, ResolutionContext context)
+        public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
         {
             ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Weight);
             if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
                 return null;
-            return int.Parse(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
+            return decimal.Parse(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
         }
     }
 }
