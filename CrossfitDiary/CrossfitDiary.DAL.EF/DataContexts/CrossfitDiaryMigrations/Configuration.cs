@@ -37,7 +37,6 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                 }
                 context.SaveChanges();
             }
-            context.Exercises.AddOrUpdate(x => new {x.Id}, new Exercise {Id = 6, Title = "Handstand Push-Ups", Abbreviation = "HSPU", ExerciseMeasures = new List<ExerciseMeasure> { new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == MeasureType.Count) } } });
         }
 
         private static List<ExerciseMeasureType> GetInitialExerciseMeasureTypes()
