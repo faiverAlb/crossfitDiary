@@ -9,6 +9,10 @@ namespace CrossfitDiary.Model
         /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Abbreviation of the exercise
+        /// </summary>
+        public string Abbreviation { get; set; }
 
         /// <summary>
         /// List of Exercise Measures 

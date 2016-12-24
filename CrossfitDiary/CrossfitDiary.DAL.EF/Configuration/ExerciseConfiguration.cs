@@ -10,6 +10,7 @@ namespace CrossfitDiary.DAL.EF.Configuration
             ToTable("Exercise");
             Property(x => x.Id).IsRequired();
             Property(x => x.Title).IsRequired();
+            Property(x => x.Abbreviation).IsRequired();
         }
     }
 }

@@ -77,6 +77,10 @@
     <Compile Include="DataContexts\CrossfitDiaryMigrations\201612230701230_ChangeMeasureValueType_FromInt_ToDecimal.Designer.cs">
       <DependentUpon>201612230701230_ChangeMeasureValueType_FromInt_ToDecimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201612242302344_AddExerciseAbbreviation.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201612242302344_AddExerciseAbbreviation.Designer.cs">
+      <DependentUpon>201612242302344_AddExerciseAbbreviation.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDbContext.cs" />
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201612230701230_ChangeMeasureValueType_FromInt_ToDecimal.resx">
       <DependentUpon>201612230701230_ChangeMeasureValueType_FromInt_ToDecimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201612242302344_AddExerciseAbbreviation.resx">
+      <DependentUpon>201612242302344_AddExerciseAbbreviation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
