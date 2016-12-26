@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CrossfitDiary.DAL.EF.Infrastructure;
 using CrossfitDiary.DAL.EF.Repositories;
 using CrossfitDiary.Model;
@@ -20,7 +21,8 @@ namespace CrossfitDiary.Service
 
         public IEnumerable<Exercise> GetExercises(string title = null)
         {
-            return string.IsNullOrEmpty(title) ? _exerciseRepository.GetAll() : _exerciseRepository.GetMany(x => x.Title == title);
+            var exercises = string.IsNullOrEmpty(title) ? _exerciseRepository.GetAll() : _exerciseRepository.GetMany(x => x.Title == title);
+            return exercises.OrderBy(x => x.Title);
         }
 
         public Exercise GetExercise(int id)
