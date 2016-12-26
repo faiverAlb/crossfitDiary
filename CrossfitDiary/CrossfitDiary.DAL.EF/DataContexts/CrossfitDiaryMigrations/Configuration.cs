@@ -20,8 +20,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
         {
             if (!context.ExerciseMeasureTypes.Any(x => x.MeasureType == MeasureType.Count))
             {
-                GetInitialExerciseMeasureTypes()
-                    .ForEach(exerciseMeasureType => context.ExerciseMeasureTypes.Add(exerciseMeasureType));
+                GetInitialExerciseMeasureTypes().ForEach(exerciseMeasureType => context.ExerciseMeasureTypes.Add(exerciseMeasureType));
                 context.Commit();
                 GetInitialExercises(context).ForEach(x => context.Exercises.Add(x));
                 context.Commit();
@@ -29,14 +28,6 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                 context.Commit();
             }
 
-            if (context.Exercises.Any(x => string.IsNullOrEmpty(x.Abbreviation)))
-            {
-                foreach (var initialExercise in GetInitialExercises(context))
-                {
-                    context.Exercises.AddOrUpdate(x => x.Title, initialExercise);
-                }
-                context.SaveChanges();
-            }
         }
 
         private static List<ExerciseMeasureType> GetInitialExerciseMeasureTypes()
@@ -153,11 +144,11 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                       RoutineSimple = new List<RoutineSimple>
                         {
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Deadlift"), Weight = 225, Count = 21},
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "HSPU"), Count = 21},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Handstand Push-Ups"), Count = 21},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Deadlift"), Weight = 225, Count = 15},
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "HSPU"), Count = 15},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Handstand Push-Ups"), Count = 15},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Deadlift"), Weight = 225, Count = 9},
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "HSPU"), Count = 9},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Handstand Push-Ups"), Count = 9},
                         }
                         , Title = "Diane"
                         , ComplexType = RoutineComplexType.ForTime
