@@ -16,20 +16,18 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
             MigrationsDirectory = @"DataContexts\CrossfitDiaryMigrations";
         }
 
-        protected override void Seed(CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryDbContext context)
+        protected override void Seed(CrossfitDiaryDbContext context)
         {
-            if (!context.ExerciseMeasureTypes.Any(x => x.MeasureType == MeasureType.Count))
-            {
-                GetInitialExerciseMeasureTypes().ForEach(exerciseMeasureType => context.ExerciseMeasureTypes.Add(exerciseMeasureType));
+                GetInitialExerciseMeasureTypes().ForEach(exerciseMeasureType => context.ExerciseMeasureTypes.AddOrUpdate(x => x.MeasureType, exerciseMeasureType));
                 context.Commit();
-                GetInitialExercises(context).ForEach(x => context.Exercises.Add(x));
+                GetInitialExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Title, y.Abbreviation }, x));
                 context.Commit();
-                GetInitialRoutines(context).ForEach(x => context.ComplexRoutines.Add(x));
+                GetInitialRoutines(context).ForEach(x => context.ComplexRoutines.AddOrUpdate(y => y.Title,x));
                 context.Commit();
-            }
 
         }
 
+        
         private static List<ExerciseMeasureType> GetInitialExerciseMeasureTypes()
         {
             return new List<ExerciseMeasureType>
@@ -71,20 +69,14 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                 new Exercise {Title = "Clean and Jerk",Abbreviation = "C&J",ExerciseMeasures = new List<ExerciseMeasure> {new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == MeasureType.Count) },new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == MeasureType.Weight) } }},
                 new Exercise {Title = "Run",Abbreviation = "Run",ExerciseMeasures = new List<ExerciseMeasure>() {new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == MeasureType.Distance) }/*,new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == MeasureType.Time) }*/ } },
                 new Exercise {Title = "Kettlebell swing",Abbreviation = "Swing",ExerciseMeasures = new List<ExerciseMeasure> {new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == MeasureType.Count) },new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == MeasureType.Weight)}}},
+                 new Exercise {Title = "Box Jumps",Abbreviation = "BJ",ExerciseMeasures= new List<ExerciseMeasure> {new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single( x => x.MeasureType == MeasureType.Count)}}},
+                new Exercise {Title = "Burpee",Abbreviation = "Burpee",ExerciseMeasures= new List<ExerciseMeasure> {new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single( x => x.MeasureType == MeasureType.Count)}}},
+                new Exercise {Title = "Bar Muscle-Up",Abbreviation = "BMU",ExerciseMeasures= new List<ExerciseMeasure> {new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single( x => x.MeasureType == MeasureType.Count)}}},
+                new Exercise {Title = "Bench Press",Abbreviation = "BP",ExerciseMeasures= new List<ExerciseMeasure> {new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single( x => x.MeasureType == MeasureType.Count)},new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single( x => x.MeasureType == MeasureType.Weight)}}},
+                new Exercise {Title = "Back Squat",Abbreviation = "BS",ExerciseMeasures= new List<ExerciseMeasure> {new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single( x => x.MeasureType == MeasureType.Count)},new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single( x => x.MeasureType == MeasureType.Weight)}}},
             };
         }
 
-//        private static List<Crossfitter> GetInitialCrossfitters()
-//        {
-//            return new List<Crossfitter>()
-//            {
-//                new Crossfitter()
-//                {
-//                    FirstName = "Pukie",
-//                    LastName = "Pukie"
-//                }
-//            };
-//        }
 
         private static List<RoutineComplex> GetInitialRoutines(CrossfitDiaryDbContext context)
         {
