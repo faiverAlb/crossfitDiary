@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CrossfitDiary.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Win-Yagd")]
+[assembly: AssemblyCompany("GAlb")]
 [assembly: AssemblyProduct("CrossfitDiary.Web")]
-[assembly: AssemblyCopyright("Copyright © Win-Yagd 2016")]
+[assembly: AssemblyCopyright("Copyright © Alb 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.1")]
+[assembly: AssemblyVersion("1.0.2")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
