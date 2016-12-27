@@ -39,7 +39,7 @@
                     <form class="form-inline main-group">
                         <div class="form-group" data-bind="if: canSeeRoundsCount, validationElement: roundsCount">
                             <label for="roundsInput">Rounds count</label>
-                            <input type="text" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: roundsCount, valueUpdate: 'afterkeydown'">
+                            <input type="number"  min="1"  class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: roundsCount, valueUpdate: 'afterkeydown'">
                         </div>
                         <div class="form-group" data-bind="if: canSeeTimeToWork, validationElement: timeToWork">
                             <label for="timeInput">Time to work</label>
@@ -56,11 +56,11 @@
                         </div>
                         <div class="form-group">
                             <label for="restExercisesInput">Rest between exercises</label>
-                            <input type="text" class="form-control" id="restExercisesInput" placeholder="Rest between exercises" data-bind="value: restBetweenExercises">
+                            <input type="text" class="form-control" id="restExercisesInput" placeholder="Rest between exercises" data-bind="inputmask:{value: restBetweenExercises, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                         </div>
                         <div class="form-group">
                             <label for="restRoundsInput">Rest between rounds</label>
-                            <input type="text" class="form-control" id="restRoundsInput" placeholder="Rest between rounds" data-bind="value: restBetweenRounds">
+                            <input type="text" class="form-control" id="restRoundsInput" placeholder="Rest between rounds" data-bind="inputmask:{value: restBetweenRounds, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                         </div>
                     </form>
                 </div>

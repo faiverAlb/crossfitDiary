@@ -27,7 +27,9 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.WorkoutTypeViewModel, x => x.MapFrom(y => y.ComplexType))
                 .ForMember(x => x.ExercisesToDoList, x => x.MapFrom(y => y.RoutineSimple))
                 .ForMember(x => x.RoundsCount, x => x.MapFrom(y => y.RoundCount))
-                .ForMember(x => x.TimeToWork, x => x.MapFrom(y => y.TimeToWork.HasValue?$"{y.TimeToWork.Value.TotalMinutes}:{y.TimeToWork.Value.Seconds}" :""));
+                .ForMember(x => x.TimeToWork, x => x.MapFrom(y => y.TimeToWork.HasValue?$"{Math.Floor(y.TimeToWork.Value.TotalMinutes)}:{y.TimeToWork.Value.Seconds}" :""))
+                .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => y.RestBetweenExercises.HasValue?$"{Math.Floor(y.RestBetweenExercises.Value.TotalMinutes)}:{y.RestBetweenExercises.Value.Seconds}" :""))
+                .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => y.RestBetweenRounds.HasValue?$"{Math.Floor(y.RestBetweenRounds.Value.TotalMinutes)}:{y.RestBetweenRounds.Value.Seconds}" :""));
 
             CreateMap<RoutineSimple, ExerciseViewModel>()
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.ExerciseId))
