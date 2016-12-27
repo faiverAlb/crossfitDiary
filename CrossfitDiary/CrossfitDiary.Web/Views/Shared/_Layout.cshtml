@@ -1,4 +1,7 @@
 ﻿@using CrossfitDiary.Web.MvcHelpers
+@{
+    var currentVersion = string.Format("{0}.{1}.{2}",ViewContext.Controller.GetType().Assembly.GetName().Version.Major, ViewContext.Controller.GetType().Assembly.GetName().Version.Minor, ViewContext.Controller.GetType().Assembly.GetName().Version.Build);
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +21,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Workouter v0.1</a>
+            <a class="navbar-brand" href="#">Workouter v@(currentVersion)</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             @if (@User.Identity.IsAuthenticated)
