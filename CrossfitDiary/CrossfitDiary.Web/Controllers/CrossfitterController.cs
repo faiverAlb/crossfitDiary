@@ -19,11 +19,6 @@ namespace CrossfitDiary.Web.Controllers
             _workoutService = workoutService;
         }
 
-        public virtual ActionResult Index()
-        {
-            return View();
-        }
-
         public virtual ActionResult CreateNewWorkout()
         {
             IEnumerable<ExerciseViewModel> viewModels = Mapper.Map<IEnumerable<ExerciseViewModel>>(_exerciseService.GetExercises());

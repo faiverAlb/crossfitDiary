@@ -72,7 +72,6 @@ namespace CrossfitDiary.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
             public readonly string CreateNewWorkout = "CreateNewWorkout";
             public readonly string LogWorkout = "LogWorkout";
         }
@@ -80,7 +79,6 @@ namespace CrossfitDiary.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
             public const string CreateNewWorkout = "CreateNewWorkout";
             public const string LogWorkout = "LogWorkout";
         }
@@ -97,11 +95,9 @@ namespace CrossfitDiary.Web.Controllers
             public class _ViewNamesClass
             {
                 public readonly string CreateNewWorkout = "CreateNewWorkout";
-                public readonly string Index = "Index";
                 public readonly string LogWorkout = "LogWorkout";
             }
             public readonly string CreateNewWorkout = "~/Views/Crossfitter/CreateNewWorkout.cshtml";
-            public readonly string Index = "~/Views/Crossfitter/Index.cshtml";
             public readonly string LogWorkout = "~/Views/Crossfitter/LogWorkout.cshtml";
             static readonly _TemplatesClass s_Templates = new _TemplatesClass();
             public _TemplatesClass Templates { get { return s_Templates; } }
@@ -125,17 +121,6 @@ namespace CrossfitDiary.Web.Controllers
     public partial class T4MVC_CrossfitterController : CrossfitDiary.Web.Controllers.CrossfitterController
     {
         public T4MVC_CrossfitterController() : base(Dummy.Instance) { }
-
-        [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
-            return callInfo;
-        }
 
         [NonAction]
         partial void CreateNewWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);

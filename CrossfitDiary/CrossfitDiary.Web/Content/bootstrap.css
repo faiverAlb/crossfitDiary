@@ -8444,3 +8444,9 @@ select.selectpicker {
 .home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .workout:last-child {
   border-bottom: none;
 }
+.home-container .activities-calendar .grid-calendar .grid-cell .action-panel {
+  margin-bottom: 5px;
+}
+.home-container .activities-calendar .grid-calendar .grid-cell .action-panel .action-button {
+  margin-left: 5px;
+}
