@@ -13,6 +13,9 @@ namespace CrossfitDiary.Web.ViewModels
 
         [JsonProperty("exerciseMeasures")]
         public IEnumerable<ExerciseMeasureViewModel> ExerciseMeasures { get; set; }
+
+        [JsonProperty("isAlternative")]
+        public bool IsAlternative { get; set; }
     }
 
 

@@ -81,6 +81,10 @@
     <Compile Include="DataContexts\CrossfitDiaryMigrations\201612242302344_AddExerciseAbbreviation.Designer.cs">
       <DependentUpon>201612242302344_AddExerciseAbbreviation.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201612280702059_Add_IsAlternative_Property_Exercise.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201612280702059_Add_IsAlternative_Property_Exercise.Designer.cs">
+      <DependentUpon>201612280702059_Add_IsAlternative_Property_Exercise.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDbContext.cs" />
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
@@ -122,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201612242302344_AddExerciseAbbreviation.resx">
       <DependentUpon>201612242302344_AddExerciseAbbreviation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201612280702059_Add_IsAlternative_Property_Exercise.resx">
+      <DependentUpon>201612280702059_Add_IsAlternative_Property_Exercise.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
