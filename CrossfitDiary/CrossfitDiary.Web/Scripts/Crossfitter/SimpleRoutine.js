@@ -12,7 +12,8 @@
         var model = {
             exerciseMeasures: [],
             id: self.exercise.id,
-            title:self.exercise.title
+            title: self.exercise.title,
+            isAlternative: self.exercise.isAlternative
         };
         $.each(self.exerciseMeasures(), function (index, measure) {
             model.exerciseMeasures.push(measure.toJSON());

@@ -26,9 +26,6 @@ var CrossfitterController = function (parameters) {
     }
     self.selectedWorkoutType = ko.observable(parameters.selectedWorkoutType);
 
-
-
-
     self.title = ko.observable(parameters.title);
     self.restBetweenExercises = ko.observable(parameters.restBetweenExercises);
     self.restBetweenRounds = ko.observable(parameters.restBetweenRounds);
@@ -41,6 +38,33 @@ var CrossfitterController = function (parameters) {
         var selectedType = self.selectedWorkoutType().Value;
         return selectedType == Crossfitter.WorkoutTypes.ForTime;
     });
+
+    self.anyUsualExercises = ko.computed(function () {
+        return ko.utils.arrayFirst(self.simpleRoutines(), function (routine) {
+            return routine.exercise.isAlternative == false;
+        }) != null;
+    });
+
+
+    self.canSeeAlternativeExercises = ko.computed(function() {
+        if (!self.selectedWorkoutType()) {
+            return false;
+        }
+        var selectedType = self.selectedWorkoutType().Value;
+        var typeIsNeeded =
+            selectedType == Crossfitter.WorkoutTypes.EMOM || selectedType == Crossfitter.WorkoutTypes.E2MOM;
+        return typeIsNeeded && self.anyUsualExercises();
+    });
+
+
+    self.anyAlternative = ko.computed(function () {
+        return ko.utils.arrayFirst(self.simpleRoutines(), function (routine) {
+            return routine.exercise.isAlternative;
+        }) != null;
+    });
+
+
+
 
     self.roundsCount = ko.observable(parameters.roundsCount).extend({
         required: {

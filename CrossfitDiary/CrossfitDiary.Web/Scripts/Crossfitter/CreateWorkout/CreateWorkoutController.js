@@ -1,7 +1,14 @@
 ﻿var CreateWorkoutController = function (parameters) {
     var self = new CrossfitterController(parameters);
     self.exercises = ko.observableArray(parameters.viewModel.exercises);
-    self.alternativeExercises = ko.observableArray(parameters.viewModel.exercises);
+
+    //  HACK for copy
+    var alternativeExercises = JSON.parse(JSON.stringify(parameters.viewModel.exercises));
+
+    for (var i = 0; i < alternativeExercises.length; i++) {
+        alternativeExercises[i].isAlternative = true;
+    }
+    self.alternativeExercises = ko.observableArray(alternativeExercises);
 
     self.selectedExercise = ko.observable();
     self.selectedAlternativeExercise = ko.observable();
