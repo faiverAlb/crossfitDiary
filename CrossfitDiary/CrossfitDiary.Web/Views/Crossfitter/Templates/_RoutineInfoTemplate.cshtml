@@ -76,28 +76,7 @@
     <div class="routines-container">
         <!-- ko foreach:simpleRoutines-->
         <!-- ko ifnot: exercise.isAlternative -->
-        <div class="simple-routine-item">
-            <div class="form-inline">
-                <div class="form-group">
-                    <div class="input-group">
-                        <!--ko ifnot:$root.isReadOnlyMode-->
-                        <span class="btn input-group-addon" data-bind="click:function(){ $parent.removeSimpleRoutineFromToDo($index)}">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </span>
-                        <!-- /ko -->
-                        <label class="form-control exercise-title" data-bind="text: exercise.title"></label>
-                    </div>
-                </div>
-                <!-- ko foreach:exerciseMeasures-->
-                <div class="form-group" data-bind="validationElement: measureValue">
-                    <div class="input-group">
-                        <input type="number" min="0" class="form-control measure-value-input" data-bind="value: measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: measureDesciption, readonly: $root.isReadOnlyMode}">
-                        <div class="input-group-addon" data-bind="text:'('+ shortMeasureDescription() + ')'"></div>
-                    </div>
-                </div>
-                <!-- /ko -->
-            </div>
-        </div>
+        @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._SimpleRoutineItemTemlate); }
         <!-- /ko -->
         <!-- /ko -->
         <!-- ko ifnot: anyUsualExercises -->
@@ -107,9 +86,9 @@
         <!-- /ko -->
     </div>
 
-    <div >
+    <div>
         <div data-bind="if:canSeeAlternativeExercises">
-            <div class="text-center selected-workout-type">Alternative </div>
+            <div class="text-center selected-workout-type">Alternative</div>
             <div data-bind="ifnot: isReadOnlyMode">
                 <select class="form-control exercise-selector" data-live-search="true" data-bind="options:alternativeExercises, optionsText:'title',value: selectedAlternativeExercise, optionsCaption: 'Choose an alternative exercise...',selectPicker: {}"></select>
             </div>
@@ -119,28 +98,7 @@
     <div class="routines-container" data-bind="if:canSeeAlternativeExercises">
         <!-- ko foreach:simpleRoutines-->
         <!-- ko if: exercise.isAlternative -->
-        <div class="simple-routine-item">
-            <div class="form-inline">
-                <div class="form-group">
-                    <div class="input-group">
-                        <!--ko ifnot:$root.isReadOnlyMode-->
-                        <span class="btn input-group-addon" data-bind="click:function(){ $parent.removeSimpleRoutineFromToDo($index)}">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </span>
-                        <!-- /ko -->
-                        <label class="form-control exercise-title" data-bind="text: exercise.title"></label>
-                    </div>
-                </div>
-                <!-- ko foreach:exerciseMeasures-->
-                <div class="form-group" data-bind="validationElement: measureValue">
-                    <div class="input-group">
-                        <input type="number" min="0" class="form-control measure-value-input" data-bind="value: measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: measureDesciption, readonly: $root.isReadOnlyMode}">
-                        <div class="input-group-addon" data-bind="text:'('+ shortMeasureDescription() + ')'"></div>
-                    </div>
-                </div>
-                <!-- /ko -->
-            </div>
-        </div>
+        @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._SimpleRoutineItemTemlate); }
         <!-- /ko -->
         <!-- /ko -->
         <!-- ko ifnot: anyAlternative-->

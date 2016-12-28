@@ -152,6 +152,14 @@ namespace Links
             public static readonly string WorkoutType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/WorkoutType.min.js") ? Url("WorkoutType.min.js") : Url("WorkoutType.js");
         }
     
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Home {
+            public const string UrlPath = "~/Scripts/Home";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string HomePageController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/HomePageController.min.js") ? Url("HomePageController.min.js") : Url("HomePageController.js");
+        }
+    
         public static readonly string jquery_3_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.1.intellisense.min.js") ? Url("jquery-3.1.1.intellisense.min.js") : Url("jquery-3.1.1.intellisense.js");
         public static readonly string jquery_3_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.1.min.js") ? Url("jquery-3.1.1.min.js") : Url("jquery-3.1.1.js");
         public static readonly string jquery_3_1_1_min_js = Url("jquery-3.1.1.min.js");
@@ -159,7 +167,17 @@ namespace Links
         public static readonly string jquery_3_1_1_slim_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.1.slim.min.js") ? Url("jquery-3.1.1.slim.min.js") : Url("jquery-3.1.1.slim.js");
         public static readonly string jquery_3_1_1_slim_min_js = Url("jquery-3.1.1.slim.min.js");
         public static readonly string jquery_3_1_1_slim_min_map = Url("jquery-3.1.1.slim.min.map");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class jqueryPlugins {
+            public const string UrlPath = "~/Scripts/jqueryPlugins";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string jquery_inputmask_bundle_min_js = Url("jquery.inputmask.bundle.min.js");
+        }
+    
         public static readonly string knockout_3_4_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/knockout-3.4.0.min.js") ? Url("knockout-3.4.0.min.js") : Url("knockout-3.4.0.js");
+        public static readonly string knockout_validation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/knockout.validation.min.js") ? Url("knockout.validation.min.js") : Url("knockout.validation.js");
+        public static readonly string knockout_validation_min_js = Url("knockout.validation.min.js");
         public static readonly string ko_bindingHandlers_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ko.bindingHandlers.min.js") ? Url("ko.bindingHandlers.min.js") : Url("ko.bindingHandlers.js");
         public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
     }
@@ -290,6 +308,14 @@ namespace Links
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class img {
+            public const string UrlPath = "~/Content/img";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string curly_bracket_svg = Url("curly-bracket.svg");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class pages {
             public const string UrlPath = "~/Content/pages";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
@@ -323,6 +349,16 @@ namespace Links
                     public static readonly string workout_info_less = Url("workout-info.less");
                 }
             
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class home {
+                public const string UrlPath = "~/Content/pages/home";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string home_less = Url("home.less");
+                public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
+                public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
             }
         
             public static readonly string login_page_less = Url("login-page.less");
@@ -484,6 +520,20 @@ namespace Links
                     public const string WorkoutType_js = "~/Scripts/Crossfitter/WorkoutType.js"; 
                 }
             }
+            public static partial class Home 
+            {
+                public static class Assets
+                {
+                    public const string HomePageController_js = "~/Scripts/Home/HomePageController.js"; 
+                }
+            }
+            public static partial class jqueryPlugins 
+            {
+                public static class Assets
+                {
+                    public const string jquery_inputmask_bundle_min_js = "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"; 
+                }
+            }
             public static class Assets
             {
                 public const string _references_js = "~/Scripts/_references.js"; 
@@ -494,6 +544,8 @@ namespace Links
                 public const string jquery_3_1_1_slim_js = "~/Scripts/jquery-3.1.1.slim.js"; 
                 public const string jquery_3_1_1_slim_min_js = "~/Scripts/jquery-3.1.1.slim.min.js"; 
                 public const string knockout_3_4_0_js = "~/Scripts/knockout-3.4.0.js"; 
+                public const string knockout_validation_js = "~/Scripts/knockout.validation.js"; 
+                public const string knockout_validation_min_js = "~/Scripts/knockout.validation.min.js"; 
                 public const string ko_bindingHandlers_js = "~/Scripts/ko.bindingHandlers.js"; 
                 public const string modernizr_2_8_3_js = "~/Scripts/modernizr-2.8.3.js"; 
             }
@@ -531,6 +583,12 @@ namespace Links
                 {
                 }
             }
+            public static partial class img 
+            {
+                public static class Assets
+                {
+                }
+            }
             public static partial class pages 
             {
                 public static partial class crossfitter 
@@ -553,6 +611,12 @@ namespace Links
                         {
                         }
                     }
+                    public static class Assets
+                    {
+                    }
+                }
+                public static partial class home 
+                {
                     public static class Assets
                     {
                     }

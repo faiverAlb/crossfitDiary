@@ -21,7 +21,7 @@ var CrossfitterController = function (parameters) {
     if (parameters.exercisesToDoList) {
         for (var i = 0; i < parameters.exercisesToDoList.length; i++) {
             var exerciseToDo = parameters.exercisesToDoList[i];
-            self.simpleRoutines.push(new SimpleRoutine(exerciseToDo));
+            self.simpleRoutines.push(new SimpleRoutine(exerciseToDo,false));
         }
     }
     self.selectedWorkoutType = ko.observable(parameters.selectedWorkoutType);

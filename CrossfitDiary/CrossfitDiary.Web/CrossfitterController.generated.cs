@@ -113,8 +113,10 @@ namespace CrossfitDiary.Web.Controllers
                 public class _ViewNamesClass
                 {
                     public readonly string _RoutineInfoTemplate = "_RoutineInfoTemplate";
+                    public readonly string _SimpleRoutineItemTemlate = "_SimpleRoutineItemTemlate";
                 }
                 public readonly string _RoutineInfoTemplate = "~/Views/Crossfitter/Templates/_RoutineInfoTemplate.cshtml";
+                public readonly string _SimpleRoutineItemTemlate = "~/Views/Crossfitter/Templates/_SimpleRoutineItemTemlate.cshtml";
             }
         }
     }
