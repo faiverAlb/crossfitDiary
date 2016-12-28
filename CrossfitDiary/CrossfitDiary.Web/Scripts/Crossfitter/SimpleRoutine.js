@@ -1,10 +1,11 @@
-﻿var SimpleRoutine = function (exerciseModel) {
+﻿var SimpleRoutine = function (exerciseModel, isFieldsRequired) {
     var self = this;
     self.exercise = exerciseModel;
     self.exerciseMeasures = ko.observableArray([]);
+    var isMeasuresRequired = isFieldsRequired != null ? isFieldsRequired : true;
     function init() {
         for (var i = 0; i < self.exercise.exerciseMeasures.length; i++) {
-            self.exerciseMeasures.push(new ExerciseMeasureTypeValue(self.exercise.exerciseMeasures[i].exerciseMeasureType));
+            self.exerciseMeasures.push(new ExerciseMeasureTypeValue(self.exercise.exerciseMeasures[i].exerciseMeasureType, isMeasuresRequired));
         }
     };
 

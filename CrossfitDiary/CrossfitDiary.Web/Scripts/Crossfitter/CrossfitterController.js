@@ -36,7 +36,7 @@ var CrossfitterController = function (parameters) {
             return false;
         }
         var selectedType = self.selectedWorkoutType().Value;
-        return selectedType == Crossfitter.WorkoutTypes.ForTime;
+        return selectedType == Crossfitter.WorkoutTypes.ForTime || selectedType == Crossfitter.WorkoutTypes.Tabata;
     });
 
     self.anyUsualExercises = ko.computed(function () {
@@ -75,7 +75,7 @@ var CrossfitterController = function (parameters) {
     });
 
 
-    self.canSeeTimeToWork = ko.computed(function () {
+    self.canSeeTimeToWork = ko.computed(function() {
         if (!self.selectedWorkoutType()) {
             return false;
         }

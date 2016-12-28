@@ -28,7 +28,7 @@
             return;
         }
 
-        self.simpleRoutines.push(new SimpleRoutine(exercise));
+        self.simpleRoutines.push(new SimpleRoutine(exercise, self.selectedWorkoutType().Value != Crossfitter.WorkoutTypes.Tabata));
         self.selectedExercise('');
     });
 
