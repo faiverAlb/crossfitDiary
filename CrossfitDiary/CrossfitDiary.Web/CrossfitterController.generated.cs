@@ -74,6 +74,7 @@ namespace CrossfitDiary.Web.Controllers
         {
             public readonly string CreateNewWorkout = "CreateNewWorkout";
             public readonly string LogWorkout = "LogWorkout";
+            public readonly string ManageWorkout = "ManageWorkout";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -81,6 +82,7 @@ namespace CrossfitDiary.Web.Controllers
         {
             public const string CreateNewWorkout = "CreateNewWorkout";
             public const string LogWorkout = "LogWorkout";
+            public const string ManageWorkout = "ManageWorkout";
         }
 
 
@@ -96,9 +98,11 @@ namespace CrossfitDiary.Web.Controllers
             {
                 public readonly string CreateNewWorkout = "CreateNewWorkout";
                 public readonly string LogWorkout = "LogWorkout";
+                public readonly string ManageWorkout = "ManageWorkout";
             }
             public readonly string CreateNewWorkout = "~/Views/Crossfitter/CreateNewWorkout.cshtml";
             public readonly string LogWorkout = "~/Views/Crossfitter/LogWorkout.cshtml";
+            public readonly string ManageWorkout = "~/Views/Crossfitter/ManageWorkout.cshtml";
             static readonly _TemplatesClass s_Templates = new _TemplatesClass();
             public _TemplatesClass Templates { get { return s_Templates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -141,6 +145,17 @@ namespace CrossfitDiary.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LogWorkout);
             LogWorkoutOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ManageWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ManageWorkout()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ManageWorkout);
+            ManageWorkoutOverride(callInfo);
             return callInfo;
         }
 

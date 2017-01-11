@@ -38,6 +38,11 @@ namespace CrossfitDiary.Web.Controllers
             };
             return View(logWorkoutViewModel);
         }
+
+        public virtual ActionResult ManageWorkout()
+        {
+            return View();
+        }
         
 
     }
