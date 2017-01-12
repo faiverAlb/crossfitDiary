@@ -5,6 +5,25 @@
 }
 
 <div class="manage-workout-page">
-    <h2>magic here!</h2>
-</div>
+    <div class="new-or-existing" id="accordion">
+        <div class="choose-buttons text-center">
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#ExistingWorkoutsContainer">Existing workouts?</button>
+            or
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#NewWorkoutContainer">Create new workout?</button>
+        </div>
+        <div class="panel">
+            <div class="existing-workouts-container collapse" id="ExistingWorkoutsContainer">
+                ExistingWorkoutsContainer
+            </div>
+        </div>
+        
+        <div class="panel">
+            <div class="new-workout-container collapse" id="NewWorkoutContainer">
+                NewWorkoutContainer
+            </div>
+        </div>
+
+
+    </div>
+</div>  
 
