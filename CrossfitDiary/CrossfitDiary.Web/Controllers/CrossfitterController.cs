@@ -45,7 +45,8 @@ namespace CrossfitDiary.Web.Controllers
             var model = new
             {
                 exercises = viewModels,
-                workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key)
+                workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key),
+                availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts())
             };
             return View(model);
         }

@@ -8404,6 +8404,8 @@ select.selectpicker {
 }
 .manage-workout-page .new-or-existing .panel.panel-borderless {
   border: 0;
+  margin-bottom: 0;
+  margin-top: 0;
   box-shadow: none;
 }
 /* Home page */

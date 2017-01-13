@@ -1,0 +1,19 @@
+﻿<script type="text/html" id="existing-workouts-template">
+    <div class="existing-workouts-container">
+        <div class="col-md-12 workout-container">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Existing Workouts
+                </div>
+                <div class="panel-body">
+                    <div class="existing-workout-selector">
+                        <select class="form-control" data-live-search="true" data-bind="options:availableWorkouts, optionsText:'title',value: selectedWorkout, optionsCaption: 'Choose a workout...',selectPicker: {}"></select>
+                    </div>
+                    <div data-bind="if: selectedWorkout">
+                        <div data-bind="template: { name: 'routine-info-template', data: workoutToDisplay }"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

@@ -60,13 +60,14 @@ namespace CrossfitDiary.Web
                 .Include(
                     "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"
                     , "~/Scripts/Crossfitter/CrossfitterController.js"
-                    , "~/Scripts/Crossfitter/CreateWorkout/CreateWorkoutController.js"
                     , "~/Scripts/Crossfitter/SimpleRoutine.js"
                     , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
                     , "~/Scripts/Crossfitter/WorkoutType.js"
                     , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
                     , "~/Scripts/Crossfitter/CrossfitterService.js"
                     
+                    , "~/Scripts/Crossfitter/ManageWorkout/CreateWorkoutController.js"
+                    , "~/Scripts/Crossfitter/ManageWorkout/ChooseExistingWorkoutController.js"
                     , "~/Scripts/Crossfitter/ManageWorkout/ManageWorkoutController.js"
                 ));
 

@@ -14,12 +14,12 @@
         
         <div class="panel panel-borderless">
             <div class="new-workout-container collapse" id="NewWorkoutContainer">
-                <div data-bind="template: { name: 'create-new-workout-template', data: createWorkoutViewModel }"></div>
+                <div data-bind="template: { name: 'create-new-workout-template', data: createWorkoutController }"></div>
             </div>
         </div>
         <div class="panel panel-borderless">
             <div class="existing-workouts-container collapse" id="ExistingWorkoutsContainer">
-                ExistingWorkoutsContainer
+                <div data-bind="template: { name: 'existing-workouts-template', data: chooseExistingWorkoutController }"></div>
             </div>
         </div>
     </div>
@@ -27,6 +27,7 @@
 
 
 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._CreateNewWorkout); }
+@{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._ExistingWorkoutsTemplate); }
 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._RoutineInfoTemplate); }
 
 @section Scripts{
