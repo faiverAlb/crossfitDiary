@@ -454,6 +454,7 @@
     <Content Include="Scripts\Crossfitter\CreateWorkout\CreateWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\CrossfitterService.js" />
     <Content Include="Scripts\Crossfitter\LogWorkout\LogWorkoutController.js" />
+    <Content Include="Scripts\Crossfitter\ManageWorkout\ManageWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\WorkoutType.js" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureType.js" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureTypeValue.js" />
@@ -515,6 +516,7 @@
     <Content Include="Views\Crossfitter\Templates\_RoutineInfoTemplate.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_SimpleRoutineItemTemlate.cshtml" />
     <Content Include="Views\Crossfitter\ManageWorkout.cshtml" />
+    <Content Include="Views\Crossfitter\Templates\_CreateNewWorkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

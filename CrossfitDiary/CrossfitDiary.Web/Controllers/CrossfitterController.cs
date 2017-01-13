@@ -41,7 +41,13 @@ namespace CrossfitDiary.Web.Controllers
 
         public virtual ActionResult ManageWorkout()
         {
-            return View();
+            IEnumerable<ExerciseViewModel> viewModels = Mapper.Map<IEnumerable<ExerciseViewModel>>(_exerciseService.GetExercises());
+            var model = new
+            {
+                exercises = viewModels,
+                workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key)
+            };
+            return View(model);
         }
         
 

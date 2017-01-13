@@ -7,23 +7,38 @@
 <div class="manage-workout-page">
     <div class="new-or-existing" id="accordion">
         <div class="choose-buttons text-center">
-            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#ExistingWorkoutsContainer">Existing workouts?</button>
-            or
             <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#NewWorkoutContainer">Create new workout?</button>
+            or
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#ExistingWorkoutsContainer">Existing workouts?</button>
+        </div>
+        
+        <div class="panel panel-borderless">
+            <div class="new-workout-container collapse" id="NewWorkoutContainer">
+                <div data-bind="template: { name: 'create-new-workout-template', data: createWorkoutViewModel }"></div>
+            </div>
         </div>
         <div class="panel panel-borderless">
             <div class="existing-workouts-container collapse" id="ExistingWorkoutsContainer">
                 ExistingWorkoutsContainer
             </div>
         </div>
-        
-        <div class="panel panel-borderless">
-            <div class="new-workout-container collapse" id="NewWorkoutContainer">
-                NewWorkoutContainer
-            </div>
-        </div>
-
-
     </div>
 </div>  
 
+
+@{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._CreateNewWorkout); }
+@{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._RoutineInfoTemplate); }
+
+@section Scripts{
+    @Scripts.Render("~/bundles/crossfitter/manageWorkout")
+    <script>
+        $(function() {
+            var path = "@Url.Content("~")";
+            window.model = new ManageWorkoutController({
+                pathToApp: path,
+                viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+            });
+            ko.applyBindings(model);
+        });
+    </script>
+}

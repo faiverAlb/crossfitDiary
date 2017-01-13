@@ -36,6 +36,7 @@ namespace CrossfitDiary.Web
                      "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"
                     , "~/Scripts/Crossfitter/CrossfitterController.js"
                     , "~/Scripts/Crossfitter/CreateWorkout/CreateWorkoutController.js"
+
                     , "~/Scripts/Crossfitter/SimpleRoutine.js"
                     , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
                     , "~/Scripts/Crossfitter/WorkoutType.js"
@@ -47,12 +48,27 @@ namespace CrossfitDiary.Web
                 .Include(
                     "~/Scripts/Crossfitter/CrossfitterController.js"
                     , "~/Scripts/Crossfitter/LogWorkout/LogWorkoutController.js"
+
                     , "~/Scripts/Crossfitter/SimpleRoutine.js"
                     , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
                     , "~/Scripts/Crossfitter/WorkoutType.js"
                     , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
                     , "~/Scripts/Crossfitter/CrossfitterService.js"));
 
+            /* Manage workout */
+            bundles.Add(new ScriptBundle("~/bundles/crossfitter/manageWorkout")
+                .Include(
+                    "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"
+                    , "~/Scripts/Crossfitter/CrossfitterController.js"
+                    , "~/Scripts/Crossfitter/CreateWorkout/CreateWorkoutController.js"
+                    , "~/Scripts/Crossfitter/SimpleRoutine.js"
+                    , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
+                    , "~/Scripts/Crossfitter/WorkoutType.js"
+                    , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
+                    , "~/Scripts/Crossfitter/CrossfitterService.js"
+                    
+                    , "~/Scripts/Crossfitter/ManageWorkout/ManageWorkoutController.js"
+                ));
 
             /*   --Home--   */
             bundles.Add(new ScriptBundle("~/bundles/home")

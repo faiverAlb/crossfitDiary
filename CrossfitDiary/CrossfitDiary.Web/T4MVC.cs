@@ -147,6 +147,14 @@ namespace Links
                 public static readonly string LogWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/LogWorkoutController.min.js") ? Url("LogWorkoutController.min.js") : Url("LogWorkoutController.js");
             }
         
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class ManageWorkout {
+                public const string UrlPath = "~/Scripts/Crossfitter/ManageWorkout";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string ManageWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ManageWorkoutController.min.js") ? Url("ManageWorkoutController.min.js") : Url("ManageWorkoutController.js");
+            }
+        
             public static readonly string SimpleRoutine_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/SimpleRoutine.min.js") ? Url("SimpleRoutine.min.js") : Url("SimpleRoutine.js");
             public static readonly string WorkoutType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/WorkoutType.min.js") ? Url("WorkoutType.min.js") : Url("WorkoutType.js");
         }
@@ -341,6 +349,14 @@ namespace Links
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class manage_workout {
+                    public const string UrlPath = "~/Content/pages/crossfitter/manage-workout";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string manage_workout_less = Url("manage-workout.less");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class workout_info {
                     public const string UrlPath = "~/Content/pages/crossfitter/workout-info";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
@@ -509,6 +525,13 @@ namespace Links
                         public const string LogWorkoutController_js = "~/Scripts/Crossfitter/LogWorkout/LogWorkoutController.js"; 
                     }
                 }
+                public static partial class ManageWorkout 
+                {
+                    public static class Assets
+                    {
+                        public const string ManageWorkoutController_js = "~/Scripts/Crossfitter/ManageWorkout/ManageWorkoutController.js"; 
+                    }
+                }
                 public static class Assets
                 {
                     public const string CrossfitterController_js = "~/Scripts/Crossfitter/CrossfitterController.js"; 
@@ -599,6 +622,12 @@ namespace Links
                         }
                     }
                     public static partial class log_workout 
+                    {
+                        public static class Assets
+                        {
+                        }
+                    }
+                    public static partial class manage_workout 
                     {
                         public static class Assets
                         {
