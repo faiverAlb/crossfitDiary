@@ -8376,6 +8376,7 @@ select.selectpicker {
 .workout-container .routines-container .simple-routine-item .measure-value-input {
   width: 130px;
 }
+/* TODO: To be removed */
 /* Create workout feature */
 .crossfitter-edit-workout-container .add-new-workout-container .go-next-pointer {
   margin: 6px 0;
@@ -8389,12 +8390,18 @@ select.selectpicker {
 .crossfitter-edit-workout-container .add-new-workout-container .no-selected-container {
   color: #5bc0de;
 }
+/* TODO: To be removed */
 /* Log workout feature */
 .log-workout-container .existing-workout-selector {
   padding-bottom: 6px;
 }
 .log-workout-container .log-workout-inputs {
   padding: 10px 0;
+}
+/* Manage workout page: add new/existing and/or log workout */
+.manage-workout-page .new-or-existing .panel.panel-borderless {
+  border: 0;
+  box-shadow: none;
 }
 /* Home page */
 @media (min-width: 992px) {
