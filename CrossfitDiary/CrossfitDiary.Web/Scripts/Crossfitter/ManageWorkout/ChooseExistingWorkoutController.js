@@ -18,6 +18,10 @@
 
     });
 
+    self.clearState = function() {
+        self.selectedWorkout(null);
+    };
+
 
     self.toJSON = function () {
         var model = {

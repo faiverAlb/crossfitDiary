@@ -7,9 +7,9 @@
 <div class="manage-workout-page">
     <div class="new-or-existing" id="accordion">
         <div class="choose-buttons text-center">
-            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#NewWorkoutContainer">Create new workout?</button>
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#NewWorkoutContainer" data-bind="click:function(){manageWorkoutClick(true);}">Create new workout?</button>
             or
-            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#ExistingWorkoutsContainer">Existing workouts?</button>
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#ExistingWorkoutsContainer" data-bind="click:function(){manageWorkoutClick(false);}">Existing workouts?</button>
         </div>
         
         <div class="panel panel-borderless">

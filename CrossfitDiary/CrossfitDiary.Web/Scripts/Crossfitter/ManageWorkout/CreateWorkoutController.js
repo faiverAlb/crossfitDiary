@@ -50,5 +50,9 @@
         self.service.createWorkout(self.toJSON());
     };
 
+    self.clearState = function () {
+        self.selectedWorkoutType(null);
+    };
+
     return self;
 };
