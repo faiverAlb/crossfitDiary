@@ -16,8 +16,13 @@
             self.createWorkoutController.isContainerVisible(false);
             self.chooseExistingWorkoutController.isContainerVisible(!self.chooseExistingWorkoutController.isContainerVisible());
         }
-        self.isAnyContainersVisible(self.chooseExistingWorkoutController.isContainerVisible() || self.createWorkoutController.isContainerVisible());
+        
     };
+
+    ko.computed(function() {
+        self.isAnyContainersVisible((self.chooseExistingWorkoutController.isContainerVisible() && self.chooseExistingWorkoutController.workoutToDisplay())
+                                 || (self.createWorkoutController.isContainerVisible() && self.createWorkoutController.selectedWorkoutType()));
+    });
 
     return self;
 };
