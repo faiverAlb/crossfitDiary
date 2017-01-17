@@ -5,13 +5,13 @@
 }
 
 <div class="manage-workout-page">
-    <div class="new-or-existing" id="accordion">
+    <div class="new-or-existing" id="NewOrExistingAccordion">
         <div class="choose-buttons text-center">
-            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#NewWorkoutContainer" data-bind="click:function(){manageWorkoutClick(true);}">Create new workout?</button>
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#NewOrExistingAccordion" data-toggle="collapse" data-target="#NewWorkoutContainer" data-bind="click:function(){manageWorkoutClick(true);}">Create new workout?</button>
             or
-            <button type="button" class="btn btn-primary btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#ExistingWorkoutsContainer" data-bind="click:function(){manageWorkoutClick(false);}">Existing workouts?</button>
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#NewOrExistingAccordion" data-toggle="collapse" data-target="#ExistingWorkoutsContainer" data-bind="click:function(){manageWorkoutClick(false);}">Existing workouts?</button>
         </div>
-        
+
         <div class="panel panel-borderless">
             <div class="new-workout-container collapse" id="NewWorkoutContainer">
                 <div data-bind="template: { name: 'create-new-workout-template', data: createWorkoutController }"></div>
@@ -23,14 +23,25 @@
             </div>
         </div>
     </div>
-    <div class="want-to-log-container" data-bind="visible:isAnyContainersVisible">
+    <div class="want-to-log-container" data-bind="visible:isAnyContainersVisible" id="WantToLogAccordion">
         <div class="log-or-save-buttons text-center">
-            <button type="button" class="btn btn-success btn-lg" data-parent="#accordion" data-toggle="collapse" data-target="#NewWorkoutContainer" >Log your workout?</button>
-            or  
-            <button type="button" class="btn btn-primary btn-lg">Plan the workout?</button>
-        </div>    
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#LogWorkoutContainer">Log your workout?</button>
+            or
+            <button type="button" class="btn btn-success btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#PlanWorkoutContainer">Plan the workout?</button>
+        </div>
+
+        <div class="panel panel-borderless">
+            <div class="log-workout-container collapse" id="LogWorkoutContainer">
+                log here
+            </div>
+        </div>
+        <div class="panel panel-borderless">
+            <div class="plan-workout-container collapse" id="PlanWorkoutContainer">
+                Plan here
+            </div>
+        </div>
     </div>
-</div>  
+</div>
 
 
 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._CreateNewWorkout); }
@@ -45,7 +56,7 @@
             window.model = new ManageWorkoutController({
                 pathToApp: path,
                 viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
-            });
+                });
             ko.applyBindings(model);
         });
     </script>

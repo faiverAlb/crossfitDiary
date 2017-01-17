@@ -8402,7 +8402,7 @@ select.selectpicker {
 .manage-workout-page .new-or-existing .choose-buttons {
   margin-bottom: 10px;
 }
-.manage-workout-page .new-or-existing .panel.panel-borderless {
+.manage-workout-page .panel.panel-borderless {
   border: 0;
   margin-bottom: 0;
   margin-top: 0;
