@@ -20,7 +20,7 @@
     };
 
     ko.computed(function() {
-        self.isAnyContainersVisible((self.chooseExistingWorkoutController.isContainerVisible() && self.chooseExistingWorkoutController.workoutToDisplay())
+        self.isAnyContainersVisible((self.chooseExistingWorkoutController.isContainerVisible() && self.chooseExistingWorkoutController.selectedWorkout())
                                  || (self.createWorkoutController.isContainerVisible() && self.createWorkoutController.selectedWorkoutType()));
     });
 
