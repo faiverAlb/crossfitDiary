@@ -1,6 +1,10 @@
 ﻿var LogWorkoutController = function (selectedWorkoutType, simpleRoutines) {
     var self = this;
 //    self.service = new CrossfitterService(parameters.pathToApp);
+//    self.availableWorkouts = ko.observableArray(parameters.viewModel.availableWorkouts);
+//    self.selectedWorkout = ko.observable(baseWorkout);
+//    self.isReadOnlyMode = true;
+
     self.totalRoundsFinished = ko.observable();
     self.partialRepsFinished = ko.observable();
 
