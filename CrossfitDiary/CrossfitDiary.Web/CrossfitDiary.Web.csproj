@@ -456,6 +456,7 @@
     <Content Include="Scripts\Crossfitter\LogWorkout\LogWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\ManageWorkout\ChooseExistingWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\ManageWorkout\CreateWorkoutController.js" />
+    <Content Include="Scripts\Crossfitter\ManageWorkout\LogWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\ManageWorkout\ManageWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\WorkoutType.js" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureType.js" />

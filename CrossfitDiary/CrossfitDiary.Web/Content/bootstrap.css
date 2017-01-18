@@ -8402,6 +8402,9 @@ select.selectpicker {
 .manage-workout-page .new-or-existing .choose-buttons {
   margin-bottom: 10px;
 }
+.manage-workout-page .want-to-log-container .log-or-save-buttons {
+  margin-bottom: 10px;
+}
 .manage-workout-page .panel.panel-borderless {
   border: 0;
   margin-bottom: 0;

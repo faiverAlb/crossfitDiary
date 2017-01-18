@@ -68,6 +68,7 @@ namespace CrossfitDiary.Web
                     
                     , "~/Scripts/Crossfitter/ManageWorkout/CreateWorkoutController.js"
                     , "~/Scripts/Crossfitter/ManageWorkout/ChooseExistingWorkoutController.js"
+                    , "~/Scripts/Crossfitter/ManageWorkout/LogWorkoutController.js"
                     , "~/Scripts/Crossfitter/ManageWorkout/ManageWorkoutController.js"
                 ));
 
