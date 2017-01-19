@@ -1,4 +1,4 @@
-﻿var LogWorkoutController = function (selectedWorkoutType, simpleRoutines) {
+﻿var LogWorkoutController = function (lightModel) {
     var self = this;
 //    self.service = new CrossfitterService(parameters.pathToApp);
 //    self.availableWorkouts = ko.observableArray(parameters.viewModel.availableWorkouts);
@@ -25,10 +25,10 @@
     };
 
     function updateInputsVisibility() {
-        if (!selectedWorkoutType() || !simpleRoutines()) {
+        if (!lightModel.selectedWorkoutType || !lightModel.simpleRoutines) {
             return;
         }
-        var selectedTypeValue = selectedWorkoutType().Value;
+        var selectedTypeValue = lightModel.selectedWorkoutType.Value;
 
         /* Rounds */
         self.canSeeTotalRounds(selectedTypeValue == Crossfitter.WorkoutTypes.AMRAP);
@@ -41,7 +41,7 @@
     }
 
     function checkWorkoutContainsDistanceExercise() {
-        return ko.utils.arrayFirst(simpleRoutines(), function(routine) {
+        return ko.utils.arrayFirst(lightModel.simpleRoutines, function (routine) {
             var foundDistanceMeasure = ko.utils.arrayFirst(routine.exerciseMeasures(), function (measure) {
                 return measure.measureType() == Crossfitter.ExerciseMeasureTypes.Distance;
             });
