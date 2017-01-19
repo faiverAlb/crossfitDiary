@@ -33,19 +33,15 @@
     self.manageWorkoutClick = function (isCreateNewWorkout) {
         if (isCreateNewWorkout) {
             self.chooseExistingWorkoutController.clearState();
-            self.createWorkoutController.isContainerVisible(!self.createWorkoutController.isContainerVisible());
-            self.chooseExistingWorkoutController.isContainerVisible(false);
         } else {
             self.createWorkoutController.clearState();
-            self.createWorkoutController.isContainerVisible(false);
-            self.chooseExistingWorkoutController.isContainerVisible(!self.chooseExistingWorkoutController.isContainerVisible());
         }
+        self.logWorkoutController(null);
     };
 
 
     ko.computed(function() {
-        self.isAnyContainersVisible((self.chooseExistingWorkoutController.isContainerVisible() && self.chooseExistingWorkoutController.selectedWorkout())
-                                 || (self.createWorkoutController.isContainerVisible() && self.createWorkoutController.selectedWorkoutType()));
+        self.isAnyContainersVisible(self.logWorkoutController() != null && (self.chooseExistingWorkoutController.selectedWorkout() || self.createWorkoutController.hasAnyRoutines()));
     });
 
     return self;

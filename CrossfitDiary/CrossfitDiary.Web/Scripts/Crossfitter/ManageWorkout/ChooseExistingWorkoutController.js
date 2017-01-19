@@ -7,7 +7,6 @@
     self.isReadOnlyMode = true;
 
     self.workoutToDisplay = ko.observable();
-    self.isContainerVisible = ko.observable(false);
 
     ko.computed(function () {
         var workout = self.selectedWorkout();
