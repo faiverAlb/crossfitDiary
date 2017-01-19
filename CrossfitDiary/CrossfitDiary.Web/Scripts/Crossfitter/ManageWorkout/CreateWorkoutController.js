@@ -46,12 +46,11 @@
         self.selectedAlternativeExercise('');
     });
 
-    self.createWorkout = function () {
+    self.prepareCreateWorkout = function () {
         if (self.errors().length > 0) {
             self.errors.showAllMessages();
             return;
         }
-        self.service.createWorkout(self.toJSON());
     };
 
     self.clearState = function () {

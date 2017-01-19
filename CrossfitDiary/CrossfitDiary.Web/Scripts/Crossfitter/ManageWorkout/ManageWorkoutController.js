@@ -6,8 +6,14 @@
     self.logWorkoutController = ko.observable();
     self.isAnyContainersVisible = ko.observable(false);
 
+    self.isCreateNewWorkoutPressed = ko.observable(false);
     var logFunction = function () {
-        debugger;
+
+        if (self.isCreateNewWorkoutPressed()) {
+            self.createWorkoutController.prepareCreateWorkout();
+        } else {
+            
+        }
     };
 
 
@@ -44,6 +50,7 @@
         } else {
             self.createWorkoutController.clearState();
         }
+        self.isCreateNewWorkoutPressed(isCreateNewWorkout);
         self.logWorkoutController(null);
     };
 
