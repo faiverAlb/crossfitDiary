@@ -1,4 +1,4 @@
-﻿var LogWorkoutController = function (lightModel) {
+﻿var LogWorkoutController = function (lightModel, logFunction) {
     var self = this;
 //    self.service = new CrossfitterService(parameters.pathToApp);
 //    self.availableWorkouts = ko.observableArray(parameters.viewModel.availableWorkouts);
@@ -21,7 +21,8 @@
 
 
     self.logWorkout = function () {
-        self.service.logWorkout(self.toJSON());
+        logFunction();
+//        self.service.logWorkout(self.toJSON());
     };
 
     function updateInputsVisibility() {

@@ -32,43 +32,7 @@
 
         <div class="panel panel-borderless">
             <div class="log-workout-container collapse" id="LogWorkoutContainer" data-bind="with:logWorkoutController">
-                <div class="col-md-12">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            Log workout!
-                        </div>
-                        <div class="panel-body">
-                            <div class="text-right">
-                                <div class="log-workout-inputs">
-                                    <div class="form-inline" data-bind="if:canSeeTotalRounds">
-                                        <div class="form-group">
-                                            <label for="generalRoundsFinishedInput">Rounds finished</label>
-                                            <input type="text" class="form-control" id="generalRoundsFinishedInput" placeholder="Rounds finished" data-bind="value: totalRoundsFinished">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="partialRepsFinishedInput">Partial repetitions</label>
-                                            <input type="text" class="form-control" id="partialRepsFinishedInput" placeholder="Partial repetitions" data-bind="value: partialRepsFinished">
-                                        </div>
-                                    </div>
-                                    <div class="form-inline" data-bind="if:canSeePassedDistance">
-                                        <div class="form-group">
-                                            <label for="passedDistanceInput">Passed distance</label>
-                                            <input type="text" class="form-control" id="passedDistanceInput" placeholder="Passed distance" data-bind="value: distance">
-                                        </div>
-                                    </div>
-                                    <div class="form-inline" data-bind="if:canSeeTotalTime">
-                                        <div class="form-group">
-                                            <label for="timToWorkInput">Total time</label>
-                                            <input type="text" class="form-control" id="timToWorkInput" placeholder="Total time" data-bind="value: totalTime">
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-success" data-bind="click: $root.logWorkout">Log workout</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
             </div>
         </div>
         <div class="panel panel-borderless">

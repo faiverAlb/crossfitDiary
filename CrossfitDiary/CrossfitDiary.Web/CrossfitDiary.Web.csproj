@@ -521,6 +521,7 @@
     <Content Include="Views\Crossfitter\ManageWorkout.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_CreateNewWorkout.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_ExistingWorkoutsTemplate.cshtml" />
+    <Content Include="Views\Crossfitter\Templates\_LogWorkoutPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

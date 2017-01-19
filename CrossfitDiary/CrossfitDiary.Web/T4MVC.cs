@@ -152,6 +152,9 @@ namespace Links
                 public const string UrlPath = "~/Scripts/Crossfitter/ManageWorkout";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string ChooseExistingWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ChooseExistingWorkoutController.min.js") ? Url("ChooseExistingWorkoutController.min.js") : Url("ChooseExistingWorkoutController.js");
+                public static readonly string CreateWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CreateWorkoutController.min.js") ? Url("CreateWorkoutController.min.js") : Url("CreateWorkoutController.js");
+                public static readonly string LogWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/LogWorkoutController.min.js") ? Url("LogWorkoutController.min.js") : Url("LogWorkoutController.js");
                 public static readonly string ManageWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ManageWorkoutController.min.js") ? Url("ManageWorkoutController.min.js") : Url("ManageWorkoutController.js");
             }
         
@@ -529,6 +532,9 @@ namespace Links
                 {
                     public static class Assets
                     {
+                        public const string ChooseExistingWorkoutController_js = "~/Scripts/Crossfitter/ManageWorkout/ChooseExistingWorkoutController.js"; 
+                        public const string CreateWorkoutController_js = "~/Scripts/Crossfitter/ManageWorkout/CreateWorkoutController.js"; 
+                        public const string LogWorkoutController_js = "~/Scripts/Crossfitter/ManageWorkout/LogWorkoutController.js"; 
                         public const string ManageWorkoutController_js = "~/Scripts/Crossfitter/ManageWorkout/ManageWorkoutController.js"; 
                     }
                 }

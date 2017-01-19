@@ -1,22 +1,30 @@
 ﻿var ManageWorkoutController = function (parameters) {
     var self = this;
-
     self.createWorkoutController = new CreateWorkoutController(parameters);
     self.chooseExistingWorkoutController = new ChooseExistingWorkoutController(parameters);
 
     self.logWorkoutController = ko.observable();
     self.isAnyContainersVisible = ko.observable(false);
 
+    var logFunction = function () {
+        debugger;
+    };
+
+
+    var createLogController = function (lightLogModel) {
+        self.logWorkoutController(new LogWorkoutController(lightLogModel, logFunction));
+    };
+
     self.chooseExistingWorkoutController.workoutToDisplay.subscribe(function (newValue) {
         if (!newValue) {
             return;
         }
-
         var lightLogModel = {
             selectedWorkoutType: newValue.selectedWorkoutType(),
             simpleRoutines: newValue.simpleRoutines()
         };
-        self.logWorkoutController(new LogWorkoutController(lightLogModel));
+
+        createLogController(lightLogModel);
     });
 
     self.createWorkoutController.simpleRoutines.subscribe(function (newValue) {
@@ -27,7 +35,7 @@
             selectedWorkoutType: self.createWorkoutController.selectedWorkoutType(),
             simpleRoutines: self.createWorkoutController.simpleRoutines()
         };
-        self.logWorkoutController(new LogWorkoutController(lightLogModel));
+        createLogController(lightLogModel);
     });
 
     self.manageWorkoutClick = function (isCreateNewWorkout) {
