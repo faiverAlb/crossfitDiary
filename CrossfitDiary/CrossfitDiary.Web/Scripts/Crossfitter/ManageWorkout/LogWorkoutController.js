@@ -1,23 +1,45 @@
 ﻿var LogWorkoutController = function (lightModel, logFunction) {
     var self = this;
-//    self.service = new CrossfitterService(parameters.pathToApp);
-//    self.availableWorkouts = ko.observableArray(parameters.viewModel.availableWorkouts);
-//    self.selectedWorkout = ko.observable(baseWorkout);
-//    self.isReadOnlyMode = true;
 
-    self.totalRoundsFinished = ko.observable();
+    self.canSeeTotalRounds = ko.observable(false);
+    self.canSeePassedDistance = ko.observable(false);
+    self.canSeeTotalTime = ko.observable(false);
+
+    self.totalRoundsFinished = ko.observable()
+        .extend({
+            required: {
+                onlyIf: function() {
+                    return self.canSeeTotalRounds();
+                }
+            }
+        });
+
     self.partialRepsFinished = ko.observable();
 
-    self.distance = ko.observable();
+    self.distance = ko.observable()
+        .extend({
+            required: {
+                onlyIf: function() {
+                    return self.canSeePassedDistance();
+                }
+            }
+        });
 
+    
     self.wasFinished = ko.observable();
     self.isRx = ko.observable(true);
     self.IsModified = ko.observable();
-    self.totalTime = ko.observable();
+    self.totalTime = ko.observable()
+        .extend({
+            required: {
+                onlyIf: function() {
+                    return self.canSeeTotalTime();
+                }
+            }
+        });
 
-    self.canSeeTotalRounds = ko.observable();
-    self.canSeePassedDistance = ko.observable();
-    self.canSeeTotalTime = ko.observable();
+
+    
 
 
     self.logWorkout = function () {
@@ -53,6 +75,17 @@
     ko.computed(function() {
         updateInputsVisibility();
     });
+
+
+    self.errors = ko.validation.group(self);
+    self.canLogWorkout = function () {
+        if (self.errors().length > 0) {
+            self.errors.showAllMessages();
+            return false;
+        }
+        return true;
+    };
+
 
 
     self.toJSON = function() {

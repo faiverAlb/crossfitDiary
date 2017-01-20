@@ -10,7 +10,11 @@
     var logFunction = function () {
 
         if (self.isCreateNewWorkoutPressed()) {
-            self.createWorkoutController.prepareCreateWorkout();
+            var canCreateWorkout = self.createWorkoutController.canCreateCreateWorkout();
+            var canLogWorkout = self.logWorkoutController().canLogWorkout();
+            if (canCreateWorkout && canLogWorkout) {
+                debugger;
+            }
         } else {
             
         }
