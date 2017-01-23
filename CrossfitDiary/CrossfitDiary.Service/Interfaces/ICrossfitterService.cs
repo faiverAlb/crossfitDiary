@@ -6,8 +6,9 @@ namespace CrossfitDiary.Service.Interfaces
 {
     public interface ICrossfitterService
     {
-        void CreateWorkout(RoutineComplex map);
+        int CreateWorkout(RoutineComplex map);
         void LogWorkout(CrossfitterWorkout map);
+        void CreateAndLogNewWorkout(RoutineComplex newWorkoutRoutine, CrossfitterWorkout logWorkoutModel);
 
         List<CrossfitterWorkout> GetCrossfitterWorkouts(string userId, DateTime fromDate, DateTime dueInterval);
     }

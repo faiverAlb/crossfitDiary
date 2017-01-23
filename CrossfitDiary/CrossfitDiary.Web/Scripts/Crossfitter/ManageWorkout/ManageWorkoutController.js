@@ -2,6 +2,7 @@
     var self = this;
     self.createWorkoutController = new CreateWorkoutController(parameters);
     self.chooseExistingWorkoutController = new ChooseExistingWorkoutController(parameters);
+    self.service = new CrossfitterService(parameters.pathToApp);
 
     self.logWorkoutController = ko.observable();
     self.isAnyContainersVisible = ko.observable(false);
@@ -13,7 +14,11 @@
             var canCreateWorkout = self.createWorkoutController.canCreateCreateWorkout();
             var canLogWorkout = self.logWorkoutController().canLogWorkout();
             if (canCreateWorkout && canLogWorkout) {
-                debugger;
+                var model = {
+                    newWorkoutViewModel: self.createWorkoutController.getCreateWorkoutModel(),
+                    logWorkoutViewModel: self.logWorkoutController().toJSON()
+                };
+                self.service.createAndLogWorkout(model);
             }
         } else {
             
@@ -31,7 +36,8 @@
         }
         var lightLogModel = {
             selectedWorkoutType: newValue.selectedWorkoutType(),
-            simpleRoutines: newValue.simpleRoutines()
+            simpleRoutines: newValue.simpleRoutines(),
+            selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout
         };
 
         createLogController(lightLogModel);

@@ -90,12 +90,12 @@
 
     self.toJSON = function() {
         var model = {
-            selectedWorkoutId: self.selectedWorkout().id,
-            roundsFinished: self.totalRoundsFinished,
-            partialRepsFinished: self.partialRepsFinished,
-            timePassed: self.totalTime,
-            distance: self.distance,
-            wasFinished: self.wasFinished,
+            selectedWorkoutId: lightModel.selectedWorkout ? lightModel.selectedWorkout().id : null,
+            roundsFinished: self.totalRoundsFinished(),
+            partialRepsFinished: self.partialRepsFinished(),
+            timePassed: self.totalTime(),
+            distance: self.distance(),
+            wasFinished: self.wasFinished(),
             isRx: self.isRx()
         };
         return model;

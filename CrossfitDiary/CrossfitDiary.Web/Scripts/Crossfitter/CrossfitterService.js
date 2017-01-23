@@ -21,5 +21,14 @@
         });
     };
 
+    self.createAndLogWorkout = function(model) {
+        return $.post({
+            url: pathToApp + "api/createAndLogNewWorkout",
+            data: model
+        }).done(function() {
+            window.location = "/Home";
+        });
+    };
+
     return self;
 };

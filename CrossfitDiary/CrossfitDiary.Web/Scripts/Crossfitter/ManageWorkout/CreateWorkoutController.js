@@ -58,5 +58,10 @@
         self.selectedWorkoutType(null);
     };
 
+
+    self.getCreateWorkoutModel = function() {
+        return self.toJSON();
+    }
+
     return self;
 };

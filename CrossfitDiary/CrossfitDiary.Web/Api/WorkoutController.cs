@@ -49,6 +49,22 @@ namespace CrossfitDiary.Web.Api
             crossfitterWorkout.Crossfitter = user;
             _crossfitterService.LogWorkout(crossfitterWorkout);
         }
+
+        /// <summary>
+        /// Create and log workout
+        /// </summary>
+        /// <param name="model">Complex model with two properties: new workout and log workout models</param>
+        [HttpPost]
+        [Route("createAndLogNewWorkout")]
+        public void CreateAndLogNewWorkout(ToCreateAndLogNewWorkoutViewModel model)
+        {
+            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
+            var crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
+            crossfitterWorkout.Crossfitter = user;
+            _crossfitterService.CreateAndLogNewWorkout(Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel), crossfitterWorkout);
+        }
+
+        
     }
 
     
