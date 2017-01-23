@@ -24,7 +24,8 @@ namespace CrossfitDiary.Web
                 "~/Scripts/bootstrap-select/bootstrap-select.js",
                 "~/Scripts/knockout-3.4.0.js",
                 "~/Scripts/knockout.validation.js",
-                "~/Scripts/ko.bindingHandlers.js"
+                "~/Scripts/ko.bindingHandlers.js",
+                "~/Scripts/Spinner/modalLoading.min.js"
                 ));
 
 

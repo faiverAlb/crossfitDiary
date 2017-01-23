@@ -487,6 +487,7 @@
     <Content Include="Scripts\knockout.validation.min.js" />
     <Content Include="Scripts\ko.bindingHandlers.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Spinner\modalLoading.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
