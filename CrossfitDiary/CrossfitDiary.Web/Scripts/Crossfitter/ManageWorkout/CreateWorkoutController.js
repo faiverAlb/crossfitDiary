@@ -1,6 +1,7 @@
 ﻿var CreateWorkoutController = function (parameters) {
     var self = new CrossfitterController(parameters);
     self.exercises = ko.observableArray(parameters.viewModel.exercises);
+    self.service = new CrossfitterService(parameters.pathToApp);
 
     self.hasAnyRoutines = ko.computed(function() {
         return self.simpleRoutines().length > 0;
@@ -53,6 +54,15 @@
         }
         return true;
     };
+
+        self.createWorkout = function () {
+        if (self.errors().length > 0) {
+            self.errors.showAllMessages();
+            return;
+        }
+        self.service.createWorkout(self.toJSON());
+    };
+
 
     self.clearState = function () {
         self.selectedWorkoutType(null);

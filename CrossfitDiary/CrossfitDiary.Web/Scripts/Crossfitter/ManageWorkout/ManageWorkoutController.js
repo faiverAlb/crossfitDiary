@@ -37,7 +37,8 @@
         var lightLogModel = {
             selectedWorkoutType: newValue.selectedWorkoutType(),
             simpleRoutines: newValue.simpleRoutines(),
-            selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout
+            selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout,
+            logWorkoutText:"Log selected workout"
         };
 
         createLogController(lightLogModel);
@@ -49,7 +50,8 @@
         }
         var lightLogModel = {
             selectedWorkoutType: self.createWorkoutController.selectedWorkoutType(),
-            simpleRoutines: self.createWorkoutController.simpleRoutines()
+            simpleRoutines: self.createWorkoutController.simpleRoutines(),
+            logWorkoutText: "Create and log workout"
         };
         createLogController(lightLogModel);
     });

@@ -5,6 +5,8 @@
     self.canSeePassedDistance = ko.observable(false);
     self.canSeeTotalTime = ko.observable(false);
 
+    self.logWorkoutText = ko.observable(lightModel.logWorkoutText);
+
     self.totalRoundsFinished = ko.observable()
         .extend({
             required: {
@@ -44,7 +46,6 @@
 
     self.logWorkout = function () {
         logFunction();
-//        self.service.logWorkout(self.toJSON());
     };
 
     function updateInputsVisibility() {
