@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Controllers
 {
-    [RequireHttps]
+//    [RequireHttps]
     public partial class HomeController : Controller
     {
         private readonly ICrossfitterService _crossfitterService;
