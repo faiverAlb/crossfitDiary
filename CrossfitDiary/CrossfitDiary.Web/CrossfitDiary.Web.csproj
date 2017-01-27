@@ -473,7 +473,7 @@
     <Content Include="Content\pages\crossfitter\workout-info\workout-info.less" />
     <Content Include="Content\pages\home\home.less" />
     <Content Include="Content\pages\crossfitter\manage-workout\manage-workout.less" />
-    <None Include="Properties\PublishProfiles\SomeeBeta.pubxml" />
+    <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Properties\PublishProfiles\workouter.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\Home\HomePageController.js" />
