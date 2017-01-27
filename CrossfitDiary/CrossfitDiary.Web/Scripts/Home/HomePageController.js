@@ -1,13 +1,13 @@
-﻿var HomePageController = function (parameters) {
-    var self = this;
-
-    self.weekWorkouts = parameters.viewModel.weekWorkouts;
-
-
-    self.toJSON = function () {
-        var model = {};
-        return model;
-    };
-
-    return self;
-};
+var HomePageController = (function () {
+    function HomePageController(parameters) {
+        this.parameters = parameters;
+        this.toJSON = function () {
+            var model = {};
+            return model;
+        };
+        this.weekWorkouts = this.parameters.viewModel.weekWorkouts;
+    }
+    return HomePageController;
+}());
+;
+//# sourceMappingURL=HomePageController.js.map
