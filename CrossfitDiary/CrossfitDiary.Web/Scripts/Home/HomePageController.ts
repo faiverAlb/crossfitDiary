@@ -1,5 +1,5 @@
 ﻿class HomePageController {
-    weekWorkouts:any
+    weekWorkouts:any;
 
     constructor(public parameters: { viewModel: { weekWorkouts } }) {
         this.weekWorkouts = this.parameters.viewModel.weekWorkouts;
