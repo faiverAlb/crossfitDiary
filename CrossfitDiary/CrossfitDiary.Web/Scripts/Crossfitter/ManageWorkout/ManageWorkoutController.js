@@ -8,11 +8,12 @@
     self.isAnyContainersVisible = ko.observable(false);
 
     self.isCreateNewWorkoutPressed = ko.observable(false);
-    var logFunction = function () {
+
+    var logFunction = function() {
+        var canLogWorkout = self.logWorkoutController().canLogWorkout();
 
         if (self.isCreateNewWorkoutPressed()) {
             var canCreateWorkout = self.createWorkoutController.canCreateCreateWorkout();
-            var canLogWorkout = self.logWorkoutController().canLogWorkout();
             if (canCreateWorkout && canLogWorkout) {
                 var model = {
                     newWorkoutViewModel: self.createWorkoutController.getCreateWorkoutModel(),
@@ -21,7 +22,9 @@
                 self.service.createAndLogWorkout(model);
             }
         } else {
-            
+            if (canLogWorkout) {
+                self.service.logWorkout(self.logWorkoutController().toJSON());
+            }
         }
     };
 
