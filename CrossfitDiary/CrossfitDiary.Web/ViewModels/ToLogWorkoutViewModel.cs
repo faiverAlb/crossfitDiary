@@ -15,7 +15,7 @@ namespace CrossfitDiary.Web.ViewModels
         public int? PartialRepsFinished { get; set; }
 
         [JsonProperty("timePassed")]
-        public TimeSpan? TimePassed { get; set; }
+        public string TimePassed { get; set; }
 
         [JsonProperty("distance")]
         public int? Distance { get; set; }
