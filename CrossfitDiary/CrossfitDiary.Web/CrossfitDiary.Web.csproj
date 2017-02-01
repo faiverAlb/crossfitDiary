@@ -236,6 +236,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Configuration\ApplicationSignInManager.cs" />
+    <Compile Include="Configuration\ApplicationUserManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CrossfitterController.cs" />
@@ -254,7 +255,6 @@
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Mappings\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Mappings\ViewModelToDomainMappingProfile.cs" />
-    <Compile Include="Configuration\ApplicationUserManager.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="MvcHelpers\EnumHelper.cs" />
     <Compile Include="MvcHelpers\MvcUIHelper.cs" />
@@ -535,6 +535,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Configuration\" />
     <Folder Include="Content\themes\base\minified\images\" />
   </ItemGroup>
   <ItemGroup>

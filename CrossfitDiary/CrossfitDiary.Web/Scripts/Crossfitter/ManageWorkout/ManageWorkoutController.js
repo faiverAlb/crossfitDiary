@@ -7,6 +7,8 @@
     self.logWorkoutController = ko.observable();
     self.isAnyContainersVisible = ko.observable(false);
 
+    self.plannedDate = ko.observable();
+
     self.isCreateNewWorkoutPressed = ko.observable(false);
 
     var logFunction = function() {

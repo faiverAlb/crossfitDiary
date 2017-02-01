@@ -75,7 +75,6 @@ ko.bindingHandlers.datepicker = {
         //initialize datepicker with some optional options
         var options = allBindingsAccessor().datepickerOptions || {
             useCurrent: false,
-            format: 'mm/dd/yyyy',
             autoclose: true
         };
         $(element).datepicker(options);
@@ -84,7 +83,6 @@ ko.bindingHandlers.datepicker = {
         ko.utils.registerEventHandler(element, "changeDate", function (event) {
             var value = valueAccessor();
             if (ko.isObservable(value)) {
-                debugger;
                 value(event.date);
             }
         });
