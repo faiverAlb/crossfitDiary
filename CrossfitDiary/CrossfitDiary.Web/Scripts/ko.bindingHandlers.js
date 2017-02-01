@@ -68,3 +68,29 @@ ko.bindingHandlers.inputmask =
         }
     }
 };
+
+
+ko.bindingHandlers.datepicker = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        //initialize datepicker with some optional options
+        var options = allBindingsAccessor().datepickerOptions || {
+            useCurrent: false,
+            format: 'mm/dd/yyyy',
+            autoclose: true
+        };
+        $(element).datepicker(options);
+
+        //when a user changes the date, update the view model
+        ko.utils.registerEventHandler(element, "changeDate", function (event) {
+            var value = valueAccessor();
+            if (ko.isObservable(value)) {
+                debugger;
+                value(event.date);
+            }
+        });
+    },
+    update: function (element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $(element).val(value);
+    }
+};

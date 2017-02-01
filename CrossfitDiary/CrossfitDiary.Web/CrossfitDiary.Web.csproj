@@ -280,6 +280,7 @@
     <Compile Include="ViewModels\WorkoutViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
@@ -421,6 +422,9 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Content\bootstrap\bootstrap-social.less" />
     <Content Include="Content\pages\login-page.less" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datepicker.en-GB.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datepicker.ru.min.js" />
     <Content Include="Scripts\bootstrap-select\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap-select\i18n\defaults-ar_AR.js" />
     <Content Include="Scripts\bootstrap-select\i18n\defaults-bg_BG.js" />

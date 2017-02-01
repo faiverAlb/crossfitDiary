@@ -60,6 +60,7 @@ namespace CrossfitDiary.Web
             bundles.Add(new ScriptBundle("~/bundles/crossfitter/manageWorkout")
                 .Include(
                     "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"
+                    , "~/Scripts/bootstrap-datepicker/bootstrap-datepicker.min.js"
                     , "~/Scripts/Crossfitter/CrossfitterController.js"
                     , "~/Scripts/Crossfitter/SimpleRoutine.js"
                     , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
@@ -78,7 +79,10 @@ namespace CrossfitDiary.Web
                 .Include("~/Scripts/Home/HomePageController.js"));
 
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/css/font-awesome.min.css"));
+            bundles.Add(new StyleBundle("~/Content/css")
+                .Include("~/Content/bootstrap.css"
+                    , "~/Content/css/font-awesome.min.css"
+                    , "~/Content/bootstrap-datepicker/bootstrap-datepicker.css"));
 
         }
     }
