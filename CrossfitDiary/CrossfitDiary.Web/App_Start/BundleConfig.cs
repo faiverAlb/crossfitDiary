@@ -60,7 +60,8 @@ namespace CrossfitDiary.Web
             bundles.Add(new ScriptBundle("~/bundles/crossfitter/manageWorkout")
                 .Include(
                     "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"
-                    , "~/Scripts/bootstrap-datepicker/bootstrap-datepicker.min.js"
+                    , "~/Scripts/bootstrap-datepicker/moment.min.js"
+                    , "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.min.js"
                     , "~/Scripts/Crossfitter/CrossfitterController.js"
                     , "~/Scripts/Crossfitter/SimpleRoutine.js"
                     , "~/Scripts/Crossfitter/ExerciseMeasureType.js"

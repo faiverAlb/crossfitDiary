@@ -85,6 +85,10 @@
     <Compile Include="DataContexts\CrossfitDiaryMigrations\201612280702059_Add_IsAlternative_Property_Exercise.Designer.cs">
       <DependentUpon>201612280702059_Add_IsAlternative_Property_Exercise.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201702030634196_AddIsPlanned.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201702030634196_AddIsPlanned.Designer.cs">
+      <DependentUpon>201702030634196_AddIsPlanned.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDbContext.cs" />
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201612280702059_Add_IsAlternative_Property_Exercise.resx">
       <DependentUpon>201612280702059_Add_IsAlternative_Property_Exercise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201702030634196_AddIsPlanned.resx">
+      <DependentUpon>201702030634196_AddIsPlanned.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

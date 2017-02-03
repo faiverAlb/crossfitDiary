@@ -27,6 +27,9 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("isRx")]
         public bool IsRx { get; set; }
 
+        [JsonProperty("isPlanned")]
+        public bool IsPlanned { get; set; }
+
         //TODO: Move to separate view model?
 
         [JsonProperty("selectedWorkoutName")]

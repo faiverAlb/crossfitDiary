@@ -25,9 +25,9 @@
     </div>
     <div class="want-to-log-container" data-bind="visible:isAnyContainersVisible" id="WantToLogAccordion">
         <div class="log-or-save-buttons text-center">
-            <button type="button" class="btn btn-primary btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#LogWorkoutContainer">Log your workout?</button>
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#LogWorkoutContainer" data-bind="click:logWorkoutContainerClick">Log your workout?</button>
             or
-            <button type="button" class="btn btn-success btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#PlanWorkoutContainer">Plan the workout?</button>
+            <button type="button" class="btn btn-success btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#PlanWorkoutContainer" data-bind="click:planWorkoutContainerClick">Plan the workout?</button>
         </div>
 
         <div class="panel panel-borderless">
@@ -46,10 +46,10 @@
                         <div class="panel-body">
                             <div class="text-right">
                                 <form class="form-inline data-selector-container">
-                                    <div class="form-group">
+                                    <div class="form-group" data-bind="validationElement: plannedDate">
                                         <label>Plan your workout here <i class="fa fa-arrow-right" aria-hidden="true"></i></label>
                                         <div class="input-group date pointer">
-                                            <input class="datepicker form-control" data-date-format="mm-dd-yyyy" data-bind="datepicker:plannedDate" placeholder="Date here">
+                                            <input class="form-control" data-bind="datepicker:plannedDate" placeholder="Date here" >
                                             <div class="input-group-addon">
                                                 <span>
                                                     <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -59,7 +59,7 @@
                                     </div>
                                 </form>
 
-                                <button type="button" class="btn btn-success btn-lg pull-right">Plan it!</button>
+                                <button type="button" class="btn btn-success btn-lg pull-right" data-bind="click: planWorkout, enable: plannedDate">Plan it!</button>
                             </div>
                         </div>
                     </div>
@@ -78,16 +78,16 @@
     @Scripts.Render("~/bundles/crossfitter/manageWorkout")
     <script>
         $(function() {
+//            $('.input-group.date')
+//                .datepicker({
+//                    autoclose: true
+//                });
             var path = "@Url.Content("~")";
             window.model = new ManageWorkoutController({
                 pathToApp: path,
                 viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
                 });
             ko.applyBindings(model);
-            $('.input-group.date')
-                .datepicker({
-                    autoclose: true
-                });
         });
     </script>
 }

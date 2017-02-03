@@ -6,10 +6,27 @@
 
     self.logWorkoutController = ko.observable();
     self.isAnyContainersVisible = ko.observable(false);
+    self.wantToPlanWorkout = ko.observable(false);
 
-    self.plannedDate = ko.observable();
+    self.plannedDate = ko.observable(null)
+        .extend({
+            required: {
+                onlyIf: function() {
+                    return self.wantToPlanWorkout();
+                }
+            }
+        });
 
     self.isCreateNewWorkoutPressed = ko.observable(false);
+
+
+    self.logWorkoutContainerClick = function() {
+        self.wantToPlanWorkout(false);
+    };
+
+    self.planWorkoutContainerClick = function() {
+        self.wantToPlanWorkout(!self.wantToPlanWorkout());
+    };
 
     var logFunction = function() {
         var canLogWorkout = self.logWorkoutController().canLogWorkout();
@@ -29,6 +46,29 @@
             }
         }
     };
+
+    self.planWorkout = function () {
+        debugger;
+        var canPlanWorkout = self.plannedDate.isValid();
+        self.plannedDate.errors.showAllMessages();
+        if (self.isCreateNewWorkoutPressed()) {
+            var canCreateWorkout = self.createWorkoutController.canCreateCreateWorkout();
+            if (canCreateWorkout && canPlanWorkout) {
+                var model = {
+                    newWorkoutViewModel: self.createWorkoutController.getCreateWorkoutModel(),
+                    logWorkoutViewModel: self.logWorkoutController().toJSON()
+                };
+                debugger;
+                model.logWorkoutViewModel.isPlanned = true;
+//                self.service.createAndLogWorkout(model);
+            }
+        } else {
+            if (canPlanWorkout) {
+                self.service.logWorkout(self.logWorkoutController().toJSON());
+            }
+        }
+    };
+
 
 
     var createLogController = function (lightLogModel) {
@@ -60,6 +100,7 @@
         };
         createLogController(lightLogModel);
     });
+
 
     self.manageWorkoutClick = function (isCreateNewWorkout) {
         if (isCreateNewWorkout) {

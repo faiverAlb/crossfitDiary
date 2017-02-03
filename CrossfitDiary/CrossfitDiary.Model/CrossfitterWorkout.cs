@@ -35,6 +35,8 @@ namespace CrossfitDiary.Model
 
         public bool IsModified { get; set; }
 
+        public bool IsPlanned { get; set; }
+
         [NotMapped]
         public string MeasureDisplayName { get; set; }
     }
