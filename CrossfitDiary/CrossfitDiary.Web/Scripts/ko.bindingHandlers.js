@@ -73,7 +73,12 @@ ko.bindingHandlers.inputmask =
 ko.bindingHandlers.datepicker = {
     init: function (element, valueAccessor, allBindingsAccessor) {
         //initialize datepicker with some optional options
-        var options = allBindingsAccessor().dateTimePickerOptions || { format: 'DD/MM/YYYY' };
+        var date = new Date();
+        var options = allBindingsAccessor().dateTimePickerOptions || {
+            format: 'DD/MM/YYYY'
+            , minDate: date.setDate(date.getDate() - 1)
+            , ignoreReadonly: true
+        };
         var defaults = {
             icons: {
                 time: "fa fa-clock-o",
