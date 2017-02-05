@@ -48,7 +48,6 @@
     };
 
     self.planWorkout = function () {
-        debugger;
         var canPlanWorkout = self.plannedDate.isValid();
         self.plannedDate.errors.showAllMessages();
         if (self.isCreateNewWorkoutPressed()) {
