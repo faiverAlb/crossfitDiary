@@ -49,7 +49,6 @@
 
     self.planWorkout = function () {
         var canPlanWorkout = self.plannedDate.isValid();
-        self.plannedDate.errors.showAllMessages();
         if (self.isCreateNewWorkoutPressed()) {
             var canCreateWorkout = self.createWorkoutController.canCreateCreateWorkout();
             if (canCreateWorkout && canPlanWorkout) {
@@ -57,13 +56,14 @@
                     newWorkoutViewModel: self.createWorkoutController.getCreateWorkoutModel(),
                     logWorkoutViewModel: self.logWorkoutController().toJSON()
                 };
-                debugger;
                 model.logWorkoutViewModel.isPlanned = true;
-//                self.service.createAndLogWorkout(model);
+                self.service.createAndLogWorkout(model);
             }
         } else {
             if (canPlanWorkout) {
-                self.service.logWorkout(self.logWorkoutController().toJSON());
+                var logModel = self.logWorkoutController().toJSON();
+                logModel.isPlanned = true;
+                self.service.logWorkout(logModel);
             }
         }
     };
