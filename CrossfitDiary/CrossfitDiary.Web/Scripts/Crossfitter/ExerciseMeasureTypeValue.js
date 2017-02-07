@@ -2,7 +2,7 @@
     var self = this;
 
     self.measureType = ko.observable(model.measureType);
-    self.measureValue = ko.observable(model.measureValue).extend({ required: isRequired });
+    self.measureValue = ko.observable(parseFloat(model.measureValue)).extend({ required: isRequired });
     self.measureDesciption = ko.observable(model.description);
     self.shortMeasureDescription = ko.observable(model.shortMeasureDescription);
 
