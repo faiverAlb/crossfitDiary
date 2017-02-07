@@ -12,8 +12,8 @@
                         <div data-bind="text:dayOfWeek"></div>
                         <div class="content ">
                             <div class="date" data-bind="text:displayDate"></div>
-                            <div class="empty-row"></div>
                             <!-- ko if: doneWorkouts.length > 0-->
+                            <div class="empty-row"></div>
                             <div class="workout-container">
                                 <div class="header">Done</div>
                                 <!-- ko foreach: doneWorkouts-->
@@ -24,15 +24,17 @@
                                 <!--/ko-->
                             </div>
                             <!--/ko-->
-                            <div class="empty-row"></div>
                             <!-- ko if: plannedWorkouts.length > 0-->
+                            <div class="empty-row"></div>
                             <div class="workout-container">
                                 <div class="header">Planned</div>
                                 <!-- ko foreach: plannedWorkouts-->
                                 <div class="workout clearfix">
                                     <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
                                     <div class="pull-right">
-                                        <button class="btn btn-success btn-xs" title="Create/Log/Plan!"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <a href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)" class="btn btn-success btn-xs" title="Log workout">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <!--/ko-->
