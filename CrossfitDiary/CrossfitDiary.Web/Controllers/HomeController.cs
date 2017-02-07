@@ -60,12 +60,14 @@ namespace CrossfitDiary.Web.Controllers
         private DayWorkoutViewModel GetDayWorkoutViewModelByDate(DayOfWeek dayOfWeek, DateTime date, IEnumerable<IGrouping<DayOfWeek, ToLogWorkoutViewModel>> groupedModels)
         {
             var dayWorkout = groupedModels.SingleOrDefault(x => x.Key == dayOfWeek);
-            var workouts = dayWorkout?.ToList() ?? new List<ToLogWorkoutViewModel>();
-            return new DayWorkoutViewModel()
+            var doneWorkoutes = dayWorkout?.Where(x => x.IsPlanned == false).ToList() ?? new List<ToLogWorkoutViewModel>();
+            var planendWorkouts = dayWorkout?.Where(x => x.IsPlanned == true).ToList() ?? new List<ToLogWorkoutViewModel>();
+            return new DayWorkoutViewModel
             {
                 DayOfWeek = dayOfWeek.ToString(),
                 Date = date,
-                Workouts = workouts
+                DoneWorkouts = doneWorkoutes,
+                PlannedWorkouts = planendWorkouts
             };
         }
 

@@ -9,14 +9,26 @@
             <div class="grid-calendar">
                 <div class="row seven-cols" data-bind="foreach: weekWorkouts">
                     <div class="col-md-1 grid-cell">
-                        <div data-bind ="text:dayOfWeek"></div>
+                        <div data-bind="text:dayOfWeek"></div>
                         <div class="content ">
                             <div class="date" data-bind="text:displayDate"></div>
                             <div class="empty-row"></div>
-                            <!-- ko if: workouts.length > 0-->
+                            <!-- ko if: doneWorkouts.length > 0-->
                             <div class="workout-container">
                                 <div class="header">Done</div>
-                                <!-- ko foreach: workouts-->
+                                <!-- ko foreach: doneWorkouts-->
+                                <div class="workout clearfix">
+                                    <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
+                                    <div class="pull-right" data-bind="text: measureDisplayName"></div>
+                                </div>
+                                <!--/ko-->
+                            </div>
+                            <!--/ko-->
+                            <div class="empty-row"></div>
+                            <!-- ko if: plannedWorkouts.length > 0-->
+                            <div class="workout-container">
+                                <div class="header">Planned</div>
+                                <!-- ko foreach: plannedWorkouts-->
                                 <div class="workout clearfix">
                                     <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
                                     <div class="pull-right" data-bind="text: measureDisplayName"></div>
@@ -43,7 +55,7 @@
             var model = new HomePageController({
                 pathToApp: path,
                 viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
-            });
+                });
             ko.applyBindings(model);
         });
     </script>

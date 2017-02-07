@@ -8454,13 +8454,13 @@ select.selectpicker {
   padding: 2px;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .header {
-  width: 40px;
+  width: 60px;
   margin-top: -10px;
   background-color: #f6f6f6;
-  text-align: center;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .workout {
   border-bottom: 1px dashed black;
+  padding: 3px 0;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .content .workout-container .workout:last-child {
   border-bottom: none;

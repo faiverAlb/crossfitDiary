@@ -12,17 +12,21 @@ namespace CrossfitDiary.Web.ViewModels
 
     public class DayWorkoutViewModel
     {
+
         [JsonProperty("date")]
         public DateTime Date { get; set; }
 
         [JsonProperty("displayDate")]
-        public string DisplayDate { get { return Date.ToString("d"); } }
+        public string DisplayDate => Date.ToString("d");
 
         [JsonProperty("dayOfWeek")]
         public string DayOfWeek { get; set; }
 
-        [JsonProperty("workouts")]
-        public List<ToLogWorkoutViewModel> Workouts { get; set; } = new List<ToLogWorkoutViewModel>();
+        [JsonProperty("doneWorkouts")]
+        public List<ToLogWorkoutViewModel> DoneWorkouts { get; set; } = new List<ToLogWorkoutViewModel>();
+
+        [JsonProperty("plannedWorkouts")]
+        public List<ToLogWorkoutViewModel> PlannedWorkouts { get; set; } = new List<ToLogWorkoutViewModel>();
 
     }
 }
