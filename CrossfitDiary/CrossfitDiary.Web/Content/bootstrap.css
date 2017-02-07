@@ -8417,6 +8417,9 @@ select.selectpicker {
 .manage-workout-page .pointer {
   cursor: pointer;
 }
+.existing-workouts-container .existing-workout-selector {
+  padding-bottom: 6px;
+}
 /* Home page */
 @media (min-width: 992px) {
   .home-container .activities-calendar .grid-calendar .seven-cols .col-md-1,

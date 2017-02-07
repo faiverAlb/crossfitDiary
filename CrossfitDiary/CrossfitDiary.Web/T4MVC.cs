@@ -76,6 +76,19 @@ namespace Links
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
         public static readonly string _references_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/_references.min.js") ? Url("_references.min.js") : Url("_references.js");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class bootstrap_datepicker {
+            public const string UrlPath = "~/Scripts/bootstrap-datepicker";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string bootstrap_datetimepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap-datetimepicker.min.js") ? Url("bootstrap-datetimepicker.min.js") : Url("bootstrap-datetimepicker.js");
+            public static readonly string bootstrap_datetimepicker_min_js = Url("bootstrap-datetimepicker.min.js");
+            public static readonly string moment_with_locales_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/moment-with-locales.min.js") ? Url("moment-with-locales.min.js") : Url("moment-with-locales.js");
+            public static readonly string moment_with_locales_min_js = Url("moment-with-locales.min.js");
+            public static readonly string moment_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/moment.min.js") ? Url("moment.min.js") : Url("moment.js");
+            public static readonly string moment_min_js = Url("moment.min.js");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class bootstrap_select {
             public const string UrlPath = "~/Scripts/bootstrap-select";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
@@ -137,6 +150,7 @@ namespace Links
         
             public static readonly string CrossfitterController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterController.min.js") ? Url("CrossfitterController.min.js") : Url("CrossfitterController.js");
             public static readonly string CrossfitterService_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterService.min.js") ? Url("CrossfitterService.min.js") : Url("CrossfitterService.js");
+            public static readonly string CrossfitterService_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterService.min.js") ? Url("CrossfitterService.min.js") : Url("CrossfitterService.js");
             public static readonly string ExerciseMeasureType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureType.min.js") ? Url("ExerciseMeasureType.min.js") : Url("ExerciseMeasureType.js");
             public static readonly string ExerciseMeasureTypeValue_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureTypeValue.min.js") ? Url("ExerciseMeasureTypeValue.min.js") : Url("ExerciseMeasureTypeValue.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -167,7 +181,7 @@ namespace Links
             public const string UrlPath = "~/Scripts/Home";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-            public static readonly string HomePageController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/HomePageController.min.js") ? Url("HomePageController.min.js") : Url("HomePageController.js");
+            public static readonly string HomePageController_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/HomePageController.min.js") ? Url("HomePageController.min.js") : Url("HomePageController.js");
         }
     
         public static readonly string jquery_3_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.1.intellisense.min.js") ? Url("jquery-3.1.1.intellisense.min.js") : Url("jquery-3.1.1.intellisense.js");
@@ -190,6 +204,37 @@ namespace Links
         public static readonly string knockout_validation_min_js = Url("knockout.validation.min.js");
         public static readonly string ko_bindingHandlers_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ko.bindingHandlers.min.js") ? Url("ko.bindingHandlers.min.js") : Url("ko.bindingHandlers.js");
         public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Spinner {
+            public const string UrlPath = "~/Scripts/Spinner";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string modalLoading_min_js = Url("modalLoading.min.js");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class typings {
+            public const string UrlPath = "~/Scripts/typings";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class jquery {
+                public const string UrlPath = "~/Scripts/typings/jquery";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string jquery_d_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.d.min.js") ? Url("jquery.d.min.js") : Url("jquery.d.js");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class knockout {
+                public const string UrlPath = "~/Scripts/typings/knockout";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string knockout_d_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/knockout.d.min.js") ? Url("knockout.d.min.js") : Url("knockout.d.js");
+            }
+        
+        }
+    
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -197,6 +242,7 @@ namespace Links
         public const string UrlPath = "~/Content";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+        public static readonly string _bootstrap_datetimepicker_less = Url("_bootstrap-datetimepicker.less");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class bootstrap {
             public const string UrlPath = "~/Content/bootstrap";
@@ -284,6 +330,15 @@ namespace Links
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class bootstrap_datepicker {
+            public const string UrlPath = "~/Content/bootstrap-datepicker";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string bootstrap_datepicker_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap-datepicker.min.css") ? Url("bootstrap-datepicker.min.css") : Url("bootstrap-datepicker.css");
+        }
+    
+        public static readonly string bootstrap_datetimepicker_build_less = Url("bootstrap-datetimepicker-build.less");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class bootstrap_select {
             public const string UrlPath = "~/Content/bootstrap-select";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
@@ -295,6 +350,13 @@ namespace Links
         public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
         public static readonly string bootstrap_less = Url("bootstrap.less");
         public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Configuration {
+            public const string UrlPath = "~/Content/Configuration";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+        }
+    
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class css {
             public const string UrlPath = "~/Content/css";
@@ -468,6 +530,18 @@ namespace Links
     {
         public static partial class Scripts 
         {
+            public static partial class bootstrap_datepicker 
+            {
+                public static class Assets
+                {
+                    public const string bootstrap_datetimepicker_js = "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.js"; 
+                    public const string bootstrap_datetimepicker_min_js = "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.min.js"; 
+                    public const string moment_with_locales_js = "~/Scripts/bootstrap-datepicker/moment-with-locales.js"; 
+                    public const string moment_with_locales_min_js = "~/Scripts/bootstrap-datepicker/moment-with-locales.min.js"; 
+                    public const string moment_js = "~/Scripts/bootstrap-datepicker/moment.js"; 
+                    public const string moment_min_js = "~/Scripts/bootstrap-datepicker/moment.min.js"; 
+                }
+            }
             public static partial class bootstrap_select 
             {
                 public static partial class i18n 
@@ -552,7 +626,6 @@ namespace Links
             {
                 public static class Assets
                 {
-                    public const string HomePageController_js = "~/Scripts/Home/HomePageController.js"; 
                 }
             }
             public static partial class jqueryPlugins 
@@ -560,6 +633,31 @@ namespace Links
                 public static class Assets
                 {
                     public const string jquery_inputmask_bundle_min_js = "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"; 
+                }
+            }
+            public static partial class Spinner 
+            {
+                public static class Assets
+                {
+                    public const string modalLoading_min_js = "~/Scripts/Spinner/modalLoading.min.js"; 
+                }
+            }
+            public static partial class typings 
+            {
+                public static partial class jquery 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
+                public static partial class knockout 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
+                public static class Assets
+                {
                 }
             }
             public static class Assets
@@ -592,7 +690,20 @@ namespace Links
                 {
                 }
             }
+            public static partial class bootstrap_datepicker 
+            {
+                public static class Assets
+                {
+                    public const string bootstrap_datepicker_css = "~/Content/bootstrap-datepicker/bootstrap-datepicker.css";
+                }
+            }
             public static partial class bootstrap_select 
+            {
+                public static class Assets
+                {
+                }
+            }
+            public static partial class Configuration 
             {
                 public static class Assets
                 {

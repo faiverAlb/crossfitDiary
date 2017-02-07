@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
@@ -39,14 +40,15 @@ namespace CrossfitDiary.Web.Controllers
             return View(logWorkoutViewModel);
         }
 
-        public virtual ActionResult ManageWorkout()
+        public virtual ActionResult ManageWorkout(DateTime? date)
         {
             IEnumerable<ExerciseViewModel> viewModels = Mapper.Map<IEnumerable<ExerciseViewModel>>(_exerciseService.GetExercises());
             var model = new
             {
                 exercises = viewModels,
                 workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key),
-                availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts())
+                availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts()),
+                planDate = date?.ToShortDateString() ?? DateTime.Now.ToShortDateString()
             };
             return View(model);
         }

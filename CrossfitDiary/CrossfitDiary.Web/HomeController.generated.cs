@@ -113,7 +113,7 @@ namespace CrossfitDiary.Web.Controllers
         [NonAction]
         public override System.Web.Mvc.ActionResult Index()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index, "https");
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
             return callInfo;
         }
@@ -124,7 +124,7 @@ namespace CrossfitDiary.Web.Controllers
         [NonAction]
         public override System.Web.Mvc.ActionResult Secure()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Secure, "https");
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Secure);
             SecureOverride(callInfo);
             return callInfo;
         }

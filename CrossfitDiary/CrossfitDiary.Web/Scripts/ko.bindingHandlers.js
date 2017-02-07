@@ -76,7 +76,7 @@ ko.bindingHandlers.datepicker = {
         var date = new Date();
         var options = allBindingsAccessor().dateTimePickerOptions || {
             format: 'DD/MM/YYYY'
-            , minDate: date.setDate(date.getDate() - 1)
+//            , minDate: date.setDate(date.getDate() - 1)
             , ignoreReadonly: true
         };
         var defaults = {

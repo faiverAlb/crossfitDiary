@@ -8,7 +8,7 @@
     self.isAnyContainersVisible = ko.observable(false);
     self.wantToPlanWorkout = ko.observable(false);
 
-    self.plannedDate = ko.observable(new Date())
+    self.plannedDate = ko.observable(new Date(parameters.viewModel.planDate))
         .extend({
             required: {
                 onlyIf: function() {
