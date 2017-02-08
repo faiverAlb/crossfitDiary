@@ -103,11 +103,9 @@
 
 
     self.manageWorkoutClick = function (isCreateNewWorkout) {
-        if (isCreateNewWorkout) {
-            self.chooseExistingWorkoutController.clearState();
-        } else {
-            self.createWorkoutController.clearState();
-        }
+        self.chooseExistingWorkoutController.clearState();
+        self.createWorkoutController.clearState();
+
         self.isCreateNewWorkoutPressed(isCreateNewWorkout);
         self.logWorkoutController(null);
     };
