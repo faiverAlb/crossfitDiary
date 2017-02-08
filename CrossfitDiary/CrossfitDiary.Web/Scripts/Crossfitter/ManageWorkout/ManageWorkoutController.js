@@ -8,6 +8,7 @@
     self.isAnyContainersVisible = ko.observable(false);
     self.wantToPlanWorkout = ko.observable(false);
 
+    self.withoutPreparedWorkout = ko.observable(parameters.viewModel.selectedWorkoutId == null);
     self.plannedDate = ko.observable(new Date(parameters.viewModel.planDate))
         .extend({
             required: {
@@ -112,9 +113,24 @@
     };
 
 
-    ko.computed(function() {
+    ko.computed(function () {
         self.isAnyContainersVisible(self.logWorkoutController() != null && (self.chooseExistingWorkoutController.selectedWorkout() || self.createWorkoutController.hasAnyRoutines()));
     });
+
+    function init() {
+        if (self.withoutPreparedWorkout() == false) {
+            var lightLogModel = {
+                selectedWorkoutType: self.chooseExistingWorkoutController.workoutToDisplay().selectedWorkoutType(),
+                simpleRoutines: self.chooseExistingWorkoutController.workoutToDisplay().simpleRoutines(),
+                selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout,
+                logWorkoutText: "Log selected workout"
+            };
+
+            createLogController(lightLogModel);
+        }  
+    };
+
+    init();
 
     return self;
 };
