@@ -61,7 +61,7 @@ namespace CrossfitDiary.Service
 
         public List<CrossfitterWorkout> GetCrossfitterWorkouts(string userId, DateTime fromDate, DateTime dueDate)
         {
-            var crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId && (fromDate < x.Date && x.Date <= dueDate)).ToList();
+            List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId && (fromDate < x.Date && x.Date <= dueDate)).ToList();
             foreach (var workout in crossfitterWorkouts)
             {
                 if (workout.Distance.HasValue)

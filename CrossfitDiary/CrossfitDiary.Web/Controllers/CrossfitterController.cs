@@ -40,7 +40,7 @@ namespace CrossfitDiary.Web.Controllers
             return View(logWorkoutViewModel);
         }
 
-        public virtual ActionResult ManageWorkout(DateTime? date)
+        public virtual ActionResult ManageWorkout(DateTime? date, int? workoutId)
         {
             IEnumerable<ExerciseViewModel> viewModels = Mapper.Map<IEnumerable<ExerciseViewModel>>(_exerciseService.GetExercises());
             var model = new

@@ -418,6 +418,7 @@ namespace Links
                     public const string UrlPath = "~/Content/pages/crossfitter/manage-workout";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string existing_workouts_container_less = Url("existing-workouts-container.less");
                     public static readonly string manage_workout_less = Url("manage-workout.less");
                 }
             

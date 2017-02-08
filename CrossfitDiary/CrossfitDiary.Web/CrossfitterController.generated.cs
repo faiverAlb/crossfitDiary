@@ -99,6 +99,7 @@ namespace CrossfitDiary.Web.Controllers
         public class ActionParamsClass_ManageWorkout
         {
             public readonly string date = "date";
+            public readonly string workoutId = "workoutId";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -169,14 +170,15 @@ namespace CrossfitDiary.Web.Controllers
         }
 
         [NonAction]
-        partial void ManageWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.DateTime? date);
+        partial void ManageWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.DateTime? date, int? workoutId);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult ManageWorkout(System.DateTime? date)
+        public override System.Web.Mvc.ActionResult ManageWorkout(System.DateTime? date, int? workoutId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ManageWorkout);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "date", date);
-            ManageWorkoutOverride(callInfo, date);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "workoutId", workoutId);
+            ManageWorkoutOverride(callInfo, date, workoutId);
             return callInfo;
         }
 
