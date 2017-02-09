@@ -31,31 +31,6 @@ namespace CrossfitDiary.Web
 
             /*   --Crossfitter--   */
             
-            /*   Create workout   */
-            bundles.Add(new ScriptBundle("~/bundles/crossfitter/createWorkout")
-                .Include(
-                     "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"
-                    , "~/Scripts/Crossfitter/CrossfitterController.js"
-                    , "~/Scripts/Crossfitter/CreateWorkout/CreateWorkoutController.js"
-
-                    , "~/Scripts/Crossfitter/SimpleRoutine.js"
-                    , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
-                    , "~/Scripts/Crossfitter/WorkoutType.js"
-                    , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
-                    , "~/Scripts/Crossfitter/CrossfitterService.js"));
-
-            /*   Log workout   */
-            bundles.Add(new ScriptBundle("~/bundles/crossfitter/logWorkout")
-                .Include(
-                    "~/Scripts/Crossfitter/CrossfitterController.js"
-                    , "~/Scripts/Crossfitter/LogWorkout/LogWorkoutController.js"
-
-                    , "~/Scripts/Crossfitter/SimpleRoutine.js"
-                    , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
-                    , "~/Scripts/Crossfitter/WorkoutType.js"
-                    , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
-                    , "~/Scripts/Crossfitter/CrossfitterService.js"));
-
             /* Manage workout */
             bundles.Add(new ScriptBundle("~/bundles/crossfitter/manageWorkout")
                 .Include(

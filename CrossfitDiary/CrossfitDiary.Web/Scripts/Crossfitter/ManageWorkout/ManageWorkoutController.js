@@ -83,7 +83,8 @@
             selectedWorkoutType: newValue.selectedWorkoutType(),
             simpleRoutines: newValue.simpleRoutines(),
             selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout,
-            logWorkoutText:"Log selected workout"
+            logWorkoutText: "Log selected workout",
+            date: parameters.viewModel.planDate
         };
 
         createLogController(lightLogModel);
@@ -96,7 +97,8 @@
         var lightLogModel = {
             selectedWorkoutType: self.createWorkoutController.selectedWorkoutType(),
             simpleRoutines: self.createWorkoutController.simpleRoutines(),
-            logWorkoutText: "Create and log workout"
+            logWorkoutText: "Create and log workout",
+            date: parameters.viewModel.planDate
         };
         createLogController(lightLogModel);
     });
@@ -121,7 +123,8 @@
                 selectedWorkoutType: self.chooseExistingWorkoutController.workoutToDisplay().selectedWorkoutType(),
                 simpleRoutines: self.chooseExistingWorkoutController.workoutToDisplay().simpleRoutines(),
                 selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout,
-                logWorkoutText: "Log selected workout"
+                logWorkoutText: "Log selected workout",
+                date: parameters.viewModel.planDate
             };
 
             createLogController(lightLogModel);

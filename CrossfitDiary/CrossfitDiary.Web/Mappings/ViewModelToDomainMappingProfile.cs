@@ -34,7 +34,7 @@ namespace CrossfitDiary.Web.Mappings
 
             CreateMap<ToLogWorkoutViewModel, CrossfitterWorkout>()
                 .ForMember(x => x.RoutineComplexId, x => x.MapFrom(y => y.SelectedWorkoutId))
-                .ForMember(x => x.Date, x => x.MapFrom(y => DateTime.Now))
+                .ForMember(x => x.Date, x => x.MapFrom(y => y.Date))
                 .ForMember(x => x.IsModified, x => x.MapFrom(y => !y.IsRx))
                 .ForMember(x => x.TimePassed, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.TimePassed.Split(':')[0]), int.Parse(y.TimePassed.Split(':')[1]))));
         }

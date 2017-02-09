@@ -4,6 +4,7 @@
     self.canSeeTotalRounds = ko.observable(false);
     self.canSeePassedDistance = ko.observable(false);
     self.canSeeTotalTime = ko.observable(false);
+    self.date = lightModel.date;
 
     self.logWorkoutText = ko.observable(lightModel.logWorkoutText);
 
@@ -97,7 +98,8 @@
             timePassed: self.totalTime(),
             distance: self.distance(),
             wasFinished: self.wasFinished(),
-            isRx: self.isRx()
+            isRx: self.isRx(),
+            date: self.date
         };
         return model;
     };
