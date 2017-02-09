@@ -22,7 +22,8 @@ namespace CrossfitDiary.Web.Mappings
 
             CreateMap<CrossfitterWorkout, ToLogWorkoutViewModel>()
                 .ForMember(x => x.SelectedWorkoutName, x => x.MapFrom(y => y.RoutineComplex.Title))
-                .ForMember(x => x.SelectedWorkoutId, x => x.MapFrom(y => y.RoutineComplex.Id));
+                .ForMember(x => x.SelectedWorkoutId, x => x.MapFrom(y => y.RoutineComplex.Id))
+                .ForMember(x => x.CrossfitterWorkoutId, x => x.MapFrom(y => y.Id));
 
             CreateMap<RoutineComplex, WorkoutViewModel>()
                 .ForMember(x => x.WorkoutTypeViewModel, x => x.MapFrom(y => y.ComplexType))
