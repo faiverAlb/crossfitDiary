@@ -32,7 +32,7 @@
                                 <div class="workout clearfix">
                                     <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
                                     <div class="pull-right">
-                                        <a class="btn btn-success btn-xs" title="Log workout" data-bind="attr: { 'href': '@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)?date=' + $parent.displayDate+'&workoutId='+ $data.selectedWorkoutId}">
+                                        <a class="btn btn-success btn-xs" title="Log workout" data-bind="attr: { 'href': '@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)?date=' + $parent.displayDate+'&crossfitterWorkoutId='+ $data.crossfitterWorkoutId}">
                                             <i class="fa fa-check" aria-hidden="true"></i>
                                         </a>
                                     </div>

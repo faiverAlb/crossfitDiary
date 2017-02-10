@@ -40,7 +40,7 @@ namespace CrossfitDiary.Web.Controllers
             return View(logWorkoutViewModel);
         }
 
-        public virtual ActionResult ManageWorkout(DateTime? date, int? workoutId)
+        public virtual ActionResult ManageWorkout(DateTime? date, int? crossfitterWorkoutId)
         {
             IEnumerable<ExerciseViewModel> viewModels = Mapper.Map<IEnumerable<ExerciseViewModel>>(_exerciseService.GetExercises());
             var model = new
@@ -49,7 +49,6 @@ namespace CrossfitDiary.Web.Controllers
                 workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key),
                 availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts()),
                 planDate = date?.ToShortDateString() ?? DateTime.Now.ToShortDateString(),
-                selectedWorkoutId = workoutId
             };
             
             return View(model);

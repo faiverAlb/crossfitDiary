@@ -52,6 +52,11 @@ namespace CrossfitDiary.Model
         public decimal? Weight { get; set; }
 
         /// <summary>
+        /// Calories to make
+        /// </summary>
+        public decimal? Calories { get; set; }
+
+        /// <summary>
         /// Specify does this exercise is alternative exercise (primarily used in EMOM/E2MOM)
         /// </summary>
         public bool IsAlternative { get; set; }

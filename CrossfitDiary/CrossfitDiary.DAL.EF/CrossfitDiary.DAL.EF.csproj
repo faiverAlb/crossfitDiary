@@ -89,7 +89,12 @@
     <Compile Include="DataContexts\CrossfitDiaryMigrations\201702030634196_AddIsPlanned.Designer.cs">
       <DependentUpon>201702030634196_AddIsPlanned.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201702091141347_Addcalories.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201702091141347_Addcalories.Designer.cs">
+      <DependentUpon>201702091141347_Addcalories.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder.cs" />
     <Compile Include="DataContexts\IdentityDbContext.cs" />
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
@@ -136,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201702030634196_AddIsPlanned.resx">
       <DependentUpon>201702030634196_AddIsPlanned.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201702091141347_Addcalories.resx">
+      <DependentUpon>201702091141347_Addcalories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

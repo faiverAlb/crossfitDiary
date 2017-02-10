@@ -63,6 +63,12 @@ namespace CrossfitDiary.Web.Mappings
                                 exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Weight).ExerciseMeasureType.Description;
                                 exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Weight).ExerciseMeasureType.ShortMeasureDescription;
                                 break;
+                            case MeasureType.Calories:
+                                exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Calories;
+                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Calories?.ToString();
+                                exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Calories).ExerciseMeasureType.Description;
+                                exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Calories).ExerciseMeasureType.ShortMeasureDescription;
+                                break;
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }

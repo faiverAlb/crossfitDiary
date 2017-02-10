@@ -34,6 +34,7 @@ namespace CrossfitDiary.Service
 
         public void LogWorkout(CrossfitterWorkout workoutToLog)
         {
+            workoutToLog.IsPlanned = false;
             _crossfitterWorkoutRepository.AddOrUpdate(workoutToLog);
             _unitOfWork.Commit();
         }
@@ -61,7 +62,7 @@ namespace CrossfitDiary.Service
 
         public List<CrossfitterWorkout> GetCrossfitterWorkouts(string userId, DateTime fromDate, DateTime dueDate)
         {
-            List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId && (fromDate < x.Date && x.Date <= dueDate)).ToList();
+            List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId && (fromDate.Date <= x.Date && x.Date <= dueDate.Date)).ToList();
             foreach (var workout in crossfitterWorkouts)
             {
                 if (workout.Distance.HasValue)

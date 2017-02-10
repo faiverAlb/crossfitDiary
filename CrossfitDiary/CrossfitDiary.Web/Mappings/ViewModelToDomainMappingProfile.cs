@@ -30,7 +30,8 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.Id, x => x.Ignore())
                 .ForMember(x => x.Count, opt => opt.ResolveUsing<CountResolver>())
                 .ForMember(x => x.Distance, opt => opt.ResolveUsing<DistanceResolver>())
-                .ForMember(x => x.Weight, opt => opt.ResolveUsing<WeightResolver>());
+                .ForMember(x => x.Weight, opt => opt.ResolveUsing<WeightResolver>())
+                .ForMember(x => x.Calories, opt => opt.ResolveUsing<CaloriesResolver>());
 
             CreateMap<ToLogWorkoutViewModel, CrossfitterWorkout>()
                 .ForMember(x => x.RoutineComplexId, x => x.MapFrom(y => y.SelectedWorkoutId))
@@ -68,6 +69,16 @@ namespace CrossfitDiary.Web.Mappings
         public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
         {
             ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Weight);
+            if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
+                return null;
+            return decimal.Parse(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
+        }
+    }
+    public class CaloriesResolver : IValueResolver<ExerciseViewModel, RoutineSimple, decimal?>
+    {
+        public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
+        {
+            ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Calories);
             if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
                 return null;
             return decimal.Parse(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
