@@ -25,7 +25,11 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
             context.Commit();
             GetInitialRoutines(context).ForEach(x => context.ComplexRoutines.AddOrUpdate(y => y.Title,x));
             context.Commit();
+
             ExerciseSeeder.GetAdditionalExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+            context.Commit();
+
+            ExerciseSeeder.GetMoreExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
             context.Commit();
         }
 
