@@ -1,37 +1,55 @@
-var modalLoading;
 var CrossfitterService = (function () {
     function CrossfitterService(pathToApp) {
+        var _this = this;
         this.pathToApp = pathToApp;
         this.createWorkout = function (model) {
-            modalLoading.init(true);
-            return $.ajax({
-                type: 'POST',
-                url: this.pathToApp + "api/createWorkout",
-                data: model,
-                async: false
-            }).done(function () {
-                modalLoading.init(false);
+            return Q.Promise(function (resolve, reject) {
+                return $.ajax({
+                    url: _this.pathToApp + "api/createWorkout",
+                    method: 'POST',
+                    success: function (data) { return resolve(data); },
+                    error: function (error) { return reject(error); },
+                    data: model
+                });
+            }).finally(function () {
                 window.location.href = "/Home";
             });
         };
         this.logWorkout = function (model) {
-            modalLoading.init(true);
-            return $.post({
-                url: this.pathToApp + "api/logWorkout",
-                data: model
-            }).done(function () {
-                modalLoading.init(false);
+            return Q.Promise(function (resolve, reject) {
+                return $.ajax({
+                    url: _this.pathToApp + "api/logWorkout",
+                    method: "POST",
+                    success: function (data) { return resolve(data); },
+                    error: function (error) { return reject(error); },
+                    data: model
+                });
+            }).finally(function () {
                 window.location.href = "/Home";
             });
         };
         this.createAndLogWorkout = function (model) {
-            modalLoading.init(true);
-            return $.post({
-                url: this.pathToApp + "api/createAndLogNewWorkout",
-                data: model
-            }).done(function () {
-                modalLoading.init(false);
+            return Q.Promise(function (resolve, reject) {
+                return $.ajax({
+                    url: _this.pathToApp + "api/createAndLogNewWorkout",
+                    method: "POST",
+                    success: function (data) { return resolve(data); },
+                    error: function (error) { return reject(error); },
+                    data: model
+                });
+            }).finally(function () {
                 window.location.href = "/Home";
+            });
+        };
+        this.getAvailableWorkouts = function () {
+            return Q.Promise(function (resolve, reject) {
+                return $.ajax({
+                    url: _this.pathToApp + "api/getAvailableWorkouts",
+                    method: "GET",
+                    success: function (data) { return resolve(data); },
+                    error: function (error) { return reject(error); }
+                });
+            }).finally(function () {
             });
         };
     }

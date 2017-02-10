@@ -1,8 +1,11 @@
-﻿using System.Web;
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
 using System.Web.Http;
 using AutoMapper;
 using CrossfitDiary.Model;
 using CrossfitDiary.Service;
+using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.Configuration;
 using CrossfitDiary.Web.ViewModels;
 using Microsoft.AspNet.Identity;
@@ -16,12 +19,34 @@ namespace CrossfitDiary.Web.Api
     {
         private readonly CrossfitterService _crossfitterService;
         private readonly ApplicationUserManager _applicationUserManager;
+        private readonly IWorkoutService _workoutService;
 
-        public WorkoutController(CrossfitterService crossfitterService, ApplicationUserManager applicationUserManager)
+        public WorkoutController(CrossfitterService crossfitterService, ApplicationUserManager applicationUserManager, IWorkoutService workoutService)
         {
             _crossfitterService = crossfitterService;
             _applicationUserManager = applicationUserManager;
+            _workoutService = workoutService;
         }
+
+        /// <summary>
+        /// Get available workouts
+        /// </summary>
+        /// <returns>All available workouts</returns>
+        [HttpGet]
+        [Route("getAvailableWorkouts")]
+        public IHttpActionResult GetAvailableWorkouts()
+        {
+            try
+            {
+                var availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts());
+                return Ok(availableWorkouts);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
 
         /// <summary>
         /// Create workout by viewmodel
