@@ -48,8 +48,8 @@
             window.location.href = "/Home";
         });
     };
-    getAvailableWorkouts = () => {
 
+    getAvailableWorkouts = () => {
         return Q.Promise((resolve, reject) => {
             return $.ajax({
                 url: this.pathToApp + "api/getAvailableWorkouts",
@@ -60,6 +60,18 @@
         }).finally(() => {
 
         });
-    }
+    };
+
+    getExercises = () => {
+        return Q.Promise((resolve, reject) => {
+            return $.ajax({
+                url: this.pathToApp + "api/getExercises",
+                method: "GET",
+                success: (data) => resolve(data),
+                error: (error) => reject(error)
+            });
+        }).finally(() => {
+        });
+    };
 
 }

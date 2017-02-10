@@ -52,6 +52,17 @@ var CrossfitterService = (function () {
             }).finally(function () {
             });
         };
+        this.getExercises = function () {
+            return Q.Promise(function (resolve, reject) {
+                return $.ajax({
+                    url: _this.pathToApp + "api/getExercises",
+                    method: "GET",
+                    success: function (data) { return resolve(data); },
+                    error: function (error) { return reject(error); }
+                });
+            }).finally(function () {
+            });
+        };
     }
     return CrossfitterService;
 }());

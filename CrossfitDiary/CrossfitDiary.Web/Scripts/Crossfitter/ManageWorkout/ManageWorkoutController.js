@@ -90,7 +90,7 @@
             selectedWorkoutType: newValue.selectedWorkoutType(),
             simpleRoutines: newValue.simpleRoutines(),
             selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout,
-            logWorkoutText: "Log selected workout"
+            logWorkoutText: "Log workout"
         };
 
         createLogController(lightLogModel);
@@ -121,21 +121,6 @@
     ko.computed(function () {
         self.isAnyContainersVisible(self.logWorkoutController() != null && (self.chooseExistingWorkoutController.selectedWorkout() || self.createWorkoutController.hasAnyRoutines()));
     });
-
-    function init() {
-        if (self.withoutPreparedWorkout === false) {
-            var lightLogModel = {
-                selectedWorkoutType: self.chooseExistingWorkoutController.workoutToDisplay().selectedWorkoutType(),
-                simpleRoutines: self.chooseExistingWorkoutController.workoutToDisplay().simpleRoutines(),
-                selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout,
-                logWorkoutText: "Log selected workout"
-            };
-
-            createLogController(lightLogModel);
-        }  
-    };
-
-    init();
 
     return self;
 };

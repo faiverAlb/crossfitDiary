@@ -42,20 +42,21 @@
     function loadAvailableWorkouts() {
         self.service.getAvailableWorkouts().then(function (availableWorkouts) {
             self.availableWorkouts(availableWorkouts);
+
+            if (self.hasPredefinedWorkout) {
+                var foundWorkout = ko.utils.arrayFirst(self.availableWorkouts(), function (item) {
+                    return item.id == parameters.viewModel.crossfitterWorkout.selectedWorkoutId;
+                });
+
+                if (foundWorkout) {
+                    self.selectedWorkout(foundWorkout);
+                }
+            }
         });
     };
 
     function init() {
         loadAvailableWorkouts();
-        if (self.hasPredefinedWorkout) {
-            var foundWorkout = ko.utils.arrayFirst(self.availableWorkouts(), function (item) {
-                return item.id == parameters.viewModel.crossfitterWorkout.selectedWorkoutId;
-            });
-
-            if (foundWorkout) {
-                self.selectedWorkout(foundWorkout);
-            }
-        }  
     };
 
     init();

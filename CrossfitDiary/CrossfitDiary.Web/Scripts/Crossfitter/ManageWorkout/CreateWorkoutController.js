@@ -1,19 +1,15 @@
 ﻿var CreateWorkoutController = function (parameters) {
     var self = new CrossfitterController(parameters);
-    self.exercises = ko.observableArray(parameters.viewModel.exercises);
+    self.exercises = ko.observableArray();
+    self.alternativeExercises = ko.observableArray();
+
     self.service = new CrossfitterService(parameters.pathToApp);
 
     self.hasAnyRoutines = ko.computed(function() {
         return self.simpleRoutines().length > 0;
     });
 
-    //  HACK for copy
-    var alternativeExercises = JSON.parse(JSON.stringify(parameters.viewModel.exercises));
-
-    for (var i = 0; i < alternativeExercises.length; i++) {
-        alternativeExercises[i].isAlternative = true;
-    }
-    self.alternativeExercises = ko.observableArray(alternativeExercises);
+  
 
     self.selectedExercise = ko.observable();
     self.selectedAlternativeExercise = ko.observable();
@@ -72,6 +68,26 @@
     self.getCreateWorkoutModel = function() {
         return self.toJSON();
     }
+
+    function loadExercises() {
+        self.service.getExercises().then(function (exercises) {
+            self.exercises(exercises);
+
+            //  HACK for copy
+            var alternativeExercises = JSON.parse(JSON.stringify(exercises));
+            for (var i = 0; i < alternativeExercises.length; i++) {
+                alternativeExercises[i].isAlternative = true;
+            }
+            self.alternativeExercises(alternativeExercises);
+        });
+
+    };
+
+    function init() {
+        loadExercises();
+    };
+
+    init();
 
     return self;
 };
