@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="panel panel-borderless">
-            <div class="existing-workouts-container" id="ExistingWorkoutsContainer" data-bind="css:{collapse: withoutPreparedWorkout()}">
+            <div class="existing-workouts-container" id="ExistingWorkoutsContainer" data-bind="css:{collapse: withoutPreparedWorkout}">
                 <div data-bind="template: { name: 'existing-workouts-template', data: chooseExistingWorkoutController }"></div>
             </div>
         </div>
@@ -31,7 +31,7 @@
         </div>
 
         <div class="panel panel-borderless">
-            <div class="log-workout-container" id="LogWorkoutContainer" data-bind="with:logWorkoutController, css:{collapse: withoutPreparedWorkout()}" >
+            <div class="log-workout-container" id="LogWorkoutContainer" data-bind="with:logWorkoutController, css:{collapse: withoutPreparedWorkout}" >
                 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
             </div>
         </div>

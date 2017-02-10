@@ -5,7 +5,8 @@
     self.availableWorkouts = ko.observableArray(parameters.viewModel.availableWorkouts);
     self.selectedWorkout = ko.observable();
     self.isReadOnlyMode = true;
-    self.hasPredefinedWorkout = parameters.viewModel.selectedWorkoutId != null;
+
+    self.hasPredefinedWorkout = parameters.viewModel.crossfitterWorkout != null;
 
     self.workoutToDisplay = ko.observable();
 
@@ -40,7 +41,7 @@
     function init() {
         if (self.hasPredefinedWorkout) {
             var foundWorkout = ko.utils.arrayFirst(self.availableWorkouts(), function (item) {
-                return item.id == parameters.viewModel.selectedWorkoutId;
+                return item.id == parameters.viewModel.crossfitterWorkout.selectedWorkoutId;
             });
 
             if (foundWorkout) {

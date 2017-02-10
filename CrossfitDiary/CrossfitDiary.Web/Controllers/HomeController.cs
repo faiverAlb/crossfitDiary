@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
-using CrossfitDiary.Model;
-using CrossfitDiary.Service.Interfaces;
+using CrossfitDiary.Service;
 using CrossfitDiary.Web.Configuration;
 using CrossfitDiary.Web.MvcHelpers;
 using CrossfitDiary.Web.ViewModels;
@@ -15,10 +14,10 @@ namespace CrossfitDiary.Web.Controllers
 //    [RequireHttps]
     public partial class HomeController : Controller
     {
-        private readonly ICrossfitterService _crossfitterService;
+        private readonly CrossfitterService _crossfitterService;
         private readonly ApplicationUserManager _applicationUserManager;
 
-        public HomeController(ICrossfitterService crossfitterService, ApplicationUserManager applicationUserManager)
+        public HomeController(CrossfitterService crossfitterService, ApplicationUserManager applicationUserManager)
         {
             _crossfitterService = crossfitterService;
             _applicationUserManager = applicationUserManager;

@@ -56,6 +56,7 @@ namespace CrossfitDiary.Web
             builder.RegisterAssemblyTypes(typeof (ExerciseService).Assembly)
                 .Where(t => t.Name.EndsWith("Service"))
                 .AsImplementedInterfaces()
+                .AsSelf()
                 .InstancePerRequest();
 
 

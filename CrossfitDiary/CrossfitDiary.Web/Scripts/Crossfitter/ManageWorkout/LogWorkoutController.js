@@ -93,6 +93,7 @@
     self.toJSON = function() {
         var model = {
             selectedWorkoutId: lightModel.selectedWorkout ? lightModel.selectedWorkout().id : null,
+            crossfitterWorkoutId: lightModel.crossfitterWorkoutId,
             roundsFinished: self.totalRoundsFinished(),
             partialRepsFinished: self.partialRepsFinished(),
             timePassed: self.totalTime(),

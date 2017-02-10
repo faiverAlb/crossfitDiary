@@ -8,7 +8,9 @@
     self.isAnyContainersVisible = ko.observable(false);
     self.wantToPlanWorkout = ko.observable(false);
 
-    self.withoutPreparedWorkout = ko.observable(parameters.viewModel.selectedWorkoutId == null);
+    self.withoutPreparedWorkout = parameters.viewModel.crossfitterWorkout == null;
+    self.crossfitterWorkout = parameters.viewModel.crossfitterWorkout;
+
     self.plannedDate = ko.observable(new Date(parameters.viewModel.planDate))
         .extend({
             required: {
@@ -72,6 +74,11 @@
 
 
     var createLogController = function (lightLogModel) {
+        lightLogModel.crossfitterWorkoutId = self.crossfitterWorkout != null
+            ? self.crossfitterWorkout.crossfitterWorkoutId
+            : null;
+        lightLogModel.date = parameters.viewModel.planDate;
+
         self.logWorkoutController(new LogWorkoutController(lightLogModel, logFunction));
     };
 
@@ -83,8 +90,7 @@
             selectedWorkoutType: newValue.selectedWorkoutType(),
             simpleRoutines: newValue.simpleRoutines(),
             selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout,
-            logWorkoutText: "Log selected workout",
-            date: parameters.viewModel.planDate
+            logWorkoutText: "Log selected workout"
         };
 
         createLogController(lightLogModel);
@@ -97,8 +103,7 @@
         var lightLogModel = {
             selectedWorkoutType: self.createWorkoutController.selectedWorkoutType(),
             simpleRoutines: self.createWorkoutController.simpleRoutines(),
-            logWorkoutText: "Create and log workout",
-            date: parameters.viewModel.planDate
+            logWorkoutText: "Create and log workout"
         };
         createLogController(lightLogModel);
     });
@@ -118,13 +123,12 @@
     });
 
     function init() {
-        if (self.withoutPreparedWorkout() == false) {
+        if (self.withoutPreparedWorkout === false) {
             var lightLogModel = {
                 selectedWorkoutType: self.chooseExistingWorkoutController.workoutToDisplay().selectedWorkoutType(),
                 simpleRoutines: self.chooseExistingWorkoutController.workoutToDisplay().simpleRoutines(),
                 selectedWorkout: self.chooseExistingWorkoutController.selectedWorkout,
-                logWorkoutText: "Log selected workout",
-                date: parameters.viewModel.planDate
+                logWorkoutText: "Log selected workout"
             };
 
             createLogController(lightLogModel);

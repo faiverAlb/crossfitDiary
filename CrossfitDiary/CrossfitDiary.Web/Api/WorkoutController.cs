@@ -2,11 +2,10 @@
 using System.Web.Http;
 using AutoMapper;
 using CrossfitDiary.Model;
-using CrossfitDiary.Service.Interfaces;
+using CrossfitDiary.Service;
 using CrossfitDiary.Web.Configuration;
 using CrossfitDiary.Web.ViewModels;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace CrossfitDiary.Web.Api
 {
@@ -15,10 +14,10 @@ namespace CrossfitDiary.Web.Api
     [RoutePrefix("api")]
     public class WorkoutController : ApiController
     {
-        private readonly ICrossfitterService _crossfitterService;
+        private readonly CrossfitterService _crossfitterService;
         private readonly ApplicationUserManager _applicationUserManager;
 
-        public WorkoutController(ICrossfitterService crossfitterService, ApplicationUserManager applicationUserManager)
+        public WorkoutController(CrossfitterService crossfitterService, ApplicationUserManager applicationUserManager)
         {
             _crossfitterService = crossfitterService;
             _applicationUserManager = applicationUserManager;

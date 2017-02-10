@@ -4,11 +4,10 @@ using System.Linq;
 using CrossfitDiary.DAL.EF.Infrastructure;
 using CrossfitDiary.DAL.EF.Repositories;
 using CrossfitDiary.Model;
-using CrossfitDiary.Service.Interfaces;
 
 namespace CrossfitDiary.Service
 {
-    public class CrossfitterService : ICrossfitterService
+    public class CrossfitterService
     {
         private readonly IRoutineComplexRepository _routineComplexRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -34,7 +33,6 @@ namespace CrossfitDiary.Service
 
         public void LogWorkout(CrossfitterWorkout workoutToLog)
         {
-            workoutToLog.IsPlanned = false;
             _crossfitterWorkoutRepository.AddOrUpdate(workoutToLog);
             _unitOfWork.Commit();
         }
@@ -64,30 +62,42 @@ namespace CrossfitDiary.Service
         {
             List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId && (fromDate.Date <= x.Date && x.Date <= dueDate.Date)).ToList();
             foreach (var workout in crossfitterWorkouts)
+                PrepareWorkout(workout);
+
+            return crossfitterWorkouts;
+        }
+
+        private void PrepareWorkout(CrossfitterWorkout workout)
+        {
+            if (workout.Distance.HasValue)
+                workout.MeasureDisplayName = $"{workout.Distance.Value}m";
+            if (workout.RoundsFinished.HasValue)
             {
-                if (workout.Distance.HasValue)
-                    workout.MeasureDisplayName = $"{workout.Distance.Value}m";
-                if (workout.RoundsFinished.HasValue)
-                { 
-                    workout.MeasureDisplayName = $"{workout.RoundsFinished.Value} rnds";
-                    if (workout.PartialRepsFinished.HasValue)
-                    {
-                        workout.MeasureDisplayName = $"{workout.MeasureDisplayName} + {workout.PartialRepsFinished.Value}";
-                    }
-                }
-
-                if (workout.TimePassed.HasValue )
+                workout.MeasureDisplayName = $"{workout.RoundsFinished.Value} rnds";
+                if (workout.PartialRepsFinished.HasValue)
                 {
-                    workout.MeasureDisplayName = $"{workout.TimePassed.Value.Minutes}min";
-                    if (workout.TimePassed.Value.Seconds>0)
-                    {
-                        workout.MeasureDisplayName = $"{workout.MeasureDisplayName}+{workout.TimePassed.Value.Seconds}sec";
-                    }
+                    workout.MeasureDisplayName = $"{workout.MeasureDisplayName} + {workout.PartialRepsFinished.Value}";
+                }
+            }
 
+            if (workout.TimePassed.HasValue)
+            {
+                workout.MeasureDisplayName = $"{workout.TimePassed.Value.Minutes}min";
+                if (workout.TimePassed.Value.Seconds > 0)
+                {
+                    workout.MeasureDisplayName = $"{workout.MeasureDisplayName}+{workout.TimePassed.Value.Seconds}sec";
                 }
 
             }
-            return crossfitterWorkouts;
+        }
+
+        public CrossfitterWorkout GetCrossfitterWorkout(string userId, int crossfitterWorkoutId)
+        {
+            CrossfitterWorkout crossfitterWorkout = _crossfitterWorkoutRepository.GetById(crossfitterWorkoutId);
+            if (crossfitterWorkout.Crossfitter.Id != userId)
+                return null;
+            PrepareWorkout(crossfitterWorkout);
+            return crossfitterWorkout;
         }
     }
 }

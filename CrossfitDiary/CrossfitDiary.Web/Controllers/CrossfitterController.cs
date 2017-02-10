@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using CrossfitDiary.Service;
 using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.MvcHelpers;
 using CrossfitDiary.Web.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Controllers
 {
     public partial class CrossfitterController : Controller
     {
+        private readonly CrossfitterService _crossfitterService;
         private readonly IExerciseService _exerciseService;
         private readonly IWorkoutService _workoutService;
 
-        public CrossfitterController(IExerciseService exerciseService, IWorkoutService workoutService)
+        public CrossfitterController(CrossfitterService crossfitterService, IExerciseService exerciseService, IWorkoutService workoutService)
         {
+            _crossfitterService = crossfitterService;
             _exerciseService = exerciseService;
             _workoutService = workoutService;
         }
@@ -49,6 +53,7 @@ namespace CrossfitDiary.Web.Controllers
                 workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key),
                 availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts()),
                 planDate = date?.ToShortDateString() ?? DateTime.Now.ToShortDateString(),
+                crossfitterWorkout = crossfitterWorkoutId.HasValue? Mapper.Map<ToLogWorkoutViewModel>(_crossfitterService.GetCrossfitterWorkout(HttpContext.User.Identity.GetUserId(), crossfitterWorkoutId.Value)) : null
             };
             
             return View(model);
