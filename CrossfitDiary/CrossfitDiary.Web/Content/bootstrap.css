@@ -8421,6 +8421,13 @@ select.selectpicker {
   padding-bottom: 6px;
 }
 /* Home page */
+.home-container .activities-calendar .grid-calendar > .row.match-my-cols {
+  overflow: hidden;
+}
+.home-container .activities-calendar .grid-calendar > .row.match-my-cols [class*="col-"] {
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}
 @media (min-width: 992px) {
   .home-container .activities-calendar .grid-calendar .seven-cols .col-md-1,
   .home-container .activities-calendar .grid-calendar .seven-cols .col-sm-1,
@@ -8469,10 +8476,11 @@ select.selectpicker {
   border-bottom: none;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .action-panel {
-  margin-bottom: 5px;
+  padding: 30px 16px 0 0;
 }
 .home-container .activities-calendar .grid-calendar .grid-cell .action-panel .action-button {
   margin-left: 5px;
+  margin-bottom: 5px;
 }
 /* bootstrap-datepicker from http://eonasdan.github.io/bootstrap-datetimepicker */
 /*!

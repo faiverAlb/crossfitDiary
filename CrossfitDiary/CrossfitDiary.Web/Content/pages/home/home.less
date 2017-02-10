@@ -2,6 +2,15 @@
     .activities-calendar {
         .grid-calendar {
 
+            > .row.match-my-cols {
+                overflow: hidden;
+            }
+
+            > .row.match-my-cols [class*="col-"] {
+                margin-bottom: -99999px;
+                padding-bottom: 99999px;
+            }
+
             @media (min-width: 992px) {
                 .seven-cols .col-md-1,
                 .seven-cols .col-sm-1,
@@ -49,7 +58,7 @@
                             width: 60px;
                             margin-top: -10px;
                             background-color: #f6f6f6;
-                            
+
                         }
 
                         .workout {
@@ -66,9 +75,11 @@
                 }
 
                 .action-panel {
-                    margin-bottom: 5px;
+                    padding: 30px @padding-large-horizontal 0 0;
+
                     .action-button {
                         margin-left: 5px;
+                        margin-bottom: 5px;
                     }
                 }
             }
