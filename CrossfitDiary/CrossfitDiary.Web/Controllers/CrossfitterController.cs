@@ -49,7 +49,7 @@ namespace CrossfitDiary.Web.Controllers
             var model = new
             {
                 workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key),
-                planDate = date?.ToShortDateString() ?? DateTime.Now.ToShortDateString(),
+                planDate = date?.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz") ?? DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                 crossfitterWorkout = crossfitterWorkoutId.HasValue? Mapper.Map<ToLogWorkoutViewModel>(_crossfitterService.GetCrossfitterWorkout(HttpContext.User.Identity.GetUserId(), crossfitterWorkoutId.Value)) : null
             };
             
