@@ -18,7 +18,13 @@ namespace CrossfitDiary.Web.Api
         }
 
         //TODO: Add pagination
-        public IHttpActionResult Get()
+        /// <summary>
+        /// Get exercises
+        /// </summary>
+        /// <returns>All available exercises</returns>
+        [HttpGet]
+        [Route("getExercises")]
+        public IHttpActionResult GetExercises()
         {
             try
             {

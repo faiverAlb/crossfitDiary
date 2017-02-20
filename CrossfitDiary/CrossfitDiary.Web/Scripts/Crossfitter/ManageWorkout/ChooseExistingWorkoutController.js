@@ -2,7 +2,8 @@
 
     var self = this;
     self.service = new CrossfitterService(parameters.pathToApp);
-    self.availableWorkouts = ko.observableArray(parameters.viewModel.availableWorkouts);
+    self.availableWorkouts = ko.observableArray();
+
     self.selectedWorkout = ko.observable();
     self.isReadOnlyMode = true;
 
@@ -38,16 +39,24 @@
         return model;
     };
 
-    function init() {
-        if (self.hasPredefinedWorkout) {
-            var foundWorkout = ko.utils.arrayFirst(self.availableWorkouts(), function (item) {
-                return item.id == parameters.viewModel.crossfitterWorkout.selectedWorkoutId;
-            });
+    function loadAvailableWorkouts() {
+        self.service.getAvailableWorkouts().then(function (availableWorkouts) {
+            self.availableWorkouts(availableWorkouts);
 
-            if (foundWorkout) {
-                self.selectedWorkout(foundWorkout);
+            if (self.hasPredefinedWorkout) {
+                var foundWorkout = ko.utils.arrayFirst(self.availableWorkouts(), function (item) {
+                    return item.id == parameters.viewModel.crossfitterWorkout.selectedWorkoutId;
+                });
+
+                if (foundWorkout) {
+                    self.selectedWorkout(foundWorkout);
+                }
             }
-        }  
+        });
+    };
+
+    function init() {
+        loadAvailableWorkouts();
     };
 
     init();
