@@ -268,35 +268,157 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations.Seeders
                 new Exercise {Title = "Shoulder Press (DB/KB)",Abbreviation = "ShPs(DB/KB)",ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight) },
             };
         }
+
         internal static List<Exercise> GetMoreExercises(CrossfitDiaryDbContext context)
         {
-            if (context.Exercises.Any(x => x.Title.ToLower() == "Wallball".ToLower()))
-                return new List<Exercise>();
-
-
-            return new List<Exercise>
+            var exercisesToAdd = new List<Exercise>();
+            if (context.Exercises.Any(x => x.Title.ToLower() != "Squat Clean".ToLower()))
             {
-                new Exercise {Title = "Wallball",Abbreviation = "WB", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Ring Row",Abbreviation = "Ring Row", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count)},
-                new Exercise {Title = "Kettlebell Thruster",Abbreviation = "KB Thruster", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Triple unders",Abbreviation = "TU", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count)},
-                new Exercise {Title = "Dip",Abbreviation = "Dip", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Jumping Jack",Abbreviation = "JJ", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Kettlebell Snatch",Abbreviation = "KB Snatch", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Burpee over rower",Abbreviation = "Burpee OvR", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Burpee over barbell",Abbreviation = "Burpee OvBr", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Burpee box jump",Abbreviation = "Burpee BJ", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Burpee box jump over",Abbreviation = "Burpee BJ Ov", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Lap Run",Abbreviation = "Lap Run", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Bear Crawl(Lap)",Abbreviation = "Bear Crawl(Lap)", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Overhead Kettlebell/Dumbbell Lunges(Lap)",Abbreviation = "OH lunges (KB/DB)(Lap)", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Overhead Kettlebell/Dumbbell Lunges",Abbreviation = "OH lunges (KB/DB)", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Distance,MeasureType.Weight)},
-                new Exercise {Title = "Cluster",Abbreviation = "Cluster", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Pull-ups (rings)",Abbreviation = "PU(rings)", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Push-ups (rings)",Abbreviation = "PshU(rings)", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Hyperextensions (back extensions)",Abbreviation = "B.ext", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count,MeasureType.Weight)},
-                new Exercise {Title = "Jumping Lunges",Abbreviation = "JL", ExerciseMeasures = GetExerciseMeasures(context,MeasureType.Count,MeasureType.Weight)},
-            };
+                exercisesToAdd.AddRange(new List<Exercise>
+                {
+                    new Exercise
+                    {
+                        Title = "Squat Clean",
+                        Abbreviation = "Sq.Clean",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Hang Clean",
+                        Abbreviation = "Hang Clean",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    }
+                });
+            }
+
+            if (context.Exercises.Any(x => x.Title.ToLower() != "Wallball".ToLower()))
+            {
+                exercisesToAdd.AddRange(new List<Exercise>
+                {
+                    new Exercise
+                    {
+                        Title = "Wallball",
+                        Abbreviation = "WB",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Ring Row",
+                        Abbreviation = "Ring Row",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count)
+                    },
+                    new Exercise
+                    {
+                        Title = "Kettlebell Thruster",
+                        Abbreviation = "KB Thruster",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Triple unders",
+                        Abbreviation = "TU",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count)
+                    },
+                    new Exercise
+                    {
+                        Title = "Dip",
+                        Abbreviation = "Dip",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Jumping Jack",
+                        Abbreviation = "JJ",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Kettlebell Snatch",
+                        Abbreviation = "KB Snatch",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Burpee over rower",
+                        Abbreviation = "Burpee OvR",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Burpee over barbell",
+                        Abbreviation = "Burpee OvBr",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Burpee box jump",
+                        Abbreviation = "Burpee BJ",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Burpee box jump over",
+                        Abbreviation = "Burpee BJ Ov",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Lap Run",
+                        Abbreviation = "Lap Run",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Bear Crawl(Lap)",
+                        Abbreviation = "Bear Crawl(Lap)",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Overhead Kettlebell/Dumbbell Lunges(Lap)",
+                        Abbreviation = "OH lunges (KB/DB)(Lap)",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Overhead Kettlebell/Dumbbell Lunges",
+                        Abbreviation = "OH lunges (KB/DB)",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Distance, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Cluster",
+                        Abbreviation = "Cluster",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Pull-ups (rings)",
+                        Abbreviation = "PU(rings)",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Push-ups (rings)",
+                        Abbreviation = "PshU(rings)",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Hyperextensions (back extensions)",
+                        Abbreviation = "B.ext",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                    new Exercise
+                    {
+                        Title = "Jumping Lunges",
+                        Abbreviation = "JL",
+                        ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)
+                    },
+                });
+            }
+
+            return exercisesToAdd;
         }
 
     }
