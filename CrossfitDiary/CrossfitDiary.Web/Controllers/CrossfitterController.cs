@@ -52,7 +52,7 @@ namespace CrossfitDiary.Web.Controllers
                 planDate = date?.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz") ?? DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                 crossfitterWorkout = crossfitterWorkoutId.HasValue? Mapper.Map<ToLogWorkoutViewModel>(_crossfitterService.GetCrossfitterWorkout(HttpContext.User.Identity.GetUserId(), crossfitterWorkoutId.Value)) : null
             };
-            
+             
             return View(model);
         }
         
