@@ -26,8 +26,8 @@
     <div class="want-to-log-container" style="display: none" data-bind="visible:isAnyContainersVisible" id="WantToLogAccordion">
         <div class="log-or-save-buttons text-center" data-bind="if: withoutPreparedWorkout">
             <button type="button" class="btn btn-primary btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#LogWorkoutContainer" data-bind="click:logWorkoutContainerClick">Log your workout?</button>
-            or
-            <button type="button" class="btn btn-success btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#PlanWorkoutContainer" data-bind="click:planWorkoutContainerClick">Plan the workout?</button>
+@*            or*@
+@*            <button type="button" class="btn btn-success btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#PlanWorkoutContainer" data-bind="click:planWorkoutContainerClick">Plan the workout?</button>*@
         </div>
 
         <div class="panel panel-borderless">
@@ -35,37 +35,37 @@
                 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
             </div>
         </div>
-        <div class="panel panel-borderless" data-bind="if: withoutPreparedWorkout">
-            <div class="plan-workout-container collapse" id="PlanWorkoutContainer">
-                
-                <div class="col-md-12">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            Plan workout!
-                        </div>
-                        <div class="panel-body">
-                            <div class="text-right">
-                                <form class="form-inline data-selector-container">
-                                    <div class="form-group" data-bind="validationElement: plannedDate">
-                                        <label>Plan your workout here <i class="fa fa-arrow-right" aria-hidden="true"></i></label>
-                                        <div class="input-group date pointer" data-bind="datepicker:plannedDate">
-                                            <input class="form-control" readonly="readonly" placeholder="Date here" >
-                                            <div class="input-group-addon">
-                                                <span>
-                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <button type="button" class="btn btn-success btn-lg pull-right" data-bind="click: planWorkout, enable: plannedDate">Plan it!</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+@*        <div class="panel panel-borderless" data-bind="if: withoutPreparedWorkout">*@
+@*            <div class="plan-workout-container collapse" id="PlanWorkoutContainer">*@
+@*                *@
+@*                <div class="col-md-12">*@
+@*                    <div class="panel panel-success">*@
+@*                        <div class="panel-heading">*@
+@*                            Plan workout!*@
+@*                        </div>*@
+@*                        <div class="panel-body">*@
+@*                            <div class="text-right">*@
+@*                                <form class="form-inline data-selector-container">*@
+@*                                    <div class="form-group" data-bind="validationElement: plannedDate">*@
+@*                                        <label>Plan your workout here <i class="fa fa-arrow-right" aria-hidden="true"></i></label>*@
+@*                                        <div class="input-group date pointer" data-bind="datepicker:plannedDate">*@
+@*                                            <input class="form-control" readonly="readonly" placeholder="Date here" >*@
+@*                                            <div class="input-group-addon">*@
+@*                                                <span>*@
+@*                                                    <i class="fa fa-calendar" aria-hidden="true"></i>*@
+@*                                                </span>*@
+@*                                            </div>*@
+@*                                        </div>*@
+@*                                    </div>*@
+@*                                </form>*@
+@**@
+@*                                <button type="button" class="btn btn-success btn-lg pull-right" data-bind="click: planWorkout, enable: plannedDate">Plan it!</button>*@
+@*                            </div>*@
+@*                        </div>*@
+@*                    </div>*@
+@*                </div>*@
+@*            </div>*@
+@*        </div>*@
     </div>
 </div>
 

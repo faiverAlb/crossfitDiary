@@ -140,27 +140,10 @@ namespace Links
             public const string UrlPath = "~/Scripts/Crossfitter";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class CreateWorkout {
-                public const string UrlPath = "~/Scripts/Crossfitter/CreateWorkout";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-                public static readonly string CreateWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CreateWorkoutController.min.js") ? Url("CreateWorkoutController.min.js") : Url("CreateWorkoutController.js");
-            }
-        
             public static readonly string CrossfitterController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterController.min.js") ? Url("CrossfitterController.min.js") : Url("CrossfitterController.js");
-            public static readonly string CrossfitterService_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterService.min.js") ? Url("CrossfitterService.min.js") : Url("CrossfitterService.js");
             public static readonly string CrossfitterService_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterService.min.js") ? Url("CrossfitterService.min.js") : Url("CrossfitterService.js");
             public static readonly string ExerciseMeasureType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureType.min.js") ? Url("ExerciseMeasureType.min.js") : Url("ExerciseMeasureType.js");
             public static readonly string ExerciseMeasureTypeValue_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureTypeValue.min.js") ? Url("ExerciseMeasureTypeValue.min.js") : Url("ExerciseMeasureTypeValue.js");
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class LogWorkout {
-                public const string UrlPath = "~/Scripts/Crossfitter/LogWorkout";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-                public static readonly string LogWorkoutController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/LogWorkoutController.min.js") ? Url("LogWorkoutController.min.js") : Url("LogWorkoutController.js");
-            }
-        
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class ManageWorkout {
                 public const string UrlPath = "~/Scripts/Crossfitter/ManageWorkout";
@@ -209,7 +192,6 @@ namespace Links
             public const string UrlPath = "~/Scripts/Spinner";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-            public static readonly string modalLoading_min_js = Url("modalLoading.min.js");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -231,6 +213,16 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 public static readonly string knockout_d_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/knockout.d.min.js") ? Url("knockout.d.min.js") : Url("knockout.d.js");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class q {
+                public const string UrlPath = "~/Scripts/typings/q";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string Q_d_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/Q.d.min.js") ? Url("Q.d.min.js") : Url("Q.d.js");
+                public static readonly string q_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/q.min.js") ? Url("q.min.js") : Url("q.js");
+                public static readonly string q_min_js = Url("q.min.js");
             }
         
         }
@@ -589,20 +581,6 @@ namespace Links
             }
             public static partial class Crossfitter 
             {
-                public static partial class CreateWorkout 
-                {
-                    public static class Assets
-                    {
-                        public const string CreateWorkoutController_js = "~/Scripts/Crossfitter/CreateWorkout/CreateWorkoutController.js"; 
-                    }
-                }
-                public static partial class LogWorkout 
-                {
-                    public static class Assets
-                    {
-                        public const string LogWorkoutController_js = "~/Scripts/Crossfitter/LogWorkout/LogWorkoutController.js"; 
-                    }
-                }
                 public static partial class ManageWorkout 
                 {
                     public static class Assets
@@ -616,7 +594,6 @@ namespace Links
                 public static class Assets
                 {
                     public const string CrossfitterController_js = "~/Scripts/Crossfitter/CrossfitterController.js"; 
-                    public const string CrossfitterService_js = "~/Scripts/Crossfitter/CrossfitterService.js"; 
                     public const string ExerciseMeasureType_js = "~/Scripts/Crossfitter/ExerciseMeasureType.js"; 
                     public const string ExerciseMeasureTypeValue_js = "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"; 
                     public const string SimpleRoutine_js = "~/Scripts/Crossfitter/SimpleRoutine.js"; 
@@ -640,7 +617,6 @@ namespace Links
             {
                 public static class Assets
                 {
-                    public const string modalLoading_min_js = "~/Scripts/Spinner/modalLoading.min.js"; 
                 }
             }
             public static partial class typings 
@@ -655,6 +631,14 @@ namespace Links
                 {
                     public static class Assets
                     {
+                    }
+                }
+                public static partial class q 
+                {
+                    public static class Assets
+                    {
+                        public const string q_js = "~/Scripts/typings/q/q.js"; 
+                        public const string q_min_js = "~/Scripts/typings/q/q.min.js"; 
                     }
                 }
                 public static class Assets
