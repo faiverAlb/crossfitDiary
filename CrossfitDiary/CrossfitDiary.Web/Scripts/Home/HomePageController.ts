@@ -1,7 +1,7 @@
 ﻿class HomePageController {
-    weekWorkouts:any;
+    allWorkouts:any;
 
-    constructor(public parameters: { viewModel: { weekWorkouts } }) {
-        this.weekWorkouts = this.parameters.viewModel.weekWorkouts;
+    constructor(public parameters: { viewModel: { allWorkouts } }) {
+        this.allWorkouts = this.parameters.viewModel.allWorkouts;
     }
 };

@@ -3,58 +3,45 @@
 }
 @model CrossfitDiary.Web.ViewModels.HomeViewModel
 
-<div class="row home-container">
-    <div class="">
+
+<div class="home-container">
+    <div class="row">
         <div class="container activities-calendar">
             <div class="grid-calendar">
-                <div class="row match-my-cols seven-cols" data-bind="foreach: weekWorkouts, visible:true" style="display: none" >
-                    <div class="col-md-1 grid-cell">
-                        <div data-bind="text:dayOfWeek"></div>
-                        <div class="content ">
-                            <div class="date" data-bind="text:displayDate"></div>
-                            <!-- ko if: doneWorkouts.length > 0-->
-                            <div class="empty-row"></div>
-                            <div class="workout-container">
-                                <div class="header">Done</div>
-                                <!-- ko foreach: doneWorkouts-->
-                                <div class="workout clearfix">
-                                    <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
-                                    <div class="pull-right" data-bind="text: measureDisplayName"></div>
-                                </div>
-                                <!--/ko-->
-                            </div>
-                            <!--/ko-->
-                            <!-- ko if: plannedWorkouts.length > 0-->
-                            <div class="empty-row"></div>
-                            <div class="workout-container">
-                                <div class="header">Planned</div>
-                                <!-- ko foreach: plannedWorkouts-->
-                                <div class="workout clearfix">
-                                    <div class="pull-left" data-bind="text: selectedWorkoutName"></div>
-                                    <div class="pull-right">
-                                        <a class="btn btn-success btn-xs" title="Log workout" data-bind="attr: { 'href': '@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)?date=' + $parent.displayDate+'&crossfitterWorkoutId='+ $data.crossfitterWorkoutId}">
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!--/ko-->
-                            </div>
-                            <!--/ko-->
-                            <div class="empty-row"></div>
-                        </div>
-                        <div class="row">
-                            <div class="action-panel clearfix">
-                                <a class="btn btn-primary btn-xs  pull-right action-button" title="Create/Log/Plan!" data-bind="attr: { 'href': '@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)?date=' + displayDate }">
-                                    <i class="fa fa-lg fa-magic" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
+                <div class="row" data-bind="foreach: allWorkouts, visible:true" style="display: none" >
+                    <div class="col-md-5 col-md-offset-5">
+                        <div data-bind="text:workouterName"></div>
+@*                        <div class="content ">*@
+@*                            <div class="date" data-bind="text:displayDate"></div>*@
+@*                            <!-- ko if: doneWorkouts.length > 0-->*@
+@*                            <div class="empty-row"></div>*@
+@*                            <div class="workout-container">*@
+@*                                <div class="header">Done</div>*@
+@*                                <!-- ko foreach: doneWorkouts-->*@
+@*                                <div class="workout clearfix">*@
+@*                                    <div class="pull-left" data-bind="text: selectedWorkoutName"></div>*@
+@*                                    <div class="pull-right" data-bind="text: measureDisplayName"></div>*@
+@*                                </div>*@
+@*                                <!--/ko-->*@
+@*                            </div>*@
+@*                            <!--/ko-->*@
+@*                            <div class="empty-row"></div>*@
+@*                        </div>*@
+@*                        <div class="row">*@
+@*                            <div class="action-panel clearfix">*@
+@*                                <a class="btn btn-primary btn-xs  pull-right action-button" title="Create/Log/Plan!" data-bind="attr: { 'href': '@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)?date=' + displayDate }">*@
+@*                                    <i class="fa fa-lg fa-magic" aria-hidden="true"></i>*@
+@*                                </a>*@
+@*                            </div>*@
+@*                        </div>*@
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 @section Scripts{
     @Scripts.Render("~/bundles/home")
