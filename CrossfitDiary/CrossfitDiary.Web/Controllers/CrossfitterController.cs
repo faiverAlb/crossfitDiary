@@ -35,14 +35,14 @@ namespace CrossfitDiary.Web.Controllers
             return View(model);
         }
 
-        public virtual ActionResult LogWorkout()
-        {
-            var logWorkoutViewModel = new LogWorkoutViewModel
-            {
-                AvailableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts())
-            };
-            return View(logWorkoutViewModel);
-        }
+//        public virtual ActionResult LogWorkout()
+//        {
+//            var logWorkoutViewModel = new LogWorkoutViewModel
+//            {
+//                AvailableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts())
+//            };
+//            return View(logWorkoutViewModel);
+//        }
 
         public virtual ActionResult ManageWorkout(DateTime? date, int? crossfitterWorkoutId)
         {

@@ -20,6 +20,8 @@ namespace CrossfitDiary.Model
 
         public string LastName { get; set; }
 
+        public string FullName => $"{LastName} {FirstName}";
+
 
         public virtual ICollection<CrossfitterWorkout> CrossfitterWorkout { get; set; }
 

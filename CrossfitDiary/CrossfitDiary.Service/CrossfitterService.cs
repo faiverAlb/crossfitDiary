@@ -66,6 +66,14 @@ namespace CrossfitDiary.Service
 
             return crossfitterWorkouts;
         }
+        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(DateTime fromDate, DateTime dueDate)
+        {
+            List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x =>(fromDate.Date <= x.Date && x.Date <= dueDate.Date)).ToList();
+            foreach (var workout in crossfitterWorkouts)
+                PrepareWorkout(workout);
+
+            return crossfitterWorkouts.OrderByDescending(x => x.Date).ToList();
+        }
 
         private void PrepareWorkout(CrossfitterWorkout workout)
         {

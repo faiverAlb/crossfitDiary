@@ -79,7 +79,6 @@ namespace CrossfitDiary.Web.Controllers
         public class ActionNamesClass
         {
             public readonly string CreateNewWorkout = "CreateNewWorkout";
-            public readonly string LogWorkout = "LogWorkout";
             public readonly string ManageWorkout = "ManageWorkout";
         }
 
@@ -87,7 +86,6 @@ namespace CrossfitDiary.Web.Controllers
         public class ActionNameConstants
         {
             public const string CreateNewWorkout = "CreateNewWorkout";
-            public const string LogWorkout = "LogWorkout";
             public const string ManageWorkout = "ManageWorkout";
         }
 
@@ -153,17 +151,6 @@ namespace CrossfitDiary.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateNewWorkout);
             CreateNewWorkoutOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void LogWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult LogWorkout()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LogWorkout);
-            LogWorkoutOverride(callInfo);
             return callInfo;
         }
 

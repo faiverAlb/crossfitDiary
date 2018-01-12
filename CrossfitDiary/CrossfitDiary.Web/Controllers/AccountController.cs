@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using CrossfitDiary.DAL.EF.DataContexts;
@@ -69,14 +71,16 @@ namespace CrossfitDiary.Web.Controllers
             var result = await _applicationSignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
                 default:
                     var info = await AuthenticationManager.GetExternalLoginInfoAsync();
                     if (info == null)
                         return View(MVC.Account.Views.ExternalLoginFailure);
+                    
+                    var lastNameClaim = info.ExternalIdentity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname);
+                    var givenNameClaim = info.ExternalIdentity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
 
-                    var user = new ApplicationUser { UserName = loginInfo.Email, Email = loginInfo.Email };
+
+                    var user = new ApplicationUser { UserName = loginInfo.Email, Email = loginInfo.Email, FirstName = lastNameClaim.Value, LastName = givenNameClaim.Value};
                     var createdUser = await _userManager.CreateAsync(user);
                     if (createdUser.Succeeded)
                     {

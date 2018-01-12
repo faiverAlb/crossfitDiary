@@ -7,7 +7,7 @@ namespace CrossfitDiary.Web.ViewModels
     public class HomeViewModel
     {
         [JsonProperty("weekWorkouts")]
-        public List<DayWorkoutViewModel> WeekWorkouts { get; set; } = new List<DayWorkoutViewModel>();
+        public List<DayWorkoutViewModel> AllWorkouts { get; set; } = new List<DayWorkoutViewModel>();
     }
 
     public class DayWorkoutViewModel
@@ -24,9 +24,6 @@ namespace CrossfitDiary.Web.ViewModels
 
         [JsonProperty("doneWorkouts")]
         public List<ToLogWorkoutViewModel> DoneWorkouts { get; set; } = new List<ToLogWorkoutViewModel>();
-
-        [JsonProperty("plannedWorkouts")]
-        public List<ToLogWorkoutViewModel> PlannedWorkouts { get; set; } = new List<ToLogWorkoutViewModel>();
 
     }
 }

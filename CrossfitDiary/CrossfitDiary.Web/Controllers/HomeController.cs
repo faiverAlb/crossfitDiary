@@ -28,7 +28,7 @@ namespace CrossfitDiary.Web.Controllers
 
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                WeekWorkouts = GetWeekWorkouts()
+                AllWorkouts = GetWeekWorkouts(),
             };
 
             return View(model: homeViewModel);
@@ -37,9 +37,7 @@ namespace CrossfitDiary.Web.Controllers
         private List<DayWorkoutViewModel> GetWeekWorkouts()
         {
             var startOfWeek = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
-            List<ToLogWorkoutViewModel> crossfitterWorkoutsViewModels = _crossfitterService.GetCrossfitterWorkouts(System.Web.HttpContext.Current.User.Identity.GetUserId()
-                                                                                                                   , startOfWeek
-                                                                                                                   , startOfWeek.AddDays(6)).Select(x => Mapper.Map<ToLogWorkoutViewModel>(x)).ToList();
+            List<ToLogWorkoutViewModel> crossfitterWorkoutsViewModels = _crossfitterService.GetAllCrossfittersWorkouts(startOfWeek, startOfWeek.AddDays(6)).Select(x => Mapper.Map<ToLogWorkoutViewModel>(x)).ToList();
             var groupedModels = crossfitterWorkoutsViewModels.GroupBy(x => x.Date.DayOfWeek);
 
             var dayWorkouts = new List<DayWorkoutViewModel>
@@ -60,13 +58,11 @@ namespace CrossfitDiary.Web.Controllers
         {
             var dayWorkout = groupedModels.SingleOrDefault(x => x.Key == dayOfWeek);
             var doneWorkoutes = dayWorkout?.Where(x => x.IsPlanned == false).ToList() ?? new List<ToLogWorkoutViewModel>();
-            var planendWorkouts = dayWorkout?.Where(x => x.IsPlanned == true).ToList() ?? new List<ToLogWorkoutViewModel>();
             return new DayWorkoutViewModel
             {
                 DayOfWeek = dayOfWeek.ToString(),
                 Date = date,
                 DoneWorkouts = doneWorkoutes,
-                PlannedWorkouts = planendWorkouts
             };
         }
 
