@@ -78,6 +78,7 @@ ko.bindingHandlers.datepicker = {
             format: 'DD/MM/YYYY'
 //            , minDate: date.setDate(date.getDate() - 1)
             , ignoreReadonly: true
+            , locale: 'ru'
         };
         var defaults = {
             icons: {

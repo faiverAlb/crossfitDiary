@@ -35,6 +35,7 @@ namespace CrossfitDiary.Web
                 .Include(
                     "~/Scripts/jqueryPlugins/jquery.inputmask.bundle.min.js"
                     , "~/Scripts/bootstrap-datepicker/moment.min.js"
+                    , "~/Scripts/bootstrap-datepicker/moment-with-locales.min.js"
                     , "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.min.js"
                     , "~/Scripts/Crossfitter/CrossfitterController.js"
                     , "~/Scripts/Crossfitter/SimpleRoutine.js"

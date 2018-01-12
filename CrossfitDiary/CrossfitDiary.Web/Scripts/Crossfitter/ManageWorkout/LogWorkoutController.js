@@ -19,6 +19,10 @@
 
     self.partialRepsFinished = ko.observable();
 
+    self.plannedDate = ko.observable(new Date());
+       
+
+
     self.distance = ko.observable()
         .extend({
             required: {
@@ -90,7 +94,8 @@
 
 
 
-    self.toJSON = function() {
+    self.toJSON = function () {
+        var date = self.plannedDate().toDate().toUTCString();
         var model = {
             selectedWorkoutId: lightModel.selectedWorkout ? lightModel.selectedWorkout().id : null,
             crossfitterWorkoutId: lightModel.crossfitterWorkoutId,
@@ -100,7 +105,7 @@
             distance: self.distance(),
             wasFinished: self.wasFinished(),
             isRx: self.isRx(),
-            date: self.date
+            date: date
         };
         return model;
     };

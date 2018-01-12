@@ -27,9 +27,9 @@
         self.wantToPlanWorkout(false);
     };
 
-    self.planWorkoutContainerClick = function() {
-        self.wantToPlanWorkout(!self.wantToPlanWorkout());
-    };
+//    self.planWorkoutContainerClick = function() {
+//        self.wantToPlanWorkout(!self.wantToPlanWorkout());
+//    };
 
     var logFunction = function() {
         var canLogWorkout = self.logWorkoutController().canLogWorkout();
@@ -50,26 +50,26 @@
         }
     };
 
-    self.planWorkout = function () {
-        var canPlanWorkout = self.plannedDate.isValid();
-        if (self.isCreateNewWorkoutPressed()) {
-            var canCreateWorkout = self.createWorkoutController.canCreateCreateWorkout();
-            if (canCreateWorkout && canPlanWorkout) {
-                var model = {
-                    newWorkoutViewModel: self.createWorkoutController.getCreateWorkoutModel(),
-                    logWorkoutViewModel: self.logWorkoutController().toJSON()
-                };
-                model.logWorkoutViewModel.isPlanned = true;
-                self.service.createAndLogWorkout(model);
-            }
-        } else {
-            if (canPlanWorkout) {
-                var logModel = self.logWorkoutController().toJSON();
-                logModel.isPlanned = true;
-                self.service.logWorkout(logModel);
-            }
-        }
-    };
+//    self.planWorkout = function () {
+//        var canPlanWorkout = self.plannedDate.isValid();
+//        if (self.isCreateNewWorkoutPressed()) {
+//            var canCreateWorkout = self.createWorkoutController.canCreateCreateWorkout();
+//            if (canCreateWorkout && canPlanWorkout) {
+//                var model = {
+//                    newWorkoutViewModel: self.createWorkoutController.getCreateWorkoutModel(),
+//                    logWorkoutViewModel: self.logWorkoutController().toJSON()
+//                };
+//                model.logWorkoutViewModel.isPlanned = true;
+//                self.service.createAndLogWorkout(model);
+//            }
+//        } else {
+//            if (canPlanWorkout) {
+//                var logModel = self.logWorkoutController().toJSON();
+//                logModel.isPlanned = true;
+//                self.service.logWorkout(logModel);
+//            }
+//        }
+//    };
 
 
 
