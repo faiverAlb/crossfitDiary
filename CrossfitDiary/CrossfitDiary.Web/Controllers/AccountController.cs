@@ -71,6 +71,8 @@ namespace CrossfitDiary.Web.Controllers
             var result = await _applicationSignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
                 default:
                     var info = await AuthenticationManager.GetExternalLoginInfoAsync();
                     if (info == null)
