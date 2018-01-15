@@ -1,39 +1,32 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
 }
+@using Newtonsoft.Json
 @model CrossfitDiary.Web.ViewModels.HomeViewModel
 
 
 <div class="home-container">
     <div class="row">
         <div class="container activities-calendar">
-            <div class="grid-calendar">
-                <div class="row" data-bind="foreach: allWorkouts, visible:true" style="display: none" >
-                    <div class="col-md-5 col-md-offset-5">
-                        <div data-bind="text:workouterName"></div>
-@*                        <div class="content ">*@
-@*                            <div class="date" data-bind="text:displayDate"></div>*@
-@*                            <!-- ko if: doneWorkouts.length > 0-->*@
-@*                            <div class="empty-row"></div>*@
-@*                            <div class="workout-container">*@
-@*                                <div class="header">Done</div>*@
-@*                                <!-- ko foreach: doneWorkouts-->*@
-@*                                <div class="workout clearfix">*@
-@*                                    <div class="pull-left" data-bind="text: selectedWorkoutName"></div>*@
-@*                                    <div class="pull-right" data-bind="text: measureDisplayName"></div>*@
-@*                                </div>*@
-@*                                <!--/ko-->*@
-@*                            </div>*@
-@*                            <!--/ko-->*@
-@*                            <div class="empty-row"></div>*@
-@*                        </div>*@
-@*                        <div class="row">*@
-@*                            <div class="action-panel clearfix">*@
-@*                                <a class="btn btn-primary btn-xs  pull-right action-button" title="Create/Log/Plan!" data-bind="attr: { 'href': '@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)?date=' + displayDate }">*@
-@*                                    <i class="fa fa-lg fa-magic" aria-hidden="true"></i>*@
-@*                                </a>*@
-@*                            </div>*@
-@*                        </div>*@
+            <div>
+                <div class="row" data-bind="foreach: allWorkouts, visible:true" style="display: none">
+                    <div class="col-md-offset-3 col-md-5 done-item">
+                        <div class="item-header clearfix">
+                            <div class="pull-left" >
+                                <span class="user-icon">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </span>
+                                <span data-bind="text:workouterName"></span>
+                            </div>
+                            <div class="pull-right" data-bind="text:displayDate"></div>
+                        </div>
+                        <div class="item-body clearfix">
+                            <div >
+                                <span class="workout-title" data-bind="text: selectedWorkoutName"></span>
+                                <span>:</span>
+                                <span class="workout-result" data-bind="text: measureDisplayName"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,16 +35,15 @@
 </div>
 
 
-
 @section Scripts{
     @Scripts.Render("~/bundles/home")
     <script>
         $(function() {
-            var path = "@Url.Content("~")";
-            var model = new HomePageController({
+            const path = "@Url.Content("~")";
+            const model = new HomePageController({
                 pathToApp: path,
-                viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
-                });
+                viewModel: @Html.Raw(JsonConvert.SerializeObject(Model))
+            });
             ko.applyBindings(model);
         });
     </script>

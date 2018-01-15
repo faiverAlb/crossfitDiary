@@ -8421,6 +8421,24 @@ select.selectpicker {
   padding-bottom: 6px;
 }
 /* Home page */
+.home-container .activities-calendar .done-item {
+  padding-left: 25px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  margin-top: 10px;
+  background: #e8edf3;
+}
+.home-container .activities-calendar .done-item .item-header {
+  border-bottom: 1px dashed #a6a6a6;
+  font-size: 15px;
+  padding-bottom: 5px;
+}
+.home-container .activities-calendar .done-item .item-body {
+  padding-top: 5px;
+  font-size: 18px;
+}
 .home-container .activities-calendar .grid-calendar > .row.match-my-cols {
   overflow: hidden;
 }
