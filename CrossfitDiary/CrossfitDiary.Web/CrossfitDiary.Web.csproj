@@ -241,6 +241,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CrossfitterController.cs" />
+    <Compile Include="Mappings\CanBeRemovedResolver.cs" />
     <Compile Include="MvcHelpers\DateTimeExtensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />

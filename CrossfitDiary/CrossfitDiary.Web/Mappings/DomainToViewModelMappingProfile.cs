@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Providers.Entities;
 using AutoMapper;
 using CrossfitDiary.Model;
 using CrossfitDiary.Web.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Mappings
 {
@@ -24,6 +26,7 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.SelectedWorkoutName, x => x.MapFrom(y => y.RoutineComplex.Title))
                 .ForMember(x => x.SelectedWorkoutId, x => x.MapFrom(y => y.RoutineComplex.Id))
                 .ForMember(x => x.CrossfitterWorkoutId, x => x.MapFrom(y => y.Id))
+                .ForMember(x => x.CanBeRemovedByCurrentUser, x => x.ResolveUsing<CanBeRemovedResolver>())
                 .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName));
 
             CreateMap<RoutineComplex, WorkoutViewModel>()

@@ -23,6 +23,13 @@
                                 </span>
                                 <span data-bind="text:workouterName"></span>
                             </div>
+                            <!-- ko if:canBeRemovedByCurrentUser-->
+                            <div class="pull-right remove-workout" title="Remove your workout">
+                                <a class="pointer">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <!-- /ko-->
                             <div class="pull-right" data-bind="text:displayDate"></div>
                         </div>
                         <div class="item-body clearfix">
