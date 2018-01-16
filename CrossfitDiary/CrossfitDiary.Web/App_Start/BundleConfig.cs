@@ -54,7 +54,11 @@ namespace CrossfitDiary.Web
 
             /*   --Home--   */
             bundles.Add(new ScriptBundle("~/bundles/home")
-                .Include("~/Scripts/Home/HomePageController.js"));
+                .Include(
+                     "~/Scripts/BaseTypeScript/ServerProcessedViewModel.js"
+                    , "~/Scripts/BaseTypeScript/BaseService.js"
+                    , "~/Scripts/BaseTypeScript/CrossfitterService.js"
+                    ,"~/Scripts/Home/HomePageController.js"));
 
 
             bundles.Add(new StyleBundle("~/Content/css")

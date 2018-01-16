@@ -32,6 +32,9 @@ var CrossfitterService = (function (_super) {
         _this.getExercises = function () {
             return _this.get(_this.pathToApp + "api/getExercises");
         };
+        _this.removeWorkout = function (crossfitterWorkoutId) {
+            return _this.delete("api/removeWorkout/" + crossfitterWorkoutId);
+        };
         return _this;
     }
     return CrossfitterService;

@@ -10,7 +10,7 @@
     }
 
     // Make a GET call to the service
-    get<T>(url: string): Q.Promise<T> {
+    protected  get<T>(url: string): Q.Promise<T> {
         return Q.Promise<T>((resolve, reject) => {
             $.ajax({
                 url: url,
@@ -22,7 +22,7 @@
     }
 
     // Make a POST call to the service
-    post<T>(url: string, model: any) {
+    protected post<T>(url: string, model: any) {
         return Q.Promise<T>((resolve, reject) => {
             return $.ajax({
                 url: url,
@@ -34,7 +34,7 @@
         });
     }
     //TODO: Merge with usual post
-    postExtended<T>(url: string, model: any, contentType: any, processData: boolean) {
+    protected postExtended<T>(url: string, model: any, contentType: any, processData: boolean) {
         return Q.Promise<T>((resolve, reject) => {
             return $.ajax({
                 url: url,
@@ -50,7 +50,7 @@
     }
 
     // Make a DELETE call to the service
-    delete<T>(url: string) {
+    protected delete<T>(url: string) {
         return Q.Promise((resolve, reject) => {
             return $.ajax({
                 url: url,

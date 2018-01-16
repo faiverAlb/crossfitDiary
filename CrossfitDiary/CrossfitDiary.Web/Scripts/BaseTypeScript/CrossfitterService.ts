@@ -32,4 +32,8 @@
     getExercises = () => {
         return this.get(this.pathToApp + "api/getExercises");
     };
+
+    removeWorkout = (crossfitterWorkoutId) => {
+        return this.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
+    };
 }

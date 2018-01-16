@@ -88,6 +88,13 @@ namespace CrossfitDiary.Web.Api
             _crossfitterService.CreateAndLogNewWorkout(Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel), crossfitterWorkout);
         }
 
+        [HttpDelete]
+        [Route("removeWorkout/{crossfitterWorkoutId}")]
+        public void RemoveWorkout(int crossfitterWorkoutId)
+        {
+            _crossfitterService.RemoveWorkout(crossfitterWorkoutId);
+        }
+
         
     }
 

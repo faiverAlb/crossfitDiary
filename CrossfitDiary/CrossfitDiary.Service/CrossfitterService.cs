@@ -107,5 +107,11 @@ namespace CrossfitDiary.Service
             PrepareWorkout(crossfitterWorkout);
             return crossfitterWorkout;
         }
+
+        public void RemoveWorkout(int crossfitterWorkoutId)
+        {
+            _crossfitterWorkoutRepository.Delete(x => x.Id == crossfitterWorkoutId);
+            _unitOfWork.Commit();
+        }
     }
 }
