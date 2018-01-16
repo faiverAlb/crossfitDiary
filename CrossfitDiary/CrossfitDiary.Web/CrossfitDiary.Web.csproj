@@ -459,7 +459,9 @@
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_CN.js" />
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <TypeScriptCompile Include="Scripts\Crossfitter\CrossfitterService.ts" />
+    <TypeScriptCompile Include="Scripts\BaseTypeScript\ServerProcessedViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\BaseTypeScript\BaseService.ts" />
+    <TypeScriptCompile Include="Scripts\BaseTypeScript\CrossfitterService.ts" />
     <Content Include="Scripts\Crossfitter\ManageWorkout\ChooseExistingWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\ManageWorkout\CreateWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\ManageWorkout\LogWorkoutController.js" />

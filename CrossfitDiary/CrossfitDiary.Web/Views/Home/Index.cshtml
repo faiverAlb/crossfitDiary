@@ -24,7 +24,7 @@
                                 <span data-bind="text:workouterName"></span>
                             </div>
                             <!-- ko if:canBeRemovedByCurrentUser-->
-                            <div class="pull-right remove-workout" title="Remove your workout">
+                            <div class="pull-right remove-workout" title="Remove your workout" data-bind="click: $parent.removeWorkout">
                                 <a class="pointer">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
