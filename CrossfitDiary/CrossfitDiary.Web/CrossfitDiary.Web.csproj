@@ -459,6 +459,7 @@
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_CN.js" />
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Views\Crossfitter\Pride.cshtml" />
     <TypeScriptCompile Include="Scripts\BaseTypeScript\ServerProcessedViewModel.ts" />
     <TypeScriptCompile Include="Scripts\BaseTypeScript\BaseService.ts" />
     <TypeScriptCompile Include="Scripts\BaseTypeScript\CrossfitterService.ts" />

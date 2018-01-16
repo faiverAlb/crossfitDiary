@@ -55,6 +55,11 @@ namespace CrossfitDiary.Web.Controllers
              
             return View(model);
         }
+
+        public virtual ActionResult Pride()
+        {
+            return View();
+        }
         
 
     }

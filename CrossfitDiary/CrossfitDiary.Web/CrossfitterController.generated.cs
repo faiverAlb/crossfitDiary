@@ -80,6 +80,7 @@ namespace CrossfitDiary.Web.Controllers
         {
             public readonly string CreateNewWorkout = "CreateNewWorkout";
             public readonly string ManageWorkout = "ManageWorkout";
+            public readonly string Pride = "Pride";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -87,6 +88,7 @@ namespace CrossfitDiary.Web.Controllers
         {
             public const string CreateNewWorkout = "CreateNewWorkout";
             public const string ManageWorkout = "ManageWorkout";
+            public const string Pride = "Pride";
         }
 
 
@@ -111,9 +113,11 @@ namespace CrossfitDiary.Web.Controllers
             {
                 public readonly string CreateNewWorkout = "CreateNewWorkout";
                 public readonly string ManageWorkout = "ManageWorkout";
+                public readonly string Pride = "Pride";
             }
             public readonly string CreateNewWorkout = "~/Views/Crossfitter/CreateNewWorkout.cshtml";
             public readonly string ManageWorkout = "~/Views/Crossfitter/ManageWorkout.cshtml";
+            public readonly string Pride = "~/Views/Crossfitter/Pride.cshtml";
             static readonly _TemplatesClass s_Templates = new _TemplatesClass();
             public _TemplatesClass Templates { get { return s_Templates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -164,6 +168,17 @@ namespace CrossfitDiary.Web.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "date", date);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "crossfitterWorkoutId", crossfitterWorkoutId);
             ManageWorkoutOverride(callInfo, date, crossfitterWorkoutId);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void PrideOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Pride()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Pride);
+            PrideOverride(callInfo);
             return callInfo;
         }
 

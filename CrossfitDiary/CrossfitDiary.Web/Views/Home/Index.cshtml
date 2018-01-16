@@ -6,11 +6,6 @@
 
 
 <div class="home-container" data-bind="visible:true" style="display: none">
-@*    <div class="row">*@
-@*        <div class="col-md-offset-3 col-md-5 done-item">*@
-@*            <h2>Menu here</h2>*@
-@*        </div>*@
-@*    </div>*@
     <div class="row">
         <div class="container activities-calendar">
             <div class="row">
@@ -44,9 +39,8 @@
                 <!-- ko if:allWorkouts.length == 0-->
 
                 <div class="col-md-offset-3 col-md-5  ">
-                    <div class="alert alert-warning" role="alert">
-                        No items yet!
-                        <a class="alert-link" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)">Let's create and log a new one?</a>
+                    <div class="done-item text-center" >
+                        <a class="btn btn-success btn-lg" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-star" aria-hidden="true"></i> Let's log our first workout? <i class="fa fa-star" aria-hidden="true"></i></a>
 
                     </div>
 

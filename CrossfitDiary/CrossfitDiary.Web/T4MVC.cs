@@ -76,6 +76,16 @@ namespace Links
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
         public static readonly string _references_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/_references.min.js") ? Url("_references.min.js") : Url("_references.js");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class BaseTypeScript {
+            public const string UrlPath = "~/Scripts/BaseTypeScript";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string BaseService_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/BaseService.min.js") ? Url("BaseService.min.js") : Url("BaseService.js");
+            public static readonly string CrossfitterService_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterService.min.js") ? Url("CrossfitterService.min.js") : Url("CrossfitterService.js");
+            public static readonly string ServerProcessedViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ServerProcessedViewModel.min.js") ? Url("ServerProcessedViewModel.min.js") : Url("ServerProcessedViewModel.js");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class bootstrap_datepicker {
             public const string UrlPath = "~/Scripts/bootstrap-datepicker";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
@@ -141,7 +151,6 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             public static readonly string CrossfitterController_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterController.min.js") ? Url("CrossfitterController.min.js") : Url("CrossfitterController.js");
-            public static readonly string CrossfitterService_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterService.min.js") ? Url("CrossfitterService.min.js") : Url("CrossfitterService.js");
             public static readonly string ExerciseMeasureType_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureType.min.js") ? Url("ExerciseMeasureType.min.js") : Url("ExerciseMeasureType.js");
             public static readonly string ExerciseMeasureTypeValue_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureTypeValue.min.js") ? Url("ExerciseMeasureTypeValue.min.js") : Url("ExerciseMeasureTypeValue.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -523,6 +532,12 @@ namespace Links
     {
         public static partial class Scripts 
         {
+            public static partial class BaseTypeScript 
+            {
+                public static class Assets
+                {
+                }
+            }
             public static partial class bootstrap_datepicker 
             {
                 public static class Assets
