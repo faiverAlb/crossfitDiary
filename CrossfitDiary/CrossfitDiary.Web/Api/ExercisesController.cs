@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using AutoMapper;
+using CrossfitDiary.Model;
 using CrossfitDiary.Service.Interfaces;
 using CrossfitDiary.Web.ViewModels;
 
@@ -9,33 +9,48 @@ namespace CrossfitDiary.Web.Api
 {
     [Authorize]
     [RoutePrefix("api")]
-    public class ExercisesController : ApiController
+    public class ExercisesController : BaseApiController
     {
+        #region members
+
         private readonly IExerciseService _exerciseService;
+
+        #endregion
+
+        #region constructors
+
         public ExercisesController(IExerciseService exerciseService)
         {
             _exerciseService = exerciseService;
         }
 
-        //TODO: Add pagination
+        #endregion
+
+        #region methods
+
         /// <summary>
-        /// Get exercises
+        /// The get exercises.
         /// </summary>
-        /// <returns>All available exercises</returns>
+        /// <returns>
+        /// The <see cref="IHttpActionResult"/>.
+        /// </returns>
         [HttpGet]
         [Route("getExercises")]
         public IHttpActionResult GetExercises()
         {
-            try
-            {
-                var exercises = _exerciseService.GetExercises();
-                return Ok(Mapper.Map<IEnumerable<ExerciseViewModel>>(exercises));
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
+            var exercises = _exerciseService.GetExercises();
+            return Ok(Mapper.Map<IEnumerable<ExerciseViewModel>>(exercises));
         }
-    }
 
+
+        [HttpGet]
+        [Route("getStatisticalExercises")]
+        public IHttpActionResult GetStatisticalExercises()
+        {
+            IEnumerable<Exercise> exercises = _exerciseService.GetStatisticalExercises();
+            return Ok(Mapper.Map<IEnumerable<ExerciseViewModel>>(exercises));
+        }
+
+        #endregion
+    }
 }

@@ -12,44 +12,47 @@ using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Api
 {
-
     [Authorize]
     [RoutePrefix("api")]
-    public class WorkoutController : ApiController
+    public class WorkoutController : BaseApiController
     {
+        #region members
+
         private readonly CrossfitterService _crossfitterService;
         private readonly ApplicationUserManager _applicationUserManager;
         private readonly IWorkoutService _workoutService;
 
-        public WorkoutController(CrossfitterService crossfitterService, ApplicationUserManager applicationUserManager, IWorkoutService workoutService)
+        #endregion
+
+        #region constructors
+
+        public WorkoutController(CrossfitterService crossfitterService, ApplicationUserManager applicationUserManager,
+            IWorkoutService workoutService)
         {
             _crossfitterService = crossfitterService;
             _applicationUserManager = applicationUserManager;
             _workoutService = workoutService;
         }
 
+        #endregion
+
+        #region methods
+
         /// <summary>
-        /// Get available workouts
+        ///     Get available workouts
         /// </summary>
         /// <returns>All available workouts</returns>
         [HttpGet]
         [Route("getAvailableWorkouts")]
         public IHttpActionResult GetAvailableWorkouts()
         {
-            try
-            {
-                var availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts());
-                return Ok(availableWorkouts);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
+            IEnumerable<WorkoutViewModel> availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts());
+            return Ok(availableWorkouts);
         }
 
 
         /// <summary>
-        /// Create workout by viewmodel
+        ///     Create workout by viewmodel
         /// </summary>
         /// <param name="model"></param>
         [HttpPost]
@@ -60,14 +63,14 @@ namespace CrossfitDiary.Web.Api
         }
 
         /// <summary>
-        /// Log workout
+        ///     Log workout
         /// </summary>
         /// <param name="model"></param>
         [HttpPost]
         [Route("logWorkout")]
         public void LogWorkout(ToLogWorkoutViewModel model)
         {
-            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
+            var user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
 
             var crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model);
             crossfitterWorkout.Crossfitter = user;
@@ -75,7 +78,7 @@ namespace CrossfitDiary.Web.Api
         }
 
         /// <summary>
-        /// Create and log workout
+        ///     Create and log workout
         /// </summary>
         /// <param name="model">Complex model with two properties: new workout and log workout models</param>
         [HttpPost]
@@ -83,9 +86,10 @@ namespace CrossfitDiary.Web.Api
         public void CreateAndLogNewWorkout(ToCreateAndLogNewWorkoutViewModel model)
         {
             ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
-            var crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
+            CrossfitterWorkout crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
             crossfitterWorkout.Crossfitter = user;
-            _crossfitterService.CreateAndLogNewWorkout(Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel), crossfitterWorkout);
+            _crossfitterService.CreateAndLogNewWorkout(Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel),
+                crossfitterWorkout);
         }
 
         [HttpDelete]
@@ -95,8 +99,6 @@ namespace CrossfitDiary.Web.Api
             _crossfitterService.RemoveWorkout(crossfitterWorkoutId);
         }
 
-        
+        #endregion
     }
-
-    
 }

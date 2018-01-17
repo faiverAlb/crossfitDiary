@@ -241,6 +241,7 @@
     <Compile Include="AdminController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Api\BaseApiController.cs" />
     <Compile Include="Api\ExercisesController.cs" />
     <Compile Include="Api\WorkoutController.cs" />
     <Compile Include="App_Start\AutofacDependencyResolver.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CrossfitterController.cs" />
+    <Compile Include="Infrastructure\ExceptionHandlingAttribute.cs" />
     <Compile Include="Mappings\CanBeRemovedResolver.cs" />
     <Compile Include="MvcHelpers\DateTimeExtensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />

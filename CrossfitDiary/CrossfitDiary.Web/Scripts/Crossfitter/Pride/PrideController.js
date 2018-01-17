@@ -2,7 +2,7 @@ var PrideController = (function () {
     function PrideController(basicParameters) {
         var _this = this;
         this.loadExercises = function () {
-            _this._service.getExercises()
+            _this._service.getStatisticalExercises()
                 .then(function (exercises) {
                 _this._exercises(exercises);
             });

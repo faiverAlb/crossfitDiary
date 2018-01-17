@@ -10,5 +10,6 @@ namespace CrossfitDiary.Service.Interfaces
 
         void CreateExercise(Exercise exercise);
         void SaveExercise();
+        IEnumerable<Exercise> GetStatisticalExercises();
     }
 }

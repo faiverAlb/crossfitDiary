@@ -39,5 +39,11 @@ namespace CrossfitDiary.Service
         {
             _unitOfWork.Commit();
         }
+
+        public IEnumerable<Exercise> GetStatisticalExercises()
+        {
+            var exercises = _exerciseRepository.GetMany(x => x.ExerciseMeasures.Any(y => y.ExerciseMeasureType.MeasureType == MeasureType.Weight));
+            return exercises.OrderBy(x => x.Title);
+        }
     }
 }

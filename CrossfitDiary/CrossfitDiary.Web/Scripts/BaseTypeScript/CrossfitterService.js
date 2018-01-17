@@ -37,6 +37,9 @@ var CrossfitterService = (function (_super) {
         _this.getExercises = function () {
             return _this.get(_this.pathToApp + "api/getExercises");
         };
+        _this.getStatisticalExercises = function () {
+            return _this.get(_this.pathToApp + "api/getStatisticalExercises");
+        };
         _this.removeWorkout = function (crossfitterWorkoutId) {
             return _this.delete("api/removeWorkout/" + crossfitterWorkoutId);
         };

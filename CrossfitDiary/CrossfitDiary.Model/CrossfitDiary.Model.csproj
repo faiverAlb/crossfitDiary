@@ -65,6 +65,7 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="BaseModel.cs" />
     <Compile Include="CrossfitterWorkout.cs" />
+    <Compile Include="Exceptions\BaseBusinessException.cs" />
     <Compile Include="Exercise.cs" />
     <Compile Include="ExerciseMeasure.cs" />
     <Compile Include="ExerciseMeasureType.cs" />

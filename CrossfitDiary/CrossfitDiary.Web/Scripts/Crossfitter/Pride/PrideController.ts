@@ -22,7 +22,7 @@
     }
 
     private loadExercises = () => {
-        this._service.getExercises()
+        this._service.getStatisticalExercises()
             .then((exercises:any) => {
                 this._exercises(exercises);
             });

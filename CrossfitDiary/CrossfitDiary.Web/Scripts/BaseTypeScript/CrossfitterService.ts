@@ -33,6 +33,10 @@
         return this.get(this.pathToApp + "api/getExercises");
     };
 
+    getStatisticalExercises = () => {
+        return this.get(this.pathToApp + "api/getStatisticalExercises");
+    };
+
     removeWorkout = (crossfitterWorkoutId) => {
         return this.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
     };
