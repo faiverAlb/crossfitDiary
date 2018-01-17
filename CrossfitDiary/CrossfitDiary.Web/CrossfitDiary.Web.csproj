@@ -503,6 +503,7 @@
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
     <Content Include="Content\pages\crossfitter\manage-workout\existing-workouts-container.less" />
+    <Content Include="Content\General\general.less" />
     <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Properties\PublishProfiles\workouter.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

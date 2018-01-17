@@ -6,70 +6,75 @@
 <div data-bind="visible:true" style="display: none">
     <h2>Choose an exercise:</h2>
     <select class="form-control exercise-selector" data-live-search="true" data-bind="options:_exercises, optionsText:'title',value: _selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
-    
-    <div class="clearfix" data-bind="if:_selectedExercise">
+
+    <div class="person-records" data-bind="if:_selectedExercise">
+        <h3>All persons results </h3>
+        <div class="clearfix">
+            <table class="table table-striped ">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Maximum Weight</th>
+                        <th>Date</th>
+                </thead>
+                <tbody>
+                    <!--ko if:_personMaximums().length == 0 -->
+                    <tr class="text-center empty-data">
+                        <td colspan="4">No records for you were found</td>
+                    </tr>
+                    <!-- /ko -->
+                    <!-- ko foreach: _personMaximums -->
+                    <tr>
+                        <td>
+                            <span data-bind="text: personName"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text: maximumWeight"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text: date"></span>
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="all-persons-records" data-bind="if:_selectedExercise">
+        <h3>All persons results </h3>
+        <div class="pull-right">
+            <input type="text" class="form-control " placeholder="Search" data-bind="value: filter, valueUpdate: 'afterkeydown'" />
+        </div>
         <table class="table table-striped ">
             <thead>
-            <tr>
-            <th >Name</th>
-            <th>Maximum Weight</th>
-            <th >Date</th>
+                <tr>
+                    <th data-bind="sort: {arr:_allPersonsMaximums, prop:'personName'}">Name</th>
+                    <th data-bind="sort: {arr:_allPersonsMaximums, prop:'maximumWeight'}">Maximum Weight</th>
+                    <th data-bind="sort: {arr:_allPersonsMaximums, prop:'date'}">Date</th>
             </thead>
             <tbody>
-            <!--ko if:_personMaximums().length == 0 -->
-            <tr class="text-center empty-data">
-                <td colspan="4">No records for you were found</td>
-            </tr>
-            <!-- /ko -->
-            <!-- ko foreach: _personMaximums -->
-            <tr>
-                <td>
-                    <span data-bind="text: personName"></span>
-                </td>
-                <td>
-                    <span data-bind="text: maximumWeight"></span>
-                </td>
-                <td>
-                    <span data-bind="text: date"></span>
-                </td>
-            </tr>
-            <!-- /ko -->
+                <!--ko if:filteredItems().length == 0 -->
+                <tr class="text-center empty-data">
+                    <td colspan="4">No keys found for this customer</td>
+                </tr>
+                <!-- /ko -->
+                <!-- ko foreach: filteredItems -->
+                <tr>
+                    <td>
+                        <span data-bind="text: personName"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: maximumWeight"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: date"></span>
+                    </td>
+                </tr>
+                <!-- /ko -->
             </tbody>
         </table>
-    </div>
-    
-    <div class="all-persons-records">
-@*        <div class="pull-right">*@
-@*            <input type="text" class="form-control " placeholder="Search" data-bind="value: filter, valueUpdate: 'afterkeydown'"/>*@
-@*        </div>*@
-@*        <table class="table table-striped ">*@
-@*            <thead>*@
-@*            <tr>*@
-@*            <th data-bind="sort: {arr:_exercises, prop:'personName'}">Name</th>*@
-@*            <th data-bind="sort: {arr:_exercises, prop:'maximumWeight'}">Maximum Weight</th>*@
-@*            <th data-bind="sort: {arr:_exercises, prop:'date'}">Date</th>*@
-@*            </thead>*@
-@*            <tbody>*@
-@*            <!--ko if:filteredItems().length == 0 -->*@
-@*            <tr class="text-center empty-data">*@
-@*                <td colspan="4">No keys found for this customer</td>*@
-@*            </tr>*@
-@*            <!-- /ko -->*@
-@*            <!-- ko foreach: filteredItems -->*@
-@*            <tr>*@
-@*                <td>*@
-@*                    <span data-bind="text: personName"></span>*@
-@*                </td>*@
-@*                <td>*@
-@*                    <span data-bind="text: maximumWeight"></span>*@
-@*                </td>*@
-@*                <td>*@
-@*                    <span data-bind="text: date"></span>*@
-@*                </td>*@
-@*            </tr>*@
-@*            <!-- /ko -->*@
-@*            </tbody>*@
-@*        </table>*@
 
     </div>
 </div>
@@ -77,10 +82,10 @@
 
 @section Scripts{
     @Scripts.Render("~/bundles/crossfitter/statistics")
-<script>
+    <script>
         $(function() {
-            var model = new PrideController({pathToApp: "@Url.Content("~")"});
+            const model = new PrideController({ pathToApp: "@Url.Content("~")" });
             ko.applyBindings(model);
         });
-</script>
+    </script>
 }

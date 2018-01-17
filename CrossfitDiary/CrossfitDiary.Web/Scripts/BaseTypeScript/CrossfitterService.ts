@@ -41,6 +41,10 @@
         return this.get(this.pathToApp + `api/exercises/${exerciseId}/personMaximum`);
     };
 
+    getAllPersonsExerciseMaximumWeights = (exerciseId:number) => {
+        return this.get(this.pathToApp + `api/exercises/${exerciseId}/allPersonsMaximums`);
+    };
+
     removeWorkout = (crossfitterWorkoutId) => {
         return this.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
     };

@@ -129,3 +129,42 @@ ko.bindingHandlers.datepicker = {
         }
     }
 };
+
+
+ko.bindingHandlers.sort = {
+    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var asc = false;
+        element.style.cursor = 'pointer';
+        if ($(element).hasClass("sorting_initial")) {
+            $(element).removeClass("sorting_initial");
+        } else {
+            $(element).addClass("sorting_initial");
+        }
+        element.onclick = function() {
+            var value = valueAccessor();
+            var prop = value.prop;
+            var data = value.arr;
+
+            $(element).siblings().removeClass("sorting_asc");
+            $(element).siblings().removeClass("sorting_desc");
+
+            asc = !asc;
+            if (asc) {
+                $(element).removeClass("sorting_asc");
+                $(element).addClass("sorting_desc");
+
+                data.sort(function(left, right) {
+                    return left[prop]() == right[prop]() ? 0 : left[prop]() < right[prop]() ? -1 : 1;
+                });
+            } else {
+                $(element).removeClass("sorting_desc");
+                $(element).addClass("sorting_asc");
+
+                data.sort(function(left, right) {
+                    return left[prop]() == right[prop]() ? 0 : left[prop]() > right[prop]() ? -1 : 1;
+                });
+            }
+        };
+    }
+};
+

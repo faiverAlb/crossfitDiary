@@ -43,6 +43,9 @@ var CrossfitterService = (function (_super) {
         _this.getPersonExerciseMaximumWeight = function (exerciseId) {
             return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/personMaximum"));
         };
+        _this.getAllPersonsExerciseMaximumWeights = function (exerciseId) {
+            return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/allPersonsMaximums"));
+        };
         _this.removeWorkout = function (crossfitterWorkoutId) {
             return _this.delete("api/removeWorkout/" + crossfitterWorkoutId);
         };

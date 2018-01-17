@@ -8038,6 +8038,32 @@ fieldset[disabled] .btn-yahoo.focus {
   color: #720e9e;
   background-color: #fff;
 }
+table > thead > tr > th.sorting_initial:before {
+  font-family: 'FontAwesome';
+  content: ' \f0dc';
+  padding-right: 2px;
+}
+table > thead > tr > th.sorting_asc:before {
+  font-family: 'FontAwesome';
+  content: ' \f0de';
+  padding-right: 2px;
+}
+table > thead > tr > th.sorting_desc:before {
+  font-family: 'FontAwesome';
+  content: ' \f0dd';
+  padding-right: 2px;
+}
+table > tbody > tr.empty-data {
+  background: #eeeeee;
+}
+.table-borderless tbody tr td,
+.table-borderless tbody tr th,
+.table-borderless thead tr th,
+.table-borderless thead tr td,
+.table-borderless tfoot tr th,
+.table-borderless tfoot tr td {
+  border: none;
+}
 .login-container .form-signin {
   max-width: 400px;
   display: block;

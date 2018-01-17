@@ -58,15 +58,41 @@ namespace CrossfitDiary.Web.Api
         [Route("exercises/{exerciseId}/personMaximum")]
         public IHttpActionResult GetPersonMaximum(int exerciseId)
         {
-            var result = new List<PersonExerciseMaximumViewModel>(){new PersonExerciseMaximumViewModel()
+            var result = new List<PersonExerciseMaximumViewModel>()
             {
-                Date = DateTime.Now.ToString("d"),
-                MaximumWeight = "124.5",
-                PersonName = User.Identity.Name
-            }};
+                new PersonExerciseMaximumViewModel()
+                {
+                    Date = DateTime.Now.ToString("d"),
+                    MaximumWeight = "124.5",
+                    PersonName = User.Identity.Name
+                }
+            };
             return Ok(result);
 //            IEnumerable<Exercise> exercises = _exerciseService.GetStatisticalExercises();
 //            return Ok(Mapper.Map<IEnumerable<ExerciseViewModel>>(exercises));
+        }
+
+
+        [HttpGet]
+        [Route("exercises/{exerciseId}/allPersonsMaximums")]
+        public IHttpActionResult GetallPersonsMaximums(int exerciseId)
+        {
+            var result = new List<PersonExerciseMaximumViewModel>()
+            {
+                new PersonExerciseMaximumViewModel()
+                {
+                    Date = DateTime.Now.ToString("d"),
+                    MaximumWeight = "124.5",
+                    PersonName = User.Identity.Name
+                },
+                new PersonExerciseMaximumViewModel()
+                {
+                    Date = DateTime.Now.AddDays(-2).ToString("d"),
+                    MaximumWeight = "100",
+                    PersonName = User.Identity.Name
+                }
+            };
+            return Ok(result);
         }
 
         #endregion

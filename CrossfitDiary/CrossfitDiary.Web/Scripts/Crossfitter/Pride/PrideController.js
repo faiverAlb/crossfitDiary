@@ -21,8 +21,9 @@ var PrideController = (function (_super) {
         _this._service = new CrossfitterService(basicParameters.pathToApp);
         _this._exercises = ko.observableArray([]);
         _this._personMaximums = ko.observableArray([]);
+        _this._allPersonsMaximums = ko.observableArray([]);
         _this._selectedExercise = ko.observable();
-        _this.initiateFiltering(_this._exercises, [{ value: "personName" }, { value: "date" }]);
+        _this.initiateFiltering(_this._allPersonsMaximums, [{ value: "personName" }, { value: "date" }]);
         _this.loadExercises();
         ko.computed(function () {
             var exercise = _this._selectedExercise();
@@ -32,6 +33,12 @@ var PrideController = (function (_super) {
             _this._service.getPersonExerciseMaximumWeight(exercise.id)
                 .then(function (personMaximums) {
                 _this._personMaximums(personMaximums);
+            })
+                .then(function () {
+                return _this._service.getAllPersonsExerciseMaximumWeights(exercise.id);
+            })
+                .then(function (allPersonsRecords) {
+                _this._allPersonsMaximums($.map(allPersonsRecords, function (item) { return new ObservablePersonExerciseRecord(item.personName, item.maximumWeight, item.date); }));
             });
         });
         return _this;
@@ -42,5 +49,13 @@ var PersonExerciseRecord = (function () {
     function PersonExerciseRecord() {
     }
     return PersonExerciseRecord;
+}());
+var ObservablePersonExerciseRecord = (function () {
+    function ObservablePersonExerciseRecord(personName, maximumWeight, date) {
+        this.personName = ko.observable(personName);
+        this.maximumWeight = ko.observable(maximumWeight);
+        this.date = ko.observable(date);
+    }
+    return ObservablePersonExerciseRecord;
 }());
 //# sourceMappingURL=PrideController.js.map
