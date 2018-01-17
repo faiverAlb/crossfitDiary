@@ -47,7 +47,7 @@ namespace CrossfitDiary.Model
         public decimal? Distance { get; set; }
 
         /// <summary>
-        /// Possible weight in lbs
+        /// Possible weight in kgs
         /// </summary>
         public decimal? Weight { get; set; }
 

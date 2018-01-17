@@ -40,6 +40,9 @@ var CrossfitterService = (function (_super) {
         _this.getStatisticalExercises = function () {
             return _this.get(_this.pathToApp + "api/getStatisticalExercises");
         };
+        _this.getPersonExerciseMaximumWeight = function (exerciseId) {
+            return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/personMaximum"));
+        };
         _this.removeWorkout = function (crossfitterWorkoutId) {
             return _this.delete("api/removeWorkout/" + crossfitterWorkoutId);
         };

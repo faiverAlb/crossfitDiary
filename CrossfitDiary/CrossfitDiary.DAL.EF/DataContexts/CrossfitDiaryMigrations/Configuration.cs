@@ -56,7 +56,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                 {
                     MeasureType = MeasureType.Weight,
                     Description = "Weight",
-                    ShortMeasureDescription = "lbs"
+                    ShortMeasureDescription = "kgs"
                 },
                 new ExerciseMeasureType()
                 {

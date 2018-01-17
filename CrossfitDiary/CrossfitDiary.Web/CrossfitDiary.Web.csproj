@@ -291,6 +291,7 @@
     <Compile Include="ViewModels\ExerciseViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LogWorkoutViewModel.cs" />
+    <Compile Include="ViewModels\Pride\PersonExerciseMaximum.cs" />
     <Compile Include="ViewModels\ToCreateAndLogNewWorkoutViewModel.cs" />
     <Compile Include="ViewModels\ToLogWorkoutViewModel.cs" />
     <Compile Include="ViewModels\WorkoutTypeViewModel.cs" />
@@ -474,6 +475,7 @@
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_CN.js" />
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <TypeScriptCompile Include="Scripts\BaseTypeScript\FilterableViewModel.ts" />
     <TypeScriptCompile Include="Scripts\BaseTypeScript\BasicParameters.ts" />
     <TypeScriptCompile Include="Scripts\Crossfitter\Pride\PrideController.ts" />
     <Content Include="Views\Crossfitter\Pride.cshtml" />

@@ -59,8 +59,9 @@ namespace CrossfitDiary.Web
                     "~/Scripts/BaseTypeScript/ServerProcessedViewModel.js"
                     , "~/Scripts/BaseTypeScript/BaseService.js"
                     , "~/Scripts/BaseTypeScript/CrossfitterService.js"
-                    , "~/Scripts/Crossfitter/Pride/PrideController.js"
                     , "~/Scripts/BaseTypeScript/BasicParameters.js"
+                    , "~/Scripts/BaseTypeScript/FilterableViewModel.js"
+                    , "~/Scripts/Crossfitter/Pride/PrideController.js"
                 ));
 
             /*   --Home--   */
