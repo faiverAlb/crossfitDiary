@@ -1,7 +1,21 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Our prides";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>pride here</h2>
+<div>
+    <h2>Choose an exercise:</h2>
+    <select class="form-control exercise-selector" data-live-search="true" data-bind="options:_exercises, optionsText:'title',value: _selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
+    <h3>table here</h3>
+</div>
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/crossfitter/statistics")
+<script>
+        $(function() {
+            var model = new PrideController({pathToApp: "@Url.Content("~")"});
+            ko.applyBindings(model);
+        });
+</script>
+}

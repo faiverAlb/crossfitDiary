@@ -52,6 +52,17 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Crossfitter/ManageWorkout/ManageWorkoutController.js"
                 ));
 
+
+            /* Statistics */
+            bundles.Add(new ScriptBundle("~/bundles/crossfitter/statistics")
+                .Include(
+                    "~/Scripts/BaseTypeScript/ServerProcessedViewModel.js"
+                    , "~/Scripts/BaseTypeScript/BaseService.js"
+                    , "~/Scripts/BaseTypeScript/CrossfitterService.js"
+                    , "~/Scripts/Crossfitter/Pride/PrideController.js"
+                    , "~/Scripts/BaseTypeScript/BasicParameters.js"
+                ));
+
             /*   --Home--   */
             bundles.Add(new ScriptBundle("~/bundles/home")
                 .Include(
