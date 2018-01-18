@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using AutoMapper;
 using CrossfitDiary.Model;
@@ -38,22 +39,8 @@ namespace CrossfitDiary.Web.Api
         [Route("exercises/{exerciseId}/allPersonsMaximums")]
         public IHttpActionResult GetAllPersonsMaximums(int exerciseId)
         {
-            var result = new List<PersonExerciseMaximumViewModel>()
-            {
-                new PersonExerciseMaximumViewModel()
-                {
-                    Date = DateTime.Now.ToString("d"),
-                    MaximumWeight = "124.5",
-                    PersonName = User.Identity.Name
-                },
-                new PersonExerciseMaximumViewModel()
-                {
-                    Date = DateTime.Now.AddDays(-2).ToString("d"),
-                    MaximumWeight = "100",
-                    PersonName = User.Identity.Name
-                }
-            };
-            return Ok(result);
+            List<PersonMaximum> maximums = _crossfitterService.GetAllPersonMaximumForExercise(exerciseId);
+            return Ok(maximums.Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)));
         }
     }
 }

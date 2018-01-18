@@ -95,10 +95,24 @@ namespace CrossfitDiary.Service
                         select exercise.Weight ?? 0
                     ).Max()
                 }).OrderByDescending(x => x.MaximumWeight).FirstOrDefault();
-
-
             return maximum;
+
         }
+
+
+        public List<PersonMaximum> GetAllPersonMaximumForExercise(int exerciseId)
+        {
+            IEnumerable<CrossfitterWorkout> workoutsWithExericesOnly = _crossfitterWorkoutRepository.GetMany(x => x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId));
+            var groupedByCrossfitter = workoutsWithExericesOnly.GroupBy(x => x.Crossfitter.Id);
+            var resultMaximums = new List<PersonMaximum>();
+            foreach (var group in groupedByCrossfitter)
+            {
+                resultMaximums.Add(GetPersonMaximumForExercise(group.Key, exerciseId));
+            }
+
+            return resultMaximums.OrderByDescending(x => x.MaximumWeight).ToList();
+        }
+
 
 
         public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(DateTime fromDate, DateTime dueDate)
@@ -148,5 +162,6 @@ namespace CrossfitDiary.Service
             _crossfitterWorkoutRepository.Delete(x => x.Id == crossfitterWorkoutId);
             _unitOfWork.Commit();
         }
+
     }
 }
