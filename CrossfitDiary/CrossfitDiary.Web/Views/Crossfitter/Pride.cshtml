@@ -3,19 +3,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div data-bind="visible:true" style="display: none">
+<div data-bind="visible:true" style="display: none" class="pride-container">
     <h2>Choose an exercise:</h2>
     <select class="form-control exercise-selector" data-live-search="true" data-bind="options:_exercises, optionsText:'title',value: _selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
 
     <div class="person-records" data-bind="if:_selectedExercise">
-        <h3>All persons results </h3>
+        <h3>Your results </h3>
         <div class="clearfix">
             <table class="table table-striped ">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Maximum Weight</th>
-                        <th>Date</th>
+                        <th class="fixed-pride-width">Name</th>
+                        <th class="fixed-pride-width">Maximum Weight</th>
+                        <th class="fixed-pride-width">Date</th>
                 </thead>
                 <tbody>
                     <!--ko if:_personMaximums().length == 0 -->
@@ -50,9 +50,9 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
-                    <th data-bind="sort: {arr:_allPersonsMaximums, prop:'personName'}">Name</th>
-                    <th data-bind="sort: {arr:_allPersonsMaximums, prop:'maximumWeight'}">Maximum Weight</th>
-                    <th data-bind="sort: {arr:_allPersonsMaximums, prop:'date'}">Date</th>
+                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'personName'}">Name</th>
+                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'maximumWeight'}">Maximum Weight</th>
+                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'date'}">Date</th>
             </thead>
             <tbody>
                 <!--ko if:filteredItems().length == 0 -->

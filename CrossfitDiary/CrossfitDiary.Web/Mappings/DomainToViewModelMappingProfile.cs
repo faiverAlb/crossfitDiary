@@ -5,6 +5,7 @@ using System.Web.Providers.Entities;
 using AutoMapper;
 using CrossfitDiary.Model;
 using CrossfitDiary.Web.ViewModels;
+using CrossfitDiary.Web.ViewModels.Pride;
 using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Mappings
@@ -20,6 +21,8 @@ namespace CrossfitDiary.Web.Mappings
             CreateMap<ExerciseMeasureType, ExerciseMeasureTypeViewModel>();
             CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>();
             CreateMap<RoutineComplexType, WorkoutTypeViewModel>();
+            CreateMap<PersonMaximum, PersonExerciseMaximumViewModel>()
+                .ForMember(x => x.Date, x => x.MapFrom(y => y.Date.ToString("d")));
 
 
             CreateMap<CrossfitterWorkout, ToLogWorkoutViewModel>()

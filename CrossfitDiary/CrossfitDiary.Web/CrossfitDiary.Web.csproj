@@ -244,6 +244,7 @@
     <Compile Include="Api\BaseApiController.cs" />
     <Compile Include="Api\ExercisesController.cs" />
     <Compile Include="Api\WorkoutController.cs" />
+    <Compile Include="Api\WorkouterController.cs" />
     <Compile Include="App_Start\AutofacDependencyResolver.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -308,6 +309,12 @@
       <DependentUpon>login-page.less</DependentUpon>
     </Content>
     <Content Include="Content\pages\bootstrap.min.css">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="Content\pages\crossfitter\pride\bootstrap.css">
+      <DependentUpon>pride.less</DependentUpon>
+    </Content>
+    <Content Include="Content\pages\crossfitter\pride\bootstrap.min.css">
       <DependentUpon>bootstrap.css</DependentUpon>
     </Content>
     <Content Include="Content\pages\home\bootstrap.css">
@@ -504,6 +511,7 @@
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
     <Content Include="Content\pages\crossfitter\manage-workout\existing-workouts-container.less" />
     <Content Include="Content\General\general.less" />
+    <Content Include="Content\pages\crossfitter\pride\pride.less" />
     <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Properties\PublishProfiles\workouter.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

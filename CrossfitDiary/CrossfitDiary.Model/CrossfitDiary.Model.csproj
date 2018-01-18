@@ -69,6 +69,7 @@
     <Compile Include="Exercise.cs" />
     <Compile Include="ExerciseMeasure.cs" />
     <Compile Include="ExerciseMeasureType.cs" />
+    <Compile Include="PersonMaximum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoutineComplex.cs" />
     <Compile Include="RoutineComplexType.cs" />
