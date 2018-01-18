@@ -21,6 +21,11 @@ namespace CrossfitDiary.Model
         /// </summary>
         public string PersonName { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the workout title.
+        /// </summary>
+        public string WorkoutTitle { get; set; }
+
         #endregion
     }
 }

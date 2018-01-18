@@ -36,7 +36,7 @@
                     return this._service.getAllPersonsExerciseMaximumWeights(exercise.id);
                 })
                 .then((allPersonsRecords: PersonExerciseRecord[]) => {
-                    this._allPersonsMaximums($.map(allPersonsRecords, item => new ObservablePersonExerciseRecord(item.personName,item.maximumWeight,item.date)));
+                    this._allPersonsMaximums($.map(allPersonsRecords, item => new ObservablePersonExerciseRecord(item.personName, item.maximumWeight, item.date, item.workoutTitle)));
                 });
         });
 
@@ -56,17 +56,20 @@ class PersonExerciseRecord {
     personName: string;
     maximumWeight: string;
     date: string;
+    workoutTitle: string;
 }
 
 class ObservablePersonExerciseRecord {
     personName: KnockoutObservable<string>;
     maximumWeight: KnockoutObservable<string>;
     date: KnockoutObservable<string>;
+    workoutTitle: KnockoutObservable<string>;
 
-    constructor(personName: string, maximumWeight: string, date: string) {
+    constructor(personName: string, maximumWeight: string, date: string, workoutTitle:string) {
         this.personName = ko.observable(personName);
         this.maximumWeight = ko.observable(maximumWeight);
         this.date = ko.observable(date);
+        this.workoutTitle = ko.observable(workoutTitle);
     }
 }
 

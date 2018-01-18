@@ -20,5 +20,6 @@ namespace CrossfitDiary.Service
             var availableWorkouts = _routineComplexRepository.GetAll();
             return availableWorkouts;
         }
+
     }
 }

@@ -5,30 +5,31 @@ using AutoMapper;
 using CrossfitDiary.Model;
 using CrossfitDiary.Service;
 using CrossfitDiary.Web.ViewModels.Pride;
+using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Api
 {
     [Authorize]
     [RoutePrefix("api")]
-    public class WorkouterController : BaseApiController
+    public class CrossfitterController : BaseApiController
     {
-        private readonly WorkouterService _workouterService;
+        private readonly CrossfitterService _crossfitterService;
 
-        public WorkouterController(WorkouterService workouterService)
+        public CrossfitterController(CrossfitterService crossfitterService)
         {
-            _workouterService = workouterService;
+            _crossfitterService = crossfitterService;
         }
 
         [HttpGet]
         [Route("exercises/{exerciseId}/personMaximum")]
         public IHttpActionResult GetPersonMaximum(int exerciseId)
         {
-            PersonMaximum gotMaximum = _workouterService.GetPersonMaximumForExercise(exerciseId);
-            
-            var result = new List<PersonExerciseMaximumViewModel>()
+            var result = new List<PersonExerciseMaximumViewModel>();
+            PersonMaximum gotMaximum = _crossfitterService.GetPersonMaximumForExercise(User.Identity.GetUserId(), exerciseId);
+            if (gotMaximum != null)
             {
-                Mapper.Map<PersonExerciseMaximumViewModel>(gotMaximum)
-            };
+                result.Add(Mapper.Map<PersonExerciseMaximumViewModel>(gotMaximum));
+            }
             return Ok(result);
         }
 

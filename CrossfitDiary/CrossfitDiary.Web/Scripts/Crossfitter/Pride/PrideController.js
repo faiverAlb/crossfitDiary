@@ -38,7 +38,7 @@ var PrideController = (function (_super) {
                 return _this._service.getAllPersonsExerciseMaximumWeights(exercise.id);
             })
                 .then(function (allPersonsRecords) {
-                _this._allPersonsMaximums($.map(allPersonsRecords, function (item) { return new ObservablePersonExerciseRecord(item.personName, item.maximumWeight, item.date); }));
+                _this._allPersonsMaximums($.map(allPersonsRecords, function (item) { return new ObservablePersonExerciseRecord(item.personName, item.maximumWeight, item.date, item.workoutTitle); }));
             });
         });
         return _this;
@@ -51,10 +51,11 @@ var PersonExerciseRecord = (function () {
     return PersonExerciseRecord;
 }());
 var ObservablePersonExerciseRecord = (function () {
-    function ObservablePersonExerciseRecord(personName, maximumWeight, date) {
+    function ObservablePersonExerciseRecord(personName, maximumWeight, date, workoutTitle) {
         this.personName = ko.observable(personName);
         this.maximumWeight = ko.observable(maximumWeight);
         this.date = ko.observable(date);
+        this.workoutTitle = ko.observable(workoutTitle);
     }
     return ObservablePersonExerciseRecord;
 }());

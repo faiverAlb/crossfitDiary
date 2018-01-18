@@ -66,6 +66,41 @@ namespace CrossfitDiary.Service
 
             return crossfitterWorkouts;
         }
+
+        /// <summary>
+        /// The get person maximum for exercise.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="exerciseId">
+        ///     The exercise id.
+        /// </param>
+        /// <param name="getUserId"></param>
+        /// <returns>
+        /// The <see cref="PersonMaximum"/>.
+        /// </returns>
+        public PersonMaximum GetPersonMaximumForExercise(string userId, int exerciseId)
+        {
+            IEnumerable<CrossfitterWorkout> workoutsWithExericesOnly = _crossfitterWorkoutRepository
+                        .GetMany(x => x.Crossfitter.Id == userId
+                                      && x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId));
+
+            PersonMaximum maximum = (from crossfitterWorkout in workoutsWithExericesOnly
+                select new PersonMaximum
+                {
+                    Date = crossfitterWorkout.Date,
+                    PersonName = crossfitterWorkout.Crossfitter.FullName,
+                    WorkoutTitle = crossfitterWorkout.RoutineComplex.Title,
+                    MaximumWeight = (
+                        from exercise in crossfitterWorkout.RoutineComplex.RoutineSimple
+                        select exercise.Weight ?? 0
+                    ).Max()
+                }).OrderByDescending(x => x.MaximumWeight).FirstOrDefault();
+
+
+            return maximum;
+        }
+
+
         public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(DateTime fromDate, DateTime dueDate)
         {
             List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x =>(fromDate.Date <= x.Date && x.Date <= dueDate.Date)).ToList();

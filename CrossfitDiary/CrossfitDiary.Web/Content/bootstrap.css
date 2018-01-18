@@ -8532,7 +8532,11 @@ select.selectpicker {
 }
 /* Home page */
 .pride-container .fixed-pride-width {
-  width: 33%;
+  width: 25%;
+}
+.pride-container .maximum-weight {
+  font-weight: bold;
+  text-decoration: underline;
 }
 /* bootstrap-datepicker from http://eonasdan.github.io/bootstrap-datetimepicker */
 /*!
