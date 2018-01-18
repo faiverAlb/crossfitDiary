@@ -89,6 +89,7 @@ namespace CrossfitDiary.Service
                 {
                     Date = crossfitterWorkout.Date,
                     PersonName = crossfitterWorkout.Crossfitter.FullName,
+                    PersonId = crossfitterWorkout.Crossfitter.Id,
                     WorkoutTitle = crossfitterWorkout.RoutineComplex.Title,
                     MaximumWeight = (
                         from exercise in crossfitterWorkout.RoutineComplex.RoutineSimple
@@ -100,7 +101,7 @@ namespace CrossfitDiary.Service
         }
 
 
-        public List<PersonMaximum> GetAllPersonMaximumForExercise(int exerciseId)
+        public List<PersonMaximum> GetAllPersonMaximumForExercise(int exerciseId, string currentUserId)
         {
             IEnumerable<CrossfitterWorkout> workoutsWithExericesOnly = _crossfitterWorkoutRepository.GetMany(x => x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId));
             var groupedByCrossfitter = workoutsWithExericesOnly.GroupBy(x => x.Crossfitter.Id);
@@ -110,7 +111,14 @@ namespace CrossfitDiary.Service
                 resultMaximums.Add(GetPersonMaximumForExercise(group.Key, exerciseId));
             }
 
-            return resultMaximums.OrderByDescending(x => x.MaximumWeight).ToList();
+            resultMaximums = resultMaximums.OrderByDescending(x => x.MaximumWeight).ToList();
+            for (int i = 0; i < resultMaximums.Count; i++)
+            {
+                resultMaximums[i].PositionBetweenOthers = i + 1;
+                resultMaximums[i].IsItMe = resultMaximums[i].PersonId == currentUserId;
+            }
+
+            return resultMaximums;
         }
 
 

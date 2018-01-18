@@ -16,6 +16,12 @@ namespace CrossfitDiary.Web.ViewModels.Pride
         public string Date { get; set; }
 
         /// <summary>
+        ///     Gets or sets a value indicating whether is it me.
+        /// </summary>
+        [JsonProperty("isItMe")]
+        public bool IsItMe { get; set; }
+
+        /// <summary>
         ///     Gets or sets the maximum weight.
         /// </summary>
         [JsonProperty("maximumWeight")]
@@ -26,6 +32,12 @@ namespace CrossfitDiary.Web.ViewModels.Pride
         /// </summary>
         [JsonProperty("personName")]
         public string PersonName { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the position between others.
+        /// </summary>
+        [JsonProperty("positionBetweenOthers")]
+        public int PositionBetweenOthers { get; set; }
 
         /// <summary>
         ///     Gets or sets the workout title.

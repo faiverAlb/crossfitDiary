@@ -54,6 +54,7 @@
         <table class="table table-striped ">
             <thead>
                 <tr>
+                    <th></th>
                     <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'personName'}">Name</th>
                     <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'maximumWeight'}">Maximum weight</th>
                     <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'date'}">Date</th>
@@ -66,7 +67,10 @@
                 </tr>
                 <!-- /ko -->
                 <!-- ko foreach: filteredItems -->
-                <tr>
+                <tr data-bind="css: {'success': isItMe }">
+                    <td>
+                        <span data-bind="text: positionBetweenOthers"></span>
+                    </td>
                     <td>
                         <span data-bind="text: personName"></span>
                     </td>

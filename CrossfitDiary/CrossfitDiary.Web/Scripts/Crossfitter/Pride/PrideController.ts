@@ -16,7 +16,7 @@
 
         this._selectedExercise = ko.observable();
 
-        this.initiateFiltering(this._allPersonsMaximums, [{ value: "personName" }, { value: "date" }]);
+        this.initiateFiltering(this._allPersonsMaximums, [{ value: "personName" }, { value: "date" }, { value: "workoutTitle" }]);
 
 
 
@@ -36,7 +36,7 @@
                     return this._service.getAllPersonsExerciseMaximumWeights(exercise.id);
                 })
                 .then((allPersonsRecords: PersonExerciseRecord[]) => {
-                    this._allPersonsMaximums($.map(allPersonsRecords, item => new ObservablePersonExerciseRecord(item.personName, item.maximumWeight, item.date, item.workoutTitle)));
+                    this._allPersonsMaximums($.map(allPersonsRecords, item => new ObservablePersonExerciseRecord(item.personName, item.maximumWeight, item.date, item.workoutTitle, item.positionBetweenOthers, item.isItMe)));
                 });
         });
 
@@ -57,6 +57,8 @@ class PersonExerciseRecord {
     maximumWeight: string;
     date: string;
     workoutTitle: string;
+    positionBetweenOthers: number;
+    isItMe: boolean;
 }
 
 class ObservablePersonExerciseRecord {
@@ -64,12 +66,16 @@ class ObservablePersonExerciseRecord {
     maximumWeight: KnockoutObservable<string>;
     date: KnockoutObservable<string>;
     workoutTitle: KnockoutObservable<string>;
+    positionBetweenOthers: KnockoutObservable<number>;
+    isItMe: KnockoutObservable<boolean>;
 
-    constructor(personName: string, maximumWeight: string, date: string, workoutTitle:string) {
+    constructor(personName: string, maximumWeight: string, date: string, workoutTitle: string, positionBetweenOthers: number, isItMe: boolean) {
         this.personName = ko.observable(personName);
         this.maximumWeight = ko.observable(maximumWeight);
         this.date = ko.observable(date);
         this.workoutTitle = ko.observable(workoutTitle);
+        this.positionBetweenOthers = ko.observable(positionBetweenOthers);
+        this.isItMe = ko.observable(isItMe);
     }
 }
 

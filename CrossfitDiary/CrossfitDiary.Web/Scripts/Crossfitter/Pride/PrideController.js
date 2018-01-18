@@ -23,7 +23,7 @@ var PrideController = (function (_super) {
         _this._personMaximums = ko.observableArray([]);
         _this._allPersonsMaximums = ko.observableArray([]);
         _this._selectedExercise = ko.observable();
-        _this.initiateFiltering(_this._allPersonsMaximums, [{ value: "personName" }, { value: "date" }]);
+        _this.initiateFiltering(_this._allPersonsMaximums, [{ value: "personName" }, { value: "date" }, { value: "workoutTitle" }]);
         _this.loadExercises();
         ko.computed(function () {
             var exercise = _this._selectedExercise();
@@ -38,7 +38,7 @@ var PrideController = (function (_super) {
                 return _this._service.getAllPersonsExerciseMaximumWeights(exercise.id);
             })
                 .then(function (allPersonsRecords) {
-                _this._allPersonsMaximums($.map(allPersonsRecords, function (item) { return new ObservablePersonExerciseRecord(item.personName, item.maximumWeight, item.date, item.workoutTitle); }));
+                _this._allPersonsMaximums($.map(allPersonsRecords, function (item) { return new ObservablePersonExerciseRecord(item.personName, item.maximumWeight, item.date, item.workoutTitle, item.positionBetweenOthers, item.isItMe); }));
             });
         });
         return _this;
@@ -51,11 +51,13 @@ var PersonExerciseRecord = (function () {
     return PersonExerciseRecord;
 }());
 var ObservablePersonExerciseRecord = (function () {
-    function ObservablePersonExerciseRecord(personName, maximumWeight, date, workoutTitle) {
+    function ObservablePersonExerciseRecord(personName, maximumWeight, date, workoutTitle, positionBetweenOthers, isItMe) {
         this.personName = ko.observable(personName);
         this.maximumWeight = ko.observable(maximumWeight);
         this.date = ko.observable(date);
         this.workoutTitle = ko.observable(workoutTitle);
+        this.positionBetweenOthers = ko.observable(positionBetweenOthers);
+        this.isItMe = ko.observable(isItMe);
     }
     return ObservablePersonExerciseRecord;
 }());
