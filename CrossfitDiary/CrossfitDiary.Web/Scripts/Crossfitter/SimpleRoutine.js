@@ -5,7 +5,14 @@
     var isMeasuresRequired = isFieldsRequired != null ? isFieldsRequired : true;
     function init() {
         for (var i = 0; i < self.exercise.exerciseMeasures.length; i++) {
-            self.exerciseMeasures.push(new ExerciseMeasureTypeValue(self.exercise.exerciseMeasures[i].exerciseMeasureType, isMeasuresRequired));
+            var exerciseMeasureType = self.exercise.exerciseMeasures[i].exerciseMeasureType;
+            if (exerciseMeasureType.measureType == Crossfitter.ExerciseMeasureTypes.Weight) {
+                isMeasuresRequired = false;
+            }
+
+            var exerciseMeasureTypeValue = new ExerciseMeasureTypeValue(exerciseMeasureType, isMeasuresRequired);
+
+            self.exerciseMeasures.push(exerciseMeasureTypeValue);
         }
     };
 

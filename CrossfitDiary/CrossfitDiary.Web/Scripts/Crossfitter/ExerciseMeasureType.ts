@@ -1,9 +1,8 @@
 ﻿module Crossfitter {
     export enum ExerciseMeasureTypes {
-        Distance= 0,
+        Distance = 0,
         Count = 1,
-        Time = 2,
-        Weight = 3,
-        Calories = 4
+        Weight = 2,
+        Calories = 3
     }
 }
