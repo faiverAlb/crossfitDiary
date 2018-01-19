@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                     <!--ko if:_personMaximums().length == 0 -->
-                    <tr class="text-center empty-data">
+                    <tr class="empty-data">
                         <td colspan="4">No records  were found for you</td>
                     </tr>
                     <!-- /ko -->
@@ -62,8 +62,8 @@
             </thead>
             <tbody>
                 <!--ko if:filteredItems().length == 0 -->
-                <tr class="text-center empty-data">
-                    <td colspan="4">No records yet</td>
+                <tr class="empty-data">
+                    <td colspan="5">No records yet</td>
                 </tr>
                 <!-- /ko -->
                 <!-- ko foreach: filteredItems -->
