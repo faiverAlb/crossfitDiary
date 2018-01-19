@@ -9,8 +9,8 @@
 
     }
 
-    private removeWorkout = (data) => {
-        this._service.removeWorkout(data.crossfitterWorkoutId)
+    private removeWorkout = (crossfitterWorkoutId:number) => {
+        this._service.removeWorkout(crossfitterWorkoutId)
             .finally(() => {
                 window.location.href = "/Home";
             });

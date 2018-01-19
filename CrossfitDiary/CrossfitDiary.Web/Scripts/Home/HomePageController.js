@@ -2,8 +2,8 @@ var HomePageController = (function () {
     function HomePageController(parameters) {
         var _this = this;
         this.parameters = parameters;
-        this.removeWorkout = function (data) {
-            _this._service.removeWorkout(data.crossfitterWorkoutId)
+        this.removeWorkout = function (crossfitterWorkoutId) {
+            _this._service.removeWorkout(crossfitterWorkoutId)
                 .finally(function () {
                 window.location.href = "/Home";
             });
