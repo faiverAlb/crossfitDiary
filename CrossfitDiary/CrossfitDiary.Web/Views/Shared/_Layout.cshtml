@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width"/>
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
 <nav class="navbar navbar-inverse ">
@@ -55,8 +54,6 @@
 </div>
 
 
-
-@Scripts.Render("~/bundles/site")
 @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -13,19 +13,22 @@ namespace CrossfitDiary.Web
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr")
-                   .Include("~/Scripts/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/site").Include(
-                "~/Scripts/jquery-{version}.js",
+            
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.min.js",
-                "~/Scripts/bootstrap-select/bootstrap-select.js",
+                "~/Scripts/bootstrap-select/bootstrap-select.js"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                "~/Scripts/jquery-{version}.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                 "~/Scripts/knockout-3.4.0.js",
                 "~/Scripts/knockout.validation.js",
                 "~/Scripts/ko.bindingHandlers.js",
-                "~/Scripts/typings/q/q.min.js"));
+                "~/Scripts/typings/q/q.min.js"
+            ));
 
 
             /*   --Crossfitter--   */
