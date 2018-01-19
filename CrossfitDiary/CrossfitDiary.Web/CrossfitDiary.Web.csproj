@@ -493,7 +493,7 @@
     <Content Include="Scripts\Crossfitter\ManageWorkout\CreateWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\ManageWorkout\LogWorkoutController.js" />
     <Content Include="Scripts\Crossfitter\ManageWorkout\ManageWorkoutController.js" />
-    <Content Include="Scripts\Crossfitter\WorkoutType.js" />
+    <TypeScriptCompile Include="Scripts\Crossfitter\WorkoutType.ts" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureType.js" />
     <Content Include="Scripts\Crossfitter\ExerciseMeasureTypeValue.js" />
     <Content Include="Scripts\Crossfitter\SimpleRoutine.js" />

@@ -60,13 +60,13 @@
         var selectedTypeValue = lightModel.selectedWorkoutType.Value;
 
         /* Rounds */
-        self.canSeeTotalRounds(selectedTypeValue == Crossfitter.WorkoutTypes.AMRAP);
+        self.canSeeTotalRounds(selectedTypeValue == WorkoutTypes.AMRAP);
 
 //        /* Distance input */
-        self.canSeePassedDistance(checkWorkoutContainsDistanceExercise() && selectedTypeValue == Crossfitter.WorkoutTypes.EMOM);
+        self.canSeePassedDistance(checkWorkoutContainsDistanceExercise() && selectedTypeValue == WorkoutTypes.EMOM);
 
         /* General time */
-        self.canSeeTotalTime(selectedTypeValue == Crossfitter.WorkoutTypes.ForTime);
+        self.canSeeTotalTime(selectedTypeValue == WorkoutTypes.ForTime);
     }
 
     function checkWorkoutContainsDistanceExercise() {

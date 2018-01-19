@@ -36,7 +36,7 @@ var CrossfitterController = function (parameters) {
             return false;
         }
         var selectedType = self.selectedWorkoutType().Value;
-        return selectedType == Crossfitter.WorkoutTypes.ForTime || selectedType == Crossfitter.WorkoutTypes.Tabata;
+        return selectedType == WorkoutTypes.ForTime || selectedType == WorkoutTypes.Tabata;
     });
 
     self.anyUsualExercises = ko.computed(function () {
@@ -52,7 +52,7 @@ var CrossfitterController = function (parameters) {
         }
         var selectedType = self.selectedWorkoutType().Value;
         var typeIsNeeded =
-            selectedType == Crossfitter.WorkoutTypes.EMOM || selectedType == Crossfitter.WorkoutTypes.E2MOM;
+            selectedType == WorkoutTypes.EMOM || selectedType == WorkoutTypes.E2MOM;
         return typeIsNeeded && self.anyUsualExercises();
     });
 
@@ -80,9 +80,9 @@ var CrossfitterController = function (parameters) {
             return false;
         }
         var selectedType = self.selectedWorkoutType().Value;
-        return selectedType == Crossfitter.WorkoutTypes.AMRAP
-            || selectedType == Crossfitter.WorkoutTypes.EMOM
-            || selectedType == Crossfitter.WorkoutTypes.E2MOM;
+        return selectedType == WorkoutTypes.AMRAP
+            || selectedType == WorkoutTypes.EMOM
+            || selectedType == WorkoutTypes.E2MOM;
     });
 
 

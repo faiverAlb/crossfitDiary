@@ -77,7 +77,7 @@ namespace CrossfitDiary.Web
 
 
             bundles.Add(new StyleBundle("~/Content/css")
-                .Include("~/Content/bootstrap.css"
+                .Include("~/Content/bootstrap.min.css"
                     , "~/Content/css/font-awesome.min.css"
                     , "~/Content/bootstrap-datepicker/bootstrap-datepicker.css"));
 
