@@ -4,7 +4,7 @@ using CrossfitDiary.Model;
 
 namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations.Seeders
 {
-    public static class ExerciseSeeder
+    public static partial class ExerciseSeeder
     {
 
         private static ICollection<ExerciseMeasure> GetExerciseMeasures(CrossfitDiaryDbContext context, params MeasureType[] measureTypes)

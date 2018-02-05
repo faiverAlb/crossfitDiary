@@ -31,6 +31,9 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
 
             ExerciseSeeder.GetMoreExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
             context.Commit();
+
+            ExerciseSeeder.AddSeeds_February_2018(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+            context.Commit();
         }
 
 
