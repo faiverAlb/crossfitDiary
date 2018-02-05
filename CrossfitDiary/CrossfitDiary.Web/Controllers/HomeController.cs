@@ -24,10 +24,6 @@ namespace CrossfitDiary.Web.Controllers
         }
         public virtual ActionResult Index()
         {
-
-
-            var fromDate = DateTime.Now.AddDays(-10);
-            var toDate = DateTime.Now.AddDays(10);
             HomeViewModel homeViewModel = new HomeViewModel()
             {
                 AllWorkouts = _crossfitterService.GetAllCrossfittersWorkouts().Select(x => Mapper.Map<ToLogWorkoutViewModel>(x)).OrderByDescending(x => x.Date).ToList(),
