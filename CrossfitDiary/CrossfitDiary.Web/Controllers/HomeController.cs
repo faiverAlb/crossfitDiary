@@ -30,7 +30,7 @@ namespace CrossfitDiary.Web.Controllers
             var toDate = DateTime.Now.AddDays(10);
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                AllWorkouts = _crossfitterService.GetAllCrossfittersWorkouts(fromDate, toDate).Select(x => Mapper.Map<ToLogWorkoutViewModel>(x)).OrderByDescending(x => x.Date).ToList(),
+                AllWorkouts = _crossfitterService.GetAllCrossfittersWorkouts().Select(x => Mapper.Map<ToLogWorkoutViewModel>(x)).OrderByDescending(x => x.Date).ToList(),
             };
 
             return View(model: homeViewModel);

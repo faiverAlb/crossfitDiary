@@ -122,12 +122,19 @@ namespace CrossfitDiary.Service
         }
 
 
-
-        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(DateTime fromDate, DateTime dueDate)
+        /// <summary>
+        /// Returns all crossfitters workouts.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts()
         {
-            List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x =>(fromDate.Date <= x.Date && x.Date <= dueDate.Date)).ToList();
+            List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetAll().ToList();
             foreach (var workout in crossfitterWorkouts)
+            {
                 PrepareWorkout(workout);
+            }
 
             return crossfitterWorkouts.OrderByDescending(x => x.Date).ToList();
         }
