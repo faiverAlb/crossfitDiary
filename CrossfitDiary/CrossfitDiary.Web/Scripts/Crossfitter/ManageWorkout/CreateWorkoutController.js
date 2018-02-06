@@ -57,7 +57,6 @@
             return;
         }
         self.service.createWorkout(self.toJSON());
-        self.service.createWorkout(self.toJSON());
     };
 
 
