@@ -101,7 +101,7 @@
     @Scripts.Render("~/bundles/crossfitter/statistics")
     <script>
         $(function() {
-            const model = new PrideController({ pathToApp: "@Url.Content("~")" });
+            const model = new Pages.PrideController({ pathToApp: "@Url.Content("~")" });
             ko.applyBindings(model);
         });
     </script>

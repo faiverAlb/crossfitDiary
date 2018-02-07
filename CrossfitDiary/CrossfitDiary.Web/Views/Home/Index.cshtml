@@ -6,7 +6,7 @@
 @model HomeViewModel
 
 
-<div class="home-container">
+<div class="home-container" style="display: none" data-bind="visible:true">
     
     <div data-bind="visible: _isDataLoading">
         @Html.Partial(MVC.Shared.Views._Spinner)

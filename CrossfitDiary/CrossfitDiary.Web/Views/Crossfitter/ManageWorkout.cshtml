@@ -52,7 +52,7 @@
     <script>
         $(function() {
             var path = "@Url.Content("~")";
-            window.model = new ManageWorkoutController({
+            window.model = new Pages.ManageWorkoutController({
                 pathToApp: path,
                 viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
                 });

@@ -64,41 +64,28 @@ module Pages {
             }
           }
         });
-
-
-
-
-
-     
-
-      function updateInputsVisibility() {
-        if (!lightModel.selectedWorkoutType || !lightModel.simpleRoutines) {
-          return;
-        }
-        var selectedTypeValue = lightModel.selectedWorkoutType.Value;
-
-        /* Rounds */
-        this.canSeeTotalRounds(selectedTypeValue == WorkoutTypes.AMRAP);
-
-        //        /* Distance input */
-        this.canSeePassedDistance(this.checkWorkoutContainsDistanceExercise() && selectedTypeValue == WorkoutTypes.EMOM);
-
-        /* General time */
-        this.canSeeTotalTime(selectedTypeValue == WorkoutTypes.ForTime);
-      }
-
-
       ko.computed(() => {
-        updateInputsVisibility();
+        this.updateInputsVisibility();
       });
-
-
       this.errors = ko.validation.group(this);
-
-
-
-
     }
+
+    updateInputsVisibility = () => {
+      if (!this.lightModel.selectedWorkoutType || !this.lightModel.simpleRoutines) {
+        return;
+      }
+      var selectedTypeValue = this.lightModel.selectedWorkoutType.Value;
+
+      /* Rounds */
+      this.canSeeTotalRounds(selectedTypeValue == WorkoutTypes.AMRAP);
+
+      //        /* Distance input */
+      this.canSeePassedDistance(this.checkWorkoutContainsDistanceExercise() && selectedTypeValue == WorkoutTypes.EMOM);
+
+      /* General time */
+      this.canSeeTotalTime(selectedTypeValue == WorkoutTypes.ForTime);
+    }
+
 
 
     checkWorkoutContainsDistanceExercise = () => {

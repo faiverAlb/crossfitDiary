@@ -16,7 +16,7 @@
       super(parameters);
       this.exercises = ko.observableArray([]);
       this.alternativeExercises = ko.observableArray();
-      this.hasAnyRoutines = ko.computed(function () {
+      this.hasAnyRoutines = ko.computed(() => {
         return this.simpleRoutines().length > 0;
       });
 
@@ -27,14 +27,14 @@
 
       this.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
 
-      ko.computed(function () {
+      ko.computed(() => {
         if (this.selectedWorkoutType() || !this.selectedWorkoutType()) {
           this.simpleRoutines([]);
         }
       });
       this.errors = ko.validation.group(this);
 
-      ko.computed(function () {
+      ko.computed( () => {
         var exercise = this.selectedExercise();
         if (!exercise) {
           return;
@@ -44,7 +44,7 @@
         this.selectedExercise('');
       });
 
-      ko.computed(function () {
+      ko.computed(() =>{
         var exercise = this.selectedAlternativeExercise();
         if (!exercise) {
           return;
@@ -89,7 +89,7 @@
       this.selectedWorkoutType(null);
     };
 
-    getCreateWorkoutModel = function () {
+    getCreateWorkoutModel = () => {
       return this.toJSON();
     }
 

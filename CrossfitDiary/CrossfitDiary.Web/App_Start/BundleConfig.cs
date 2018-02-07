@@ -41,14 +41,15 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/bootstrap-datepicker/moment-with-locales.min.js"
                     , "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.min.js"
                     , "~/Scripts/Pages/General/BaseController.js"
+                    , "~/Scripts/Pages/General/BaseService.js"
+                    , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/Crossfitter/SimpleRoutine.js"
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/CrossfitterController.js"
                     , "~/Scripts/Pages/Crossfitter/ExerciseMeasureType.js"
                     , "~/Scripts/Pages/Crossfitter/WorkoutType.js"
                     , "~/Scripts/Pages/Crossfitter/ExerciseMeasureTypeValue.js"
                     , "~/Scripts/Pages/General/ServerProcessedViewModel.js"
-                    , "~/Scripts/Pages/General/BaseService.js"
-                    , "~/Scripts/Pages/General/CrossfitterService.js"
+                    
 
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/CreateWorkoutController.js"
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/ChooseExistingWorkoutController.js"

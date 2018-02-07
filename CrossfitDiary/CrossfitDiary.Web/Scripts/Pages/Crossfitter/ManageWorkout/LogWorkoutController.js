@@ -5,6 +5,18 @@ var Pages;
             var _this = this;
             this.lightModel = lightModel;
             this.logFunction = logFunction;
+            this.updateInputsVisibility = function () {
+                if (!_this.lightModel.selectedWorkoutType || !_this.lightModel.simpleRoutines) {
+                    return;
+                }
+                var selectedTypeValue = _this.lightModel.selectedWorkoutType.Value;
+                /* Rounds */
+                _this.canSeeTotalRounds(selectedTypeValue == WorkoutTypes.AMRAP);
+                //        /* Distance input */
+                _this.canSeePassedDistance(_this.checkWorkoutContainsDistanceExercise() && selectedTypeValue == WorkoutTypes.EMOM);
+                /* General time */
+                _this.canSeeTotalTime(selectedTypeValue == WorkoutTypes.ForTime);
+            };
             this.checkWorkoutContainsDistanceExercise = function () {
                 return ko.utils.arrayFirst(_this.lightModel.simpleRoutines, function (routine) {
                     var foundDistanceMeasure = ko.utils.arrayFirst(routine.exerciseMeasures(), function (measure) { return measure.measureType() == Crossfitter.ExerciseMeasureTypes.Distance; });
@@ -70,20 +82,8 @@ var Pages;
                     }
                 }
             });
-            function updateInputsVisibility() {
-                if (!lightModel.selectedWorkoutType || !lightModel.simpleRoutines) {
-                    return;
-                }
-                var selectedTypeValue = lightModel.selectedWorkoutType.Value;
-                /* Rounds */
-                this.canSeeTotalRounds(selectedTypeValue == WorkoutTypes.AMRAP);
-                //        /* Distance input */
-                this.canSeePassedDistance(this.checkWorkoutContainsDistanceExercise() && selectedTypeValue == WorkoutTypes.EMOM);
-                /* General time */
-                this.canSeeTotalTime(selectedTypeValue == WorkoutTypes.ForTime);
-            }
             ko.computed(function () {
-                updateInputsVisibility();
+                _this.updateInputsVisibility();
             });
             this.errors = ko.validation.group(this);
         }

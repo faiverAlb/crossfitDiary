@@ -44,37 +44,37 @@ var Pages;
                 _this.selectedWorkoutType(null);
             };
             _this.getCreateWorkoutModel = function () {
-                return this.toJSON();
+                return _this.toJSON();
             };
             _this.exercises = ko.observableArray([]);
             _this.alternativeExercises = ko.observableArray();
             _this.hasAnyRoutines = ko.computed(function () {
-                return this.simpleRoutines().length > 0;
+                return _this.simpleRoutines().length > 0;
             });
             _this.selectedExercise = ko.observable();
             _this.selectedAlternativeExercise = ko.observable();
             _this.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
             ko.computed(function () {
-                if (this.selectedWorkoutType() || !this.selectedWorkoutType()) {
-                    this.simpleRoutines([]);
+                if (_this.selectedWorkoutType() || !_this.selectedWorkoutType()) {
+                    _this.simpleRoutines([]);
                 }
             });
             _this.errors = ko.validation.group(_this);
             ko.computed(function () {
-                var exercise = this.selectedExercise();
+                var exercise = _this.selectedExercise();
                 if (!exercise) {
                     return;
                 }
-                this.simpleRoutines.push(new SimpleRoutine(exercise, this.selectedWorkoutType().Value != WorkoutTypes.Tabata));
-                this.selectedExercise('');
+                _this.simpleRoutines.push(new SimpleRoutine(exercise, _this.selectedWorkoutType().Value != WorkoutTypes.Tabata));
+                _this.selectedExercise('');
             });
             ko.computed(function () {
-                var exercise = this.selectedAlternativeExercise();
+                var exercise = _this.selectedAlternativeExercise();
                 if (!exercise) {
                     return;
                 }
-                this.simpleRoutines.push(new SimpleRoutine(exercise));
-                this.selectedAlternativeExercise('');
+                _this.simpleRoutines.push(new SimpleRoutine(exercise));
+                _this.selectedAlternativeExercise('');
             });
             _this.loadExercises();
             return _this;
