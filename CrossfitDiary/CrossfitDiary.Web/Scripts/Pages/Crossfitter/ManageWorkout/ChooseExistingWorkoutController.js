@@ -1,65 +1,56 @@
-﻿var ChooseExistingWorkoutController = function (parameters) {
-
-    var self = this;
-    self.service = new CrossfitterService(parameters.pathToApp);
-    self.availableWorkouts = ko.observableArray();
-
-    self.selectedWorkout = ko.observable();
-    self.isReadOnlyMode = true;
-
-    self.hasPredefinedWorkout = parameters.viewModel.crossfitterWorkout != null;
-
-    self.workoutToDisplay = ko.observable();
-
-    ko.computed(function () {
-        var workout = self.selectedWorkout();
-        if (!workout) {
-            return;
-        }
-        workout.isReadOnlyMode = self.isReadOnlyMode;
-        self.workoutToDisplay(new CrossfitterController(workout));
-
-    });
-
-    self.clearState = function() {
-        self.selectedWorkout(null);
-    };
-
-
-    self.toJSON = function () {
-        var model = {
-            selectedWorkoutId: self.selectedWorkout().id,
-            roundsFinished: self.totalRoundsFinished,
-            partialRepsFinished: self.partialRepsFinished,
-            timePassed: self.totalTime,
-            distance: self.distance,
-            wasFinished: self.wasFinished,
-            isRx: self.isRx()
-        };
-        return model;
-    };
-
-    function loadAvailableWorkouts() {
-        self.service.getAvailableWorkouts().then(function (availableWorkouts) {
-            self.availableWorkouts(availableWorkouts);
-
-            if (self.hasPredefinedWorkout) {
-                var foundWorkout = ko.utils.arrayFirst(self.availableWorkouts(), function (item) {
-                    return item.id == parameters.viewModel.crossfitterWorkout.selectedWorkoutId;
+var Pages;
+(function (Pages) {
+    var CrossfitterService = General.CrossfitterService;
+    var ChooseExistingWorkoutController = (function () {
+        function ChooseExistingWorkoutController(parameters) {
+            var _this = this;
+            this.parameters = parameters;
+            this.clearState = function () {
+                _this.selectedWorkout(null);
+            };
+            this.toJSON = function () {
+                var model = {
+                    selectedWorkoutId: _this.selectedWorkout().id,
+                    roundsFinished: _this.totalRoundsFinished,
+                    partialRepsFinished: _this.partialRepsFinished,
+                    timePassed: _this.totalTime,
+                    distance: _this.distance,
+                    wasFinished: _this.wasFinished,
+                    isRx: _this.isRx()
+                };
+                return model;
+            };
+            this.loadAvailableWorkouts = function () {
+                _this._service.getAvailableWorkouts().then(function (availableWorkouts) {
+                    _this.availableWorkouts(availableWorkouts);
+                    if (_this.hasPredefinedWorkout) {
+                        var foundWorkout = ko.utils.arrayFirst(_this.availableWorkouts(), function (item) {
+                            return item.id == _this.parameters.viewModel.crossfitterWorkout.selectedWorkoutId;
+                        });
+                        if (foundWorkout) {
+                            _this.selectedWorkout(foundWorkout);
+                        }
+                    }
                 });
-
-                if (foundWorkout) {
-                    self.selectedWorkout(foundWorkout);
+            };
+            this._service = new CrossfitterService(parameters.pathToApp);
+            this.availableWorkouts = ko.observableArray();
+            this.selectedWorkout = ko.observable();
+            this.isReadOnlyMode = true;
+            this.hasPredefinedWorkout = parameters.viewModel.crossfitterWorkout != null;
+            this.workoutToDisplay = ko.observable();
+            ko.computed(function () {
+                var workout = _this.selectedWorkout();
+                if (!workout) {
+                    return;
                 }
-            }
-        });
-    };
-
-    function init() {
-        loadAvailableWorkouts();
-    };
-
-    init();
-
-    return self;
-};
+                workout.isReadOnlyMode = _this.isReadOnlyMode;
+                _this.workoutToDisplay(new Pages.CrossfitterController(workout));
+            });
+            this.loadAvailableWorkouts();
+        }
+        return ChooseExistingWorkoutController;
+    }());
+    Pages.ChooseExistingWorkoutController = ChooseExistingWorkoutController;
+})(Pages || (Pages = {}));
+//# sourceMappingURL=ChooseExistingWorkoutController.js.map

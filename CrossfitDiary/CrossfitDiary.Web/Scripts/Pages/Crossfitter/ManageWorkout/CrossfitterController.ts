@@ -36,7 +36,7 @@
   export class CrossfitterController extends BaseController {
     protected  _service: CrossfitterService;
     private isReadOnlyMode: boolean;
-    private simpleRoutines: KnockoutObservableArray<any>;
+    simpleRoutines: KnockoutObservableArray<any>;
     selectedWorkoutType: KnockoutObservable<any>;
     private title: KnockoutObservable<string>;
     private restBetweenExercises: KnockoutObservable<any>;

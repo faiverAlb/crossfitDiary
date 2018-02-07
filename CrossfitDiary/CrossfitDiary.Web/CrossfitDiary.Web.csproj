@@ -491,10 +491,10 @@
     <TypeScriptCompile Include="Scripts\Pages\General\ServerProcessedViewModel.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\BaseService.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\CrossfitterService.ts" />
-    <Content Include="Scripts\Pages\Crossfitter\ManageWorkout\ChooseExistingWorkoutController.js" />
+    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\ChooseExistingWorkoutController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CreateWorkoutController.ts" />
-    <Content Include="Scripts\Pages\Crossfitter\ManageWorkout\LogWorkoutController.js" />
-    <Content Include="Scripts\Pages\Crossfitter\ManageWorkout\ManageWorkoutController.js" />
+    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\LogWorkoutController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\ManageWorkoutController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\WorkoutType.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ExerciseMeasureType.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ExerciseMeasureTypeValue.ts" />

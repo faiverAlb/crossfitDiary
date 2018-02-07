@@ -1,114 +1,94 @@
-﻿var LogWorkoutController = function (lightModel, logFunction) {
-    var self = this;
-
-    self.canSeeTotalRounds = ko.observable(false);
-    self.canSeePassedDistance = ko.observable(false);
-    self.canSeeTotalTime = ko.observable(false);
-    self.date = lightModel.date;
-
-    self.logWorkoutText = ko.observable(lightModel.logWorkoutText);
-
-    self.totalRoundsFinished = ko.observable()
-        .extend({
-            required: {
-                onlyIf: function() {
-                    return self.canSeeTotalRounds();
+var Pages;
+(function (Pages) {
+    var LogWorkoutController = (function () {
+        function LogWorkoutController(lightModel, logFunction) {
+            var _this = this;
+            this.lightModel = lightModel;
+            this.logFunction = logFunction;
+            this.checkWorkoutContainsDistanceExercise = function () {
+                return ko.utils.arrayFirst(_this.lightModel.simpleRoutines, function (routine) {
+                    var foundDistanceMeasure = ko.utils.arrayFirst(routine.exerciseMeasures(), function (measure) { return measure.measureType() == Crossfitter.ExerciseMeasureTypes.Distance; });
+                    return foundDistanceMeasure;
+                }) != null;
+            };
+            this.logWorkout = function () {
+                _this.logFunction();
+            };
+            this.toJSON = function () {
+                var date = _this.plannedDate().toDate().toUTCString();
+                var model = {
+                    selectedWorkoutId: _this.lightModel.selectedWorkout ? _this.lightModel.selectedWorkout().id : null,
+                    crossfitterWorkoutId: _this.lightModel.crossfitterWorkoutId,
+                    roundsFinished: _this.totalRoundsFinished(),
+                    partialRepsFinished: _this.partialRepsFinished(),
+                    timePassed: _this.totalTime(),
+                    distance: _this.distance(),
+                    wasFinished: _this.wasFinished(),
+                    isRx: _this.isRx(),
+                    date: date
+                };
+                return model;
+            };
+            this.canLogWorkout = function () {
+                if (_this.errors().length > 0) {
+                    _this.errors.showAllMessages();
+                    return false;
                 }
-            }
-        });
-
-    self.partialRepsFinished = ko.observable();
-
-    self.plannedDate = ko.observable(new Date());
-       
-
-
-    self.distance = ko.observable()
-        .extend({
-            required: {
-                onlyIf: function() {
-                    return self.canSeePassedDistance();
+                return true;
+            };
+            this.canSeeTotalRounds = ko.observable(false);
+            this.canSeePassedDistance = ko.observable(false);
+            this.canSeeTotalTime = ko.observable(false);
+            this.date = lightModel.date;
+            this.logWorkoutText = ko.observable(lightModel.logWorkoutText);
+            this.totalRoundsFinished = ko.observable()
+                .extend({
+                required: {
+                    onlyIf: function () {
+                        return _this.canSeeTotalRounds();
+                    }
                 }
-            }
-        });
-
-    
-    self.wasFinished = ko.observable();
-    self.isRx = ko.observable(true);
-    self.IsModified = ko.observable();
-    self.totalTime = ko.observable()
-        .extend({
-            required: {
-                onlyIf: function() {
-                    return self.canSeeTotalTime();
-                }
-            }
-        });
-
-
-    
-
-
-    self.logWorkout = function () {
-        logFunction();
-    };
-
-    function updateInputsVisibility() {
-        if (!lightModel.selectedWorkoutType || !lightModel.simpleRoutines) {
-            return;
-        }
-        var selectedTypeValue = lightModel.selectedWorkoutType.Value;
-
-        /* Rounds */
-        self.canSeeTotalRounds(selectedTypeValue == WorkoutTypes.AMRAP);
-
-//        /* Distance input */
-        self.canSeePassedDistance(checkWorkoutContainsDistanceExercise() && selectedTypeValue == WorkoutTypes.EMOM);
-
-        /* General time */
-        self.canSeeTotalTime(selectedTypeValue == WorkoutTypes.ForTime);
-    }
-
-    function checkWorkoutContainsDistanceExercise() {
-        return ko.utils.arrayFirst(lightModel.simpleRoutines, function (routine) {
-            var foundDistanceMeasure = ko.utils.arrayFirst(routine.exerciseMeasures(), function (measure) {
-                return measure.measureType() == Crossfitter.ExerciseMeasureTypes.Distance;
             });
-            return foundDistanceMeasure;
-        }) != null;
-    }
-
-    ko.computed(function() {
-        updateInputsVisibility();
-    });
-
-
-    self.errors = ko.validation.group(self);
-    self.canLogWorkout = function () {
-        if (self.errors().length > 0) {
-            self.errors.showAllMessages();
-            return false;
+            this.partialRepsFinished = ko.observable();
+            this.plannedDate = ko.observable(new Date());
+            this.distance = ko.observable()
+                .extend({
+                required: {
+                    onlyIf: function () {
+                        return _this.canSeePassedDistance();
+                    }
+                }
+            });
+            this.wasFinished = ko.observable();
+            this.isRx = ko.observable(true);
+            this.IsModified = ko.observable();
+            this.totalTime = ko.observable()
+                .extend({
+                required: {
+                    onlyIf: function () {
+                        return _this.canSeeTotalTime();
+                    }
+                }
+            });
+            function updateInputsVisibility() {
+                if (!lightModel.selectedWorkoutType || !lightModel.simpleRoutines) {
+                    return;
+                }
+                var selectedTypeValue = lightModel.selectedWorkoutType.Value;
+                /* Rounds */
+                this.canSeeTotalRounds(selectedTypeValue == WorkoutTypes.AMRAP);
+                //        /* Distance input */
+                this.canSeePassedDistance(this.checkWorkoutContainsDistanceExercise() && selectedTypeValue == WorkoutTypes.EMOM);
+                /* General time */
+                this.canSeeTotalTime(selectedTypeValue == WorkoutTypes.ForTime);
+            }
+            ko.computed(function () {
+                updateInputsVisibility();
+            });
+            this.errors = ko.validation.group(this);
         }
-        return true;
-    };
-
-
-
-    self.toJSON = function () {
-        var date = self.plannedDate().toDate().toUTCString();
-        var model = {
-            selectedWorkoutId: lightModel.selectedWorkout ? lightModel.selectedWorkout().id : null,
-            crossfitterWorkoutId: lightModel.crossfitterWorkoutId,
-            roundsFinished: self.totalRoundsFinished(),
-            partialRepsFinished: self.partialRepsFinished(),
-            timePassed: self.totalTime(),
-            distance: self.distance(),
-            wasFinished: self.wasFinished(),
-            isRx: self.isRx(),
-            date: date
-        };
-        return model;
-    };
-
-    return self;
-};
+        return LogWorkoutController;
+    }());
+    Pages.LogWorkoutController = LogWorkoutController;
+})(Pages || (Pages = {}));
+//# sourceMappingURL=LogWorkoutController.js.map
