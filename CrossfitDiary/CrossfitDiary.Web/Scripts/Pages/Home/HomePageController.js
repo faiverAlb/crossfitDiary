@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 var Pages;
 (function (Pages) {
     var BaseController = General.BaseController;
+    var CrossfitterService = General.CrossfitterService;
     var HomePageController = (function (_super) {
         __extends(HomePageController, _super);
         function HomePageController(parameters) {

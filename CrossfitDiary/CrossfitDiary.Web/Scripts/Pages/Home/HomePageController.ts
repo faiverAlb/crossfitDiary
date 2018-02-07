@@ -1,5 +1,6 @@
 ﻿module Pages {
   import BaseController = General.BaseController;
+  import CrossfitterService = General.CrossfitterService;
 
   export class HomePageController extends  BaseController {
     private allWorkouts: any;

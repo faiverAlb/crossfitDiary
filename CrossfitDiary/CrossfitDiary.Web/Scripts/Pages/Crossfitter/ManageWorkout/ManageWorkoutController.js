@@ -50,28 +50,6 @@
         }
     };
 
-//    self.planWorkout = function () {
-//        var canPlanWorkout = self.plannedDate.isValid();
-//        if (self.isCreateNewWorkoutPressed()) {
-//            var canCreateWorkout = self.createWorkoutController.canCreateCreateWorkout();
-//            if (canCreateWorkout && canPlanWorkout) {
-//                var model = {
-//                    newWorkoutViewModel: self.createWorkoutController.getCreateWorkoutModel(),
-//                    logWorkoutViewModel: self.logWorkoutController().toJSON()
-//                };
-//                model.logWorkoutViewModel.isPlanned = true;
-//                self.service.createAndLogWorkout(model);
-//            }
-//        } else {
-//            if (canPlanWorkout) {
-//                var logModel = self.logWorkoutController().toJSON();
-//                logModel.isPlanned = true;
-//                self.service.logWorkout(logModel);
-//            }
-//        }
-//    };
-
-
 
     var createLogController = function (lightLogModel) {
         lightLogModel.crossfitterWorkoutId = self.crossfitterWorkout != null
