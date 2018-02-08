@@ -27,10 +27,7 @@ var Pages;
                 }
             };
             this.createLogController = function (lightLogModel) {
-                lightLogModel.crossfitterWorkoutId = _this.crossfitterWorkout != null
-                    ? _this.crossfitterWorkout.crossfitterWorkoutId
-                    : null;
-                lightLogModel.date = _this.parameters.viewModel.planDate;
+                lightLogModel.crossfitterWorkoutId = null;
                 _this.logWorkoutController(new Pages.LogWorkoutController(lightLogModel, _this.logFunction));
             };
             this.manageWorkoutClick = function (isCreateNewWorkout) {
@@ -45,16 +42,6 @@ var Pages;
             this.logWorkoutController = ko.observable();
             this.isAnyContainersVisible = ko.observable(false);
             this.wantToPlanWorkout = ko.observable(false);
-            this.withoutPreparedWorkout = parameters.viewModel.crossfitterWorkout == null;
-            this.crossfitterWorkout = parameters.viewModel.crossfitterWorkout;
-            this.plannedDate = ko.observable(new Date(parameters.viewModel.planDate))
-                .extend({
-                required: {
-                    onlyIf: function () {
-                        return _this.wantToPlanWorkout();
-                    }
-                }
-            });
             this.isCreateNewWorkoutPressed = ko.observable(false);
             this.chooseExistingWorkoutController.workoutToDisplay.subscribe(function (newValue) {
                 if (!newValue) {

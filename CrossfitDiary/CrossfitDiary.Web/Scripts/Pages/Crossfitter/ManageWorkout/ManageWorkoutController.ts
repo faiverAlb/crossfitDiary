@@ -9,14 +9,9 @@
     logWorkoutController;
     isAnyContainersVisible;
     wantToPlanWorkout;
-    withoutPreparedWorkout: boolean;
-    crossfitterWorkout;
-    plannedDate;
     isCreateNewWorkoutPressed;
 
-
-    constructor(public parameters) {
-
+    constructor(public parameters: {pathToApp: string}) {
       this.createWorkoutController = new CreateWorkoutController(parameters);
       this.chooseExistingWorkoutController = new ChooseExistingWorkoutController(parameters);
       this.service = new CrossfitterService(parameters.pathToApp);
@@ -24,23 +19,7 @@
       this.logWorkoutController = ko.observable();
       this.isAnyContainersVisible = ko.observable(false);
       this.wantToPlanWorkout = ko.observable(false);
-
-      this.withoutPreparedWorkout = parameters.viewModel.crossfitterWorkout == null;
-      this.crossfitterWorkout = parameters.viewModel.crossfitterWorkout;
-
-      this.plannedDate = ko.observable(new Date(parameters.viewModel.planDate))
-        .extend({
-          required: {
-            onlyIf: () => {
-              return this.wantToPlanWorkout();
-            }
-          }
-        });
-
       this.isCreateNewWorkoutPressed = ko.observable(false);
-
-
-
       this.chooseExistingWorkoutController.workoutToDisplay.subscribe((newValue) => {
         if (!newValue) {
           return;
@@ -101,11 +80,7 @@
 
 
     createLogController =  (lightLogModel) => {
-      lightLogModel.crossfitterWorkoutId = this.crossfitterWorkout != null
-        ? this.crossfitterWorkout.crossfitterWorkoutId
-        : null;
-      lightLogModel.date = this.parameters.viewModel.planDate;
-
+      lightLogModel.crossfitterWorkoutId =  null;
       this.logWorkoutController(new LogWorkoutController(lightLogModel, this.logFunction));
     };
 

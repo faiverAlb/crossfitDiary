@@ -24,6 +24,22 @@ var Pages;
     var BaseController = General.BaseController;
     var CrossfitterService = General.CrossfitterService;
     var SimpleRoutine = Crossfitter.SimpleRoutine;
+    var BaseKeyValuePairModel = General.BaseKeyValuePairModel;
+    var CrossfitterParameters = (function () {
+        function CrossfitterParameters(pathToApp, isReadOnlyMode, exercisesToDoList, selectedWorkoutType, title, restBetweenExercises, restBetweenRounds, timeToWork, roundsCount) {
+            this.pathToApp = pathToApp;
+            this.isReadOnlyMode = isReadOnlyMode;
+            this.exercisesToDoList = exercisesToDoList;
+            this.selectedWorkoutType = selectedWorkoutType;
+            this.title = title;
+            this.restBetweenExercises = restBetweenExercises;
+            this.restBetweenRounds = restBetweenRounds;
+            this.timeToWork = timeToWork;
+            this.roundsCount = roundsCount;
+        }
+        return CrossfitterParameters;
+    }());
+    Pages.CrossfitterParameters = CrossfitterParameters;
     var CrossfitterController = (function (_super) {
         __extends(CrossfitterController, _super);
         function CrossfitterController(parameters) {
@@ -39,7 +55,7 @@ var Pages;
                     timeToWork: _this.timeToWork(),
                     restBetweenExercises: _this.restBetweenExercises(),
                     restBetweenRounds: _this.restBetweenRounds(),
-                    workoutTypeViewModel: _this.selectedWorkoutType().Value,
+                    workoutTypeViewModel: _this.selectedWorkoutType().id,
                     exercisesToDoList: []
                 };
                 $.each(_this.simpleRoutines(), function (index, routine) {
@@ -57,6 +73,7 @@ var Pages;
                     _this.simpleRoutines.push(new SimpleRoutine(exerciseToDo, false));
                 }
             }
+            _this.workoutTypes = ko.observable(new Array(new BaseKeyValuePairModel(Pages.WorkoutTypes.ForTime, Pages.WorkoutTypes[Pages.WorkoutTypes.ForTime]), new BaseKeyValuePairModel(Pages.WorkoutTypes.AMRAP, Pages.WorkoutTypes[Pages.WorkoutTypes.AMRAP]), new BaseKeyValuePairModel(Pages.WorkoutTypes.EMOM, Pages.WorkoutTypes[Pages.WorkoutTypes.EMOM]), new BaseKeyValuePairModel(Pages.WorkoutTypes.E2MOM, Pages.WorkoutTypes[Pages.WorkoutTypes.E2MOM]), new BaseKeyValuePairModel(Pages.WorkoutTypes.NotForTime, Pages.WorkoutTypes[Pages.WorkoutTypes.NotForTime]), new BaseKeyValuePairModel(Pages.WorkoutTypes.Tabata, Pages.WorkoutTypes[Pages.WorkoutTypes.Tabata])));
             _this.selectedWorkoutType = ko.observable(parameters.selectedWorkoutType);
             _this.title = ko.observable(parameters.title);
             _this.restBetweenExercises = ko.observable(parameters.restBetweenExercises);
@@ -65,8 +82,8 @@ var Pages;
                 if (!_this.selectedWorkoutType()) {
                     return false;
                 }
-                var selectedType = _this.selectedWorkoutType().Value;
-                return selectedType === WorkoutTypes.ForTime || selectedType === WorkoutTypes.Tabata;
+                var selectedType = _this.selectedWorkoutType().id;
+                return selectedType === Pages.WorkoutTypes.ForTime || selectedType === Pages.WorkoutTypes.Tabata;
             });
             _this.anyUsualExercises = ko.computed(function () {
                 return ko.utils.arrayFirst(_this.simpleRoutines(), function (routine) { return routine.exercise.isAlternative === false; }) != null;
@@ -75,8 +92,8 @@ var Pages;
                 if (!_this.selectedWorkoutType()) {
                     return false;
                 }
-                var selectedType = _this.selectedWorkoutType().Value;
-                var typeIsNeeded = selectedType == WorkoutTypes.EMOM || selectedType == WorkoutTypes.E2MOM;
+                var selectedType = _this.selectedWorkoutType().id;
+                var typeIsNeeded = selectedType == Pages.WorkoutTypes.EMOM || selectedType == Pages.WorkoutTypes.E2MOM;
                 return typeIsNeeded && _this.anyUsualExercises();
             });
             _this.anyAlternative = ko.computed(function () {
@@ -93,10 +110,10 @@ var Pages;
                 if (!_this.selectedWorkoutType()) {
                     return false;
                 }
-                var selectedType = _this.selectedWorkoutType().Value;
-                return selectedType == WorkoutTypes.AMRAP
-                    || selectedType == WorkoutTypes.EMOM
-                    || selectedType == WorkoutTypes.E2MOM;
+                var selectedType = _this.selectedWorkoutType().id;
+                return selectedType == Pages.WorkoutTypes.AMRAP
+                    || selectedType == Pages.WorkoutTypes.EMOM
+                    || selectedType == Pages.WorkoutTypes.E2MOM;
             });
             _this.timeToWork = ko.observable(parameters.timeToWork)
                 .extend({

@@ -7,7 +7,6 @@
     availableWorkouts:KnockoutObservableArray<any>;
     selectedWorkout;
     isReadOnlyMode: true;
-    hasPredefinedWorkout: boolean;
     workoutToDisplay;
     partialRepsFinished;
     totalTime;
@@ -23,7 +22,6 @@
       this.selectedWorkout = ko.observable();
       this.isReadOnlyMode = true;
 
-      this.hasPredefinedWorkout = parameters.viewModel.crossfitterWorkout != null;
 
       this.workoutToDisplay = ko.observable();
 
@@ -59,15 +57,6 @@
     loadAvailableWorkouts = () => {
       this._service.getAvailableWorkouts().then((availableWorkouts:any) => {
         this.availableWorkouts(availableWorkouts);
-        if (this.hasPredefinedWorkout) {
-          var foundWorkout = ko.utils.arrayFirst(this.availableWorkouts(), (item) => {
-            return item.id == this.parameters.viewModel.crossfitterWorkout.selectedWorkoutId;
-          });
-
-          if (foundWorkout) {
-            this.selectedWorkout(foundWorkout);
-          }
-        }
       });
     };
 

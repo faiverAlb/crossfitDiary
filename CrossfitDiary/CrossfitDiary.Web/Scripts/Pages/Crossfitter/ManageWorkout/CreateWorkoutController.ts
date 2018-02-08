@@ -8,12 +8,12 @@
     hasAnyRoutines: KnockoutComputed<boolean>;
     selectedExercise: KnockoutObservable<any>;
     selectedAlternativeExercise: KnockoutObservable<any>;
-    workoutTypes: KnockoutObservableArray<any>;
     errors;
 
 
-    constructor(parameters) {
-      super(parameters);
+    constructor(parameters: { pathToApp: string }) {
+
+      super(new CrossfitterParameters(parameters.pathToApp,false,[],null,null,null,null,null,null));
       this.exercises = ko.observableArray([]);
       this.alternativeExercises = ko.observableArray();
       this.hasAnyRoutines = ko.computed(() => {
@@ -24,8 +24,6 @@
 
       this.selectedExercise = ko.observable();
       this.selectedAlternativeExercise = ko.observable();
-
-      this.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
 
       ko.computed(() => {
         if (this.selectedWorkoutType() || !this.selectedWorkoutType()) {
@@ -40,7 +38,7 @@
           return;
         }
 
-        this.simpleRoutines.push(new SimpleRoutine(exercise, this.selectedWorkoutType().Value != WorkoutTypes.Tabata));
+        this.simpleRoutines.push(new SimpleRoutine(exercise, this.selectedWorkoutType().id !== WorkoutTypes.Tabata));
         this.selectedExercise('');
       });
 

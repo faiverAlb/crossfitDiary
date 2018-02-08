@@ -23,21 +23,12 @@ var Pages;
             this.loadAvailableWorkouts = function () {
                 _this._service.getAvailableWorkouts().then(function (availableWorkouts) {
                     _this.availableWorkouts(availableWorkouts);
-                    if (_this.hasPredefinedWorkout) {
-                        var foundWorkout = ko.utils.arrayFirst(_this.availableWorkouts(), function (item) {
-                            return item.id == _this.parameters.viewModel.crossfitterWorkout.selectedWorkoutId;
-                        });
-                        if (foundWorkout) {
-                            _this.selectedWorkout(foundWorkout);
-                        }
-                    }
                 });
             };
             this._service = new CrossfitterService(parameters.pathToApp);
             this.availableWorkouts = ko.observableArray();
             this.selectedWorkout = ko.observable();
             this.isReadOnlyMode = true;
-            this.hasPredefinedWorkout = parameters.viewModel.crossfitterWorkout != null;
             this.workoutToDisplay = ko.observable();
             ko.computed(function () {
                 var workout = _this.selectedWorkout();

@@ -56,12 +56,6 @@ namespace CrossfitDiary.Web.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult ManageWorkout()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ManageWorkout);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public CrossfitterController Actions { get { return MVC.Crossfitter; } }
@@ -78,7 +72,6 @@ namespace CrossfitDiary.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string CreateNewWorkout = "CreateNewWorkout";
             public readonly string ManageWorkout = "ManageWorkout";
             public readonly string Pride = "Pride";
         }
@@ -86,21 +79,11 @@ namespace CrossfitDiary.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string CreateNewWorkout = "CreateNewWorkout";
             public const string ManageWorkout = "ManageWorkout";
             public const string Pride = "Pride";
         }
 
 
-        static readonly ActionParamsClass_ManageWorkout s_params_ManageWorkout = new ActionParamsClass_ManageWorkout();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_ManageWorkout ManageWorkoutParams { get { return s_params_ManageWorkout; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_ManageWorkout
-        {
-            public readonly string date = "date";
-            public readonly string crossfitterWorkoutId = "crossfitterWorkoutId";
-        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -111,11 +94,9 @@ namespace CrossfitDiary.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string CreateNewWorkout = "CreateNewWorkout";
                 public readonly string ManageWorkout = "ManageWorkout";
                 public readonly string Pride = "Pride";
             }
-            public readonly string CreateNewWorkout = "~/Views/Crossfitter/CreateNewWorkout.cshtml";
             public readonly string ManageWorkout = "~/Views/Crossfitter/ManageWorkout.cshtml";
             public readonly string Pride = "~/Views/Crossfitter/Pride.cshtml";
             static readonly _TemplatesClass s_Templates = new _TemplatesClass();
@@ -148,26 +129,13 @@ namespace CrossfitDiary.Web.Controllers
         public T4MVC_CrossfitterController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void CreateNewWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void ManageWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult CreateNewWorkout()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateNewWorkout);
-            CreateNewWorkoutOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void ManageWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.DateTime? date, int? crossfitterWorkoutId);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult ManageWorkout(System.DateTime? date, int? crossfitterWorkoutId)
+        public override System.Web.Mvc.ActionResult ManageWorkout()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ManageWorkout);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "date", date);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "crossfitterWorkoutId", crossfitterWorkoutId);
-            ManageWorkoutOverride(callInfo, date, crossfitterWorkoutId);
+            ManageWorkoutOverride(callInfo);
             return callInfo;
         }
 

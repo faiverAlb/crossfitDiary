@@ -17,9 +17,9 @@
   import BaseController = General.BaseController;
   import CrossfitterService = General.CrossfitterService;
   import SimpleRoutine = Crossfitter.SimpleRoutine;
+  import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
 
-  interface ICrossfitterParameters {
-    viewModel: any;
+  export interface ICrossfitterParameters {
     pathToApp: string;
     isReadOnlyMode: boolean;
     exercisesToDoList: any;
@@ -29,15 +29,46 @@
     restBetweenRounds: any;
     timeToWork: any;
     roundsCount: any;
-//  { viewModel: { allWorkouts }, pathToApp: string,  }
+  }
 
+  export class CrossfitterParameters implements ICrossfitterParameters {
+    pathToApp: string;
+    isReadOnlyMode: boolean;
+    exercisesToDoList: any;
+    selectedWorkoutType: any;
+    title: string;
+    restBetweenExercises: any;
+    restBetweenRounds: any;
+    timeToWork: any;
+    roundsCount: any;
+
+    constructor(pathToApp
+      , isReadOnlyMode
+      , exercisesToDoList
+      , selectedWorkoutType
+      , title
+      , restBetweenExercises
+      , restBetweenRounds
+      , timeToWork
+      , roundsCount) {
+      this.pathToApp = pathToApp;
+      this.isReadOnlyMode = isReadOnlyMode;
+      this.exercisesToDoList = exercisesToDoList;
+      this.selectedWorkoutType = selectedWorkoutType;
+      this.title = title;
+      this.restBetweenExercises = restBetweenExercises;
+      this.restBetweenRounds = restBetweenRounds;
+      this.timeToWork = timeToWork;
+      this.roundsCount = roundsCount;
+    }
   }
 
   export class CrossfitterController extends BaseController {
     protected  _service: CrossfitterService;
     private isReadOnlyMode: boolean;
     simpleRoutines: KnockoutObservableArray<any>;
-    selectedWorkoutType: KnockoutObservable<any>;
+    selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
+
     private title: KnockoutObservable<string>;
     private restBetweenExercises: KnockoutObservable<any>;
     private restBetweenRounds: KnockoutObservable<any>;
@@ -49,8 +80,9 @@
     private canSeeTimeToWork: KnockoutComputed<false | boolean>;
     private anyAlternative: KnockoutComputed<boolean>;
     private roundsCount: KnockoutObservable<any>;
+    private workoutTypes: KnockoutObservable<Array<BaseKeyValuePairModel<number, string>>>;
 
-    constructor(public parameters: ICrossfitterParameters) {
+    constructor(public parameters: CrossfitterParameters) {
       super();
       this._service = new CrossfitterService(parameters.pathToApp);
       this.isReadOnlyMode = parameters.isReadOnlyMode != undefined ? parameters.isReadOnlyMode : false;
@@ -63,7 +95,15 @@
         }
       }
 
-
+      this.workoutTypes = ko.observable(
+        new Array(
+          new BaseKeyValuePairModel(WorkoutTypes.ForTime, WorkoutTypes[WorkoutTypes.ForTime])
+          , new BaseKeyValuePairModel(WorkoutTypes.AMRAP, WorkoutTypes[WorkoutTypes.AMRAP])
+          , new BaseKeyValuePairModel(WorkoutTypes.EMOM, WorkoutTypes[WorkoutTypes.EMOM])
+          , new BaseKeyValuePairModel(WorkoutTypes.E2MOM, WorkoutTypes[WorkoutTypes.E2MOM])
+          , new BaseKeyValuePairModel(WorkoutTypes.NotForTime, WorkoutTypes[WorkoutTypes.NotForTime])
+          , new BaseKeyValuePairModel(WorkoutTypes.Tabata, WorkoutTypes[WorkoutTypes.Tabata])
+      ));
       this.selectedWorkoutType = ko.observable(parameters.selectedWorkoutType);
 
       this.title = ko.observable(parameters.title);
@@ -75,7 +115,7 @@
         if (!this.selectedWorkoutType()) {
           return false;
         }
-        var selectedType = this.selectedWorkoutType().Value;
+        let selectedType = this.selectedWorkoutType().id;
         return selectedType === WorkoutTypes.ForTime || selectedType === WorkoutTypes.Tabata;
       });
 
@@ -88,9 +128,8 @@
         if (!this.selectedWorkoutType()) {
           return false;
         }
-        var selectedType = this.selectedWorkoutType().Value;
-        var typeIsNeeded =
-          selectedType == WorkoutTypes.EMOM || selectedType == WorkoutTypes.E2MOM;
+        let selectedType = this.selectedWorkoutType().id;
+        let typeIsNeeded = selectedType == WorkoutTypes.EMOM || selectedType == WorkoutTypes.E2MOM;
         return typeIsNeeded && this.anyUsualExercises();
       });
 
@@ -115,7 +154,7 @@
         if (!this.selectedWorkoutType()) {
           return false;
         }
-        var selectedType = this.selectedWorkoutType().Value;
+        let selectedType = this.selectedWorkoutType().id;
         return selectedType == WorkoutTypes.AMRAP
           || selectedType == WorkoutTypes.EMOM
           || selectedType == WorkoutTypes.E2MOM;
@@ -150,8 +189,8 @@
           timeToWork: this.timeToWork(),
           restBetweenExercises: this.restBetweenExercises(),
           restBetweenRounds: this.restBetweenRounds(),
-          workoutTypeViewModel: this.selectedWorkoutType().Value,
-            exercisesToDoList: []
+          workoutTypeViewModel: this.selectedWorkoutType().id,
+          exercisesToDoList: []
         };
         $.each(this.simpleRoutines(), (index, routine) => {
           let innerRoutineJson = routine.toJSON();

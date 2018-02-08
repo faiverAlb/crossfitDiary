@@ -14,7 +14,7 @@ var Pages;
     var CreateWorkoutController = (function (_super) {
         __extends(CreateWorkoutController, _super);
         function CreateWorkoutController(parameters) {
-            var _this = _super.call(this, parameters) || this;
+            var _this = _super.call(this, new Pages.CrossfitterParameters(parameters.pathToApp, false, [], null, null, null, null, null, null)) || this;
             _this.loadExercises = function () {
                 _this._service.getExercises().then(function (exercises) {
                     ko.utils.arrayPushAll(_this.exercises, exercises);
@@ -53,7 +53,6 @@ var Pages;
             });
             _this.selectedExercise = ko.observable();
             _this.selectedAlternativeExercise = ko.observable();
-            _this.workoutTypes = ko.observableArray(parameters.viewModel.workoutTypes);
             ko.computed(function () {
                 if (_this.selectedWorkoutType() || !_this.selectedWorkoutType()) {
                     _this.simpleRoutines([]);
@@ -65,7 +64,7 @@ var Pages;
                 if (!exercise) {
                     return;
                 }
-                _this.simpleRoutines.push(new SimpleRoutine(exercise, _this.selectedWorkoutType().Value != WorkoutTypes.Tabata));
+                _this.simpleRoutines.push(new SimpleRoutine(exercise, _this.selectedWorkoutType().id !== Pages.WorkoutTypes.Tabata));
                 _this.selectedExercise('');
             });
             ko.computed(function () {

@@ -11,11 +11,11 @@ var Pages;
                 }
                 var selectedTypeValue = _this.lightModel.selectedWorkoutType.Value;
                 /* Rounds */
-                _this.canSeeTotalRounds(selectedTypeValue == WorkoutTypes.AMRAP);
+                _this.canSeeTotalRounds(selectedTypeValue == Pages.WorkoutTypes.AMRAP);
                 //        /* Distance input */
-                _this.canSeePassedDistance(_this.checkWorkoutContainsDistanceExercise() && selectedTypeValue == WorkoutTypes.EMOM);
+                _this.canSeePassedDistance(_this.checkWorkoutContainsDistanceExercise() && selectedTypeValue == Pages.WorkoutTypes.EMOM);
                 /* General time */
-                _this.canSeeTotalTime(selectedTypeValue == WorkoutTypes.ForTime);
+                _this.canSeeTotalTime(selectedTypeValue == Pages.WorkoutTypes.ForTime);
             };
             this.checkWorkoutContainsDistanceExercise = function () {
                 return ko.utils.arrayFirst(_this.lightModel.simpleRoutines, function (routine) {
