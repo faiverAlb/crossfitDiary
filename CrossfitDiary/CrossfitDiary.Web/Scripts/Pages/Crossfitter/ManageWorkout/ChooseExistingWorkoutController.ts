@@ -55,9 +55,10 @@
     };
 
     loadAvailableWorkouts = () => {
-      this._service.getAvailableWorkouts().then((availableWorkouts:any) => {
-        this.availableWorkouts(availableWorkouts);
-      });
+      this._service.getAvailableWorkouts()
+        .then((availableWorkouts: any) => {
+          this.availableWorkouts(availableWorkouts);
+        });
     };
 
  

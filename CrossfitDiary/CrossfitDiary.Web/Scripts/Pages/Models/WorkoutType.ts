@@ -1,5 +1,5 @@
-﻿module Pages {
- export enum WorkoutTypes {
+﻿module Models {
+ export enum WorkoutType {
     ForTime = 0,
     AMRAP = 1,
     EMOM = 2,

@@ -21,7 +21,8 @@ var Pages;
                 return model;
             };
             this.loadAvailableWorkouts = function () {
-                _this._service.getAvailableWorkouts().then(function (availableWorkouts) {
+                _this._service.getAvailableWorkouts()
+                    .then(function (availableWorkouts) {
                     _this.availableWorkouts(availableWorkouts);
                 });
             };

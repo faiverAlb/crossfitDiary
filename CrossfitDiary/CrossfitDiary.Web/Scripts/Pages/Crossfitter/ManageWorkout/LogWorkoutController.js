@@ -1,5 +1,6 @@
 var Pages;
 (function (Pages) {
+    var WorkoutTypes = Models.WorkoutType;
     var LogWorkoutController = (function () {
         function LogWorkoutController(lightModel, logFunction) {
             var _this = this;
@@ -11,15 +12,15 @@ var Pages;
                 }
                 var selectedTypeValue = _this.lightModel.selectedWorkoutType.Value;
                 /* Rounds */
-                _this.canSeeTotalRounds(selectedTypeValue == Pages.WorkoutTypes.AMRAP);
+                _this.canSeeTotalRounds(selectedTypeValue == WorkoutTypes.AMRAP);
                 //        /* Distance input */
-                _this.canSeePassedDistance(_this.checkWorkoutContainsDistanceExercise() && selectedTypeValue == Pages.WorkoutTypes.EMOM);
+                _this.canSeePassedDistance(_this.checkWorkoutContainsDistanceExercise() && selectedTypeValue == WorkoutTypes.EMOM);
                 /* General time */
-                _this.canSeeTotalTime(selectedTypeValue == Pages.WorkoutTypes.ForTime);
+                _this.canSeeTotalTime(selectedTypeValue == WorkoutTypes.ForTime);
             };
             this.checkWorkoutContainsDistanceExercise = function () {
                 return ko.utils.arrayFirst(_this.lightModel.simpleRoutines, function (routine) {
-                    var foundDistanceMeasure = ko.utils.arrayFirst(routine.exerciseMeasures(), function (measure) { return measure.measureType() == Crossfitter.ExerciseMeasureTypes.Distance; });
+                    var foundDistanceMeasure = ko.utils.arrayFirst(routine.exerciseMeasures(), function (measure) { return measure.measureType() == Models.ExerciseMeasureType.Distance; });
                     return foundDistanceMeasure;
                 }) != null;
             };

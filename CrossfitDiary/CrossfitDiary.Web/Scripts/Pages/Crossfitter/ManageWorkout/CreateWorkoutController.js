@@ -10,7 +10,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Pages;
 (function (Pages) {
-    var SimpleRoutine = Crossfitter.SimpleRoutine;
+    var WorkoutTypes = Models.WorkoutType;
+    var SimpleRoutine = Models.SimpleRoutine;
     var CreateWorkoutController = (function (_super) {
         __extends(CreateWorkoutController, _super);
         function CreateWorkoutController(parameters) {
@@ -64,7 +65,7 @@ var Pages;
                 if (!exercise) {
                     return;
                 }
-                _this.simpleRoutines.push(new SimpleRoutine(exercise, _this.selectedWorkoutType().id !== Pages.WorkoutTypes.Tabata));
+                _this.simpleRoutines.push(new SimpleRoutine(exercise, _this.selectedWorkoutType().id !== WorkoutTypes.Tabata));
                 _this.selectedExercise('');
             });
             ko.computed(function () {

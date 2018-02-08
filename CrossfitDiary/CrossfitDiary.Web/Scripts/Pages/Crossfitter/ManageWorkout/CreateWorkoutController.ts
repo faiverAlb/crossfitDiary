@@ -1,6 +1,8 @@
 ﻿module Pages {
   declare var ko;
-  import SimpleRoutine = Crossfitter.SimpleRoutine;
+  import WorkoutTypes = Models.WorkoutType;
+  import SimpleRoutine = Models.SimpleRoutine;
+
   export class CreateWorkoutController extends CrossfitterController {
 
     exercises: KnockoutObservableArray<any>;

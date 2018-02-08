@@ -45,12 +45,12 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/ServerProcessedViewModel.js"
                     , "~/Scripts/Pages/General/BaseKeyValuePairModel.js"
-                    , "~/Scripts/Pages/Crossfitter/SimpleRoutine.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureTypeValue.js"
+                    , "~/Scripts/Pages/Models/WorkoutType.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureType.js"
+                    , "~/Scripts/Pages/Models/SimpleRoutine.js"
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/CrossfitterController.js"
-                    , "~/Scripts/Pages/Crossfitter/ExerciseMeasureType.js"
-                    , "~/Scripts/Pages/Crossfitter/WorkoutType.js"
-                    , "~/Scripts/Pages/Crossfitter/ExerciseMeasureTypeValue.js"
-                    
+
 
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/CreateWorkoutController.js"
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/ChooseExistingWorkoutController.js"

@@ -71,7 +71,7 @@
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options:exercises, optionsText:'title',value: selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
     </div>
     <div class="selected-workout-type">
-        <div class="text-center" data-bind="text:selectedWorkoutType().Key"></div>
+        <div class="text-center" data-bind="text:selectedWorkoutType().text"></div>
     </div>
     <div class="routines-container">
         <!-- ko foreach:simpleRoutines-->

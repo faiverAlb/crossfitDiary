@@ -16,8 +16,9 @@
 
   import BaseController = General.BaseController;
   import CrossfitterService = General.CrossfitterService;
-  import SimpleRoutine = Crossfitter.SimpleRoutine;
   import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
+  import WorkoutTypes = Models.WorkoutType;
+  import SimpleRoutine = Models.SimpleRoutine;
 
   export interface ICrossfitterParameters {
     pathToApp: string;

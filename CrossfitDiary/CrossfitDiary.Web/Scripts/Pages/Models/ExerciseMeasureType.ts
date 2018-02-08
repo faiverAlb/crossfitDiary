@@ -1,5 +1,5 @@
-﻿module Crossfitter {
-    export enum ExerciseMeasureTypes {
+﻿module Models {
+    export enum ExerciseMeasureType {
         Distance = 0,
         Count = 1,
         Weight = 2,

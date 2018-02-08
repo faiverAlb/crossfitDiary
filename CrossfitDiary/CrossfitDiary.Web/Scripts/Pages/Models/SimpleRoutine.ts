@@ -1,4 +1,5 @@
-﻿module Crossfitter {
+﻿module Models {
+
   export class SimpleRoutine {
     exercise: any;
     exerciseMeasures: KnockoutObservableArray<any>;
@@ -9,7 +10,7 @@
       let isMeasuresRequired = isFieldsRequired != null ? isFieldsRequired : true;
       for (let i = 0; i < this.exercise.exerciseMeasures.length; i++) {
         const exerciseMeasureType = this.exercise.exerciseMeasures[i].exerciseMeasureType;
-        if (exerciseMeasureType.measureType === ExerciseMeasureTypes.Weight) {
+        if (exerciseMeasureType.measureType === ExerciseMeasureType.Weight) {
           isMeasuresRequired = false;
         }
 

@@ -295,7 +295,6 @@
     <Compile Include="ViewModels\Pride\PersonExerciseMaximum.cs" />
     <Compile Include="ViewModels\ToCreateAndLogNewWorkoutViewModel.cs" />
     <Compile Include="ViewModels\ToLogWorkoutViewModel.cs" />
-    <Compile Include="ViewModels\WorkoutTypeViewModel.cs" />
     <Compile Include="ViewModels\WorkoutViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -496,10 +495,10 @@
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CreateWorkoutController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\LogWorkoutController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\ManageWorkoutController.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\WorkoutType.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ExerciseMeasureType.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ExerciseMeasureTypeValue.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\SimpleRoutine.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\WorkoutType.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseMeasureType.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseMeasureTypeValue.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\SimpleRoutine.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CrossfitterController.ts" />
     <Content Include="Content\bootstrap-select\bootstrap-select.less" />
     <Content Include="Content\bootstrap-select\variables.less" />
@@ -568,6 +567,7 @@
     <Content Include="Views\Crossfitter\Templates\_CreateNewWorkout.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_ExistingWorkoutsTemplate.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_LogWorkoutPartial.cshtml" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\WorkoutViewModel.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\q\Q.d.ts" />

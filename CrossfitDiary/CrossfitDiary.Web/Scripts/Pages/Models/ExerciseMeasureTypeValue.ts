@@ -1,4 +1,4 @@
-﻿module Crossfitter {
+﻿module Models {
   export class ExerciseMeasureTypeValue {
     measureType: KnockoutObservable<any>;
     measureValue: KnockoutObservable<any>;

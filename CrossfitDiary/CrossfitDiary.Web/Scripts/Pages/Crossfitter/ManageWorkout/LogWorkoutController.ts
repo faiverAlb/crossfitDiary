@@ -1,5 +1,5 @@
-﻿
-module Pages {
+﻿module Pages {
+  import WorkoutTypes = Models.WorkoutType;
   declare var ko;
   export class LogWorkoutController {
 
@@ -90,7 +90,7 @@ module Pages {
 
     checkWorkoutContainsDistanceExercise = () => {
       return ko.utils.arrayFirst(this.lightModel.simpleRoutines, routine => {
-        var foundDistanceMeasure = ko.utils.arrayFirst(routine.exerciseMeasures(), measure => measure.measureType() == Crossfitter.ExerciseMeasureTypes.Distance);
+        var foundDistanceMeasure = ko.utils.arrayFirst(routine.exerciseMeasures(), measure => measure.measureType() == Models.ExerciseMeasureType.Distance);
         return foundDistanceMeasure;
       }) != null;
     }

@@ -1,5 +1,5 @@
-var Crossfitter;
-(function (Crossfitter) {
+var Models;
+(function (Models) {
     var SimpleRoutine = (function () {
         function SimpleRoutine(exerciseModel, isFieldsRequired) {
             if (isFieldsRequired === void 0) { isFieldsRequired = null; }
@@ -21,15 +21,15 @@ var Crossfitter;
             var isMeasuresRequired = isFieldsRequired != null ? isFieldsRequired : true;
             for (var i = 0; i < this.exercise.exerciseMeasures.length; i++) {
                 var exerciseMeasureType = this.exercise.exerciseMeasures[i].exerciseMeasureType;
-                if (exerciseMeasureType.measureType === Crossfitter.ExerciseMeasureType.Weight) {
+                if (exerciseMeasureType.measureType === Models.ExerciseMeasureType.Weight) {
                     isMeasuresRequired = false;
                 }
-                var exerciseMeasureTypeValue = new Crossfitter.ExerciseMeasureTypeValue(exerciseMeasureType, isMeasuresRequired);
+                var exerciseMeasureTypeValue = new Models.ExerciseMeasureTypeValue(exerciseMeasureType, isMeasuresRequired);
                 this.exerciseMeasures.push(exerciseMeasureTypeValue);
             }
         }
         return SimpleRoutine;
     }());
-    Crossfitter.SimpleRoutine = SimpleRoutine;
-})(Crossfitter || (Crossfitter = {}));
+    Models.SimpleRoutine = SimpleRoutine;
+})(Models || (Models = {}));
 //# sourceMappingURL=SimpleRoutine.js.map
