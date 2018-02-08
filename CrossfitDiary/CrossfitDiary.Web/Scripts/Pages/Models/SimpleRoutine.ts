@@ -14,7 +14,7 @@
           isMeasuresRequired = false;
         }
 
-        const exerciseMeasureTypeValue = new ExerciseMeasureTypeValue(exerciseMeasureType, isMeasuresRequired);
+        const exerciseMeasureTypeValue = new ExerciseMeasureTypeViewModel(exerciseMeasureType, isMeasuresRequired);
 
         this.exerciseMeasures.push(exerciseMeasureTypeValue);
       }

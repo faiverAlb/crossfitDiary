@@ -24,7 +24,7 @@ var Models;
                 if (exerciseMeasureType.measureType === Models.ExerciseMeasureType.Weight) {
                     isMeasuresRequired = false;
                 }
-                var exerciseMeasureTypeValue = new Models.ExerciseMeasureTypeValue(exerciseMeasureType, isMeasuresRequired);
+                var exerciseMeasureTypeValue = new Models.ExerciseMeasureTypeViewModel(exerciseMeasureType, isMeasuresRequired);
                 this.exerciseMeasures.push(exerciseMeasureTypeValue);
             }
         }

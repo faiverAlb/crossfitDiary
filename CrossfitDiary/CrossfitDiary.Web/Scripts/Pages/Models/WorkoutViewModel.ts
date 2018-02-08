@@ -8,7 +8,7 @@
     restBetweenExercises?: any;
     restBetweenRounds?:any;
     workoutType: WorkoutType;
-    exercisesToDoList: any;
+    exercisesToDoList: ExerciseViewModel[];
   }
   export class WorkoutViewModel {
     constructor(model:IWorkoutViewModel) {

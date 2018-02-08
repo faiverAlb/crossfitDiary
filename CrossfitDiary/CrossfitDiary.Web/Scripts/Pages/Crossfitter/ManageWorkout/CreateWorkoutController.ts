@@ -3,7 +3,7 @@
   import WorkoutTypes = Models.WorkoutType;
   import SimpleRoutine = Models.SimpleRoutine;
 
-  export class CreateWorkoutController extends CrossfitterController {
+  export class CreateWorkoutController {
 
     exercises: KnockoutObservableArray<any>;
     alternativeExercises: KnockoutObservableArray<any>;
@@ -15,14 +15,14 @@
 
     constructor(parameters: { pathToApp: string }) {
 
-      super(new CrossfitterParameters(parameters.pathToApp,false,[],null,null,null,null,null,null));
+//      super(new CrossfitterParameters(parameters.pathToApp,false,[],null,null,null,null,null,null));
+
+
       this.exercises = ko.observableArray([]);
       this.alternativeExercises = ko.observableArray();
       this.hasAnyRoutines = ko.computed(() => {
         return this.simpleRoutines().length > 0;
       });
-
-
 
       this.selectedExercise = ko.observable();
       this.selectedAlternativeExercise = ko.observable();
