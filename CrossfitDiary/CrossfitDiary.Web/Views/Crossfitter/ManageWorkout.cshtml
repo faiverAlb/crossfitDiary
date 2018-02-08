@@ -25,13 +25,11 @@
     </div>
     <div class="want-to-log-container" style="display: none" data-bind="visible:isAnyContainersVisible" id="WantToLogAccordion">
         <div class="log-or-save-buttons text-center">
-            <button type="button" class="btn btn-primary btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#LogWorkoutContainer" data-bind="click:logWorkoutContainerClick">Log your workout?</button>
-            @*            or*@
-            @*            <button type="button" class="btn btn-success btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#PlanWorkoutContainer" data-bind="click:planWorkoutContainerClick">Plan the workout?</button>*@
+            <button type="button" class="btn btn-primary btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#LogWorkoutContainer">Log your workout?</button>
         </div>
 
         <div class="panel panel-borderless">
-            <div class="log-workout-container" id="LogWorkoutContainer" data-bind="with:logWorkoutController, css:{collapse: true}">
+            <div class="log-workout-container collapse" id="LogWorkoutContainer" data-bind="with:logWorkoutController">
                 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
             </div>
         </div>

@@ -5,9 +5,6 @@ var Pages;
         function ManageWorkoutController(parameters) {
             var _this = this;
             this.parameters = parameters;
-            this.logWorkoutContainerClick = function () {
-                _this.wantToPlanWorkout(false);
-            };
             this.logFunction = function () {
                 var canLogWorkout = _this.logWorkoutController().canLogWorkout();
                 if (_this.isCreateNewWorkoutPressed()) {
@@ -38,10 +35,9 @@ var Pages;
             };
             this.createWorkoutController = new Pages.CreateWorkoutController(parameters);
             this.chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(parameters);
-            this.service = new CrossfitterService(parameters.pathToApp);
             this.logWorkoutController = ko.observable();
+            this.service = new CrossfitterService(parameters.pathToApp);
             this.isAnyContainersVisible = ko.observable(false);
-            this.wantToPlanWorkout = ko.observable(false);
             this.isCreateNewWorkoutPressed = ko.observable(false);
             this.chooseExistingWorkoutController.workoutToDisplay.subscribe(function (newValue) {
                 if (!newValue) {
@@ -67,7 +63,8 @@ var Pages;
                 _this.createLogController(lightLogModel);
             });
             ko.computed(function () {
-                _this.isAnyContainersVisible(_this.logWorkoutController() != null && (_this.chooseExistingWorkoutController.selectedWorkout() || _this.createWorkoutController.hasAnyRoutines()));
+                _this.isAnyContainersVisible(_this.logWorkoutController() != null &&
+                    (_this.chooseExistingWorkoutController.selectedWorkout() || _this.createWorkoutController.hasAnyRoutines()));
             });
         }
         return ManageWorkoutController;

@@ -2,29 +2,27 @@
   import CrossfitterService = General.CrossfitterService;
 
   export class ManageWorkoutController {
-
     createWorkoutController: CreateWorkoutController;
     chooseExistingWorkoutController: ChooseExistingWorkoutController;
-    service;
-    logWorkoutController;
-    isAnyContainersVisible;
-    wantToPlanWorkout;
-    isCreateNewWorkoutPressed;
+    service: CrossfitterService;
+    logWorkoutController: KnockoutObservable<LogWorkoutController>;
+    isAnyContainersVisible: KnockoutObservable<boolean>;
+    isCreateNewWorkoutPressed: KnockoutObservable<boolean>;
 
-    constructor(public parameters: {pathToApp: string}) {
+    constructor(public parameters: { pathToApp: string }) {
       this.createWorkoutController = new CreateWorkoutController(parameters);
       this.chooseExistingWorkoutController = new ChooseExistingWorkoutController(parameters);
+      this.logWorkoutController = ko.observable();
+
       this.service = new CrossfitterService(parameters.pathToApp);
 
-      this.logWorkoutController = ko.observable();
       this.isAnyContainersVisible = ko.observable(false);
-      this.wantToPlanWorkout = ko.observable(false);
       this.isCreateNewWorkoutPressed = ko.observable(false);
       this.chooseExistingWorkoutController.workoutToDisplay.subscribe((newValue) => {
         if (!newValue) {
           return;
         }
-        let lightLogModel = {
+        const lightLogModel = {
           selectedWorkoutType: newValue.selectedWorkoutType(),
           simpleRoutines: newValue.simpleRoutines(),
           selectedWorkout: this.chooseExistingWorkoutController.selectedWorkout,
@@ -47,25 +45,20 @@
       });
 
 
-
-
-      ko.computed( () => {
-        this.isAnyContainersVisible(this.logWorkoutController() != null && (this.chooseExistingWorkoutController.selectedWorkout() || this.createWorkoutController.hasAnyRoutines()));
+      ko.computed(() => {
+        this.isAnyContainersVisible(this.logWorkoutController() != null &&
+          (this.chooseExistingWorkoutController.selectedWorkout() || this.createWorkoutController.hasAnyRoutines()));
       });
 
     }
 
-    logWorkoutContainerClick =  () => {
-      this.wantToPlanWorkout(false);
-    };
-
-    logFunction =  () => {
-      var canLogWorkout = this.logWorkoutController().canLogWorkout();
+    private logFunction = () => {
+      const canLogWorkout = this.logWorkoutController().canLogWorkout();
 
       if (this.isCreateNewWorkoutPressed()) {
-        var canCreateWorkout = this.createWorkoutController.canCreateCreateWorkout();
+        const canCreateWorkout = this.createWorkoutController.canCreateCreateWorkout();
         if (canCreateWorkout && canLogWorkout) {
-          var model = {
+          const model = {
             newWorkoutViewModel: this.createWorkoutController.getCreateWorkoutModel(),
             logWorkoutViewModel: this.logWorkoutController().toJSON()
           };
@@ -79,12 +72,12 @@
     };
 
 
-    createLogController =  (lightLogModel) => {
-      lightLogModel.crossfitterWorkoutId =  null;
+    private createLogController = (lightLogModel) => {
+      lightLogModel.crossfitterWorkoutId = null;
       this.logWorkoutController(new LogWorkoutController(lightLogModel, this.logFunction));
     };
 
-    manageWorkoutClick = (isCreateNewWorkout) => {
+    private manageWorkoutClick = (isCreateNewWorkout: boolean) => {
       this.chooseExistingWorkoutController.clearState();
       this.createWorkoutController.clearState();
 
@@ -94,6 +87,3 @@
 
   }
 }
-
-    
-
