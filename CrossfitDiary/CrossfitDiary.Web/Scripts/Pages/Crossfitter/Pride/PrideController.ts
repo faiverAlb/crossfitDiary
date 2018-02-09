@@ -10,7 +10,7 @@
     _personMaximums: KnockoutObservableArray<PersonExerciseRecord>;
     _allPersonsMaximums: KnockoutObservableArray<ObservablePersonExerciseRecord>;
 
-    constructor(basicParameters: General.IBasicParameters) {
+    constructor(basicParameters: General.BasicParameters) {
       super();
       this._service = new CrossfitterService(basicParameters.pathToApp);
       this._exercises = ko.observableArray([]);

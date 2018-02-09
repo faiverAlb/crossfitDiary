@@ -1,4 +1,6 @@
 ﻿module General {
+  import IExerciseViewModel = Models.IExerciseViewModel;
+
   export class CrossfitterService extends BaseService {
 
     constructor(public pathToApp: string) {
@@ -30,8 +32,8 @@
       return this.get(this.pathToApp + "api/getAvailableWorkouts");
     };
 
-    getExercises = () => {
-      return this.get(this.pathToApp + "api/getExercises");
+    getExercises = (): Q.Promise<IExerciseViewModel[]> => {
+      return this.get<IExerciseViewModel[]>(this.pathToApp + "api/getExercises");
     };
 
     getStatisticalExercises = () => {

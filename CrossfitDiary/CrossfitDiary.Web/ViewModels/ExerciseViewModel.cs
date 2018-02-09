@@ -38,6 +38,11 @@ namespace CrossfitDiary.Web.ViewModels
 
         [JsonProperty("shortMeasureDescription")]
         public string ShortMeasureDescription { get; set; }
+
+        [JsonProperty("isRequired")]
+        public bool IsRequired { get; set; } = true;
+
+
     }
 
     public enum MeasureTypeViewModel

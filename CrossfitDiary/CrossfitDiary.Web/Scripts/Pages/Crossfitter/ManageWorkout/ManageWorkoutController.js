@@ -5,67 +5,67 @@ var Pages;
         function ManageWorkoutController(parameters) {
             var _this = this;
             this.parameters = parameters;
-            this.logFunction = function () {
-                var canLogWorkout = _this.logWorkoutController().canLogWorkout();
-                if (_this.isCreateNewWorkoutPressed()) {
-                    var canCreateWorkout = _this.createWorkoutController.canCreateCreateWorkout();
-                    if (canCreateWorkout && canLogWorkout) {
-                        var model = {
-                            newWorkoutViewModel: _this.createWorkoutController.getCreateWorkoutModel(),
-                            logWorkoutViewModel: _this.logWorkoutController().toJSON()
-                        };
-                        _this.service.createAndLogWorkout(model);
-                    }
-                }
-                else {
-                    if (canLogWorkout) {
-                        _this.service.logWorkout(_this.logWorkoutController().toJSON());
-                    }
-                }
-            };
-            this.createLogController = function (lightLogModel) {
-                lightLogModel.crossfitterWorkoutId = null;
-                _this.logWorkoutController(new Pages.LogWorkoutController(lightLogModel, _this.logFunction));
-            };
+            //    private logFunction = () => {
+            //      const canLogWorkout = this.logWorkoutController().canLogWorkout();
+            //
+            //      if (this.isCreateNewWorkoutPressed()) {
+            //        const canCreateWorkout = this.createWorkoutController.canCreateCreateWorkout();
+            //        if (canCreateWorkout && canLogWorkout) {
+            //          const model = {
+            //            newWorkoutViewModel: this.createWorkoutController.getCreateWorkoutModel(),
+            //            logWorkoutViewModel: this.logWorkoutController().toJSON()
+            //          };
+            //          this._service.createAndLogWorkout(model);
+            //        }
+            //      } else {
+            //        if (canLogWorkout) {
+            //          this._service.logWorkout(this.logWorkoutController().toJSON());
+            //        }
+            //      }
+            //    };
+            //    private createLogController = (lightLogModel) => {
+            //      lightLogModel.crossfitterWorkoutId = null;
+            //      this.logWorkoutController(new LogWorkoutController(lightLogModel, this.logFunction));
+            //    };
             this.manageWorkoutClick = function (isCreateNewWorkout) {
-                _this.chooseExistingWorkoutController.clearState();
-                _this.createWorkoutController.clearState();
+                //      this.chooseExistingWorkoutController.clearState();
+                //      this.createWorkoutController.clearState();
                 _this.isCreateNewWorkoutPressed(isCreateNewWorkout);
                 _this.logWorkoutController(null);
             };
-            this.createWorkoutController = new Pages.CreateWorkoutController(parameters);
-            this.chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(parameters);
+            this._service = new CrossfitterService(parameters.pathToApp);
+            this.createWorkoutController = new Pages.CreateWorkoutController(parameters, this._service);
+            //      this.chooseExistingWorkoutController = new ChooseExistingWorkoutController(parameters);
             this.logWorkoutController = ko.observable();
-            this.service = new CrossfitterService(parameters.pathToApp);
             this.isAnyContainersVisible = ko.observable(false);
             this.isCreateNewWorkoutPressed = ko.observable(false);
-            this.chooseExistingWorkoutController.workoutToDisplay.subscribe(function (newValue) {
-                if (!newValue) {
-                    return;
-                }
-                var lightLogModel = {
-                    selectedWorkoutType: newValue.selectedWorkoutType(),
-                    simpleRoutines: newValue.simpleRoutines(),
-                    selectedWorkout: _this.chooseExistingWorkoutController.selectedWorkout,
-                    logWorkoutText: "Log workout"
-                };
-                _this.createLogController(lightLogModel);
-            });
-            this.createWorkoutController.simpleRoutines.subscribe(function (newValue) {
-                if (!newValue || newValue.length === 0) {
-                    return;
-                }
-                var lightLogModel = {
-                    selectedWorkoutType: _this.createWorkoutController.selectedWorkoutType(),
-                    simpleRoutines: _this.createWorkoutController.simpleRoutines(),
-                    logWorkoutText: "Create and log workout"
-                };
-                _this.createLogController(lightLogModel);
-            });
-            ko.computed(function () {
-                _this.isAnyContainersVisible(_this.logWorkoutController() != null &&
-                    (_this.chooseExistingWorkoutController.selectedWorkout() || _this.createWorkoutController.hasAnyRoutines()));
-            });
+            //      this.chooseExistingWorkoutController.workoutToDisplay.subscribe((newValue) => {
+            //        if (!newValue) {
+            //          return;
+            //        }
+            //        const lightLogModel = {
+            //          selectedWorkoutType: newValue.selectedWorkoutType(),
+            //          simpleRoutines: newValue.simpleRoutines(),
+            //          selectedWorkout: this.chooseExistingWorkoutController.selectedWorkout,
+            //          logWorkoutText: "Log workout"
+            //        };
+            //        this.createLogController(lightLogModel);
+            //      });
+            //      this.createWorkoutController.simpleRoutines.subscribe((newValue) => {
+            //        if (!newValue || newValue.length === 0) {
+            //          return;
+            //        }
+            //        var lightLogModel = {
+            //          selectedWorkoutType: this.createWorkoutController.selectedWorkoutType(),
+            //          simpleRoutines: this.createWorkoutController.simpleRoutines(),
+            //          logWorkoutText: "Create and log workout"
+            //        };
+            //        this.createLogController(lightLogModel);
+            //      });
+            //      ko.computed(() => {
+            //        this.isAnyContainersVisible(this.logWorkoutController() != null &&
+            //          (this.chooseExistingWorkoutController.selectedWorkout() || this.createWorkoutController.hasAnyRoutines()));
+            //      });
         }
         return ManageWorkoutController;
     }());

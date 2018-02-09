@@ -3,11 +3,20 @@
   export interface IExerciseViewModel {
     id: number;
     title?: string;
-    exerciseMeasures: ExerciseMeasureViewModel[];
-    isAlternative:boolean;
+    exerciseMeasures: IExerciseMeasureViewModel[];
+    isAlternative: boolean;
   }
-  export class ExerciseViewModel {
-    constructor(model:IWorkoutViewModel) {
+
+  export interface IExerciseMeasureViewModel {
+    exerciseMeasureType: IExerciseMeasureTypeViewModel
+  }
+
+  class ExerciseMeasureViewModelObservable {
+    constructor(model: IExerciseMeasureViewModel) {}
+  }
+
+  export class ExerciseViewModelObservable {
+    constructor(public model: IExerciseViewModel) {
 
     }
   }

@@ -1,10 +1,62 @@
 var Models;
 (function (Models) {
     var WorkoutViewModel = (function () {
-        function WorkoutViewModel(model) {
+        function WorkoutViewModel(workoutType, exercises) {
+            this.workoutType = workoutType;
+            this.exercisesToDoList = exercises;
         }
         return WorkoutViewModel;
     }());
     Models.WorkoutViewModel = WorkoutViewModel;
+    var WorkoutViewModelObservable = (function () {
+        function WorkoutViewModelObservable(model, isReadOnlyMode) {
+            var _this = this;
+            this.model = model;
+            /* Сivilians */
+            this._isReadOnlyMode = isReadOnlyMode;
+            this.errors = ko.validation.group(this);
+            this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {
+                return new Models.ExerciseViewModelObservable(item);
+            }));
+            /* Observables */
+            this._title = ko.observable(model.title);
+            this._restBetweenExercises = ko.observable(model.restBetweenExercises);
+            this._restBetweenRounds = ko.observable(model.restBetweenRounds);
+            this._timeToWork = ko.observable();
+            this._roundsCount = ko.observable();
+            /* Computeds */
+            this._canSeeRoundsCount = ko.computed(function () {
+                return _this.model.workoutType === Models.WorkoutType.ForTime || _this.model.workoutType === Models.WorkoutType.Tabata;
+            });
+            this._anyUsualExercises = ko.computed(function () {
+                return ko.utils.arrayFirst(_this._exercisesToBeDone(), function (exercise) { return exercise.model.isAlternative === false; }) != null;
+            });
+            this._canSeeAlternativeExercises = ko.computed(function () {
+                var typeIsNeeded = _this.model.workoutType === Models.WorkoutType.EMOM || _this.model.workoutType === Models.WorkoutType.E2MOM;
+                return typeIsNeeded && _this._anyUsualExercises();
+            });
+            this._canSeeTimeToWork = ko.computed(function () {
+                return _this.model.workoutType === Models.WorkoutType.AMRAP ||
+                    _this.model.workoutType === Models.WorkoutType.EMOM ||
+                    _this.model.workoutType === Models.WorkoutType.E2MOM;
+            });
+            this._timeToWork.extend({
+                required: {
+                    onlyIf: function () {
+                        return _this._canSeeTimeToWork();
+                    }
+                }
+            });
+            this._roundsCount.extend({
+                required: {
+                    onlyIf: function () {
+                        return _this._canSeeRoundsCount();
+                    }
+                }
+            });
+        }
+        return WorkoutViewModelObservable;
+    }());
+    Models.WorkoutViewModelObservable = WorkoutViewModelObservable;
 })(Models || (Models = {}));
 //# sourceMappingURL=WorkoutViewModel.js.map

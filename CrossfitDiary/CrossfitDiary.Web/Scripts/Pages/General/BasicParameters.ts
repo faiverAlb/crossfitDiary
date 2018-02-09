@@ -1,5 +1,7 @@
 ﻿module General {
-    export interface IBasicParameters {
-        pathToApp:string;
+  export class BasicParameters {
+    constructor(public pathToApp) {
+
     }
+  }
 }

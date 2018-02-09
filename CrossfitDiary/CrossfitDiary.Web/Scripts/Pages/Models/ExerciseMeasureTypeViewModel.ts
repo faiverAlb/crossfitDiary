@@ -1,14 +1,21 @@
 ﻿module Models {
-  export class ExerciseMeasureTypeViewModel {
+  export class IExerciseMeasureTypeViewModel {
+    measureType: ExerciseMeasureType;
+    measureValue: string;
+    description: string;
+    shortMeasureDescription: string;
+    isRequired: boolean;
+  }
+  export class ExerciseMeasureTypeViewModelObservable {
     measureType: KnockoutObservable<ExerciseMeasureType>;
     measureValue: KnockoutObservable<string>;
     measureDesciption: KnockoutObservable<string>;
     shortMeasureDescription: KnockoutObservable<string>;
 
-    constructor(model, isRequired:boolean) {
+    constructor(model: IExerciseMeasureTypeViewModel) {
       this.measureType = ko.observable(model.measureType);
       this.measureValue = ko.observable();
-      this.measureValue.extend({ required: isRequired });
+      this.measureValue.extend({ required: model.isRequired });
 
       if (parseFloat(model.measureValue)) {
         this.measureValue(parseFloat(model.measureValue).toString());

@@ -7,10 +7,9 @@ var Models;
     }());
     var ExerciseViewModelObservable = (function () {
         function ExerciseViewModelObservable(model) {
-            this.model = model;
         }
         return ExerciseViewModelObservable;
     }());
     Models.ExerciseViewModelObservable = ExerciseViewModelObservable;
 })(Models || (Models = {}));
-//# sourceMappingURL=ExerciseViewModel.js.map
+//# sourceMappingURL=ExerciseViewModelObservable.js.map

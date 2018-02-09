@@ -1,86 +1,61 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Pages;
 (function (Pages) {
-    var WorkoutTypes = Models.WorkoutType;
-    var SimpleRoutine = Models.SimpleRoutine;
-    var CreateWorkoutController = (function (_super) {
-        __extends(CreateWorkoutController, _super);
-        function CreateWorkoutController(parameters) {
-            var _this = _super.call(this, new Pages.CrossfitterParameters(parameters.pathToApp, false, [], null, null, null, null, null, null)) || this;
-            _this.loadExercises = function () {
-                _this._service.getExercises().then(function (exercises) {
-                    ko.utils.arrayPushAll(_this.exercises, exercises);
+    var BaseKeyValuePairModel = General.BaseKeyValuePairModel;
+    var WorkoutType = Models.WorkoutType;
+    var WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
+    var WorkoutViewModel = Models.WorkoutViewModel;
+    var CreateWorkoutController = (function () {
+        function CreateWorkoutController(parameters, service) {
+            var _this = this;
+            this.loadExercises = function () {
+                _this._service
+                    .getExercises()
+                    .then(function (exercises) {
+                    _this._exercises(exercises);
                     //  HACK for copy
                     var alternativeExercises = JSON.parse(JSON.stringify(exercises));
                     for (var i = 0; i < alternativeExercises.length; i++) {
                         alternativeExercises[i].isAlternative = true;
                     }
-                    _this.alternativeExercises(alternativeExercises);
+                    _this._alternativeExercises(alternativeExercises);
                 });
             };
-            _this.canCreateCreateWorkout = function () {
+            this.canCreateWorkout = function () {
                 if (_this.errors().length > 0) {
                     _this.errors.showAllMessages();
                     return false;
                 }
                 return true;
             };
-            _this.createWorkout = function () {
-                if (_this.errors().length > 0) {
-                    _this.errors.showAllMessages();
+            this.createWorkout = function () {
+                //      if (this.errors().length > 0) {
+                //        this.errors.showAllMessages();
+                //        return;
+                //      }
+                //      this._service.createWorkout(this.toJSON());
+            };
+            this._service = service;
+            this._workoutTypes = ko.observable(new Array(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]), new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP]), new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM]), new BaseKeyValuePairModel(WorkoutType.E2MOM, WorkoutType[WorkoutType.E2MOM]), new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime]), new BaseKeyValuePairModel(WorkoutType.Tabata, WorkoutType[WorkoutType.Tabata])));
+            this._selectedWorkoutType = ko.observable(null);
+            this._workoutToCreate = ko.observable(null);
+            this._exercises = ko.observableArray([]);
+            this._alternativeExercises = ko.observableArray([]);
+            this._selectedExercise = ko.observable();
+            this._selectedAlternativeExercise = ko.observable();
+            ko.computed(function () {
+                if (!_this._selectedWorkoutType()) {
                     return;
                 }
-                _this._service.createWorkout(_this.toJSON());
-            };
-            _this.clearState = function () {
-                _this.selectedWorkoutType(null);
-            };
-            _this.getCreateWorkoutModel = function () {
-                return _this.toJSON();
-            };
-            _this.exercises = ko.observableArray([]);
-            _this.alternativeExercises = ko.observableArray();
-            _this.hasAnyRoutines = ko.computed(function () {
-                return _this.simpleRoutines().length > 0;
-            });
-            _this.selectedExercise = ko.observable();
-            _this.selectedAlternativeExercise = ko.observable();
-            ko.computed(function () {
-                if (_this.selectedWorkoutType() || !_this.selectedWorkoutType()) {
-                    _this.simpleRoutines([]);
-                }
-            });
-            _this.errors = ko.validation.group(_this);
-            ko.computed(function () {
-                var exercise = _this.selectedExercise();
-                if (!exercise) {
+                if (_this._exercises().length === 0) {
                     return;
                 }
-                _this.simpleRoutines.push(new SimpleRoutine(exercise, _this.selectedWorkoutType().id !== WorkoutTypes.Tabata));
-                _this.selectedExercise('');
+                var model = new WorkoutViewModel(_this._selectedWorkoutType().id, _this._exercises());
+                _this._workoutToCreate(new WorkoutViewModelObservable(model, false));
             });
-            ko.computed(function () {
-                var exercise = _this.selectedAlternativeExercise();
-                if (!exercise) {
-                    return;
-                }
-                _this.simpleRoutines.push(new SimpleRoutine(exercise));
-                _this.selectedAlternativeExercise('');
-            });
-            _this.loadExercises();
-            return _this;
+            this.loadExercises();
         }
         return CreateWorkoutController;
-    }(Pages.CrossfitterController));
+    }());
     Pages.CreateWorkoutController = CreateWorkoutController;
 })(Pages || (Pages = {}));
 //# sourceMappingURL=CreateWorkoutController.js.map

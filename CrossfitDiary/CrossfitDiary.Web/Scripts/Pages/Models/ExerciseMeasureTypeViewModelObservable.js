@@ -28,4 +28,4 @@ var Models;
     }());
     Models.ExerciseMeasureTypeViewModelObservable = ExerciseMeasureTypeViewModelObservable;
 })(Models || (Models = {}));
-//# sourceMappingURL=ExerciseMeasureTypeViewModel.js.map
+//# sourceMappingURL=ExerciseMeasureTypeViewModelObservable.js.map

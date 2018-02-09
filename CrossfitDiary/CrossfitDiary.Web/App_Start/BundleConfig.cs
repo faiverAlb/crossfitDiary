@@ -42,13 +42,17 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.min.js"
                     , "~/Scripts/Pages/General/BaseController.js"
                     , "~/Scripts/Pages/General/BaseService.js"
+                    , "~/Scripts/Pages/General/BaseKeyValuePairModel.js"
+                    , "~/Scripts/Pages/General/BasicParameters.js"
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/ServerProcessedViewModel.js"
-                    , "~/Scripts/Pages/General/BaseKeyValuePairModel.js"
                     , "~/Scripts/Pages/Models/ExerciseMeasureTypeValue.js"
                     , "~/Scripts/Pages/Models/WorkoutType.js"
                     , "~/Scripts/Pages/Models/ExerciseMeasureType.js"
                     , "~/Scripts/Pages/Models/SimpleRoutine.js"
+                    , "~/Scripts/Pages/Models/ExerciseViewModel.js"
+                    , "~/Scripts/Pages/Models/WorkoutViewModel.js"
+
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/CrossfitterController.js"
 
 
