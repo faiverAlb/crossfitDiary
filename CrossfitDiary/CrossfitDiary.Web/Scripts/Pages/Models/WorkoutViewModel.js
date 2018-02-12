@@ -31,13 +31,8 @@ var Models;
             this._anyUsualExercises = ko.computed(function () {
                 return ko.utils.arrayFirst(_this._exercisesToBeDone(), function (exercise) { return exercise.model.isAlternative === false; }) != null;
             });
-            this._canSeeAlternativeExercises = ko.computed(function () {
-                var typeIsNeeded = _this.model.workoutType === Models.WorkoutType.EMOM;
-                return typeIsNeeded && _this._anyUsualExercises();
-            });
             this._canSeeTimeToWork = ko.computed(function () {
-                return _this.model.workoutType === Models.WorkoutType.AMRAP ||
-                    _this.model.workoutType === Models.WorkoutType.EMOM;
+                return _this.model.workoutType === Models.WorkoutType.AMRAP || _this.model.workoutType === Models.WorkoutType.EMOM;
             });
             this._timeToWork.extend({
                 required: {
@@ -54,6 +49,9 @@ var Models;
                 }
             });
         }
+        WorkoutViewModelObservable.prototype.addExerciseToList = function (exerciseViewModel) {
+            this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel));
+        };
         return WorkoutViewModelObservable;
     }());
     Models.WorkoutViewModelObservable = WorkoutViewModelObservable;

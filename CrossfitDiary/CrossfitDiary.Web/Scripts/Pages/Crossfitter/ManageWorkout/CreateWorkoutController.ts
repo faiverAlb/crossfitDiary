@@ -19,8 +19,6 @@
     private _exercises: KnockoutObservableArray<IExerciseViewModel>;
     private _selectedExercise: KnockoutObservable<IExerciseViewModel>;
 
-    private _alternativeExercises: KnockoutObservableArray<IExerciseViewModel>;
-    private _selectedAlternativeExercise: KnockoutObservable<IExerciseViewModel>;
 
 
 
@@ -37,22 +35,32 @@
       this._selectedWorkoutType = ko.observable(null);
       this._workoutToCreate = ko.observable(null);
       this._exercises = ko.observableArray([]);
-      this._alternativeExercises = ko.observableArray([]);
 
       this._selectedExercise = ko.observable();
-      this._selectedAlternativeExercise = ko.observable();
 
       ko.computed(() => {
-        if (!this._selectedWorkoutType()) {
+        this._selectedExercise(null);
+          if (!this._selectedWorkoutType()) {
           return;
         }
         if (this._exercises().length === 0) {
           return;
         }
 
-        let model = new WorkoutViewModel(this._selectedWorkoutType().id, this._exercises());
+        let model = new WorkoutViewModel(this._selectedWorkoutType().id, []);
         this._workoutToCreate(new WorkoutViewModelObservable(model, false));
       });
+
+      ko.computed(() => {
+        let exercise = this._selectedExercise();
+        if (!exercise) {
+          return;
+        }
+        this._workoutToCreate().addExerciseToList(exercise);
+//        this.simpleRoutines.push(new SimpleRoutine(exercise, this.selectedWorkoutType().id !== WorkoutTypes.Tabata));
+        this._selectedExercise(null);
+      });
+
       this.loadExercises();
     }
 
@@ -61,12 +69,6 @@
         .getExercises()
         .then((exercises: IExerciseViewModel[]) => {
           this._exercises(exercises);
-          //  HACK for copy
-          let alternativeExercises = JSON.parse(JSON.stringify(exercises));
-          for (let i = 0; i < alternativeExercises.length; i++) {
-            alternativeExercises[i].isAlternative = true;
-          }
-          this._alternativeExercises(alternativeExercises);
         });
     };
 

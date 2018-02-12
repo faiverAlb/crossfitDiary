@@ -30,12 +30,10 @@
     private _restBetweenExercises: KnockoutObservable<string>;
     private _restBetweenRounds: KnockoutObservable<string>;
     private _exercisesToBeDone: KnockoutObservableArray<ExerciseViewModelObservable>;
-    private _alternativeExercisesToBeDone: KnockoutObservableArray<ExerciseViewModelObservable>;
 
     /* Computeds */
     private _canSeeRoundsCount: KnockoutComputed<false | boolean>;
     private _canSeeTimeToWork: KnockoutComputed<false | boolean>;
-    private _canSeeAlternativeExercises: KnockoutComputed<false | boolean>;
     private _anyUsualExercises: KnockoutComputed<false | boolean>;
 
 
@@ -66,17 +64,9 @@
         return ko.utils.arrayFirst(this._exercisesToBeDone(), exercise => exercise.model.isAlternative === false) != null;
       });
 
-      this._canSeeAlternativeExercises = ko.computed(() => {
-        let typeIsNeeded = this.model.workoutType === WorkoutType.EMOM;
-
-        return typeIsNeeded && this._anyUsualExercises();
-      });
-
       this._canSeeTimeToWork = ko.computed(() => {
-        return this.model.workoutType === WorkoutType.AMRAP ||
-          this.model.workoutType === WorkoutType.EMOM;
+        return this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
       });
-
 
       this._timeToWork.extend({
         required: {
@@ -94,5 +84,10 @@
       });
 
     }
+
+    public addExerciseToList(exerciseViewModel: IExerciseViewModel) {
+      this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel));
+    }
+
   }
 }

@@ -50,6 +50,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/Models/WorkoutType.js"
                     , "~/Scripts/Pages/Models/ExerciseMeasureType.js"
                     , "~/Scripts/Pages/Models/SimpleRoutine.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureTypeViewModel.js"
                     , "~/Scripts/Pages/Models/ExerciseViewModel.js"
                     , "~/Scripts/Pages/Models/WorkoutViewModel.js"
 

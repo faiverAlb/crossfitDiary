@@ -67,45 +67,20 @@
             </div>
         </div>
     </div>
-    <div data-bind="ifnot: model._isReadOnlyMode">
+    <div data-bind="ifnot: model()._isReadOnlyMode">
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options: controller._exercises, optionsText:'title',value: controller._selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
     </div>
     <div class="selected-workout-type">
         <div class="text-center" data-bind="text:controller._selectedWorkoutType().text"></div>
     </div>
     <div class="routines-container">
-        <!-- ko foreach:model._exercisesToBeDone-->
-        <!-- ko ifnot: model.isAlternative -->
+        <!-- ko foreach:model()._exercisesToBeDone-->
         @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._SimpleRoutineItemTemlate); }
         <!-- /ko -->
-        <!-- /ko -->
-        <!-- ko ifnot: model._anyUsualExercises -->
+        <!-- ko ifnot: model()._anyUsualExercises -->
         <div class="simple-routine-item text-center no-selected-container">
             No exercises selected
         </div>
         <!-- /ko -->
     </div>
-
-    <div>
-        <div data-bind="if:model._canSeeAlternativeExercises">
-            <div class="text-center selected-workout-type">Alternative</div>
-            <div data-bind="ifnot: model._isReadOnlyMode">
-                <select class="form-control exercise-selector" data-live-search="true" data-bind="options:controller._alternativeExercises, optionsText:'title',value: controller._selectedAlternativeExercise, optionsCaption: 'Choose an alternative exercise...',selectPicker: {}"></select>
-            </div>
-        </div>
-    </div>
-
-    <div class="routines-container" data-bind="if:model._canSeeAlternativeExercises">
-        <!-- ko foreach:simpleRoutines-->
-        <!-- ko if: exercise.isAlternative -->
-        @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._SimpleRoutineItemTemlate); }
-        <!-- /ko -->
-        <!-- /ko -->
-        <!-- ko ifnot: anyAlternative-->
-        <div class="simple-routine-item text-center no-selected-container">
-            No alternative exercises selected
-        </div>
-        <!-- /ko -->
-    </div>
-
 </script>

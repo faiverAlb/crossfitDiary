@@ -12,12 +12,6 @@ var Pages;
                     .getExercises()
                     .then(function (exercises) {
                     _this._exercises(exercises);
-                    //  HACK for copy
-                    var alternativeExercises = JSON.parse(JSON.stringify(exercises));
-                    for (var i = 0; i < alternativeExercises.length; i++) {
-                        alternativeExercises[i].isAlternative = true;
-                    }
-                    _this._alternativeExercises(alternativeExercises);
                 });
             };
             this.canCreateWorkout = function () {
@@ -39,18 +33,26 @@ var Pages;
             this._selectedWorkoutType = ko.observable(null);
             this._workoutToCreate = ko.observable(null);
             this._exercises = ko.observableArray([]);
-            this._alternativeExercises = ko.observableArray([]);
             this._selectedExercise = ko.observable();
-            this._selectedAlternativeExercise = ko.observable();
             ko.computed(function () {
+                _this._selectedExercise(null);
                 if (!_this._selectedWorkoutType()) {
                     return;
                 }
                 if (_this._exercises().length === 0) {
                     return;
                 }
-                var model = new WorkoutViewModel(_this._selectedWorkoutType().id, _this._exercises());
+                var model = new WorkoutViewModel(_this._selectedWorkoutType().id, []);
                 _this._workoutToCreate(new WorkoutViewModelObservable(model, false));
+            });
+            ko.computed(function () {
+                var exercise = _this._selectedExercise();
+                if (!exercise) {
+                    return;
+                }
+                _this._workoutToCreate().addExerciseToList(exercise);
+                //        this.simpleRoutines.push(new SimpleRoutine(exercise, this.selectedWorkoutType().id !== WorkoutTypes.Tabata));
+                _this._selectedExercise(null);
             });
             this.loadExercises();
         }
