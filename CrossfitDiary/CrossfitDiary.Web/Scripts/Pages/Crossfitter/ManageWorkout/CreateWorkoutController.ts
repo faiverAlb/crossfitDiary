@@ -32,9 +32,7 @@
           new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime])
           , new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP])
           , new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM])
-          , new BaseKeyValuePairModel(WorkoutType.E2MOM, WorkoutType[WorkoutType.E2MOM])
           , new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])
-          , new BaseKeyValuePairModel(WorkoutType.Tabata, WorkoutType[WorkoutType.Tabata])
         ));
       this._selectedWorkoutType = ko.observable(null);
       this._workoutToCreate = ko.observable(null);

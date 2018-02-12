@@ -58,7 +58,7 @@
 
       /* Computeds */
       this._canSeeRoundsCount = ko.computed(() => {
-        return this.model.workoutType === WorkoutType.ForTime || this.model.workoutType === WorkoutType.Tabata;
+        return this.model.workoutType === WorkoutType.ForTime;
       });
 
 
@@ -67,15 +67,14 @@
       });
 
       this._canSeeAlternativeExercises = ko.computed(() => {
-        let typeIsNeeded = this.model.workoutType === WorkoutType.EMOM || this.model.workoutType === WorkoutType.E2MOM;
+        let typeIsNeeded = this.model.workoutType === WorkoutType.EMOM;
 
         return typeIsNeeded && this._anyUsualExercises();
       });
 
       this._canSeeTimeToWork = ko.computed(() => {
         return this.model.workoutType === WorkoutType.AMRAP ||
-          this.model.workoutType === WorkoutType.EMOM ||
-          this.model.workoutType === WorkoutType.E2MOM;
+          this.model.workoutType === WorkoutType.EMOM;
       });
 
 

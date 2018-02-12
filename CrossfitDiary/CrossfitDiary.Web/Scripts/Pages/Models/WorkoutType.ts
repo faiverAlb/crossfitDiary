@@ -4,7 +4,6 @@
     AMRAP = 1,
     EMOM = 2,
     E2MOM = 3,
-    NotForTime = 4,
-    Tabata = 5
+    NotForTime = 4
   }
 }
