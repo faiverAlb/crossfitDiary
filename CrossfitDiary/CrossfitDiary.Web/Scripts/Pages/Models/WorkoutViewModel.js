@@ -52,6 +52,9 @@ var Models;
         WorkoutViewModelObservable.prototype.addExerciseToList = function (exerciseViewModel) {
             this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel));
         };
+        WorkoutViewModelObservable.prototype.removeSimpleRoutineFromToDo = function (index) {
+            this._exercisesToBeDone.splice(index(), 1);
+        };
         return WorkoutViewModelObservable;
     }());
     Models.WorkoutViewModelObservable = WorkoutViewModelObservable;

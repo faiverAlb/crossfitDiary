@@ -3,7 +3,7 @@
         <div class="form-group">
             <div class="input-group">
                 <!--ko ifnot:$parent.isReadOnlyMode-->
-                <span class="btn input-group-addon" data-bind="click:function(){ $parent.removeSimpleRoutineFromToDo($index)}">
+                <span class="btn input-group-addon" data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </span>
                 <!-- /ko -->

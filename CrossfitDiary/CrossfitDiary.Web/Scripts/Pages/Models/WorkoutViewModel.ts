@@ -89,5 +89,9 @@
       this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel));
     }
 
+    public removeSimpleRoutineFromToDo(index:KnockoutObservable<number>) {
+      this._exercisesToBeDone.splice(index(), 1);
+    }
+
   }
 }

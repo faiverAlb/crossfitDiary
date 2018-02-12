@@ -57,7 +57,6 @@
           return;
         }
         this._workoutToCreate().addExerciseToList(exercise);
-//        this.simpleRoutines.push(new SimpleRoutine(exercise, this.selectedWorkoutType().id !== WorkoutTypes.Tabata));
         this._selectedExercise(null);
       });
 
