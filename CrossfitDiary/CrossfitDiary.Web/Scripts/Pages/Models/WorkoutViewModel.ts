@@ -21,7 +21,7 @@
 
     /* Сivilians */
     private _isReadOnlyMode: boolean;
-    private errors:any;
+    public errors:any;
 
     /* Observables */
     private _title: KnockoutObservable<string>;
@@ -40,7 +40,7 @@
     constructor(public model: WorkoutViewModel, isReadOnlyMode: boolean) {
       /* Сivilians */
       this._isReadOnlyMode = isReadOnlyMode;
-      this.errors = ko.validation.group(this);
+      
       this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map((item) => {
         return new ExerciseViewModelObservable(item);
       }));
@@ -82,7 +82,7 @@
           }
         }
       });
-
+      this.errors = ko.validation.group(this);
     }
 
     public addExerciseToList(exerciseViewModel: IExerciseViewModel) {

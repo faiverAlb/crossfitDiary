@@ -2,7 +2,18 @@
   import CrossfitterService = General.CrossfitterService;
   import BasicParameters = General.BasicParameters;
 
-
+  declare var ko;
+  ko.validation.init({
+    errorElementClass: 'has-error',
+    errorMessageClass: 'help-block',
+    decorateInputElement: true,
+    insertMessages: false,
+    grouping: {
+      deep: true,
+      live: true,
+      observable: true
+    }
+  });
   export class ManageWorkoutController {
     createWorkoutController: CreateWorkoutController;
 //    chooseExistingWorkoutController: ChooseExistingWorkoutController;

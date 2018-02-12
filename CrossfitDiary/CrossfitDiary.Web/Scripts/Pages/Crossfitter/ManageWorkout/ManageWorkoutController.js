@@ -1,6 +1,17 @@
 var Pages;
 (function (Pages) {
     var CrossfitterService = General.CrossfitterService;
+    ko.validation.init({
+        errorElementClass: 'has-error',
+        errorMessageClass: 'help-block',
+        decorateInputElement: true,
+        insertMessages: false,
+        grouping: {
+            deep: true,
+            live: true,
+            observable: true
+        }
+    });
     var ManageWorkoutController = (function () {
         function ManageWorkoutController(parameters) {
             var _this = this;

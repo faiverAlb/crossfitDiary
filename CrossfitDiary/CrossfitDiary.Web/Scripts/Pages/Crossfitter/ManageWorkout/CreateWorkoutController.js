@@ -15,17 +15,17 @@ var Pages;
                 });
             };
             this.canCreateWorkout = function () {
-                if (_this.errors().length > 0) {
-                    _this.errors.showAllMessages();
+                if (_this._workoutToCreate().errors().length > 0) {
+                    _this._workoutToCreate().errors.showAllMessages();
                     return false;
                 }
                 return true;
             };
             this.createWorkout = function () {
-                //      if (this.errors().length > 0) {
-                //        this.errors.showAllMessages();
-                //        return;
-                //      }
+                if (_this._workoutToCreate().errors().length > 0) {
+                    _this._workoutToCreate().errors.showAllMessages();
+                    return;
+                }
                 //      this._service.createWorkout(this.toJSON());
             };
             this._service = service;

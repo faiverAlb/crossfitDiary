@@ -14,7 +14,6 @@ var Models;
             this.model = model;
             /* Сivilians */
             this._isReadOnlyMode = isReadOnlyMode;
-            this.errors = ko.validation.group(this);
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {
                 return new Models.ExerciseViewModelObservable(item);
             }));
@@ -48,6 +47,7 @@ var Models;
                     }
                 }
             });
+            this.errors = ko.validation.group(this);
         }
         WorkoutViewModelObservable.prototype.addExerciseToList = function (exerciseViewModel) {
             this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel));

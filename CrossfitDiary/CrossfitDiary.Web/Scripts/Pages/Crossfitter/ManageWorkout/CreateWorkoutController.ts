@@ -8,7 +8,6 @@
   import WorkoutViewModel = Models.WorkoutViewModel;
 
   export class CreateWorkoutController {
-    private errors;
     private _service: CrossfitterService;
 
     private _workoutToCreate: KnockoutObservable<WorkoutViewModelObservable>;
@@ -72,18 +71,18 @@
     };
 
     canCreateWorkout = () => {
-      if (this.errors().length > 0) {
-        this.errors.showAllMessages();
+      if (this._workoutToCreate().errors().length > 0) {
+        this._workoutToCreate().errors.showAllMessages();
         return false;
       }
       return true;
     };
 
     createWorkout = () => {
-//      if (this.errors().length > 0) {
-//        this.errors.showAllMessages();
-//        return;
-//      }
+      if (this._workoutToCreate().errors().length > 0) {
+        this._workoutToCreate().errors.showAllMessages();
+        return;
+      }
 //      this._service.createWorkout(this.toJSON());
     };
 
