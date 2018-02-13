@@ -52,8 +52,8 @@
       this._restBetweenExercises = ko.observable(model.restBetweenExercises);
       this._restBetweenRounds = ko.observable(model.restBetweenRounds);
 
-      this._timeToWork = ko.observable();
-      this._roundsCount = ko.observable();
+      this._timeToWork = ko.observable(model.timeToWork);
+      this._roundsCount = ko.observable(model.roundsCount);
 
 
       /* Computeds */
