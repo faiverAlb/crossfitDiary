@@ -1,10 +1,18 @@
 ﻿module Models {
-  export class IExerciseMeasureTypeViewModel {
+  export class ExerciseMeasureTypeViewModel {
     measureType: ExerciseMeasureType;
     measureValue: string;
     description: string;
     shortMeasureDescription: string;
     isRequired: boolean;
+
+    constructor(measureType: ExerciseMeasureType, measureValue: string, description: string, shortMeasureDescription: string, isRequired: boolean) {
+      this.measureType = measureType;
+      this.measureValue = measureValue;
+      this.description = description;
+      this.shortMeasureDescription = shortMeasureDescription;
+      this.isRequired = isRequired;
+    }
   }
   export class ExerciseMeasureTypeViewModelObservable {
     measureType: KnockoutObservable<ExerciseMeasureType>;
@@ -12,7 +20,7 @@
     measureDesciption: KnockoutObservable<string>;
     shortMeasureDescription: KnockoutObservable<string>;
 
-    constructor(model: IExerciseMeasureTypeViewModel) {
+    constructor(public model: ExerciseMeasureTypeViewModel) {
       this.measureType = ko.observable(model.measureType);
       this.measureValue = ko.observable();
       this.measureValue.extend({ required: model.isRequired });
@@ -24,12 +32,14 @@
       this.shortMeasureDescription = ko.observable(model.shortMeasureDescription);
     }
 
+    public toPlainObject = (): ExerciseMeasureTypeViewModel => {
+      let plainObject = new ExerciseMeasureTypeViewModel(this.measureType(),
+        this.measureValue(),
+        this.measureDesciption(),
+        this.shortMeasureDescription(),
+        this.model.isRequired);
 
-    public toJSON = () => ({
-      exerciseMeasureType: {
-        measureType: this.measureType(),
-        measureValue: this.measureValue()
-      }
-    });
+      return plainObject;
+    }
   }
 }

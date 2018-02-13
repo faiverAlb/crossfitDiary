@@ -1,7 +1,7 @@
 ﻿module Pages {
   import BasicParameters = General.BasicParameters;
   import CrossfitterService = General.CrossfitterService;
-  import IExerciseViewModel = Models.IExerciseViewModel;
+  import IExerciseViewModel = Models.ExerciseViewModel;
   import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
   import WorkoutType = Models.WorkoutType;
   import WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
@@ -83,7 +83,9 @@
         this._workoutToCreate().errors.showAllMessages();
         return;
       }
-//      this._service.createWorkout(this.toJSON());
+      let workoutToCreate = this._workoutToCreate().toPlainObject();
+      debugger;
+//      this._service.createWorkout(workoutToCreate);
     };
 
 

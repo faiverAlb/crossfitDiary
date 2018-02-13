@@ -9,16 +9,16 @@
     restBetweenExercises?: any;
     restBetweenRounds?: any;
     workoutType: WorkoutType;
-    exercisesToDoList: IExerciseViewModel[];
+    exercisesToDoList: ExerciseViewModel[];
 
-    constructor(workoutType: WorkoutType, exercises: IExerciseViewModel[]) {
+    constructor(workoutType: WorkoutType, exercises: ExerciseViewModel[]) {
       this.workoutType = workoutType;
       this.exercisesToDoList = exercises;
     }
   }
 
   export class WorkoutViewModelObservable {
-
+    
     /* Сivilians */
     private _isReadOnlyMode: boolean;
     public errors:any;
@@ -85,7 +85,7 @@
       this.errors = ko.validation.group(this);
     }
 
-    public addExerciseToList(exerciseViewModel: IExerciseViewModel) {
+    public addExerciseToList(exerciseViewModel: ExerciseViewModel) {
       this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel));
     }
 
@@ -93,5 +93,16 @@
       this._exercisesToBeDone.splice(index(), 1);
     }
 
+
+    public toPlainObject = (): WorkoutViewModel => {
+      let workoutToCreate = new WorkoutViewModel(this.model.workoutType, this._exercisesToBeDone().map(item => item.toPlainObject()));
+      workoutToCreate.title = this._title();
+      workoutToCreate.roundsCount = this._roundsCount();
+      workoutToCreate.timeToWork = this._timeToWork();
+      workoutToCreate.restBetweenExercises = this._restBetweenExercises();
+      workoutToCreate.restBetweenRounds = this._restBetweenRounds();
+
+      return workoutToCreate;
+    }
   }
 }

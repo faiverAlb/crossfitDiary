@@ -26,7 +26,9 @@ var Pages;
                     _this._workoutToCreate().errors.showAllMessages();
                     return;
                 }
-                //      this._service.createWorkout(this.toJSON());
+                var workoutToCreate = _this._workoutToCreate().toPlainObject();
+                debugger;
+                //      this._service.createWorkout(workoutToCreate);
             };
             this._service = service;
             this._workoutTypes = ko.observable(new Array(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]), new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP]), new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM]), new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])));

@@ -1,20 +1,24 @@
 var Models;
 (function (Models) {
-    var IExerciseMeasureTypeViewModel = (function () {
-        function IExerciseMeasureTypeViewModel() {
+    var ExerciseMeasureTypeViewModel = (function () {
+        function ExerciseMeasureTypeViewModel(measureType, measureValue, description, shortMeasureDescription, isRequired) {
+            this.measureType = measureType;
+            this.measureValue = measureValue;
+            this.description = description;
+            this.shortMeasureDescription = shortMeasureDescription;
+            this.isRequired = isRequired;
         }
-        return IExerciseMeasureTypeViewModel;
+        return ExerciseMeasureTypeViewModel;
     }());
-    Models.IExerciseMeasureTypeViewModel = IExerciseMeasureTypeViewModel;
+    Models.ExerciseMeasureTypeViewModel = ExerciseMeasureTypeViewModel;
     var ExerciseMeasureTypeViewModelObservable = (function () {
         function ExerciseMeasureTypeViewModelObservable(model) {
             var _this = this;
-            this.toJSON = function () { return ({
-                exerciseMeasureType: {
-                    measureType: _this.measureType(),
-                    measureValue: _this.measureValue()
-                }
-            }); };
+            this.model = model;
+            this.toPlainObject = function () {
+                var plainObject = new ExerciseMeasureTypeViewModel(_this.measureType(), _this.measureValue(), _this.measureDesciption(), _this.shortMeasureDescription(), _this.model.isRequired);
+                return plainObject;
+            };
             this.measureType = ko.observable(model.measureType);
             this.measureValue = ko.observable();
             this.measureValue.extend({ required: model.isRequired });

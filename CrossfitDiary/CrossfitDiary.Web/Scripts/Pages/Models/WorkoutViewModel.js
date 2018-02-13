@@ -12,6 +12,15 @@ var Models;
         function WorkoutViewModelObservable(model, isReadOnlyMode) {
             var _this = this;
             this.model = model;
+            this.toPlainObject = function () {
+                var workoutToCreate = new WorkoutViewModel(_this.model.workoutType, _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); }));
+                workoutToCreate.title = _this._title();
+                workoutToCreate.roundsCount = _this._roundsCount();
+                workoutToCreate.timeToWork = _this._timeToWork();
+                workoutToCreate.restBetweenExercises = _this._restBetweenExercises();
+                workoutToCreate.restBetweenRounds = _this._restBetweenRounds();
+                return workoutToCreate;
+            };
             /* Сivilians */
             this._isReadOnlyMode = isReadOnlyMode;
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {

@@ -1,5 +1,6 @@
 ﻿module General {
-  import IExerciseViewModel = Models.IExerciseViewModel;
+  import IExerciseViewModel = Models.ExerciseViewModel;
+  import WorkoutViewModel = Models.WorkoutViewModel;
 
   export class CrossfitterService extends BaseService {
 
@@ -7,7 +8,7 @@
       super();
     }
 
-    createWorkout = model => {
+    createWorkout = (model: WorkoutViewModel) => {
       return this.post(this.pathToApp + "api/createWorkout", model)
         .finally(() => {
           window.location.href = "/Home";
