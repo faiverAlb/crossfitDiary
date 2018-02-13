@@ -71,7 +71,7 @@
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options: controller._exercises, optionsText:'title',value: controller._selectedExercise, optionsCaption: 'Choose an exercise...',selectPicker: {}"></select>
     </div>
     <div class="selected-workout-type">
-        <div class="text-center" data-bind="text:controller._selectedWorkoutType().text"></div>
+        <div class="text-center" data-bind="text:model()._workoutTypeTitle"></div>
     </div>
     <div class="routines-container">
         <!-- ko foreach:model()._exercisesToBeDone-->

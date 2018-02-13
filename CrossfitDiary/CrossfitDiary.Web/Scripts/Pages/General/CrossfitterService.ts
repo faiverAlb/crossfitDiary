@@ -27,8 +27,8 @@
         });
     };
 
-    getAvailableWorkouts = () => {
-      return this.get(this.pathToApp + "api/getAvailableWorkouts");
+    getAvailableWorkouts = (): Q.Promise<WorkoutViewModel[]> => {
+      return this.get <WorkoutViewModel[]>(this.pathToApp + "api/getAvailableWorkouts");
     };
 
     getExercises = (): Q.Promise<IExerciseViewModel[]> => {

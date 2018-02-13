@@ -23,6 +23,7 @@ var Models;
             };
             /* Сivilians */
             this._isReadOnlyMode = isReadOnlyMode;
+            this._workoutTypeTitle = Models.WorkoutType[model.workoutType];
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {
                 return new Models.ExerciseViewModelObservable(item);
             }));

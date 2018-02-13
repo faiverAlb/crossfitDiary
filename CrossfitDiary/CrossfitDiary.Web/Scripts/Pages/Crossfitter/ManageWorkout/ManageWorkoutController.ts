@@ -16,7 +16,7 @@
   });
   export class ManageWorkoutController {
     createWorkoutController: CreateWorkoutController;
-//    chooseExistingWorkoutController: ChooseExistingWorkoutController;
+    chooseExistingWorkoutController: ChooseExistingWorkoutController;
     _service: CrossfitterService;
     logWorkoutController: KnockoutObservable<LogWorkoutController>;
     isAnyContainersVisible: KnockoutObservable<boolean>;
@@ -26,7 +26,7 @@
       this._service = new CrossfitterService(parameters.pathToApp);
 
       this.createWorkoutController = new CreateWorkoutController(parameters, this._service);
-//      this.chooseExistingWorkoutController = new ChooseExistingWorkoutController(parameters);
+      this.chooseExistingWorkoutController = new ChooseExistingWorkoutController(parameters, this._service);
       this.logWorkoutController = ko.observable();
 
 

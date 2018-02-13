@@ -36,11 +36,13 @@
     private _canSeeTimeToWork: KnockoutComputed<false | boolean>;
     private _anyUsualExercises: KnockoutComputed<false | boolean>;
 
+    private _workoutTypeTitle: string;
+
 
     constructor(public model: WorkoutViewModel, isReadOnlyMode: boolean) {
       /* Сivilians */
       this._isReadOnlyMode = isReadOnlyMode;
-      
+      this._workoutTypeTitle = WorkoutType[model.workoutType];
       this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map((item) => {
         return new ExerciseViewModelObservable(item);
       }));
