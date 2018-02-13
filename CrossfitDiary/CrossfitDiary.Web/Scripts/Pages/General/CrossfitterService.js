@@ -16,10 +16,7 @@ var General;
             var _this = _super.call(this) || this;
             _this.pathToApp = pathToApp;
             _this.createWorkout = function (model) {
-                return _this.post(_this.pathToApp + "api/createWorkout", model)
-                    .finally(function () {
-                    window.location.href = "/Home";
-                });
+                return _this.post(_this.pathToApp + "api/createWorkout", model);
             };
             _this.logWorkout = function (model) {
                 return _this.post(_this.pathToApp + "api/logWorkout", model)

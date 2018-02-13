@@ -27,8 +27,13 @@ var Pages;
                     return;
                 }
                 var workoutToCreate = _this._workoutToCreate().toPlainObject();
-                debugger;
-                //      this._service.createWorkout(workoutToCreate);
+                _this._service.createWorkout(workoutToCreate)
+                    .then(function () {
+                    window.location.href = "/Home";
+                })
+                    .fail(function () {
+                    debugger;
+                });
             };
             this._service = service;
             this._workoutTypes = ko.observable(new Array(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]), new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP]), new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM]), new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])));

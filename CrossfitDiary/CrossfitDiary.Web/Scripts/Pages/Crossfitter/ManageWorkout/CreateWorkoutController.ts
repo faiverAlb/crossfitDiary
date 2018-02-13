@@ -84,17 +84,18 @@
         return;
       }
       let workoutToCreate = this._workoutToCreate().toPlainObject();
-      debugger;
-//      this._service.createWorkout(workoutToCreate);
+      this._service.createWorkout(workoutToCreate)
+        .then(() => {
+          window.location.href = "/Home";
+        })
+        .fail(() => {
+          debugger;
+        });
     };
 
 
 //    clearState = () => {
 //      this.selectedWorkoutType(null);
-//    };
-
-//    getCreateWorkoutModel = () => {
-//      return this.toJSON();
 //    };
 
 
