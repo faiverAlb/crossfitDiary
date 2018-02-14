@@ -16,7 +16,19 @@ namespace CrossfitDiary.Web.Mappings
 
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<Exercise, ExerciseViewModel>();
+            CreateMap<Exercise, ExerciseViewModel>()
+                .AfterMap((exercise, model) =>
+                {
+                    foreach (var exerciseMeasureViewModel in model.ExerciseMeasures)
+                    {
+                        switch (exerciseMeasureViewModel.ExerciseMeasureType.MeasureType)
+                        {
+                            case MeasureTypeViewModel.Weight:
+                                exerciseMeasureViewModel.ExerciseMeasureType.IsRequired = exercise.ExerciseMeasures.Count <= 1;
+                                break;
+                        }
+                    }
+                });
             CreateMap<MeasureType, MeasureTypeViewModel>();
             CreateMap<ExerciseMeasureType, ExerciseMeasureTypeViewModel>();
             CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>();
