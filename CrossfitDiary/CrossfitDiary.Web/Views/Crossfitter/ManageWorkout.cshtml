@@ -15,22 +15,29 @@
         <div class="panel panel-borderless" >
             <div class="new-workout-container collapse" id="NewWorkoutContainer">
                 <div data-bind="template: { name: 'create-new-workout-template', data: createWorkoutController }"></div>
-            </div>
-        </div>
-        <div class="panel panel-borderless">
-            <div class="existing-workouts-container" id="ExistingWorkoutsContainer" data-bind="css:{collapse: true}">
-                <div data-bind="template: { name: 'existing-workouts-template', data: chooseExistingWorkoutController }"></div>
-            </div>
-        </div>
-    </div>
-    <div class="want-to-log-container" style="display: none" data-bind="visible:isAnyContainersVisible" id="WantToLogAccordion">
-        <div class="log-or-save-buttons text-center">
-            <button type="button" class="btn btn-primary btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#LogWorkoutContainer">Log your workout?</button>
-        </div>
+                
+                <div class="want-to-log-container" data-bind="if: createWorkoutController._selectedWorkoutType() != null">
+                    <div class="panel panel-borderless">
+                        <div class="log-workout-container" id="LogWorkoutContainer">
+                            @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+        </div>
         <div class="panel panel-borderless">
-            <div class="log-workout-container collapse" id="LogWorkoutContainer" data-bind="with:logWorkoutController">
-                @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
+            <div class="existing-workouts-container collapse" id="ExistingWorkoutsContainer">
+                <div data-bind="template: { name: 'existing-workouts-template', data: chooseExistingWorkoutController }"></div>
+                
+@*                <div class="want-to-log-container">*@
+@*                    <div class="panel panel-borderless">*@
+@*                        <div class="log-workout-container" id="LogWorkoutContainer" >*@
+@*                            @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }*@
+@*                        </div>*@
+@*                    </div>*@
+@*                </div>*@
+
             </div>
         </div>
     </div>

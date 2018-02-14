@@ -29,12 +29,15 @@ var Pages;
                     console.log(error);
                 });
             };
+            this.clearState = function () {
+                _this._selectedWorkoutType(null);
+            };
             this._service = service;
             this._workoutTypes = ko.observable(new Array(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]), new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP]), new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM]), new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])));
             this._selectedWorkoutType = ko.observable(null);
             this._workoutToCreate = ko.observable(null);
             this._exercises = ko.observableArray([]);
-            this._selectedExercise = ko.observable();
+            this._selectedExercise = ko.observable(null);
             ko.computed(function () {
                 _this._selectedExercise(null);
                 if (!_this._selectedWorkoutType()) {

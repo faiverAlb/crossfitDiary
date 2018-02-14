@@ -24,11 +24,17 @@
       this.loadAvailableWorkouts();
     }
 
-    loadAvailableWorkouts = () => {
+    private loadAvailableWorkouts = () => {
       this._service.getAvailableWorkouts()
         .then((availableWorkouts: WorkoutViewModel[]) => {
           this._availableWorkouts(availableWorkouts);
         });
+    };
+
+
+
+    public clearState = () => {
+      this._selectedWorkout(null);
     };
   }
 }

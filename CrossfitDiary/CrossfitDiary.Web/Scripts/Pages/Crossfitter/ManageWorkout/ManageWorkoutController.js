@@ -39,15 +39,15 @@ var Pages;
             //      this.logWorkoutController(new LogWorkoutController(lightLogModel, this.logFunction));
             //    };
             this.manageWorkoutClick = function (isCreateNewWorkout) {
-                //      this.chooseExistingWorkoutController.clearState();
-                //      this.createWorkoutController.clearState();
+                _this.chooseExistingWorkoutController.clearState();
+                _this.createWorkoutController.clearState();
                 _this.isCreateNewWorkoutPressed(isCreateNewWorkout);
                 _this.logWorkoutController(null);
             };
             this._service = new CrossfitterService(parameters.pathToApp);
             this.createWorkoutController = new Pages.CreateWorkoutController(parameters, this._service);
             this.chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(this._service);
-            this.logWorkoutController = ko.observable();
+            this.logWorkoutController = ko.observable(null);
             this.isAnyContainersVisible = ko.observable(false);
             this.isCreateNewWorkoutPressed = ko.observable(false);
             //      this.chooseExistingWorkoutController.workoutToDisplay.subscribe((newValue) => {

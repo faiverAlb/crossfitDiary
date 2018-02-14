@@ -35,7 +35,7 @@
       this._workoutToCreate = ko.observable(null);
       this._exercises = ko.observableArray([]);
 
-      this._selectedExercise = ko.observable();
+      this._selectedExercise = ko.observable(null);
 
       ko.computed(() => {
         this._selectedExercise(null);
@@ -87,9 +87,9 @@
     };
 
 
-//    clearState = () => {
-//      this.selectedWorkoutType(null);
-//    };
+    clearState = () => {
+      this._selectedWorkoutType(null);
+    };
 
 
   }

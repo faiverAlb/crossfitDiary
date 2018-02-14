@@ -27,7 +27,7 @@
 
       this.createWorkoutController = new CreateWorkoutController(parameters, this._service);
       this.chooseExistingWorkoutController = new ChooseExistingWorkoutController(this._service);
-      this.logWorkoutController = ko.observable();
+      this.logWorkoutController = ko.observable(new LogWorkoutController());
 
 
       this.isAnyContainersVisible = ko.observable(false);
@@ -93,8 +93,8 @@
 //    };
 
     private manageWorkoutClick = (isCreateNewWorkout: boolean) => {
-//      this.chooseExistingWorkoutController.clearState();
-//      this.createWorkoutController.clearState();
+      this.chooseExistingWorkoutController.clearState();
+      this.createWorkoutController.clearState();
 
       this.isCreateNewWorkoutPressed(isCreateNewWorkout);
       this.logWorkoutController(null);

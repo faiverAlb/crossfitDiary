@@ -569,6 +569,7 @@
     <Content Include="Views\Crossfitter\Templates\_ExistingWorkoutsTemplate.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_LogWorkoutPartial.cshtml" />
     <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\ToLogWorkoutViewModel.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Models\WorkoutViewModel.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />

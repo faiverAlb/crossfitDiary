@@ -11,6 +11,9 @@ var Pages;
                     _this._availableWorkouts(availableWorkouts);
                 });
             };
+            this.clearState = function () {
+                _this._selectedWorkout(null);
+            };
             this._availableWorkouts = ko.observableArray([]);
             this._selectedWorkout = ko.observable(null);
             this._workoutToDisplay = ko.observable(null);
