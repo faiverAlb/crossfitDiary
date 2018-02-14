@@ -11,7 +11,7 @@
                     </div>
                     <div data-bind="if:_selectedWorkoutType" >
                         <div data-bind="template: { name: 'routine-info-template', data: {model:_workoutToCreate, controller: $data} }"></div>
-                        <button class="btn btn-success pull-right" data-bind="click: createWorkout, enable: canCreateWorkout">Just create workout</button>
+                        <button class="btn btn-success pull-right" data-bind="click: createWorkout">Just create workout</button>
                     </div>
                 </div>
             </div>

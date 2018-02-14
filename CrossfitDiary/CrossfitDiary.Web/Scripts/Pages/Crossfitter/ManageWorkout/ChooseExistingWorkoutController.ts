@@ -8,7 +8,7 @@
     _selectedWorkout: KnockoutObservable<WorkoutViewModel>;
     _workoutToDisplay: KnockoutObservable<WorkoutViewModelObservable>;
 
-    constructor(basicParameters: General.BasicParameters, public _service: General.CrossfitterService) {
+    constructor(public _service: General.CrossfitterService) {
       this._availableWorkouts = ko.observableArray([]);
       this._selectedWorkout = ko.observable(null);
       this._workoutToDisplay = ko.observable(null);

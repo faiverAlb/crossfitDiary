@@ -5,6 +5,7 @@ var Pages;
     var WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
     var WorkoutViewModel = Models.WorkoutViewModel;
     var CreateWorkoutController = (function () {
+        /* Computeds */
         function CreateWorkoutController(parameters, service) {
             var _this = this;
             this.loadExercises = function () {
@@ -13,13 +14,6 @@ var Pages;
                     .then(function (exercises) {
                     _this._exercises(exercises);
                 });
-            };
-            this.canCreateWorkout = function () {
-                if (_this._workoutToCreate().errors().length > 0) {
-                    _this._workoutToCreate().errors.showAllMessages();
-                    return false;
-                }
-                return true;
             };
             this.createWorkout = function () {
                 if (_this._workoutToCreate().errors().length > 0) {
@@ -31,8 +25,8 @@ var Pages;
                     .then(function () {
                     window.location.href = "/Home";
                 })
-                    .fail(function () {
-                    debugger;
+                    .fail(function (error) {
+                    console.log(error);
                 });
             };
             this._service = service;

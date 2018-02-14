@@ -8,17 +8,17 @@
   import WorkoutViewModel = Models.WorkoutViewModel;
 
   export class CreateWorkoutController {
+    /* Сivilians */
     private _service: CrossfitterService;
 
+    /* Observables */
     private _workoutToCreate: KnockoutObservable<WorkoutViewModelObservable>;
-
     private _workoutTypes: KnockoutObservable<Array<BaseKeyValuePairModel<number, string>>>;
     private _selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
-
     private _exercises: KnockoutObservableArray<IExerciseViewModel>;
     private _selectedExercise: KnockoutObservable<IExerciseViewModel>;
 
-
+    /* Computeds */
 
 
     constructor(parameters: BasicParameters, service: CrossfitterService) {
@@ -70,13 +70,6 @@
         });
     };
 
-    canCreateWorkout = () => {
-      if (this._workoutToCreate().errors().length > 0) {
-        this._workoutToCreate().errors.showAllMessages();
-        return false;
-      }
-      return true;
-    };
 
     createWorkout = () => {
       if (this._workoutToCreate().errors().length > 0) {
@@ -88,8 +81,8 @@
         .then(() => {
           window.location.href = "/Home";
         })
-        .fail(() => {
-          debugger;
+        .fail((error) => {
+          console.log(error);
         });
     };
 

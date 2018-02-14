@@ -2,7 +2,7 @@ var Pages;
 (function (Pages) {
     var WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
     var ChooseExistingWorkoutController = (function () {
-        function ChooseExistingWorkoutController(basicParameters, _service) {
+        function ChooseExistingWorkoutController(_service) {
             var _this = this;
             this._service = _service;
             this.loadAvailableWorkouts = function () {

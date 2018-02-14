@@ -46,7 +46,7 @@ var Pages;
             };
             this._service = new CrossfitterService(parameters.pathToApp);
             this.createWorkoutController = new Pages.CreateWorkoutController(parameters, this._service);
-            this.chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(parameters, this._service);
+            this.chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(this._service);
             this.logWorkoutController = ko.observable();
             this.isAnyContainersVisible = ko.observable(false);
             this.isCreateNewWorkoutPressed = ko.observable(false);

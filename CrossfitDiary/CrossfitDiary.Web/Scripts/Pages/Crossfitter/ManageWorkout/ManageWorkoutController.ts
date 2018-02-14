@@ -26,7 +26,7 @@
       this._service = new CrossfitterService(parameters.pathToApp);
 
       this.createWorkoutController = new CreateWorkoutController(parameters, this._service);
-      this.chooseExistingWorkoutController = new ChooseExistingWorkoutController(parameters, this._service);
+      this.chooseExistingWorkoutController = new ChooseExistingWorkoutController(this._service);
       this.logWorkoutController = ko.observable();
 
 

@@ -84,6 +84,12 @@
           }
         }
       });
+
+      this._exercisesToBeDone.extend({
+        minLength: {
+          message: "At least one exercise is required"
+        }
+      });
       this.errors = ko.validation.group(this);
     }
 

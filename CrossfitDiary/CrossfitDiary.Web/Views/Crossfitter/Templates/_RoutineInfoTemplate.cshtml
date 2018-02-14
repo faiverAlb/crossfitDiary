@@ -78,7 +78,7 @@
         @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._SimpleRoutineItemTemlate); }
         <!-- /ko -->
         <!-- ko ifnot: model()._anyUsualExercises -->
-        <div class="simple-routine-item text-center no-selected-container">
+        <div class="simple-routine-item text-center no-selected-container" data-bind="validationElement: model()._exercisesToBeDone">
             No exercises selected
         </div>
         <!-- /ko -->
