@@ -44,7 +44,7 @@ var Pages;
             };
             this.service.createAndLogWorkout(model)
                 .then(function () {
-                //          window.location.href = "/Home";
+                window.location.href = "/Home";
             })
                 .fail(function (error) {
                 console.log(error);

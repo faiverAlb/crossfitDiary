@@ -59,6 +59,14 @@ var Pages;
                 _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController._workoutToCreate(), true, _this._service));
             });
             this._isCreateNewWorkoutPressed = ko.observable(false);
+            this._chooseExistingWorkoutController._selectedWorkout.subscribe(function (selectedWorkout) {
+                _this._canSeeLoggingContainer(false);
+                if (selectedWorkout == undefined || selectedWorkout == null) {
+                    return;
+                }
+                _this._logWorkoutController(new Pages.LogWorkoutController(_this._chooseExistingWorkoutController._workoutToDisplay(), false, _this._service));
+                _this._canSeeLoggingContainer(true);
+            });
             //      this.chooseExistingWorkoutController.workoutToDisplay.subscribe((newValue) => {
             //        if (!newValue) {
             //          return;

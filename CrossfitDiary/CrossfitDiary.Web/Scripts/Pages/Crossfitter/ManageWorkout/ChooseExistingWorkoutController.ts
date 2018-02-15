@@ -5,8 +5,8 @@
   export class ChooseExistingWorkoutController {
 
     _availableWorkouts: KnockoutObservableArray<WorkoutViewModel>;
-    _selectedWorkout: KnockoutObservable<WorkoutViewModel>;
-    _workoutToDisplay: KnockoutObservable<WorkoutViewModelObservable>;
+    public _selectedWorkout: KnockoutObservable<WorkoutViewModel>;
+    public _workoutToDisplay: KnockoutObservable<WorkoutViewModelObservable>;
 
     constructor(public _service: General.CrossfitterService) {
       this._availableWorkouts = ko.observableArray([]);

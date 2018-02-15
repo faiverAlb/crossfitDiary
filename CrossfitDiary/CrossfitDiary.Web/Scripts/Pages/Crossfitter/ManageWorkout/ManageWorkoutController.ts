@@ -2,6 +2,7 @@
   import CrossfitterService = General.CrossfitterService;
   import BasicParameters = General.BasicParameters;
   import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
+  import WorkoutViewModel = Models.WorkoutViewModel;
 
   declare var ko;
   ko.validation.init({
@@ -49,6 +50,16 @@
         this._logWorkoutController(new LogWorkoutController(this._createWorkoutController._workoutToCreate(), true, this._service));
       });
       this._isCreateNewWorkoutPressed = ko.observable(false);
+
+      this._chooseExistingWorkoutController._selectedWorkout.subscribe((selectedWorkout: WorkoutViewModel) => {
+        this._canSeeLoggingContainer(false);
+        if (selectedWorkout == undefined || selectedWorkout == null) {
+          return;
+        }
+        this._logWorkoutController(new LogWorkoutController(this._chooseExistingWorkoutController._workoutToDisplay(), false, this._service));
+
+        this._canSeeLoggingContainer(true);
+      });
 
 
 //      this.chooseExistingWorkoutController.workoutToDisplay.subscribe((newValue) => {
