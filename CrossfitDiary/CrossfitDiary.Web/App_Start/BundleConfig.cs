@@ -70,6 +70,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/BasicParameters.js"
                     , "~/Scripts/Pages/General/FilterableViewModel.js"
+                    , "~/Scripts/Pages/Models/PersonExerciseRecord.js"
                     , "~/Scripts/Pages/Crossfitter/Pride/PrideController.js"
                 ));
 

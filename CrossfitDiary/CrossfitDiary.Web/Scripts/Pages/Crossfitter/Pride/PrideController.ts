@@ -1,14 +1,21 @@
 ﻿module Pages {
   import CrossfitterService = General.CrossfitterService;
+  import PersonExerciseRecord = Models.PersonExerciseRecord;
+  import ObservablePersonExerciseRecord = Models.ObservablePersonExerciseRecord;
 
   export class PrideController extends General.FilterableViewModel {
-
+    /* Сivilians */
     _service: CrossfitterService;
+
+    /* Observables */
     _exercises: KnockoutObservableArray<any>;
     _selectedExercise: KnockoutObservable<any>;
-
     _personMaximums: KnockoutObservableArray<PersonExerciseRecord>;
     _allPersonsMaximums: KnockoutObservableArray<ObservablePersonExerciseRecord>;
+
+    /* Computeds */
+
+    
 
     constructor(basicParameters: General.BasicParameters) {
       super();
@@ -60,36 +67,5 @@
   }
 
 
-  class PersonExerciseRecord {
-    personName: string;
-    maximumWeight: string;
-    date: string;
-    workoutTitle: string;
-    positionBetweenOthers: number;
-    isItMe: boolean;
-  }
-
-  class ObservablePersonExerciseRecord {
-    personName: KnockoutObservable<string>;
-    maximumWeight: KnockoutObservable<string>;
-    date: KnockoutObservable<string>;
-    workoutTitle: KnockoutObservable<string>;
-    positionBetweenOthers: KnockoutObservable<number>;
-    isItMe: KnockoutObservable<boolean>;
-
-    constructor(personName: string,
-      maximumWeight: string,
-      date: string,
-      workoutTitle: string,
-      positionBetweenOthers: number,
-      isItMe: boolean) {
-      this.personName = ko.observable(personName);
-      this.maximumWeight = ko.observable(maximumWeight);
-      this.date = ko.observable(date);
-      this.workoutTitle = ko.observable(workoutTitle);
-      this.positionBetweenOthers = ko.observable(positionBetweenOthers);
-      this.isItMe = ko.observable(isItMe);
-    }
-  }
 
 }

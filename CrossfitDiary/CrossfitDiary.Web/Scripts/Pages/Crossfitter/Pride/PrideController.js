@@ -11,8 +11,10 @@ var __extends = (this && this.__extends) || (function () {
 var Pages;
 (function (Pages) {
     var CrossfitterService = General.CrossfitterService;
+    var ObservablePersonExerciseRecord = Models.ObservablePersonExerciseRecord;
     var PrideController = (function (_super) {
         __extends(PrideController, _super);
+        /* Computeds */
         function PrideController(basicParameters) {
             var _this = _super.call(this) || this;
             _this.loadExercises = function () {
@@ -49,21 +51,5 @@ var Pages;
         return PrideController;
     }(General.FilterableViewModel));
     Pages.PrideController = PrideController;
-    var PersonExerciseRecord = (function () {
-        function PersonExerciseRecord() {
-        }
-        return PersonExerciseRecord;
-    }());
-    var ObservablePersonExerciseRecord = (function () {
-        function ObservablePersonExerciseRecord(personName, maximumWeight, date, workoutTitle, positionBetweenOthers, isItMe) {
-            this.personName = ko.observable(personName);
-            this.maximumWeight = ko.observable(maximumWeight);
-            this.date = ko.observable(date);
-            this.workoutTitle = ko.observable(workoutTitle);
-            this.positionBetweenOthers = ko.observable(positionBetweenOthers);
-            this.isItMe = ko.observable(isItMe);
-        }
-        return ObservablePersonExerciseRecord;
-    }());
 })(Pages || (Pages = {}));
 //# sourceMappingURL=PrideController.js.map

@@ -482,9 +482,8 @@
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Views\Shared\_Spinner.cshtml" />
-    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\1ChooseExistingWorkoutController - Copy.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CreateWorkoutController.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\LogWorkoutController - Copy.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\PersonExerciseRecord.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\BaseController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\BaseKeyValuePairModel.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\FilterableViewModel.ts" />
@@ -501,7 +500,6 @@
     <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseMeasureType.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseMeasureTypeViewModel.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Models\SimpleRoutine.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CrossfitterController.ts" />
     <Content Include="Content\bootstrap-select\bootstrap-select.less" />
     <Content Include="Content\bootstrap-select\variables.less" />
     <Content Include="Content\bootstrap.less" />
