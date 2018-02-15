@@ -1,6 +1,7 @@
 ﻿module Pages {
   import CrossfitterService = General.CrossfitterService;
   import BasicParameters = General.BasicParameters;
+  import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
 
   declare var ko;
   ko.validation.init({
@@ -15,23 +16,40 @@
     }
   });
   export class ManageWorkoutController {
-    createWorkoutController: CreateWorkoutController;
-    chooseExistingWorkoutController: ChooseExistingWorkoutController;
+
+    /* Сivilians */
+    _createWorkoutController: CreateWorkoutController;
+    _chooseExistingWorkoutController: ChooseExistingWorkoutController;
     _service: CrossfitterService;
-    logWorkoutController: KnockoutObservable<LogWorkoutController>;
-    isAnyContainersVisible: KnockoutObservable<boolean>;
-    isCreateNewWorkoutPressed: KnockoutObservable<boolean>;
+
+    /* Observables */
+    _logWorkoutController: KnockoutObservable<LogWorkoutController>;
+    _isCreateNewWorkoutPressed: KnockoutObservable<boolean>;
+    _canSeeLoggingContainer: KnockoutObservable<boolean>;
+
+    /* Computeds */
+
+    
 
     constructor(public parameters: BasicParameters) {
       this._service = new CrossfitterService(parameters.pathToApp);
 
-      this.createWorkoutController = new CreateWorkoutController(parameters, this._service);
-      this.chooseExistingWorkoutController = new ChooseExistingWorkoutController(this._service);
-      this.logWorkoutController = ko.observable(new LogWorkoutController());
+      this._createWorkoutController = new CreateWorkoutController(parameters, this._service);
+      this._chooseExistingWorkoutController = new ChooseExistingWorkoutController(this._service);
+      this._logWorkoutController = ko.observable(null);
+      this._canSeeLoggingContainer = ko.observable(false);
 
+      this._createWorkoutController._selectedWorkoutType.subscribe((selectedWorkoutType: BaseKeyValuePairModel<number, string>) => {
+        this._canSeeLoggingContainer(false);
+        if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
+          return;
+        }
 
-      this.isAnyContainersVisible = ko.observable(false);
-      this.isCreateNewWorkoutPressed = ko.observable(false);
+        this._canSeeLoggingContainer(true);
+        this._logWorkoutController(new LogWorkoutController(this._createWorkoutController._workoutToCreate(), false));
+      });
+      this._isCreateNewWorkoutPressed = ko.observable(false);
+
 
 //      this.chooseExistingWorkoutController.workoutToDisplay.subscribe((newValue) => {
 //        if (!newValue) {
@@ -93,11 +111,11 @@
 //    };
 
     private manageWorkoutClick = (isCreateNewWorkout: boolean) => {
-      this.chooseExistingWorkoutController.clearState();
-      this.createWorkoutController.clearState();
+      this._chooseExistingWorkoutController.clearState();
+      this._createWorkoutController.clearState();
 
-      this.isCreateNewWorkoutPressed(isCreateNewWorkout);
-      this.logWorkoutController(null);
+      this._isCreateNewWorkoutPressed(isCreateNewWorkout);
+      this._logWorkoutController(null);
     };
 
   }

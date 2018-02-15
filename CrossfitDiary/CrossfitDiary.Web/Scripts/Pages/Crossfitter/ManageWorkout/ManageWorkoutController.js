@@ -13,6 +13,7 @@ var Pages;
         }
     });
     var ManageWorkoutController = (function () {
+        /* Computeds */
         function ManageWorkoutController(parameters) {
             var _this = this;
             this.parameters = parameters;
@@ -39,17 +40,25 @@ var Pages;
             //      this.logWorkoutController(new LogWorkoutController(lightLogModel, this.logFunction));
             //    };
             this.manageWorkoutClick = function (isCreateNewWorkout) {
-                _this.chooseExistingWorkoutController.clearState();
-                _this.createWorkoutController.clearState();
-                _this.isCreateNewWorkoutPressed(isCreateNewWorkout);
-                _this.logWorkoutController(null);
+                _this._chooseExistingWorkoutController.clearState();
+                _this._createWorkoutController.clearState();
+                _this._isCreateNewWorkoutPressed(isCreateNewWorkout);
+                _this._logWorkoutController(null);
             };
             this._service = new CrossfitterService(parameters.pathToApp);
-            this.createWorkoutController = new Pages.CreateWorkoutController(parameters, this._service);
-            this.chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(this._service);
-            this.logWorkoutController = ko.observable(null);
-            this.isAnyContainersVisible = ko.observable(false);
-            this.isCreateNewWorkoutPressed = ko.observable(false);
+            this._createWorkoutController = new Pages.CreateWorkoutController(parameters, this._service);
+            this._chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(this._service);
+            this._logWorkoutController = ko.observable(null);
+            this._canSeeLoggingContainer = ko.observable(false);
+            this._createWorkoutController._selectedWorkoutType.subscribe(function (selectedWorkoutType) {
+                _this._canSeeLoggingContainer(false);
+                if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
+                    return;
+                }
+                _this._canSeeLoggingContainer(true);
+                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController._workoutToCreate(), false));
+            });
+            this._isCreateNewWorkoutPressed = ko.observable(false);
             //      this.chooseExistingWorkoutController.workoutToDisplay.subscribe((newValue) => {
             //        if (!newValue) {
             //          return;

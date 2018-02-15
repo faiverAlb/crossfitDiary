@@ -12,9 +12,9 @@
     private _service: CrossfitterService;
 
     /* Observables */
-    private _workoutToCreate: KnockoutObservable<WorkoutViewModelObservable>;
+    public _workoutToCreate: KnockoutObservable<WorkoutViewModelObservable>;
     private _workoutTypes: KnockoutObservable<Array<BaseKeyValuePairModel<number, string>>>;
-    private _selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
+    public _selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
     private _exercises: KnockoutObservableArray<IExerciseViewModel>;
     private _selectedExercise: KnockoutObservable<IExerciseViewModel>;
 

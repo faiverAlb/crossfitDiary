@@ -14,11 +14,11 @@
 
         <div class="panel panel-borderless" >
             <div class="new-workout-container collapse" id="NewWorkoutContainer">
-                <div data-bind="template: { name: 'create-new-workout-template', data: createWorkoutController }"></div>
+                <div data-bind="template: { name: 'create-new-workout-template', data: _createWorkoutController }"></div>
                 
-                <div class="want-to-log-container" data-bind="if: createWorkoutController._selectedWorkoutType() != null">
+                <div class="want-to-log-container" data-bind="if: _canSeeLoggingContainer">
                     <div class="panel panel-borderless">
-                        <div class="log-workout-container" id="LogWorkoutContainer">
+                        <div class="log-workout-container" id="LogWorkoutContainer" data-bind="with:_logWorkoutController">
                             @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
                         </div>
                     </div>
@@ -28,11 +28,11 @@
         </div>
         <div class="panel panel-borderless">
             <div class="existing-workouts-container collapse" id="ExistingWorkoutsContainer">
-                <div data-bind="template: { name: 'existing-workouts-template', data: chooseExistingWorkoutController }"></div>
+                <div data-bind="template: { name: 'existing-workouts-template', data: _chooseExistingWorkoutController }"></div>
                 
 @*                <div class="want-to-log-container">*@
 @*                    <div class="panel panel-borderless">*@
-@*                        <div class="log-workout-container" id="LogWorkoutContainer" >*@
+@*                        <div class="log-workout-container" id="LogWorkoutContainer" >*@c
 @*                            @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }*@
 @*                        </div>*@
 @*                    </div>*@

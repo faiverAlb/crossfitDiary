@@ -53,9 +53,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/Models/ExerciseMeasureTypeViewModel.js"
                     , "~/Scripts/Pages/Models/ExerciseViewModel.js"
                     , "~/Scripts/Pages/Models/WorkoutViewModel.js"
-
-                    , "~/Scripts/Pages/Crossfitter/ManageWorkout/CrossfitterController.js"
-
+                    , "~/Scripts/Pages/Models/ToLogWorkoutViewModel.js"
 
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/CreateWorkoutController.js"
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/ChooseExistingWorkoutController.js"

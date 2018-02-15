@@ -484,6 +484,7 @@
     <Content Include="Views\Shared\_Spinner.cshtml" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\1ChooseExistingWorkoutController - Copy.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CreateWorkoutController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\LogWorkoutController - Copy.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\BaseController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\BaseKeyValuePairModel.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\FilterableViewModel.ts" />
