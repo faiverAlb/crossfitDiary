@@ -49,6 +49,16 @@
           console.log(error);
         });
     }
+    private logExistingWorkout() {
+      
+      this.service.logWorkout(this._logToCreate().toPlainObject())
+        .then(() => {
+          window.location.href = "/Home";
+        })
+        .fail((error) => {
+          console.log(error);
+        });
+    }
 
 
     private _logWorkout = () => {
@@ -58,7 +68,7 @@
       if (this.isCreateAndLogWorkout) {
         this.createAndLogWorkout();
       } else {
-        
+        this.logExistingWorkout();
       }
     }
   }

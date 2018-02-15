@@ -19,10 +19,7 @@ var General;
                 return _this.post(_this.pathToApp + "api/createWorkout", model);
             };
             _this.logWorkout = function (model) {
-                return _this.post(_this.pathToApp + "api/logWorkout", model)
-                    .finally(function () {
-                    window.location.href = "/Home";
-                });
+                return _this.post(_this.pathToApp + "api/logWorkout", model);
             };
             _this.createAndLogWorkout = function (model) {
                 return _this.post(_this.pathToApp + "api/createAndLogNewWorkout", model);

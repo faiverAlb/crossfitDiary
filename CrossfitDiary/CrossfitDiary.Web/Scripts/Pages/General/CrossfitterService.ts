@@ -15,10 +15,7 @@
     };
 
     logWorkout = (model: ToLogWorkoutViewModel) => {
-      return this.post(this.pathToApp + "api/logWorkout", model)
-        .finally(() => {
-          window.location.href = "/Home";
-        });
+      return this.post(this.pathToApp + "api/logWorkout", model);
     };
 
     createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {

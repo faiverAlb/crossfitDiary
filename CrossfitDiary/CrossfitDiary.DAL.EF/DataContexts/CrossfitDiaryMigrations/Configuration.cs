@@ -87,6 +87,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                         }
                         , Title = "Angie"
                         , ComplexType = RoutineComplexType.ForTime
+                        , RoundCount = 1
                   }
                   ,new RoutineComplex
                   {

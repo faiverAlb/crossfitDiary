@@ -16,6 +16,7 @@ var Pages;
                     _this.createAndLogWorkout();
                 }
                 else {
+                    _this.logExistingWorkout();
                 }
             };
             this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId()));
@@ -43,6 +44,15 @@ var Pages;
                 logWorkoutViewModel: this._logToCreate().toPlainObject()
             };
             this.service.createAndLogWorkout(model)
+                .then(function () {
+                window.location.href = "/Home";
+            })
+                .fail(function (error) {
+                console.log(error);
+            });
+        };
+        LogWorkoutController.prototype.logExistingWorkout = function () {
+            this.service.logWorkout(this._logToCreate().toPlainObject())
                 .then(function () {
                 window.location.href = "/Home";
             })
