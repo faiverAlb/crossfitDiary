@@ -46,7 +46,7 @@
         }
 
         this._canSeeLoggingContainer(true);
-        this._logWorkoutController(new LogWorkoutController(this._createWorkoutController._workoutToCreate(), false));
+        this._logWorkoutController(new LogWorkoutController(this._createWorkoutController._workoutToCreate(), true, this._service));
       });
       this._isCreateNewWorkoutPressed = ko.observable(false);
 

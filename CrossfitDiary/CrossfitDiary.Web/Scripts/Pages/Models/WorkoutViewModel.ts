@@ -24,6 +24,7 @@
     public errors:any;
 
     /* Observables */
+    private _id: KnockoutObservable<number>;
     private _title: KnockoutObservable<string>;
     private _roundsCount: KnockoutObservable<number>;
     private _timeToWork: KnockoutObservable<string>;
@@ -48,6 +49,7 @@
       }));
 
       /* Observables */
+      this._id = ko.observable(model.id);
       this._title = ko.observable(model.title);
       this._restBetweenExercises = ko.observable(model.restBetweenExercises);
       this._restBetweenRounds = ko.observable(model.restBetweenRounds);
@@ -99,6 +101,10 @@
 
     public removeSimpleRoutineFromToDo(index:KnockoutObservable<number>) {
       this._exercisesToBeDone.splice(index(), 1);
+    }
+
+    public getId():number {
+      return this._id();
     }
 
 

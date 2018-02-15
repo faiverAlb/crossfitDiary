@@ -28,6 +28,7 @@ var Models;
                 return new Models.ExerciseViewModelObservable(item);
             }));
             /* Observables */
+            this._id = ko.observable(model.id);
             this._title = ko.observable(model.title);
             this._restBetweenExercises = ko.observable(model.restBetweenExercises);
             this._restBetweenRounds = ko.observable(model.restBetweenRounds);
@@ -69,6 +70,9 @@ var Models;
         };
         WorkoutViewModelObservable.prototype.removeSimpleRoutineFromToDo = function (index) {
             this._exercisesToBeDone.splice(index(), 1);
+        };
+        WorkoutViewModelObservable.prototype.getId = function () {
+            return this._id();
         };
         return WorkoutViewModelObservable;
     }());

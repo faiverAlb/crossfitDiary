@@ -56,7 +56,7 @@ var Pages;
                     return;
                 }
                 _this._canSeeLoggingContainer(true);
-                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController._workoutToCreate(), false));
+                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController._workoutToCreate(), true, _this._service));
             });
             this._isCreateNewWorkoutPressed = ko.observable(false);
             //      this.chooseExistingWorkoutController.workoutToDisplay.subscribe((newValue) => {

@@ -1,6 +1,7 @@
 ﻿module General {
   import IExerciseViewModel = Models.ExerciseViewModel;
   import WorkoutViewModel = Models.WorkoutViewModel;
+  import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
 
   export class CrossfitterService extends BaseService {
 
@@ -13,18 +14,15 @@
 
     };
 
-    logWorkout = (model) => {
+    logWorkout = (model: ToLogWorkoutViewModel) => {
       return this.post(this.pathToApp + "api/logWorkout", model)
         .finally(() => {
           window.location.href = "/Home";
         });
     };
 
-    createAndLogWorkout = (model) => {
-      return this.post(this.pathToApp + "api/createAndLogNewWorkout", model)
-        .finally(() => {
-          window.location.href = "/Home";
-        });
+    createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
+      return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);
     };
 
     getAvailableWorkouts = (): Q.Promise<WorkoutViewModel[]> => {

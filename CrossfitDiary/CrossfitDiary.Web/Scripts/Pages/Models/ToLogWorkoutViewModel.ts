@@ -4,18 +4,32 @@
   export class ToLogWorkoutViewModel {
     canBeRemovedByCurrentUser: boolean;
     crossfitterWorkoutId: number;
-    date: Date;
+    date: string;
     displayDate: string;
     distance?: number;
     isRx: boolean;
     measureDisplayName: string;
     partialRepsFinished?: number;
     roundsFinished?: number;
-    selectedWorkoutId: string;
+    selectedWorkoutId: number;
     selectedWorkoutName: string;
     timePassed: string;
     wasFinished: boolean;
     workouterName: string;
+
+    constructor(
+      date: string,
+      partialRepsFinished: number,
+      roundsFinished: number,
+      selectedWorkoutId: number,
+      timePassed: string,
+      ) {
+      this.date = date;
+      this.partialRepsFinished = partialRepsFinished;
+      this.roundsFinished = roundsFinished;
+      this.selectedWorkoutId = selectedWorkoutId;
+      this.timePassed = timePassed;
+    }
   }
 
   export class ToLogWorkoutViewModelObservable {
@@ -33,7 +47,7 @@
 
     /* Computeds */
 
-    constructor(public workoutType: WorkoutType) {
+    constructor(public workoutType: WorkoutType, public selectedWorkoutId?: number) {
       this._plannedDate = ko.observable(new Date());
       this._canSeeTotalRounds = workoutType === WorkoutType.AMRAP;
       this._canSeeTotalTime = workoutType === WorkoutType.ForTime;
@@ -64,8 +78,16 @@
     }
 
 
-    public toPlainObject = () => {
-
+    public toPlainObject = (): ToLogWorkoutViewModel => {
+      let date = this._plannedDate() as any;
+      let toLogWorkoutViewModel = new ToLogWorkoutViewModel(
+        date.toDate().toUTCString(),
+        this._partialRepsFinished(),
+        this._totalRoundsFinished(),
+        this.selectedWorkoutId,
+        this._totalTime()
+      );
+      return toLogWorkoutViewModel;
     }
   }
 }

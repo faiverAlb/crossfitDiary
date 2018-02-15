@@ -38,7 +38,7 @@ namespace CrossfitDiary.Web.ViewModels
         public int? RoundsFinished { get; set; }
 
         [JsonProperty("selectedWorkoutId")]
-        public string SelectedWorkoutId { get; set; }
+        public int SelectedWorkoutId { get; set; }
 
         // TODO: Move to separate view model?
         [JsonProperty("selectedWorkoutName")]

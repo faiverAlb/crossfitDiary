@@ -25,10 +25,7 @@ var General;
                 });
             };
             _this.createAndLogWorkout = function (model) {
-                return _this.post(_this.pathToApp + "api/createAndLogNewWorkout", model)
-                    .finally(function () {
-                    window.location.href = "/Home";
-                });
+                return _this.post(_this.pathToApp + "api/createAndLogNewWorkout", model);
             };
             _this.getAvailableWorkouts = function () {
                 return _this.get(_this.pathToApp + "api/getAvailableWorkouts");
