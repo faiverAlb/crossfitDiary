@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
 }
+@using CrossfitDiary.Model
 @using CrossfitDiary.Web.ViewModels
 @using Newtonsoft.Json
 @model HomeViewModel
@@ -39,13 +40,78 @@
                                 <div class="pull-right">@workout.DisplayDate</div>
                             </div>
                             <div class="item-body clearfix">
-                                <div>
-                                    <span class="workout-title">@workout.SelectedWorkoutName</span>
-                                    @if (!string.IsNullOrEmpty(@workout.MeasureDisplayName))
+                                <div class="workout-title">
+                                    <span>@workout.WorkoutViewModel.WorkoutType</span>
+                                    @switch (workout.WorkoutViewModel.WorkoutType)
                                     {
-                                        <span>:</span>
-                                        <span class="workout-result">@workout.MeasureDisplayName</span>
+                                        case RoutineComplexType.ForTime:
+                                            <span>: @workout.WorkoutViewModel.RoundsCount</span>
+                                            <span> rounds</span>
+                                            break;
+                                        case RoutineComplexType.AMRAP:
+                                            <span>: @workout.WorkoutViewModel.TimeToWork</span>
+                                            break;
+                                        case RoutineComplexType.EMOM:
+                                            break;
+                                        case RoutineComplexType.E2MOM:
+                                        case RoutineComplexType.NotForTime:
+                                            break;
+                                        default:
+                                            throw new ArgumentOutOfRangeException();
                                     }
+                                </div>
+                                <div class="workout-exercises">
+                                    @{
+                                        foreach (ExerciseViewModel exerciseViewModel in workout.WorkoutViewModel.ExercisesToDoList)
+                                        {
+                                            <div class="exercise">
+                                                <span>@exerciseViewModel.Title:</span>
+                                                @{
+                                                    foreach (ExerciseMeasureViewModel measure in exerciseViewModel.ExerciseMeasures)
+                                                    {
+                                                        if (string.IsNullOrEmpty(@measure.ExerciseMeasureType.MeasureValue))
+                                                        {
+                                                            continue;
+                                                        }
+                                                        <span>@measure.ExerciseMeasureType.MeasureValue</span>
+                                                        switch (measure.ExerciseMeasureType.MeasureType)
+                                                        {
+                                                            case MeasureTypeViewModel.Distance:
+                                                                break;
+                                                            case MeasureTypeViewModel.Count:
+                                                                break;
+                                                            case MeasureTypeViewModel.Weight:
+                                                                <span> kgs</span>
+                                                                break;
+                                                            case MeasureTypeViewModel.Calories:
+                                                                <span> calories</span>
+                                                                
+                                                                break;
+                                                            default:
+                                                                throw new ArgumentOutOfRangeException();
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="result">
+                                    @switch (workout.WorkoutViewModel.WorkoutType)
+                                    {
+                                        case RoutineComplexType.ForTime:
+                                            <span>Total time: @workout.TimePassed </span>
+                                            break;
+                                        case RoutineComplexType.AMRAP:
+                                            <span>Result rounds: @workout.RoundsFinished @(workout.PartialRepsFinished.HasValue? string.Format("+ {0} partials", workout.PartialRepsFinished.Value) : "")</span>
+                                            break;
+                                        case RoutineComplexType.EMOM:
+                                            break;
+                                        case RoutineComplexType.E2MOM:
+                                        case RoutineComplexType.NotForTime:
+                                            break;
+                                    }
+
                                 </div>
                             </div>
                         </div>

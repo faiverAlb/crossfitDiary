@@ -36,6 +36,7 @@
     private _canSeeRoundsCount: KnockoutComputed<false | boolean>;
     private _canSeeTimeToWork: KnockoutComputed<false | boolean>;
     private _anyUsualExercises: KnockoutComputed<false | boolean>;
+    private _canSeeGeneralWorkoutInfo: KnockoutComputed<false | boolean>;
 
     private _workoutTypeTitle: string;
 
@@ -70,6 +71,10 @@
 
       this._canSeeTimeToWork = ko.computed(() => {
         return this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
+      });
+
+      this._canSeeGeneralWorkoutInfo = ko.computed(() => {
+        return this._canSeeTimeToWork() || this._canSeeRoundsCount();
       });
 
       this._timeToWork.extend({

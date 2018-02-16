@@ -41,15 +41,24 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.SelectedWorkoutId, x => x.MapFrom(y => y.RoutineComplex.Id))
                 .ForMember(x => x.CrossfitterWorkoutId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.CanBeRemovedByCurrentUser, x => x.ResolveUsing<CanBeRemovedResolver>())
-                .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName));
+                .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName))
+                .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex));
 
             CreateMap<RoutineComplex, WorkoutViewModel>()
                 .ForMember(x => x.WorkoutType, x => x.MapFrom(y => y.ComplexType))
                 .ForMember(x => x.ExercisesToDoList, x => x.MapFrom(y => y.RoutineSimple))
                 .ForMember(x => x.RoundsCount, x => x.MapFrom(y => y.RoundCount))
-                .ForMember(x => x.TimeToWork, x => x.MapFrom(y => y.TimeToWork.HasValue?$"{Math.Floor(y.TimeToWork.Value.TotalMinutes)}:{y.TimeToWork.Value.Seconds}" :""))
-                .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => y.RestBetweenExercises.HasValue?$"{Math.Floor(y.RestBetweenExercises.Value.TotalMinutes)}:{y.RestBetweenExercises.Value.Seconds}" :""))
-                .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => y.RestBetweenRounds.HasValue?$"{Math.Floor(y.RestBetweenRounds.Value.TotalMinutes)}:{y.RestBetweenRounds.Value.Seconds}" :""));
+                .ForMember(x => x.TimeToWork,
+                    x => x.MapFrom(y =>
+                        y.TimeToWork.HasValue
+                            ? string.Format("{0:00}:{1:00}", Math.Floor(y.TimeToWork.Value.TotalMinutes), y.TimeToWork.Value.Seconds)
+                            : string.Empty))
+                .ForMember(x => x.RestBetweenExercises,
+                    x => x.MapFrom(y =>
+                        y.RestBetweenExercises.HasValue
+                            ? $"{Math.Floor(y.RestBetweenExercises.Value.TotalMinutes)}:{y.RestBetweenExercises.Value.Seconds}"
+                            : string.Empty))
+                .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => y.RestBetweenRounds.HasValue?$"{Math.Floor(y.RestBetweenRounds.Value.TotalMinutes)}:{y.RestBetweenRounds.Value.Seconds}" :string.Empty));
 
             CreateMap<RoutineSimple, ExerciseViewModel>()
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.ExerciseId))
@@ -71,7 +80,7 @@ namespace CrossfitDiary.Web.Mappings
                                 break;
                             case MeasureType.Count:
                                 exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Count;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Count?.ToString();
+                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = $"{simple.Count:0}";
                                 exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Count).ExerciseMeasureType.Description;
                                 exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Count).ExerciseMeasureType.ShortMeasureDescription;
                                 break;
@@ -84,7 +93,7 @@ namespace CrossfitDiary.Web.Mappings
                                 break;
                             case MeasureType.Calories:
                                 exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Calories;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Calories?.ToString();
+                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = $"{simple.Calories:0}";
                                 exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Calories).ExerciseMeasureType.Description;
                                 exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Calories).ExerciseMeasureType.ShortMeasureDescription;
                                 break;

@@ -54,6 +54,9 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("workouterName")]
         public string WorkouterName { get; set; }
 
+        [JsonProperty("workoutViewModel")]
+        public WorkoutViewModel WorkoutViewModel { get; set; }
+
         #endregion
     }
 }

@@ -44,6 +44,9 @@ var Models;
             this._canSeeTimeToWork = ko.computed(function () {
                 return _this.model.workoutType === Models.WorkoutType.AMRAP || _this.model.workoutType === Models.WorkoutType.EMOM;
             });
+            this._canSeeGeneralWorkoutInfo = ko.computed(function () {
+                return _this._canSeeTimeToWork() || _this._canSeeRoundsCount();
+            });
             this._timeToWork.extend({
                 required: {
                     onlyIf: function () {
