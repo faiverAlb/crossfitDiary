@@ -42,7 +42,9 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.CrossfitterWorkoutId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.CanBeRemovedByCurrentUser, x => x.ResolveUsing<CanBeRemovedResolver>())
                 .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName))
-                .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex));
+                .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex))
+                .ForMember(x => x.TimePassed, x => x.ResolveUsing<TimePassedResolver>());
+//                .ForMember(x => x.TimePassed, x => x.MapFrom(y => y.TimePassed.HasValue? y.TimePassed.Value.TotalHours>0? y.TimePassed.Value.ToString(): string.Format("{0:00}:{1:00}", y.TimePassed.Value.TotalMinutes, y.TimePassed.Value.Seconds) : string.Empty));
 
             CreateMap<RoutineComplex, WorkoutViewModel>()
                 .ForMember(x => x.WorkoutType, x => x.MapFrom(y => y.ComplexType))
@@ -69,7 +71,7 @@ namespace CrossfitDiary.Web.Mappings
                     var toMapExercises = new List<ExerciseMeasureViewModel>();
                     foreach (ExerciseMeasure exerciseMeasure in simple.Exercise.ExerciseMeasures)
                     {
-                        var exerviseMeasureVm = new ExerciseMeasureViewModel() {ExerciseMeasureType = new ExerciseMeasureTypeViewModel()  };
+                        var exerviseMeasureVm = new ExerciseMeasureViewModel() {ExerciseMeasureType = new ExerciseMeasureTypeViewModel()};
                         switch (exerciseMeasure.ExerciseMeasureType.MeasureType)
                         {
                             case MeasureType.Distance:
@@ -104,6 +106,29 @@ namespace CrossfitDiary.Web.Mappings
                     }
                     dest.ExerciseMeasures = toMapExercises;
                 });
+        }
+    }
+
+    public class TimePassedResolver : IValueResolver<CrossfitterWorkout, ToLogWorkoutViewModel, string>
+    {
+        public string Resolve(CrossfitterWorkout source, ToLogWorkoutViewModel destination, string destMember, ResolutionContext context)
+        {
+            //.ForMember(x => x.TimePassed, x => x.MapFrom(y => y.TimePassed.HasValue? y.TimePassed.Value.TotalHours>0? y.TimePassed.Value.ToString(): string.Format("{0:00}:{1:00}", y.TimePassed.Value.TotalMinutes, y.TimePassed.Value.Seconds) : string.Empty));
+
+            if (source.TimePassed.HasValue == false)
+            {
+                return null;
+            }
+
+            TimeSpan totalTime = source.TimePassed.Value;
+            if (totalTime.TotalHours >= 1)
+            {
+                return totalTime.ToString();
+            }
+
+            string result = string.Format("{0:00}:{1:00}", totalTime.TotalMinutes, totalTime.Seconds);
+            return result;
+
         }
     }
 }

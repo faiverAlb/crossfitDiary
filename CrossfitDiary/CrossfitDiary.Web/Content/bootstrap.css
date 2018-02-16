@@ -8487,6 +8487,15 @@ select.selectpicker {
   padding-top: 5px;
   font-size: 13px;
 }
+.home-container .activities-calendar .done-item .item-body .workout-title {
+  border-bottom: 1px dashed black;
+}
+.home-container .activities-calendar .done-item .item-body .workout-exercises {
+  margin: 5px 10px;
+}
+.home-container .activities-calendar .done-item .item-body .workout-result {
+  border-bottom: 1px dotted black;
+}
 .home-container .activities-calendar .grid-calendar > .row.match-my-cols {
   overflow: hidden;
 }

@@ -8,7 +8,7 @@
 
 
 <div class="home-container" style="display: none" data-bind="visible:true">
-    
+
     <div data-bind="visible: _isDataLoading">
         @Html.Partial(MVC.Shared.Views._Spinner)
     </div>
@@ -40,7 +40,7 @@
                                 <div class="pull-right">@workout.DisplayDate</div>
                             </div>
                             <div class="item-body clearfix">
-                                <div class="workout-title">
+                                <span class="workout-title">
                                     <span>@workout.WorkoutViewModel.WorkoutType</span>
                                     @switch (workout.WorkoutViewModel.WorkoutType)
                                     {
@@ -59,58 +59,64 @@
                                         default:
                                             throw new ArgumentOutOfRangeException();
                                     }
-                                </div>
+                                </span>
                                 <div class="workout-exercises">
                                     @{
                                         foreach (ExerciseViewModel exerciseViewModel in workout.WorkoutViewModel.ExercisesToDoList)
                                         {
-                                            <div class="exercise">
-                                                <span>@exerciseViewModel.Title:</span>
-                                                @{
-                                                    foreach (ExerciseMeasureViewModel measure in exerciseViewModel.ExerciseMeasures)
-                                                    {
-                                                        if (string.IsNullOrEmpty(@measure.ExerciseMeasureType.MeasureValue))
-                                                        {
-                                                            continue;
-                                                        }
-                                                        <span>@measure.ExerciseMeasureType.MeasureValue</span>
-                                                        switch (measure.ExerciseMeasureType.MeasureType)
-                                                        {
-                                                            case MeasureTypeViewModel.Distance:
-                                                                break;
-                                                            case MeasureTypeViewModel.Count:
-                                                                break;
-                                                            case MeasureTypeViewModel.Weight:
-                                                                <span> kgs</span>
-                                                                break;
-                                                            case MeasureTypeViewModel.Calories:
-                                                                <span> calories</span>
-                                                                
-                                                                break;
-                                                            default:
-                                                                throw new ArgumentOutOfRangeException();
-                                                        }
-                                                    }
+                                    <div class="exercise">
+                                        <span>@exerciseViewModel.Title:</span>
+                                        @{
+                                            foreach (ExerciseMeasureViewModel measure in exerciseViewModel.ExerciseMeasures)
+                                            {
+                                                if (string.IsNullOrEmpty(@measure.ExerciseMeasureType.MeasureValue))
+                                                {
+                                                    continue;
                                                 }
-                                            </div>
+
+                                                switch (measure.ExerciseMeasureType.MeasureType)
+                                                {
+                                                    case MeasureTypeViewModel.Distance:
+                                                        break;
+                                                    case MeasureTypeViewModel.Count:
+                                                        <span>@measure.ExerciseMeasureType.MeasureValue</span>
+                                                        break;
+                                                    case MeasureTypeViewModel.Weight:
+                                                        <span>(@measure.ExerciseMeasureType.MeasureValue kgs)</span>
+                                                        break;
+                                                    case MeasureTypeViewModel.Calories:
+                                                        <span>(@measure.ExerciseMeasureType.MeasureValue calories)</span>
+                                                        break;
+                                                    default:
+                                                        throw new ArgumentOutOfRangeException();
+                                                }
+                                            }
+
                                         }
+                                    </div>
+                                        }
+
                                     }
                                 </div>
-                                <div class="result">
-                                    @switch (workout.WorkoutViewModel.WorkoutType)
-                                    {
-                                        case RoutineComplexType.ForTime:
-                                            <span>Total time: @workout.TimePassed </span>
-                                            break;
-                                        case RoutineComplexType.AMRAP:
-                                            <span>Result rounds: @workout.RoundsFinished @(workout.PartialRepsFinished.HasValue? string.Format("+ {0} partials", workout.PartialRepsFinished.Value) : "")</span>
-                                            break;
-                                        case RoutineComplexType.EMOM:
-                                            break;
-                                        case RoutineComplexType.E2MOM:
-                                        case RoutineComplexType.NotForTime:
-                                            break;
-                                    }
+                                <div class="text-right">
+                                    <span class="workout-result">
+
+                                        @switch (workout.WorkoutViewModel.WorkoutType)
+                                        {
+                                            case RoutineComplexType.ForTime:
+
+                                                <span><i class="fa fa-clock-o" aria-hidden="true"></i> Total time: @workout.TimePassed </span>
+                                                break;
+                                            case RoutineComplexType.AMRAP:
+                                                <span><i class="fa fa-hashtag" aria-hidden="true"></i> Result rounds: @workout.RoundsFinished @(workout.PartialRepsFinished.HasValue ? string.Format("+ {0} partials", workout.PartialRepsFinished.Value) : string.Empty)</span>
+                                                break;
+                                            case RoutineComplexType.EMOM:
+                                                break;
+                                            case RoutineComplexType.E2MOM:
+                                            case RoutineComplexType.NotForTime:
+                                                break;
+                                        }
+                                    </span>
 
                                 </div>
                             </div>
