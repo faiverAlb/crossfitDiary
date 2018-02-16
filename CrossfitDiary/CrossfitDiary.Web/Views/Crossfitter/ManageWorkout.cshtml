@@ -6,33 +6,38 @@
 
 <div class="manage-workout-page">
     <div class="new-or-existing" id="NewOrExistingAccordion">
-        <div class="choose-buttons text-center" style="display: none" data-bind="if: withoutPreparedWorkout, visible:true">
+        <div class="choose-buttons text-center" style="display: none" data-bind="visible:true">
             <button type="button" class="btn btn-primary btn-lg" data-parent="#NewOrExistingAccordion" data-toggle="collapse" data-target="#NewWorkoutContainer" data-bind="click:function(){manageWorkoutClick(true);}">Create new workout?</button>
             or
             <button type="button" class="btn btn-primary btn-lg" data-parent="#NewOrExistingAccordion" data-toggle="collapse" data-target="#ExistingWorkoutsContainer" data-bind="click:function(){manageWorkoutClick(false);}">Log existing workout?</button>
         </div>
 
-        <div class="panel panel-borderless" data-bind="if: withoutPreparedWorkout">
+        <div class="panel panel-borderless" >
             <div class="new-workout-container collapse" id="NewWorkoutContainer">
-                <div data-bind="template: { name: 'create-new-workout-template', data: createWorkoutController }"></div>
-            </div>
-        </div>
-        <div class="panel panel-borderless">
-            <div class="existing-workouts-container" id="ExistingWorkoutsContainer" data-bind="css:{collapse: withoutPreparedWorkout}">
-                <div data-bind="template: { name: 'existing-workouts-template', data: chooseExistingWorkoutController }"></div>
-            </div>
-        </div>
-    </div>
-    <div class="want-to-log-container" style="display: none" data-bind="visible:isAnyContainersVisible" id="WantToLogAccordion">
-        <div class="log-or-save-buttons text-center" data-bind="if: withoutPreparedWorkout">
-            <button type="button" class="btn btn-primary btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#LogWorkoutContainer" data-bind="click:logWorkoutContainerClick">Log your workout?</button>
-            @*            or*@
-            @*            <button type="button" class="btn btn-success btn-lg" data-parent="#WantToLogAccordion" data-toggle="collapse" data-target="#PlanWorkoutContainer" data-bind="click:planWorkoutContainerClick">Plan the workout?</button>*@
-        </div>
+                <div data-bind="template: { name: 'create-new-workout-template', data: _createWorkoutController }"></div>
+                
+                <div class="want-to-log-container" data-bind="if: _canSeeLoggingContainer">
+                    <div class="panel panel-borderless">
+                        <div class="log-workout-container"  data-bind="with:_logWorkoutController">
+                            @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+        </div>
         <div class="panel panel-borderless">
-            <div class="log-workout-container" id="LogWorkoutContainer" data-bind="with:logWorkoutController, css:{collapse: withoutPreparedWorkout}">
-                @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
+            <div class="existing-workouts-container collapse" id="ExistingWorkoutsContainer">
+                <div data-bind="template: { name: 'existing-workouts-template', data: _chooseExistingWorkoutController }"></div>
+                
+                <div class="want-to-log-container" data-bind="if: _canSeeLoggingContainer">
+                    <div class="panel panel-borderless">
+                        <div class="log-workout-container " data-bind="with:_logWorkoutController">
+                            @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -52,10 +57,7 @@
     <script>
         $(function() {
             var path = "@Url.Content("~")";
-            window.model = new ManageWorkoutController({
-                pathToApp: path,
-                viewModel: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
-                });
+            let model = new Pages.ManageWorkoutController(new General.BasicParameters(path));
             ko.applyBindings(model);
         });
     </script>

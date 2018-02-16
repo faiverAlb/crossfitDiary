@@ -6,11 +6,11 @@
                     Existing Workouts
                 </div>
                 <div class="panel-body">
-                    <div class="existing-workout-selector" data-bind="ifnot:hasPredefinedWorkout">
-                        <select class="form-control" data-live-search="true" data-bind="options:availableWorkouts, optionsText:'title',value: selectedWorkout, optionsCaption: 'Choose a workout...',selectPicker: {}"></select>
+                    <div class="existing-workout-selector">
+                        <select class="form-control" data-live-search="true" data-bind="options: _availableWorkouts, optionsText:'title',value: _selectedWorkout, optionsCaption: 'Choose a workout...',selectPicker: {}"></select>
                     </div>
-                    <div data-bind="if: selectedWorkout">
-                        <div data-bind="template: { name: 'routine-info-template', data: workoutToDisplay }"></div>
+                    <div data-bind="if: _selectedWorkout">
+                        <div data-bind="template: { name: 'routine-info-template', data: {model:_workoutToDisplay} }"></div>
                     </div>
                 </div>
             </div>

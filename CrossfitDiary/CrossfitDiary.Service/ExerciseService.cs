@@ -22,7 +22,7 @@ namespace CrossfitDiary.Service
         public IEnumerable<Exercise> GetExercises(string title = null)
         {
             var exercises = string.IsNullOrEmpty(title) ? _exerciseRepository.GetAll() : _exerciseRepository.GetMany(x => x.Title == title);
-            return exercises.OrderBy(x => x.Title);
+            return exercises.OrderBy(x => x.Title).ToList();
         }
 
         public Exercise GetExercise(int id)

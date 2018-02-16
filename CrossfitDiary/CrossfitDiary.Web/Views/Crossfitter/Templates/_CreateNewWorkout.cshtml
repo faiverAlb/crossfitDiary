@@ -5,13 +5,13 @@
                 <div class="panel-heading">
                     Add new workout
                 </div>
-                <div class="panel-body clearfix">
-                    <div class="workout-type-selector">
-                        <select class="form-control" data-live-search="true" data-bind="options:workoutTypes, optionsText:'Key',value: selectedWorkoutType, optionsCaption: 'Choose a workout type...',selectPicker: {}"></select>
+                <div class="panel-body clearfix" >
+                    <div class="workout-type-selector" >
+                        <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: _selectedWorkoutType, optionsCaption: 'Choose a workout type...',selectPicker: {}"></select>
                     </div>
-                    <div data-bind="if:selectedWorkoutType">
-                        <div data-bind="template: { name: 'routine-info-template', data: $data }"></div>
-                        <button class="btn btn-success pull-right" data-bind="click: createWorkout, enable: canCreateWorkout">Just create workout</button>
+                    <div data-bind="if:_selectedWorkoutType" >
+                        <div data-bind="template: { name: 'routine-info-template', data: {model:_workoutToCreate, controller: $data} }"></div>
+                        <button class="btn btn-success pull-right" data-bind="click: createWorkout">Just create workout</button>
                     </div>
                 </div>
             </div>

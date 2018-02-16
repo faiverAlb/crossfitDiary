@@ -295,7 +295,6 @@
     <Compile Include="ViewModels\Pride\PersonExerciseMaximum.cs" />
     <Compile Include="ViewModels\ToCreateAndLogNewWorkoutViewModel.cs" />
     <Compile Include="ViewModels\ToLogWorkoutViewModel.cs" />
-    <Compile Include="ViewModels\WorkoutTypeViewModel.cs" />
     <Compile Include="ViewModels\WorkoutViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -482,22 +481,25 @@
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_CN.js" />
     <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <TypeScriptCompile Include="Scripts\BaseTypeScript\FilterableViewModel.ts" />
-    <TypeScriptCompile Include="Scripts\BaseTypeScript\BasicParameters.ts" />
-    <TypeScriptCompile Include="Scripts\Crossfitter\Pride\PrideController.ts" />
+    <Content Include="Views\Shared\_Spinner.cshtml" />
+    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CreateWorkoutController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\PersonExerciseRecord.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\General\BaseController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\General\BaseKeyValuePairModel.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\General\FilterableViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\General\BasicParameters.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\Pride\PrideController.ts" />
     <Content Include="Views\Crossfitter\Pride.cshtml" />
-    <TypeScriptCompile Include="Scripts\BaseTypeScript\ServerProcessedViewModel.ts" />
-    <TypeScriptCompile Include="Scripts\BaseTypeScript\BaseService.ts" />
-    <TypeScriptCompile Include="Scripts\BaseTypeScript\CrossfitterService.ts" />
-    <Content Include="Scripts\Crossfitter\ManageWorkout\ChooseExistingWorkoutController.js" />
-    <Content Include="Scripts\Crossfitter\ManageWorkout\CreateWorkoutController.js" />
-    <Content Include="Scripts\Crossfitter\ManageWorkout\LogWorkoutController.js" />
-    <Content Include="Scripts\Crossfitter\ManageWorkout\ManageWorkoutController.js" />
-    <TypeScriptCompile Include="Scripts\Crossfitter\WorkoutType.ts" />
-    <TypeScriptCompile Include="Scripts\Crossfitter\ExerciseMeasureType.ts" />
-    <Content Include="Scripts\Crossfitter\ExerciseMeasureTypeValue.js" />
-    <Content Include="Scripts\Crossfitter\SimpleRoutine.js" />
-    <Content Include="Scripts\Crossfitter\CrossfitterController.js" />
+    <TypeScriptCompile Include="Scripts\Pages\General\ServerProcessedViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\General\BaseService.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\General\CrossfitterService.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\ChooseExistingWorkoutController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\LogWorkoutController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\ManageWorkoutController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\WorkoutType.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseMeasureType.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseMeasureTypeViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\SimpleRoutine.ts" />
     <Content Include="Content\bootstrap-select\bootstrap-select.less" />
     <Content Include="Content\bootstrap-select\variables.less" />
     <Content Include="Content\bootstrap.less" />
@@ -515,7 +517,7 @@
     <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Properties\PublishProfiles\workouter.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <TypeScriptCompile Include="Scripts\Home\HomePageController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Home\HomePageController.ts" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -558,7 +560,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\Secure.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
-    <Content Include="Views\Crossfitter\CreateNewWorkout.cshtml" />
     <None Include="T4MVC.tt.hooks.t4" />
     <Content Include="Views\Crossfitter\Templates\_RoutineInfoTemplate.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_SimpleRoutineItemTemlate.cshtml" />
@@ -566,6 +567,9 @@
     <Content Include="Views\Crossfitter\Templates\_CreateNewWorkout.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_ExistingWorkoutsTemplate.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_LogWorkoutPartial.cshtml" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\ToLogWorkoutViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Models\WorkoutViewModel.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\q\Q.d.ts" />
@@ -574,7 +578,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Configuration\" />
     <Folder Include="Content\themes\base\minified\images\" />
-    <Folder Include="Scripts\Spinner\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -40,40 +40,48 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/bootstrap-datepicker/moment.min.js"
                     , "~/Scripts/bootstrap-datepicker/moment-with-locales.min.js"
                     , "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.min.js"
-                    , "~/Scripts/Crossfitter/CrossfitterController.js"
-                    , "~/Scripts/Crossfitter/SimpleRoutine.js"
-                    , "~/Scripts/Crossfitter/ExerciseMeasureType.js"
-                    , "~/Scripts/Crossfitter/WorkoutType.js"
-                    , "~/Scripts/Crossfitter/ExerciseMeasureTypeValue.js"
-                    , "~/Scripts/BaseTypeScript/ServerProcessedViewModel.js"
-                    , "~/Scripts/BaseTypeScript/BaseService.js"
-                    , "~/Scripts/BaseTypeScript/CrossfitterService.js"
+                    , "~/Scripts/Pages/General/BaseController.js"
+                    , "~/Scripts/Pages/General/BaseService.js"
+                    , "~/Scripts/Pages/General/BaseKeyValuePairModel.js"
+                    , "~/Scripts/Pages/General/BasicParameters.js"
+                    , "~/Scripts/Pages/General/CrossfitterService.js"
+                    , "~/Scripts/Pages/General/ServerProcessedViewModel.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureTypeValue.js"
+                    , "~/Scripts/Pages/Models/WorkoutType.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureType.js"
+                    , "~/Scripts/Pages/Models/SimpleRoutine.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureTypeViewModel.js"
+                    , "~/Scripts/Pages/Models/ExerciseViewModel.js"
+                    , "~/Scripts/Pages/Models/WorkoutViewModel.js"
+                    , "~/Scripts/Pages/Models/ToLogWorkoutViewModel.js"
 
-                    , "~/Scripts/Crossfitter/ManageWorkout/CreateWorkoutController.js"
-                    , "~/Scripts/Crossfitter/ManageWorkout/ChooseExistingWorkoutController.js"
-                    , "~/Scripts/Crossfitter/ManageWorkout/LogWorkoutController.js"
-                    , "~/Scripts/Crossfitter/ManageWorkout/ManageWorkoutController.js"
+                    , "~/Scripts/Pages/Crossfitter/ManageWorkout/CreateWorkoutController.js"
+                    , "~/Scripts/Pages/Crossfitter/ManageWorkout/ChooseExistingWorkoutController.js"
+                    , "~/Scripts/Pages/Crossfitter/ManageWorkout/LogWorkoutController.js"
+                    , "~/Scripts/Pages/Crossfitter/ManageWorkout/ManageWorkoutController.js"
                 ));
 
 
             /* Statistics */
             bundles.Add(new ScriptBundle("~/bundles/crossfitter/statistics")
                 .Include(
-                    "~/Scripts/BaseTypeScript/ServerProcessedViewModel.js"
-                    , "~/Scripts/BaseTypeScript/BaseService.js"
-                    , "~/Scripts/BaseTypeScript/CrossfitterService.js"
-                    , "~/Scripts/BaseTypeScript/BasicParameters.js"
-                    , "~/Scripts/BaseTypeScript/FilterableViewModel.js"
-                    , "~/Scripts/Crossfitter/Pride/PrideController.js"
+                    "~/Scripts/Pages/General/ServerProcessedViewModel.js"
+                    , "~/Scripts/Pages/General/BaseService.js"
+                    , "~/Scripts/Pages/General/CrossfitterService.js"
+                    , "~/Scripts/Pages/General/BasicParameters.js"
+                    , "~/Scripts/Pages/General/FilterableViewModel.js"
+                    , "~/Scripts/Pages/Models/PersonExerciseRecord.js"
+                    , "~/Scripts/Pages/Crossfitter/Pride/PrideController.js"
                 ));
 
             /*   --Home--   */
             bundles.Add(new ScriptBundle("~/bundles/home")
                 .Include(
-                     "~/Scripts/BaseTypeScript/ServerProcessedViewModel.js"
-                    , "~/Scripts/BaseTypeScript/BaseService.js"
-                    , "~/Scripts/BaseTypeScript/CrossfitterService.js"
-                    ,"~/Scripts/Home/HomePageController.js"));
+                     "~/Scripts/Pages/General/ServerProcessedViewModel.js"
+                    , "~/Scripts/Pages/General/BaseService.js"
+                    , "~/Scripts/Pages/General/CrossfitterService.js"
+                    , "~/Scripts/Pages/General/BaseController.js"
+                    , "~/Scripts/Pages/Home/HomePageController.js"));
 
 
             bundles.Add(new StyleBundle("~/Content/css")

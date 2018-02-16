@@ -8064,6 +8064,19 @@ table > tbody > tr.empty-data {
 .table-borderless tfoot tr td {
   border: none;
 }
+/* Spinner */
+.spinner-container {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -75px;
+  z-index: 1000;
+}
+.disabledContent {
+  opacity: 0.4;
+  pointer-events: none;
+}
 .login-container .form-signin {
   max-width: 400px;
   display: block;
@@ -8416,6 +8429,11 @@ select.selectpicker {
 .crossfitter-edit-workout-container .add-new-workout-container .no-selected-container {
   color: #5bc0de;
 }
+.crossfitter-edit-workout-container .add-new-workout-container .no-selected-container.has-error {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
 /* TODO: To be removed */
 /* Log workout feature */
 .log-workout-container .existing-workout-selector {
@@ -8468,6 +8486,15 @@ select.selectpicker {
 .home-container .activities-calendar .done-item .item-body {
   padding-top: 5px;
   font-size: 13px;
+}
+.home-container .activities-calendar .done-item .item-body .workout-title {
+  border-bottom: 1px dashed black;
+}
+.home-container .activities-calendar .done-item .item-body .workout-exercises {
+  margin: 5px 10px;
+}
+.home-container .activities-calendar .done-item .item-body .workout-result {
+  border-bottom: 1px dotted black;
 }
 .home-container .activities-calendar .grid-calendar > .row.match-my-cols {
   overflow: hidden;

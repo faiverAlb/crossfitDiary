@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CrossfitDiary.Model;
 using CrossfitDiary.Web.MvcHelpers;
 using Newtonsoft.Json;
 
@@ -26,18 +27,9 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("restBetweenRounds")]
         public string RestBetweenRounds { get; set; }
 
-        [JsonProperty("workoutTypeViewModel")]
-        public WorkoutTypeViewModel WorkoutTypeViewModel { get; set; }
+        [JsonProperty("workoutType")]
+        public RoutineComplexType WorkoutType { get; set; }
 
-
-        [JsonProperty("selectedWorkoutType")]
-        public KeyValuePair<string, int> WorkoutTypeKeyValue
-        {
-            get
-            {
-                return EnumHelper.ToList(typeof (WorkoutTypeViewModel)).Single(x => x.Value == (int) WorkoutTypeViewModel);
-            }
-        }
 
         [JsonProperty("exercisesToDoList")]
         public List<ExerciseViewModel> ExercisesToDoList { get; set; }

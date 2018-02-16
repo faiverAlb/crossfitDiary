@@ -18,7 +18,7 @@ namespace CrossfitDiary.Web.Mappings
             CreateMap<ExerciseMeasureViewModel, ExerciseMeasure>();
 
             CreateMap<WorkoutViewModel, RoutineComplex>()
-                .ForMember(x => x.ComplexType, x => x.MapFrom(y => y.WorkoutTypeViewModel))
+                .ForMember(x => x.ComplexType, x => x.MapFrom(y => y.WorkoutType))
                 .ForMember(x => x.RoutineSimple, x => x.MapFrom(y => y.ExercisesToDoList))
                 .ForMember(x => x.RoundCount, x => x.MapFrom(y => y.RoundsCount))
                 .ForMember(x => x.TimeToWork, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.TimeToWork.Split(':')[0]), int.Parse(y.TimeToWork.Split(':')[1]))))

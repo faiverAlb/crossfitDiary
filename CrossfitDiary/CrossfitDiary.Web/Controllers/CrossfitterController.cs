@@ -24,36 +24,9 @@ namespace CrossfitDiary.Web.Controllers
             _workoutService = workoutService;
         }
 
-        public virtual ActionResult CreateNewWorkout()
+        public virtual ActionResult ManageWorkout()
         {
-            IEnumerable<ExerciseViewModel> viewModels = Mapper.Map<IEnumerable<ExerciseViewModel>>(_exerciseService.GetExercises());
-            var model = new
-            {
-                exercises = viewModels,
-                workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key)
-            };
-            return View(model);
-        }
-
-//        public virtual ActionResult LogWorkout()
-//        {
-//            var logWorkoutViewModel = new LogWorkoutViewModel
-//            {
-//                AvailableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts())
-//            };
-//            return View(logWorkoutViewModel);
-//        }
-
-        public virtual ActionResult ManageWorkout(DateTime? date, int? crossfitterWorkoutId)
-        {
-            var model = new
-            {
-                workoutTypes = EnumHelper.ToList(typeof(WorkoutTypeViewModel)).OrderBy(x => x.Key),
-                planDate = date?.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz") ?? DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-                crossfitterWorkout = crossfitterWorkoutId.HasValue? Mapper.Map<ToLogWorkoutViewModel>(_crossfitterService.GetCrossfitterWorkout(HttpContext.User.Identity.GetUserId(), crossfitterWorkoutId.Value)) : null
-            };
-             
-            return View(model);
+            return View();
         }
 
         public virtual ActionResult Pride()
