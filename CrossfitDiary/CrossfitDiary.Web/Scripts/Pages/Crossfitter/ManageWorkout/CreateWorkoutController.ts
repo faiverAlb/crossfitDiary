@@ -1,5 +1,4 @@
 ﻿module Pages {
-  import BasicParameters = General.BasicParameters;
   import CrossfitterService = General.CrossfitterService;
   import IExerciseViewModel = Models.ExerciseViewModel;
   import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
@@ -9,20 +8,18 @@
 
   export class CreateWorkoutController {
     /* Сivilians */
-    private _service: CrossfitterService;
 
     /* Observables */
-    public _workoutToCreate: KnockoutObservable<WorkoutViewModelObservable>;
+    public workoutToCreate: KnockoutObservable<WorkoutViewModelObservable>;
     private _workoutTypes: KnockoutObservable<Array<BaseKeyValuePairModel<number, string>>>;
-    public _selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
+    public selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
     private _exercises: KnockoutObservableArray<IExerciseViewModel>;
     private _selectedExercise: KnockoutObservable<IExerciseViewModel>;
 
     /* Computeds */
 
 
-    constructor(parameters: BasicParameters, service: CrossfitterService) {
-      this._service = service;
+    constructor(public service: CrossfitterService) {
 
       this._workoutTypes = ko.observable(
         new Array(
@@ -31,23 +28,23 @@
           , new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM])
           , new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])
         ));
-      this._selectedWorkoutType = ko.observable(null);
-      this._workoutToCreate = ko.observable(null);
+      this.selectedWorkoutType = ko.observable(null);
+      this.workoutToCreate = ko.observable(null);
       this._exercises = ko.observableArray([]);
 
       this._selectedExercise = ko.observable(null);
 
       ko.computed(() => {
         this._selectedExercise(null);
-          if (!this._selectedWorkoutType()) {
+          if (!this.selectedWorkoutType()) {
           return;
         }
         if (this._exercises().length === 0) {
           return;
         }
 
-        let model = new WorkoutViewModel(this._selectedWorkoutType().id, []);
-        this._workoutToCreate(new WorkoutViewModelObservable(model, false));
+        let model = new WorkoutViewModel(this.selectedWorkoutType().id, []);
+        this.workoutToCreate(new WorkoutViewModelObservable(model, false));
       });
 
       ko.computed(() => {
@@ -55,15 +52,15 @@
         if (!exercise) {
           return;
         }
-        this._workoutToCreate().addExerciseToList(exercise);
+        this.workoutToCreate().addExerciseToList(exercise);
         this._selectedExercise(null);
       });
 
       this.loadExercises();
     }
 
-    loadExercises = () => {
-      this._service
+    private  loadExercises = () => {
+      this.service
         .getExercises()
         .then((exercises: IExerciseViewModel[]) => {
           this._exercises(exercises);
@@ -71,13 +68,13 @@
     };
 
 
-    createWorkout = () => {
-      if (this._workoutToCreate().errors().length > 0) {
-        this._workoutToCreate().errors.showAllMessages();
+    private createWorkout = () => {
+      if (this.workoutToCreate().errors().length > 0) {
+        this.workoutToCreate().errors.showAllMessages();
         return;
       }
-      let workoutToCreate = this._workoutToCreate().toPlainObject();
-      this._service.createWorkout(workoutToCreate)
+      let workoutToCreate = this.workoutToCreate().toPlainObject();
+      this.service.createWorkout(workoutToCreate)
         .then(() => {
           window.location.href = "/Home";
         })
@@ -87,15 +84,8 @@
     };
 
 
-    clearState = () => {
-      this._selectedWorkoutType(null);
+    public clearState = () => {
+      this.selectedWorkoutType(null);
     };
-
-
   }
-
-  
-
-
-
 }
