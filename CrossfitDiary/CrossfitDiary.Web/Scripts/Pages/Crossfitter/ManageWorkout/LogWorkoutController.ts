@@ -5,7 +5,7 @@
 
   export class LogWorkoutController {
     /* Сivilians */
-    _logWorkoutText: string;
+    private _logWorkoutText: string;
 
     /* Observables */
     private _logToCreate: KnockoutObservable<ToLogWorkoutViewModelObservable>;
@@ -49,8 +49,8 @@
           console.log(error);
         });
     }
+
     private logExistingWorkout() {
-      
       this.service.logWorkout(this._logToCreate().toPlainObject())
         .then(() => {
           window.location.href = "/Home";
@@ -59,7 +59,6 @@
           console.log(error);
         });
     }
-
 
     private _logWorkout = () => {
       if (this.checkAndShowErrors()) {

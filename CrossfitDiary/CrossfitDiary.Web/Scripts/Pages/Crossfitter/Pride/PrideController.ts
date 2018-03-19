@@ -5,17 +5,15 @@
 
   export class PrideController extends General.FilterableViewModel {
     /* Сivilians */
-    _service: CrossfitterService;
+    private _service: CrossfitterService;
 
     /* Observables */
-    _exercises: KnockoutObservableArray<any>;
-    _selectedExercise: KnockoutObservable<any>;
-    _personMaximums: KnockoutObservableArray<PersonExerciseRecord>;
-    _allPersonsMaximums: KnockoutObservableArray<ObservablePersonExerciseRecord>;
+    private _exercises: KnockoutObservableArray<any>;
+    private _selectedExercise: KnockoutObservable<any>;
+    private _personMaximums: KnockoutObservableArray<PersonExerciseRecord>;
+    private _allPersonsMaximums: KnockoutObservableArray<ObservablePersonExerciseRecord>;
 
     /* Computeds */
-
-    
 
     constructor(basicParameters: General.BasicParameters) {
       super();
