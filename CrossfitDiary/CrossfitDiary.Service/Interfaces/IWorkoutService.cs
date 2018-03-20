@@ -5,6 +5,6 @@ namespace CrossfitDiary.Service.Interfaces
 {
     public interface IWorkoutService
     {
-        IEnumerable<RoutineComplex> GetAvailableWorkouts();
+        IEnumerable<RoutineComplex> GetDefaultAndUserWorkouts(string userId);
     }
 }

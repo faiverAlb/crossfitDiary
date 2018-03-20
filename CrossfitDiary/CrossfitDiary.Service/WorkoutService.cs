@@ -15,9 +15,9 @@ namespace CrossfitDiary.Service
             _routineComplexRepository = routineComplexRepository;
         }
 
-        public IEnumerable<RoutineComplex> GetAvailableWorkouts()
+        public IEnumerable<RoutineComplex> GetDefaultAndUserWorkouts(string userId)
         {
-            var availableWorkouts = _routineComplexRepository.GetAll();
+            IEnumerable<RoutineComplex> availableWorkouts = _routineComplexRepository.GetMany(x => x.CreatedBy == null || x.CreatedBy.Id == userId);
             return availableWorkouts;
         }
 

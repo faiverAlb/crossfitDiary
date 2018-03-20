@@ -46,7 +46,8 @@ namespace CrossfitDiary.Web.Api
         [Route("getAvailableWorkouts")]
         public IHttpActionResult GetAvailableWorkouts()
         {
-            IEnumerable<WorkoutViewModel> availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts());
+            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
+            IEnumerable<WorkoutViewModel> availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetDefaultAndUserWorkouts(user.Id));
             return Ok(availableWorkouts);
         }
 
