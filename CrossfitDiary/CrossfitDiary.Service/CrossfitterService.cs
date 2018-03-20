@@ -58,14 +58,6 @@ namespace CrossfitDiary.Service
             routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
         }
 
-        public List<CrossfitterWorkout> GetCrossfitterWorkouts(string userId, DateTime fromDate, DateTime dueDate)
-        {
-            List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId && (fromDate.Date <= x.Date && x.Date <= dueDate.Date)).ToList();
-            foreach (var workout in crossfitterWorkouts)
-                PrepareWorkout(workout);
-
-            return crossfitterWorkouts;
-        }
 
         /// <summary>
         /// The get person maximum for exercise.
@@ -161,15 +153,6 @@ namespace CrossfitDiary.Service
                 }
 
             }
-        }
-
-        public CrossfitterWorkout GetCrossfitterWorkout(string userId, int crossfitterWorkoutId)
-        {
-            CrossfitterWorkout crossfitterWorkout = _crossfitterWorkoutRepository.GetById(crossfitterWorkoutId);
-            if (crossfitterWorkout.Crossfitter.Id != userId)
-                return null;
-            PrepareWorkout(crossfitterWorkout);
-            return crossfitterWorkout;
         }
 
         public void RemoveWorkout(int crossfitterWorkoutId)

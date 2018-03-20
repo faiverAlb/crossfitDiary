@@ -10,5 +10,11 @@ namespace CrossfitDiary.DAL.EF.Repositories
         public RoutineComplexRepository(IDbFactory dbFactory) : base(dbFactory)
         {
         }
+
+        public override void Add(RoutineComplex entity)
+        {
+            entity.CreatedBy = DbContext.Users.Find(entity.CreatedBy.Id);
+            base.Add(entity);
+        }
     }
 }

@@ -93,6 +93,10 @@
     <Compile Include="DataContexts\CrossfitDiaryMigrations\201702091141347_Addcalories.Designer.cs">
       <DependentUpon>201702091141347_Addcalories.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201803200605452_AddCreatedByForWorkout.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201803200605452_AddCreatedByForWorkout.Designer.cs">
+      <DependentUpon>201803200605452_AddCreatedByForWorkout.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder_February_2018.cs" />
@@ -145,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201702091141347_Addcalories.resx">
       <DependentUpon>201702091141347_Addcalories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201803200605452_AddCreatedByForWorkout.resx">
+      <DependentUpon>201803200605452_AddCreatedByForWorkout.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

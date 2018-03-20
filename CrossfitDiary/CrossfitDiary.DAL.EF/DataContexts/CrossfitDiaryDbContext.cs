@@ -52,6 +52,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts
 
 
             modelBuilder.Entity<ApplicationUser>().HasMany(x => x.CrossfitterWorkout);
+            modelBuilder.Entity<ApplicationUser>().HasMany(x => x.RoutineComplexCollection);
             modelBuilder.Configurations.Add(new ExerciseConfiguration());
             modelBuilder.Configurations.Add(new RoutineSimpleConfiguration());
             modelBuilder.Configurations.Add(new RoutineComplexConfiguration());
