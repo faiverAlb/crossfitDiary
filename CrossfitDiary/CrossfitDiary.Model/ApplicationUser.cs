@@ -25,5 +25,7 @@ namespace CrossfitDiary.Model
 
         public virtual ICollection<CrossfitterWorkout> CrossfitterWorkout { get; set; }
 
+        public virtual ICollection<RoutineComplex> RoutineComplexCollection { get; set; }
+
     }
 }

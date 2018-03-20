@@ -46,7 +46,8 @@ namespace CrossfitDiary.Web.Api
         [Route("getAvailableWorkouts")]
         public IHttpActionResult GetAvailableWorkouts()
         {
-            IEnumerable<WorkoutViewModel> availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAvailableWorkouts());
+            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
+            IEnumerable<WorkoutViewModel> availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetDefaultAndUserWorkouts(user.Id));
             return Ok(availableWorkouts);
         }
 
@@ -59,7 +60,11 @@ namespace CrossfitDiary.Web.Api
         [Route("createWorkout")]
         public void CreateWorkout(WorkoutViewModel model)
         {
-            _crossfitterService.CreateWorkout(Mapper.Map<RoutineComplex>(model));
+            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
+
+            RoutineComplex routineComplexToSave = Mapper.Map<RoutineComplex>(model);
+            routineComplexToSave.CreatedBy = user;
+            _crossfitterService.CreateWorkout(routineComplexToSave);
         }
 
         /// <summary>
@@ -85,11 +90,14 @@ namespace CrossfitDiary.Web.Api
         [Route("createAndLogNewWorkout")]
         public void CreateAndLogNewWorkout(ToCreateAndLogNewWorkoutViewModel model)
         {
+            
             ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
             CrossfitterWorkout crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
             crossfitterWorkout.Crossfitter = user;
-            _crossfitterService.CreateAndLogNewWorkout(Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel),
-                crossfitterWorkout);
+            RoutineComplex newWorkoutRoutine = Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
+            newWorkoutRoutine.CreatedBy = user;
+
+            _crossfitterService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout);
         }
 
         [HttpDelete]
