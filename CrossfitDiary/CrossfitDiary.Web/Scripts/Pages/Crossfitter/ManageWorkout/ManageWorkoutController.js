@@ -20,7 +20,7 @@ var Pages;
             this.manageWorkoutClick = function (isCreateNewWorkout) {
                 _this._chooseExistingWorkoutController.clearState();
                 _this._createWorkoutController.clearState();
-                _this._isCreateNewWorkoutPressed(isCreateNewWorkout);
+                _this._isCreateNewWorkout(isCreateNewWorkout);
                 _this._logWorkoutController(null);
             };
             this._service = new CrossfitterService(parameters.pathToApp);
@@ -36,7 +36,7 @@ var Pages;
                 _this._canSeeLoggingContainer(true);
                 _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToCreate(), true, _this._service));
             });
-            this._isCreateNewWorkoutPressed = ko.observable(false);
+            this._isCreateNewWorkout = ko.observable(true);
             this._chooseExistingWorkoutController.selectedWorkout.subscribe(function (selectedWorkout) {
                 _this._canSeeLoggingContainer(false);
                 if (selectedWorkout == undefined || selectedWorkout == null) {

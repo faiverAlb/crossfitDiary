@@ -25,7 +25,7 @@
 
     /* Observables */
     private _logWorkoutController: KnockoutObservable<LogWorkoutController>;
-    private _isCreateNewWorkoutPressed: KnockoutObservable<boolean>;
+    private _isCreateNewWorkout: KnockoutObservable<boolean>;
     private _canSeeLoggingContainer: KnockoutObservable<boolean>;
 
     /* Computeds */
@@ -48,7 +48,7 @@
         this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToCreate(), true, this._service));
       });
 
-      this._isCreateNewWorkoutPressed = ko.observable(false);
+      this._isCreateNewWorkout = ko.observable(true);
 
       this._chooseExistingWorkoutController.selectedWorkout.subscribe((selectedWorkout: WorkoutViewModel) => {
         this._canSeeLoggingContainer(false);
@@ -64,7 +64,7 @@
       this._chooseExistingWorkoutController.clearState();
       this._createWorkoutController.clearState();
 
-      this._isCreateNewWorkoutPressed(isCreateNewWorkout);
+      this._isCreateNewWorkout(isCreateNewWorkout);
       this._logWorkoutController(null);
     };
 
