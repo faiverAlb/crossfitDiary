@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
 using AutoMapper;
@@ -48,7 +49,7 @@ namespace CrossfitDiary.Web.Api
         {
             ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
             IEnumerable<WorkoutViewModel> availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetDefaultAndUserWorkouts(user.Id));
-            return Ok(availableWorkouts);
+            return Ok(availableWorkouts.OrderBy(x => x.DetailedTitle));
         }
 
 
