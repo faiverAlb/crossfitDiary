@@ -4,16 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="manage-workout-page">
+<div class="manage-workout-page" data-bind="visible:true" style="display: none">
     <div class="new-or-existing" id="NewOrExistingAccordion">
         <div class="choose-buttons text-center" style="display: none" data-bind="visible:true">
-            <button type="button" class="btn btn-warning btn-lg" data-parent="#NewOrExistingAccordion" data-toggle="collapse" data-target="#NewWorkoutContainer" data-bind="click:function(){manageWorkoutClick(true);}">Create new workout?</button>
+            <button type="button" class="btn btn-warning btn-lg" data-bind="click:function(){manageWorkoutClick(true);}">Create new workout?</button>
             or
-            <button type="button" class="btn btn-success btn-lg" data-parent="#NewOrExistingAccordion" data-toggle="collapse" data-target="#ExistingWorkoutsContainer" data-bind="click:function(){manageWorkoutClick(false);}">Log existing workout?</button>
+            <button type="button" class="btn btn-success btn-lg" data-bind="click:function(){manageWorkoutClick(false);}">Log existing workout?</button>
         </div>
 
-        <div class="panel panel-borderless" >
-            <div class="new-workout-container collapse" id="NewWorkoutContainer">
+        <div class="panel panel-borderless" data-bind="if:_isCreateNewWorkout">
+            <div class="new-workout-container" id="NewWorkoutContainer" >
                 <div data-bind="template: { name: 'create-new-workout-template', data: _createWorkoutController }"></div>
                 
                 <div class="want-to-log-container" data-bind="if: _canSeeLoggingContainer">
@@ -26,8 +26,8 @@
 
             </div>
         </div>
-        <div class="panel panel-borderless">
-            <div class="existing-workouts-container collapse" id="ExistingWorkoutsContainer">
+        <div class="panel panel-borderless" data-bind="ifnot:_isCreateNewWorkout">
+            <div class="existing-workouts-container" id="ExistingWorkoutsContainer">
                 <div data-bind="template: { name: 'existing-workouts-template', data: _chooseExistingWorkoutController }"></div>
                 
                 <div class="want-to-log-container" data-bind="if: _canSeeLoggingContainer">

@@ -44,12 +44,12 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName))
                 .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex))
                 .ForMember(x => x.TimePassed, x => x.ResolveUsing<TimePassedResolver>());
-//                .ForMember(x => x.TimePassed, x => x.MapFrom(y => y.TimePassed.HasValue? y.TimePassed.Value.TotalHours>0? y.TimePassed.Value.ToString(): string.Format("{0:00}:{1:00}", y.TimePassed.Value.TotalMinutes, y.TimePassed.Value.Seconds) : string.Empty));
 
             CreateMap<RoutineComplex, WorkoutViewModel>()
                 .ForMember(x => x.WorkoutType, x => x.MapFrom(y => y.ComplexType))
                 .ForMember(x => x.ExercisesToDoList, x => x.MapFrom(y => y.RoutineSimple))
                 .ForMember(x => x.RoundsCount, x => x.MapFrom(y => y.RoundCount))
+                .ForMember(x => x.DetailedTitle, x => x.ResolveUsing<DetailedTitleResolver>())
                 .ForMember(x => x.TimeToWork,
                     x => x.MapFrom(y =>
                         y.TimeToWork.HasValue
@@ -106,6 +106,103 @@ namespace CrossfitDiary.Web.Mappings
                     }
                     dest.ExerciseMeasures = toMapExercises;
                 });
+        }
+    }
+
+    internal class DetailedTitleResolver : IValueResolver<RoutineComplex, WorkoutViewModel, string>
+    {
+        public string Resolve(RoutineComplex source, WorkoutViewModel destination, string destMember, ResolutionContext context)
+        {
+            bool containDefaultName = ContainDefaultName(source.Title);
+            string mainTitle = containDefaultName ? source.ComplexType.ToString() : source.Title;
+            string lastTitlePart = string.Empty;
+            if (source.RoutineSimple.Count > 3)
+            {
+                lastTitlePart = $"{BuildRoutineTitle(source.RoutineSimple.ElementAt(0))}, {BuildRoutineTitle(source.RoutineSimple.ElementAt(1))}, {BuildRoutineTitle(source.RoutineSimple.ElementAt(2))} and {source.RoutineSimple.Count - 3} more...";
+            }
+            else
+            {
+                for (int i = 0; i < source.RoutineSimple.Count; i++)
+                {
+                    lastTitlePart += $"{BuildRoutineTitle(source.RoutineSimple.ElementAt(i))}";
+                    if (i + 1  < source.RoutineSimple.Count)
+                    {
+                        lastTitlePart += ", ";
+                    }
+                }
+            }
+
+            return $"{mainTitle}: {lastTitlePart}";
+        }
+
+
+        /// <summary>
+        /// Build routine simple detailed title
+        /// </summary>
+        /// <param name="routineSimple">
+        /// The routine simple.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string BuildRoutineTitle(RoutineSimple routineSimple)
+        {
+            if (routineSimple.Weight.HasValue && routineSimple.Weight.Value > 0)
+            {
+                if (routineSimple.Count.HasValue)
+                {
+                    return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Count)} * {CorrectDecimalValue(routineSimple.Weight)} kg)";
+                }
+
+                return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Weight)} kg)";
+            }
+
+            if (routineSimple.Count.HasValue)
+            {
+                return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Count)})";
+            }
+
+            if (routineSimple.Calories.HasValue)
+            {
+                return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Calories)} cal)";
+            }
+
+            if (routineSimple.Distance.HasValue)
+            {
+                return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Distance)} meters)";
+            }
+
+            return "-";
+        }
+
+        private string CorrectDecimalValue(decimal? routineSimpleWeight)
+        {
+            decimal floatingPart = routineSimpleWeight.Value % 1.0m;
+            if (floatingPart > 0.0m)
+            {
+                return routineSimpleWeight.Value.ToString();
+            }
+
+            return ((int) routineSimpleWeight.Value).ToString();
+
+        }
+
+        /// <summary>
+        /// Returns does workout title contain default type name
+        /// </summary>
+        /// <param name="workoutTitle">
+        /// The source title.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool ContainDefaultName(string workoutTitle)
+        {
+            return workoutTitle.Contains(RoutineComplexType.AMRAP.ToString())
+                   || workoutTitle.Contains(RoutineComplexType.E2MOM.ToString())
+                   || workoutTitle.Contains(RoutineComplexType.EMOM.ToString())
+                   || workoutTitle.Contains(RoutineComplexType.ForTime.ToString())
+                   || workoutTitle.Contains(RoutineComplexType.NotForTime.ToString());
         }
     }
 
