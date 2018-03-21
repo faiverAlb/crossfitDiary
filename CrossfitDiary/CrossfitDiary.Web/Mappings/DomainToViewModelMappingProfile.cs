@@ -88,7 +88,7 @@ namespace CrossfitDiary.Web.Mappings
                                 break;
                             case MeasureType.Weight:
                                 exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Weight;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Weight?.ToString();
+                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Weight.ToCustomString();
                                 exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Weight).ExerciseMeasureType.Description;
                                 exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Weight).ExerciseMeasureType.ShortMeasureDescription;
                                 exerviseMeasureVm.ExerciseMeasureType.IsRequired = simple.Exercise.ExerciseMeasures.Count <= 1;
@@ -151,41 +151,30 @@ namespace CrossfitDiary.Web.Mappings
             {
                 if (routineSimple.Count.HasValue)
                 {
-                    return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Count)} * {CorrectDecimalValue(routineSimple.Weight)} kg)";
+                    return $"{routineSimple.Exercise.Title}({routineSimple.Count.ToCustomString()} * {routineSimple.Weight.ToCustomString()} kg)";
                 }
 
-                return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Weight)} kg)";
+                return $"{routineSimple.Exercise.Title}({routineSimple.Weight.ToCustomString()} kg)";
             }
 
             if (routineSimple.Count.HasValue)
             {
-                return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Count)})";
+                return $"{routineSimple.Exercise.Title}({routineSimple.Count.ToCustomString()})";
             }
 
             if (routineSimple.Calories.HasValue)
             {
-                return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Calories)} cal)";
+                return $"{routineSimple.Exercise.Title}({routineSimple.Calories.ToCustomString()} cal)";
             }
 
             if (routineSimple.Distance.HasValue)
             {
-                return $"{routineSimple.Exercise.Title}({CorrectDecimalValue(routineSimple.Distance)} meters)";
+                return $"{routineSimple.Exercise.Title}({routineSimple.Distance.ToCustomString()} meters)";
             }
 
             return "-";
         }
 
-        private string CorrectDecimalValue(decimal? routineSimpleWeight)
-        {
-            decimal floatingPart = routineSimpleWeight.Value % 1.0m;
-            if (floatingPart > 0.0m)
-            {
-                return routineSimpleWeight.Value.ToString();
-            }
-
-            return ((int) routineSimpleWeight.Value).ToString();
-
-        }
 
         /// <summary>
         /// Returns does workout title contain default type name
@@ -226,6 +215,25 @@ namespace CrossfitDiary.Web.Mappings
             string result = string.Format("{0:00}:{1:00}", totalTime.TotalMinutes, totalTime.Seconds);
             return result;
 
+        }
+    }
+
+    public static class DecimalToStringExtension
+    {
+        public static string ToCustomString(this decimal? value)
+        {
+            if (value.HasValue == false)
+            {
+                return string.Empty;
+            }
+
+            decimal floatingPart = value.Value % 1.0m;
+            if (floatingPart > 0.0m)
+            {
+                return value.Value.ToString();
+            }
+
+            return ((int)value.Value).ToString();
         }
     }
 }
