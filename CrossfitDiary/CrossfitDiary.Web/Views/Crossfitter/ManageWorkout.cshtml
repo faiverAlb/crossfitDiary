@@ -5,6 +5,10 @@
 }
 
 <div class="manage-workout-page" data-bind="visible:true" style="display: none">
+    <div data-bind="visible: isDataLoading">
+        @Html.Partial(MVC.Shared.Views._Spinner)
+    </div>
+
     <div class="new-or-existing" id="NewOrExistingAccordion">
         <div class="choose-buttons text-center" style="display: none" data-bind="visible:true">
             <button type="button" class="btn btn-warning btn-lg" data-bind="click:function(){manageWorkoutClick(true);}">Create new workout?</button>
@@ -13,12 +17,12 @@
         </div>
 
         <div class="panel panel-borderless" data-bind="if:_isCreateNewWorkout">
-            <div class="new-workout-container" id="NewWorkoutContainer" >
+            <div class="new-workout-container" id="NewWorkoutContainer">
                 <div data-bind="template: { name: 'create-new-workout-template', data: _createWorkoutController }"></div>
-                
+
                 <div class="want-to-log-container" data-bind="if: _canSeeLoggingContainer">
                     <div class="panel panel-borderless">
-                        <div class="log-workout-container"  data-bind="with:_logWorkoutController">
+                        <div class="log-workout-container" data-bind="with:_logWorkoutController">
                             @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
                         </div>
                     </div>
@@ -29,7 +33,7 @@
         <div class="panel panel-borderless" data-bind="ifnot:_isCreateNewWorkout">
             <div class="existing-workouts-container" id="ExistingWorkoutsContainer">
                 <div data-bind="template: { name: 'existing-workouts-template', data: _chooseExistingWorkoutController }"></div>
-                
+
                 <div class="want-to-log-container" data-bind="if: _canSeeLoggingContainer">
                     <div class="panel panel-borderless">
                         <div class="log-workout-container " data-bind="with:_logWorkoutController">

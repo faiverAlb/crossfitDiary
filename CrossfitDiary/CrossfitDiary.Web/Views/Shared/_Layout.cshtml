@@ -49,11 +49,8 @@
     </div>
 </nav>
 
-<div class="container" style="display: none" data-bind="visible:true">
-    <div data-bind="visible: isDataLoading">
-        @Html.Partial(MVC.Shared.Views._Spinner)
-    </div>
-    @RenderBody()
+<div class="container">
+   @RenderBody()
 </div>
 
 
