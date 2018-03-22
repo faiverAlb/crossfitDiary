@@ -5,8 +5,9 @@
   import WorkoutType = Models.WorkoutType;
   import WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
   import WorkoutViewModel = Models.WorkoutViewModel;
+  import BaseController = General.BaseController;
 
-  export class CreateWorkoutController {
+  export class CreateWorkoutController extends BaseController {
     /* Сivilians */
 
     /* Observables */
@@ -20,6 +21,7 @@
 
 
     constructor(public service: CrossfitterService) {
+      super();
 
       this._workoutTypes = ko.observable(
         new Array(

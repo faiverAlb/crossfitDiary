@@ -2,8 +2,9 @@
   import WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
   import ToLogWorkoutViewModelObservable = Models.ToLogWorkoutViewModelObservable;
   import CrossfitterService = General.CrossfitterService;
+  import BaseController = General.BaseController;
 
-  export class LogWorkoutController {
+  export class LogWorkoutController extends BaseController{
     /* Сivilians */
     private _logWorkoutText: string;
 
@@ -14,6 +15,7 @@
 
 
     constructor(public workoutToUse: WorkoutViewModelObservable, public isCreateAndLogWorkout: boolean, public service: CrossfitterService) {
+      super();
       this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId()));
 
       this._logWorkoutText = "Log workout";

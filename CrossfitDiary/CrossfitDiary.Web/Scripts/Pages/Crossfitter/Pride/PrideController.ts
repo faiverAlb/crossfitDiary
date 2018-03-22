@@ -12,12 +12,14 @@
     private _selectedExercise: KnockoutObservable<any>;
     private _personMaximums: KnockoutObservableArray<PersonExerciseRecord>;
     private _allPersonsMaximums: KnockoutObservableArray<ObservablePersonExerciseRecord>;
+    isDataLoading: KnockoutObservable<boolean>;
 
     /* Computeds */
 
     constructor(basicParameters: General.BasicParameters) {
       super();
-      this._service = new CrossfitterService(basicParameters.pathToApp);
+      this.isDataLoading = ko.observable(false);
+      this._service = new CrossfitterService(basicParameters.pathToApp, this.isDataLoading);
       this._exercises = ko.observableArray([]);
       this._personMaximums = ko.observableArray([]);
       this._allPersonsMaximums = ko.observableArray([]);

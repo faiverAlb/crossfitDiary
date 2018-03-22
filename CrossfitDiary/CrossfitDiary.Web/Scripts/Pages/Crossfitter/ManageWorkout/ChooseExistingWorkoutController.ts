@@ -1,8 +1,9 @@
 ﻿module Pages {
   import WorkoutViewModel = Models.WorkoutViewModel;
   import WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
+  import BaseController = General.BaseController;
 
-  export class ChooseExistingWorkoutController {
+  export class ChooseExistingWorkoutController extends BaseController {
     /* Сivilians */
 
     /* Observables */
@@ -13,6 +14,7 @@
     /* Computeds */
 
     constructor(public service: General.CrossfitterService) {
+      super();
       this._availableWorkouts = ko.observableArray([]);
       this.selectedWorkout = ko.observable(null);
       this.workoutToDisplay = ko.observable(null);

@@ -3,6 +3,7 @@
   import BasicParameters = General.BasicParameters;
   import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
   import WorkoutViewModel = Models.WorkoutViewModel;
+  import BaseController = General.BaseController;
 
   declare var ko;
   ko.validation.init({
@@ -16,7 +17,7 @@
       observable: true
     }
   });
-  export class ManageWorkoutController {
+  export class ManageWorkoutController extends BaseController{
 
     /* Сivilians */
     private  _createWorkoutController: CreateWorkoutController;
@@ -31,7 +32,8 @@
     /* Computeds */
 
     constructor(public parameters: BasicParameters) {
-      this._service = new CrossfitterService(parameters.pathToApp);
+      super();
+      this._service = new CrossfitterService(parameters.pathToApp, this.isDataLoading);
 
       this._createWorkoutController = new CreateWorkoutController(this._service);
       this._chooseExistingWorkoutController = new ChooseExistingWorkoutController(this._service);

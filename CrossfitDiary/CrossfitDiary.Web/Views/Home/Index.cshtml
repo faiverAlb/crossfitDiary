@@ -7,14 +7,8 @@
 @model HomeViewModel
 
 
-<div class="home-container" style="display: none" data-bind="visible:true">
-
-    <div data-bind="visible: _isDataLoading">
-        @Html.Partial(MVC.Shared.Views._Spinner)
-    </div>
-
-
-    <div class="row" data-bind="css:{'disabledContent':_isDataLoading}, enabled: !_isDataLoading()">
+<div class="home-container" >
+    <div class="row" >
         <div class="container activities-calendar">
             <div class="row">
 

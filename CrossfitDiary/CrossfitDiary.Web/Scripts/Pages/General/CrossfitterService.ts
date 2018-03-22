@@ -5,13 +5,13 @@
 
   export class CrossfitterService extends BaseService {
 
-    constructor(public pathToApp: string) {
+    constructor(public readonly  pathToApp: string, public isDataLoading: KnockoutObservable<Boolean>) {
       super();
     }
 
     createWorkout = (model: WorkoutViewModel) => {
-      return this.post(this.pathToApp + "api/createWorkout", model);
-
+      return this
+        .post(this.pathToApp + "api/createWorkout", model);
     };
 
     logWorkout = (model: ToLogWorkoutViewModel) => {
@@ -23,27 +23,33 @@
     };
 
     getAvailableWorkouts = (): Q.Promise<WorkoutViewModel[]> => {
-      return this.get <WorkoutViewModel[]>(this.pathToApp + "api/getAvailableWorkouts");
+      this.isDataLoading(true);
+      return this.get<WorkoutViewModel[]>(this.pathToApp + "api/getAvailableWorkouts").finally(() => { this.isDataLoading(false); });
     };
 
     getExercises = (): Q.Promise<IExerciseViewModel[]> => {
-      return this.get<IExerciseViewModel[]>(this.pathToApp + "api/getExercises");
+      this.isDataLoading(true);
+      return this.get<IExerciseViewModel[]>(this.pathToApp + "api/getExercises").finally(() => { this.isDataLoading(false); });
     };
 
     getStatisticalExercises = () => {
-      return this.get(this.pathToApp + "api/getStatisticalExercises");
+      this.isDataLoading(true);
+      return this.get(this.pathToApp + "api/getStatisticalExercises").finally(() => { this.isDataLoading(false); });
     };
 
     getPersonExerciseMaximumWeight = (exerciseId: number) => {
-      return this.get(this.pathToApp + `api/exercises/${exerciseId}/personMaximum`);
+      this.isDataLoading(true);
+      return this.get(this.pathToApp + `api/exercises/${exerciseId}/personMaximum`).finally(() => { this.isDataLoading(false); });
     };
 
     getAllPersonsExerciseMaximumWeights = (exerciseId: number) => {
-      return this.get(this.pathToApp + `api/exercises/${exerciseId}/allPersonsMaximums`);
+      this.isDataLoading(true);
+      return this.get(this.pathToApp + `api/exercises/${exerciseId}/allPersonsMaximums`).finally(() => { this.isDataLoading(false); });
     };
 
     removeWorkout = (crossfitterWorkoutId) => {
-      return this.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
+      this.isDataLoading(true);
+      return this.delete(`api/removeWorkout/${crossfitterWorkoutId}`).finally(() => { this.isDataLoading(false); });
     };
   }
 }

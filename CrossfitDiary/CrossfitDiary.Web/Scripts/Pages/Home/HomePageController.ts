@@ -8,8 +8,7 @@
 
     constructor(public parameters: { viewModel: { allWorkouts }, pathToApp: string }) {
       super();
-      this.allWorkouts = this.parameters.viewModel.allWorkouts;
-      this._service = new CrossfitterService(parameters.pathToApp);
+      this._service = new CrossfitterService(parameters.pathToApp, this.isDataLoading);
     }
 
     private removeWorkout = (crossfitterWorkoutId: number) => {

@@ -2,7 +2,7 @@ var General;
 (function (General) {
     var BaseController = (function () {
         function BaseController() {
-            this._isDataLoading = ko.observable(false);
+            this.isDataLoading = ko.observable(false);
         }
         return BaseController;
     }());

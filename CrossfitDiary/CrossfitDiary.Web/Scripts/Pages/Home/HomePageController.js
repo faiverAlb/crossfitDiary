@@ -23,8 +23,7 @@ var Pages;
                     window.location.href = "/Home";
                 });
             };
-            _this.allWorkouts = _this.parameters.viewModel.allWorkouts;
-            _this._service = new CrossfitterService(parameters.pathToApp);
+            _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
             return _this;
         }
         return HomePageController;
