@@ -24,7 +24,8 @@ namespace CrossfitDiary.Service
 
         public int CreateWorkout(RoutineComplex routineComplexToSave)
         {
-            if (IsAlreadyExist(routineComplexToSave, out int workoutId))
+            int workoutId = FindDefaultOrExistingWorkout(routineComplexToSave);
+            if (workoutId != 0)
             {
                 return workoutId;
             }
@@ -47,12 +48,11 @@ namespace CrossfitDiary.Service
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public virtual bool IsAlreadyExist(RoutineComplex routineComplexToSave, out int workoutId)
+        public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
         {
             string userId = routineComplexToSave.CreatedBy?.Id;
             List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetMany(x => x.CreatedBy == null || x.CreatedBy.Id == userId).ToList();
 
-            RoutineComplex workout = null;
 
             foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
             {
@@ -97,12 +97,10 @@ namespace CrossfitDiary.Service
                     continue;
                 }
 
-                workout = existingRoutineComplex;
-                break;
+                return existingRoutineComplex.Id;
             }
 
-            workoutId = workout?.Id ?? 0;
-            return workout != null;
+            return 0;
         }
 
         public void LogWorkout(CrossfitterWorkout workoutToLog)
