@@ -21,11 +21,14 @@ var Pages;
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
             _this.removeWorkout = function (crossfitterWorkoutId) {
+                _this.isDataLoading(true);
                 _this._service.removeWorkout(crossfitterWorkoutId)
                     .then(function () {
+                    _this.isDataLoading(false);
                     window.location.href = "/Home";
                 })
                     .fail(function (response) {
+                    _this.isDataLoading(false);
                     _this.errorMessager.addMessage(response.responseText, false);
                 });
             };

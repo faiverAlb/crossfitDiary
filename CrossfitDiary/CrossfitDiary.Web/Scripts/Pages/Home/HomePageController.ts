@@ -19,11 +19,14 @@
     }
 
     private removeWorkout = (crossfitterWorkoutId: number) => {
+      this.isDataLoading(true);
       this._service.removeWorkout(crossfitterWorkoutId)
         .then(() => {
+          this.isDataLoading(false);
           window.location.href = "/Home";
         })
         .fail((response) => {
+          this.isDataLoading(false);
           this.errorMessager.addMessage(response.responseText, false);
         });
     }
