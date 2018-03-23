@@ -35,11 +35,74 @@ namespace CrossfitDiary.Service
             return routineComplexToSave.Id;
         }
 
+        /// <summary>
+        /// Find existing workout by workout structure
+        /// </summary>
+        /// <param name="routineComplexToSave">
+        /// The routine complex to save.
+        /// </param>
+        /// <param name="workoutId">
+        /// The workout id if found
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         private bool IsAlreadyExist(RoutineComplex routineComplexToSave, out int workoutId)
         {
-            CrossfitterWorkout workout  =  _crossfitterWorkoutRepository.FirstOrDefault(x => x.Crossfitter == routineComplexToSave.CreatedBy);
+            string userId = routineComplexToSave.CreatedBy?.Id;
+            List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetMany(x => x.CreatedBy == null || x.CreatedBy.Id == userId).ToList();
+
+            RoutineComplex workout = null;
+
+            foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
+            {
+                if (routineComplexToSave.ComplexType != existingRoutineComplex.ComplexType)
+                {
+                    continue;
+                }
+
+                if (routineComplexToSave.RoundCount != existingRoutineComplex.RoundCount)
+                {
+                    continue;
+                }
+
+                if (routineComplexToSave.TimeToWork != existingRoutineComplex.TimeToWork)
+                {
+                    continue;
+                }
+
+                if (routineComplexToSave.RoutineSimple.Count != existingRoutineComplex.RoutineSimple.Count)
+                {
+                    continue;
+                }
+
+                bool isExercisesMatch = true;
+
+                for (int i = 0; i < routineComplexToSave.RoutineSimple.Count; i++)
+                {
+                    RoutineSimple routineSimpleToSave = routineComplexToSave.RoutineSimple.ToList()[i];
+                    RoutineSimple existingSimpleRoutine = existingRoutineComplex.RoutineSimple.ToList()[i];
+                    if (routineSimpleToSave.Count != existingSimpleRoutine.Count 
+                        || routineSimpleToSave.Distance != existingSimpleRoutine.Distance
+                        || routineSimpleToSave.Weight != existingSimpleRoutine.Weight
+                        || routineSimpleToSave.Calories != existingSimpleRoutine.Calories)
+                    {
+                        isExercisesMatch = false;
+                        break;
+                    }
+                }
+
+                if (isExercisesMatch == false)
+                {
+                    continue;
+                }
+
+                workout = existingRoutineComplex;
+                break;
+            }
+
             workoutId = workout?.Id ?? 0;
-            return workout == null;
+            return workout != null;
         }
 
         public void LogWorkout(CrossfitterWorkout workoutToLog)
