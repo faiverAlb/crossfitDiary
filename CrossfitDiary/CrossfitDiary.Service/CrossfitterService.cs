@@ -47,7 +47,7 @@ namespace CrossfitDiary.Service
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool IsAlreadyExist(RoutineComplex routineComplexToSave, out int workoutId)
+        public virtual bool IsAlreadyExist(RoutineComplex routineComplexToSave, out int workoutId)
         {
             string userId = routineComplexToSave.CreatedBy?.Id;
             List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetMany(x => x.CreatedBy == null || x.CreatedBy.Id == userId).ToList();
@@ -121,7 +121,9 @@ namespace CrossfitDiary.Service
         private void SetRoutineComplexTitle(RoutineComplex routineComplexToSave)
         {
             if (!string.IsNullOrEmpty(routineComplexToSave.Title))
+            {
                 return;
+            }
 
             List<string> exerciseNames = new List<string>();
             foreach (var routineSimple in routineComplexToSave.RoutineSimple)
@@ -208,7 +210,10 @@ namespace CrossfitDiary.Service
         private void PrepareWorkout(CrossfitterWorkout workout)
         {
             if (workout.Distance.HasValue)
+            {
                 workout.MeasureDisplayName = $"{workout.Distance.Value}m";
+            }
+
             if (workout.RoundsFinished.HasValue)
             {
                 workout.MeasureDisplayName = $"{workout.RoundsFinished.Value} rnds";
@@ -225,7 +230,6 @@ namespace CrossfitDiary.Service
                 {
                     workout.MeasureDisplayName = $"{workout.MeasureDisplayName}+{workout.TimePassed.Value.Seconds}sec";
                 }
-
             }
         }
 
