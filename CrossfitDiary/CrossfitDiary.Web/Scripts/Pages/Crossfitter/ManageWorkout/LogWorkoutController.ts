@@ -3,6 +3,7 @@
   import ToLogWorkoutViewModelObservable = Models.ToLogWorkoutViewModelObservable;
   import CrossfitterService = General.CrossfitterService;
   import BaseController = General.BaseController;
+  import ErrorMessageViewModel = General.ErrorMessageViewModel;
 
   export class LogWorkoutController extends BaseController{
     /* Сivilians */
@@ -14,7 +15,10 @@
     /* Computeds */
 
 
-    constructor(public workoutToUse: WorkoutViewModelObservable, public isCreateAndLogWorkout: boolean, public service: CrossfitterService) {
+    constructor(public workoutToUse: WorkoutViewModelObservable
+              , public isCreateAndLogWorkout: boolean
+              , public service: CrossfitterService
+              , public readonly errorMessager: ErrorMessageViewModel) {
       super();
       this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId()));
 
@@ -47,8 +51,8 @@
         .then(() => {
           window.location.href = "/Home";
         })
-        .fail((error) => {
-          console.log(error);
+        .fail((response) => {
+          this.errorMessager.addMessage(response.responseText, false);
         });
     }
 
@@ -57,8 +61,8 @@
         .then(() => {
           window.location.href = "/Home";
         })
-        .fail((error) => {
-          console.log(error);
+        .fail((response) => {
+          this.errorMessager.addMessage(response.responseText, false);
         });
     }
 

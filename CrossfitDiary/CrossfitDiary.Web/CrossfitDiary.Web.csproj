@@ -483,6 +483,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Views\Shared\_Spinner.cshtml" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CreateWorkoutController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\General\ErrorMessageViewModel.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Models\PersonExerciseRecord.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\BaseController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\BaseKeyValuePairModel.ts" />

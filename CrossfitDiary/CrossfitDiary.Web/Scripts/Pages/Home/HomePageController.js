@@ -12,17 +12,24 @@ var Pages;
 (function (Pages) {
     var BaseController = General.BaseController;
     var CrossfitterService = General.CrossfitterService;
+    var ErrorMessageViewModel = General.ErrorMessageViewModel;
     var HomePageController = (function (_super) {
         __extends(HomePageController, _super);
+        /* Observables */
+        /* Computeds */
         function HomePageController(parameters) {
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
             _this.removeWorkout = function (crossfitterWorkoutId) {
                 _this._service.removeWorkout(crossfitterWorkoutId)
-                    .finally(function () {
+                    .then(function () {
                     window.location.href = "/Home";
+                })
+                    .fail(function (response) {
+                    _this.errorMessager.addMessage(response.responseText, false);
                 });
             };
+            _this.errorMessager = new ErrorMessageViewModel();
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
             return _this;
         }

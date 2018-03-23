@@ -70,7 +70,7 @@ namespace CrossfitDiary.DAL.EF.Infrastructure
             return _dbSet.Where(where).ToList();
         }
 
-        public T Get(Expression<Func<T, bool>> where)
+        public T FirstOrDefault(Expression<Func<T, bool>> where)
         {
             return _dbSet.FirstOrDefault(where);
         }

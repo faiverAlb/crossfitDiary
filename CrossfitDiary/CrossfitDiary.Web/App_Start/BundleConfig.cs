@@ -46,6 +46,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/BasicParameters.js"
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/ServerProcessedViewModel.js"
+                    , "~/Scripts/Pages/General/ErrorMessageViewModel.js"
                     , "~/Scripts/Pages/Models/ExerciseMeasureTypeValue.js"
                     , "~/Scripts/Pages/Models/WorkoutType.js"
                     , "~/Scripts/Pages/Models/ExerciseMeasureType.js"
@@ -81,6 +82,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/BaseService.js"
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/BaseController.js"
+                    , "~/Scripts/Pages/General/ErrorMessageViewModel.js"
                     , "~/Scripts/Pages/Home/HomePageController.js"));
 
 

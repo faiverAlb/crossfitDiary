@@ -24,11 +24,22 @@ namespace CrossfitDiary.Service
 
         public int CreateWorkout(RoutineComplex routineComplexToSave)
         {
-            SetRoutineComplexTitle(routineComplexToSave);
+            if (IsAlreadyExist(routineComplexToSave, out int workoutId))
+            {
+                return workoutId;
+            }
 
+            SetRoutineComplexTitle(routineComplexToSave);
             _routineComplexRepository.Add(routineComplexToSave);
             _unitOfWork.Commit();
             return routineComplexToSave.Id;
+        }
+
+        private bool IsAlreadyExist(RoutineComplex routineComplexToSave, out int workoutId)
+        {
+            CrossfitterWorkout workout  =  _crossfitterWorkoutRepository.FirstOrDefault(x => x.Crossfitter == routineComplexToSave.CreatedBy);
+            workoutId = workout?.Id ?? 0;
+            return workout == null;
         }
 
         public void LogWorkout(CrossfitterWorkout workoutToLog)

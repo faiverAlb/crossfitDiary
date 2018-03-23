@@ -2,6 +2,7 @@
   import WorkoutViewModel = Models.WorkoutViewModel;
   import WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
   import BaseController = General.BaseController;
+  import ErrorMessageViewModel = General.ErrorMessageViewModel;
 
   export class ChooseExistingWorkoutController extends BaseController {
     /* Сivilians */
@@ -13,7 +14,7 @@
 
     /* Computeds */
 
-    constructor(public service: General.CrossfitterService) {
+    constructor(public service: General.CrossfitterService, public readonly errorMessager: ErrorMessageViewModel) {
       super();
       this._availableWorkouts = ko.observableArray([]);
       this.selectedWorkout = ko.observable(null);
@@ -34,6 +35,9 @@
       this.service.getAvailableWorkouts()
         .then((availableWorkouts: WorkoutViewModel[]) => {
           this._availableWorkouts(availableWorkouts);
+        })
+        .fail((response) => {
+          this.errorMessager.addMessage(response.responseText, false);
         });
     };
 
