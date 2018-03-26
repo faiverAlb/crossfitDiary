@@ -15,11 +15,12 @@ var Pages;
     var LogWorkoutController = (function (_super) {
         __extends(LogWorkoutController, _super);
         /* Computeds */
-        function LogWorkoutController(workoutToUse, isCreateAndLogWorkout, service) {
+        function LogWorkoutController(workoutToUse, isCreateAndLogWorkout, service, errorMessager) {
             var _this = _super.call(this) || this;
             _this.workoutToUse = workoutToUse;
             _this.isCreateAndLogWorkout = isCreateAndLogWorkout;
             _this.service = service;
+            _this.errorMessager = errorMessager;
             _this._logWorkout = function () {
                 if (_this.checkAndShowErrors()) {
                     return;
@@ -51,6 +52,7 @@ var Pages;
             return hasErrors;
         };
         LogWorkoutController.prototype.createAndLogWorkout = function () {
+            var _this = this;
             var workoutModel = this.workoutToUse.toPlainObject();
             var model = {
                 newWorkoutViewModel: workoutModel,
@@ -60,17 +62,18 @@ var Pages;
                 .then(function () {
                 window.location.href = "/Home";
             })
-                .fail(function (error) {
-                console.log(error);
+                .fail(function (response) {
+                _this.errorMessager.addMessage(response.responseText, false);
             });
         };
         LogWorkoutController.prototype.logExistingWorkout = function () {
+            var _this = this;
             this.service.logWorkout(this._logToCreate().toPlainObject())
                 .then(function () {
                 window.location.href = "/Home";
             })
-                .fail(function (error) {
-                console.log(error);
+                .fail(function (response) {
+                _this.errorMessager.addMessage(response.responseText, false);
             });
         };
         return LogWorkoutController;

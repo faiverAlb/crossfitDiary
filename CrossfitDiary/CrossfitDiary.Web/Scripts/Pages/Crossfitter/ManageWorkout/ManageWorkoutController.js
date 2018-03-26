@@ -12,6 +12,7 @@ var Pages;
 (function (Pages) {
     var CrossfitterService = General.CrossfitterService;
     var BaseController = General.BaseController;
+    var ErrorMessageViewModel = General.ErrorMessageViewModel;
     ko.validation.init({
         errorElementClass: 'has-error',
         errorMessageClass: 'help-block',
@@ -35,26 +36,30 @@ var Pages;
                 _this._isCreateNewWorkout(isCreateNewWorkout);
                 _this._logWorkoutController(null);
             };
+            /* Сivilians */
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
-            _this._createWorkoutController = new Pages.CreateWorkoutController(_this._service);
-            _this._chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(_this._service);
+            _this.errorMessager = new ErrorMessageViewModel();
+            _this._createWorkoutController = new Pages.CreateWorkoutController(_this._service, _this.errorMessager);
+            _this._chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(_this._service, _this.errorMessager);
+            /* Observables */
             _this._logWorkoutController = ko.observable(null);
             _this._canSeeLoggingContainer = ko.observable(false);
+            _this._isCreateNewWorkout = ko.observable(true);
+            /* Computeds */
             _this._createWorkoutController.selectedWorkoutType.subscribe(function (selectedWorkoutType) {
                 _this._canSeeLoggingContainer(false);
                 if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
                     return;
                 }
                 _this._canSeeLoggingContainer(true);
-                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToCreate(), true, _this._service));
+                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToCreate(), true, _this._service, _this.errorMessager));
             });
-            _this._isCreateNewWorkout = ko.observable(true);
             _this._chooseExistingWorkoutController.selectedWorkout.subscribe(function (selectedWorkout) {
                 _this._canSeeLoggingContainer(false);
                 if (selectedWorkout == undefined || selectedWorkout == null) {
                     return;
                 }
-                _this._logWorkoutController(new Pages.LogWorkoutController(_this._chooseExistingWorkoutController.workoutToDisplay(), false, _this._service));
+                _this._logWorkoutController(new Pages.LogWorkoutController(_this._chooseExistingWorkoutController.workoutToDisplay(), false, _this._service, _this.errorMessager));
                 _this._canSeeLoggingContainer(true);
             });
             return _this;

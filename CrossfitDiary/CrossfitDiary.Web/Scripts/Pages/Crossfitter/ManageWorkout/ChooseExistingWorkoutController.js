@@ -15,13 +15,17 @@ var Pages;
     var ChooseExistingWorkoutController = (function (_super) {
         __extends(ChooseExistingWorkoutController, _super);
         /* Computeds */
-        function ChooseExistingWorkoutController(service) {
+        function ChooseExistingWorkoutController(service, errorMessager) {
             var _this = _super.call(this) || this;
             _this.service = service;
+            _this.errorMessager = errorMessager;
             _this.loadAvailableWorkouts = function () {
                 _this.service.getAvailableWorkouts()
                     .then(function (availableWorkouts) {
                     _this._availableWorkouts(availableWorkouts);
+                })
+                    .fail(function (response) {
+                    _this.errorMessager.addMessage(response.responseText, false);
                 });
             };
             _this.clearState = function () {

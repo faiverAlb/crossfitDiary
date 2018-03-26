@@ -20,7 +20,7 @@ namespace CrossfitDiary.DAL.EF.Infrastructure
 
         T GetById(int id);
 
-        T Get(Expression<Func<T, bool>> where);
+        T FirstOrDefault(Expression<Func<T, bool>> where);
 
         IEnumerable<T> GetAll();
 
