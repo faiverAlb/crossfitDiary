@@ -6,8 +6,9 @@
   import WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
   import WorkoutViewModel = Models.WorkoutViewModel;
   import BaseController = General.BaseController;
+  import ErrorMessageViewModel = General.ErrorMessageViewModel;
 
-  export class CreateWorkoutController extends BaseController {
+  export class CreateWorkoutController {
     /* Сivilians */
 
     /* Observables */
@@ -20,8 +21,7 @@
     /* Computeds */
 
 
-    constructor(public service: CrossfitterService) {
-      super();
+    constructor(public service: CrossfitterService, public readonly errorMessager: ErrorMessageViewModel) {
 
       this._workoutTypes = ko.observable(
         new Array(
@@ -80,8 +80,8 @@
         .then(() => {
           window.location.href = "/Home";
         })
-        .fail((error) => {
-          console.log(error);
+        .fail((response) => {
+          this.errorMessager.addMessage(response.responseText, false);
         });
     };
 

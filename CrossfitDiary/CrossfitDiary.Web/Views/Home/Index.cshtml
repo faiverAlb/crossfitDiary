@@ -7,128 +7,138 @@
 @model HomeViewModel
 
 
-<div class="home-container" >
-    <div class="row" >
+<div class="home-container">
+    <!--ko if:errorMessager.hasMessage -->
+    <div class="errors-container alert alert-danger" data-bind="visible:true" style="display: none">
+        <strong data-bind="text: errorMessager.message"></strong>
+    </div>
+    <!-- /ko -->
+    <div class="row">
+        <div data-bind="visible:true" style="display: none">
+            <div data-bind="visible: isDataLoading">
+                @Html.Partial(MVC.Shared.Views._Spinner)
+            </div>
+        </div>
         <div class="container activities-calendar">
             <div class="row">
 
                 @{
-                    foreach (ToLogWorkoutViewModel workout in Model.AllWorkouts)
-                    {
-                        <div class="col-md-offset-3 col-md-5 done-item">
-                            <div class="item-header clearfix">
-                                <div class="pull-left">
-                                    <span class="user-icon">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                    </span>
-                                    <span>@workout.WorkouterName</span>
-                                </div>
-                                @if (workout.CanBeRemovedByCurrentUser)
-                                {
-                                    <div class="pull-right remove-workout" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
-                                        <a class="pointer">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                }
-                                <div class="pull-right">@workout.DisplayDate</div>
-                            </div>
-                            <div class="item-body clearfix">
-                                <span class="workout-title">
-                                    <span>@workout.WorkoutViewModel.WorkoutType</span>
-                                    @switch (workout.WorkoutViewModel.WorkoutType)
-                                    {
-                                        case RoutineComplexType.ForTime:
-                                            <span>: @workout.WorkoutViewModel.RoundsCount</span>
-                                            <span> rounds</span>
-                                            break;
-                                        case RoutineComplexType.AMRAP:
-                                            <span>: @workout.WorkoutViewModel.TimeToWork</span>
-                                            break;
-                                        case RoutineComplexType.EMOM:
-                                            break;
-                                        case RoutineComplexType.E2MOM:
-                                        case RoutineComplexType.NotForTime:
-                                            break;
-                                        default:
-                                            throw new ArgumentOutOfRangeException();
-                                    }
+                foreach (ToLogWorkoutViewModel workout in Model.AllWorkouts)
+                {
+                    <div class="col-md-offset-3 col-md-5 done-item">
+                        <div class="item-header clearfix">
+                            <div class="pull-left">
+                                <span class="user-icon">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
                                 </span>
-                                <div class="workout-exercises">
-                                    @{
-                                        foreach (ExerciseViewModel exerciseViewModel in workout.WorkoutViewModel.ExercisesToDoList)
-                                        {
+                                <span>@workout.WorkouterName</span>
+                            </div>
+                            @if (workout.CanBeRemovedByCurrentUser)
+                        {
+                            <div class="pull-right remove-workout" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
+                                <a class="pointer">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                    }
+                            <div class="pull-right">@workout.DisplayDate</div>
+                        </div>
+                        <div class="item-body clearfix">
+                            <span class="workout-title">
+                                <span>@workout.WorkoutViewModel.WorkoutType</span>
+                                @switch (workout.WorkoutViewModel.WorkoutType)
+                            {
+                                case RoutineComplexType.ForTime:
+                                    <span>: @workout.WorkoutViewModel.RoundsCount</span>
+                                    <span> rounds</span>
+                                break;
+                            case RoutineComplexType.AMRAP:
+                                <span>: @workout.WorkoutViewModel.TimeToWork</span>
+                            break;
+                        case RoutineComplexType.EMOM:
+                            break;
+                        case RoutineComplexType.E2MOM:
+                        case RoutineComplexType.NotForTime:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                            </span>
+                            <div class="workout-exercises">
+                                @{
+                                foreach (ExerciseViewModel exerciseViewModel in workout.WorkoutViewModel.ExercisesToDoList)
+                                {
                                     <div class="exercise">
                                         <span>@exerciseViewModel.Title:</span>
                                         @{
-                                            foreach (ExerciseMeasureViewModel measure in exerciseViewModel.ExerciseMeasures)
+                                        foreach (ExerciseMeasureViewModel measure in exerciseViewModel.ExerciseMeasures)
+                                        {
+                                            if (string.IsNullOrEmpty(@measure.ExerciseMeasureType.MeasureValue))
                                             {
-                                                if (string.IsNullOrEmpty(@measure.ExerciseMeasureType.MeasureValue))
-                                                {
-                                                    continue;
-                                                }
-
-                                                switch (measure.ExerciseMeasureType.MeasureType)
-                                                {
-                                                    case MeasureTypeViewModel.Distance:
-                                                        <span>@measure.ExerciseMeasureType.MeasureValue meters</span>
-                                                        break;
-                                                    case MeasureTypeViewModel.Count:
-                                                        <span>@measure.ExerciseMeasureType.MeasureValue</span>
-                                                        break;
-                                                    case MeasureTypeViewModel.Weight:
-                                                        <span>(@measure.ExerciseMeasureType.MeasureValue kgs)</span>
-                                                        break;
-                                                    case MeasureTypeViewModel.Calories:
-                                                        <span>(@measure.ExerciseMeasureType.MeasureValue calories)</span>
-                                                        break;
-                                                    default:
-                                                        throw new ArgumentOutOfRangeException();
-                                                }
+                                                continue;
                                             }
+
+                                            switch (measure.ExerciseMeasureType.MeasureType)
+                                            {
+                                                case MeasureTypeViewModel.Distance:
+                                                    <span>@measure.ExerciseMeasureType.MeasureValue meters</span>
+                                                break;
+                                            case MeasureTypeViewModel.Count:
+                                                <span>@measure.ExerciseMeasureType.MeasureValue</span>
+                                            break;
+                                        case MeasureTypeViewModel.Weight:
+                                            <span>(@measure.ExerciseMeasureType.MeasureValue kgs)</span>
+                                        break;
+                                    case MeasureTypeViewModel.Calories:
+                                        <span>(@measure.ExerciseMeasureType.MeasureValue calories)</span>
+                                    break;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
+                        }
 
                                         }
                                     </div>
-                                        }
+                            }
 
-                                    }
-                                </div>
-                                <div class="text-right">
-                                    <span class="workout-result">
+                                }
+                            </div>
+                            <div class="text-right">
+                                <span class="workout-result">
 
-                                        @switch (workout.WorkoutViewModel.WorkoutType)
-                                        {
-                                            case RoutineComplexType.ForTime:
-                                                <span><i class="fa fa-clock-o" aria-hidden="true"></i> Total time: @workout.TimePassed</span>
-                                                break;
-                                            case RoutineComplexType.AMRAP:
-                                                <span><i class="fa fa-hashtag" aria-hidden="true"></i> Result rounds: @workout.RoundsFinished @(workout.PartialRepsFinished.HasValue ? string.Format("+ {0} partials", workout.PartialRepsFinished.Value) : string.Empty)</span>
-                                                break;
-                                            case RoutineComplexType.EMOM:
-                                            case RoutineComplexType.E2MOM:
-                                                <span><i class="fa fa-clock-o" aria-hidden="true"></i> Work time: @workout.WorkoutViewModel.TimeToWork </span>
-                                                break;
-                                            case RoutineComplexType.NotForTime:
-                                                break;
-                                        }
-                                    </span>
+                                    @switch (workout.WorkoutViewModel.WorkoutType)
+                                {
+                                    case RoutineComplexType.ForTime:
+                                        <span><i class="fa fa-clock-o" aria-hidden="true"></i> Total time: @workout.TimePassed</span>
+                                    break;
+                                case RoutineComplexType.AMRAP:
+                                    <span><i class="fa fa-hashtag" aria-hidden="true"></i> Result rounds: @workout.RoundsFinished @(workout.PartialRepsFinished.HasValue ? string.Format("+ {0} partials", workout.PartialRepsFinished.Value) : string.Empty)</span>
+                                break;
+                            case RoutineComplexType.EMOM:
+                            case RoutineComplexType.E2MOM:
+                                <span><i class="fa fa-clock-o" aria-hidden="true"></i> Work time: @workout.WorkoutViewModel.TimeToWork </span>
+                            break;
+                        case RoutineComplexType.NotForTime:
+                            break;
+                    }
+                                </span>
 
-                                </div>
                             </div>
                         </div>
-                    }
+                    </div>
+            }
 
                 }
                 @if (Model.AllWorkouts.Count == 0)
-                {
-                    <div class="col-md-offset-3 col-md-5  ">
-                        <div class="done-item text-center">
-                            <a class="btn btn-success btn-lg" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-star" aria-hidden="true"></i> Let's log our first workout? <i class="fa fa-star" aria-hidden="true"></i></a>
-
-                        </div>
+            {
+                <div class="col-md-offset-3 col-md-5  ">
+                    <div class="done-item text-center">
+                        <a class="btn btn-success btn-lg" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-star" aria-hidden="true"></i> Let's log our first workout? <i class="fa fa-star" aria-hidden="true"></i></a>
 
                     </div>
-                }
+
+                </div>
+        }
 
             </div>
         </div>

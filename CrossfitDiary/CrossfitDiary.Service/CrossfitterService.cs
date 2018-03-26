@@ -24,11 +24,83 @@ namespace CrossfitDiary.Service
 
         public int CreateWorkout(RoutineComplex routineComplexToSave)
         {
-            SetRoutineComplexTitle(routineComplexToSave);
+            int workoutId = FindDefaultOrExistingWorkout(routineComplexToSave);
+            if (workoutId != 0)
+            {
+                return workoutId;
+            }
 
+            SetRoutineComplexTitle(routineComplexToSave);
             _routineComplexRepository.Add(routineComplexToSave);
             _unitOfWork.Commit();
             return routineComplexToSave.Id;
+        }
+
+        /// <summary>
+        /// Find existing workout by workout structure
+        /// </summary>
+        /// <param name="routineComplexToSave">
+        /// The routine complex to save.
+        /// </param>
+        /// <param name="workoutId">
+        /// The workout id if found
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
+        {
+            string userId = routineComplexToSave.CreatedBy?.Id;
+            List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetMany(x => x.CreatedBy == null || x.CreatedBy.Id == userId).ToList();
+
+
+            foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
+            {
+                if (routineComplexToSave.ComplexType != existingRoutineComplex.ComplexType)
+                {
+                    continue;
+                }
+
+                if (routineComplexToSave.RoundCount != existingRoutineComplex.RoundCount)
+                {
+                    continue;
+                }
+
+                if (routineComplexToSave.TimeToWork != existingRoutineComplex.TimeToWork)
+                {
+                    continue;
+                }
+
+                if (routineComplexToSave.RoutineSimple.Count != existingRoutineComplex.RoutineSimple.Count)
+                {
+                    continue;
+                }
+
+                bool isExercisesMatch = true;
+
+                for (int i = 0; i < routineComplexToSave.RoutineSimple.Count; i++)
+                {
+                    RoutineSimple routineSimpleToSave = routineComplexToSave.RoutineSimple.ToList()[i];
+                    RoutineSimple existingSimpleRoutine = existingRoutineComplex.RoutineSimple.ToList()[i];
+                    if (routineSimpleToSave.Count != existingSimpleRoutine.Count 
+                        || routineSimpleToSave.Distance != existingSimpleRoutine.Distance
+                        || routineSimpleToSave.Weight != existingSimpleRoutine.Weight
+                        || routineSimpleToSave.Calories != existingSimpleRoutine.Calories)
+                    {
+                        isExercisesMatch = false;
+                        break;
+                    }
+                }
+
+                if (isExercisesMatch == false)
+                {
+                    continue;
+                }
+
+                return existingRoutineComplex.Id;
+            }
+
+            return 0;
         }
 
         public void LogWorkout(CrossfitterWorkout workoutToLog)
@@ -47,7 +119,9 @@ namespace CrossfitDiary.Service
         private void SetRoutineComplexTitle(RoutineComplex routineComplexToSave)
         {
             if (!string.IsNullOrEmpty(routineComplexToSave.Title))
+            {
                 return;
+            }
 
             List<string> exerciseNames = new List<string>();
             foreach (var routineSimple in routineComplexToSave.RoutineSimple)
@@ -134,7 +208,10 @@ namespace CrossfitDiary.Service
         private void PrepareWorkout(CrossfitterWorkout workout)
         {
             if (workout.Distance.HasValue)
+            {
                 workout.MeasureDisplayName = $"{workout.Distance.Value}m";
+            }
+
             if (workout.RoundsFinished.HasValue)
             {
                 workout.MeasureDisplayName = $"{workout.RoundsFinished.Value} rnds";
@@ -151,7 +228,6 @@ namespace CrossfitDiary.Service
                 {
                     workout.MeasureDisplayName = $"{workout.MeasureDisplayName}+{workout.TimePassed.Value.Seconds}sec";
                 }
-
             }
         }
 
