@@ -125,11 +125,73 @@ namespace CrossfitDiary.Service.Tests
 
 
         [Test]
-        public void FindDefaultOrExistingWorkout_ExercisesHasDifferentCountValue_MethodReturns_0()
+        public void FindDefaultOrExistingWorkout_ExercisesHasDifferentCaloriesValue_MethodReturns_0()
         {
             // Arrange
             RoutineComplex routineComplexToSave = GetRoutineComplex();
             routineComplexToSave.RoutineSimple.ElementAt(0).Calories++;
+            
+            // Act
+            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null);
+            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+
+            // Assert
+            Assert.AreEqual(0, actual);
+        }
+
+
+        [Test]
+        public void FindDefaultOrExistingWorkout_ExercisesHasDifferentCountValue_MethodReturns_0()
+        {
+            // Arrange
+            RoutineComplex routineComplexToSave = GetRoutineComplex();
+            routineComplexToSave.RoutineSimple.ElementAt(1).Count++;
+            
+            // Act
+            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null);
+            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+
+            // Assert
+            Assert.AreEqual(0, actual);
+        }
+
+        [Test]
+        public void FindDefaultOrExistingWorkout_ExercisesHasDifferentDistanceValue_MethodReturns_0()
+        {
+            // Arrange
+            RoutineComplex routineComplexToSave = GetRoutineComplex();
+            routineComplexToSave.RoutineSimple.ElementAt(2).Distance++;
+            
+            // Act
+            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null);
+            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+
+            // Assert
+            Assert.AreEqual(0, actual);
+        }
+
+
+        [Test]
+        public void FindDefaultOrExistingWorkout_ExercisesHasDifferentWeightValueSameCount_MethodReturns_0()
+        {
+            // Arrange
+            RoutineComplex routineComplexToSave = GetRoutineComplex();
+            routineComplexToSave.RoutineSimple.ElementAt(3).Weight++;
+            
+            // Act
+            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null);
+            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+
+            // Assert
+            Assert.AreEqual(0, actual);
+        }
+
+        [Test]
+        public void FindDefaultOrExistingWorkout_ExercisesHasDifferentCountValueSameWeight_MethodReturns_0()
+        {
+            // Arrange
+            RoutineComplex routineComplexToSave = GetRoutineComplex();
+            routineComplexToSave.RoutineSimple.ElementAt(3).Count++;
             
             // Act
             CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null);
