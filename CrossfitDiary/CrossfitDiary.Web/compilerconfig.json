@@ -2,5 +2,9 @@
   {
     "outputFile": "Content/bootstrap.css",
     "inputFile": "Content/bootstrap.scss"
+  },
+  {
+    "outputFile": "Content/pages/login-page.css",
+    "inputFile": "Content/pages/login-page.scss"
   }
 ]

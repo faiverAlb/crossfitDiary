@@ -275,12 +275,6 @@
       <DependentUpon>bootstrap.css</DependentUpon>
     </Content>
     <Content Include="Content\img\curly-bracket.svg" />
-    <Content Include="Content\pages\bootstrap.css">
-      <DependentUpon>login-page.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\pages\bootstrap.min.css">
-      <DependentUpon>bootstrap.css</DependentUpon>
-    </Content>
     <Content Include="Content\pages\crossfitter\pride\bootstrap.css">
       <DependentUpon>pride.scss</DependentUpon>
     </Content>
@@ -292,6 +286,12 @@
     </Content>
     <Content Include="Content\pages\home\bootstrap.min.css">
       <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="Content\pages\login-page.css">
+      <DependentUpon>login-page.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\pages\login-page.min.css">
+      <DependentUpon>login-page.css</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
     <None Include="compilerconfig.json" />

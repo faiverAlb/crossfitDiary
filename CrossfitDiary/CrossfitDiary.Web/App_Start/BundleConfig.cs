@@ -89,8 +89,11 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/Home/HomePageController.js"));
 
 
-            bundles.Add(new StyleBundle("~/Content/css")
-                .Include("~/Content/bootstrap.min.css", "~/Content/bootstrap-datepicker/bootstrap-datepicker.css"));
+//            bundles.Add(new StyleBundle("~/Content/bootstrap")
+//                .Include("~/Content/bootstrap.min.css", "~/Content/bootstrap-datepicker/bootstrap-datepicker.css"));
+
+            bundles.Add(new StyleBundle("~/Content/login")
+                .Include("~/Content/pages/login-page.css"));
 
         }
     }

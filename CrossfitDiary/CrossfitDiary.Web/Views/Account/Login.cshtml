@@ -2,40 +2,24 @@
 @{
     ViewBag.Title = "Log in";
     Layout = "../Shared/_Layout.cshtml";
+    string currentVersion = string.Format("{0}.{1}.{2}", ViewContext.Controller.GetType().Assembly.GetName().Version.Major, ViewContext.Controller.GetType().Assembly.GetName().Version.Minor, ViewContext.Controller.GetType().Assembly.GetName().Version.Build);
 }
-<div class="login-container">
-    <div class="form-signin signIn mg-btm">
-        <h3 class="heading-desc">
-            Login to your board
-        </h3>
-        <div class="social-box">
-            <div class="row">
-                <div class="col-md-12">
-                    @using (Html.BeginForm(MVC.Account.ActionNames.Login, MVC.Account.Name, new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-block btn-social btn-lg btn-google" id="Google" value="Google" name="provider"><i class="fa fa-google"></i> Sign in with Google</button>
-                    }
-                </div>
-            </div>
-            @*            <div class="row">*@
-            @*                <div class="col-md-12">*@
-            @*                    <a href="/account/provider/facebook" title="Facebook" class="btn btn-block btn-social btn-lg btn-facebook">*@
-            @*                        <i class="fa fa-facebook"></i> Sign in with Facebook*@
-            @*                    </a>*@
-            @*                </div>*@
-            @*            </div>*@
-            @*            <div class="row">*@
-            @*                <div class="col-md-12">*@
-            @*                    <a href="/account/provider/facebook" title="Vk" class="btn btn-block btn-social btn-lg btn-vk">*@
-            @*                        <i class="fa fa-vk"></i> Sign in with Vkontakte*@
-            @*                    </a>*@
-            @*                </div>*@
-            @*            </div>*@
-        </div>
+<div class="login-container mt-5">
+    <h1 class="h3 mb-3 font-weight-normal text-center">Workouter v@(currentVersion)</h1>
 
-    </div>
+    @using (Html.BeginForm(MVC.Account.ActionNames.Login, MVC.Account.Name, new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-lg btn-primary btn-block" id="Google" value="Google" name="provider"><i class="fab fa-google-plus-g"></i> Sign in with Google</button>
+    }
 </div>
+
+
+
+@section styles{
+    @Styles.Render("~/Content/login")
+
+}
 
 @section Scripts{
     @Scripts.Render("~/bundles/jquery")

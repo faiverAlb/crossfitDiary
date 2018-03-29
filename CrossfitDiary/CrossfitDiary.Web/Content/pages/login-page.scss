@@ -1,26 +1,22 @@
-﻿.login-container {
-    .form-signin {
-        max-width: 400px;
-        display: block;
-        margin: 0px auto 20px auto;
-        background-color: #f7f7f7;
-        border-radius: 5px;
-        border-bottom: 1px #ccc solid;
-        text-align: center;
+﻿@import "../bootstrap.scss";
+html,
+body {
+    height: 100%;
+}
 
-        .heading-desc {
-            font-size: 20px;
-            font-weight: bold;
-            padding: 20px 38px 0px 38px;
-        }
+body {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
 
-        .social-box {
-            margin: 0 auto;
-            padding: 20px;
-
-            .row {
-                margin-bottom: 15px;
-            }
-        }
-    }
+.login-container {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }

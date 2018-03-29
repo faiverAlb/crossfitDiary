@@ -6075,4 +6075,22 @@ table > tbody > tr.empty-data {
 /* Home page */
 /* Home page */
 /* bootstrap-datepicker from http://eonasdan.github.io/bootstrap-datetimepicker */
+html,
+body {
+  height: 100%; }
+
+body {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center; }
+
+.login-container {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); }
 

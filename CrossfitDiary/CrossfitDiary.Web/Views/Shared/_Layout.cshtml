@@ -8,9 +8,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/font-awesome")
-
+    @RenderSection("styles", required: false)
 </head>
 <body>
 @if (User.Identity.IsAuthenticated)
@@ -45,7 +44,7 @@
     </nav>
 }
 <div class="container" >
-@*    @RenderBody()*@
+    @RenderBody()
 </div>
 
 @RenderSection("scripts", required: false)
