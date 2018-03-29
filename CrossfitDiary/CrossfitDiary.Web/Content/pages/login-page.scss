@@ -1,6 +1,10 @@
 ﻿@import "../bootstrap.scss";
-html,
-body {
+
+$social-button-color: #DC4B3F;
+$page-body-color: #f9f4f3;
+$login-form-body-color: #f9f4f3;
+
+html, body {
     height: 100%;
 }
 
@@ -10,13 +14,28 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    background: $page-body-color;
 }
 
 .login-container {
+    background: $login-form-body-color;
     width: 100%;
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
     border-radius: 5px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
+    .person-icon {
+        color: $social-button-color;
+    }
+
+    .social-button {
+        background: $social-button-color;
+        color: white;
+
+        &:hover{
+            background: darken($social-button-color,10%);
+        }
+    }
 }

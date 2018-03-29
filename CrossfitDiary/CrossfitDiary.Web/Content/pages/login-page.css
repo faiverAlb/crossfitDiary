@@ -6075,8 +6075,7 @@ table > tbody > tr.empty-data {
 /* Home page */
 /* Home page */
 /* bootstrap-datepicker from http://eonasdan.github.io/bootstrap-datetimepicker */
-html,
-body {
+html, body {
   height: 100%; }
 
 body {
@@ -6084,13 +6083,22 @@ body {
   display: -webkit-box;
   display: flex;
   align-items: flex-start;
-  justify-content: center; }
+  justify-content: center;
+  background: #f9f4f3; }
 
 .login-container {
+  background: #f9f4f3;
   width: 100%;
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
   border-radius: 5px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); }
+  .login-container .person-icon {
+    color: #DC4B3F; }
+  .login-container .social-button {
+    background: #DC4B3F;
+    color: white; }
+    .login-container .social-button:hover {
+      background: #c43024; }
 
