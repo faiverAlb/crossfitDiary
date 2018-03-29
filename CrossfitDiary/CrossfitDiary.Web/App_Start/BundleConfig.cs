@@ -13,6 +13,9 @@ namespace CrossfitDiary.Web
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/font-awesome").Include(
+                        "~/Scripts/font-awesome/fontawesome-all.js"));
+
             
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.bundle.js",
@@ -87,9 +90,7 @@ namespace CrossfitDiary.Web
 
 
             bundles.Add(new StyleBundle("~/Content/css")
-                .Include("~/Content/bootstrap.min.css"
-                    , "~/Content/css/font-awesome.min.css"
-                    , "~/Content/bootstrap-datepicker/bootstrap-datepicker.css"));
+                .Include("~/Content/bootstrap.min.css", "~/Content/bootstrap-datepicker/bootstrap-datepicker.css"));
 
         }
     }
