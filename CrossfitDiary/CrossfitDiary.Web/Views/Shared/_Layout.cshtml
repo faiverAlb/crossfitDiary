@@ -13,21 +13,21 @@
 <body>
 @if (User.Identity.IsAuthenticated)
 {
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="@Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name)">Workouter v@(currentVersion)</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navBar">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item @Html.IsSelected(MVC.Home.Name, MVC.Home.ActionNames.Index)">
                         <a class="nav-link" href="@Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name)"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @Html.IsSelected(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.ManageWorkout)">
                         <a class="nav-link" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-rocket" aria-hidden="true"></i> Create/Log workout</a>
                     </li>
-                    <li>
+                    <li class="nav-item @Html.IsSelected(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.Pride)">
                         <a class="nav-link" href="@Url.Action(MVC.Crossfitter.ActionNames.Pride, MVC.Crossfitter.Name)"><i class="fa fa-calculator" aria-hidden="true"></i> Our prides</a>
 
                     </li>
