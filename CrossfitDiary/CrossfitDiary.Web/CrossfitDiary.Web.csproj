@@ -215,9 +215,6 @@
     <Compile Include="AccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="AdminController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Api\BaseApiController.cs" />
     <Compile Include="Api\ExercisesController.cs" />
     <Compile Include="Api\WorkoutController.cs" />
@@ -231,7 +228,6 @@
     <Compile Include="Configuration\ApplicationSignInManager.cs" />
     <Compile Include="Configuration\ApplicationUserManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CrossfitterController.cs" />
     <Compile Include="CrossfitterController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -243,7 +239,6 @@
     <Compile Include="Mappings\CanBeRemovedResolver.cs" />
     <Compile Include="MvcHelpers\DateTimeExtensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -261,9 +256,6 @@
     <Compile Include="T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TeacherController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ExerciseViewModel.cs" />
@@ -557,9 +549,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Home\Secure.cshtml" />
-    <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_RoutineInfoTemplate.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_SimpleRoutineItemTemlate.cshtml" />
     <Content Include="Views\Crossfitter\ManageWorkout.cshtml" />

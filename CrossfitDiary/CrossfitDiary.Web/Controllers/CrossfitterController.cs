@@ -13,24 +13,19 @@ namespace CrossfitDiary.Web.Controllers
 {
     public partial class CrossfitterController : Controller
     {
-        private readonly CrossfitterService _crossfitterService;
-        private readonly IExerciseService _exerciseService;
-        private readonly IWorkoutService _workoutService;
-
-        public CrossfitterController(CrossfitterService crossfitterService, IExerciseService exerciseService, IWorkoutService workoutService)
+        public CrossfitterController()
         {
-            _crossfitterService = crossfitterService;
-            _exerciseService = exerciseService;
-            _workoutService = workoutService;
         }
 
         public virtual ActionResult ManageWorkout()
         {
+            ViewBag.Title = "Manage Workout";
             return View();
         }
 
         public virtual ActionResult Pride()
         {
+            ViewBag.Title = "What was done";
             return View();
         }
         
