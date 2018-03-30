@@ -275,17 +275,11 @@
       <DependentUpon>bootstrap.css</DependentUpon>
     </Content>
     <Content Include="Content\img\curly-bracket.svg" />
-    <Content Include="Content\pages\crossfitter\pride\bootstrap.css">
-      <DependentUpon>pride.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\pages\crossfitter\pride\bootstrap.min.css">
-      <DependentUpon>bootstrap.css</DependentUpon>
-    </Content>
-    <Content Include="Content\pages\home\bootstrap.css">
+    <Content Include="Content\pages\home.css">
       <DependentUpon>home.scss</DependentUpon>
     </Content>
-    <Content Include="Content\pages\home\bootstrap.min.css">
-      <DependentUpon>bootstrap.css</DependentUpon>
+    <Content Include="Content\pages\home.min.css">
+      <DependentUpon>home.css</DependentUpon>
     </Content>
     <Content Include="Content\pages\login-page.css">
       <DependentUpon>login-page.scss</DependentUpon>
@@ -501,7 +495,7 @@
     <None Include="Content\pages\crossfitter\create-workout\create-workout.scss" />
     <None Include="Content\pages\crossfitter\log-workout\log-workout.scss" />
     <None Include="Content\pages\crossfitter\workout-info\workout-info.scss" />
-    <None Include="Content\pages\home\home.scss" />
+    <None Include="Content\pages\home.scss" />
     <None Include="Content\pages\crossfitter\manage-workout\manage-workout.scss" />
     <None Include="Content\_bootstrap-datetimepicker.scss" />
     <None Include="Content\bootstrap-datetimepicker-build.scss" />
@@ -559,6 +553,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\pages\home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

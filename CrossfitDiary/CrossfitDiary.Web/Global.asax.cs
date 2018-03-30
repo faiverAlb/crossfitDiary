@@ -18,14 +18,15 @@ namespace CrossfitDiary.Web
         protected void Application_Start()
         {
 
-//            System.Data.Entity.Database.SetInitializer(new CrossfitDiarySeedData());
+            //            System.Data.Entity.Database.SetInitializer(new CrossfitDiarySeedData());
             AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            WebApiConfig.RegisterWebApiFilters(GlobalConfiguration.Configuration.Filters);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            
+
             BundleTable.EnableOptimizations = false;
         }
 

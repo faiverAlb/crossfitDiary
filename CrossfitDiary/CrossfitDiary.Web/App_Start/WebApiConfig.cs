@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Filters;
 
 
 namespace CrossfitDiary.Web
@@ -16,6 +17,11 @@ namespace CrossfitDiary.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+        }
+
+        public static void RegisterWebApiFilters(HttpFilterCollection filters)
+        {
+            filters.Add(new AuthorizeAttribute());
         }
     }
 }

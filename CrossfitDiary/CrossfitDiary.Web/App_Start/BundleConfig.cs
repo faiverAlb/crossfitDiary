@@ -95,6 +95,9 @@ namespace CrossfitDiary.Web
             bundles.Add(new StyleBundle("~/Content/login")
                 .Include("~/Content/pages/login-page.css"));
 
+            bundles.Add(new StyleBundle("~/Content/home")
+                .Include("~/Content/pages/home.css"));
+
         }
     }
 }

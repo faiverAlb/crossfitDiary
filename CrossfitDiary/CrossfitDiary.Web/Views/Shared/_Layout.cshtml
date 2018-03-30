@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/font-awesome")
-    @RenderSection("styles", required: false)
+    @RenderSection("styles", required: true)
 </head>
 <body>
 @if (User.Identity.IsAuthenticated)

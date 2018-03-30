@@ -1,6 +1,15 @@
-﻿.home-container {
+﻿@import "../bootstrap.scss";
 
-
+.home-container {
+    .activities-list {
+        .done-item {
+            background: #f6f1ed;
+            box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+        }
+    }
+}
+    /*
+.home-container {
     .activities-calendar {
         .done-item {
             padding-left: 20px;
@@ -122,7 +131,7 @@
                 }
 
                 .action-panel {
-                    padding: 30px @padding-large-horizontal 0 0;
+                    padding: 30px 16px 0 0;
 
                     .action-button {
                         margin-left: 5px;
@@ -133,3 +142,4 @@
         }
     }
 }
+*/
