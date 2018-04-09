@@ -6077,7 +6077,14 @@ table > tbody > tr.empty-data {
 /* bootstrap-datepicker from http://eonasdan.github.io/bootstrap-datetimepicker */
 .home-container .activities-list .done-item {
   background: #f6f1ed;
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05); }
+  box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.05); }
+  .home-container .activities-list .done-item .item-header {
+    border-bottom: 1px dashed #a6a6a6;
+    font-size: 15px;
+    padding-bottom: 5px; }
+    .home-container .activities-list .done-item .item-header .remove-workout {
+      padding-left: 5px;
+      cursor: pointer; }
 
 /*
 .home-container {
@@ -6214,3 +6221,4 @@ table > tbody > tr.empty-data {
     }
 }
 */
+

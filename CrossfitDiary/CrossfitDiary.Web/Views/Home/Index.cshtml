@@ -8,7 +8,7 @@
 
 <div class="home-container">
     <!--ko if:errorMessager.hasMessage -->
-    <div class=" alert alert-danger" role="alert" data-bind="visible:true" style="display: none">
+    <div class="alert alert-danger" role="alert" data-bind="visible:true" style="display: none">
         <span data-bind="text: errorMessager.message"></span>
     </div>
     <!-- /ko -->
@@ -23,23 +23,21 @@
             foreach (ToLogWorkoutViewModel workout in Model.AllWorkouts)
             {
                 <div class="row">
-                    <div class="done-item offset-lg-3 col-md-12 col-lg-6 my-2">
-                        <div class="item-header clearfix">
-                            <div class="pull-left">
-                                <span class="user-icon">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                </span>
-                                <span>@workout.WorkouterName</span>
-                            </div>
+                    <div class="done-item offset-lg-3 col-md-12 col-lg-6 my-2 p-3 rounded">
+                        <div class="item-header">
+                            <span class="user-icon">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                            <span class="pl-1">@workout.WorkouterName</span>
+                            <span class="">@workout.DisplayDate</span>
                             @if (workout.CanBeRemovedByCurrentUser)
                             {
-                                <div class="pull-right remove-workout" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
+                                <span class="remove-workout" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
                                     <a class="pointer">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
-                                </div>
+                                </span>
                             }
-                            <div class="pull-right">@workout.DisplayDate</div>
                         </div>
                         <div class="item-body clearfix">
                             <span class="workout-title">
@@ -131,7 +129,7 @@
         }
         @if (Model.AllWorkouts.Count == 0)
         {
-            <div class="col-md-offset-3 col-md-5">
+            <div class="done-item offset-lg-3 col-md-12 col-lg-6 my-2 p-3">
                 <div class="done-item text-center">
                     <a class="btn btn-success btn-lg" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-star" aria-hidden="true"></i> Let's log our first workout? <i class="fa fa-star" aria-hidden="true"></i></a>
 
