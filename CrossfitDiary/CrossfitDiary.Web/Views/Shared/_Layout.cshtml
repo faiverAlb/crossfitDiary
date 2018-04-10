@@ -1,4 +1,6 @@
 ﻿@using CrossfitDiary.Web.MvcHelpers
+@using Links
+@using Scripts = System.Web.Optimization.Scripts
 @{
     string currentVersion = string.Format("{0}.{1}.{2}", ViewContext.Controller.GetType().Assembly.GetName().Version.Major, ViewContext.Controller.GetType().Assembly.GetName().Version.Minor, ViewContext.Controller.GetType().Assembly.GetName().Version.Build);
 }
@@ -7,6 +9,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" type="image/png" href="@Url.Content(Content.favicon_ico)" />
+
     <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/font-awesome")
     @RenderSection("styles", required: true)
@@ -37,7 +41,7 @@
                     <span class="navbar-text mr-lg-2">
                         @User.Identity.Name
                     </span>
-                    <a class="btn btn-outline-primary" href="@Url.Action(MVC.Account.ActionNames.LogOut, MVC.Account.Name)"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+                    <a class="btn btn-outline-primary" href="@Url.Action(MVC.Account.ActionNames.LogOut, MVC.Account.Name)"><i class="fas fa-sign-out-alt"></i> Log Out</a>
                 </form>
             </div>
         </div>

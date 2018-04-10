@@ -157,6 +157,15 @@ namespace Links
             public static readonly string popper_min_js_map = Url("popper.min.js.map");
         }
     
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class font_awesome {
+            public const string UrlPath = "~/Scripts/font-awesome";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string fontawesome_all_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/fontawesome-all.min.js") ? Url("fontawesome-all.min.js") : Url("fontawesome-all.js");
+            public static readonly string fontawesome_all_min_js = Url("fontawesome-all.min.js");
+        }
+    
         public static readonly string index_d_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/index.d.min.js") ? Url("index.d.min.js") : Url("index.d.js");
         public static readonly string jquery_3_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.1.1.intellisense.min.js") ? Url("jquery-3.1.1.intellisense.min.js") : Url("jquery-3.1.1.intellisense.js");
         public static readonly string jquery_3_3_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-3.3.1.intellisense.min.js") ? Url("jquery-3.3.1.intellisense.min.js") : Url("jquery-3.3.1.intellisense.js");
@@ -452,35 +461,8 @@ namespace Links
         public static readonly string bootstrap_scss = Url("bootstrap.scss");
         public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
         public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class Configuration {
-            public const string UrlPath = "~/Content/Configuration";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-        }
-    
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class css {
-            public const string UrlPath = "~/Content/css";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-            public static readonly string font_awesome_min_css = Url("font-awesome.min.css");
-        }
-    
         public static readonly string custom_variables_scss = Url("custom-variables.scss");
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class fonts {
-            public const string UrlPath = "~/Content/fonts";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-            public static readonly string fontawesome_webfont_eot = Url("fontawesome-webfont.eot");
-            public static readonly string fontawesome_webfont_svg = Url("fontawesome-webfont.svg");
-            public static readonly string fontawesome_webfont_ttf = Url("fontawesome-webfont.ttf");
-            public static readonly string fontawesome_webfont_woff = Url("fontawesome-webfont.woff");
-            public static readonly string fontawesome_webfont_woff2 = Url("fontawesome-webfont.woff2");
-            public static readonly string FontAwesome_otf = Url("FontAwesome.otf");
-        }
-    
+        public static readonly string favicon_ico = Url("favicon.ico");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class General {
             public const string UrlPath = "~/Content/General";
@@ -538,8 +520,6 @@ namespace Links
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                     public static readonly string pride_scss = Url("pride.scss");
-                    public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
-                    public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -552,19 +532,12 @@ namespace Links
             
             }
         
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class home {
-                public const string UrlPath = "~/Content/pages/home";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-                public static readonly string home_scss = Url("home.scss");
-                public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
-                public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
-            }
-        
+            public static readonly string home_scss = Url("home.scss");
+            public static readonly string home_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/home.min.css") ? Url("home.min.css") : Url("home.css");
+            public static readonly string home_min_css = Url("home.min.css");
             public static readonly string login_page_scss = Url("login-page.scss");
-            public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
-            public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
+            public static readonly string login_page_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/login-page.min.css") ? Url("login-page.min.css") : Url("login-page.css");
+            public static readonly string login_page_min_css = Url("login-page.min.css");
         }
     
     }
@@ -639,6 +612,14 @@ namespace Links
                     public static readonly string popper_utils_min_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/esm/popper-utils.min.js"); 
                     public static readonly string popper_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/esm/popper.js"); 
                     public static readonly string popper_min_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/esm/popper.min.js"); 
+                }
+            }
+            public static partial class font_awesome 
+            {
+                public static class Assets
+                {
+                    public static readonly string fontawesome_all_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/font-awesome/fontawesome-all.js"); 
+                    public static readonly string fontawesome_all_min_js = T4MVCHelpers.ProcessAssetPath("~/Scripts/font-awesome/fontawesome-all.min.js"); 
                 }
             }
             public static partial class jqueryPlugins 
@@ -794,25 +775,6 @@ namespace Links
                 {
                 }
             }
-            public static partial class Configuration 
-            {
-                public static class Assets
-                {
-                }
-            }
-            public static partial class css 
-            {
-                public static class Assets
-                {
-                    public static readonly string font_awesome_min_css = T4MVCHelpers.ProcessAssetPath("~/Content/css/font-awesome.min.css");
-                }
-            }
-            public static partial class fonts 
-            {
-                public static class Assets
-                {
-                }
-            }
             public static partial class General 
             {
                 public static class Assets
@@ -859,12 +821,6 @@ namespace Links
                         {
                         }
                     }
-                    public static class Assets
-                    {
-                    }
-                }
-                public static partial class home 
-                {
                     public static class Assets
                     {
                     }
