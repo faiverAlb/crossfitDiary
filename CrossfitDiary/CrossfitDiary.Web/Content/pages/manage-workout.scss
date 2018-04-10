@@ -1,0 +1,77 @@
+﻿@import "../bootstrap.scss";
+
+.manage-workout-page {
+    .new-or-existing {
+        .choose-buttons {
+            margin-bottom: 10px;
+        }
+    }
+
+    .want-to-log-container {
+        .log-or-save-buttons {
+            margin-bottom: 10px;
+        }
+    }
+
+    .panel {
+        &.panel-borderless {
+            border: 0;
+            margin-bottom: 0;
+            margin-top: 0;
+            box-shadow: none;
+        }
+    }
+
+    .data-selector-container {
+        margin-bottom: 10px;
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+}
+
+
+.existing-workouts-container {
+    .existing-workout-selector {
+        padding-bottom: 6px;
+    }
+}
+
+
+.log-workout-container {
+    .existing-workout-selector {
+        padding-bottom: 6px;
+    }
+
+    .log-workout-inputs {
+        padding: 10px 0;
+    }
+}
+
+
+.crossfitter-edit-workout-container {
+    .add-new-workout-container {
+        .go-next-pointer {
+            margin: 6px 0;
+        }
+
+        .workout-type-selector {
+            padding-bottom: 6px;
+        }
+
+        .exercise-selector {
+            margin-bottom: 15px;
+        }
+
+        .no-selected-container {
+            color: #5bc0de;
+
+            &.has-error {
+                border-color: #a94442;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            }
+        }
+    }
+}

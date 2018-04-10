@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CrossfitDiary.Web</RootNamespace>
     <AssemblyName>CrossfitDiary.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44301</IISExpressSSLPort>
@@ -65,7 +65,6 @@
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
@@ -87,23 +86,14 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -125,12 +115,14 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -139,14 +131,12 @@
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
@@ -171,11 +161,9 @@
     </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Providers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
@@ -194,10 +182,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
@@ -208,7 +192,6 @@
     </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -289,63 +272,18 @@
     <Content Include="Content\pages\login-page.min.css">
       <DependentUpon>login-page.css</DependentUpon>
     </Content>
+    <Content Include="Content\pages\manage-workout.css">
+      <DependentUpon>manage-workout.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\pages\manage-workout.min.css">
+      <DependentUpon>manage-workout.css</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\custom-variables.scss" />
-    <None Include="Content\pages\login-page.scss" />
-    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datetimepicker.js" />
-    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datetimepicker.min.js" />
-    <Content Include="Scripts\bootstrap-select\bootstrap-select.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-ar_AR.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-bg_BG.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-cro_CRO.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-cs_CZ.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-da_DK.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-de_DE.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-en_US.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-es_CL.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-eu.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-fa_IR.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-fi_FI.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-fr_FR.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-hu_HU.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-id_ID.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-it_IT.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-ko_KR.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-lt_LT.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-nb_NO.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-nl_NL.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-pl_PL.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-pt_BR.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-pt_PT.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-ro_RO.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-ru_RU.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-sk_SK.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-sl_SI.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-sv_SE.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-tr_TR.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-ua_UA.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_CN.js" />
-    <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_TW.js" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Content\bootstrap\_variables.scss" />
     <Content Include="Content\bootstrap\_utilities.scss" />
     <Content Include="Content\bootstrap\_type.scss" />
@@ -429,9 +367,62 @@
     <Content Include="Content\bootstrap\bootstrap.scss" />
     <Content Include="Content\bootstrap\bootstrap-reboot.scss" />
     <Content Include="Content\bootstrap\bootstrap-grid.scss" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <None Include="Content\pages\login-page.scss" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-select\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-ar_AR.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-bg_BG.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-cro_CRO.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-cs_CZ.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-da_DK.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-de_DE.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-en_US.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-es_CL.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-eu.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-fa_IR.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-fi_FI.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-fr_FR.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-hu_HU.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-id_ID.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-it_IT.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-ko_KR.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-lt_LT.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-nb_NO.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-nl_NL.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-pl_PL.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-pt_BR.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-pt_PT.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-ro_RO.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-ru_RU.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-sk_SK.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-sl_SI.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-sv_SE.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-tr_TR.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-ua_UA.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_CN.js" />
+    <Content Include="Scripts\bootstrap-select\i18n\defaults-zh_TW.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
     <Content Include="Scripts\font-awesome\fontawesome-all.js" />
     <Content Include="Scripts\font-awesome\fontawesome-all.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -445,6 +436,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -453,19 +445,12 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\q.js" />
+    <Content Include="Scripts\q.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
-    <Content Include="Scripts\README.md" />
-    <Content Include="Scripts\popper.min.js.map" />
-    <Content Include="Scripts\popper.js.map" />
-    <Content Include="Scripts\popper-utils.min.js.map" />
-    <Content Include="Scripts\popper-utils.js.map" />
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
@@ -494,16 +479,14 @@
     <None Include="Content\bootstrap-select\bootstrap-select.scss" />
     <None Include="Content\bootstrap-select\variables.scss" />
     <None Include="Content\bootstrap.scss" />
-    <None Include="Content\pages\crossfitter\create-workout\create-workout.scss" />
-    <None Include="Content\pages\crossfitter\log-workout\log-workout.scss" />
     <None Include="Content\pages\crossfitter\workout-info\workout-info.scss" />
     <None Include="Content\pages\home.scss" />
-    <None Include="Content\pages\crossfitter\manage-workout\manage-workout.scss" />
+    <None Include="Content\pages\manage-workout.scss" />
     <None Include="Content\_bootstrap-datetimepicker.scss" />
     <None Include="Content\bootstrap-datetimepicker-build.scss" />
-    <None Include="Content\pages\crossfitter\manage-workout\existing-workouts-container.scss" />
     <None Include="Content\General\general.scss" />
     <None Include="Content\pages\crossfitter\pride\pride.scss" />
+    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\masterhost.pubxml" />
     <None Include="Properties\PublishProfiles\workouter.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -522,6 +505,15 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
     <None Include="T4MVC.tt.hooks.t4" />
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Web.config">
@@ -551,15 +543,11 @@
     <TypeScriptCompile Include="Scripts\Pages\Models\WorkoutViewModel.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout\tests\jasmine.extensions.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\q\Q.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -608,15 +596,15 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
     <Error Condition="!Exists('..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Import Project="..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.11.375\build\BuildWebCompiler.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

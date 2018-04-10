@@ -59,6 +59,10 @@
 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._ExistingWorkoutsTemplate); }
 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._RoutineInfoTemplate); }
 
+@section styles{
+    @Styles.Render("~/Content/manage-workout")
+}
+
 @section Scripts{
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/knockout")

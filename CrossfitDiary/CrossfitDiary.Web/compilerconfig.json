@@ -10,5 +10,9 @@
   {
     "outputFile": "Content/pages/home.css",
     "inputFile": "Content/pages/home.scss"
+  },
+  {
+    "outputFile": "Content/pages/manage-workout.css",
+    "inputFile": "Content/pages/manage-workout.scss"
   }
 ]

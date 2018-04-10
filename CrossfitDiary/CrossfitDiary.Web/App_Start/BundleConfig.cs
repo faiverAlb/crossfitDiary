@@ -88,15 +88,14 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/ErrorMessageViewModel.js"
                     , "~/Scripts/Pages/Home/HomePageController.js"));
 
-
-//            bundles.Add(new StyleBundle("~/Content/bootstrap")
-//                .Include("~/Content/bootstrap.min.css", "~/Content/bootstrap-datepicker/bootstrap-datepicker.css"));
-
             bundles.Add(new StyleBundle("~/Content/login")
                 .Include("~/Content/pages/login-page.css"));
 
             bundles.Add(new StyleBundle("~/Content/home")
                 .Include("~/Content/pages/home.css"));
+
+            bundles.Add(new StyleBundle("~/Content/manage-workout")
+                .Include("~/Content/pages/manage-workout.css"));
 
         }
     }
