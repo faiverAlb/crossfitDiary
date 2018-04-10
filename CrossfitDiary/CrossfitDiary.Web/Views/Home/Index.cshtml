@@ -24,20 +24,22 @@
             {
                 <div class="row">
                     <div class="done-item offset-lg-3 col-md-12 col-lg-6 my-2 p-3 rounded">
-                        <div class="item-header">
-                            <span class="user-icon">
+                        <div class="item-header d-flex flex-row justify-content-between">
+                            <div class="user-icon ">
                                 <i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
-                            <span class="pl-1">@workout.WorkouterName</span>
-                            <span class="">@workout.DisplayDate</span>
-                            @if (workout.CanBeRemovedByCurrentUser)
-                            {
-                                <span class="remove-workout" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
-                                    <a class="pointer">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
-                                </span>
-                            }
+                                <span >@workout.WorkouterName</span>
+                            </div>
+                            <div class="">
+                                <span class="">@workout.DisplayDate</span>
+                                @if (workout.CanBeRemovedByCurrentUser)
+                                {
+                                    <span class="remove-workout" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
+                                        <a class="pointer">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </span>
+                                }
+                            </div>
                         </div>
                         <div class="item-body clearfix">
                             <span class="workout-title">
