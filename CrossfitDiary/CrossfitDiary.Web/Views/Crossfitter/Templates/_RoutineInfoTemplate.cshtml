@@ -1,9 +1,9 @@
 ﻿<script type="text/html" id="routine-info-template">
     <div class="routine-complex-info" data-bind="with:model">
         <!--ko if: _canSeeGeneralWorkoutInfo-->
-        <div class="panel panel-info">
-            <div class="panel-heading">General workout info</div>
-            <div class="panel-body">
+        <div class="card">
+            <div class="card-header">General workout info</div>
+            <div class="card-body">
                 <div data-bind="if: _isReadOnlyMode">
                     <form class="">
                         <!--ko if: _canSeeRoundsCount-->
@@ -36,35 +36,13 @@
                     </div>
                     <!-- /ko -->
                 </div>
-                <div data-bind="ifnot: _isReadOnlyMode">
-                    <form class="form-inline main-group">
-                        <div class="form-group" data-bind="if: _canSeeRoundsCount, validationElement: _roundsCount">
-                            <label for="roundsInput">Rounds count</label>
-                            <input type="number" min="1" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: _roundsCount, valueUpdate: 'afterkeydown'">
-                        </div>
-                        <div class="form-group" data-bind="if: _canSeeTimeToWork, validationElement: _timeToWork">
-                            <label for="timeInput">Time to work</label>
-                            <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
-                        </div>
-                        @*                        <div class="form-group">*@
-                        @*                            <a href="#" data-toggle="collapse" data-target="#optionsPanel">+ show more options</a>*@
-                        @*                        </div>*@
-                    </form>
-                    <!--Needed or not?-->
-                    @*                    <form class="form-inline collapse" id="optionsPanel">*@
-                    @*                        <div class="form-group">*@
-                    @*                            <label for="complexRoutineTitleInput">Title</label>*@
-                    @*                            <input type="text" class="form-control" id="complexRoutineTitleInput" placeholder="Title" data-bind="value: _title">*@
-                    @*                        </div>*@
-                    @*                        <div class="form-group">*@
-                    @*                            <label for="restExercisesInput">Rest between exercises</label>*@
-                    @*                            <input type="text" class="form-control" id="restExercisesInput" placeholder="Rest between exercises" data-bind="inputmask:{value: _restBetweenExercises, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">*@
-                    @*                        </div>*@
-                    @*                        <div class="form-group">*@
-                    @*                            <label for="restRoundsInput">Rest between rounds</label>*@
-                    @*                            <input type="text" class="form-control" id="restRoundsInput" placeholder="Rest between rounds" data-bind="inputmask:{value: _restBetweenRounds, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">*@
-                    @*                        </div>*@
-                    @*                    </form>*@
+                <div class="input-group" data-bind="ifnot: _isReadOnlyMode">
+                    <div  data-bind="if: _canSeeRoundsCount, validationElement: _roundsCount">
+                        <input type="number" min="1" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: _roundsCount, valueUpdate: 'afterkeydown'">
+                    </div>
+                    <div data-bind="if: _canSeeTimeToWork, validationElement: _timeToWork">
+                        <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                    </div>
                 </div>
             </div>
         </div>
