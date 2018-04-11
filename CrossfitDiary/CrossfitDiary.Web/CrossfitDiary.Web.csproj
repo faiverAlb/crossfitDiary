@@ -456,7 +456,6 @@
     <None Include="Content\bootstrap-select\bootstrap-select.scss" />
     <None Include="Content\bootstrap-select\variables.scss" />
     <None Include="Content\bootstrap.scss" />
-    <None Include="Content\pages\crossfitter\workout-info\workout-info.scss" />
     <None Include="Content\pages\home.scss" />
     <None Include="Content\pages\manage-workout.scss" />
     <None Include="Content\_bootstrap-datetimepicker.scss" />

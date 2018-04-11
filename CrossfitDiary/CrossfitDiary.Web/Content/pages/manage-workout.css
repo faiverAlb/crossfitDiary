@@ -6111,3 +6111,36 @@ table > tbody > tr.empty-data {
     border-color: #a94442;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+
+.workout-container {
+  /*.curly-bracket {
+        content: ' ';
+        background-image: url('../../../img/curly-bracket.svg');
+        background-size: 28px 28px;
+        height: 28px;
+        width: 28px;
+    }*/ }
+  .workout-container .routine-complex-info {
+    padding: 0 0 6px 0;
+    color: #000; }
+    .workout-container .routine-complex-info .main-group {
+      padding: 0 0 6px 0; }
+  .workout-container .selected-workout-type {
+    font-size: 18px;
+    font-weight: bold; }
+  .workout-container .routines-container {
+    /*
+        border-style: solid;
+        border-width: 1px 0 1px 20px;
+        border-image: url(http://opbokken.nu/meuk/curly.png) 1 20 stretch;
+        padding-left: 0.5em;
+            */ }
+    .workout-container .routines-container .exercise-title {
+      font-weight: bold;
+      background: #eeeeee; }
+    .workout-container .routines-container .simple-routine-item {
+      margin: 6px 0;
+      padding: 6px;
+      border: 1px #5bc0de dashed;
+      border-radius: 3px; }
+
