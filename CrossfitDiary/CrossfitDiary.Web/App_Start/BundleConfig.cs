@@ -18,8 +18,8 @@ namespace CrossfitDiary.Web
 
             
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.bundle.js",
-                "~/Scripts/bootstrap-select/bootstrap-select.js"));
+                "~/Scripts/bootstrap.bundle.js"/*,
+                "~/Scripts/bootstrap-select/bootstrap-select.js"*/));
 
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
