@@ -6081,12 +6081,6 @@ table > tbody > tr.empty-data {
 .manage-workout-page .want-to-log-container .log-or-save-buttons {
   margin-bottom: 10px; }
 
-.manage-workout-page .panel.panel-borderless {
-  border: 0;
-  margin-bottom: 0;
-  margin-top: 0;
-  box-shadow: none; }
-
 .manage-workout-page .data-selector-container {
   margin-bottom: 10px; }
 
