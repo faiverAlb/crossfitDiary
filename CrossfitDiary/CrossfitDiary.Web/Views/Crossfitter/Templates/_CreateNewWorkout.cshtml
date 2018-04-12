@@ -5,18 +5,20 @@
                 <div class="card-header bg-warning ">
                     Add new workout
                 </div>
-                <div class="card-body" >
-                    <div class="workout-type-selector" >
+                <div class="card-body">
+                    <div class="workout-type-selector">
                         <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'Choose a workout type...',selectPicker: {}"></select>
                     </div>
-                    <div data-bind="if: selectedWorkoutType" >
+                    <div data-bind="if: selectedWorkoutType">
                         <div data-bind="template: { name: 'routine-info-template', data: {model: workoutToCreate, controller: $data} }"></div>
-                        <button class="btn btn-success pull-right" data-bind="click: createWorkout">Just create workout</button>
+                        <div class="text-right">
+                            <button class="btn btn-success" data-bind="click: createWorkout">Just create workout</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._RoutineInfoTemplate); }
 </script>
