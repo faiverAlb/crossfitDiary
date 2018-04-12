@@ -38,9 +38,11 @@
                 </div>
                 <div class="input-group" data-bind="ifnot: _isReadOnlyMode">
                     <div  data-bind="if: _canSeeRoundsCount, validationElement: _roundsCount">
+                        <label for="roundsInput" class="sr-only">Rounds count</label>
                         <input type="number" min="1" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: _roundsCount, valueUpdate: 'afterkeydown'">
                     </div>
                     <div data-bind="if: _canSeeTimeToWork, validationElement: _timeToWork">
+                        <label for="timeInput" class="sr-only">Time to work</label>
                         <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                     </div>
                 </div>
