@@ -1,25 +1,22 @@
 ﻿<div class="col-md-12">
-    <div class="panel panel-success">
-        <div class="panel-heading text-right">
+    <div class="card ">
+        <div class="card-header text-right bg-success text-light">
             Log workout!
         </div>
-        <div class="panel-body" >
-            <div class="text-right" >
-                <div class="date-selector"data-bind="with:_logToCreate">
+        <div class="card-body clearfix" >
+            <div class="float-right text-right">
+                <div class="date-selector" data-bind="with:_logToCreate">
                     <form class="form-inline data-selector-container">
-                        <div class="form-group">
-                            <label>When? <i class="fa fa-arrow-right" aria-hidden="true"></i></label>
+                        <div class="input-group">
+                            <label class="mr-1" for="DateSelector">When? </label>
                             <div class="input-group date pointer" data-bind="datepicker:_plannedDate">
-                                <input class="form-control" readonly="readonly" placeholder="Date here" >
-                                <div class="input-group-addon">
-                                    <span>
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </span>
-                                </div>
+                                <input class="form-control" id="DateSelector" readonly="readonly" placeholder="Date here">
+                                <span class="input-group-append">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </span>
                             </div>
                         </div>
                     </form>
-
                 </div>
 
                 <div class="log-workout-inputs" data-bind="with:_logToCreate">
@@ -42,8 +39,8 @@
                     </div>
                 </div>
                 <button class="btn btn-success" data-bind="text: _logWorkoutText, click: _logWorkout">Log workout</button>
-            </div>
 
+            </div>
         </div>
     </div>
 </div>

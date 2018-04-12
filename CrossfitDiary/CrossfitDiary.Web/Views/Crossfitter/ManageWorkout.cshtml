@@ -26,15 +26,11 @@
         <div class="" data-bind="if:_isCreateNewWorkout">
             <div class="new-workout-container" id="NewWorkoutContainer">
                 <div data-bind="template: { name: 'create-new-workout-template', data: _createWorkoutController }"></div>
-
-                <div class="want-to-log-container" data-bind="if: _canSeeLoggingContainer">
-                    <div class="panel panel-borderless">
-                        <div class="log-workout-container" data-bind="with:_logWorkoutController">
-                            @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
-                        </div>
+                <div class="want-to-log-container my-2" data-bind="if: _canSeeLoggingContainer">
+                    <div class="log-workout-container" data-bind="with:_logWorkoutController">
+                        @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
                     </div>
                 </div>
-
             </div>
         </div>
 @*        <div class="panel panel-borderless" data-bind="ifnot:_isCreateNewWorkout">*@
