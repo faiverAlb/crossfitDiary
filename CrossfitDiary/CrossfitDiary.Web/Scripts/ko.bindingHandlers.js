@@ -73,15 +73,19 @@ ko.bindingHandlers.inputmask =
 
 ko.bindingHandlers.datepicker = {
   init: function (element, valueAccessor, allBindingsAccessor) {
-    $(element).datepicker({
+    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
+    var options = {
       uiLibrary: 'bootstrap4',
       iconsLibrary: 'fontawesome',
       icons: {
         rightIcon: '<i class="far fa-calendar-alt"></i>'
-      }
-    });
+      },
+      value: today.toLocaleDateString(),
+      maxDate: today
+    };
+    $(element).datepicker(options);
         //initialize datepicker with some optional options
-//        var date = new Date();
 //        var options = allBindingsAccessor().dateTimePickerOptions || {
 //            format: 'DD/MM/YYYY'
 ////            , minDate: date.setDate(date.getDate() - 1)
