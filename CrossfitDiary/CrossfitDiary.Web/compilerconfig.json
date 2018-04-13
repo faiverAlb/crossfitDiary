@@ -14,5 +14,9 @@
   {
     "outputFile": "Content/pages/manage-workout.css",
     "inputFile": "Content/pages/manage-workout.scss"
+  },
+  {
+    "outputFile": "Content/gijgo/combined/gijgo_style.css",
+    "inputFile": "Content/gijgo/combined/gijgo_style.scss"
   }
 ]

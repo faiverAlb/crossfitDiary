@@ -43,6 +43,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/bootstrap-datepicker/moment.min.js"
                     , "~/Scripts/bootstrap-datepicker/moment-with-locales.min.js"
                     , "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.min.js"
+                    , "~/Scripts/gijgo/combined/gijgo.min.js"
                     , "~/Scripts/Pages/General/BaseController.js"
                     , "~/Scripts/Pages/General/BaseService.js"
                     , "~/Scripts/Pages/General/BaseKeyValuePairModel.js"
@@ -95,7 +96,8 @@ namespace CrossfitDiary.Web
                 .Include("~/Content/pages/home.css"));
 
             bundles.Add(new StyleBundle("~/Content/manage-workout")
-                .Include("~/Content/pages/manage-workout.css"));
+                .Include("~/Content/pages/manage-workout.css")
+                .Include("~/Content/gijgo/combined/gijgo_style.css"));
 
         }
     }
