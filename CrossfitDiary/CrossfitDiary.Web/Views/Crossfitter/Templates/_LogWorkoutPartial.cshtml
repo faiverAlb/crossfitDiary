@@ -7,27 +7,16 @@
             <div class="float-right text-right">
                 <div class="date-selector" data-bind="with:_logToCreate">
                     <form class="form-inline data-selector-container justify-content-end">
+                        <label class="mx-1" for="DateSelector">When? </label>
                         <div class="input-group">
-                            <label class="mx-1" for="DateSelector">When? </label>
-                            <input class="" readonly="readonly" data-bind="datepicker:_plannedDate"/>
-@*                                <input class="form-control" id="DateSelector" readonly="readonly" placeholder="Date here">*@
-@*                                <span class="input-group-append">*@
-@*                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>*@
-@*                                </span>*@
-
-@*                            <div class="input-group date pointer" data-bind="datepicker:_plannedDate">*@
-@*                                <input class="form-control" id="DateSelector" readonly="readonly" placeholder="Date here">*@
-@*                                <span class="input-group-append">*@
-@*                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>*@
-@*                                </span>*@
-@*                            </div>*@
+                            <input class="" readonly="readonly" data-bind="datepicker:_plannedDate" />
                         </div>
                     </form>
                 </div>
 
                 <div class="log-workout-inputs" data-bind="with:_logToCreate">
                     <!--ko if:_canSeeTotalRounds -->
-                    <div class="form-inline">
+                    <div class="form-inline justify-content-end">
                         <label for="generalRoundsFinishedInput">Rounds finished</label>
                         <div class="input-group mr-1" data-bind="validationElement: _totalRoundsFinished">
                             <input type="number" min="1" class="form-control" id="generalRoundsFinishedInput" placeholder="Rounds finished" data-bind="value: _totalRoundsFinished">
@@ -41,7 +30,7 @@
                     <!--ko if:_canSeeTotalTime -->
                     <div class="form-inline justify-content-end">
                         <label for="timToWorkInput">Total time</label>
-                        <div class="input-group" data-bind="validationElement: _totalTime">
+                        <div class="input-group ml-1" data-bind="validationElement: _totalTime">
                             <input type="text" class="form-control" id="timToWorkInput" placeholder="Total time" data-bind="inputmask:{value: _totalTime, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                         </div>
                     </div>
