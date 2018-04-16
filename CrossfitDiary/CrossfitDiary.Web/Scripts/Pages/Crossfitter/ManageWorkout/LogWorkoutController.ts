@@ -67,7 +67,6 @@
     }
 
     private _logWorkout = () => {
-      debugger;
       if (this.checkAndShowErrors()) {
         return;
       }

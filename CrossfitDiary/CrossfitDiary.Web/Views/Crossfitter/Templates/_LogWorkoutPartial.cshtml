@@ -32,11 +32,11 @@
                 <!-- /ko -->
                 <!--ko if:_canSeeTotalTime -->
                 <div class="form-row justify-content-end ">
-                    <div class="col-lg-3 input-group pr-0 mb-2" data-bind="validationElement: _totalTime">
+                    <div class="col-lg-3 input-group pr-0 mb-2" >
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="far fa-clock"></i></span>
                         </div>
-                        <input type="text" class="form-control" id="timToWorkInput" placeholder="Total time" data-bind="inputmask:{value: _totalTime, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                        <input type="text" class="form-control" id="timToWorkInput" placeholder="Total time" data-bind="validationElement: _totalTime,inputmask:{value: _totalTime, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                     </div>
                 </div>
                 <!-- /ko -->

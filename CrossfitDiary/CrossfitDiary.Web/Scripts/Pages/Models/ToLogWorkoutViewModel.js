@@ -19,7 +19,7 @@ var Models;
             this.selectedWorkoutId = selectedWorkoutId;
             this.toPlainObject = function () {
                 var date = _this._plannedDate();
-                var toLogWorkoutViewModel = new ToLogWorkoutViewModel(date.toDate().toUTCString(), _this._partialRepsFinished(), _this._totalRoundsFinished(), _this.selectedWorkoutId, _this._totalTime());
+                var toLogWorkoutViewModel = new ToLogWorkoutViewModel(date.toUTCString(), _this._partialRepsFinished(), _this._totalRoundsFinished(), _this.selectedWorkoutId, _this._totalTime());
                 return toLogWorkoutViewModel;
             };
             this._plannedDate = ko.observable(new Date());

@@ -22,7 +22,6 @@ var Pages;
             _this.service = service;
             _this.errorMessager = errorMessager;
             _this._logWorkout = function () {
-                debugger;
                 if (_this.checkAndShowErrors()) {
                     return;
                 }
