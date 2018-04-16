@@ -1,4 +1,7 @@
-﻿.pride-container {
+﻿@import "../bootstrap.scss";
+@import "../General/general.scss";
+
+.pride-container {
     .fixed-pride-width {
         width: 25%;
     }

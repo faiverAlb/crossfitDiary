@@ -6028,45 +6028,6 @@ a.text-dark:hover, a.text-dark:focus {
   .table-bordered td {
     border: 1px solid #ddd !important; } }
 
-table > thead > tr > th.sorting_initial:before {
-  font-family: 'FontAwesome';
-  content: ' \f0dc';
-  padding-right: 2px; }
-
-table > thead > tr > th.sorting_asc:before {
-  font-family: 'FontAwesome';
-  content: ' \f0de';
-  padding-right: 2px; }
-
-table > thead > tr > th.sorting_desc:before {
-  font-family: 'FontAwesome';
-  content: ' \f0dd';
-  padding-right: 2px; }
-
-table > tbody > tr.empty-data {
-  background: #eeeeee; }
-
-.table-borderless tbody tr td,
-.table-borderless tbody tr th,
-.table-borderless thead tr th,
-.table-borderless thead tr td,
-.table-borderless tfoot tr th,
-.table-borderless tfoot tr td {
-  border: none; }
-
-/* Spinner */
-.spinner-container {
-  position: fixed;
-  top: 25%;
-  left: 50%;
-  margin-left: -50px;
-  margin-top: -75px;
-  z-index: 1000; }
-
-.disabledContent {
-  opacity: 0.4;
-  pointer-events: none; }
-
 /*@import "pages/login-page.scss";*/
 /* Workout info */
 /* TODO: To be removed */

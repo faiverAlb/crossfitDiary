@@ -1,20 +1,26 @@
-﻿table {
+﻿@import "../fontawesome/scss/fontawesome.scss";
+@import "../fontawesome/scss/fa-solid.scss";
+
+table {
     > thead > tr > th {
         &.sorting_initial:before {
-            font-family: 'FontAwesome';
+            font-family: 'Font Awesome 5 Free';
             content: ' \f0dc';
+            font-weight: 900; /* Fix version 5.0.9 */
             padding-right: $base-sorting-padding;
         }
 
         &.sorting_asc:before {
-            font-family: 'FontAwesome';
+            font-family: 'Font Awesome 5 Free';
             content: ' \f0de';
+            font-weight: 900; /* Fix version 5.0.9 */
             padding-right: $base-sorting-padding;
         }
 
         &.sorting_desc:before {
-            font-family: 'FontAwesome';
+            font-family: 'Font Awesome 5 Free';
             content: ' \f0dd';
+            font-weight: 900; /* Fix version 5.0.9 */
             padding-right: $base-sorting-padding;
         }
     }
