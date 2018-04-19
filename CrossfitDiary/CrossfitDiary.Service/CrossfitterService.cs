@@ -161,7 +161,7 @@ namespace CrossfitDiary.Service
                     ExerciseDisplayName = exerciseAbbreviation,
                     MaximumWeight = (
                         from exercise in crossfitterWorkout.RoutineComplex.RoutineSimple
-                        select exercise.Weight ?? 0
+                        select exercise.Weight
                     ).Max()
                 }).OrderByDescending(x => x.MaximumWeight).FirstOrDefault();
             return maximum;
@@ -250,11 +250,7 @@ namespace CrossfitDiary.Service
                 PersonMaximum personMaximumForExercise = GetPersonMaximumForExercise(userId, exercise.Id);
                 if (personMaximumForExercise == null)
                 {
-                    personMaximumForExercise = new PersonMaximum()
-                    {
-                        MaximumWeight = 0,
-                        ExerciseDisplayName = exercise.Title
-                    };
+                    personMaximumForExercise = new PersonMaximum();
                 }
 
                 personMaximumForExercise.ExerciseDisplayName = exercise.Title;

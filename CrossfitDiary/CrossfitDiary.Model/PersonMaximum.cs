@@ -24,7 +24,7 @@ namespace CrossfitDiary.Model
         /// <summary>
         ///     Gets or sets the maximum weight.
         /// </summary>
-        public decimal MaximumWeight { get; set; }
+        public decimal? MaximumWeight { get; set; }
 
         /// <summary>
         ///     Gets or sets the person id.

@@ -27,7 +27,7 @@ namespace CrossfitDiary.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
 
-            BundleTable.EnableOptimizations = false;
+//            BundleTable.EnableOptimizations = false;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
