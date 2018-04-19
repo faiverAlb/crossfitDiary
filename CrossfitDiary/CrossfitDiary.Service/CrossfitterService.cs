@@ -149,6 +149,7 @@ namespace CrossfitDiary.Service
             IEnumerable<CrossfitterWorkout> workoutsWithExericesOnly = _crossfitterWorkoutRepository
                         .GetMany(x => x.Crossfitter.Id == userId
                                       && x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId));
+            string exerciseAbbreviation = _exerciseRepository.GetById(exerciseId).Abbreviation;
 
             PersonMaximum maximum = (from crossfitterWorkout in workoutsWithExericesOnly
                 select new PersonMaximum
@@ -157,6 +158,7 @@ namespace CrossfitDiary.Service
                     PersonName = crossfitterWorkout.Crossfitter.FullName,
                     PersonId = crossfitterWorkout.Crossfitter.Id,
                     WorkoutTitle = crossfitterWorkout.RoutineComplex.Title,
+                    ExerciseDisplayName = exerciseAbbreviation,
                     MaximumWeight = (
                         from exercise in crossfitterWorkout.RoutineComplex.RoutineSimple
                         select exercise.Weight ?? 0
@@ -237,5 +239,29 @@ namespace CrossfitDiary.Service
             _unitOfWork.Commit();
         }
 
+        public List<PersonMaximum> GetPersonMaximumForMainExercises(string userId)
+        {
+            var exercisesListTitle = new List<string>(){ "deadlift", "back squat", "bench press", "shoulder press (strict)", "snatch", "power snatch", "clean", "power clean" };
+            var resultMaximums = new List<PersonMaximum>();
+
+            foreach (string exerciseTitle in exercisesListTitle)
+            {
+                Exercise exercise = _exerciseRepository.FirstOrDefault(x => x.Title.ToLower() == exerciseTitle.ToLower());
+                PersonMaximum personMaximumForExercise = GetPersonMaximumForExercise(userId, exercise.Id);
+                if (personMaximumForExercise == null)
+                {
+                    personMaximumForExercise = new PersonMaximum()
+                    {
+                        MaximumWeight = 0,
+                        ExerciseDisplayName = exercise.Title
+                    };
+                }
+
+                personMaximumForExercise.ExerciseDisplayName = exercise.Title;
+                resultMaximums.Add(personMaximumForExercise);
+            }
+
+            return resultMaximums;
+        }
     }
 }

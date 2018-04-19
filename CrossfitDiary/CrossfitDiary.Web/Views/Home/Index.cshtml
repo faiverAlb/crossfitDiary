@@ -3,6 +3,7 @@
 }
 @using CrossfitDiary.Model
 @using CrossfitDiary.Web.ViewModels
+@using CrossfitDiary.Web.ViewModels.Pride
 @using Newtonsoft.Json
 @model HomeViewModel
 
@@ -17,13 +18,28 @@
             @Html.Partial(MVC.Shared.Views._Spinner)
         </div>
     </div>
-
+    <div class="personal-maximums container">
+        <div class="row justify-content-md-center">
+            @{
+                foreach (PersonExerciseMaximumViewModel maximum in Model.PersonMaximums)
+                {
+                    <div class="col-auto item bg-info text-light rounded p-2 m-1">
+                        <div class="header">
+                        </div>
+                        <div class="body">
+                            @maximum.ExerciseDisplayName : @maximum.MaximumWeight
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
     <div class="activities-list container">
         @{
             foreach (ToLogWorkoutViewModel workout in Model.AllWorkouts)
             {
                 <div class="row">
-                    <div class="done-item offset-lg-3 col col-lg-5 my-2 p-3 rounded">
+                    <div class="done-item offset-lg-3 col col-lg-5 my-2 p-3 rounded ">
                         <div class="item-header d-flex flex-row justify-content-between">
                             <div class="user-icon">
                                 <span >@workout.WorkouterName</span>

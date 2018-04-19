@@ -4,6 +4,8 @@ using AutoMapper;
 using CrossfitDiary.Service;
 using CrossfitDiary.Web.Configuration;
 using CrossfitDiary.Web.ViewModels;
+using CrossfitDiary.Web.ViewModels.Pride;
+using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Controllers
 {
@@ -21,6 +23,7 @@ namespace CrossfitDiary.Web.Controllers
             HomeViewModel homeViewModel = new HomeViewModel()
             {
                 AllWorkouts = _crossfitterService.GetAllCrossfittersWorkouts().Select(x => Mapper.Map<ToLogWorkoutViewModel>(x)).OrderByDescending(x => x.Date).ToList(),
+                PersonMaximums = _crossfitterService.GetPersonMaximumForMainExercises(User.Identity.GetUserId()).Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)).OrderBy(x => x.ExerciseDisplayName).ToList(),
             };
             ViewBag.Title = "Home Page";
             return View(model: homeViewModel);

@@ -1,6 +1,13 @@
 ﻿@import "../bootstrap.scss";
+@import "../General/general.scss";
 
 .home-container {
+    .personal-maximums {
+        .item {
+
+        }
+    }
+
     .activities-list {
         .done-item {
             background: #f6f1ed;
@@ -13,7 +20,7 @@
                 padding-bottom: 5px;
 
                 .user-icon {
-                    font-weight:700;
+                    font-weight: 700;
                 }
 
                 .remove-workout {
