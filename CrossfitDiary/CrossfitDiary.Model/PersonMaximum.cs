@@ -12,6 +12,11 @@ namespace CrossfitDiary.Model
         public DateTime Date { get; set; }
 
         /// <summary>
+        ///     Gets or sets the exercise abbreviation.
+        /// </summary>
+        public string ExerciseDisplayName { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether is it me.
         /// </summary>
         public bool IsItMe { get; set; }
@@ -30,7 +35,6 @@ namespace CrossfitDiary.Model
         ///     Gets or sets the person name.
         /// </summary>
         public string PersonName { get; set; }
-
 
         /// <summary>
         ///     Gets or sets the position between others.

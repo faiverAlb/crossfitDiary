@@ -13,10 +13,13 @@ namespace CrossfitDiary.Web
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/font-awesome").Include(
+                        "~/Scripts/font-awesome/fontawesome-all.js"));
+
             
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.min.js",
-                "~/Scripts/bootstrap-select/bootstrap-select.js"));
+                "~/Scripts/bootstrap.bundle.js"/*,
+                "~/Scripts/bootstrap-select/bootstrap-select.js"*/));
 
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -40,6 +43,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/bootstrap-datepicker/moment.min.js"
                     , "~/Scripts/bootstrap-datepicker/moment-with-locales.min.js"
                     , "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.min.js"
+                    , "~/Scripts/gijgo/combined/gijgo.min.js"
                     , "~/Scripts/Pages/General/BaseController.js"
                     , "~/Scripts/Pages/General/BaseService.js"
                     , "~/Scripts/Pages/General/BaseKeyValuePairModel.js"
@@ -85,11 +89,18 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/ErrorMessageViewModel.js"
                     , "~/Scripts/Pages/Home/HomePageController.js"));
 
+            bundles.Add(new StyleBundle("~/Content/login")
+                .Include("~/Content/pages/login-page.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css")
-                .Include("~/Content/bootstrap.min.css"
-                    , "~/Content/css/font-awesome.min.css"
-                    , "~/Content/bootstrap-datepicker/bootstrap-datepicker.css"));
+            bundles.Add(new StyleBundle("~/Content/home")
+                .Include("~/Content/pages/home.css"));
+
+            bundles.Add(new StyleBundle("~/Content/pride")
+                .Include("~/Content/pages/pride.css"));
+
+            bundles.Add(new StyleBundle("~/Content/manage-workout")
+                .Include("~/Content/pages/manage-workout.css")
+                .Include("~/Content/gijgo/combined/gijgo_style.css"));
 
         }
     }

@@ -1,0 +1,42 @@
+﻿@import "../bootstrap.scss";
+@import "../General/general.scss";
+
+.home-container {
+    .personal-maximums {
+        .item {
+
+        }
+    }
+
+    .activities-list {
+        .done-item {
+            background: #f6f1ed;
+            box-shadow: 0 0.20rem 0.1rem rgba(0, 0, 0, .05);
+            font-size: 14px;
+
+            .item-header {
+                border-bottom: 1px dashed #a6a6a6;
+                font-size: 15px;
+                padding-bottom: 5px;
+
+                .user-icon {
+                    font-weight: 700;
+                }
+
+                .remove-workout {
+                    cursor: pointer;
+                }
+            }
+
+            .item-body {
+                .workout-title {
+                    border-bottom: 1px dashed black;
+                }
+
+                .workout-result {
+                    border-bottom: 1px dotted black;
+                }
+            }
+        }
+    }
+}

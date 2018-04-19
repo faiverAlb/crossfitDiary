@@ -5,35 +5,36 @@
 ko.bindingHandlers.selectPicker = {
     after: ['options'],   /* KO 3.0 feature to ensure binding execution order */
     init: function (element, valueAccessor, allBindingsAccessor) {
-        var $element = $(element);
-        $element.addClass('selectpicker').selectpicker();
-
-        var doRefresh = function () {
-            $element.selectpicker('refresh');
-        }, subscriptions = [];
-
-        // KO 3 requires subscriptions instead of relying on this binding's update
-        // function firing when any other binding on the element is updated.
-
-        // Add them to a subscription array so we can remove them when KO
-        // tears down the element.  Otherwise you will have a resource leak.
-        var addSubscription = function (bindingKey) {
-            var targetObs = allBindingsAccessor.get(bindingKey);
-
-            if (targetObs && ko.isObservable(targetObs)) {
-                subscriptions.push(targetObs.subscribe(doRefresh));
-            }
-        };
-
-        addSubscription('options');
-        addSubscription('value');           // Single
-        addSubscription('selectedOptions'); // Multiple
-
-        ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-            while (subscriptions.length) {
-                subscriptions.pop().dispose();
-            }
-        });
+      //todo: not implemented for bootstrap 4
+//        var $element = $(element);
+//        $element.addClass('selectpicker').selectpicker();
+//
+//        var doRefresh = function () {
+//            $element.selectpicker('refresh');
+//        }, subscriptions = [];
+//
+//        // KO 3 requires subscriptions instead of relying on this binding's update
+//        // function firing when any other binding on the element is updated.
+//
+//        // Add them to a subscription array so we can remove them when KO
+//        // tears down the element.  Otherwise you will have a resource leak.
+//        var addSubscription = function (bindingKey) {
+//            var targetObs = allBindingsAccessor.get(bindingKey);
+//
+//            if (targetObs && ko.isObservable(targetObs)) {
+//                subscriptions.push(targetObs.subscribe(doRefresh));
+//            }
+//        };
+//
+//        addSubscription('options');
+//        addSubscription('value');           // Single
+//        addSubscription('selectedOptions'); // Multiple
+//
+//        ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+//            while (subscriptions.length) {
+//                subscriptions.pop().dispose();
+//            }
+//        });
     },
     update: function (element, valueAccessor, allBindingsAccessor) {
     }
@@ -69,8 +70,49 @@ ko.bindingHandlers.inputmask =
     }
 };
 
+function getFormattedDate(date) {
+  var year = date.getFullYear();
+
+  var month = (1 + date.getMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+
+  var day = date.getDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+
+  return day + '/' + month + '/' + year;
+}
 
 ko.bindingHandlers.datepicker = {
+  init: function(element, valueAccessor, allBindingsAccessor) {
+    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    let format = 'dd/mm/yyyy';
+
+    var options = {
+      uiLibrary: 'bootstrap4',
+      iconsLibrary: 'fontawesome',
+      icons: {
+        rightIcon: '<i class="far fa-calendar-alt"></i>'
+      },
+      value: getFormattedDate(today),
+      maxDate: today,
+      weekStartDay: 1,
+      format: format
+    };
+    ko.utils.registerEventHandler(element,
+      "change",
+      function (event) {
+        let datePickerElement = element;
+        var formattedDate = moment(datePickerElement.value, "DD/MM/YYYY");
+        var value = valueAccessor();
+        value(formattedDate.toDate());
+      });
+    $(element).datepicker(options);
+  },
+  update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+  }
+};
+
+ko.bindingHandlers.datepicker_old = {
     init: function (element, valueAccessor, allBindingsAccessor) {
         //initialize datepicker with some optional options
         var date = new Date();

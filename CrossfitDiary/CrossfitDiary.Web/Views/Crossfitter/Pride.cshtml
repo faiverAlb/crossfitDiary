@@ -15,25 +15,67 @@
         <div class="clearfix">
             <table class="table table-striped ">
                 <thead>
-                <tr>
-                <th class="fixed-pride-width">Name</th>
-                <th class="fixed-pride-width">Maximum weight</th>
-                <th class="fixed-pride-width">Date</th>
-                <th class="fixed-pride-width">Workout title</th>
+                    <tr>
+                        <th class="fixed-pride-width">Name</th>
+                        <th class="fixed-pride-width">Maximum weight</th>
+                        <th class="fixed-pride-width">Date</th>
+                        <th class="fixed-pride-width">Workout title</th>
                 </thead>
                 <tbody>
-                <!--ko if:_personMaximums().length == 0 -->
+                    <!--ko if:_personMaximums().length == 0 -->
+                    <tr class="empty-data">
+                        <td colspan="4">No records were found for you</td>
+                    </tr>
+                    <!-- /ko -->
+                    <!-- ko foreach: _personMaximums -->
+                    <tr>
+                        <td>
+                            <span data-bind="text: personName"></span>
+                        </td>
+                        <td>
+                            <span class="maximum-weight" data-bind="text: maximumWeight"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text: date"></span>
+                        </td>
+                        <td>
+                            <span data-bind="text: workoutTitle"></span>
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="all-persons-records my-4" data-bind="if:_selectedExercise">
+        <h3>All persons results </h3>
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'personName'}">Name</th>
+                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'maximumWeight'}">Maximum weight</th>
+                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'date'}">Date</th>
+                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'workoutTitle'}">Workout title</th>
+            </thead>
+            <tbody>
+                <!--ko if:filteredItems().length == 0 -->
                 <tr class="empty-data">
-                    <td colspan="4">No records were found for you</td>
+                    <td colspan="5">No records yet</td>
                 </tr>
                 <!-- /ko -->
-                <!-- ko foreach: _personMaximums -->
-                <tr>
+                <!-- ko foreach: filteredItems -->
+                <tr data-bind="css: {'success': isItMe }">
+                    <td>
+                        <span data-bind="text: positionBetweenOthers"></span>
+                    </td>
                     <td>
                         <span data-bind="text: personName"></span>
                     </td>
                     <td>
-                        <span class="maximum-weight" data-bind="text: maximumWeight"></span>
+                        <span data-bind="text: maximumWeight"></span>
                     </td>
                     <td>
                         <span data-bind="text: date"></span>
@@ -43,60 +85,19 @@
                     </td>
                 </tr>
                 <!-- /ko -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
-    <div class="all-persons-records" data-bind="if:_selectedExercise">
-        <h3>All persons results </h3>
-        <div class="pull-right">
-            <input type="text" class="form-control " placeholder="Search" data-bind="value: filter, valueUpdate: 'afterkeydown'"/>
-        </div>
-        <table class="table table-striped ">
-            <thead>
-            <tr>
-            <th></th>
-            <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'personName'}">Name</th>
-            <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'maximumWeight'}">Maximum weight</th>
-            <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'date'}">Date</th>
-            <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'workoutTitle'}">Workout title</th>
-            </thead>
-            <tbody>
-            <!--ko if:filteredItems().length == 0 -->
-            <tr class="empty-data">
-                <td colspan="5">No records yet</td>
-            </tr>
-            <!-- /ko -->
-            <!-- ko foreach: filteredItems -->
-            <tr data-bind="css: {'success': isItMe }">
-                <td>
-                    <span data-bind="text: positionBetweenOthers"></span>
-                </td>
-                <td>
-                    <span data-bind="text: personName"></span>
-                </td>
-                <td>
-                    <span data-bind="text: maximumWeight"></span>
-                </td>
-                <td>
-                    <span data-bind="text: date"></span>
-                </td>
-                <td>
-                    <span data-bind="text: workoutTitle"></span>
-                </td>
-            </tr>
-            <!-- /ko -->
             </tbody>
         </table>
 
     </div>
 </div>
 
+@section styles{
+    @Styles.Render("~/Content/pride")
+}
+
 
 @section Scripts{
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/bootstrap")

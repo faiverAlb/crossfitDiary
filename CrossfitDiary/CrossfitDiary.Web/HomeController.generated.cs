@@ -73,14 +73,12 @@ namespace CrossfitDiary.Web.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string Secure = "Secure";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string Secure = "Secure";
         }
 
 
@@ -95,10 +93,8 @@ namespace CrossfitDiary.Web.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Index = "Index";
-                public readonly string Secure = "Secure";
             }
             public readonly string Index = "~/Views/Home/Index.cshtml";
-            public readonly string Secure = "~/Views/Home/Secure.cshtml";
         }
     }
 
@@ -115,17 +111,6 @@ namespace CrossfitDiary.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void SecureOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Secure()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Secure);
-            SecureOverride(callInfo);
             return callInfo;
         }
 

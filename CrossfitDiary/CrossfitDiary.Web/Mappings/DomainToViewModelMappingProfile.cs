@@ -33,7 +33,8 @@ namespace CrossfitDiary.Web.Mappings
             CreateMap<ExerciseMeasureType, ExerciseMeasureTypeViewModel>();
             CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>();
             CreateMap<PersonMaximum, PersonExerciseMaximumViewModel>()
-                .ForMember(x => x.Date, x => x.MapFrom(y => y.Date.ToString("d")));
+                .ForMember(x => x.Date, x => x.MapFrom(y => y.Date.ToString("d")))
+                .ForMember(x => x.MaximumWeight, x => x.MapFrom(y => y.MaximumWeight == 0? "-":y.MaximumWeight.ToString()));
 
 
             CreateMap<CrossfitterWorkout, ToLogWorkoutViewModel>()

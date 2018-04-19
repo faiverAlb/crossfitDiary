@@ -1,11 +1,11 @@
 ﻿<script type="text/html" id="existing-workouts-template">
     <div class="existing-workouts-container">
-        <div class="col-md-12 workout-container">
-            <div class="panel panel-success">
-                <div class="panel-heading">
+        <div class="col-md-12 add-new-workout-container workout-container">
+            <div class="card">
+                <div class="card-header bg-success text-light">
                     Existing Workouts
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <div class="existing-workout-selector">
                         <select class="form-control" data-live-search="true" data-bind="options: _availableWorkouts, optionsText:'detailedTitle',value: selectedWorkout, optionsCaption: 'Choose a workout...',selectPicker: {}"></select>
                     </div>

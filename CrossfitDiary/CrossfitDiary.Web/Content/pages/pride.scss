@@ -1,0 +1,13 @@
+﻿@import "../bootstrap.scss";
+@import "../General/general.scss";
+
+.pride-container {
+    .fixed-pride-width {
+        width: 25%;
+    }
+
+    .maximum-weight{
+        font-weight: bold;
+        text-decoration:underline;
+    }
+}

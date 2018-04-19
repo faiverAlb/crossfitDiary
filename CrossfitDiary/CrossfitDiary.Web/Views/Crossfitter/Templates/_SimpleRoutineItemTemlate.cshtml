@@ -1,28 +1,35 @@
 ﻿<div class="simple-routine-item">
-    <div class="form-inline">
-        <div class="form-group">
+    <div class="form-row">
+        <div class="form-group my-1 col-lg-auto">
             <div class="input-group">
                 <!--ko ifnot:$parent.model()._isReadOnlyMode -->
-                <span class="btn input-group-addon" data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}">
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                <span class="input-group-prepend " data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}">
+                    <span class="input-group-text btn btn-danger"><i class="fas fa-times" aria-hidden="true"></i></span>
                 </span>
                 <!-- /ko -->
-                <label class="form-control exercise-title" data-bind="text: model.title"></label>
+                <span class="form-control exercise-title" data-bind="text: model.title"></span>
             </div>
         </div>
         <!-- ko foreach:_exerciseMeasures-->
-        <div class="form-group" data-bind="ifnot: $parents[1].model()._isReadOnlyMode, validationElement: _exerciseMeasureType.measureValue">
-            <div class="input-group">
-                <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: _exerciseMeasureType.measureDesciption, readonly: $parents[1].model()._isReadOnlyMode}">
-                <div class="input-group-addon" data-bind="text:'('+ _exerciseMeasureType.shortMeasureDescription() + ')'"></div>
+        <div class="form-group my-1 col-lg-auto" data-bind="ifnot: $parents[1].model()._isReadOnlyMode, validationElement: _exerciseMeasureType.measureValue">
+            <label class="sr-only" data-bind="attr:{for:'measure_input_id_' + $index()}"></label>
+            <div class="input-group mx-1">
+                <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: _exerciseMeasureType.measureDesciption, readonly: $parents[1].model()._isReadOnlyMode, id:'measure_input_id_' + $index()}">
+                <span class="input-group-append">
+                    <span class="input-group-text" data-bind="text:'('+ _exerciseMeasureType.shortMeasureDescription() + ')'"></span>
+                </span>
             </div>
         </div>
-        <div class="form-group" data-bind="if: $parents[1].model()._isReadOnlyMode && _exerciseMeasureType.measureValue">
-            <div class="input-group">
-                <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue" readonly="readonly">
-                <div class="input-group-addon" data-bind="text:'('+ _exerciseMeasureType.shortMeasureDescription() + ')'"></div>
+        <!-- ko if: $parents[1].model()._isReadOnlyMode && _exerciseMeasureType.measureValue-->
+            <div class="form-group my-1 col-lg-auto">
+                <div class="input-group">
+                    <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue" readonly="readonly">
+                    <span class="input-group-append">
+                        <span class="input-group-text" data-bind="text:'('+ _exerciseMeasureType.shortMeasureDescription() + ')'"></span>
+                    </span>
+                </div>
             </div>
-        </div>
+        <!-- /ko -->
         <!-- /ko -->
     </div>
 </div>

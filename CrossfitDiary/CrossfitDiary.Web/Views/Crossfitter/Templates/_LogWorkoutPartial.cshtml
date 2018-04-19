@@ -1,49 +1,47 @@
 ﻿<div class="col-md-12">
-    <div class="panel panel-success">
-        <div class="panel-heading text-right">
+    <div class="card ">
+        <div class="card-header text-right bg-success text-light">
             Log workout!
         </div>
-        <div class="panel-body" >
-            <div class="text-right" >
-                <div class="date-selector"data-bind="with:_logToCreate">
-                    <form class="form-inline data-selector-container">
-                        <div class="form-group">
-                            <label>When? <i class="fa fa-arrow-right" aria-hidden="true"></i></label>
-                            <div class="input-group date pointer" data-bind="datepicker:_plannedDate">
-                                <input class="form-control" readonly="readonly" placeholder="Date here" >
-                                <div class="input-group-addon">
-                                    <span>
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-
-                <div class="log-workout-inputs" data-bind="with:_logToCreate">
-                    <div class="form-inline" data-bind="if:_canSeeTotalRounds">
-                        <div class="form-group" data-bind="validationElement: _totalRoundsFinished">
-                            <label for="generalRoundsFinishedInput">Rounds finished</label>
-                            <input type="number" min="1" class="form-control" id="generalRoundsFinishedInput" placeholder="Rounds finished" data-bind="value: _totalRoundsFinished">
-                        </div>
-                        <div class="form-group">
-                            <label for="partialRepsFinishedInput">Partial repetitions</label>
-                            <input type="number" min="0" class="form-control" id="partialRepsFinishedInput" placeholder="Partial repetitions" data-bind="value: _partialRepsFinished">
-                        </div>
+        <div class="card-body text-right">
+            <div class="form-row justify-content-end" data-bind="with:_logToCreate">
+                <form class="form-inline data-selector-container justify-content-end">
+                    <label class="mx-1" for="DateSelector">When? </label>
+                    <div class="input-group">
+                        <input class="" readonly="readonly" data-bind="datepicker:_plannedDate" />
                     </div>
-                    <div class="form-inline" data-bind="if:_canSeeTotalTime">
-                        <div class="form-group" data-bind="validationElement: _totalTime">
-                            <label for="timToWorkInput">Total time</label>
-                            <input type="text" class="form-control" id="timToWorkInput" placeholder="Total time" data-bind="inputmask:{value: _totalTime, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
-
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-success" data-bind="text: _logWorkoutText, click: _logWorkout">Log workout</button>
+                </form>
             </div>
 
+            <div class="log-workout-inputs " data-bind="with:_logToCreate">
+                <!--ko if:_canSeeTotalRounds -->
+                <div class="form-row justify-content-end">
+                    <div class="col-lg-3 input-group mb-2" data-bind="validationElement: _totalRoundsFinished">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-hashtag"></i></span>
+                        </div>
+                        <input type="number" min="1" class="form-control" id="generalRoundsFinishedInput" placeholder="Rounds finished" data-bind="value: _totalRoundsFinished">
+                    </div>
+                    <div class="col-lg-3 input-group mb-2 pr-0">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-hashtag"></i></span>
+                        </div>
+                        <input type="number" min="0" class="form-control" id="partialRepsFinishedInput" placeholder="Partial repetitions" data-bind="value: _partialRepsFinished">
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!--ko if:_canSeeTotalTime -->
+                <div class="form-row justify-content-end ">
+                    <div class="col-lg-3 input-group pr-0 mb-2" >
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-clock"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="timToWorkInput" placeholder="Total time" data-bind="validationElement: _totalTime,inputmask:{value: _totalTime, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+            <button class="btn btn-success" data-bind="text: _logWorkoutText, click: _logWorkout">Log workout</button>
         </div>
     </div>
 </div>
