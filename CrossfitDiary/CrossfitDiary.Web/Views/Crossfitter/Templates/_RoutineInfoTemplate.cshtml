@@ -1,51 +1,14 @@
 ﻿<script type="text/html" id="routine-info-template">
     <div class="routine-complex-info" data-bind="with:model">
         <!--ko if: _canSeeGeneralWorkoutInfo-->
-        <div class="card">
-            <div class="card-header">General workout info</div>
-            <div class="card-body">
-                <div data-bind="if: _isReadOnlyMode">
-                    <form class="">
-                        <!--ko if: _canSeeRoundsCount-->
-                        <div>
-                            <label>Rounds count:</label>
-                            <label data-bind="text: _roundsCount"></label>
-                        </div>
-                        <!-- /ko -->
-                        <!--ko if: _canSeeTimeToWork-->
-                        <div>
-                            <label>Time to work:</label>
-                            <label data-bind="text: _timeToWork"></label>
-                        </div>
-                        <!-- /ko -->
-                    </form>
-                    <div>
-                        <label for="complexRoutineTitleInput">Title:</label>
-                        <label data-bind="text: _title"></label>
-                    </div>
-                    <!--ko if: _restBetweenExercises-->
-                    <div>
-                        <label>Rest between exercises:</label>
-                        <label data-bind="text: _restBetweenExercises"></label>
-                    </div>
-                    <!-- /ko -->
-                    <!--ko if: _restBetweenRounds-->
-                    <div>
-                        <label for="restRoundsInput">Rest between rounds:</label>
-                        <label data-bind="text: _restBetweenRounds"></label>
-                    </div>
-                    <!-- /ko -->
-                </div>
-                <div class="input-group" data-bind="ifnot: _isReadOnlyMode">
-                    <div  data-bind="if: _canSeeRoundsCount, validationElement: _roundsCount">
-                        <label for="roundsInput" class="sr-only">Rounds count</label>
-                        <input type="number" min="1" class="form-control" id="roundsInput" placeholder="Rounds count" data-bind="value: _roundsCount, valueUpdate: 'afterkeydown'">
-                    </div>
-                    <div data-bind="if: _canSeeTimeToWork, validationElement: _timeToWork">
-                        <label for="timeInput" class="sr-only">Time to work</label>
-                        <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
-                    </div>
-                </div>
+        <div class="form-inline my-4 general-info-container">
+            <div  class="form-group" data-bind="if: _canSeeRoundsCount, validationElement: _roundsCount">
+                <h5 for="roundsInput" class="mr-2" >Rounds count:</h5>
+                <input type="number" min="1" class="form-control form-control-lg" id="roundsInput" placeholder="Rounds count" data-bind="value: _roundsCount, valueUpdate: 'afterkeydown'">
+            </div>
+            <div class="form-group" data-bind="if: _canSeeTimeToWork, validationElement: _timeToWork">
+                <h5 for="timeInput" class="mr-2">Time to work:</h5>
+                <input type="text" class="form-control form-control-lg" id="timeInput" placeholder="Time to work" data-bind="inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
             </div>
         </div>
         <!-- /ko -->

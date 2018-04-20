@@ -8924,20 +8924,17 @@ table > tbody > tr.empty-data {
 .manage-workout-page .pointer {
   cursor: pointer; }
 
-.existing-workouts-container .existing-workout-selector {
-  padding-bottom: 6px; }
+.manage-workout-page .manage-workout-container .workout-type-selector > select {
+  border: 1px solid #28a745; }
 
-.log-workout-container .existing-workout-selector {
-  padding-bottom: 6px; }
+.manage-workout-page .manage-workout-container .existing-workout-selector > select {
+  border: 1px solid #fd7e14; }
 
 .log-workout-container .log-workout-inputs {
   padding: 10px 0; }
 
 .crossfitter-edit-workout-container .add-new-workout-container .go-next-pointer {
   margin: 6px 0; }
-
-.crossfitter-edit-workout-container .add-new-workout-container .workout-type-selector {
-  padding-bottom: 6px; }
 
 .crossfitter-edit-workout-container .add-new-workout-container .exercise-selector {
   margin-bottom: 15px; }
@@ -8960,6 +8957,10 @@ table > tbody > tr.empty-data {
   .workout-container .routine-complex-info {
     padding: 0 0 6px 0;
     color: #000; }
+    .workout-container .routine-complex-info .general-info-container {
+      border-top: 1px dashed #17a2b8;
+      border-bottom: 1px dashed #17a2b8;
+      padding: 8px 0; }
     .workout-container .routine-complex-info .main-group {
       padding: 0 0 6px 0; }
   .workout-container .selected-workout-type {

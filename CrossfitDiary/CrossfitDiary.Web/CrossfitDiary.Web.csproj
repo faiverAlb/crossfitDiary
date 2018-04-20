@@ -559,7 +559,6 @@
     <TypeScriptCompile Include="Scripts\Pages\General\ServerProcessedViewModel.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\BaseService.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\CrossfitterService.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\ChooseExistingWorkoutController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\LogWorkoutController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\ManageWorkoutController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Models\WorkoutType.ts" />
@@ -615,8 +614,6 @@
     <Content Include="Views\Crossfitter\Templates\_RoutineInfoTemplate.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_SimpleRoutineItemTemlate.cshtml" />
     <Content Include="Views\Crossfitter\ManageWorkout.cshtml" />
-    <Content Include="Views\Crossfitter\Templates\_CreateNewWorkout.cshtml" />
-    <Content Include="Views\Crossfitter\Templates\_ExistingWorkoutsTemplate.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_LogWorkoutPartial.cshtml" />
     <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseViewModel.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Models\ToLogWorkoutViewModel.ts" />
