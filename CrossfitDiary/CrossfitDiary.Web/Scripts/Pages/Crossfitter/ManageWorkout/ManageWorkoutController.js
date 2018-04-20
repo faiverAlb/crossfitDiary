@@ -30,17 +30,10 @@ var Pages;
         function ManageWorkoutController(parameters) {
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
-            _this.manageWorkoutClick = function (isCreateNewWorkout) {
-                _this._chooseExistingWorkoutController.clearState();
-                _this._createWorkoutController.clearState();
-                _this._isCreateNewWorkout(isCreateNewWorkout);
-                _this._logWorkoutController(null);
-            };
             /* Сivilians */
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
             _this.errorMessager = new ErrorMessageViewModel();
             _this._createWorkoutController = new Pages.CreateWorkoutController(_this._service, _this.errorMessager);
-            _this._chooseExistingWorkoutController = new Pages.ChooseExistingWorkoutController(_this._service, _this.errorMessager);
             /* Observables */
             _this._logWorkoutController = ko.observable(null);
             _this._canSeeLoggingContainer = ko.observable(false);
@@ -52,14 +45,14 @@ var Pages;
                     return;
                 }
                 _this._canSeeLoggingContainer(true);
-                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToCreate(), true, _this._service, _this.errorMessager));
+                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToDisplay(), true, _this._service, _this.errorMessager));
             });
-            _this._chooseExistingWorkoutController.selectedWorkout.subscribe(function (selectedWorkout) {
+            _this._createWorkoutController.selectedWorkout.subscribe(function (selectedWorkout) {
                 _this._canSeeLoggingContainer(false);
                 if (selectedWorkout == undefined || selectedWorkout == null) {
                     return;
                 }
-                _this._logWorkoutController(new Pages.LogWorkoutController(_this._chooseExistingWorkoutController.workoutToDisplay(), false, _this._service, _this.errorMessager));
+                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToDisplay(), true, _this._service, _this.errorMessager));
                 _this._canSeeLoggingContainer(true);
             });
             return _this;

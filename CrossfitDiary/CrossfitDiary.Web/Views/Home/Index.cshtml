@@ -120,14 +120,14 @@
                                     @switch (workout.WorkoutViewModel.WorkoutType)
                                     {
                                         case RoutineComplexType.ForTime:
-                                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> Total time: @workout.TimePassed</span>
+                                            <span><i class="far fa-clock"></i> Total time: @workout.TimePassed</span>
                                             break;
                                         case RoutineComplexType.AMRAP:
-                                            <span><i class="fa fa-hashtag" aria-hidden="true"></i> Result rounds: @workout.RoundsFinished @(workout.PartialRepsFinished.HasValue ? string.Format("+ {0} partials", workout.PartialRepsFinished.Value) : string.Empty)</span>
+                                            <span><i class="fas fa-hashtag"></i> Result rounds: @workout.RoundsFinished @(workout.PartialRepsFinished.HasValue ? string.Format("+ {0} partials", workout.PartialRepsFinished.Value) : string.Empty)</span>
                                             break;
                                         case RoutineComplexType.EMOM:
                                         case RoutineComplexType.E2MOM:
-                                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> Work time: @workout.WorkoutViewModel.TimeToWork </span>
+                                            <span><i class="far fa-clock"></i> Work time: @workout.WorkoutViewModel.TimeToWork </span>
                                             break;
                                         case RoutineComplexType.NotForTime:
                                             break;

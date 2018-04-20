@@ -50,8 +50,7 @@ namespace CrossfitDiary.Service
         /// </returns>
         public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
         {
-            string userId = routineComplexToSave.CreatedBy?.Id;
-            List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetMany(x => x.CreatedBy == null || x.CreatedBy.Id == userId).ToList();
+            List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetAll().ToList();
 
 
             foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
@@ -161,6 +160,7 @@ namespace CrossfitDiary.Service
                     ExerciseDisplayName = exerciseAbbreviation,
                     MaximumWeight = (
                         from exercise in crossfitterWorkout.RoutineComplex.RoutineSimple
+                        where exercise.ExerciseId == exerciseId
                         select exercise.Weight
                     ).Max()
                 }).OrderByDescending(x => x.MaximumWeight).FirstOrDefault();

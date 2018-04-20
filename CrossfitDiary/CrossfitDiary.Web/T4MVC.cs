@@ -242,7 +242,6 @@ namespace Links
                     public const string UrlPath = "~/Scripts/Pages/Crossfitter/ManageWorkout";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-                    public static readonly string ChooseExistingWorkoutController_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ChooseExistingWorkoutController.min.js") ? Url("ChooseExistingWorkoutController.min.js") : Url("ChooseExistingWorkoutController.js");
                     public static readonly string CreateWorkoutController_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CreateWorkoutController.min.js") ? Url("CreateWorkoutController.min.js") : Url("CreateWorkoutController.js");
                     public static readonly string LogWorkoutController_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/LogWorkoutController.min.js") ? Url("LogWorkoutController.min.js") : Url("LogWorkoutController.js");
                     public static readonly string ManageWorkoutController_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ManageWorkoutController.min.js") ? Url("ManageWorkoutController.min.js") : Url("ManageWorkoutController.js");

@@ -22,7 +22,6 @@
 
     /* Сivilians */
     private  _createWorkoutController: CreateWorkoutController;
-    private _chooseExistingWorkoutController: ChooseExistingWorkoutController;
     private _service: CrossfitterService;
     private errorMessager: ErrorMessageViewModel;
 
@@ -41,8 +40,6 @@
       this.errorMessager = new ErrorMessageViewModel();
 
       this._createWorkoutController = new CreateWorkoutController(this._service, this.errorMessager);
-      this._chooseExistingWorkoutController = new ChooseExistingWorkoutController(this._service, this.errorMessager);
-
 
       /* Observables */
       this._logWorkoutController = ko.observable(null);
@@ -57,27 +54,19 @@
         }
 
         this._canSeeLoggingContainer(true);
-        this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToCreate(), true, this._service, this.errorMessager));
+        this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToDisplay(), true, this._service, this.errorMessager));
       });
 
 
-      this._chooseExistingWorkoutController.selectedWorkout.subscribe((selectedWorkout: WorkoutViewModel) => {
+      this._createWorkoutController.selectedWorkout.subscribe((selectedWorkout: WorkoutViewModel) => {
         this._canSeeLoggingContainer(false);
         if (selectedWorkout == undefined || selectedWorkout == null) {
           return;
         }
-        this._logWorkoutController(new LogWorkoutController(this._chooseExistingWorkoutController.workoutToDisplay(), false, this._service, this.errorMessager));
+        this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToDisplay(), true, this._service, this.errorMessager));
 
         this._canSeeLoggingContainer(true);
       });
     }
-    private manageWorkoutClick = (isCreateNewWorkout: boolean) => {
-      this._chooseExistingWorkoutController.clearState();
-      this._createWorkoutController.clearState();
-
-      this._isCreateNewWorkout(isCreateNewWorkout);
-      this._logWorkoutController(null);
-    };
-
   }
 }

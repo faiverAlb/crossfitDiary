@@ -12,11 +12,14 @@
     /* Сivilians */
 
     /* Observables */
-    public workoutToCreate: KnockoutObservable<WorkoutViewModelObservable>;
+    public workoutToDisplay: KnockoutObservable<WorkoutViewModelObservable>;
     private _workoutTypes: KnockoutObservable<Array<BaseKeyValuePairModel<number, string>>>;
     public selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
     private _exercises: KnockoutObservableArray<IExerciseViewModel>;
     private _selectedExercise: KnockoutObservable<IExerciseViewModel>;
+
+    private _availableWorkouts: KnockoutObservableArray<WorkoutViewModel>;
+    public selectedWorkout: KnockoutObservable<WorkoutViewModel>;
 
     /* Computeds */
 
@@ -31,22 +34,37 @@
           , new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])
         ));
       this.selectedWorkoutType = ko.observable(null);
-      this.workoutToCreate = ko.observable(null);
+      this.workoutToDisplay = ko.observable(null);
       this._exercises = ko.observableArray([]);
 
       this._selectedExercise = ko.observable(null);
+      this._availableWorkouts = ko.observableArray([]);
+      this.selectedWorkout = ko.observable(null);
 
       ko.computed(() => {
         this._selectedExercise(null);
-          if (!this.selectedWorkoutType()) {
+        if (!this.selectedWorkoutType()) {
+          this.workoutToDisplay(null);
           return;
         }
         if (this._exercises().length === 0) {
           return;
         }
+        this.selectedWorkout(null);
 
         let model = new WorkoutViewModel(this.selectedWorkoutType().id, []);
-        this.workoutToCreate(new WorkoutViewModelObservable(model, false));
+        this.workoutToDisplay(new WorkoutViewModelObservable(model, false));
+      });
+
+      ko.computed(() => {
+        let workout = this.selectedWorkout();
+        if (!workout) {
+          this.workoutToDisplay(null);
+          return;
+        }
+        this.selectedWorkoutType(null);
+        this.workoutToDisplay(new WorkoutViewModelObservable(workout, false));
+
       });
 
       ko.computed(() => {
@@ -54,11 +72,12 @@
         if (!exercise) {
           return;
         }
-        this.workoutToCreate().addExerciseToList(exercise);
+        this.workoutToDisplay().addExerciseToList(exercise);
         this._selectedExercise(null);
       });
 
-      this.loadExercises();
+
+      Q.all([this.loadExercises(), this.loadAvailableWorkouts()]);
     }
 
     private  loadExercises = () => {
@@ -69,25 +88,15 @@
         });
     };
 
-
-    private createWorkout = () => {
-      if (this.workoutToCreate().errors().length > 0) {
-        this.workoutToCreate().errors.showAllMessages();
-        return;
-      }
-      let workoutToCreate = this.workoutToCreate().toPlainObject();
-      this.service.createWorkout(workoutToCreate)
-        .then(() => {
-          window.location.href = "/Home";
+    private loadAvailableWorkouts = () => {
+      this.service.getAvailableWorkouts()
+        .then((availableWorkouts: WorkoutViewModel[]) => {
+          this._availableWorkouts(availableWorkouts);
         })
         .fail((response) => {
           this.errorMessager.addMessage(response.responseText, false);
         });
     };
 
-
-    public clearState = () => {
-      this.selectedWorkoutType(null);
-    };
   }
 }
