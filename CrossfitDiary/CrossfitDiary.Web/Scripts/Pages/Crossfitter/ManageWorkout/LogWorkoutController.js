@@ -28,10 +28,6 @@ var Pages;
                 _this.createAndLogWorkout();
             };
             _this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId()));
-            _this._logWorkoutText = "Log workout";
-            if (isCreateAndLogWorkout) {
-                _this._logWorkoutText = "Create and log workout";
-            }
             return _this;
         }
         LogWorkoutController.prototype.checkAndShowErrors = function () {
