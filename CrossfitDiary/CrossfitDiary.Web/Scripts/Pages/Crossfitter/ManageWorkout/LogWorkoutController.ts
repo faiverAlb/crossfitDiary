@@ -7,8 +7,6 @@
 
   export class LogWorkoutController extends BaseController{
     /* Сivilians */
-    private _logWorkoutText: string;
-
     /* Observables */
     private _logToCreate: KnockoutObservable<ToLogWorkoutViewModelObservable>;
 
@@ -22,10 +20,6 @@
       super();
       this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId()));
 
-      this._logWorkoutText = "Log workout";
-      if (isCreateAndLogWorkout) {
-        this._logWorkoutText = "Create and log workout";
-      }
     }
 
     private checkAndShowErrors():boolean {
