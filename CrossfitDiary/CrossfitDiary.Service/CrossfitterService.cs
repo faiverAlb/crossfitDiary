@@ -160,6 +160,7 @@ namespace CrossfitDiary.Service
                     ExerciseDisplayName = exerciseAbbreviation,
                     MaximumWeight = (
                         from exercise in crossfitterWorkout.RoutineComplex.RoutineSimple
+                        where exercise.ExerciseId == exerciseId
                         select exercise.Weight
                     ).Max()
                 }).OrderByDescending(x => x.MaximumWeight).FirstOrDefault();
