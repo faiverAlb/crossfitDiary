@@ -105,7 +105,8 @@ namespace CrossfitDiary.Web.Api
         [Route("removeWorkout/{crossfitterWorkoutId}")]
         public void RemoveWorkout(int crossfitterWorkoutId)
         {
-            _crossfitterService.RemoveWorkout(crossfitterWorkoutId);
+            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
+            _crossfitterService.RemoveWorkout(crossfitterWorkoutId, user);
         }
 
         #endregion
