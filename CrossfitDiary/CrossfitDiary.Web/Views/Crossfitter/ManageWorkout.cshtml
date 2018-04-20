@@ -16,38 +16,36 @@
         @Html.Partial(MVC.Shared.Views._Spinner)
     </div>
 
-    <div class="new-or-existing container" id="NewOrExistingAccordion">
-        <div>
-            <div class="new-workout-container">
-                <div data-bind="with:_createWorkoutController">
-                    <div class="crossfitter-edit-workout-container">
-                        <div class="col-md-12 add-new-workout-container workout-container">
-                            <div class="card ">
-                                <div class="card-header bg-warning ">
-                                    Add new workout
+    <div class="manage-workout-container my-2">
+        <div data-bind="with:_createWorkoutController">
+            <div class="crossfitter-edit-workout-container">
+                <div class="col-md-12 add-new-workout-container workout-container">
+                    <div class="card ">
+                        <div class="card-header bg-info text-light">
+                            New or Existing one?
+                        </div>
+                        <div class="card-body">
+                            <div class="row ">
+                                <div class="workout-type-selector col-sm-6 my-1">
+                                    <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'New workout!',selectPicker: {}"></select>
                                 </div>
-                                <div class="card-body">
-                                    <div class="workout-type-selector">
-                                        <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'Choose a workout type...',selectPicker: {}"></select>
-                                    </div>
-                                    <div class="existing-workout-selector">
-                                        <select class="form-control" data-live-search="true" data-bind="options: _availableWorkouts, optionsText:'detailedTitle',value: selectedWorkout, optionsCaption: 'Choose a workout...',selectPicker: {}"></select>
-                                    </div>
+                                <div class="existing-workout-selector col-sm-6 my-1">
+                                    <select class="form-control" data-live-search="true" data-bind="options: _availableWorkouts, optionsText:'detailedTitle',value: selectedWorkout, optionsCaption: 'Existing workout here!',selectPicker: {}"></select>
+                                </div>
+                            </div>
 
 
-                                    <div data-bind="if: selectedWorkoutType() || selectedWorkout()">
-                                        <div data-bind="template: { name: 'routine-info-template', data: {model: workoutToDisplay, controller: $data} }"></div>
-                                    </div>
-                                </div>
+                            <div data-bind="if:workoutToDisplay() != null">
+                                <div data-bind="template: { name: 'routine-info-template', data: {model: workoutToDisplay, controller: $data} }"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="want-to-log-container my-2" data-bind="if: _canSeeLoggingContainer">
-                    <div class="log-workout-container" data-bind="with:_logWorkoutController">
-                        @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
-                    </div>
-                </div>
+            </div>
+        </div>
+        <div class="want-to-log-container my-2" data-bind="if: _canSeeLoggingContainer">
+            <div class="log-workout-container" data-bind="with:_logWorkoutController">
+                @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
             </div>
         </div>
     </div>

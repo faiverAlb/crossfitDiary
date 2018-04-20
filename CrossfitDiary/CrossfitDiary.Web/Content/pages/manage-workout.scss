@@ -22,21 +22,23 @@
     .pointer {
         cursor: pointer;
     }
-}
 
+    .manage-workout-container {
+        .workout-type-selector {
+            > select {
+                border: 1px solid $green;
+            }
+        }
 
-.existing-workouts-container {
-    .existing-workout-selector {
-        padding-bottom: 6px;
+        .existing-workout-selector {
+            > select {
+                border: 1px solid $orange;
+            }
+        }
     }
 }
-
 
 .log-workout-container {
-    .existing-workout-selector {
-        padding-bottom: 6px;
-    }
-
     .log-workout-inputs {
         padding: 10px 0;
     }
@@ -47,10 +49,6 @@
     .add-new-workout-container {
         .go-next-pointer {
             margin: 6px 0;
-        }
-
-        .workout-type-selector {
-            padding-bottom: 6px;
         }
 
         .exercise-selector {

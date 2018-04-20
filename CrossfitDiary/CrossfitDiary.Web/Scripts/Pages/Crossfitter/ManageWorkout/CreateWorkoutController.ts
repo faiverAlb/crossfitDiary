@@ -43,15 +43,28 @@
 
       ko.computed(() => {
         this._selectedExercise(null);
-          if (!this.selectedWorkoutType()) {
+        if (!this.selectedWorkoutType()) {
+          this.workoutToDisplay(null);
           return;
         }
         if (this._exercises().length === 0) {
           return;
         }
+        this.selectedWorkout(null);
 
         let model = new WorkoutViewModel(this.selectedWorkoutType().id, []);
         this.workoutToDisplay(new WorkoutViewModelObservable(model, false));
+      });
+
+      ko.computed(() => {
+        let workout = this.selectedWorkout();
+        if (!workout) {
+          this.workoutToDisplay(null);
+          return;
+        }
+        this.selectedWorkoutType(null);
+        this.workoutToDisplay(new WorkoutViewModelObservable(workout, false));
+
       });
 
       ko.computed(() => {
@@ -63,14 +76,6 @@
         this._selectedExercise(null);
       });
 
-      ko.computed(() => {
-        let workout = this.selectedWorkout();
-        if (!workout) {
-          return;
-        }
-        this.workoutToDisplay(new WorkoutViewModelObservable(workout, false));
-
-      });
 
       Q.all([this.loadExercises(), this.loadAvailableWorkouts()]);
     }
@@ -93,9 +98,5 @@
         });
     };
 
-    public clearState = () => {
-      this.selectedWorkoutType(null);
-      this.selectedWorkout(null);
-    };
   }
 }

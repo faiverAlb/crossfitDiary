@@ -26,10 +26,6 @@ var Pages;
                     _this.errorMessager.addMessage(response.responseText, false);
                 });
             };
-            this.clearState = function () {
-                _this.selectedWorkoutType(null);
-                _this.selectedWorkout(null);
-            };
             this._workoutTypes = ko.observable(new Array(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]), new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP]), new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM]), new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])));
             this.selectedWorkoutType = ko.observable(null);
             this.workoutToDisplay = ko.observable(null);
@@ -40,13 +36,24 @@ var Pages;
             ko.computed(function () {
                 _this._selectedExercise(null);
                 if (!_this.selectedWorkoutType()) {
+                    _this.workoutToDisplay(null);
                     return;
                 }
                 if (_this._exercises().length === 0) {
                     return;
                 }
+                _this.selectedWorkout(null);
                 var model = new WorkoutViewModel(_this.selectedWorkoutType().id, []);
                 _this.workoutToDisplay(new WorkoutViewModelObservable(model, false));
+            });
+            ko.computed(function () {
+                var workout = _this.selectedWorkout();
+                if (!workout) {
+                    _this.workoutToDisplay(null);
+                    return;
+                }
+                _this.selectedWorkoutType(null);
+                _this.workoutToDisplay(new WorkoutViewModelObservable(workout, false));
             });
             ko.computed(function () {
                 var exercise = _this._selectedExercise();
@@ -55,13 +62,6 @@ var Pages;
                 }
                 _this.workoutToDisplay().addExerciseToList(exercise);
                 _this._selectedExercise(null);
-            });
-            ko.computed(function () {
-                var workout = _this.selectedWorkout();
-                if (!workout) {
-                    return;
-                }
-                _this.workoutToDisplay(new WorkoutViewModelObservable(workout, false));
             });
             Q.all([this.loadExercises(), this.loadAvailableWorkouts()]);
         }
