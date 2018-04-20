@@ -14,7 +14,7 @@
             font-size: 14px;
 
             &.person-workout {
-                border: 1px dashed $cyan;
+                border: 2px dashed $cyan;
             }
 
             .item-header {
@@ -37,7 +37,16 @@
                 }
 
                 .workout-result {
-                    border-bottom: 1px dotted black;
+                    //border-bottom: 1px dotted black;
+                }
+            }
+
+            .item-footer {
+                margin-top: 4px;
+                border-top: 1px dashed #a6a6a6;
+
+                .edit-workout-action {
+                    cursor: pointer;
                 }
             }
         }

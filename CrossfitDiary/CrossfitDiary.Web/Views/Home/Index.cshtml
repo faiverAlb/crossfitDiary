@@ -48,7 +48,7 @@
                                 <span class="">@workout.DisplayDate</span>
                                 @if (workout.CanBeRemovedByCurrentUser)
                                 {
-                                    <a class="remove-workout text-secondary pointer" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
+                                    <a class="remove-workout pl-1 text-secondary pointer" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 }
@@ -132,6 +132,13 @@
                                         case RoutineComplexType.NotForTime:
                                             break;
                                     }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="item-footer text-right pt-1">
+                            <div class="action-buttons">
+                                <span class="edit-workout-action pointer text-info">
+                                    <i class="fas fa-edit "></i>
                                 </span>
                             </div>
                         </div>
