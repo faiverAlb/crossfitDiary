@@ -56,25 +56,11 @@
         });
     }
 
-    private logExistingWorkout() {
-      this.service.logWorkout(this._logToCreate().toPlainObject())
-        .then(() => {
-          window.location.href = "/Home";
-        })
-        .fail((response) => {
-          this.errorMessager.addMessage(response.responseText, false);
-        });
-    }
-
     private _logWorkout = () => {
       if (this.checkAndShowErrors()) {
         return;
       }
-      if (this.isCreateAndLogWorkout) {
-        this.createAndLogWorkout();
-      } else {
-        this.logExistingWorkout();
-      }
+      this.createAndLogWorkout();
     }
   }
 }

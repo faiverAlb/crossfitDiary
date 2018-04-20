@@ -17,15 +17,10 @@ var Pages;
                     _this._exercises(exercises);
                 });
             };
-            this.createWorkout = function () {
-                if (_this.workoutToCreate().errors().length > 0) {
-                    _this.workoutToCreate().errors.showAllMessages();
-                    return;
-                }
-                var workoutToCreate = _this.workoutToCreate().toPlainObject();
-                _this.service.createWorkout(workoutToCreate)
-                    .then(function () {
-                    window.location.href = "/Home";
+            this.loadAvailableWorkouts = function () {
+                _this.service.getAvailableWorkouts()
+                    .then(function (availableWorkouts) {
+                    _this._availableWorkouts(availableWorkouts);
                 })
                     .fail(function (response) {
                     _this.errorMessager.addMessage(response.responseText, false);
@@ -33,12 +28,15 @@ var Pages;
             };
             this.clearState = function () {
                 _this.selectedWorkoutType(null);
+                _this.selectedWorkout(null);
             };
             this._workoutTypes = ko.observable(new Array(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]), new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP]), new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM]), new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])));
             this.selectedWorkoutType = ko.observable(null);
-            this.workoutToCreate = ko.observable(null);
+            this.workoutToDisplay = ko.observable(null);
             this._exercises = ko.observableArray([]);
             this._selectedExercise = ko.observable(null);
+            this._availableWorkouts = ko.observableArray([]);
+            this.selectedWorkout = ko.observable(null);
             ko.computed(function () {
                 _this._selectedExercise(null);
                 if (!_this.selectedWorkoutType()) {
@@ -48,17 +46,24 @@ var Pages;
                     return;
                 }
                 var model = new WorkoutViewModel(_this.selectedWorkoutType().id, []);
-                _this.workoutToCreate(new WorkoutViewModelObservable(model, false));
+                _this.workoutToDisplay(new WorkoutViewModelObservable(model, false));
             });
             ko.computed(function () {
                 var exercise = _this._selectedExercise();
                 if (!exercise) {
                     return;
                 }
-                _this.workoutToCreate().addExerciseToList(exercise);
+                _this.workoutToDisplay().addExerciseToList(exercise);
                 _this._selectedExercise(null);
             });
-            this.loadExercises();
+            ko.computed(function () {
+                var workout = _this.selectedWorkout();
+                if (!workout) {
+                    return;
+                }
+                _this.workoutToDisplay(new WorkoutViewModelObservable(workout, false));
+            });
+            Q.all([this.loadExercises(), this.loadAvailableWorkouts()]);
         }
         return CreateWorkoutController;
     }());

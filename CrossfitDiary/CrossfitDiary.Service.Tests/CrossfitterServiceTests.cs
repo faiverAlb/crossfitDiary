@@ -36,6 +36,7 @@ namespace CrossfitDiary.Service.Tests
         {
             IRoutineComplexRepository stubRoutineComplexRepository = A.Fake<IRoutineComplexRepository>();
             A.CallTo(() => stubRoutineComplexRepository.GetMany(A<Expression<Func<RoutineComplex, bool>>>._)).Returns(toBeReturned);
+            A.CallTo(() => stubRoutineComplexRepository.GetAll()).Returns(toBeReturned);
             return stubRoutineComplexRepository;
         }
 
