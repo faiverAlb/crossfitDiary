@@ -233,9 +233,9 @@ namespace CrossfitDiary.Service
             }
         }
 
-        public void RemoveWorkout(int crossfitterWorkoutId)
+        public void RemoveWorkout(int crossfitterWorkoutId, ApplicationUser user)
         {
-            _crossfitterWorkoutRepository.Delete(x => x.Id == crossfitterWorkoutId);
+            _crossfitterWorkoutRepository.Delete(x => x.Id == crossfitterWorkoutId && x.Crossfitter.Id == user.Id);
             _unitOfWork.Commit();
         }
 

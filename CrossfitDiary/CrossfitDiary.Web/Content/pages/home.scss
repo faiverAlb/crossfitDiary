@@ -4,7 +4,6 @@
 .home-container {
     .personal-maximums {
         .item {
-
         }
     }
 
@@ -13,6 +12,10 @@
             background: #f6f1ed;
             box-shadow: 0 0.20rem 0.1rem rgba(0, 0, 0, .05);
             font-size: 14px;
+
+            &.person-workout {
+                border: 1px dashed $cyan;
+            }
 
             .item-header {
                 border-bottom: 1px dashed #a6a6a6;
