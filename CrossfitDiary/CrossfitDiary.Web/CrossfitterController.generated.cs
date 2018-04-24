@@ -97,7 +97,7 @@ namespace CrossfitDiary.Web.Controllers
         public class ActionParamsClass_ManageWorkout
         {
             public readonly string workoutId = "workoutId";
-            public readonly string isEditing = "isEditing";
+            public readonly string crossfitterWorkoutId = "crossfitterWorkoutId";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -140,15 +140,15 @@ namespace CrossfitDiary.Web.Controllers
         public T4MVC_CrossfitterController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void ManageWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? workoutId, bool isEditing);
+        partial void ManageWorkoutOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? workoutId, int? crossfitterWorkoutId);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult ManageWorkout(int? workoutId, bool isEditing)
+        public override System.Web.Mvc.ActionResult ManageWorkout(int? workoutId, int? crossfitterWorkoutId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ManageWorkout);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "workoutId", workoutId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "isEditing", isEditing);
-            ManageWorkoutOverride(callInfo, workoutId, isEditing);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "crossfitterWorkoutId", crossfitterWorkoutId);
+            ManageWorkoutOverride(callInfo, workoutId, crossfitterWorkoutId);
             return callInfo;
         }
 

@@ -27,9 +27,14 @@ var Pages;
     var ManageWorkoutController = (function (_super) {
         __extends(ManageWorkoutController, _super);
         /* Computeds */
-        function ManageWorkoutController(parameters) {
+        function ManageWorkoutController(parameters, preselectedWorkoutId, preselectedCrossfitterWorkoutId) {
+            if (preselectedWorkoutId === void 0) { preselectedWorkoutId = null; }
+            if (preselectedCrossfitterWorkoutId === void 0) { preselectedCrossfitterWorkoutId = null; }
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
+            debugger;
+            var test = preselectedWorkoutId;
+            var test2 = preselectedCrossfitterWorkoutId;
             /* Сivilians */
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
             _this.errorMessager = new ErrorMessageViewModel();

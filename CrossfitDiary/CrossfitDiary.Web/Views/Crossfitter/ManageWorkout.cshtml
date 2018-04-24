@@ -2,6 +2,12 @@
 @{
     ViewBag.Title = "Manage Workout";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int? predefindWorkoutId = ViewBag.PredefindWorkoutId;
+    int? crossfitterWorkoutId = ViewBag.CrossfitterWorkoutId;
+
+    bool isEditMode = predefindWorkoutId.HasValue && crossfitterWorkoutId.HasValue;
+    bool isRepeatMode = predefindWorkoutId.HasValue && crossfitterWorkoutId.HasValue == false;
+    bool isDefaultModel = predefindWorkoutId.HasValue == false && crossfitterWorkoutId.HasValue == false;
 }
 
 <div class="manage-workout-page" data-bind="visible:true" style="display: none">
@@ -67,8 +73,26 @@
     <script>
         $(function() {
             var path = "@Url.Content("~")";
-            let model = new Pages.ManageWorkoutController(new General.BasicParameters(path));
-            ko.applyBindings(model);
+            @{
+                if (isEditMode)
+                {
+                     <text>
+                         ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path), @predefindWorkoutId, @crossfitterWorkoutId));
+                     </text>
+                }
+                if (isRepeatMode)
+                {
+                    <text>
+                        ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path), @predefindWorkoutId));
+                    </text>
+                }
+                if (isDefaultModel)
+                {
+                    <text>
+                        ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path)));
+                    </text>
+                }
+            }
         });
     </script>
 }

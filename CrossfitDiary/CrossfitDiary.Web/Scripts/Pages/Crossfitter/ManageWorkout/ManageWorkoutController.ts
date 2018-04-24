@@ -32,8 +32,11 @@
 
     /* Computeds */
 
-    constructor(public parameters: BasicParameters) {
+    constructor(public parameters: BasicParameters, preselectedWorkoutId: number|null = null, preselectedCrossfitterWorkoutId: number|null = null) {
       super();
+      debugger;
+      let test = preselectedWorkoutId;
+      let test2 = preselectedCrossfitterWorkoutId;
 
       /* Сivilians */
       this._service = new CrossfitterService(parameters.pathToApp, this.isDataLoading);

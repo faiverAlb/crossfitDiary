@@ -40,7 +40,7 @@
             foreach (ToLogWorkoutViewModel workout in Model.AllWorkouts)
             {
                 <div class="row">
-                    <div class="done-item offset-lg-3 col col-lg-5 my-2 p-3 rounded @(workout.CanBeRemovedByCurrentUser ? "person-workout" : string.Empty)">
+                    <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded @(workout.CanBeRemovedByCurrentUser ? "person-workout" : string.Empty)">
                         <div class="item-header d-flex flex-row justify-content-between  ">
                             <div class="user-icon">
                                 <span >@workout.WorkouterName</span>
@@ -140,8 +140,9 @@
                             <div class="action-buttons">
                                 @if (workout.CanBeRemovedByCurrentUser)
                                 {
-                                    <a class="edit-workout-action pointer text-info" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name, new {workoutId = @workout.CrossfitterWorkoutId, isEditing = true})"><i class="fas fa-edit "></i></a>
+                                    <a class="edit-workout-action pointer text-info" title="Edit" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name, new {workoutId = workout.WorkoutViewModel.Id, crossfitterWorkoutId = workout.CrossfitterWorkoutId})"><i class="fas fa-edit "></i></a>
                                 }
+                                <a class="repeat-workout-action pointer text-success pl-1" title="Repeat" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name, new {workoutId = workout.WorkoutViewModel.Id})"><i class="fas fa-plus "></i></a>
 
                             </div>
                         </div>
