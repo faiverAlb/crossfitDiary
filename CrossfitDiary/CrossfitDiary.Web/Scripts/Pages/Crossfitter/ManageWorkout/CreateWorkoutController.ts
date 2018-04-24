@@ -10,6 +10,9 @@
 
   export class CreateWorkoutController {
     /* Сivilians */
+    private _isEditMode: boolean;
+    private _isRepeatMode: boolean;
+    private _isDefaultMode: boolean;
 
     /* Observables */
     public workoutToDisplay: KnockoutObservable<WorkoutViewModelObservable>;
@@ -24,7 +27,10 @@
     /* Computeds */
 
 
-    constructor(public service: CrossfitterService, public readonly errorMessager: ErrorMessageViewModel) {
+    constructor(public service: CrossfitterService, public readonly errorMessager: ErrorMessageViewModel, public preselectedWorkoutId: number | null = null, public preselectedCrossfitterWorkoutId: number|null = null) {
+      this._isEditMode = preselectedWorkoutId != null && preselectedCrossfitterWorkoutId != null;
+      this._isRepeatMode = preselectedWorkoutId != null && preselectedCrossfitterWorkoutId == null;
+      this._isDefaultMode = preselectedWorkoutId == null && preselectedCrossfitterWorkoutId == null;
 
       this._workoutTypes = ko.observable(
         new Array(
@@ -87,11 +93,25 @@
           this._exercises(exercises);
         });
     };
+    private findAndSetSelectedWorkout = () => {
+      for (let i = 0; i < this._availableWorkouts().length; i++) {
+        let workoutToFind = this._availableWorkouts()[i];
+        if (workoutToFind.id == this.preselectedWorkoutId) {
+          this.selectedWorkout(workoutToFind);
+          break;
+        }
+      }
+    };
 
     private loadAvailableWorkouts = () => {
       this.service.getAvailableWorkouts()
         .then((availableWorkouts: WorkoutViewModel[]) => {
           this._availableWorkouts(availableWorkouts);
+        })
+        .then(() => {
+          if (this._isEditMode || this._isRepeatMode) {
+            this.findAndSetSelectedWorkout();
+          }
         })
         .fail((response) => {
           this.errorMessager.addMessage(response.responseText, false);

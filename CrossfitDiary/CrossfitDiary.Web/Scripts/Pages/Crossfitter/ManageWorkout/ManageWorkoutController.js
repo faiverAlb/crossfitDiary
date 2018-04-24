@@ -32,13 +32,10 @@ var Pages;
             if (preselectedCrossfitterWorkoutId === void 0) { preselectedCrossfitterWorkoutId = null; }
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
-            debugger;
-            var test = preselectedWorkoutId;
-            var test2 = preselectedCrossfitterWorkoutId;
             /* Сivilians */
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
             _this.errorMessager = new ErrorMessageViewModel();
-            _this._createWorkoutController = new Pages.CreateWorkoutController(_this._service, _this.errorMessager);
+            _this._createWorkoutController = new Pages.CreateWorkoutController(_this._service, _this.errorMessager, preselectedWorkoutId, preselectedCrossfitterWorkoutId);
             /* Observables */
             _this._logWorkoutController = ko.observable(null);
             _this._canSeeLoggingContainer = ko.observable(false);

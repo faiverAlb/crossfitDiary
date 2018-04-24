@@ -34,15 +34,13 @@
 
     constructor(public parameters: BasicParameters, preselectedWorkoutId: number|null = null, preselectedCrossfitterWorkoutId: number|null = null) {
       super();
-      debugger;
-      let test = preselectedWorkoutId;
-      let test2 = preselectedCrossfitterWorkoutId;
 
       /* Сivilians */
       this._service = new CrossfitterService(parameters.pathToApp, this.isDataLoading);
       this.errorMessager = new ErrorMessageViewModel();
+     
 
-      this._createWorkoutController = new CreateWorkoutController(this._service, this.errorMessager);
+      this._createWorkoutController = new CreateWorkoutController(this._service, this.errorMessager, preselectedWorkoutId, preselectedCrossfitterWorkoutId);
 
       /* Observables */
       this._logWorkoutController = ko.observable(null);

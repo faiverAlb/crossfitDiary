@@ -6,10 +6,14 @@ var Pages;
     var WorkoutViewModel = Models.WorkoutViewModel;
     var CreateWorkoutController = (function () {
         /* Computeds */
-        function CreateWorkoutController(service, errorMessager) {
+        function CreateWorkoutController(service, errorMessager, preselectedWorkoutId, preselectedCrossfitterWorkoutId) {
+            if (preselectedWorkoutId === void 0) { preselectedWorkoutId = null; }
+            if (preselectedCrossfitterWorkoutId === void 0) { preselectedCrossfitterWorkoutId = null; }
             var _this = this;
             this.service = service;
             this.errorMessager = errorMessager;
+            this.preselectedWorkoutId = preselectedWorkoutId;
+            this.preselectedCrossfitterWorkoutId = preselectedCrossfitterWorkoutId;
             this.loadExercises = function () {
                 _this.service
                     .getExercises()
@@ -17,15 +21,32 @@ var Pages;
                     _this._exercises(exercises);
                 });
             };
+            this.findAndSetSelectedWorkout = function () {
+                for (var i = 0; i < _this._availableWorkouts().length; i++) {
+                    var workoutToFind = _this._availableWorkouts()[i];
+                    if (workoutToFind.id == _this.preselectedWorkoutId) {
+                        _this.selectedWorkout(workoutToFind);
+                        break;
+                    }
+                }
+            };
             this.loadAvailableWorkouts = function () {
                 _this.service.getAvailableWorkouts()
                     .then(function (availableWorkouts) {
                     _this._availableWorkouts(availableWorkouts);
                 })
+                    .then(function () {
+                    if (_this._isEditMode || _this._isRepeatMode) {
+                        _this.findAndSetSelectedWorkout();
+                    }
+                })
                     .fail(function (response) {
                     _this.errorMessager.addMessage(response.responseText, false);
                 });
             };
+            this._isEditMode = preselectedWorkoutId != null && preselectedCrossfitterWorkoutId != null;
+            this._isRepeatMode = preselectedWorkoutId != null && preselectedCrossfitterWorkoutId == null;
+            this._isDefaultMode = preselectedWorkoutId == null && preselectedCrossfitterWorkoutId == null;
             this._workoutTypes = ko.observable(new Array(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]), new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP]), new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM]), new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])));
             this.selectedWorkoutType = ko.observable(null);
             this.workoutToDisplay = ko.observable(null);
