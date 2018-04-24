@@ -31,8 +31,8 @@
                             New or Existing one?
                         </div>
                         <div class="card-body">
-                            <div class="row ">
-                                <div class="workout-type-selector col-sm-6 my-1">
+                            <div class="row " data-bind="visible: _isEditMode == false && _isRepeatMode == false">
+                                <div class="workout-type-selector col-sm-6 my-1" >
                                     <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'New workout!',selectPicker: {}"></select>
                                 </div>
                                 <div class="existing-workout-selector col-sm-6 my-1">
