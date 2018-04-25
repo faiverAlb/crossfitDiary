@@ -51,7 +51,7 @@
 
       let hasModel:boolean = logModel != null;
       
-      this._plannedDate = ko.observable(hasModel ? new Date(logModel.date): new Date());
+      this._plannedDate = ko.observable(hasModel ? new Date(logModel.date) : new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
       this._canSeeTotalRounds = workoutType === WorkoutType.AMRAP;
       this._canSeeTotalTime = workoutType === WorkoutType.ForTime;
 
