@@ -32,31 +32,20 @@ var Pages;
             if (preselectedCrossfitterWorkoutId === void 0) { preselectedCrossfitterWorkoutId = null; }
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
+            _this.onWorkoutToShowAction = function (isCleanLogModel) {
+                if (isCleanLogModel) {
+                    _this._logWorkoutController(null);
+                    return;
+                }
+                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToDisplay(), true, _this._service, _this.errorMessager));
+            };
             /* Сivilians */
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
             _this.errorMessager = new ErrorMessageViewModel();
-            _this._createWorkoutController = new Pages.CreateWorkoutController(_this._service, _this.errorMessager, preselectedWorkoutId, preselectedCrossfitterWorkoutId);
+            _this._createWorkoutController = new Pages.CreateWorkoutController(_this._service, _this.errorMessager, _this.onWorkoutToShowAction, preselectedWorkoutId, preselectedCrossfitterWorkoutId);
             /* Observables */
             _this._logWorkoutController = ko.observable(null);
-            _this._canSeeLoggingContainer = ko.observable(false);
             _this._isCreateNewWorkout = ko.observable(true);
-            /* Computeds */
-            _this._createWorkoutController.selectedWorkoutType.subscribe(function (selectedWorkoutType) {
-                _this._canSeeLoggingContainer(false);
-                if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
-                    return;
-                }
-                _this._canSeeLoggingContainer(true);
-                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToDisplay(), true, _this._service, _this.errorMessager));
-            });
-            _this._createWorkoutController.selectedWorkout.subscribe(function (selectedWorkout) {
-                _this._canSeeLoggingContainer(false);
-                if (selectedWorkout == undefined || selectedWorkout == null) {
-                    return;
-                }
-                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToDisplay(), true, _this._service, _this.errorMessager));
-                _this._canSeeLoggingContainer(true);
-            });
             return _this;
         }
         return ManageWorkoutController;

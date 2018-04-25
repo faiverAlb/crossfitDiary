@@ -6,12 +6,13 @@ var Pages;
     var WorkoutViewModel = Models.WorkoutViewModel;
     var CreateWorkoutController = (function () {
         /* Computeds */
-        function CreateWorkoutController(service, errorMessager, preselectedWorkoutId, preselectedCrossfitterWorkoutId) {
+        function CreateWorkoutController(service, errorMessager, onWorkoutToShowAction, preselectedWorkoutId, preselectedCrossfitterWorkoutId) {
             if (preselectedWorkoutId === void 0) { preselectedWorkoutId = null; }
             if (preselectedCrossfitterWorkoutId === void 0) { preselectedCrossfitterWorkoutId = null; }
             var _this = this;
             this.service = service;
             this.errorMessager = errorMessager;
+            this.onWorkoutToShowAction = onWorkoutToShowAction;
             this.preselectedWorkoutId = preselectedWorkoutId;
             this.preselectedCrossfitterWorkoutId = preselectedCrossfitterWorkoutId;
             this.loadExercises = function () {
@@ -84,7 +85,21 @@ var Pages;
                 _this.workoutToDisplay().addExerciseToList(exercise);
                 _this._selectedExercise(null);
             });
-            Q.all([this.loadExercises(), this.loadAvailableWorkouts()]);
+            this.selectedWorkoutType.subscribe(function (selectedWorkoutType) {
+                if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
+                    _this.onWorkoutToShowAction(true);
+                    return;
+                }
+                _this.onWorkoutToShowAction(false);
+            });
+            this.selectedWorkout.subscribe(function (selectedWorkout) {
+                if (selectedWorkout == undefined || selectedWorkout == null) {
+                    _this.onWorkoutToShowAction(true);
+                    return;
+                }
+                _this.onWorkoutToShowAction(false);
+            });
+            Q.all([this.loadExercises(), this.loadAvailableWorkouts() /*, this._isEditMode? this.loadPersonLogging():null*/]);
         }
         return CreateWorkoutController;
     }());

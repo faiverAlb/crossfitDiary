@@ -17,17 +17,21 @@
     /* Observables */
     public workoutToDisplay: KnockoutObservable<WorkoutViewModelObservable>;
     private _workoutTypes: KnockoutObservable<Array<BaseKeyValuePairModel<number, string>>>;
-    public selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
+    private selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
     private _exercises: KnockoutObservableArray<IExerciseViewModel>;
     private _selectedExercise: KnockoutObservable<IExerciseViewModel>;
 
     private _availableWorkouts: KnockoutObservableArray<WorkoutViewModel>;
-    public selectedWorkout: KnockoutObservable<WorkoutViewModel>;
+    private selectedWorkout: KnockoutObservable<WorkoutViewModel>;
 
     /* Computeds */
 
 
-    constructor(public service: CrossfitterService, public readonly errorMessager: ErrorMessageViewModel, public preselectedWorkoutId: number | null = null, public preselectedCrossfitterWorkoutId: number|null = null) {
+    constructor(public service: CrossfitterService
+      , public readonly errorMessager: ErrorMessageViewModel
+      , public onWorkoutToShowAction: (isCleanLogModel: boolean) => void
+      , public preselectedWorkoutId: number | null = null
+      , public preselectedCrossfitterWorkoutId: number | null = null) {
       this._isEditMode = preselectedWorkoutId != null && preselectedCrossfitterWorkoutId != null;
       this._isRepeatMode = preselectedWorkoutId != null && preselectedCrossfitterWorkoutId == null;
       this._isDefaultMode = preselectedWorkoutId == null && preselectedCrossfitterWorkoutId == null;
@@ -82,8 +86,25 @@
         this._selectedExercise(null);
       });
 
+      this.selectedWorkoutType.subscribe((selectedWorkoutType: BaseKeyValuePairModel<number, string>) => {
+        if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
+          this.onWorkoutToShowAction(true);
+          return;
+        }
+        this.onWorkoutToShowAction(false);
+      });
 
-      Q.all([this.loadExercises(), this.loadAvailableWorkouts()]);
+
+      this.selectedWorkout.subscribe((selectedWorkout: WorkoutViewModel) => {
+        if (selectedWorkout == undefined || selectedWorkout == null) {
+          this.onWorkoutToShowAction(true);
+          return;
+        }
+        this.onWorkoutToShowAction(false);
+      });
+
+
+      Q.all([this.loadExercises(), this.loadAvailableWorkouts()/*, this._isEditMode? this.loadPersonLogging():null*/]);
     }
 
     private  loadExercises = () => {

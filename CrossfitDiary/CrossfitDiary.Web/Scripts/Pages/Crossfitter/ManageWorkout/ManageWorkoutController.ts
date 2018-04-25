@@ -28,7 +28,6 @@
     /* Observables */
     private _logWorkoutController: KnockoutObservable<LogWorkoutController>;
     private _isCreateNewWorkout: KnockoutObservable<boolean>;
-    private _canSeeLoggingContainer: KnockoutObservable<boolean>;
 
     /* Computeds */
 
@@ -40,34 +39,19 @@
       this.errorMessager = new ErrorMessageViewModel();
      
 
-      this._createWorkoutController = new CreateWorkoutController(this._service, this.errorMessager, preselectedWorkoutId, preselectedCrossfitterWorkoutId);
+      this._createWorkoutController = new CreateWorkoutController(this._service, this.errorMessager, this.onWorkoutToShowAction, preselectedWorkoutId, preselectedCrossfitterWorkoutId);
 
       /* Observables */
       this._logWorkoutController = ko.observable(null);
-      this._canSeeLoggingContainer = ko.observable(false);
       this._isCreateNewWorkout = ko.observable(true);
+    }
 
-      /* Computeds */
-      this._createWorkoutController.selectedWorkoutType.subscribe((selectedWorkoutType: BaseKeyValuePairModel<number, string>) => {
-        this._canSeeLoggingContainer(false);
-        if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
-          return;
-        }
-
-        this._canSeeLoggingContainer(true);
-        this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToDisplay(), true, this._service, this.errorMessager));
-      });
-
-
-      this._createWorkoutController.selectedWorkout.subscribe((selectedWorkout: WorkoutViewModel) => {
-        this._canSeeLoggingContainer(false);
-        if (selectedWorkout == undefined || selectedWorkout == null) {
-          return;
-        }
-        this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToDisplay(), true, this._service, this.errorMessager));
-
-        this._canSeeLoggingContainer(true);
-      });
+    private onWorkoutToShowAction = (isCleanLogModel: boolean) => {
+      if (isCleanLogModel) {
+        this._logWorkoutController(null);
+        return;
+      }
+      this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToDisplay(), true, this._service, this.errorMessager));
     }
   }
 }
