@@ -153,13 +153,12 @@
         }
         @if (Model.AllWorkouts.Count == 0)
         {
-            <div class="done-item offset-lg-3 col-md-12 col-lg-6 my-2 p-3">
-                <div class="done-item text-center">
-                    <a class="btn btn-success btn-lg" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-star" aria-hidden="true"></i> Let's log our first workout? <i class="fa fa-star" aria-hidden="true"></i></a>
-
+            <div class="row">
+                <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded text-center">
+                    <a class="btn btn-success btn-lg btn-block" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-star" aria-hidden="true"></i> Let's log our first workout? </a>
                 </div>
-
             </div>
+
         }
 
     </div>
