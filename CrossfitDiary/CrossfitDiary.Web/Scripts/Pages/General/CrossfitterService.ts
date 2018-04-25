@@ -51,5 +51,13 @@
       this.isDataLoading(true);
       return this.delete(`api/removeWorkout/${crossfitterWorkoutId}`).finally(() => { this.isDataLoading(false); });
     };
+
+    getPersonLoggingInfo = (preselectedCrossfitterWorkoutId: number): Q.Promise<ToLogWorkoutViewModel> => {
+      this.isDataLoading(true);
+      return this.get<ToLogWorkoutViewModel>(this.pathToApp + `api/getPersonLoggingInfo/${preselectedCrossfitterWorkoutId}`)
+        .finally(() => {
+          this.isDataLoading(false);
+        });
+    };
   }
 }

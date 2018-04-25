@@ -15,7 +15,7 @@ var Pages;
     var LogWorkoutController = (function (_super) {
         __extends(LogWorkoutController, _super);
         /* Computeds */
-        function LogWorkoutController(workoutToUse, isCreateAndLogWorkout, service, errorMessager) {
+        function LogWorkoutController(workoutToUse, isCreateAndLogWorkout, service, errorMessager, logModel) {
             var _this = _super.call(this) || this;
             _this.workoutToUse = workoutToUse;
             _this.isCreateAndLogWorkout = isCreateAndLogWorkout;
@@ -27,7 +27,7 @@ var Pages;
                 }
                 _this.createAndLogWorkout();
             };
-            _this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId()));
+            _this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId(), logModel));
             return _this;
         }
         LogWorkoutController.prototype.checkAndShowErrors = function () {

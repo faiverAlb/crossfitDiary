@@ -7,6 +7,7 @@
   import WorkoutViewModel = Models.WorkoutViewModel;
   import BaseController = General.BaseController;
   import ErrorMessageViewModel = General.ErrorMessageViewModel;
+  import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
 
   export class CreateWorkoutController {
     /* Сivilians */
@@ -29,7 +30,7 @@
 
     constructor(public service: CrossfitterService
       , public readonly errorMessager: ErrorMessageViewModel
-      , public onWorkoutToShowAction: (isCleanLogModel: boolean) => void
+      , public onWorkoutToShowAction: (isCleanLogModel: boolean, logModel?: ToLogWorkoutViewModel) => void
       , public preselectedWorkoutId: number | null = null
       , public preselectedCrossfitterWorkoutId: number | null = null) {
       this._isEditMode = preselectedWorkoutId != null && preselectedCrossfitterWorkoutId != null;
@@ -103,17 +104,35 @@
         this.onWorkoutToShowAction(false);
       });
 
+      this.loadExercises()
+        .then(() => {
+          return this.loadAvailableWorkouts();
+        })
+        .then(() => {
+          return this._isEditMode ? this.loadPersonLogging() : null;
+        });
 
-      Q.all([this.loadExercises(), this.loadAvailableWorkouts()/*, this._isEditMode? this.loadPersonLogging():null*/]);
     }
 
-    private  loadExercises = () => {
-      this.service
+    private loadExercises = () => {
+      return this.service
         .getExercises()
         .then((exercises: IExerciseViewModel[]) => {
           this._exercises(exercises);
         });
     };
+
+    private loadPersonLogging = () => {
+      return this.service.getPersonLoggingInfo(this.preselectedCrossfitterWorkoutId)
+        .then((logModel: ToLogWorkoutViewModel) => {
+          this.onWorkoutToShowAction(false, logModel);
+        })
+      .fail((response) => {
+        this.errorMessager.addMessage(response.responseText, false);
+      });
+
+    };
+
     private findAndSetSelectedWorkout = () => {
       for (let i = 0; i < this._availableWorkouts().length; i++) {
         let workoutToFind = this._availableWorkouts()[i];
@@ -125,7 +144,7 @@
     };
 
     private loadAvailableWorkouts = () => {
-      this.service.getAvailableWorkouts()
+      return this.service.getAvailableWorkouts()
         .then((availableWorkouts: WorkoutViewModel[]) => {
           this._availableWorkouts(availableWorkouts);
         })

@@ -16,10 +16,19 @@ var Pages;
             this.preselectedWorkoutId = preselectedWorkoutId;
             this.preselectedCrossfitterWorkoutId = preselectedCrossfitterWorkoutId;
             this.loadExercises = function () {
-                _this.service
+                return _this.service
                     .getExercises()
                     .then(function (exercises) {
                     _this._exercises(exercises);
+                });
+            };
+            this.loadPersonLogging = function () {
+                return _this.service.getPersonLoggingInfo(_this.preselectedCrossfitterWorkoutId)
+                    .then(function (logModel) {
+                    _this.onWorkoutToShowAction(false, logModel);
+                })
+                    .fail(function (response) {
+                    _this.errorMessager.addMessage(response.responseText, false);
                 });
             };
             this.findAndSetSelectedWorkout = function () {
@@ -32,7 +41,7 @@ var Pages;
                 }
             };
             this.loadAvailableWorkouts = function () {
-                _this.service.getAvailableWorkouts()
+                return _this.service.getAvailableWorkouts()
                     .then(function (availableWorkouts) {
                     _this._availableWorkouts(availableWorkouts);
                 })
@@ -99,7 +108,13 @@ var Pages;
                 }
                 _this.onWorkoutToShowAction(false);
             });
-            Q.all([this.loadExercises(), this.loadAvailableWorkouts() /*, this._isEditMode? this.loadPersonLogging():null*/]);
+            this.loadExercises()
+                .then(function () {
+                return _this.loadAvailableWorkouts();
+            })
+                .then(function () {
+                return _this._isEditMode ? _this.loadPersonLogging() : null;
+            });
         }
         return CreateWorkoutController;
     }());

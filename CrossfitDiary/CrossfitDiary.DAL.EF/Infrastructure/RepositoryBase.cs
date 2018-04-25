@@ -75,5 +75,9 @@ namespace CrossfitDiary.DAL.EF.Infrastructure
             return _dbSet.FirstOrDefault(where);
         }
 
+        public T Single(Expression<Func<T, bool>> where)
+        {
+            return _dbSet.Single(where);
+        }
     }
 }

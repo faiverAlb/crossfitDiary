@@ -1,10 +1,9 @@
 ﻿module Pages {
   import CrossfitterService = General.CrossfitterService;
   import BasicParameters = General.BasicParameters;
-  import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
-  import WorkoutViewModel = Models.WorkoutViewModel;
   import BaseController = General.BaseController;
   import ErrorMessageViewModel = General.ErrorMessageViewModel;
+  import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
 
   declare var ko;
   ko.validation.init({
@@ -46,12 +45,12 @@
       this._isCreateNewWorkout = ko.observable(true);
     }
 
-    private onWorkoutToShowAction = (isCleanLogModel: boolean) => {
+    private onWorkoutToShowAction = (isCleanLogModel: boolean, logModel?: ToLogWorkoutViewModel) => {
       if (isCleanLogModel) {
         this._logWorkoutController(null);
         return;
       }
-      this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToDisplay(), true, this._service, this.errorMessager));
+      this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToDisplay(), true, this._service, this.errorMessager, logModel));
     }
   }
 }

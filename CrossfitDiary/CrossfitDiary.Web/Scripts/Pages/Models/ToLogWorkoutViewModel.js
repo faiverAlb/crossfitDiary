@@ -13,7 +13,7 @@ var Models;
     Models.ToLogWorkoutViewModel = ToLogWorkoutViewModel;
     var ToLogWorkoutViewModelObservable = (function () {
         /* Computeds */
-        function ToLogWorkoutViewModelObservable(workoutType, selectedWorkoutId) {
+        function ToLogWorkoutViewModelObservable(workoutType, selectedWorkoutId, logModel) {
             var _this = this;
             this.workoutType = workoutType;
             this.selectedWorkoutId = selectedWorkoutId;
@@ -22,10 +22,11 @@ var Models;
                 var toLogWorkoutViewModel = new ToLogWorkoutViewModel(date.toDateString(), _this._partialRepsFinished(), _this._totalRoundsFinished(), _this.selectedWorkoutId, _this._totalTime());
                 return toLogWorkoutViewModel;
             };
-            this._plannedDate = ko.observable(new Date());
+            var hasModel = logModel != null;
+            this._plannedDate = ko.observable(hasModel ? new Date(logModel.date) : new Date());
             this._canSeeTotalRounds = workoutType === Models.WorkoutType.AMRAP;
             this._canSeeTotalTime = workoutType === Models.WorkoutType.ForTime;
-            this._totalTime = ko.observable(null)
+            this._totalTime = ko.observable(hasModel ? logModel.timePassed : null)
                 .extend({
                 required: {
                     onlyIf: function () {
@@ -33,7 +34,7 @@ var Models;
                     }
                 }
             });
-            this._totalRoundsFinished = ko.observable(null)
+            this._totalRoundsFinished = ko.observable(hasModel ? logModel.roundsFinished : null)
                 .extend({
                 required: {
                     onlyIf: function () {
@@ -41,7 +42,7 @@ var Models;
                     }
                 }
             });
-            this._partialRepsFinished = ko.observable();
+            this._partialRepsFinished = ko.observable(hasModel ? logModel.partialRepsFinished : null);
             this.errors = ko.validation.group(this);
         }
         return ToLogWorkoutViewModelObservable;

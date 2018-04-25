@@ -201,13 +201,27 @@ namespace CrossfitDiary.Service
             List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetAll().ToList();
             foreach (var workout in crossfitterWorkouts)
             {
-                PrepareWorkout(workout);
+                UpdateWorkoutEntities(workout);
             }
 
             return crossfitterWorkouts.OrderByDescending(x => x.Date).ToList();
         }
 
-        private void PrepareWorkout(CrossfitterWorkout workout)
+        /// <summary>
+        /// The get crossfitter workout.
+        /// </summary>
+        /// <param name="crossfitterWorkoutId"></param>
+        /// <returns>
+        /// The <see cref="CrossfitterWorkout"/>.
+        /// </returns>
+        public CrossfitterWorkout GetCrossfitterWorkout(int crossfitterWorkoutId)
+        {
+            CrossfitterWorkout crossfitterWorkout = _crossfitterWorkoutRepository.Single(x => x.Id == crossfitterWorkoutId);
+            UpdateWorkoutEntities(crossfitterWorkout);
+            return crossfitterWorkout;
+        }
+
+        private void UpdateWorkoutEntities(CrossfitterWorkout workout)
         {
             if (workout.Distance.HasValue)
             {

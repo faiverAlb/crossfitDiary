@@ -47,14 +47,17 @@
 
     /* Computeds */
 
-    constructor(public workoutType: WorkoutType, public selectedWorkoutId?: number) {
-      this._plannedDate = ko.observable(new Date());
+    constructor(public workoutType: WorkoutType, public selectedWorkoutId?: number, logModel?: ToLogWorkoutViewModel) {
+
+      let hasModel:boolean = logModel != null;
+      
+      this._plannedDate = ko.observable(hasModel ? new Date(logModel.date): new Date());
       this._canSeeTotalRounds = workoutType === WorkoutType.AMRAP;
       this._canSeeTotalTime = workoutType === WorkoutType.ForTime;
 
     
 
-      this._totalTime = ko.observable(null)
+      this._totalTime = ko.observable(hasModel ? logModel.timePassed : null)
         .extend({
           required: {
             onlyIf: () => {
@@ -63,7 +66,7 @@
           }
         });
 
-      this._totalRoundsFinished = ko.observable(null)
+      this._totalRoundsFinished = ko.observable(hasModel? logModel.roundsFinished: null)
         .extend({
           required: {
             onlyIf: () => {
@@ -72,7 +75,7 @@
           }
         });
 
-      this._partialRepsFinished = ko.observable();
+      this._partialRepsFinished = ko.observable(hasModel ? logModel.partialRepsFinished : null);
 
       this.errors = ko.validation.group(this);
     }
