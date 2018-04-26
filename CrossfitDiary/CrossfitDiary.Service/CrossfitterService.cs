@@ -204,7 +204,7 @@ namespace CrossfitDiary.Service
                 PrepareWorkout(workout);
             }
 
-            return crossfitterWorkouts.OrderByDescending(x => x.Date).ToList();
+            return crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();
         }
 
         private void PrepareWorkout(CrossfitterWorkout workout)
