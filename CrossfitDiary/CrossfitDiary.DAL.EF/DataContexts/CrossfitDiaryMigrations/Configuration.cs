@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Data.Entity.Migrations.Model;
+using System.Data.Entity.SqlServer;
 using CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations.Seeders;
 using CrossfitDiary.Model;
 
@@ -15,6 +17,40 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
         {
             AutomaticMigrationsEnabled = false;
             MigrationsDirectory = @"DataContexts\CrossfitDiaryMigrations";
+            SetSqlGenerator("System.Data.SqlClient", new CustomSqlServerMigrationSqlGenerator());
+        }
+
+        internal class CustomSqlServerMigrationSqlGenerator : SqlServerMigrationSqlGenerator
+        {
+            protected override void Generate(AddColumnOperation addColumnOperation)
+            {
+                SetCreatedUtcColumn(addColumnOperation.Column);
+
+                base.Generate(addColumnOperation);
+            }
+
+            protected override void Generate(CreateTableOperation createTableOperation)
+            {
+                SetCreatedUtcColumn(createTableOperation.Columns);
+
+                base.Generate(createTableOperation);
+            }
+
+            private static void SetCreatedUtcColumn(IEnumerable<ColumnModel> columns)
+            {
+                foreach (var columnModel in columns)
+                {
+                    SetCreatedUtcColumn(columnModel);
+                }
+            }
+
+            private static void SetCreatedUtcColumn(PropertyModel column)
+            {
+                if (column.Name == "CreatedUtc")
+                {
+                    column.DefaultValueSql = "GETUTCDATE()";
+                }
+            }
         }
 
         protected override void Seed(CrossfitDiaryDbContext context)
