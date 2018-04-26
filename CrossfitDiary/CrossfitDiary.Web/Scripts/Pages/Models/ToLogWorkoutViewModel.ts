@@ -81,7 +81,7 @@
     public toPlainObject = (): ToLogWorkoutViewModel => {
       let date = this._plannedDate() as any;
       let toLogWorkoutViewModel = new ToLogWorkoutViewModel(
-        date.toDateString(),
+        date.toISOString(),
         this._partialRepsFinished(),
         this._totalRoundsFinished(),
         this.selectedWorkoutId,
