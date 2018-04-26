@@ -213,7 +213,7 @@ namespace CrossfitDiary.Web.Mappings
                 return totalTime.ToString();
             }
 
-            string result = string.Format("{0:00}:{1:00}", totalTime.TotalMinutes, totalTime.Seconds);
+            string result = string.Format("{0:00}:{1:00}", totalTime.Minutes, totalTime.Seconds);
             return result;
 
         }

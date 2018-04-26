@@ -22,7 +22,7 @@ namespace CrossfitDiary.Web.Controllers
         {
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                AllWorkouts = _crossfitterService.GetAllCrossfittersWorkouts().Select(x => Mapper.Map<ToLogWorkoutViewModel>(x)).OrderByDescending(x => x.Date).ToList(),
+                AllWorkouts = _crossfitterService.GetAllCrossfittersWorkouts().Select(x => Mapper.Map<ToLogWorkoutViewModel>(x)).ToList(),
                 PersonMaximums = _crossfitterService.GetPersonMaximumForMainExercises(User.Identity.GetUserId()).Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)).OrderBy(x => x.ExerciseDisplayName).ToList(),
             };
             ViewBag.Title = "Home Page";
