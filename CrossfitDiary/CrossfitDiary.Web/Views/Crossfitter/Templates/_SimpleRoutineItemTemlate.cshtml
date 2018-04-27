@@ -2,12 +2,13 @@
     <div class="form-row">
         <div class="form-group my-1 col-lg-auto">
             <div class="input-group">
-                <!--ko ifnot:$parent.model()._isReadOnlyMode -->
-                <span class="input-group-prepend " data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}">
-                    <span class="input-group-text btn btn-danger"><i class="fas fa-times" aria-hidden="true"></i></span>
+                <span class="input-group-prepend" data-bind="click:$parent.model().addSimpleRoutineFromToDo">
+                    <span class="input-group-text btn  bg-success text-light"><i class="fas fa-plus fa-sm" aria-hidden="true"></i></span>
                 </span>
-                <!-- /ko -->
                 <span class="form-control exercise-title" data-bind="text: model.title"></span>
+                <span class="input-group-append " data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}">
+                    <span class="input-group-text btn bg-secondary text-light"><i class="fas fa-trash fa-sm" aria-hidden="true"></i></span>
+                </span>
             </div>
         </div>
         <!-- ko foreach:_exerciseMeasures-->
