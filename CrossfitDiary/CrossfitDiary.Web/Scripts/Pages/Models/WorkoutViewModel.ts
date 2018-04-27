@@ -20,7 +20,6 @@
   export class WorkoutViewModelObservable {
     
     /* Сivilians */
-    private _isReadOnlyMode: boolean;
     public errors:any;
 
     /* Observables */
@@ -41,9 +40,8 @@
     private _workoutTypeTitle: string;
 
 
-    constructor(public model: WorkoutViewModel, isReadOnlyMode: boolean) {
+    constructor(public model: WorkoutViewModel) {
       /* Сivilians */
-      this._isReadOnlyMode = isReadOnlyMode;
       this._workoutTypeTitle = WorkoutType[model.workoutType];
       this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map((item) => {
         return new ExerciseViewModelObservable(item);

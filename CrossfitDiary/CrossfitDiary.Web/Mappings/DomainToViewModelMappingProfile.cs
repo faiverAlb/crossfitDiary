@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Providers.Entities;
 using AutoMapper;
 using CrossfitDiary.Model;
 using CrossfitDiary.Web.ViewModels;
 using CrossfitDiary.Web.ViewModels.Pride;
-using Microsoft.AspNet.Identity;
 
 namespace CrossfitDiary.Web.Mappings
 {
@@ -34,7 +32,7 @@ namespace CrossfitDiary.Web.Mappings
             CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>();
             CreateMap<PersonMaximum, PersonExerciseMaximumViewModel>()
                 .ForMember(x => x.Date, x => x.MapFrom(y => y.Date.ToString("d")))
-                .ForMember(x => x.MaximumWeight, x => x.MapFrom(y => y.MaximumWeight.HasValue == false? "-": y.MaximumWeight.ToCustomString()));
+                .ForMember(x => x.MaximumWeight, x => x.MapFrom(y => y.MaximumWeight.HasValue == false? "-": $"{y.MaximumWeight.ToCustomString()} kg"));
 
 
             CreateMap<CrossfitterWorkout, ToLogWorkoutViewModel>()

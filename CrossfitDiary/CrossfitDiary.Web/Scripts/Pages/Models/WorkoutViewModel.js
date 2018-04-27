@@ -9,7 +9,7 @@ var Models;
     }());
     Models.WorkoutViewModel = WorkoutViewModel;
     var WorkoutViewModelObservable = (function () {
-        function WorkoutViewModelObservable(model, isReadOnlyMode) {
+        function WorkoutViewModelObservable(model) {
             var _this = this;
             this.model = model;
             this.addExerciseToList = function (exerciseViewModel) {
@@ -31,7 +31,6 @@ var Models;
                 return workoutToCreate;
             };
             /* Сivilians */
-            this._isReadOnlyMode = isReadOnlyMode;
             this._workoutTypeTitle = Models.WorkoutType[model.workoutType];
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {
                 return new Models.ExerciseViewModelObservable(item);

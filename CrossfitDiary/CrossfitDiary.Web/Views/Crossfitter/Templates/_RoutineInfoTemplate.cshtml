@@ -13,7 +13,7 @@
         </div>
         <!-- /ko -->
     </div>
-    <div data-bind="ifnot: model()._isReadOnlyMode">
+    <div>
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options: controller._exercises, optionsText:'title',value: controller._selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
     </div>
     <div class="selected-workout-type">

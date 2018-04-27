@@ -12,25 +12,15 @@
             </div>
         </div>
         <!-- ko foreach:_exerciseMeasures-->
-        <div class="form-group my-1 col-lg-auto" data-bind="ifnot: $parents[1].model()._isReadOnlyMode, validationElement: _exerciseMeasureType.measureValue">
+        <div class="form-group my-1 col-lg-auto" data-bind="validationElement: _exerciseMeasureType.measureValue">
             <label class="sr-only" data-bind="attr:{for:'measure_input_id_' + $index()}"></label>
             <div class="input-group mx-1 pr-1">
-                <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: _exerciseMeasureType.measureDesciption, readonly: $parents[1].model()._isReadOnlyMode, id:'measure_input_id_' + $index()}">
+                <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: _exerciseMeasureType.measureDesciption, id:'measure_input_id_' + $index()}">
                 <span class="input-group-append">
                     <span class="input-group-text" data-bind="text:'('+ _exerciseMeasureType.shortMeasureDescription() + ')'"></span>
                 </span>
             </div>
         </div>
-        <!-- ko if: $parents[1].model()._isReadOnlyMode && _exerciseMeasureType.measureValue-->
-            <div class="form-group my-1 col-lg-auto">
-                <div class="input-group">
-                    <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue" readonly="readonly">
-                    <span class="input-group-append">
-                        <span class="input-group-text" data-bind="text:'('+ _exerciseMeasureType.shortMeasureDescription() + ')'"></span>
-                    </span>
-                </div>
-            </div>
-        <!-- /ko -->
         <!-- /ko -->
     </div>
 </div>
