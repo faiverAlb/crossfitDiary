@@ -15,19 +15,20 @@ var Pages;
     var LogWorkoutController = (function (_super) {
         __extends(LogWorkoutController, _super);
         /* Computeds */
-        function LogWorkoutController(workoutToUse, isCreateAndLogWorkout, service, errorMessager, logModel) {
+        function LogWorkoutController(workoutToUse, isCreateAndLogWorkout, service, errorMessager, isEditMode, logModel) {
             var _this = _super.call(this) || this;
             _this.workoutToUse = workoutToUse;
             _this.isCreateAndLogWorkout = isCreateAndLogWorkout;
             _this.service = service;
             _this.errorMessager = errorMessager;
+            _this.isEditMode = isEditMode;
             _this._logWorkout = function () {
                 if (_this.checkAndShowErrors()) {
                     return;
                 }
                 _this.createAndLogWorkout();
             };
-            _this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId(), logModel));
+            _this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, isEditMode, workoutToUse.getId(), logModel));
             return _this;
         }
         LogWorkoutController.prototype.checkAndShowErrors = function () {

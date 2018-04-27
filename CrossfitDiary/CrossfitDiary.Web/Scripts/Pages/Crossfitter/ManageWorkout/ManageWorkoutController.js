@@ -32,12 +32,12 @@ var Pages;
             if (preselectedCrossfitterWorkoutId === void 0) { preselectedCrossfitterWorkoutId = null; }
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
-            _this.onWorkoutToShowAction = function (isCleanLogModel, logModel) {
+            _this.onWorkoutToShowAction = function (isCleanLogModel, isEditMode, logModel) {
                 if (isCleanLogModel) {
                     _this._logWorkoutController(null);
                     return;
                 }
-                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToDisplay(), true, _this._service, _this.errorMessager, logModel));
+                _this._logWorkoutController(new Pages.LogWorkoutController(_this._createWorkoutController.workoutToDisplay(), true, _this._service, _this.errorMessager, isEditMode, logModel));
             };
             /* Сivilians */
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);

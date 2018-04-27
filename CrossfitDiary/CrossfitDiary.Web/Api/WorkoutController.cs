@@ -80,7 +80,7 @@ namespace CrossfitDiary.Web.Api
 
             var crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model);
             crossfitterWorkout.Crossfitter = user;
-            _crossfitterService.LogWorkout(crossfitterWorkout);
+            _crossfitterService.LogWorkout(crossfitterWorkout, model.IsEditMode);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace CrossfitDiary.Web.Api
             RoutineComplex newWorkoutRoutine = Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
             newWorkoutRoutine.CreatedBy = user;
 
-            _crossfitterService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout);
+            _crossfitterService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
         }
 
         /// <summary>

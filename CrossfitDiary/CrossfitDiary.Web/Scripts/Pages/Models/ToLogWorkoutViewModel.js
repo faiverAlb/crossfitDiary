@@ -1,25 +1,29 @@
 var Models;
 (function (Models) {
     var ToLogWorkoutViewModel = (function () {
-        function ToLogWorkoutViewModel(date, partialRepsFinished, roundsFinished, selectedWorkoutId, timePassed) {
+        function ToLogWorkoutViewModel(crossfitterWorkoutId, date, partialRepsFinished, roundsFinished, selectedWorkoutId, timePassed, isEdtiMode) {
+            this.crossfitterWorkoutId = crossfitterWorkoutId;
             this.date = date;
             this.partialRepsFinished = partialRepsFinished;
             this.roundsFinished = roundsFinished;
             this.selectedWorkoutId = selectedWorkoutId;
             this.timePassed = timePassed;
+            this.isEditMode = isEdtiMode;
         }
         return ToLogWorkoutViewModel;
     }());
     Models.ToLogWorkoutViewModel = ToLogWorkoutViewModel;
     var ToLogWorkoutViewModelObservable = (function () {
         /* Computeds */
-        function ToLogWorkoutViewModelObservable(workoutType, selectedWorkoutId, logModel) {
+        function ToLogWorkoutViewModelObservable(workoutType, isEditMode, selectedWorkoutId, logModel) {
             var _this = this;
             this.workoutType = workoutType;
+            this.isEditMode = isEditMode;
             this.selectedWorkoutId = selectedWorkoutId;
+            this.logModel = logModel;
             this.toPlainObject = function () {
                 var date = _this._plannedDate();
-                var toLogWorkoutViewModel = new ToLogWorkoutViewModel(date.toDateString(), _this._partialRepsFinished(), _this._totalRoundsFinished(), _this.selectedWorkoutId, _this._totalTime());
+                var toLogWorkoutViewModel = new ToLogWorkoutViewModel(_this.logModel != null ? _this.logModel.crossfitterWorkoutId : 0, date.toDateString(), _this._partialRepsFinished(), _this._totalRoundsFinished(), _this.selectedWorkoutId, _this._totalTime(), _this.isEditMode);
                 return toLogWorkoutViewModel;
             };
             var hasModel = logModel != null;

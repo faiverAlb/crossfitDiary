@@ -18,9 +18,10 @@
               , public isCreateAndLogWorkout: boolean
               , public service: CrossfitterService
               , public readonly errorMessager: ErrorMessageViewModel
+              , public isEditMode: boolean
               , logModel?: ToLogWorkoutViewModel) {
       super();
-      this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId(), logModel));
+      this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, isEditMode, workoutToUse.getId(), logModel));
 
     }
 

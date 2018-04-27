@@ -30,7 +30,7 @@
 
     constructor(public service: CrossfitterService
       , public readonly errorMessager: ErrorMessageViewModel
-      , public onWorkoutToShowAction: (isCleanLogModel: boolean, logModel?: ToLogWorkoutViewModel) => void
+      , public onWorkoutToShowAction: (isCleanLogModel: boolean, isEditMode: boolean, logModel?: ToLogWorkoutViewModel) => void
       , public preselectedWorkoutId: number | null = null
       , public preselectedCrossfitterWorkoutId: number | null = null) {
       this._isEditMode = preselectedWorkoutId != null && preselectedCrossfitterWorkoutId != null;
@@ -89,19 +89,19 @@
 
       this.selectedWorkoutType.subscribe((selectedWorkoutType: BaseKeyValuePairModel<number, string>) => {
         if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
-          this.onWorkoutToShowAction(true);
+          this.onWorkoutToShowAction(true, this._isEditMode);
           return;
         }
-        this.onWorkoutToShowAction(false);
+        this.onWorkoutToShowAction(false, this._isEditMode);
       });
 
 
       this.selectedWorkout.subscribe((selectedWorkout: WorkoutViewModel) => {
         if (selectedWorkout == undefined || selectedWorkout == null) {
-          this.onWorkoutToShowAction(true);
+          this.onWorkoutToShowAction(true, this._isEditMode);
           return;
         }
-        this.onWorkoutToShowAction(false);
+        this.onWorkoutToShowAction(false, this._isEditMode);
       });
 
       this.loadExercises()
@@ -125,7 +125,7 @@
     private loadPersonLogging = () => {
       return this.service.getPersonLoggingInfo(this.preselectedCrossfitterWorkoutId)
         .then((logModel: ToLogWorkoutViewModel) => {
-          this.onWorkoutToShowAction(false, logModel);
+          this.onWorkoutToShowAction(false, this._isEditMode, logModel);
         })
       .fail((response) => {
         this.errorMessager.addMessage(response.responseText, false);

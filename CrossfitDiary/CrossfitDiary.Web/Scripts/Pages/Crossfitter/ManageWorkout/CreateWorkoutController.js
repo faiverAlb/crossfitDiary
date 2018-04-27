@@ -25,7 +25,7 @@ var Pages;
             this.loadPersonLogging = function () {
                 return _this.service.getPersonLoggingInfo(_this.preselectedCrossfitterWorkoutId)
                     .then(function (logModel) {
-                    _this.onWorkoutToShowAction(false, logModel);
+                    _this.onWorkoutToShowAction(false, _this._isEditMode, logModel);
                 })
                     .fail(function (response) {
                     _this.errorMessager.addMessage(response.responseText, false);
@@ -96,17 +96,17 @@ var Pages;
             });
             this.selectedWorkoutType.subscribe(function (selectedWorkoutType) {
                 if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
-                    _this.onWorkoutToShowAction(true);
+                    _this.onWorkoutToShowAction(true, _this._isEditMode);
                     return;
                 }
-                _this.onWorkoutToShowAction(false);
+                _this.onWorkoutToShowAction(false, _this._isEditMode);
             });
             this.selectedWorkout.subscribe(function (selectedWorkout) {
                 if (selectedWorkout == undefined || selectedWorkout == null) {
-                    _this.onWorkoutToShowAction(true);
+                    _this.onWorkoutToShowAction(true, _this._isEditMode);
                     return;
                 }
-                _this.onWorkoutToShowAction(false);
+                _this.onWorkoutToShowAction(false, _this._isEditMode);
             });
             this.loadExercises()
                 .then(function () {

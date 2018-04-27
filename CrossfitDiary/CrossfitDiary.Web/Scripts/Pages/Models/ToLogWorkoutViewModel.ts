@@ -16,19 +16,24 @@
     timePassed: string;
     wasFinished: boolean;
     workouterName: string;
+    isEditMode: boolean;
 
     constructor(
+      crossfitterWorkoutId: number,
       date: string,
       partialRepsFinished: number,
       roundsFinished: number,
       selectedWorkoutId: number,
       timePassed: string,
-      ) {
+      isEdtiMode: boolean
+    ) {
+      this.crossfitterWorkoutId = crossfitterWorkoutId;
       this.date = date;
       this.partialRepsFinished = partialRepsFinished;
       this.roundsFinished = roundsFinished;
       this.selectedWorkoutId = selectedWorkoutId;
       this.timePassed = timePassed;
+      this.isEditMode = isEdtiMode;
     }
   }
 
@@ -47,7 +52,7 @@
 
     /* Computeds */
 
-    constructor(public workoutType: WorkoutType, public selectedWorkoutId?: number, logModel?: ToLogWorkoutViewModel) {
+    constructor(public workoutType: WorkoutType, public isEditMode: boolean, public selectedWorkoutId?: number, public logModel?: ToLogWorkoutViewModel) {
 
       let hasModel:boolean = logModel != null;
       
@@ -84,11 +89,13 @@
     public toPlainObject = (): ToLogWorkoutViewModel => {
       let date = this._plannedDate() as any;
       let toLogWorkoutViewModel = new ToLogWorkoutViewModel(
+        this.logModel != null ? this.logModel.crossfitterWorkoutId: 0,
         date.toDateString(),
         this._partialRepsFinished(),
         this._totalRoundsFinished(),
         this.selectedWorkoutId,
-        this._totalTime()
+        this._totalTime(),
+        this.isEditMode
       );
       return toLogWorkoutViewModel;
     }

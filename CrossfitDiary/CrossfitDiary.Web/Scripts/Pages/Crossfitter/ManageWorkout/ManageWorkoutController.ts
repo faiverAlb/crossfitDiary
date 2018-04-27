@@ -45,12 +45,12 @@
       this._isCreateNewWorkout = ko.observable(true);
     }
 
-    private onWorkoutToShowAction = (isCleanLogModel: boolean, logModel?: ToLogWorkoutViewModel) => {
+    private onWorkoutToShowAction = (isCleanLogModel: boolean, isEditMode: boolean, logModel?: ToLogWorkoutViewModel) => {
       if (isCleanLogModel) {
         this._logWorkoutController(null);
         return;
       }
-      this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToDisplay(), true, this._service, this.errorMessager, logModel));
+      this._logWorkoutController(new LogWorkoutController(this._createWorkoutController.workoutToDisplay(), true, this._service, this.errorMessager, isEditMode, logModel));
     }
   }
 }
