@@ -100,12 +100,16 @@
       this.errors = ko.validation.group(this);
     }
 
-    public addExerciseToList(exerciseViewModel: ExerciseViewModel) {
+    public addExerciseToList = (exerciseViewModel: ExerciseViewModel) => {
       this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel));
     }
 
-    public removeSimpleRoutineFromToDo(index:KnockoutObservable<number>) {
+    public removeSimpleRoutineFromToDo = (index:KnockoutObservable<number>) => {
       this._exercisesToBeDone.splice(index(), 1);
+    }
+
+    public addSimpleRoutineFromToDo = (exerciseViewModel: ExerciseViewModelObservable) => {
+      this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel.model));
     }
 
     public getId():number {

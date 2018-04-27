@@ -29,6 +29,7 @@ public static partial class MVC
 {
     public static CrossfitDiary.Web.Controllers.AccountController Account = new CrossfitDiary.Web.Controllers.T4MVC_AccountController();
     public static CrossfitDiary.Web.Controllers.CrossfitterController Crossfitter = new CrossfitDiary.Web.Controllers.T4MVC_CrossfitterController();
+    public static CrossfitDiary.Web.Controllers.ErrorController Error = new CrossfitDiary.Web.Controllers.T4MVC_ErrorController();
     public static CrossfitDiary.Web.Controllers.HomeController Home = new CrossfitDiary.Web.Controllers.T4MVC_HomeController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
@@ -634,6 +635,7 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             public static readonly string curly_bracket_svg = Url("curly-bracket.svg");
+            public static readonly string error_jpg = Url("error.jpg");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

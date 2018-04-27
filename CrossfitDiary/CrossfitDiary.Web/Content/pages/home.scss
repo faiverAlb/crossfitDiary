@@ -37,7 +37,20 @@
                 }
 
                 .workout-result {
-                    border-bottom: 1px dotted black;
+                    //border-bottom: 1px dotted black;
+                }
+            }
+
+            .item-footer {
+                margin-top: 4px;
+                border-top: 1px dashed #a6a6a6;
+
+                .edit-workout-action {
+                    cursor: pointer;
+                }
+
+                .repeat-workout-action {
+                    cursor: pointer;
                 }
             }
         }

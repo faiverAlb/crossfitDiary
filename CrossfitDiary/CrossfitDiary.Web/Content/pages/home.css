@@ -8926,6 +8926,11 @@ table > tbody > tr.empty-data {
       cursor: pointer; }
   .home-container .activities-list .done-item .item-body .workout-title {
     border-bottom: 1px dashed black; }
-  .home-container .activities-list .done-item .item-body .workout-result {
-    border-bottom: 1px dotted black; }
+  .home-container .activities-list .done-item .item-footer {
+    margin-top: 4px;
+    border-top: 1px dashed #a6a6a6; }
+    .home-container .activities-list .done-item .item-footer .edit-workout-action {
+      cursor: pointer; }
+    .home-container .activities-list .done-item .item-footer .repeat-workout-action {
+      cursor: pointer; }
 

@@ -16,19 +16,24 @@
     timePassed: string;
     wasFinished: boolean;
     workouterName: string;
+    isEditMode: boolean;
 
     constructor(
+      crossfitterWorkoutId: number,
       date: string,
       partialRepsFinished: number,
       roundsFinished: number,
       selectedWorkoutId: number,
       timePassed: string,
-      ) {
+      isEdtiMode: boolean
+    ) {
+      this.crossfitterWorkoutId = crossfitterWorkoutId;
       this.date = date;
       this.partialRepsFinished = partialRepsFinished;
       this.roundsFinished = roundsFinished;
       this.selectedWorkoutId = selectedWorkoutId;
       this.timePassed = timePassed;
+      this.isEditMode = isEdtiMode;
     }
   }
 
@@ -47,14 +52,17 @@
 
     /* Computeds */
 
-    constructor(public workoutType: WorkoutType, public selectedWorkoutId?: number) {
-      this._plannedDate = ko.observable(new Date());
+    constructor(public workoutType: WorkoutType, public isEditMode: boolean, public selectedWorkoutId?: number, public logModel?: ToLogWorkoutViewModel) {
+
+      let hasModel:boolean = logModel != null;
+      
+      this._plannedDate = ko.observable(hasModel ? new Date(logModel.date) : new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
       this._canSeeTotalRounds = workoutType === WorkoutType.AMRAP;
       this._canSeeTotalTime = workoutType === WorkoutType.ForTime;
 
     
 
-      this._totalTime = ko.observable(null)
+      this._totalTime = ko.observable(hasModel ? logModel.timePassed : null)
         .extend({
           required: {
             onlyIf: () => {
@@ -63,7 +71,7 @@
           }
         });
 
-      this._totalRoundsFinished = ko.observable(null)
+      this._totalRoundsFinished = ko.observable(hasModel? logModel.roundsFinished: null)
         .extend({
           required: {
             onlyIf: () => {
@@ -72,7 +80,7 @@
           }
         });
 
-      this._partialRepsFinished = ko.observable();
+      this._partialRepsFinished = ko.observable(hasModel ? logModel.partialRepsFinished : null);
 
       this.errors = ko.validation.group(this);
     }
@@ -81,11 +89,13 @@
     public toPlainObject = (): ToLogWorkoutViewModel => {
       let date = this._plannedDate() as any;
       let toLogWorkoutViewModel = new ToLogWorkoutViewModel(
+        this.logModel != null ? this.logModel.crossfitterWorkoutId: 0,
         date.toDateString(),
         this._partialRepsFinished(),
         this._totalRoundsFinished(),
         this.selectedWorkoutId,
-        this._totalTime()
+        this._totalTime(),
+        this.isEditMode
       );
       return toLogWorkoutViewModel;
     }

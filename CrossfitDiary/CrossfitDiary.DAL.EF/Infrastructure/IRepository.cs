@@ -22,6 +22,8 @@ namespace CrossfitDiary.DAL.EF.Infrastructure
 
         T FirstOrDefault(Expression<Func<T, bool>> where);
 
+        T Single(Expression<Func<T, bool>> where);
+
         IEnumerable<T> GetAll();
 
         IEnumerable<T> GetMany(Expression<Func<T,bool>> where);

@@ -22,6 +22,9 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("distance")]
         public int? Distance { get; set; }
 
+        [JsonProperty("isEditMode")]
+        public bool IsEditMode { get; set; }
+
         [JsonProperty("isPlanned")]
         public bool IsPlanned { get; set; }
 

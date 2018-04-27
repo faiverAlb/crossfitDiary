@@ -50,6 +50,13 @@ var General;
                 _this.isDataLoading(true);
                 return _this.delete("api/removeWorkout/" + crossfitterWorkoutId).finally(function () { _this.isDataLoading(false); });
             };
+            _this.getPersonLoggingInfo = function (preselectedCrossfitterWorkoutId) {
+                _this.isDataLoading(true);
+                return _this.get(_this.pathToApp + ("api/getPersonLoggingInfo/" + preselectedCrossfitterWorkoutId))
+                    .finally(function () {
+                    _this.isDataLoading(false);
+                });
+            };
             return _this;
         }
         return CrossfitterService;

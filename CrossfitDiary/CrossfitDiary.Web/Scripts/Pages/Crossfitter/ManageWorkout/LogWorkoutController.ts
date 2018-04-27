@@ -4,6 +4,7 @@
   import CrossfitterService = General.CrossfitterService;
   import BaseController = General.BaseController;
   import ErrorMessageViewModel = General.ErrorMessageViewModel;
+  import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
 
   export class LogWorkoutController extends BaseController{
     /* Сivilians */
@@ -16,9 +17,11 @@
     constructor(public workoutToUse: WorkoutViewModelObservable
               , public isCreateAndLogWorkout: boolean
               , public service: CrossfitterService
-              , public readonly errorMessager: ErrorMessageViewModel) {
+              , public readonly errorMessager: ErrorMessageViewModel
+              , public isEditMode: boolean
+              , logModel?: ToLogWorkoutViewModel) {
       super();
-      this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, workoutToUse.getId()));
+      this._logToCreate = ko.observable(new ToLogWorkoutViewModelObservable(workoutToUse.model.workoutType, isEditMode, workoutToUse.getId(), logModel));
 
     }
 

@@ -12,6 +12,15 @@ var Models;
         function WorkoutViewModelObservable(model, isReadOnlyMode) {
             var _this = this;
             this.model = model;
+            this.addExerciseToList = function (exerciseViewModel) {
+                _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel));
+            };
+            this.removeSimpleRoutineFromToDo = function (index) {
+                _this._exercisesToBeDone.splice(index(), 1);
+            };
+            this.addSimpleRoutineFromToDo = function (exerciseViewModel) {
+                _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel.model));
+            };
             this.toPlainObject = function () {
                 var workoutToCreate = new WorkoutViewModel(_this.model.workoutType, _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); }));
                 workoutToCreate.title = _this._title();
@@ -68,12 +77,6 @@ var Models;
             });
             this.errors = ko.validation.group(this);
         }
-        WorkoutViewModelObservable.prototype.addExerciseToList = function (exerciseViewModel) {
-            this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel));
-        };
-        WorkoutViewModelObservable.prototype.removeSimpleRoutineFromToDo = function (index) {
-            this._exercisesToBeDone.splice(index(), 1);
-        };
         WorkoutViewModelObservable.prototype.getId = function () {
             return this._id();
         };

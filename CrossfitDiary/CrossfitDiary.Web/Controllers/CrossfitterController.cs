@@ -17,9 +17,15 @@ namespace CrossfitDiary.Web.Controllers
         {
         }
 
-        public virtual ActionResult ManageWorkout()
+        public virtual ActionResult ManageWorkout(int? workoutId, int? crossfitterWorkoutId)
         {
             ViewBag.Title = "Manage Workout";
+
+            ViewBag.PredefindWorkoutId = workoutId;
+            
+            //TODO: Check persmissions!
+            ViewBag.CrossfitterWorkoutId = crossfitterWorkoutId;
+
             return View();
         }
 

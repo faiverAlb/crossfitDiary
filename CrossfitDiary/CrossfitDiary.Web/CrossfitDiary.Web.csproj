@@ -209,7 +209,11 @@
     <Compile Include="Configuration\ApplicationUserManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CrossfitterController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="CrossfitterController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="HomeController.generated.cs">
@@ -322,6 +326,7 @@
     <Content Include="Content\gijgo\modular\tree.css" />
     <Content Include="Content\gijgo\modular\tree.min.css" />
     <Content Include="Content\img\curly-bracket.svg" />
+    <Content Include="Content\img\error.jpg" />
     <Content Include="Content\pages\home.css">
       <DependentUpon>home.scss</DependentUpon>
     </Content>
@@ -546,6 +551,7 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
     <Content Include="Views\Shared\_Spinner.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
     <TypeScriptCompile Include="Scripts\index.d.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CreateWorkoutController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\ErrorMessageViewModel.ts" />

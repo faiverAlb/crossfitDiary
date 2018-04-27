@@ -31,6 +31,7 @@
                         </div>
                     </div>
                 }
+
             }
         </div>
     </div>
@@ -39,7 +40,7 @@
             foreach (ToLogWorkoutViewModel workout in Model.AllWorkouts)
             {
                 <div class="row">
-                    <div class="done-item offset-lg-3 col col-lg-5 my-2 p-3 rounded @(workout.CanBeRemovedByCurrentUser?"person-workout":"")">
+                    <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded @(workout.CanBeRemovedByCurrentUser ? "person-workout" : string.Empty)">
                         <div class="item-header d-flex flex-row justify-content-between  ">
                             <div class="user-icon">
                                 <span >@workout.WorkouterName</span>
@@ -48,7 +49,7 @@
                                 <span class="">@workout.DisplayDate</span>
                                 @if (workout.CanBeRemovedByCurrentUser)
                                 {
-                                    <a class="remove-workout text-secondary pointer" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
+                                    <a class="remove-workout pl-1 text-secondary pointer" title="Remove your workout" data-bind="click: function(){removeWorkout(@workout.CrossfitterWorkoutId);}">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 }
@@ -135,6 +136,16 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="item-footer text-right pt-1">
+                            <div class="action-buttons">
+                                @if (workout.CanBeRemovedByCurrentUser)
+                                {
+                                    <a class="edit-workout-action pointer text-info" title="Edit" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name, new {workoutId = workout.WorkoutViewModel.Id, crossfitterWorkoutId = workout.CrossfitterWorkoutId})"><i class="fas fa-edit "></i></a>
+                                }
+                                <a class="repeat-workout-action pointer text-success pl-1" title="Repeat" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name, new {workoutId = workout.WorkoutViewModel.Id})"><i class="fas fa-plus "></i></a>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
@@ -142,13 +153,12 @@
         }
         @if (Model.AllWorkouts.Count == 0)
         {
-            <div class="done-item offset-lg-3 col-md-12 col-lg-6 my-2 p-3">
-                <div class="done-item text-center">
-                    <a class="btn btn-success btn-lg" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-star" aria-hidden="true"></i> Let's log our first workout? <i class="fa fa-star" aria-hidden="true"></i></a>
-
+            <div class="row">
+                <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded text-center">
+                    <a class="btn btn-success btn-lg btn-block" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-star" aria-hidden="true"></i> Let's log our first workout? </a>
                 </div>
-
             </div>
+
         }
 
     </div>
@@ -175,3 +185,4 @@
         });
     </script>
 }
+

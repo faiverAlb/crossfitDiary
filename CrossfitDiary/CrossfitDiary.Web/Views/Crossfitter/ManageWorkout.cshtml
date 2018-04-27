@@ -2,6 +2,12 @@
 @{
     ViewBag.Title = "Manage Workout";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int? predefindWorkoutId = ViewBag.PredefindWorkoutId;
+    int? crossfitterWorkoutId = ViewBag.CrossfitterWorkoutId;
+
+    bool isEditMode = predefindWorkoutId.HasValue && crossfitterWorkoutId.HasValue;
+    bool isRepeatMode = predefindWorkoutId.HasValue && crossfitterWorkoutId.HasValue == false;
+    bool isDefaultModel = predefindWorkoutId.HasValue == false && crossfitterWorkoutId.HasValue == false;
 }
 
 <div class="manage-workout-page" data-bind="visible:true" style="display: none">
@@ -25,8 +31,8 @@
                             New or Existing one?
                         </div>
                         <div class="card-body">
-                            <div class="row ">
-                                <div class="workout-type-selector col-sm-6 my-1">
+                            <div class="row " data-bind="visible: _isEditMode == false && _isRepeatMode == false">
+                                <div class="workout-type-selector col-sm-6 my-1" >
                                     <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'New workout!',selectPicker: {}"></select>
                                 </div>
                                 <div class="existing-workout-selector col-sm-6 my-1">
@@ -43,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="want-to-log-container my-2" data-bind="if: _canSeeLoggingContainer">
+        <div class="want-to-log-container my-2" >
             <div class="log-workout-container" data-bind="with:_logWorkoutController">
                 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
             </div>
@@ -67,8 +73,26 @@
     <script>
         $(function() {
             var path = "@Url.Content("~")";
-            let model = new Pages.ManageWorkoutController(new General.BasicParameters(path));
-            ko.applyBindings(model);
+            @{
+                if (isEditMode)
+                {
+                     <text>
+                         ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path), @predefindWorkoutId, @crossfitterWorkoutId));
+                     </text>
+                }
+                if (isRepeatMode)
+                {
+                    <text>
+                        ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path), @predefindWorkoutId));
+                    </text>
+                }
+                if (isDefaultModel)
+                {
+                    <text>
+                        ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path)));
+                    </text>
+                }
+            }
         });
     </script>
 }

@@ -80,7 +80,7 @@ namespace CrossfitDiary.Web.Api
 
             var crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model);
             crossfitterWorkout.Crossfitter = user;
-            _crossfitterService.LogWorkout(crossfitterWorkout);
+            _crossfitterService.LogWorkout(crossfitterWorkout, model.IsEditMode);
         }
 
         /// <summary>
@@ -98,15 +98,38 @@ namespace CrossfitDiary.Web.Api
             RoutineComplex newWorkoutRoutine = Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
             newWorkoutRoutine.CreatedBy = user;
 
-            _crossfitterService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout);
+            _crossfitterService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
         }
 
+        /// <summary>
+        /// Remove workout.
+        /// </summary>
+        /// <param name="crossfitterWorkoutId">
+        /// The crossfitter workout id.
+        /// </param>
         [HttpDelete]
         [Route("removeWorkout/{crossfitterWorkoutId}")]
         public void RemoveWorkout(int crossfitterWorkoutId)
         {
             ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
             _crossfitterService.RemoveWorkout(crossfitterWorkoutId, user);
+        }
+
+        /// <summary>
+        /// Get person logging info by crossfit workout id
+        /// </summary>
+        /// <param name="preselectedCrossfitterWorkoutId">
+        /// The preselected crossfitter workout id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IHttpActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        [Route("getPersonLoggingInfo/{preselectedCrossfitterWorkoutId}")]
+        public IHttpActionResult GetPersonLoggingInfo(int preselectedCrossfitterWorkoutId)
+        {
+            CrossfitterWorkout crossfitterWorkout = _crossfitterService.GetCrossfitterWorkout(preselectedCrossfitterWorkoutId);
+            return Ok(Mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout));
         }
 
         #endregion

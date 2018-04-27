@@ -8937,7 +8937,8 @@ table > tbody > tr.empty-data {
   margin: 6px 0; }
 
 .crossfitter-edit-workout-container .add-new-workout-container .exercise-selector {
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  border: 1px solid #6c757d; }
 
 .crossfitter-edit-workout-container .add-new-workout-container .no-selected-container {
   color: #5bc0de; }
