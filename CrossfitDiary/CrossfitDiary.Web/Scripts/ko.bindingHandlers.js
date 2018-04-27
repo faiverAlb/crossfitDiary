@@ -94,7 +94,7 @@ ko.bindingHandlers.datepicker = {
         rightIcon: '<i class="far fa-calendar-alt"></i>'
       },
       value: getFormattedDate(date),
-      maxDate: date,
+      maxDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
       weekStartDay: 1,
       format: format
     };
