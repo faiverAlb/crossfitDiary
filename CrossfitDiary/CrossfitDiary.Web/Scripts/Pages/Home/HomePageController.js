@@ -27,7 +27,8 @@ var Pages;
                     title: "Sure to remove workout?",
                     onOkModel: {
                         okFunction: _this.removeWorkout,
-                        okText: "Delete"
+                        okText: "Delete",
+                        cssClass: "btn-danger"
                     }
                 });
             };
