@@ -5,7 +5,6 @@
   import WorkoutType = Models.WorkoutType;
   import WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
   import WorkoutViewModel = Models.WorkoutViewModel;
-  import BaseController = General.BaseController;
   import ErrorMessageViewModel = General.ErrorMessageViewModel;
   import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
 
@@ -64,7 +63,7 @@
         this.selectedWorkout(null);
 
         let model = new WorkoutViewModel(this.selectedWorkoutType().id, []);
-        this.workoutToDisplay(new WorkoutViewModelObservable(model, false));
+        this.workoutToDisplay(new WorkoutViewModelObservable(model));
       });
 
       ko.computed(() => {
@@ -74,7 +73,7 @@
           return;
         }
         this.selectedWorkoutType(null);
-        this.workoutToDisplay(new WorkoutViewModelObservable(workout, false));
+        this.workoutToDisplay(new WorkoutViewModelObservable(workout));
 
       });
 

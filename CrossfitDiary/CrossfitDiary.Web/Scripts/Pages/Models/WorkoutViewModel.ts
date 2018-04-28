@@ -20,7 +20,6 @@
   export class WorkoutViewModelObservable {
     
     /* Сivilians */
-    private _isReadOnlyMode: boolean;
     public errors:any;
 
     /* Observables */
@@ -41,9 +40,8 @@
     private _workoutTypeTitle: string;
 
 
-    constructor(public model: WorkoutViewModel, isReadOnlyMode: boolean) {
+    constructor(public model: WorkoutViewModel) {
       /* Сivilians */
-      this._isReadOnlyMode = isReadOnlyMode;
       this._workoutTypeTitle = WorkoutType[model.workoutType];
       this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map((item) => {
         return new ExerciseViewModelObservable(item);
@@ -110,6 +108,20 @@
 
     public addSimpleRoutineFromToDo = (exerciseViewModel: ExerciseViewModelObservable) => {
       this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel.model));
+    }
+
+    public moveSimpleRoutineUp = (index: number) => {
+      if (index > 0) {
+        let rowList = this._exercisesToBeDone();
+        this._exercisesToBeDone.splice(index - 1, 2, rowList[index], rowList[index - 1]);
+      }
+    }
+    public moveSimpleRoutineDown = (index: number) => {
+      let rowList = this._exercisesToBeDone();
+      if (index < rowList.length - 1) {
+        this._exercisesToBeDone.splice(index, 2, rowList[index + 1], rowList[index]);
+
+      }
     }
 
     public getId():number {

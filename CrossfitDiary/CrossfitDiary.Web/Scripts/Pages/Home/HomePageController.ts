@@ -18,9 +18,23 @@
       this._service = new CrossfitterService(parameters.pathToApp, this.isDataLoading);
     }
 
-    private removeWorkout = (crossfitterWorkoutId: number) => {
+    private removeWorkoutConfirmation = (crossfitterWorkoutId: number) => {
+
+      ko.utils.showModalFromTemplate({
+        templateName: TemplatesNames.ConfirmToRemoveWorkout,
+        model: {crossfitterWorkoutId: crossfitterWorkoutId},
+        title: "Sure to remove workout?",
+        onOkModel: {
+          okFunction: this.removeWorkout,
+          okText: "Delete",
+          cssClass: "btn-danger"
+        }
+      });
+    };
+
+    private removeWorkout = (model: { crossfitterWorkoutId: number}) => {
       this.isDataLoading(true);
-      this._service.removeWorkout(crossfitterWorkoutId)
+      this._service.removeWorkout(model.crossfitterWorkoutId)
         .then(() => {
           this.isDataLoading(false);
           window.location.href = "/Home";

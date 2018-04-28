@@ -1,7 +1,7 @@
 ﻿<script type="text/html" id="routine-info-template">
     <div class="routine-complex-info" data-bind="with:model">
         <!--ko if: _canSeeGeneralWorkoutInfo-->
-        <div class="form-inline my-4 general-info-container">
+        <div class="form-inline mb-4 mt-3 general-info-container">
             <div  class="form-group" data-bind="if: _canSeeRoundsCount">
                 <h5 for="roundsInput" class="mr-2" >Rounds count:</h5>
                 <input type="number" min="1" class="form-control form-control-lg" id="roundsInput" placeholder="Rounds count" data-bind="validationElement: _roundsCount, value: _roundsCount, valueUpdate: 'afterkeydown'">
@@ -13,7 +13,7 @@
         </div>
         <!-- /ko -->
     </div>
-    <div data-bind="ifnot: model()._isReadOnlyMode">
+    <div>
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options: controller._exercises, optionsText:'title',value: controller._selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
     </div>
     <div class="selected-workout-type">

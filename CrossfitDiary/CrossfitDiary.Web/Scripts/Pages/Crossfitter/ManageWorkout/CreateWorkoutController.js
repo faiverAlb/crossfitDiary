@@ -75,7 +75,7 @@ var Pages;
                 }
                 _this.selectedWorkout(null);
                 var model = new WorkoutViewModel(_this.selectedWorkoutType().id, []);
-                _this.workoutToDisplay(new WorkoutViewModelObservable(model, false));
+                _this.workoutToDisplay(new WorkoutViewModelObservable(model));
             });
             ko.computed(function () {
                 var workout = _this.selectedWorkout();
@@ -84,7 +84,7 @@ var Pages;
                     return;
                 }
                 _this.selectedWorkoutType(null);
-                _this.workoutToDisplay(new WorkoutViewModelObservable(workout, false));
+                _this.workoutToDisplay(new WorkoutViewModelObservable(workout));
             });
             ko.computed(function () {
                 var exercise = _this._selectedExercise();

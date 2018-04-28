@@ -2,37 +2,32 @@
     <div class="form-row">
         <div class="form-group my-1 col-lg-auto">
             <div class="input-group">
-                <span class="input-group-prepend" data-bind="click:$parent.model().addSimpleRoutineFromToDo">
-                    <span class="input-group-text btn  bg-success text-light"><i class="fas fa-plus fa-sm" aria-hidden="true"></i></span>
-                </span>
                 <span class="form-control exercise-title" data-bind="text: model.title"></span>
-                <span class="input-group-append " data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}">
-                    <span class="input-group-text btn bg-secondary text-light"><i class="fas fa-trash fa-sm" aria-hidden="true"></i></span>
-                </span>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-de dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" data-bind="click:function(){$parent.model().moveSimpleRoutineUp($index());}, css:{disabled: $index() == 0}"> <i class="fas fa-long-arrow-alt-up text-info"></i> Move up </a>
+                        <a class="dropdown-item" href="#" data-bind="click:function(){$parent.model().moveSimpleRoutineDown($index());}, css:{disabled: $parent.model()._exercisesToBeDone().length -1  == $index()}"><i class="fas fa-long-arrow-alt-down text-info"></i> Move down </a>
+                        <a class="dropdown-item" href="#" data-bind="click:$parent.model().addSimpleRoutineFromToDo"><i class="fas fa-plus fa-sm text-success" aria-hidden="true"></i> Repeat </a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item " href="#" data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}"><i class="fas fa-trash fa-sm text-danger" aria-hidden="true"></i> Remove </a>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- ko foreach:_exerciseMeasures-->
-        <div class="form-group my-1 col-lg-auto" data-bind="ifnot: $parents[1].model()._isReadOnlyMode, validationElement: _exerciseMeasureType.measureValue">
+        <div class="form-group my-1 col-lg-auto" data-bind="validationElement: _exerciseMeasureType.measureValue">
             <label class="sr-only" data-bind="attr:{for:'measure_input_id_' + $index()}"></label>
             <div class="input-group mx-1 pr-1">
-                <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: _exerciseMeasureType.measureDesciption, readonly: $parents[1].model()._isReadOnlyMode, id:'measure_input_id_' + $index()}">
+                <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: _exerciseMeasureType.measureDesciption, id:'measure_input_id_' + $index()}">
                 <span class="input-group-append">
                     <span class="input-group-text" data-bind="text:'('+ _exerciseMeasureType.shortMeasureDescription() + ')'"></span>
                 </span>
             </div>
         </div>
-        <!-- ko if: $parents[1].model()._isReadOnlyMode && _exerciseMeasureType.measureValue-->
-            <div class="form-group my-1 col-lg-auto">
-                <div class="input-group">
-                    <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue" readonly="readonly">
-                    <span class="input-group-append">
-                        <span class="input-group-text" data-bind="text:'('+ _exerciseMeasureType.shortMeasureDescription() + ')'"></span>
-                    </span>
-                </div>
-            </div>
-        <!-- /ko -->
         <!-- /ko -->
     </div>
 </div>
-
 

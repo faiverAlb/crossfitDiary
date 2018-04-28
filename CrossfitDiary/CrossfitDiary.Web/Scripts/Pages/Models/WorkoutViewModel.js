@@ -9,7 +9,7 @@ var Models;
     }());
     Models.WorkoutViewModel = WorkoutViewModel;
     var WorkoutViewModelObservable = (function () {
-        function WorkoutViewModelObservable(model, isReadOnlyMode) {
+        function WorkoutViewModelObservable(model) {
             var _this = this;
             this.model = model;
             this.addExerciseToList = function (exerciseViewModel) {
@@ -21,6 +21,18 @@ var Models;
             this.addSimpleRoutineFromToDo = function (exerciseViewModel) {
                 _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel.model));
             };
+            this.moveSimpleRoutineUp = function (index) {
+                if (index > 0) {
+                    var rowList = _this._exercisesToBeDone();
+                    _this._exercisesToBeDone.splice(index - 1, 2, rowList[index], rowList[index - 1]);
+                }
+            };
+            this.moveSimpleRoutineDown = function (index) {
+                var rowList = _this._exercisesToBeDone();
+                if (index < rowList.length - 1) {
+                    _this._exercisesToBeDone.splice(index, 2, rowList[index + 1], rowList[index]);
+                }
+            };
             this.toPlainObject = function () {
                 var workoutToCreate = new WorkoutViewModel(_this.model.workoutType, _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); }));
                 workoutToCreate.title = _this._title();
@@ -31,7 +43,6 @@ var Models;
                 return workoutToCreate;
             };
             /* Сivilians */
-            this._isReadOnlyMode = isReadOnlyMode;
             this._workoutTypeTitle = Models.WorkoutType[model.workoutType];
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {
                 return new Models.ExerciseViewModelObservable(item);

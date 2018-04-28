@@ -114,66 +114,6 @@ ko.bindingHandlers.datepicker = {
   }
 };
 
-//ko.bindingHandlers.datepicker_old = {
-//    init: function (element, valueAccessor, allBindingsAccessor) {
-//        //initialize datepicker with some optional options
-//        var date = new Date();
-//        var options = allBindingsAccessor().dateTimePickerOptions || {
-//            format: 'DD/MM/YYYY'
-////            , minDate: date.setDate(date.getDate() - 1)
-//            , ignoreReadonly: true
-//            , locale: 'ru'
-//        };
-//        var defaults = {
-//            icons: {
-//                time: "fa fa-clock-o",
-//                date: "fa fa-calendar",
-//                up: "fa fa-arrow-up",
-//                down: "fa fa-arrow-down",
-//                previous: 'fa fa-chevron-left',
-//                next: 'fa fa-chevron-right',
-//                today: 'fa fa-calendar-check-o',
-//                clear: 'fa fa-eraser',
-//                close: 'fa fa-times'
-//            }
-//        };
-//        options = $.extend(true, {}, defaults, options);
-//        $(element).datetimepicker(options);
-//
-//        //when a user changes the date, update the view model
-//        ko.utils.registerEventHandler(element, "dp.change", function (event) {
-//            var value = valueAccessor();
-//            if (ko.isObservable(value)) {
-//                if (event.date === false) {
-//                    value(null);
-//                } else {
-//                    value(event.date);
-//                }
-//            }
-//        });
-//
-//        ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-//            var picker = $(element).data("DateTimePicker");
-//            if (picker) {
-//                picker.destroy();
-//            }
-//        });
-//    },
-//    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-//
-//        var picker = $(element).data("DateTimePicker");
-//        //when the view model is updated, update the widget
-//        if (picker) {
-//            var koDate = ko.utils.unwrapObservable(valueAccessor());
-//
-//            //in case return from server datetime i am get in this form for example /Date(93989393)/ then fomat this
-//            koDate = (typeof (koDate) !== 'object') ? new Date(parseFloat(koDate.replace(/[^0-9]/g, ''))) : koDate;
-//
-//            picker.date(koDate);
-//        }
-//    }
-//};
-
 
 ko.bindingHandlers.sort = {
     init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -212,3 +152,88 @@ ko.bindingHandlers.sort = {
     }
 };
 
+
+ko.utils.showModalFromTemplate = function (modalProperties) {
+  return innerModalMarkup(modalProperties.templateName
+    , modalProperties.model
+    , modalProperties.title
+    , modalProperties.onOkModel
+    , modalProperties.onCancelModel
+    , modalProperties.additionalCss
+    , modalProperties.onRefreshModel
+    , "#shared-bootstrap-modal-template"
+    , modalProperties.isLarge);
+
+};
+function innerModalMarkup(templateName, model, title, onOkModel, onCancelModel, additionalCss, onRefreshModel, modalContainer, isLarge, additionalFunctions) {
+    model.modalHeader = title;
+    model.modalLarge = isLarge ? "modal-lg" : "";
+    model.templateName = templateName;
+    var onOk = onOkModel || {};
+    model.onOk = onOk.okFunction;
+    model.okText = onOk.okText;
+    model.okClass = onOk.cssClass||"";
+    var onCancel = onCancelModel || {};
+    model.onCancel = onCancel.onCancelFunction || null;
+    model.showCancel = onCancel.isShown != undefined ? onCancel.isShown : true;
+    model.cancelText = onCancel.cancelText || "Cancel";
+
+    model.ShowOk = ko.computed({
+        read: function() {
+            return model.onOk != null;
+        },
+        deferEvaluation: true
+    });
+    model.EnableOk = onOk.enableFunction != null ? onOk.enableFunction : true;
+    var onRefresh = onRefreshModel || {};
+    model.onRefresh = onRefresh.onRefreshFunction || null;
+    model.ShowRefresh = ko.computed({
+        read: function() {
+            return model.onRefresh != null;
+        },
+        deferEvaluation: true
+    });
+    var $modalMarkup = $($(modalContainer).html());
+    ko.applyBindings(model, $modalMarkup[0]);
+
+   
+    if (additionalCss)
+        $modalMarkup.find('.modal-body').addClass(additionalCss);
+    $modalMarkup.find('[role="tablist"]').on("click", '[role="tab"]', function (e) {
+        e.preventDefault();
+        if ($(this).next('.panel-collapse.collapse.in').length > 0) {
+            $(this).next().collapse('hide');
+        } else {
+            $(this).next().collapse('show');
+        }
+    });
+    if (additionalFunctions) {
+        var modalBody = $modalMarkup.find('.modal-body');
+        for (var i = 0; i <= additionalFunctions.length - 1; i++) {
+            modalBody.on(additionalFunctions[i].event,
+                additionalFunctions[i].functionToExecute);
+        }
+    }
+
+    $modalMarkup.find('ul.nav-tabs')
+        .on('click',
+            'li:not(.active)',
+            function() {
+                $(this)
+                    .addClass('active')
+                    .siblings()
+                    .removeClass('active')
+                    .closest('div.tabs')
+                    .find('div.tab-pane')
+                    .removeClass('in active')
+                    .eq($(this).index())
+                    .addClass('in active');
+            });
+
+    $modalMarkup.modal({ show: true })
+        .on("hidden.bs.modal",
+            function () {
+                $modalMarkup.detach();
+            });
+
+};
