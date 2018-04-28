@@ -20,9 +20,20 @@ var Pages;
         function HomePageController(parameters) {
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
-            _this.removeWorkout = function (crossfitterWorkoutId) {
+            _this.removeWorkoutConfirmation = function (crossfitterWorkoutId) {
+                ko.utils.showModalFromTemplate({
+                    templateName: Pages.TemplatesNames.ConfirmToRemoveWorkout,
+                    model: { crossfitterWorkoutId: crossfitterWorkoutId },
+                    title: "Sure to remove workout?",
+                    onOkModel: {
+                        okFunction: _this.removeWorkout,
+                        okText: "Delete"
+                    }
+                });
+            };
+            _this.removeWorkout = function (model) {
                 _this.isDataLoading(true);
-                _this._service.removeWorkout(crossfitterWorkoutId)
+                _this._service.removeWorkout(model.crossfitterWorkoutId)
                     .then(function () {
                     _this.isDataLoading(false);
                     window.location.href = "/Home";

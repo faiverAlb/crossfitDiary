@@ -44,6 +44,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/bootstrap-datepicker/moment-with-locales.min.js"
                     , "~/Scripts/bootstrap-datepicker/bootstrap-datetimepicker.min.js"
                     , "~/Scripts/gijgo/combined/gijgo.min.js"
+
                     , "~/Scripts/Pages/General/BaseController.js"
                     , "~/Scripts/Pages/General/BaseService.js"
                     , "~/Scripts/Pages/General/BaseKeyValuePairModel.js"
@@ -51,6 +52,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/ServerProcessedViewModel.js"
                     , "~/Scripts/Pages/General/ErrorMessageViewModel.js"
+
                     , "~/Scripts/Pages/Models/ExerciseMeasureTypeValue.js"
                     , "~/Scripts/Pages/Models/WorkoutType.js"
                     , "~/Scripts/Pages/Models/ExerciseMeasureType.js"
@@ -86,6 +88,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/BaseController.js"
                     , "~/Scripts/Pages/General/ErrorMessageViewModel.js"
+                    , "~/Scripts/Pages/Home/TemplateNames.js"
                     , "~/Scripts/Pages/Home/HomePageController.js"));
 
             bundles.Add(new StyleBundle("~/Content/login")

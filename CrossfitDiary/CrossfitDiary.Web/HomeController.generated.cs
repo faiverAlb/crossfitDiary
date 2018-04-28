@@ -92,8 +92,10 @@ namespace CrossfitDiary.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _RemoveWorkoutTemplate = "_RemoveWorkoutTemplate";
                 public readonly string Index = "Index";
             }
+            public readonly string _RemoveWorkoutTemplate = "~/Views/Home/_RemoveWorkoutTemplate.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
         }
     }

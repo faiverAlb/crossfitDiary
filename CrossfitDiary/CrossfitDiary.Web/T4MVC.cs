@@ -270,6 +270,7 @@ namespace Links
                 public static readonly string CrossfitterService_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CrossfitterService.min.js") ? Url("CrossfitterService.min.js") : Url("CrossfitterService.js");
                 public static readonly string ErrorMessageViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ErrorMessageViewModel.min.js") ? Url("ErrorMessageViewModel.min.js") : Url("ErrorMessageViewModel.js");
                 public static readonly string FilterableViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/FilterableViewModel.min.js") ? Url("FilterableViewModel.min.js") : Url("FilterableViewModel.js");
+                public static readonly string KnockoutUtils_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/KnockoutUtils.min.js") ? Url("KnockoutUtils.min.js") : Url("KnockoutUtils.js");
                 public static readonly string ServerProcessedViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ServerProcessedViewModel.min.js") ? Url("ServerProcessedViewModel.min.js") : Url("ServerProcessedViewModel.js");
             }
         
@@ -279,6 +280,7 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 public static readonly string HomePageController_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/HomePageController.min.js") ? Url("HomePageController.min.js") : Url("HomePageController.js");
+                public static readonly string TemplateNames_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/TemplateNames.min.js") ? Url("TemplateNames.min.js") : Url("TemplateNames.js");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
