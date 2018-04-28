@@ -21,6 +21,18 @@ var Models;
             this.addSimpleRoutineFromToDo = function (exerciseViewModel) {
                 _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel.model));
             };
+            this.moveSimpleRoutineUp = function (index) {
+                if (index > 0) {
+                    var rowList = _this._exercisesToBeDone();
+                    _this._exercisesToBeDone.splice(index - 1, 2, rowList[index], rowList[index - 1]);
+                }
+            };
+            this.moveSimpleRoutineDown = function (index) {
+                var rowList = _this._exercisesToBeDone();
+                if (index < rowList.length - 1) {
+                    _this._exercisesToBeDone.splice(index, 2, rowList[index + 1], rowList[index]);
+                }
+            };
             this.toPlainObject = function () {
                 var workoutToCreate = new WorkoutViewModel(_this.model.workoutType, _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); }));
                 workoutToCreate.title = _this._title();

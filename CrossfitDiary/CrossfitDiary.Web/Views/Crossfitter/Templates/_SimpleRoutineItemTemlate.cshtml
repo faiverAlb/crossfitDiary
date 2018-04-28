@@ -2,13 +2,19 @@
     <div class="form-row">
         <div class="form-group my-1 col-lg-auto">
             <div class="input-group">
-                <span class="input-group-prepend" data-bind="click:$parent.model().addSimpleRoutineFromToDo">
-                    <button class="btn bg-success text-light"><i class="fas fa-plus fa-sm" aria-hidden="true"></i></button>
-                </span>
                 <span class="form-control exercise-title" data-bind="text: model.title"></span>
-                <span class="input-group-append " data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}">
-                    <button class="btn bg-secondary text-light" type="button"><i class="fas fa-trash fa-sm" aria-hidden="true"></i></button>
-                </span>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-de dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" data-bind="click:function(){$parent.model().moveSimpleRoutineUp($index());}, css:{disabled: $index() == 0}"> <i class="fas fa-long-arrow-alt-up text-info"></i> Move up </a>
+                        <a class="dropdown-item" href="#" data-bind="click:function(){$parent.model().moveSimpleRoutineDown($index());}, css:{disabled: $parent.model()._exercisesToBeDone().length -1  == $index()}"><i class="fas fa-long-arrow-alt-down text-info"></i> Move down </a>
+                        <a class="dropdown-item" href="#" data-bind="click:$parent.model().addSimpleRoutineFromToDo"><i class="fas fa-plus fa-sm text-success" aria-hidden="true"></i> Repeat </a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item " href="#" data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}"><i class="fas fa-trash fa-sm text-danger" aria-hidden="true"></i> Remove </a>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- ko foreach:_exerciseMeasures-->
@@ -24,5 +30,4 @@
         <!-- /ko -->
     </div>
 </div>
-
 

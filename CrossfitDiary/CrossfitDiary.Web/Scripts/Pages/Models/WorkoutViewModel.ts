@@ -110,6 +110,20 @@
       this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel.model));
     }
 
+    public moveSimpleRoutineUp = (index: number) => {
+      if (index > 0) {
+        let rowList = this._exercisesToBeDone();
+        this._exercisesToBeDone.splice(index - 1, 2, rowList[index], rowList[index - 1]);
+      }
+    }
+    public moveSimpleRoutineDown = (index: number) => {
+      let rowList = this._exercisesToBeDone();
+      if (index < rowList.length - 1) {
+        this._exercisesToBeDone.splice(index, 2, rowList[index + 1], rowList[index]);
+
+      }
+    }
+
     public getId():number {
       return this._id();
     }
