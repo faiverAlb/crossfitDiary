@@ -81,7 +81,8 @@ namespace CrossfitDiary.Service
                 {
                     RoutineSimple routineSimpleToSave = routineComplexToSave.RoutineSimple.ToList()[i];
                     RoutineSimple existingSimpleRoutine = existingRoutineComplex.RoutineSimple.ToList()[i];
-                    if (routineSimpleToSave.Count != existingSimpleRoutine.Count 
+                    if (routineSimpleToSave.ExerciseId != existingSimpleRoutine.ExerciseId
+                        || routineSimpleToSave.Count != existingSimpleRoutine.Count 
                         || routineSimpleToSave.Distance != existingSimpleRoutine.Distance
                         || routineSimpleToSave.Weight != existingSimpleRoutine.Weight
                         || routineSimpleToSave.Calories != existingSimpleRoutine.Calories)
