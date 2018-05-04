@@ -14,6 +14,7 @@ namespace CrossfitDiary.Model
         Distance = 0,
         Count = 1,
         Weight = 2,
-        Calories = 3
+        Calories = 3,
+        Height = 4,
     }
 }

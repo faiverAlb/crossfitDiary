@@ -34,5 +34,37 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations.Seeders
             };
         }
 
+
+        internal static List<Exercise> UpdateHeightMeasures(CrossfitDiaryDbContext context)
+        {
+            if (context.Exercises.Any(x => x.Title.ToLower() == "Box Jumps".ToLower() && x.ExerciseMeasures.FirstOrDefault(y => y.ExerciseMeasureType.MeasureType == MeasureType.Height) != null))
+            {
+                return new List<Exercise>();
+            }
+
+            var result = new List<Exercise>();
+
+            Exercise boxJump = context.Exercises.Single(x => x.Title == "Box Jumps" && x.Abbreviation == "BJ");
+            Exercise burpeeBoxJump = context.Exercises.Single(x => x.Title == "Burpee box jump" && x.Abbreviation == "Burpee BJ");
+            Exercise burpeeBoxJumpOver = context.Exercises.Single(x => x.Title == "Burpee box jump over" && x.Abbreviation == "Burpee BJ Ov");
+
+            ExerciseMeasureType exerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == MeasureType.Height);
+            AddMeasureToExercise(boxJump, exerciseMeasureType);
+            AddMeasureToExercise(burpeeBoxJump, exerciseMeasureType);
+            AddMeasureToExercise(burpeeBoxJumpOver, exerciseMeasureType);
+
+            result.AddRange(new[] {boxJump, burpeeBoxJump, burpeeBoxJumpOver});
+            return result;
+        }
+
+        private static void AddMeasureToExercise(Exercise exercise, ExerciseMeasureType exerciseMeasureType)
+        {
+            exercise.ExerciseMeasures.Add(new ExerciseMeasure()
+            {
+                Exercise = exercise,
+                ExerciseMeasureType = exerciseMeasureType,
+            });
+
+        }
     }
 }

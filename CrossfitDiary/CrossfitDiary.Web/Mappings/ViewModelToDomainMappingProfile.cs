@@ -32,7 +32,8 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.Count, opt => opt.ResolveUsing<CountResolver>())
                 .ForMember(x => x.Distance, opt => opt.ResolveUsing<DistanceResolver>())
                 .ForMember(x => x.Weight, opt => opt.ResolveUsing<WeightResolver>())
-                .ForMember(x => x.Calories, opt => opt.ResolveUsing<CaloriesResolver>());
+                .ForMember(x => x.Calories, opt => opt.ResolveUsing<CaloriesResolver>())
+                .ForMember(x => x.Centimeters, opt => opt.ResolveUsing<CentimetersResolver>());
 
             CreateMap<ToLogWorkoutViewModel, CrossfitterWorkout>()
                 .ForMember(x => x.RoutineComplexId, x => x.MapFrom(y => y.SelectedWorkoutId))
@@ -57,7 +58,10 @@ namespace CrossfitDiary.Web.Mappings
         {
             ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Count);
             if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
+            {
                 return null;
+            }
+
             return DecimalParse.ParseDecimal(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
         }
 
@@ -69,7 +73,10 @@ namespace CrossfitDiary.Web.Mappings
         {
             ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Distance);
             if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
+            {
                 return null;
+            }
+
             return DecimalParse.ParseDecimal(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
         }
     }
@@ -80,7 +87,10 @@ namespace CrossfitDiary.Web.Mappings
         {
             ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Weight);
             if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
+            {
                 return null;
+            }
+
             return DecimalParse.ParseDecimal(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
         }
     }
@@ -90,7 +100,22 @@ namespace CrossfitDiary.Web.Mappings
         {
             ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Calories);
             if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
+            {
                 return null;
+            }
+            return DecimalParse.ParseDecimal(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
+        }
+    }
+    public class CentimetersResolver : IValueResolver<ExerciseViewModel, RoutineSimple, decimal?>
+    {
+        public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
+        {
+            ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.ExerciseMeasureType.MeasureType == MeasureTypeViewModel.Height);
+            if (string.IsNullOrEmpty(foundTimeMeasure?.ExerciseMeasureType.MeasureValue))
+            {
+                return null;
+            }
+
             return DecimalParse.ParseDecimal(foundTimeMeasure.ExerciseMeasureType.MeasureValue);
         }
     }

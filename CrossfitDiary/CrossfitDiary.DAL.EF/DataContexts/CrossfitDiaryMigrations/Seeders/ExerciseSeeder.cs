@@ -9,12 +9,16 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations.Seeders
 
         private static ICollection<ExerciseMeasure> GetExerciseMeasures(CrossfitDiaryDbContext context, params MeasureType[] measureTypes)
         {
-            var exerciseMeasure = measureTypes.Select(measureType => new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == measureType) }).ToList();
+            List<ExerciseMeasure> exerciseMeasure = measureTypes.Select(measureType => new ExerciseMeasure() { ExerciseMeasureType = context.ExerciseMeasureTypes.Single(x => x.MeasureType == measureType) }).ToList();
             return exerciseMeasure;
         }
 
         internal static List<Exercise> GetInitialExercises(CrossfitDiaryDbContext context)
         {
+            if (context.Exercises.Any(x => x.Title == "Pull-up"))
+            {
+                return new List<Exercise>();
+            }
             return new List<Exercise>
             {
                 new Exercise

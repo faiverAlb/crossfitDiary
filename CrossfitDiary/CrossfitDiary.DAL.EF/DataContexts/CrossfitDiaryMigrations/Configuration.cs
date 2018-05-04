@@ -55,25 +55,28 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
 
         protected override void Seed(CrossfitDiaryDbContext context)
         {
-            GetInitialExerciseMeasureTypes().ForEach(exerciseMeasureType => context.ExerciseMeasureTypes.AddOrUpdate(x => x.MeasureType, exerciseMeasureType));
-            context.Commit();
-            ExerciseSeeder.GetInitialExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new {y.Abbreviation}, x));
-            context.Commit();
-            GetInitialRoutines(context).ForEach(x => context.ComplexRoutines.AddOrUpdate(y => y.Title,x));
-            context.Commit();
+//            GetInitialExerciseMeasureTypes().ForEach(eMeasureType => context.ExerciseMeasureTypes.AddOrUpdate(x => x.MeasureType, eMeasureType));
+//            context.Commit();
+//            ExerciseSeeder.GetInitialExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new {y.Abbreviation}, x));
+//            context.Commit();
+//            GetInitialRoutines(context).ForEach(x => context.ComplexRoutines.AddOrUpdate(y => y.Title,x));
+//            context.Commit();
+//
+//            ExerciseSeeder.GetAdditionalExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+//            context.Commit();
+//
+//            ExerciseSeeder.GetMoreExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+//            context.Commit();
+//
+//            ExerciseSeeder.AddSeeds_February_2018(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+//            context.Commit();
+//
+//            ExerciseSeeder.AddSeeds_May_2018(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+//            context.Commit();
+//            ExerciseSeeder.AddSeeds_May_2018_Second(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+//            context.Commit();
 
-            ExerciseSeeder.GetAdditionalExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
-            context.Commit();
-
-            ExerciseSeeder.GetMoreExercises(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
-            context.Commit();
-
-            ExerciseSeeder.AddSeeds_February_2018(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
-            context.Commit();
-
-            ExerciseSeeder.AddSeeds_May_2018(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
-            context.Commit();
-            ExerciseSeeder.AddSeeds_May_2018_Second(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+            ExerciseSeeder.UpdateHeightMeasures(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
             context.Commit();
         }
 
@@ -107,6 +110,12 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                     MeasureType = MeasureType.Calories,
                     Description = "Calories",
                     ShortMeasureDescription = "cal"
+                },
+                new ExerciseMeasureType()
+                {
+                    MeasureType = MeasureType.Height,
+                    Description = "Centimeters",
+                    ShortMeasureDescription = "cm"
                 }
             };
         }
