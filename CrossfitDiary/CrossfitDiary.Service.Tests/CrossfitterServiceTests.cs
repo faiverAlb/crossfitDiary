@@ -23,10 +23,10 @@ namespace CrossfitDiary.Service.Tests
                 RoutineSimple =
                     new List<RoutineSimple>()
                     {
-                        new RoutineSimple() {Calories = 111, Id = 1},
-                        new RoutineSimple() {Count = 222, Id = 2},
-                        new RoutineSimple() {Distance = 333, Id = 3},
-                        new RoutineSimple() {Weight = 444, Count = 555, Id = 4},
+                        new RoutineSimple() {Calories = 111, Id = 1, ExerciseId = 1},
+                        new RoutineSimple() {Count = 222, Id = 2, ExerciseId = 1},
+                        new RoutineSimple() {Distance = 333, Id = 3, ExerciseId = 1},
+                        new RoutineSimple() {Weight = 444, Count = 555, Id = 4, ExerciseId = 1}
                     },
                 Id = 123
             };
@@ -193,6 +193,21 @@ namespace CrossfitDiary.Service.Tests
             // Arrange
             RoutineComplex routineComplexToSave = GetRoutineComplex();
             routineComplexToSave.RoutineSimple.ElementAt(3).Count++;
+            
+            // Act
+            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null);
+            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+
+            // Assert
+            Assert.AreEqual(0, actual);
+        }
+
+        [Test]
+        public void FindDefaultOrExistingWorkout_ExercisesDifferentWithSameMeasures_MethodReturns_0()
+        {
+            // Arrange
+            RoutineComplex routineComplexToSave = GetRoutineComplex();
+            routineComplexToSave.RoutineSimple.ElementAt(0).ExerciseId++;
             
             // Act
             CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null);
