@@ -421,5 +421,11 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations.Seeders
             return exercisesToAdd;
         }
 
+
+        private static bool IsExerciseAlreadyExist(string exerciseTitle, CrossfitDiaryDbContext context)
+        {
+            return context.Exercises.Any(x => x.Title.ToLower() == exerciseTitle.ToLower());
+        }
+
     }
 }

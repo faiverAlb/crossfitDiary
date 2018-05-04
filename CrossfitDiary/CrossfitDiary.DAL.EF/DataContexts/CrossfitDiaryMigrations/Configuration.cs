@@ -70,6 +70,9 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
 
             ExerciseSeeder.AddSeeds_February_2018(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
             context.Commit();
+
+            ExerciseSeeder.AddSeeds_May_2018(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+            context.Commit();
         }
 
 
@@ -110,6 +113,10 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
 
         private static List<RoutineComplex> GetInitialRoutines(CrossfitDiaryDbContext context)
         {
+            if (context.ComplexRoutines.Any(x => x.Title == "Angie"))
+            {
+                return new List<RoutineComplex>();
+            }
             return new List<RoutineComplex>()
               {
                   new RoutineComplex
@@ -166,11 +173,11 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                   {
                       RoutineSimple = new List<RoutineSimple>
                         {
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Deadlift"), Weight = 225, Count = 21},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Deadlift"), Weight = 102, Count = 21},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Handstand Push-Ups"), Count = 21},
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Deadlift"), Weight = 225, Count = 15},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Deadlift"), Weight = 102, Count = 15},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Handstand Push-Ups"), Count = 15},
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Deadlift"), Weight = 225, Count = 9},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Deadlift"), Weight = 102, Count = 9},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Handstand Push-Ups"), Count = 9},
                         }
                         , Title = "Diane"
@@ -180,11 +187,11 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                   {
                       RoutineSimple = new List<RoutineSimple>
                         {
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 135, Count = 21},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 61, Count = 21},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Ring Dip"), Count = 21},
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 135, Count = 15},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 61, Count = 15},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Ring Dip"), Count = 15},
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 135, Count = 9},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 61, Count = 9},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Ring Dip"), Count = 9}
                         }
                         , Title = "Elizabeth"
@@ -194,11 +201,11 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                   {
                       RoutineSimple = new List<RoutineSimple>
                         {
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 95, Count = 21},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 43, Count = 21},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Pull-up"), Count = 21},
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 95, Count = 15},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 43, Count = 15},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Pull-up"), Count = 15},
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 95, Count = 9},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean"), Weight = 43, Count = 9},
                             new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Pull-up"), Count = 9},
                         }
                         , Title = "Fran"
@@ -208,7 +215,7 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
                   {
                       RoutineSimple = new List<RoutineSimple>
                         {
-                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean and Jerk"), Weight = 135, Count = 30},
+                            new RoutineSimple() {Exercise = context.Exercises.Single(x => x.Title == "Clean and Jerk"), Weight = 61, Count = 30},
                         }
                         , Title = "Grace"
                         , ComplexType = RoutineComplexType.ForTime
