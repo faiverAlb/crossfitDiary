@@ -85,7 +85,8 @@ namespace CrossfitDiary.Service
                         || routineSimpleToSave.Count != existingSimpleRoutine.Count 
                         || routineSimpleToSave.Distance != existingSimpleRoutine.Distance
                         || routineSimpleToSave.Weight != existingSimpleRoutine.Weight
-                        || routineSimpleToSave.Calories != existingSimpleRoutine.Calories)
+                        || routineSimpleToSave.Calories != existingSimpleRoutine.Calories
+                        || routineSimpleToSave.Centimeters != existingSimpleRoutine.Centimeters)
                     {
                         isExercisesMatch = false;
                         break;

@@ -97,6 +97,10 @@
     <Compile Include="DataContexts\CrossfitDiaryMigrations\201804260711258_AddCreatedDate.Designer.cs">
       <DependentUpon>201804260711258_AddCreatedDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201805040704147_AddCentimeters.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201805040704147_AddCentimeters.Designer.cs">
+      <DependentUpon>201805040704147_AddCentimeters.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder_May_2018.cs" />
@@ -160,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201804260711258_AddCreatedDate.resx">
       <DependentUpon>201804260711258_AddCreatedDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201805040704147_AddCentimeters.resx">
+      <DependentUpon>201805040704147_AddCentimeters.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

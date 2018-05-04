@@ -98,6 +98,12 @@ namespace CrossfitDiary.Web.Mappings
                                 exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Calories).ExerciseMeasureType.Description;
                                 exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Calories).ExerciseMeasureType.ShortMeasureDescription;
                                 break;
+                            case MeasureType.Height:
+                                exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Height;
+                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = $"{simple.Centimeters:0}";
+                                exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Height).ExerciseMeasureType.Description;
+                                exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Height).ExerciseMeasureType.ShortMeasureDescription;
+                                break;
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
@@ -169,6 +175,11 @@ namespace CrossfitDiary.Web.Mappings
             if (routineSimple.Distance.HasValue)
             {
                 return $"{routineSimple.Exercise.Title}({routineSimple.Distance.ToCustomString()} meters)";
+            }
+
+            if (routineSimple.Centimeters.HasValue)
+            {
+                return $"{routineSimple.Exercise.Title}({routineSimple.Centimeters.ToCustomString()} cm)";
             }
 
             return "-";

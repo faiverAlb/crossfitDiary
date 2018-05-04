@@ -16,7 +16,7 @@ namespace CrossfitDiary.Model
         /// <summary>
         /// Exercise is a part of the simple routine
         /// </summary>
-        public Exercise Exercise { get; set; }
+        public virtual Exercise Exercise { get; set; }
 
         /// <summary>
         /// Foreign Key to Exercise

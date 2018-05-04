@@ -104,6 +104,9 @@
                                                         case MeasureTypeViewModel.Calories:
                                                             <span>(@measure.ExerciseMeasureType.MeasureValue calories)</span>
                                                             break;
+                                                        case MeasureTypeViewModel.Height:
+                                                            <span>(@measure.ExerciseMeasureType.MeasureValue cm)</span>
+                                                            break;
                                                         default:
                                                             throw new ArgumentOutOfRangeException();
                                                     }
