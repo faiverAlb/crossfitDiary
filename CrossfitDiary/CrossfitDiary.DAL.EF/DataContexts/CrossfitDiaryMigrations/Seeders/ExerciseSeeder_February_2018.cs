@@ -7,10 +7,6 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations.Seeders
     public static partial class ExerciseSeeder
     {
 
-        private static bool IsExerciseAlreadyExist(string exerciseTitle, CrossfitDiaryDbContext context)
-        {
-            return context.Exercises.Any(x => x.Title.ToLower() == exerciseTitle.ToLower());
-        }
 
         internal static List<Exercise> AddSeeds_February_2018(CrossfitDiaryDbContext context)
         {
