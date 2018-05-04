@@ -34,6 +34,23 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations.Seeders
             };
         }
 
+        internal static List<Exercise> AddSeeds_May_2018_Third(CrossfitDiaryDbContext context)
+        {
+            if (IsExerciseAlreadyExist("Push Press(Db/Kb) arm", context))
+            {
+                return new List<Exercise>();
+            }
+
+            return new List<Exercise>
+            {
+                new Exercise {Title = "Push Press(Db/Kb)arm", Abbreviation = "Push Press(Db/Kb)arm", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)},
+                new Exercise {Title = "Push Jerk(Db/Kb)", Abbreviation = "PJ(Db/Kb)", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)},
+                new Exercise {Title = "Power Clean(DB/KB)", Abbreviation = "PC(DB/KB)", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)},
+                new Exercise {Title = "Power Snatch(DB/KB)", Abbreviation = "PS(DB/KB)", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)},
+                new Exercise {Title = "Thruster(DB/KB)", Abbreviation = "Thruster(DB/KB)", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)},
+            };
+        }
+
 
         internal static List<Exercise> UpdateHeightMeasures(CrossfitDiaryDbContext context)
         {
