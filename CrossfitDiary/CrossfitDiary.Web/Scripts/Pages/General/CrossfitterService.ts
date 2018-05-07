@@ -9,16 +9,7 @@
       super();
     }
 
-    createWorkout = (model: WorkoutViewModel) => {
-      return this
-        .post(this.pathToApp + "api/createWorkout", model);
-    };
-
-    logWorkout = (model: ToLogWorkoutViewModel) => {
-      return this.post(this.pathToApp + "api/logWorkout", model);
-    };
-
-    createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
+    public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
       return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);
     };
 

@@ -16,13 +16,6 @@ var General;
             var _this = _super.call(this) || this;
             _this.pathToApp = pathToApp;
             _this.isDataLoading = isDataLoading;
-            _this.createWorkout = function (model) {
-                return _this
-                    .post(_this.pathToApp + "api/createWorkout", model);
-            };
-            _this.logWorkout = function (model) {
-                return _this.post(_this.pathToApp + "api/logWorkout", model);
-            };
             _this.createAndLogWorkout = function (model) {
                 return _this.post(_this.pathToApp + "api/createAndLogNewWorkout", model);
             };
