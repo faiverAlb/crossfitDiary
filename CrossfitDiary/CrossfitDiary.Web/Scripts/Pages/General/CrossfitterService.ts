@@ -1,7 +1,7 @@
 ﻿module General {
-  import IExerciseViewModel = Models.ExerciseViewModel;
   import WorkoutViewModel = Models.WorkoutViewModel;
   import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
+  import ExerciseViewModel = Models.ExerciseViewModel;
 
   export class CrossfitterService extends BaseService {
 
@@ -22,9 +22,13 @@
         .finally(() => { this.isDataLoading(false); });
     };
 
-    getExercises = (): Q.Promise<IExerciseViewModel[]> => {
+    getExercises = (): Q.Promise<ExerciseViewModel[]> => {
       this.isDataLoading(true);
-      return this.get<IExerciseViewModel[]>(this.pathToApp + "api/getExercises").finally(() => { this.isDataLoading(false); });
+      return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getExercises")
+        .then((jsonData) => {
+          return jsonData.map(x => new ExerciseViewModel().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
     getStatisticalExercises = () => {

@@ -1,6 +1,8 @@
 ﻿module Models {
   import Serializable = General.Serializable;
-  export interface IExerciseViewModel {
+
+
+  interface IExerciseViewModel {
     id: number;
     title: string;
     exerciseMeasures: ExerciseMeasureViewModel[];

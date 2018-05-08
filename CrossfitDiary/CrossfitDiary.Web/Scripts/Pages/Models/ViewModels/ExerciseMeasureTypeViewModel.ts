@@ -1,7 +1,7 @@
 ﻿module Models {
   import Serializable = General.Serializable;
 
-  export interface IExerciseMeasureTypeViewModel {
+  interface IExerciseMeasureTypeViewModel {
     measureType: ExerciseMeasureType;
     measureValue: string;
     description: string;
@@ -21,6 +21,7 @@
       if (params == null) {
         return;
       }
+      
       this.measureType = params.measureType;
       this.measureValue = params.measureValue;
       this.description = params.description;
@@ -34,7 +35,7 @@
       }
 
       return new ExerciseMeasureTypeViewModel({
-        measureType: input.measureType,
+        measureType: <ExerciseMeasureType>input.measureType,
         measureValue: input.measureValue,
         description: input.description,
         isRequired: input.isRequired,
