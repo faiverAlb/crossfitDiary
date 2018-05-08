@@ -34,7 +34,7 @@
       }
 
       return new ExerciseMeasureViewModel({
-        exerciseMeasureType: new ExerciseMeasureTypeViewModel().deserialize(input)
+        exerciseMeasureType: new ExerciseMeasureTypeViewModel().deserialize(input.exerciseMeasureType)
       });
     }
 

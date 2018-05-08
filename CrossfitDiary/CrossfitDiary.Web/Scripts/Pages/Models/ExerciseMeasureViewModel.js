@@ -27,7 +27,7 @@ var Models;
                 return null;
             }
             return new ExerciseMeasureViewModel({
-                exerciseMeasureType: new Models.ExerciseMeasureTypeViewModel().deserialize(input)
+                exerciseMeasureType: new Models.ExerciseMeasureTypeViewModel().deserialize(input.exerciseMeasureType)
             });
         };
         return ExerciseMeasureViewModel;
