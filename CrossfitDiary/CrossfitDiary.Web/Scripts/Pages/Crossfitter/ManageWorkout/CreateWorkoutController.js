@@ -74,7 +74,10 @@ var Pages;
                     return;
                 }
                 _this.selectedWorkout(null);
-                var model = new WorkoutViewModel(_this.selectedWorkoutType().id, []);
+                var model = new WorkoutViewModel({
+                    workoutType: _this.selectedWorkoutType().id,
+                    exercisesToDoList: []
+                });
                 _this.workoutToDisplay(new WorkoutViewModelObservable(model));
             });
             ko.computed(function () {

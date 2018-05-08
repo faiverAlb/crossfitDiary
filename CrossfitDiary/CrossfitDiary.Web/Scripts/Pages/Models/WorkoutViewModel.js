@@ -1,10 +1,36 @@
 var Models;
 (function (Models) {
     var WorkoutViewModel = (function () {
-        function WorkoutViewModel(workoutType, exercises) {
-            this.workoutType = workoutType;
-            this.exercisesToDoList = exercises;
+        function WorkoutViewModel(params) {
+            if (params == null) {
+                return;
+            }
+            this.id = params.id;
+            this.title = params.title;
+            this.detailedTitle = params.detailedTitle;
+            this.roundsCount = params.roundsCount;
+            this.timeToWork = params.timeToWork;
+            this.restBetweenExercises = params.restBetweenExercises;
+            this.restBetweenRounds = params.restBetweenRounds;
+            this.workoutType = params.workoutType;
+            this.exercisesToDoList = params.exercisesToDoList;
         }
+        WorkoutViewModel.prototype.deserialize = function (jsonInput) {
+            if (jsonInput == null) {
+                return null;
+            }
+            return new WorkoutViewModel({
+                id: jsonInput.id,
+                title: jsonInput.title,
+                detailedTitle: jsonInput.detailedTitle,
+                roundsCount: jsonInput.roundsCount,
+                timeToWork: jsonInput.timeToWork,
+                restBetweenExercises: jsonInput.restBetweenExercises,
+                restBetweenRounds: jsonInput.restBetweenRounds,
+                workoutType: jsonInput.workoutType,
+                exercisesToDoList: jsonInput.exercisesToDoList
+            });
+        };
         return WorkoutViewModel;
     }());
     Models.WorkoutViewModel = WorkoutViewModel;
@@ -34,12 +60,17 @@ var Models;
                 }
             };
             this.toPlainObject = function () {
-                var workoutToCreate = new WorkoutViewModel(_this.model.workoutType, _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); }));
-                workoutToCreate.title = _this._title();
-                workoutToCreate.roundsCount = _this._roundsCount();
-                workoutToCreate.timeToWork = _this._timeToWork();
-                workoutToCreate.restBetweenExercises = _this._restBetweenExercises();
-                workoutToCreate.restBetweenRounds = _this._restBetweenRounds();
+                var workoutToCreate = new WorkoutViewModel({
+                    id: _this.model.id,
+                    title: _this._title(),
+                    detailedTitle: _this.model.detailedTitle,
+                    roundsCount: _this._roundsCount(),
+                    timeToWork: _this._timeToWork(),
+                    restBetweenExercises: _this._restBetweenExercises(),
+                    restBetweenRounds: _this._restBetweenRounds(),
+                    workoutType: _this.model.workoutType,
+                    exercisesToDoList: _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); })
+                });
                 return workoutToCreate;
             };
             /* Сivilians */

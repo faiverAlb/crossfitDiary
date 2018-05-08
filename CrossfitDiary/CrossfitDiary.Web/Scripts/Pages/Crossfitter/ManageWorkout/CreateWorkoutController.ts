@@ -62,7 +62,10 @@
         }
         this.selectedWorkout(null);
 
-        let model = new WorkoutViewModel(this.selectedWorkoutType().id, []);
+        let model = new WorkoutViewModel({
+          workoutType: this.selectedWorkoutType().id,
+          exercisesToDoList: []
+        });
         this.workoutToDisplay(new WorkoutViewModelObservable(model));
       });
 

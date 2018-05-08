@@ -13,9 +13,13 @@
       return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);
     };
 
-    getAvailableWorkouts = (): Q.Promise<WorkoutViewModel[]> => {
+    public getAvailableWorkouts = (): Q.Promise<WorkoutViewModel[]> => {
       this.isDataLoading(true);
-      return this.get<WorkoutViewModel[]>(this.pathToApp + "api/getAvailableWorkouts").finally(() => { this.isDataLoading(false); });
+      return this.get<WorkoutViewModel[]>(this.pathToApp + "api/getAvailableWorkouts")
+        .then((jsonData) => {
+          return jsonData.map(x => new WorkoutViewModel().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
     getExercises = (): Q.Promise<IExerciseViewModel[]> => {

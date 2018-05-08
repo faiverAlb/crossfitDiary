@@ -15,7 +15,7 @@
     <!--ko if:errorMessager.hasMessage -->
     <div class="alert alert-danger" role="alert">
         <span data-bind="text: errorMessager.message"></span>
-    </div>    
+    </div>
     <!-- /ko -->
 
     <div data-bind="visible: isDataLoading">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row " data-bind="visible: _isEditMode == false && _isRepeatMode == false">
-                                <div class="workout-type-selector col-sm-6 my-1" >
+                                <div class="workout-type-selector col-sm-6 my-1">
                                     <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'New workout!',selectPicker: {}"></select>
                                 </div>
                                 <div class="existing-workout-selector col-sm-6 my-1">
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="want-to-log-container my-2" >
+        <div class="want-to-log-container my-2">
             <div class="log-workout-container" data-bind="with:_logWorkoutController">
                 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
             </div>
@@ -68,6 +68,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/general-models")
 
     @Scripts.Render("~/bundles/crossfitter/manageWorkout")
     <script>

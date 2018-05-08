@@ -10,6 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var General;
 (function (General) {
+    var WorkoutViewModel = Models.WorkoutViewModel;
     var CrossfitterService = (function (_super) {
         __extends(CrossfitterService, _super);
         function CrossfitterService(pathToApp, isDataLoading) {
@@ -21,7 +22,11 @@ var General;
             };
             _this.getAvailableWorkouts = function () {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + "api/getAvailableWorkouts").finally(function () { _this.isDataLoading(false); });
+                return _this.get(_this.pathToApp + "api/getAvailableWorkouts")
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new WorkoutViewModel().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.getExercises = function () {
                 _this.isDataLoading(true);

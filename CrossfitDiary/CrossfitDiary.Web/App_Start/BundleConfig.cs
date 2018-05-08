@@ -83,13 +83,25 @@ namespace CrossfitDiary.Web
             /*   --Home--   */
             bundles.Add(new ScriptBundle("~/bundles/home")
                 .Include(
-                     "~/Scripts/Pages/General/ServerProcessedViewModel.js"
+                    "~/Scripts/Pages/General/ServerProcessedViewModel.js"
                     , "~/Scripts/Pages/General/BaseService.js"
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/BaseController.js"
                     , "~/Scripts/Pages/General/ErrorMessageViewModel.js"
                     , "~/Scripts/Pages/Home/TemplateNames.js"
                     , "~/Scripts/Pages/Home/HomePageController.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/general-models")
+                .Include(
+                    "~/Scripts/Pages/Models/ExerciseMeasureTypeValue.js"
+                    , "~/Scripts/Pages/Models/WorkoutType.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureType.js"
+                    , "~/Scripts/Pages/Models/SimpleRoutine.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureTypeViewModel.js"
+                    , "~/Scripts/Pages/Models/ExerciseViewModel.js"
+                    , "~/Scripts/Pages/Models/WorkoutViewModel.js"
+                    , "~/Scripts/Pages/Models/ToLogWorkoutViewModel.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/login")
                 .Include("~/Content/pages/login-page.css"));
