@@ -1,13 +1,4 @@
 ﻿module Models {
-  export class PersonExerciseRecord {
-    personName: string;
-    maximumWeight: string;
-    date: string;
-    workoutTitle: string;
-    positionBetweenOthers: number;
-    isItMe: boolean;
-  }
-
   export class ObservablePersonExerciseRecord {
     personName: KnockoutObservable<string>;
     maximumWeight: KnockoutObservable<string>;

@@ -53,14 +53,12 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/ServerProcessedViewModel.js"
                     , "~/Scripts/Pages/General/ErrorMessageViewModel.js"
 
-                    , "~/Scripts/Pages/Models/ExerciseMeasureTypeValue.js"
-                    , "~/Scripts/Pages/Models/WorkoutType.js"
-                    , "~/Scripts/Pages/Models/ExerciseMeasureType.js"
-                    , "~/Scripts/Pages/Models/SimpleRoutine.js"
-                    , "~/Scripts/Pages/Models/ExerciseMeasureTypeViewModel.js"
-                    , "~/Scripts/Pages/Models/ExerciseViewModel.js"
-                    , "~/Scripts/Pages/Models/WorkoutViewModel.js"
-                    , "~/Scripts/Pages/Models/ToLogWorkoutViewModel.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureTypeViewModelObservable.js"
+                    , "~/Scripts/Pages/Models/ExerciseMeasureViewModelObservable.js"
+                    , "~/Scripts/Pages/Models/ExerciseViewModelObservable.js"
+                    , "~/Scripts/Pages/Models/WorkoutViewModelObservable.js"
+                    , "~/Scripts/Pages/Models/ToLogWorkoutViewModelObservable.js"
+
 
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/CreateWorkoutController.js"
                     , "~/Scripts/Pages/Crossfitter/ManageWorkout/LogWorkoutController.js"
@@ -76,7 +74,8 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/BasicParameters.js"
                     , "~/Scripts/Pages/General/FilterableViewModel.js"
-                    , "~/Scripts/Pages/Models/PersonExerciseRecord.js"
+
+                    , "~/Scripts/Pages/Models/ObservablePersonExerciseRecord.js"
                     , "~/Scripts/Pages/Crossfitter/Pride/PrideController.js"
                 ));
 
@@ -93,15 +92,15 @@ namespace CrossfitDiary.Web
 
             bundles.Add(new ScriptBundle("~/bundles/general-models")
                 .Include(
-                    "~/Scripts/Pages/Models/ExerciseMeasureTypeValue.js"
-                    , "~/Scripts/Pages/Models/WorkoutType.js"
-                    , "~/Scripts/Pages/Models/ExerciseMeasureType.js"
-                    , "~/Scripts/Pages/Models/SimpleRoutine.js"
-                    , "~/Scripts/Pages/Models/ExerciseMeasureTypeViewModel.js"
-                    , "~/Scripts/Pages/Models/ExerciseMeasureViewModel.js"
-                    , "~/Scripts/Pages/Models/ExerciseViewModel.js"
-                    , "~/Scripts/Pages/Models/WorkoutViewModel.js"
-                    , "~/Scripts/Pages/Models/ToLogWorkoutViewModel.js"
+                    "~/Scripts/Pages/Models/ViewModels/ExerciseMeasureTypeValue.js"
+                    , "~/Scripts/Pages/Models/ViewModels/WorkoutType.js"
+                    , "~/Scripts/Pages/Models/ViewModels/ExerciseMeasureType.js"
+                    , "~/Scripts/Pages/Models/ViewModels/SimpleRoutine.js"
+                    , "~/Scripts/Pages/Models/ViewModels/ExerciseMeasureTypeViewModel.js"
+                    , "~/Scripts/Pages/Models/ViewModels/ExerciseMeasureViewModel.js"
+                    , "~/Scripts/Pages/Models/ViewModels/ExerciseViewModel.js"
+                    , "~/Scripts/Pages/Models/ViewModels/WorkoutViewModel.js"
+                    , "~/Scripts/Pages/Models/ViewModels/ToLogWorkoutViewModel.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/login")

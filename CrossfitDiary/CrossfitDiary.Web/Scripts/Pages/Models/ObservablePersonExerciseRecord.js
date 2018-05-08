@@ -1,11 +1,5 @@
 var Models;
 (function (Models) {
-    var PersonExerciseRecord = (function () {
-        function PersonExerciseRecord() {
-        }
-        return PersonExerciseRecord;
-    }());
-    Models.PersonExerciseRecord = PersonExerciseRecord;
     var ObservablePersonExerciseRecord = (function () {
         function ObservablePersonExerciseRecord(personName, maximumWeight, date, workoutTitle, positionBetweenOthers, isItMe) {
             this.personName = ko.observable(personName);
@@ -19,4 +13,4 @@ var Models;
     }());
     Models.ObservablePersonExerciseRecord = ObservablePersonExerciseRecord;
 })(Models || (Models = {}));
-//# sourceMappingURL=PersonExerciseRecord.js.map
+//# sourceMappingURL=ObservablePersonExerciseRecord.js.map

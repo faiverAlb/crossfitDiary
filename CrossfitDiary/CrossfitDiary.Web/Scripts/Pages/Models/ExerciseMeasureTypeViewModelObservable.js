@@ -1,20 +1,19 @@
 var Models;
 (function (Models) {
-    var IExerciseMeasureTypeViewModel = (function () {
-        function IExerciseMeasureTypeViewModel() {
-        }
-        return IExerciseMeasureTypeViewModel;
-    }());
-    Models.IExerciseMeasureTypeViewModel = IExerciseMeasureTypeViewModel;
     var ExerciseMeasureTypeViewModelObservable = (function () {
         function ExerciseMeasureTypeViewModelObservable(model) {
             var _this = this;
-            this.toJSON = function () { return ({
-                exerciseMeasureType: {
+            this.model = model;
+            this.toPlainObject = function () {
+                var plainObject = new Models.ExerciseMeasureTypeViewModel({
                     measureType: _this.measureType(),
-                    measureValue: _this.measureValue()
-                }
-            }); };
+                    measureValue: _this.measureValue(),
+                    description: _this.measureDesciption(),
+                    shortMeasureDescription: _this.shortMeasureDescription(),
+                    isRequired: _this.model.isRequired
+                });
+                return plainObject;
+            };
             this.measureType = ko.observable(model.measureType);
             this.measureValue = ko.observable();
             this.measureValue.extend({ required: model.isRequired });
