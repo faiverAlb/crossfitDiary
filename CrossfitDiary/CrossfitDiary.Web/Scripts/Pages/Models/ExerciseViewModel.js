@@ -1,31 +1,28 @@
 var Models;
 (function (Models) {
-    var ExerciseMeasureViewModel = (function () {
-        function ExerciseMeasureViewModel(exerciseMeasureType) {
-            this.exerciseMeasureType = exerciseMeasureType;
-        }
-        return ExerciseMeasureViewModel;
-    }());
-    Models.ExerciseMeasureViewModel = ExerciseMeasureViewModel;
-    var ExerciseMeasureViewModelObservable = (function () {
-        function ExerciseMeasureViewModelObservable(model) {
-            var _this = this;
-            this.model = model;
-            this.toPlainObject = function () {
-                var plainObject = new ExerciseMeasureViewModel(_this._exerciseMeasureType.toPlainObject());
-                return plainObject;
-            };
-            this._exerciseMeasureType = new Models.ExerciseMeasureTypeViewModelObservable(model.exerciseMeasureType);
-        }
-        return ExerciseMeasureViewModelObservable;
-    }());
+    ;
     var ExerciseViewModel = (function () {
-        function ExerciseViewModel(id, title, exerciseMeasures, isAlternative) {
-            this.id = id;
-            this.title = title;
-            this.exerciseMeasures = exerciseMeasures;
-            this.isAlternative = isAlternative;
+        function ExerciseViewModel(params) {
+            if (params == null) {
+                return;
+            }
+            this.id = params.id;
+            this.title = params.title;
+            this.exerciseMeasures = params.exerciseMeasures;
+            this.isAlternative = params.isAlternative;
         }
+        ExerciseViewModel.prototype.deserialize = function (input) {
+            if (input == null) {
+                return null;
+            }
+            return new ExerciseViewModel({
+                id: input.id,
+                title: input.title,
+                exerciseMeasures: input.exerciseMeasures.map(function (x) { return new Models.ExerciseMeasureViewModel().deserialize(x); }),
+                isAlternative: input.isAlternative,
+            });
+        };
+        ;
         return ExerciseViewModel;
     }());
     Models.ExerciseViewModel = ExerciseViewModel;
@@ -34,10 +31,15 @@ var Models;
             var _this = this;
             this.model = model;
             this.toPlainObject = function () {
-                var planExercise = new ExerciseViewModel(_this.model.id, _this.model.title, _this._exerciseMeasures.map(function (item) { return item.toPlainObject(); }), _this.model.isAlternative);
-                return planExercise;
+                var plainExercise = new ExerciseViewModel({
+                    id: _this.model.id,
+                    title: _this.model.title,
+                    exerciseMeasures: _this._exerciseMeasures.map(function (item) { return item.toPlainObject(); }),
+                    isAlternative: _this.model.isAlternative
+                });
+                return plainExercise;
             };
-            this._exerciseMeasures = model.exerciseMeasures.map(function (item) { return new ExerciseMeasureViewModelObservable(item); });
+            this._exerciseMeasures = model.exerciseMeasures.map(function (item) { return new Models.ExerciseMeasureViewModelObservable(item); });
         }
         return ExerciseViewModelObservable;
     }());

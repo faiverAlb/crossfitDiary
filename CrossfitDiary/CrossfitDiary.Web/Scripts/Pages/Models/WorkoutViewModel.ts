@@ -56,7 +56,7 @@
         restBetweenExercises: jsonInput.restBetweenExercises,
         restBetweenRounds: jsonInput.restBetweenRounds,
         workoutType: jsonInput.workoutType,
-        exercisesToDoList: jsonInput.exercisesToDoList
+        exercisesToDoList: jsonInput.exercisesToDoList.map(x => new ExerciseViewModel().deserialize(x))
       });
     }
 

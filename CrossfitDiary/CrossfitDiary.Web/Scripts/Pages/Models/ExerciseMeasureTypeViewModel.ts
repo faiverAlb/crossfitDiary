@@ -1,19 +1,50 @@
 ﻿module Models {
-  export class ExerciseMeasureTypeViewModel {
+  import Serializable = General.Serializable;
+
+  export interface IExerciseMeasureTypeViewModel {
+    measureType: ExerciseMeasureType;
+    measureValue: string;
+    description: string;
+    shortMeasureDescription: string;
+    isRequired: boolean;
+  }
+
+  export class ExerciseMeasureTypeViewModel implements Serializable<ExerciseMeasureTypeViewModel>{
+
     measureType: ExerciseMeasureType;
     measureValue: string;
     description: string;
     shortMeasureDescription: string;
     isRequired: boolean;
 
-    constructor(measureType: ExerciseMeasureType, measureValue: string, description: string, shortMeasureDescription: string, isRequired: boolean) {
-      this.measureType = measureType;
-      this.measureValue = measureValue;
-      this.description = description;
-      this.shortMeasureDescription = shortMeasureDescription;
-      this.isRequired = isRequired;
+    constructor(params?: IExerciseMeasureTypeViewModel) {
+      if (params == null) {
+        return;
+      }
+      this.measureType = params.measureType;
+      this.measureValue = params.measureValue;
+      this.description = params.description;
+      this.shortMeasureDescription = params.shortMeasureDescription;
+      this.isRequired = params.isRequired;
     }
-  }
+
+    deserialize(input): ExerciseMeasureTypeViewModel {
+      if (input == null) {
+        return null;
+      }
+
+      return new ExerciseMeasureTypeViewModel({
+        measureType: input.measureType,
+        measureValue: input.measureValue,
+        description: input.description,
+        isRequired: input.isRequired,
+        shortMeasureDescription: input.shortMeasureDescription,
+      });
+    }
+
+  };
+
+
   export class ExerciseMeasureTypeViewModelObservable {
     measureType: KnockoutObservable<ExerciseMeasureType>;
     measureValue: KnockoutObservable<string>;
@@ -33,11 +64,13 @@
     }
 
     public toPlainObject = (): ExerciseMeasureTypeViewModel => {
-      let plainObject = new ExerciseMeasureTypeViewModel(this.measureType(),
-        this.measureValue(),
-        this.measureDesciption(),
-        this.shortMeasureDescription(),
-        this.model.isRequired);
+      let plainObject = new ExerciseMeasureTypeViewModel({
+        measureType: this.measureType(),
+        measureValue: this.measureValue(),
+        description: this.measureDesciption(),
+        shortMeasureDescription: this.shortMeasureDescription(),
+        isRequired: this.model.isRequired
+      });
 
       return plainObject;
     }

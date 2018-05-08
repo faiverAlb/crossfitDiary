@@ -28,7 +28,7 @@ var Models;
                 restBetweenExercises: jsonInput.restBetweenExercises,
                 restBetweenRounds: jsonInput.restBetweenRounds,
                 workoutType: jsonInput.workoutType,
-                exercisesToDoList: jsonInput.exercisesToDoList
+                exercisesToDoList: jsonInput.exercisesToDoList.map(function (x) { return new Models.ExerciseViewModel().deserialize(x); })
             });
         };
         return WorkoutViewModel;
