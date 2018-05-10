@@ -10,41 +10,58 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var General;
 (function (General) {
+    var WorkoutViewModel = Models.WorkoutViewModel;
+    var ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
+    var ExerciseViewModel = Models.ExerciseViewModel;
+    var PersonExerciseRecord = Models.PersonExerciseRecord;
     var CrossfitterService = (function (_super) {
         __extends(CrossfitterService, _super);
         function CrossfitterService(pathToApp, isDataLoading) {
             var _this = _super.call(this) || this;
             _this.pathToApp = pathToApp;
             _this.isDataLoading = isDataLoading;
-            _this.createWorkout = function (model) {
-                return _this
-                    .post(_this.pathToApp + "api/createWorkout", model);
-            };
-            _this.logWorkout = function (model) {
-                return _this.post(_this.pathToApp + "api/logWorkout", model);
-            };
             _this.createAndLogWorkout = function (model) {
                 return _this.post(_this.pathToApp + "api/createAndLogNewWorkout", model);
             };
             _this.getAvailableWorkouts = function () {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + "api/getAvailableWorkouts").finally(function () { _this.isDataLoading(false); });
+                return _this.get(_this.pathToApp + "api/getAvailableWorkouts")
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new WorkoutViewModel().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.getExercises = function () {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + "api/getExercises").finally(function () { _this.isDataLoading(false); });
+                return _this.get(_this.pathToApp + "api/getExercises")
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new ExerciseViewModel().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.getStatisticalExercises = function () {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + "api/getStatisticalExercises").finally(function () { _this.isDataLoading(false); });
+                return _this.get(_this.pathToApp + "api/getStatisticalExercises")
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new ExerciseViewModel().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.getPersonExerciseMaximumWeight = function (exerciseId) {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/personMaximum")).finally(function () { _this.isDataLoading(false); });
+                return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/personMaximum"))
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new PersonExerciseRecord().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.getAllPersonsExerciseMaximumWeights = function (exerciseId) {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/allPersonsMaximums")).finally(function () { _this.isDataLoading(false); });
+                return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/allPersonsMaximums"))
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new PersonExerciseRecord().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.removeWorkout = function (crossfitterWorkoutId) {
                 _this.isDataLoading(true);
@@ -53,6 +70,9 @@ var General;
             _this.getPersonLoggingInfo = function (preselectedCrossfitterWorkoutId) {
                 _this.isDataLoading(true);
                 return _this.get(_this.pathToApp + ("api/getPersonLoggingInfo/" + preselectedCrossfitterWorkoutId))
+                    .then(function (jsonData) {
+                    return new ToLogWorkoutViewModel().deserialize(jsonData);
+                })
                     .finally(function () {
                     _this.isDataLoading(false);
                 });

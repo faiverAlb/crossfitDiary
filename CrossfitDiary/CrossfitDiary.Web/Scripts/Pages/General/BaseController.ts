@@ -6,4 +6,8 @@
       this.isDataLoading = ko.observable<boolean>(false);
     }
   }
+
+  export interface Serializable<T> {
+    deserialize(input: Object): T;
+  }
 }

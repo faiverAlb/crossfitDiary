@@ -12,6 +12,7 @@ var Pages;
 (function (Pages) {
     var CrossfitterService = General.CrossfitterService;
     var ObservablePersonExerciseRecord = Models.ObservablePersonExerciseRecord;
+    var ErrorMessageViewModel = General.ErrorMessageViewModel;
     var PrideController = (function (_super) {
         __extends(PrideController, _super);
         /* Computeds */
@@ -21,8 +22,12 @@ var Pages;
                 _this._service.getStatisticalExercises()
                     .then(function (exercises) {
                     _this._exercises(exercises);
+                })
+                    .fail(function (response) {
+                    _this.errorMessager.addMessage(response.responseText, false);
                 });
             };
+            _this.errorMessager = new ErrorMessageViewModel();
             _this.isDataLoading = ko.observable(false);
             _this._service = new CrossfitterService(basicParameters.pathToApp, _this.isDataLoading);
             _this._exercises = ko.observableArray([]);
@@ -45,6 +50,9 @@ var Pages;
                 })
                     .then(function (allPersonsRecords) {
                     _this._allPersonsMaximums($.map(allPersonsRecords, function (item) { return new ObservablePersonExerciseRecord(item.personName, item.maximumWeight, item.date, item.workoutTitle, item.positionBetweenOthers, item.isItMe); }));
+                })
+                    .fail(function (response) {
+                    _this.errorMessager.addMessage(response.responseText, false);
                 });
             });
             return _this;
