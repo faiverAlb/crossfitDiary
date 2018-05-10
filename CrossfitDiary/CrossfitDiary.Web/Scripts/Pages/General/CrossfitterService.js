@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 var General;
 (function (General) {
     var WorkoutViewModel = Models.WorkoutViewModel;
+    var ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
     var ExerciseViewModel = Models.ExerciseViewModel;
     var PersonExerciseRecord = Models.PersonExerciseRecord;
     var CrossfitterService = (function (_super) {
@@ -69,6 +70,9 @@ var General;
             _this.getPersonLoggingInfo = function (preselectedCrossfitterWorkoutId) {
                 _this.isDataLoading(true);
                 return _this.get(_this.pathToApp + ("api/getPersonLoggingInfo/" + preselectedCrossfitterWorkoutId))
+                    .then(function (jsonData) {
+                    return new ToLogWorkoutViewModel().deserialize(jsonData);
+                })
                     .finally(function () {
                     _this.isDataLoading(false);
                 });

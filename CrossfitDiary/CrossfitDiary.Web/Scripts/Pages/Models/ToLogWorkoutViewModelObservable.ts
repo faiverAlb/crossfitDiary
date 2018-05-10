@@ -52,13 +52,15 @@
     public toPlainObject = (): ToLogWorkoutViewModel => {
       let date = this._plannedDate() as any;
       let toLogWorkoutViewModel = new ToLogWorkoutViewModel(
-        this.logModel != null ? this.logModel.crossfitterWorkoutId: 0,
-        date.toDateString(),
-        this._partialRepsFinished(),
-        this._totalRoundsFinished(),
-        this.selectedWorkoutId,
-        this._totalTime(),
-        this.isEditMode
+        {
+          crossfitterWorkoutId: this.logModel != null ? this.logModel.crossfitterWorkoutId : 0,
+          date: date.toDateString(),
+          partialRepsFinished: this._partialRepsFinished(),
+          roundsFinished: this._totalRoundsFinished(),
+          selectedWorkoutId: this.selectedWorkoutId,
+          timePassed: this._totalTime(),
+          isEditMode: this.isEditMode
+        }
       );
       return toLogWorkoutViewModel;
     }

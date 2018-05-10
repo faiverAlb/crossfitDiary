@@ -10,7 +10,15 @@ var Models;
             this.logModel = logModel;
             this.toPlainObject = function () {
                 var date = _this._plannedDate();
-                var toLogWorkoutViewModel = new Models.ToLogWorkoutViewModel(_this.logModel != null ? _this.logModel.crossfitterWorkoutId : 0, date.toDateString(), _this._partialRepsFinished(), _this._totalRoundsFinished(), _this.selectedWorkoutId, _this._totalTime(), _this.isEditMode);
+                var toLogWorkoutViewModel = new Models.ToLogWorkoutViewModel({
+                    crossfitterWorkoutId: _this.logModel != null ? _this.logModel.crossfitterWorkoutId : 0,
+                    date: date.toDateString(),
+                    partialRepsFinished: _this._partialRepsFinished(),
+                    roundsFinished: _this._totalRoundsFinished(),
+                    selectedWorkoutId: _this.selectedWorkoutId,
+                    timePassed: _this._totalTime(),
+                    isEditMode: _this.isEditMode
+                });
                 return toLogWorkoutViewModel;
             };
             var hasModel = logModel != null;

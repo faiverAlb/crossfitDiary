@@ -1,39 +1,54 @@
 ﻿module Models {
-  declare var ko;
+  import Serializable = General.Serializable;
 
-  export class ToLogWorkoutViewModel {
-    canBeRemovedByCurrentUser: boolean;
+  interface IToLogWorkoutViewModel {
     crossfitterWorkoutId: number;
     date: string;
-    displayDate: string;
-    distance?: number;
-    isRx: boolean;
-    measureDisplayName: string;
+    partialRepsFinished: number;
+    roundsFinished: number;
+    selectedWorkoutId: number;
+    timePassed: string;
+    isEditMode: boolean;
+  }
+  export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel>{
+
+    crossfitterWorkoutId: number;
+    date: string;
     partialRepsFinished?: number;
     roundsFinished?: number;
     selectedWorkoutId: number;
-    selectedWorkoutName: string;
     timePassed: string;
-    wasFinished: boolean;
-    workouterName: string;
     isEditMode: boolean;
 
     constructor(
-      crossfitterWorkoutId: number,
-      date: string,
-      partialRepsFinished: number,
-      roundsFinished: number,
-      selectedWorkoutId: number,
-      timePassed: string,
-      isEdtiMode: boolean
-    ) {
-      this.crossfitterWorkoutId = crossfitterWorkoutId;
-      this.date = date;
-      this.partialRepsFinished = partialRepsFinished;
-      this.roundsFinished = roundsFinished;
-      this.selectedWorkoutId = selectedWorkoutId;
-      this.timePassed = timePassed;
-      this.isEditMode = isEdtiMode;
+      params?: IToLogWorkoutViewModel) {
+      if (params == null) {
+        return;
+      }
+      this.crossfitterWorkoutId = params.crossfitterWorkoutId;
+      this.date = params.date;
+      this.partialRepsFinished = params.partialRepsFinished;
+      this.roundsFinished = params.roundsFinished;
+      this.selectedWorkoutId = params.selectedWorkoutId;
+      this.timePassed = params.timePassed;
+      this.isEditMode = params.isEditMode;
     }
+
+    deserialize(jsonInput): ToLogWorkoutViewModel {
+      if (jsonInput == null) {
+        return null;
+      }
+
+      return new ToLogWorkoutViewModel({
+        crossfitterWorkoutId: jsonInput.crossfitterWorkoutId,
+        date: jsonInput.date,
+        isEditMode: jsonInput.isEditMode,
+        partialRepsFinished: jsonInput.partialRepsFinished,
+        roundsFinished: jsonInput.roundsFinished,
+        selectedWorkoutId: jsonInput.selectedWorkoutId,
+        timePassed: jsonInput.timePassed
+      });
+    }
+
   }
 }

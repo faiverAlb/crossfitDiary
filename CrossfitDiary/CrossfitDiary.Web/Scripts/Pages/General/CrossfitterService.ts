@@ -50,7 +50,7 @@
         .finally(() => { this.isDataLoading(false); });
     };
 
-    getAllPersonsExerciseMaximumWeights = (exerciseId: number) => {
+    public getAllPersonsExerciseMaximumWeights = (exerciseId: number) => {
       this.isDataLoading(true);
       return this.get<PersonExerciseRecord[]>(this.pathToApp + `api/exercises/${exerciseId}/allPersonsMaximums`)
         .then((jsonData) => {
@@ -59,14 +59,17 @@
         .finally(() => { this.isDataLoading(false); });
     };
 
-    removeWorkout = (crossfitterWorkoutId) => {
+    public removeWorkout = (crossfitterWorkoutId) => {
       this.isDataLoading(true);
       return this.delete(`api/removeWorkout/${crossfitterWorkoutId}`).finally(() => { this.isDataLoading(false); });
     };
 
-    getPersonLoggingInfo = (preselectedCrossfitterWorkoutId: number): Q.Promise<ToLogWorkoutViewModel> => {
+    public getPersonLoggingInfo = (preselectedCrossfitterWorkoutId: number): Q.Promise<ToLogWorkoutViewModel> => {
       this.isDataLoading(true);
       return this.get<ToLogWorkoutViewModel>(this.pathToApp + `api/getPersonLoggingInfo/${preselectedCrossfitterWorkoutId}`)
+        .then((jsonData) => {
+          return new ToLogWorkoutViewModel().deserialize(jsonData);
+        })
         .finally(() => {
           this.isDataLoading(false);
         });
