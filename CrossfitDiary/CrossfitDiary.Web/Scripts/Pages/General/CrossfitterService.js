@@ -56,7 +56,11 @@ var General;
             };
             _this.getAllPersonsExerciseMaximumWeights = function (exerciseId) {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/allPersonsMaximums")).finally(function () { _this.isDataLoading(false); });
+                return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/allPersonsMaximums"))
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new PersonExerciseRecord().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.removeWorkout = function (crossfitterWorkoutId) {
                 _this.isDataLoading(true);

@@ -52,7 +52,11 @@
 
     getAllPersonsExerciseMaximumWeights = (exerciseId: number) => {
       this.isDataLoading(true);
-      return this.get(this.pathToApp + `api/exercises/${exerciseId}/allPersonsMaximums`).finally(() => { this.isDataLoading(false); });
+      return this.get<PersonExerciseRecord[]>(this.pathToApp + `api/exercises/${exerciseId}/allPersonsMaximums`)
+        .then((jsonData) => {
+          return jsonData.map(x => new PersonExerciseRecord().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
     removeWorkout = (crossfitterWorkoutId) => {
