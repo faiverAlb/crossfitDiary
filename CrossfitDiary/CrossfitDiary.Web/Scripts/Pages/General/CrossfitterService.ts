@@ -31,9 +31,13 @@
         .finally(() => { this.isDataLoading(false); });
     };
 
-    getStatisticalExercises = () => {
+    getStatisticalExercises = (): Q.Promise<ExerciseViewModel[]> => {
       this.isDataLoading(true);
-      return this.get(this.pathToApp + "api/getStatisticalExercises").finally(() => { this.isDataLoading(false); });
+      return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getStatisticalExercises")
+        .then((jsonData) => {
+          return jsonData.map(x => new ExerciseViewModel().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
     getPersonExerciseMaximumWeight = (exerciseId: number) => {

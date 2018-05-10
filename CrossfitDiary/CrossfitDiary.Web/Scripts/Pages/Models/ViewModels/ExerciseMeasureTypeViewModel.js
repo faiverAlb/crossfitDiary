@@ -11,16 +11,16 @@ var Models;
             this.shortMeasureDescription = params.shortMeasureDescription;
             this.isRequired = params.isRequired;
         }
-        ExerciseMeasureTypeViewModel.prototype.deserialize = function (input) {
-            if (input == null) {
+        ExerciseMeasureTypeViewModel.prototype.deserialize = function (jsonInput) {
+            if (jsonInput == null) {
                 return null;
             }
             return new ExerciseMeasureTypeViewModel({
-                measureType: input.measureType,
-                measureValue: input.measureValue,
-                description: input.description,
-                isRequired: input.isRequired,
-                shortMeasureDescription: input.shortMeasureDescription,
+                measureType: jsonInput.measureType,
+                measureValue: jsonInput.measureValue,
+                description: jsonInput.description,
+                isRequired: jsonInput.isRequired,
+                shortMeasureDescription: jsonInput.shortMeasureDescription,
             });
         };
         return ExerciseMeasureTypeViewModel;

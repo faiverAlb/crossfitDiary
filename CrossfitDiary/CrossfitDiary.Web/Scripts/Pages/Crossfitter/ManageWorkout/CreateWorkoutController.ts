@@ -1,12 +1,12 @@
 ﻿module Pages {
   import CrossfitterService = General.CrossfitterService;
-  import IExerciseViewModel = Models.ExerciseViewModel;
   import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
   import WorkoutType = Models.WorkoutType;
   import WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
   import WorkoutViewModel = Models.WorkoutViewModel;
   import ErrorMessageViewModel = General.ErrorMessageViewModel;
   import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
+  import ExerciseViewModel = Models.ExerciseViewModel;
 
   export class CreateWorkoutController {
     /* Сivilians */
@@ -18,8 +18,8 @@
     public workoutToDisplay: KnockoutObservable<WorkoutViewModelObservable>;
     private _workoutTypes: KnockoutObservable<Array<BaseKeyValuePairModel<number, string>>>;
     private selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
-    private _exercises: KnockoutObservableArray<IExerciseViewModel>;
-    private _selectedExercise: KnockoutObservable<IExerciseViewModel>;
+    private _exercises: KnockoutObservableArray<ExerciseViewModel>;
+    private _selectedExercise: KnockoutObservable<ExerciseViewModel>;
 
     private _availableWorkouts: KnockoutObservableArray<WorkoutViewModel>;
     private selectedWorkout: KnockoutObservable<WorkoutViewModel>;
@@ -119,7 +119,7 @@
     private loadExercises = () => {
       return this.service
         .getExercises()
-        .then((exercises: IExerciseViewModel[]) => {
+        .then((exercises: ExerciseViewModel[]) => {
           this._exercises(exercises);
         });
     };

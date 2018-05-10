@@ -2,14 +2,15 @@
   import CrossfitterService = General.CrossfitterService;
   import PersonExerciseRecord = Models.PersonExerciseRecord;
   import ObservablePersonExerciseRecord = Models.ObservablePersonExerciseRecord;
+  import ExerciseViewModel = Models.ExerciseViewModel;
 
   export class PrideController extends General.FilterableViewModel {
     /* Сivilians */
     private _service: CrossfitterService;
 
     /* Observables */
-    private _exercises: KnockoutObservableArray<any>;
-    private _selectedExercise: KnockoutObservable<any>;
+    private _exercises: KnockoutObservableArray<ExerciseViewModel>;
+    private _selectedExercise: KnockoutObservable<ExerciseViewModel>;
     private _personMaximums: KnockoutObservableArray<PersonExerciseRecord>;
     private _allPersonsMaximums: KnockoutObservableArray<ObservablePersonExerciseRecord>;
     isDataLoading: KnockoutObservable<boolean>;
@@ -60,7 +61,7 @@
 
     private loadExercises = () => {
       this._service.getStatisticalExercises()
-        .then((exercises: any) => {
+        .then((exercises) => {
           this._exercises(exercises);
         });
     };

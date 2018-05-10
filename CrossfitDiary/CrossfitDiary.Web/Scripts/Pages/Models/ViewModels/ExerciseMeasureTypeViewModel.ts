@@ -29,17 +29,17 @@
       this.isRequired = params.isRequired;
     }
 
-    deserialize(input): ExerciseMeasureTypeViewModel {
-      if (input == null) {
+    deserialize(jsonInput): ExerciseMeasureTypeViewModel {
+      if (jsonInput == null) {
         return null;
       }
 
       return new ExerciseMeasureTypeViewModel({
-        measureType: <ExerciseMeasureType>input.measureType,
-        measureValue: input.measureValue,
-        description: input.description,
-        isRequired: input.isRequired,
-        shortMeasureDescription: input.shortMeasureDescription,
+        measureType: <ExerciseMeasureType>jsonInput.measureType,
+        measureValue: jsonInput.measureValue,
+        description: jsonInput.description,
+        isRequired: jsonInput.isRequired,
+        shortMeasureDescription: jsonInput.shortMeasureDescription,
       });
     }
 

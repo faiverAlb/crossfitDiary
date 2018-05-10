@@ -39,7 +39,11 @@ var General;
             };
             _this.getStatisticalExercises = function () {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + "api/getStatisticalExercises").finally(function () { _this.isDataLoading(false); });
+                return _this.get(_this.pathToApp + "api/getStatisticalExercises")
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new ExerciseViewModel().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.getPersonExerciseMaximumWeight = function (exerciseId) {
                 _this.isDataLoading(true);
