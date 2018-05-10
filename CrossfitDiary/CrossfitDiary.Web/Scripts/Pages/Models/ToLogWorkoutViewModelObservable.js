@@ -1,18 +1,5 @@
 var Models;
 (function (Models) {
-    var ToLogWorkoutViewModel = (function () {
-        function ToLogWorkoutViewModel(crossfitterWorkoutId, date, partialRepsFinished, roundsFinished, selectedWorkoutId, timePassed, isEdtiMode) {
-            this.crossfitterWorkoutId = crossfitterWorkoutId;
-            this.date = date;
-            this.partialRepsFinished = partialRepsFinished;
-            this.roundsFinished = roundsFinished;
-            this.selectedWorkoutId = selectedWorkoutId;
-            this.timePassed = timePassed;
-            this.isEditMode = isEdtiMode;
-        }
-        return ToLogWorkoutViewModel;
-    }());
-    Models.ToLogWorkoutViewModel = ToLogWorkoutViewModel;
     var ToLogWorkoutViewModelObservable = (function () {
         /* Computeds */
         function ToLogWorkoutViewModelObservable(workoutType, isEditMode, selectedWorkoutId, logModel) {
@@ -23,7 +10,15 @@ var Models;
             this.logModel = logModel;
             this.toPlainObject = function () {
                 var date = _this._plannedDate();
-                var toLogWorkoutViewModel = new ToLogWorkoutViewModel(_this.logModel != null ? _this.logModel.crossfitterWorkoutId : 0, date.toDateString(), _this._partialRepsFinished(), _this._totalRoundsFinished(), _this.selectedWorkoutId, _this._totalTime(), _this.isEditMode);
+                var toLogWorkoutViewModel = new Models.ToLogWorkoutViewModel({
+                    crossfitterWorkoutId: _this.logModel != null ? _this.logModel.crossfitterWorkoutId : 0,
+                    date: date.toDateString(),
+                    partialRepsFinished: _this._partialRepsFinished(),
+                    roundsFinished: _this._totalRoundsFinished(),
+                    selectedWorkoutId: _this.selectedWorkoutId,
+                    timePassed: _this._totalTime(),
+                    isEditMode: _this.isEditMode
+                });
                 return toLogWorkoutViewModel;
             };
             var hasModel = logModel != null;
@@ -53,4 +48,4 @@ var Models;
     }());
     Models.ToLogWorkoutViewModelObservable = ToLogWorkoutViewModelObservable;
 })(Models || (Models = {}));
-//# sourceMappingURL=ToLogWorkoutViewModel.js.map
+//# sourceMappingURL=ToLogWorkoutViewModelObservable.js.map

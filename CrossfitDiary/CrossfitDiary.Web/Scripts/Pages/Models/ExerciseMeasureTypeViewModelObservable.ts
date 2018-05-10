@@ -1,19 +1,4 @@
 ﻿module Models {
-  export class ExerciseMeasureTypeViewModel {
-    measureType: ExerciseMeasureType;
-    measureValue: string;
-    description: string;
-    shortMeasureDescription: string;
-    isRequired: boolean;
-
-    constructor(measureType: ExerciseMeasureType, measureValue: string, description: string, shortMeasureDescription: string, isRequired: boolean) {
-      this.measureType = measureType;
-      this.measureValue = measureValue;
-      this.description = description;
-      this.shortMeasureDescription = shortMeasureDescription;
-      this.isRequired = isRequired;
-    }
-  }
   export class ExerciseMeasureTypeViewModelObservable {
     measureType: KnockoutObservable<ExerciseMeasureType>;
     measureValue: KnockoutObservable<string>;
@@ -33,11 +18,13 @@
     }
 
     public toPlainObject = (): ExerciseMeasureTypeViewModel => {
-      let plainObject = new ExerciseMeasureTypeViewModel(this.measureType(),
-        this.measureValue(),
-        this.measureDesciption(),
-        this.shortMeasureDescription(),
-        this.model.isRequired);
+      let plainObject = new ExerciseMeasureTypeViewModel({
+        measureType: this.measureType(),
+        measureValue: this.measureValue(),
+        description: this.measureDesciption(),
+        shortMeasureDescription: this.shortMeasureDescription(),
+        isRequired: this.model.isRequired
+      });
 
       return plainObject;
     }

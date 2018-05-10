@@ -1,7 +1,8 @@
 ﻿module General {
-  import IExerciseViewModel = Models.ExerciseViewModel;
   import WorkoutViewModel = Models.WorkoutViewModel;
   import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
+  import ExerciseViewModel = Models.ExerciseViewModel;
+  import PersonExerciseRecord = Models.PersonExerciseRecord;
 
   export class CrossfitterService extends BaseService {
 
@@ -9,52 +10,66 @@
       super();
     }
 
-    createWorkout = (model: WorkoutViewModel) => {
-      return this
-        .post(this.pathToApp + "api/createWorkout", model);
-    };
-
-    logWorkout = (model: ToLogWorkoutViewModel) => {
-      return this.post(this.pathToApp + "api/logWorkout", model);
-    };
-
-    createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
+    public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
       return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);
     };
 
-    getAvailableWorkouts = (): Q.Promise<WorkoutViewModel[]> => {
+    public getAvailableWorkouts = (): Q.Promise<WorkoutViewModel[]> => {
       this.isDataLoading(true);
-      return this.get<WorkoutViewModel[]>(this.pathToApp + "api/getAvailableWorkouts").finally(() => { this.isDataLoading(false); });
+      return this.get<WorkoutViewModel[]>(this.pathToApp + "api/getAvailableWorkouts")
+        .then((jsonData) => {
+          return jsonData.map(x => new WorkoutViewModel().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
-    getExercises = (): Q.Promise<IExerciseViewModel[]> => {
+    public getExercises = (): Q.Promise<ExerciseViewModel[]> => {
       this.isDataLoading(true);
-      return this.get<IExerciseViewModel[]>(this.pathToApp + "api/getExercises").finally(() => { this.isDataLoading(false); });
+      return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getExercises")
+        .then((jsonData) => {
+          return jsonData.map(x => new ExerciseViewModel().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
-    getStatisticalExercises = () => {
+    public getStatisticalExercises = (): Q.Promise<ExerciseViewModel[]> => {
       this.isDataLoading(true);
-      return this.get(this.pathToApp + "api/getStatisticalExercises").finally(() => { this.isDataLoading(false); });
+      return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getStatisticalExercises")
+        .then((jsonData) => {
+          return jsonData.map(x => new ExerciseViewModel().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
-    getPersonExerciseMaximumWeight = (exerciseId: number) => {
+    public getPersonExerciseMaximumWeight = (exerciseId: number) => {
       this.isDataLoading(true);
-      return this.get(this.pathToApp + `api/exercises/${exerciseId}/personMaximum`).finally(() => { this.isDataLoading(false); });
+      return this.get<PersonExerciseRecord[]>(this.pathToApp + `api/exercises/${exerciseId}/personMaximum`)
+        .then((jsonData) => {
+          return jsonData.map(x => new PersonExerciseRecord().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
-    getAllPersonsExerciseMaximumWeights = (exerciseId: number) => {
+    public getAllPersonsExerciseMaximumWeights = (exerciseId: number) => {
       this.isDataLoading(true);
-      return this.get(this.pathToApp + `api/exercises/${exerciseId}/allPersonsMaximums`).finally(() => { this.isDataLoading(false); });
+      return this.get<PersonExerciseRecord[]>(this.pathToApp + `api/exercises/${exerciseId}/allPersonsMaximums`)
+        .then((jsonData) => {
+          return jsonData.map(x => new PersonExerciseRecord().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
-    removeWorkout = (crossfitterWorkoutId) => {
+    public removeWorkout = (crossfitterWorkoutId) => {
       this.isDataLoading(true);
       return this.delete(`api/removeWorkout/${crossfitterWorkoutId}`).finally(() => { this.isDataLoading(false); });
     };
 
-    getPersonLoggingInfo = (preselectedCrossfitterWorkoutId: number): Q.Promise<ToLogWorkoutViewModel> => {
+    public getPersonLoggingInfo = (preselectedCrossfitterWorkoutId: number): Q.Promise<ToLogWorkoutViewModel> => {
       this.isDataLoading(true);
       return this.get<ToLogWorkoutViewModel>(this.pathToApp + `api/getPersonLoggingInfo/${preselectedCrossfitterWorkoutId}`)
+        .then((jsonData) => {
+          return new ToLogWorkoutViewModel().deserialize(jsonData);
+        })
         .finally(() => {
           this.isDataLoading(false);
         });
