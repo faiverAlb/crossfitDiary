@@ -12,6 +12,7 @@ var General;
 (function (General) {
     var WorkoutViewModel = Models.WorkoutViewModel;
     var ExerciseViewModel = Models.ExerciseViewModel;
+    var PersonExerciseRecord = Models.PersonExerciseRecord;
     var CrossfitterService = (function (_super) {
         __extends(CrossfitterService, _super);
         function CrossfitterService(pathToApp, isDataLoading) {
@@ -47,7 +48,11 @@ var General;
             };
             _this.getPersonExerciseMaximumWeight = function (exerciseId) {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/personMaximum")).finally(function () { _this.isDataLoading(false); });
+                return _this.get(_this.pathToApp + ("api/exercises/" + exerciseId + "/personMaximum"))
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new PersonExerciseRecord().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.getAllPersonsExerciseMaximumWeights = function (exerciseId) {
                 _this.isDataLoading(true);

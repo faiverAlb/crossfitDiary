@@ -3,10 +3,12 @@
   import PersonExerciseRecord = Models.PersonExerciseRecord;
   import ObservablePersonExerciseRecord = Models.ObservablePersonExerciseRecord;
   import ExerciseViewModel = Models.ExerciseViewModel;
+  import ErrorMessageViewModel = General.ErrorMessageViewModel;
 
   export class PrideController extends General.FilterableViewModel {
     /* Сivilians */
     private _service: CrossfitterService;
+    private errorMessager: ErrorMessageViewModel;
 
     /* Observables */
     private _exercises: KnockoutObservableArray<ExerciseViewModel>;
@@ -19,6 +21,11 @@
 
     constructor(basicParameters: General.BasicParameters) {
       super();
+
+      this.errorMessager = new ErrorMessageViewModel();
+
+
+
       this.isDataLoading = ko.observable(false);
       this._service = new CrossfitterService(basicParameters.pathToApp, this.isDataLoading);
       this._exercises = ko.observableArray([]);
@@ -41,7 +48,6 @@
         this._service.getPersonExerciseMaximumWeight(exercise.id)
           .then((personMaximums: PersonExerciseRecord[]) => {
             this._personMaximums(personMaximums);
-
           })
           .then(() => {
             return this._service.getAllPersonsExerciseMaximumWeights(exercise.id);
@@ -54,6 +60,9 @@
                 item.workoutTitle,
                 item.positionBetweenOthers,
                 item.isItMe)));
+          })
+          .fail((response) => {
+            this.errorMessager.addMessage(response.responseText, false);
           });
       });
 
@@ -63,6 +72,9 @@
       this._service.getStatisticalExercises()
         .then((exercises) => {
           this._exercises(exercises);
+        })
+        .fail((response) => {
+          this.errorMessager.addMessage(response.responseText, false);
         });
     };
   }

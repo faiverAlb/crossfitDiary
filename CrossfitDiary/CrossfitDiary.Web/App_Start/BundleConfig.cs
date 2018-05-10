@@ -74,6 +74,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/General/CrossfitterService.js"
                     , "~/Scripts/Pages/General/BasicParameters.js"
                     , "~/Scripts/Pages/General/FilterableViewModel.js"
+                    , "~/Scripts/Pages/General/ErrorMessageViewModel.js"
 
                     , "~/Scripts/Pages/Models/ObservablePersonExerciseRecord.js"
                     , "~/Scripts/Pages/Crossfitter/Pride/PrideController.js"
@@ -101,6 +102,7 @@ namespace CrossfitDiary.Web
                     , "~/Scripts/Pages/Models/ViewModels/ExerciseViewModel.js"
                     , "~/Scripts/Pages/Models/ViewModels/WorkoutViewModel.js"
                     , "~/Scripts/Pages/Models/ViewModels/ToLogWorkoutViewModel.js"
+                    , "~/Scripts/Pages/Models/ViewModels/PersonExerciseRecord.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/login")

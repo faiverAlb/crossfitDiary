@@ -12,11 +12,7 @@
 
 <div class="manage-workout-page" data-bind="visible:true" style="display: none">
 
-    <!--ko if:errorMessager.hasMessage -->
-    <div class="alert alert-danger" role="alert">
-        <span data-bind="text: errorMessager.message"></span>
-    </div>
-    <!-- /ko -->
+
 
     <div data-bind="visible: isDataLoading">
         @Html.Partial(MVC.Shared.Views._Spinner)

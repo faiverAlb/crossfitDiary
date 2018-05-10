@@ -59,9 +59,14 @@
             </div>
         </nav>
     }
-    <div class="container">
-        @RenderBody()
+<div class="container">
+    <!--ko if:errorMessager.hasMessage -->
+    <div class="alert alert-danger" role="alert" data-bind="visible:true" style="display: none">
+        <span data-bind="text: errorMessager.message"></span>
     </div>
+    <!-- /ko -->
+    @RenderBody()
+</div>
 
 
 @Html.Partial(MVC.Shared.Views.ViewNames._ModalTemplate)

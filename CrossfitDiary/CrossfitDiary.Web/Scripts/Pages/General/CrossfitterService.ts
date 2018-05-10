@@ -2,6 +2,7 @@
   import WorkoutViewModel = Models.WorkoutViewModel;
   import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
   import ExerciseViewModel = Models.ExerciseViewModel;
+  import PersonExerciseRecord = Models.PersonExerciseRecord;
 
   export class CrossfitterService extends BaseService {
 
@@ -22,7 +23,7 @@
         .finally(() => { this.isDataLoading(false); });
     };
 
-    getExercises = (): Q.Promise<ExerciseViewModel[]> => {
+    public getExercises = (): Q.Promise<ExerciseViewModel[]> => {
       this.isDataLoading(true);
       return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getExercises")
         .then((jsonData) => {
@@ -31,7 +32,7 @@
         .finally(() => { this.isDataLoading(false); });
     };
 
-    getStatisticalExercises = (): Q.Promise<ExerciseViewModel[]> => {
+    public getStatisticalExercises = (): Q.Promise<ExerciseViewModel[]> => {
       this.isDataLoading(true);
       return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getStatisticalExercises")
         .then((jsonData) => {
@@ -40,9 +41,13 @@
         .finally(() => { this.isDataLoading(false); });
     };
 
-    getPersonExerciseMaximumWeight = (exerciseId: number) => {
+    public getPersonExerciseMaximumWeight = (exerciseId: number) => {
       this.isDataLoading(true);
-      return this.get(this.pathToApp + `api/exercises/${exerciseId}/personMaximum`).finally(() => { this.isDataLoading(false); });
+      return this.get<PersonExerciseRecord[]>(this.pathToApp + `api/exercises/${exerciseId}/personMaximum`)
+        .then((jsonData) => {
+          return jsonData.map(x => new PersonExerciseRecord().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
     };
 
     getAllPersonsExerciseMaximumWeights = (exerciseId: number) => {
