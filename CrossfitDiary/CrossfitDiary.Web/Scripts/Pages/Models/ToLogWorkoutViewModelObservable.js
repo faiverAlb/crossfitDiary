@@ -17,7 +17,8 @@ var Models;
                     roundsFinished: _this._totalRoundsFinished(),
                     selectedWorkoutId: _this.selectedWorkoutId,
                     timePassed: _this._totalTime(),
-                    isEditMode: _this.isEditMode
+                    isEditMode: _this.isEditMode,
+                    repsToFinishOnCapTime: _this._repsToFinishOnCapTime()
                 });
                 return toLogWorkoutViewModel;
             };
@@ -42,6 +43,7 @@ var Models;
                 }
             });
             this._partialRepsFinished = ko.observable(hasModel ? logModel.partialRepsFinished : null);
+            this._repsToFinishOnCapTime = ko.observable(hasModel ? logModel.repsToFinishOnCapTime : null);
             this.errors = ko.validation.group(this);
         }
         return ToLogWorkoutViewModelObservable;

@@ -12,6 +12,7 @@
     _totalTime: KnockoutObservable<string>;
     _totalRoundsFinished: KnockoutObservable<number>;
     _partialRepsFinished?: KnockoutObservable<number>;
+    _repsToFinishOnCapTime?: KnockoutObservable<number>;
 
     /* Computeds */
 
@@ -44,6 +45,7 @@
         });
 
       this._partialRepsFinished = ko.observable(hasModel ? logModel.partialRepsFinished : null);
+      this._repsToFinishOnCapTime = ko.observable(hasModel ? logModel.repsToFinishOnCapTime : null);
 
       this.errors = ko.validation.group(this);
     }
@@ -59,7 +61,8 @@
           roundsFinished: this._totalRoundsFinished(),
           selectedWorkoutId: this.selectedWorkoutId,
           timePassed: this._totalTime(),
-          isEditMode: this.isEditMode
+          isEditMode: this.isEditMode,
+          repsToFinishOnCapTime: this._repsToFinishOnCapTime()
         }
       );
       return toLogWorkoutViewModel;
