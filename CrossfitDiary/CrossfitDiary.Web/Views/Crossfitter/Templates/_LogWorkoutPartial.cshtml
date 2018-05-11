@@ -1,53 +1,61 @@
-﻿<div class="col-md-12">
-    <div class="py-3 ">
-        <div class=" text-right">
-            <div class="form-row justify-content-end" data-bind="with:_logToCreate">
-                <form class="form-inline data-selector-container justify-content-end pr-1">
-                    <label class="mx-1 font-weight-bold" for="DateSelector">Date: </label>
-                    <div class="input-group">
-                        <input class="" readonly="readonly" data-bind="datepicker:_plannedDate" />
-                    </div>
-                </form>
+﻿<div class="col-md-12 text-right">
+    <div class="row justify-content-end" data-bind="with:_logToCreate">
+        <div class="col-lg-3 col-sm data-selector-container">
+            <div class="input-group">
+                <input class="" id="DateSelector" readonly="readonly" data-bind="datepicker:_plannedDate"/>
+            </div>
+        </div>
+        <!--ko if:_canSeeTotalRounds -->
+        <div class="col-lg-3 col-sm pr-lg-1">
+            <div class=" input-group mb-2" data-bind="validationElement: _totalRoundsFinished">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-hashtag"></i>
+                    </span>
+                </div>
+                <input type="number" min="1" class="form-control" id="generalRoundsFinishedInput" placeholder="Rounds finished" data-bind="value: _totalRoundsFinished">
             </div>
 
-            <div class="log-workout-inputs  pr-1" data-bind="with:_logToCreate">
-                <!--ko if:_canSeeTotalRounds -->
-                <div class="form-row justify-content-end">
-                    <div class="col-lg-3 input-group mb-2" data-bind="validationElement: _totalRoundsFinished">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
-                        </div>
-                        <input type="number" min="1" class="form-control" id="generalRoundsFinishedInput" placeholder="Rounds finished" data-bind="value: _totalRoundsFinished">
-                    </div>
-                    <div class="col-lg-3 input-group mb-2 pr-0">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" ><i class="fas fa-hashtag"></i></span>
-                        </div>
-                        <input type="number" min="0" class="form-control" id="partialRepsFinishedInput" placeholder="Partial repetitions" data-bind="value: _partialRepsFinished">
-                    </div>
-                </div>
-                <!-- /ko -->
-                <!--ko if:_canSeeTotalTime -->
-                <div class="form-row justify-content-end ">
-                    <div class="col-lg-3 input-group pr-0 mb-2" >
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-clock"></i></span>
-                        </div>
-                        <input type="text" class="form-control" id="timToWorkInput" placeholder="Total time" data-bind="validationElement: _totalTime,inputmask:{value: _totalTime, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
-                    </div>
-                </div>
-                <div class="form-row justify-content-end ">
-                    
-                    <div class="col-lg-2 input-group mb-2 pr-0 ml-lg-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
-                        </div>
-                        <input type="number" min="0" class="form-control" id="repsToFinishOnCapTimeInput" placeholder="Reps left" data-bind="value: _repsToFinishOnCapTime" aria-describedby="passwordHelpBlock">
-                    </div>
-                </div>
-                <!-- /ko -->
-            </div>
-            <button class="btn btn-success" data-bind="click: _logWorkout">Log workout</button>
         </div>
+        <div class="col-lg-3 col-sm ">
+            <div class=" input-group mb-2 ">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-hashtag"></i>
+                    </span>
+                </div>
+                <input type="number" min="0" class="form-control" id="partialRepsFinishedInput" placeholder="Partial repetitions" data-bind="value: _partialRepsFinished">
+            </div>
+
+        </div>
+        <!-- /ko -->
+        <!--ko if:_canSeeTotalTime -->
+        <div class="col-lg-3 col-sm pr-lg-1">
+            
+            <div class=" input-group mb-2" data-bind="validationElement: _totalTime">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-clock"></i>
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="timeToWorkInput" placeholder="Total time" data-bind="validationElement: _totalTime,inputmask:{value: _totalTime, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm ">
+            <div class=" input-group mb-2 ">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-hashtag"></i>
+                    </span>
+                </div>
+                <input type="number" min="0" class="form-control" id="repsToFinishOnCapTimeInput" placeholder="Reps left" data-bind="value: _repsToFinishOnCapTime" aria-describedby="passwordHelpBlock">
+            </div>
+
+        </div>
+
+        <!-- /ko -->
+
     </div>
+
+    <button class="btn btn-success" data-bind="click: _logWorkout">Log workout</button>
 </div>

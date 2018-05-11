@@ -156,7 +156,7 @@
           }
         })
         .fail((response) => {
-          this.errorMessager.addMessage(response.responseText, false);
+          this.errorMessager.addMessage(response.message, false);
         });
     };
 
