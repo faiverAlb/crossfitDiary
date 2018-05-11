@@ -56,25 +56,32 @@
                             </div>
                         </div>
                         <div class="item-body pt-1">
-                            <span class="workout-title">
-                                <span>@workout.WorkoutViewModel.WorkoutType</span>
-                                @switch (workout.WorkoutViewModel.WorkoutType)
-                                {
-                                    case RoutineComplexType.ForTime:
-                                        <span>: @workout.WorkoutViewModel.RoundsCount</span>
-                                        <span> rounds</span>
-                                        break;
-                                    case RoutineComplexType.AMRAP:
-                                        <span>: @workout.WorkoutViewModel.TimeToWork</span>
-                                        break;
-                                    case RoutineComplexType.EMOM:
-                                        break;
-                                    case RoutineComplexType.E2MOM:
-                                    case RoutineComplexType.NotForTime:
-                                        break;
-                                    default:
-                                        throw new ArgumentOutOfRangeException();
-                                }
+                            <span class="workout-header d-flex justify-content-between">
+                                <span class="workout-title">
+                                    <span>@workout.WorkoutViewModel.WorkoutTypeDisplay</span>
+                                    @switch (workout.WorkoutViewModel.WorkoutType)
+                                    {
+                                        case RoutineComplexType.ForTime:
+                                            <span>: @workout.WorkoutViewModel.RoundsCount rounds</span>
+                                            break;
+                                        case RoutineComplexType.AMRAP:
+                                            <span>: @workout.WorkoutViewModel.TimeToWork</span>
+                                            break;
+                                        case RoutineComplexType.EMOM:
+                                            break;
+                                        case RoutineComplexType.E2MOM:
+                                        case RoutineComplexType.NotForTime:
+                                            break;
+                                        default:
+                                            throw new ArgumentOutOfRangeException();
+                                    }
+                                </span>
+                                <span class="cap-time-info">
+                                    @if (!string.IsNullOrEmpty(workout.WorkoutViewModel.TimeCap))
+                                    {
+                                        <span>Cap: @workout.WorkoutViewModel.TimeCap</span>
+                                    }
+                                </span>
                             </span>
                             <div class="workout-exercises pl-3 pt-1">
                                 @{
