@@ -70,6 +70,11 @@ namespace CrossfitDiary.Service
                     continue;
                 }
 
+                if (routineComplexToSave.TimeCap != existingRoutineComplex.TimeCap)
+                {
+                    continue;
+                }
+
                 if (routineComplexToSave.RoutineSimple.Count != existingRoutineComplex.RoutineSimple.Count)
                 {
                     continue;

@@ -27,6 +27,9 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("roundsCount")]
         public int? RoundsCount { get; set; }
 
+        [JsonProperty("timeCap")]
+        public string TimeCap { get; set; }
+
         [JsonProperty("timeToWork")]
         public string TimeToWork { get; set; }
 

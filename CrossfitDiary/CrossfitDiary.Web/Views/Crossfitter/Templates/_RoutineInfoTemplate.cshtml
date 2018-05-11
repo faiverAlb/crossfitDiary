@@ -1,14 +1,38 @@
 ﻿<script type="text/html" id="routine-info-template">
     <div class="routine-complex-info" data-bind="with:model">
         <!--ko if: _canSeeGeneralWorkoutInfo-->
-        <div class="form-inline mb-4 mt-3 general-info-container">
-            <div  class="form-group" data-bind="if: _canSeeRoundsCount">
-                <h5 for="roundsInput" class="mr-2" >Rounds count:</h5>
-                <input type="number" min="1" class="form-control form-control-lg" id="roundsInput" placeholder="Rounds count" data-bind="validationElement: _roundsCount, value: _roundsCount, valueUpdate: 'afterkeydown'">
+        <div class=" mb-4 mt-3 general-info-container">
+            <div class="form-row" data-bind="if: _canSeeRoundsCount">
+                <div class="col-lg-3">
+                    <label for="roundsInput" class="sr-only" >Rounds count:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-hashtag"></i></div>
+                        </div>
+                        <input type="number" min="1" class="form-control form-control-lg" id="roundsInput" placeholder="Rounds count" data-bind="validationElement: _roundsCount, value: _roundsCount, valueUpdate: 'afterkeydown'">
+                    </div>
+
+                </div>
+                <div class="col-lg-3">
+                    <label for="timeCapInput" class="sr-only">Time cap:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                        </div>
+                        <input type="text"  class="form-control form-control-lg" id="timeCapInput" placeholder="Time Cap" data-bind="validationElement: _timeCap, inputmask:{value: _timeCap, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                    </div>
+                </div>
+                
+                
             </div>
-            <div class="form-group" data-bind="if: _canSeeTimeToWork">
-                <h5 for="timeInput" class="mr-2">Time to work:</h5>
-                <input type="text" class="form-control form-control-lg" id="timeInput" placeholder="Time to work" data-bind="validationElement: _timeToWork, inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+            <div class="col-3 pl-0" data-bind="if: _canSeeTimeToWork">
+                <label for="timeInput" class="sr-only">Time to work:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                    </div>
+                    <input type="text" class="form-control form-control-lg" id="timeInput" placeholder="Time to work" data-bind="validationElement: _timeToWork, inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                </div>
             </div>
         </div>
         <!-- /ko -->

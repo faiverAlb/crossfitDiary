@@ -7,6 +7,7 @@
     detailedTitle?: string,
     roundsCount?: number,
     timeToWork?: any,
+    timeCap?: any,
     restBetweenExercises?: any,
     restBetweenRounds?: any,
     workoutType: WorkoutType,
@@ -20,6 +21,7 @@
     detailedTitle: string;
     roundsCount?: number;
     timeToWork?: any;
+    timeCap?: any;
     restBetweenExercises?: any;
     restBetweenRounds?: any;
     workoutType: WorkoutType;
@@ -35,6 +37,7 @@
       this.detailedTitle = params.detailedTitle;
       this.roundsCount = params.roundsCount;
       this.timeToWork = params.timeToWork;
+      this.timeCap = params.timeCap;
       this.restBetweenExercises = params.restBetweenExercises;
       this.restBetweenRounds = params.restBetweenRounds;
       this.workoutType = params.workoutType;
@@ -51,6 +54,7 @@
         detailedTitle: jsonInput.detailedTitle,
         roundsCount: jsonInput.roundsCount,
         timeToWork: jsonInput.timeToWork,
+        timeCap: jsonInput.timeCap,
         restBetweenExercises: jsonInput.restBetweenExercises,
         restBetweenRounds: jsonInput.restBetweenRounds,
         workoutType: jsonInput.workoutType,

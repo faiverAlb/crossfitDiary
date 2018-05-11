@@ -10,6 +10,7 @@ var Models;
             this.detailedTitle = params.detailedTitle;
             this.roundsCount = params.roundsCount;
             this.timeToWork = params.timeToWork;
+            this.timeCap = params.timeCap;
             this.restBetweenExercises = params.restBetweenExercises;
             this.restBetweenRounds = params.restBetweenRounds;
             this.workoutType = params.workoutType;
@@ -25,6 +26,7 @@ var Models;
                 detailedTitle: jsonInput.detailedTitle,
                 roundsCount: jsonInput.roundsCount,
                 timeToWork: jsonInput.timeToWork,
+                timeCap: jsonInput.timeCap,
                 restBetweenExercises: jsonInput.restBetweenExercises,
                 restBetweenRounds: jsonInput.restBetweenRounds,
                 workoutType: jsonInput.workoutType,
