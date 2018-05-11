@@ -1,11 +1,12 @@
 ﻿<script type="text/html" id="routine-info-template">
+
     <div class="routine-complex-info" data-bind="with:model">
         <!--ko if: _canSeeGeneralWorkoutInfo-->
         <div class=" mb-4 mt-3 general-info-container">
             <div class="form-row" data-bind="if: _canSeeRoundsCount">
-                <div class="col-lg-3">
-                    <label for="roundsInput" class="sr-only" >Rounds count:</label>
-                    <div class="input-group">
+                <div class="col-lg-3 mb-2">
+                    <label for="roundsInput" class="sr-only">Rounds count:</label>
+                    <div class="input-group ">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fas fa-hashtag"></i></div>
                         </div>
@@ -13,17 +14,19 @@
                     </div>
 
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2 time-cap-container">
                     <label for="timeCapInput" class="sr-only">Time cap:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <div class="input-group-text"><i class="fas fa-clock"></i></div>
+                            <div class="input-group-text">
+                                <i class="fas fa-clock fa-lg time-cap-icon" ></i>
+                            </div>
                         </div>
-                        <input type="text"  class="form-control form-control-lg" id="timeCapInput" placeholder="Time Cap" data-bind="validationElement: _timeCap, inputmask:{value: _timeCap, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                        <input type="text" class="form-control form-control-lg" id="timeCapInput" placeholder="Time Cap" data-bind="validationElement: _timeCap, inputmask:{value: _timeCap, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                     </div>
                 </div>
-                
-                
+
+
             </div>
             <div class="col-3 pl-0" data-bind="if: _canSeeTimeToWork">
                 <label for="timeInput" class="sr-only">Time to work:</label>

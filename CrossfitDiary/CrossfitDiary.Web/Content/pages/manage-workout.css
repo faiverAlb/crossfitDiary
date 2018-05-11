@@ -8962,6 +8962,8 @@ table > tbody > tr.empty-data {
       border-top: 1px dashed #17a2b8;
       border-bottom: 1px dashed #17a2b8;
       padding: 8px 0; }
+      .workout-container .routine-complex-info .general-info-container .time-cap-container .time-cap-icon {
+        color: #a94442; }
     .workout-container .routine-complex-info .main-group {
       padding: 0 0 6px 0; }
   .workout-container .selected-workout-type {
