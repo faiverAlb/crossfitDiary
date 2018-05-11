@@ -35,11 +35,14 @@
                         </div>
                         <input type="text" class="form-control" id="timToWorkInput" placeholder="Total time" data-bind="validationElement: _totalTime,inputmask:{value: _totalTime, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                     </div>
-                    <div class="col-lg-3 input-group mb-2 pr-0">
+                </div>
+                <div class="form-row justify-content-end ">
+                    
+                    <div class="col-lg-2 input-group mb-2 pr-0 ml-lg-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" ><i class="fas fa-hashtag"></i></span>
+                            <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
                         </div>
-                        <input type="number" min="0" class="form-control" id="repsToFinishOnCapTimeInput" placeholder="Reps left" data-bind="value: _repsToFinishOnCapTime">
+                        <input type="number" min="0" class="form-control" id="repsToFinishOnCapTimeInput" placeholder="Reps left" data-bind="value: _repsToFinishOnCapTime" aria-describedby="passwordHelpBlock">
                     </div>
                 </div>
                 <!-- /ko -->
