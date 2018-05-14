@@ -52,6 +52,12 @@
             margin-top: 7px;
         }
     }
+
+    .total-time-log-container, .cap-reps-log-container {
+        .has-error {
+            border-color: $yellow;
+        }
+    }
 }
 
 

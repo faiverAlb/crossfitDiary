@@ -30,9 +30,9 @@
         </div>
         <!-- /ko -->
         <!--ko if:_canSeeTotalTime -->
-        <div class="col-lg-3 col-sm pr-lg-2">
+        <div class="col-lg-3 col-sm pr-lg-2 total-time-log-container">
 
-            <div class=" input-group mb-2" data-bind="validationElement: _totalTime">
+            <div class=" input-group mb-2" >
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                         <i class="fas fa-clock"></i>
@@ -46,14 +46,14 @@
             <hr  />
         </div>
 
-        <div class="col-lg-2 col-sm  pl-lg-2">
+        <div class="col-lg-2 col-sm  pl-lg-2 cap-reps-log-container">
             <div class=" input-group mb-2 ">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                         Cap +
                     </span>
                 </div>
-                <input type="number" min="0" class="form-control" id="repsToFinishOnCapTimeInput" placeholder="Count" data-bind="value: _repsToFinishOnCapTime" aria-describedby="passwordHelpBlock">
+                <input type="number" min="1" class="form-control" id="repsToFinishOnCapTimeInput" placeholder="Count" data-bind="value: _repsToFinishOnCapTime" >
             </div>
 
         </div>

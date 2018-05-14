@@ -8942,6 +8942,9 @@ table > tbody > tr.empty-data {
     width: 90%;
     margin-top: 7px; }
 
+.manage-workout-page .total-time-log-container .has-error, .manage-workout-page .cap-reps-log-container .has-error {
+  border-color: #ffc107; }
+
 .crossfitter-edit-workout-container .add-new-workout-container .go-next-pointer {
   margin: 6px 0; }
 
