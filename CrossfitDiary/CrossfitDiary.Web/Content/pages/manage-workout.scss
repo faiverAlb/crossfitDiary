@@ -36,13 +36,25 @@
             }
         }
     }
-}
 
-.log-workout-container {
-    .log-workout-inputs {
-        padding: 10px 0;
+    .vertical-divider {
+        width: 1px;
+        border-left: 1px solid $gray-500;
+        margin: 8px 0 18px 0;
+        vertical-align: middle;
+    }
+
+    .horizontal-divider {
+        width: 100%;
+
+        > hr {
+            width: 90%;
+            margin-top: 7px;
+        }
     }
 }
+
+
 
 
 .crossfitter-edit-workout-container {

@@ -8930,8 +8930,17 @@ table > tbody > tr.empty-data {
 .manage-workout-page .manage-workout-container .existing-workout-selector > select {
   border: 1px solid #fd7e14; }
 
-.log-workout-container .log-workout-inputs {
-  padding: 10px 0; }
+.manage-workout-page .vertical-divider {
+  width: 1px;
+  border-left: 1px solid #adb5bd;
+  margin: 8px 0 18px 0;
+  vertical-align: middle; }
+
+.manage-workout-page .horizontal-divider {
+  width: 100%; }
+  .manage-workout-page .horizontal-divider > hr {
+    width: 90%;
+    margin-top: 7px; }
 
 .crossfitter-edit-workout-container .add-new-workout-container .go-next-pointer {
   margin: 6px 0; }
