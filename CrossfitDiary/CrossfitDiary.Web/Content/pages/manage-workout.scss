@@ -36,13 +36,31 @@
             }
         }
     }
-}
 
-.log-workout-container {
-    .log-workout-inputs {
-        padding: 10px 0;
+    .vertical-divider {
+        width: 1px;
+        border-left: 1px solid $gray-500;
+        margin: 8px 0 18px 0;
+        vertical-align: middle;
+    }
+
+    .horizontal-divider {
+        width: 100%;
+
+        > hr {
+            width: 90%;
+            margin-top: 7px;
+        }
+    }
+
+    .total-time-log-container, .cap-reps-log-container {
+        .has-error {
+            border-color: $yellow;
+        }
     }
 }
+
+
 
 
 .crossfitter-edit-workout-container {
@@ -77,6 +95,12 @@
             border-top: 1px dashed $cyan;
             border-bottom: 1px dashed $cyan;
             padding: 8px 0;
+
+            .time-cap-container {
+                .time-cap-icon {
+                    color: #a94442;
+                }
+            }
         }
 
         .main-group {

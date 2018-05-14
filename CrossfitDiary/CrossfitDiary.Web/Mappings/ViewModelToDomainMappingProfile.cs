@@ -22,6 +22,7 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.RoutineSimple, x => x.MapFrom(y => y.ExercisesToDoList))
                 .ForMember(x => x.RoundCount, x => x.MapFrom(y => y.RoundsCount))
                 .ForMember(x => x.TimeToWork, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.TimeToWork.Split(':')[0]), int.Parse(y.TimeToWork.Split(':')[1]))))
+                .ForMember(x => x.TimeCap, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.TimeCap.Split(':')[0]), int.Parse(y.TimeCap.Split(':')[1]))))
                 .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.RestBetweenRounds.Split(':')[0]), int.Parse(y.RestBetweenRounds.Split(':')[1]))))
                 .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.RestBetweenExercises.Split(':')[0]), int.Parse(y.RestBetweenExercises.Split(':')[1]))));
 

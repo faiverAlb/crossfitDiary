@@ -21,6 +21,7 @@ var General;
             _this.pathToApp = pathToApp;
             _this.isDataLoading = isDataLoading;
             _this.createAndLogWorkout = function (model) {
+                _this.isDataLoading(true);
                 return _this.post(_this.pathToApp + "api/createAndLogNewWorkout", model);
             };
             _this.getAvailableWorkouts = function () {

@@ -52,7 +52,12 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.TimeToWork,
                     x => x.MapFrom(y =>
                         y.TimeToWork.HasValue
-                            ? string.Format("{0:00}:{1:00}", Math.Floor(y.TimeToWork.Value.TotalMinutes), y.TimeToWork.Value.Seconds)
+                            ? $"{Math.Floor(y.TimeToWork.Value.TotalMinutes):00}:{y.TimeToWork.Value.Seconds:00}"
+                            : string.Empty))
+                .ForMember(x => x.TimeCap,
+                    x => x.MapFrom(y =>
+                        y.TimeCap.HasValue
+                            ? $"{Math.Floor(y.TimeCap.Value.TotalMinutes):00}:{y.TimeCap.Value.Seconds:00}"
                             : string.Empty))
                 .ForMember(x => x.RestBetweenExercises,
                     x => x.MapFrom(y =>

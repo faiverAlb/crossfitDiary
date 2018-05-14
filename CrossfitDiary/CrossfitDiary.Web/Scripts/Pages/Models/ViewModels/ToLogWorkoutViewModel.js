@@ -12,6 +12,7 @@ var Models;
             this.selectedWorkoutId = params.selectedWorkoutId;
             this.timePassed = params.timePassed;
             this.isEditMode = params.isEditMode;
+            this.repsToFinishOnCapTime = params.repsToFinishOnCapTime;
         }
         ToLogWorkoutViewModel.prototype.deserialize = function (jsonInput) {
             if (jsonInput == null) {
@@ -24,7 +25,8 @@ var Models;
                 partialRepsFinished: jsonInput.partialRepsFinished,
                 roundsFinished: jsonInput.roundsFinished,
                 selectedWorkoutId: jsonInput.selectedWorkoutId,
-                timePassed: jsonInput.timePassed
+                timePassed: jsonInput.timePassed,
+                repsToFinishOnCapTime: jsonInput.repsToFinishOnCapTime,
             });
         };
         return ToLogWorkoutViewModel;

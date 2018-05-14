@@ -6,6 +6,7 @@
     date: string;
     partialRepsFinished: number;
     roundsFinished: number;
+    repsToFinishOnCapTime: number;
     selectedWorkoutId: number;
     timePassed: string;
     isEditMode: boolean;
@@ -16,6 +17,7 @@
     date: string;
     partialRepsFinished?: number;
     roundsFinished?: number;
+    repsToFinishOnCapTime?: number;
     selectedWorkoutId: number;
     timePassed: string;
     isEditMode: boolean;
@@ -32,6 +34,7 @@
       this.selectedWorkoutId = params.selectedWorkoutId;
       this.timePassed = params.timePassed;
       this.isEditMode = params.isEditMode;
+      this.repsToFinishOnCapTime = params.repsToFinishOnCapTime;
     }
 
     deserialize(jsonInput): ToLogWorkoutViewModel {
@@ -46,7 +49,8 @@
         partialRepsFinished: jsonInput.partialRepsFinished,
         roundsFinished: jsonInput.roundsFinished,
         selectedWorkoutId: jsonInput.selectedWorkoutId,
-        timePassed: jsonInput.timePassed
+        timePassed: jsonInput.timePassed,
+        repsToFinishOnCapTime: jsonInput.repsToFinishOnCapTime,
       });
     }
 
