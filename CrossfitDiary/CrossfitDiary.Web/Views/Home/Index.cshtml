@@ -131,7 +131,15 @@
                                     @switch (workout.WorkoutViewModel.WorkoutType)
                                     {
                                         case RoutineComplexType.ForTime:
-                                            <span><i class="far fa-clock"></i> Total time: @workout.TimePassed</span>
+                                            if (workout.RepsToFinishOnCapTime.HasValue)
+                                            {
+                                                <span><i class="far fa-smile"></i> Cap + @workout.RepsToFinishOnCapTime.Value</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span><i class="far fa-clock"></i> Total time: @workout.TimePassed</span>
+                                            }
                                             break;
                                         case RoutineComplexType.AMRAP:
                                             <span><i class="fas fa-hashtag"></i> Result rounds: @workout.RoundsFinished @(workout.PartialRepsFinished.HasValue ? string.Format("+ {0} partials", workout.PartialRepsFinished.Value) : string.Empty)</span>
