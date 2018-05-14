@@ -32,6 +32,7 @@ var Models;
                     detailedTitle: _this.model.detailedTitle,
                     roundsCount: _this._roundsCount(),
                     timeToWork: _this._timeToWork(),
+                    timeCap: _this._timeCap(),
                     restBetweenExercises: _this._restBetweenExercises(),
                     restBetweenRounds: _this._restBetweenRounds(),
                     workoutType: _this.model.workoutType,
@@ -50,6 +51,7 @@ var Models;
             this._restBetweenExercises = ko.observable(model.restBetweenExercises);
             this._restBetweenRounds = ko.observable(model.restBetweenRounds);
             this._timeToWork = ko.observable(model.timeToWork);
+            this._timeCap = ko.observable(model.timeCap);
             this._roundsCount = ko.observable(model.roundsCount);
             /* Computeds */
             this._canSeeRoundsCount = ko.computed(function () {
@@ -68,6 +70,13 @@ var Models;
                 required: {
                     onlyIf: function () {
                         return _this._canSeeTimeToWork();
+                    }
+                }
+            });
+            this._timeCap.extend({
+                required: {
+                    onlyIf: function () {
+                        return _this._canSeeRoundsCount();
                     }
                 }
             });

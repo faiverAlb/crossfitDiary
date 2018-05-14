@@ -51,7 +51,7 @@ var Pages;
                     }
                 })
                     .fail(function (response) {
-                    _this.errorMessager.addMessage(response.responseText, false);
+                    _this.errorMessager.addMessage(response.message, false);
                 });
             };
             this._isEditMode = preselectedWorkoutId != null && preselectedCrossfitterWorkoutId != null;

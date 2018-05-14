@@ -37,6 +37,9 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("partialRepsFinished")]
         public int? PartialRepsFinished { get; set; }
 
+        [JsonProperty("repsToFinishOnCapTime")]
+        public int? RepsToFinishOnCapTime { get; set; }
+
         [JsonProperty("roundsFinished")]
         public int? RoundsFinished { get; set; }
 

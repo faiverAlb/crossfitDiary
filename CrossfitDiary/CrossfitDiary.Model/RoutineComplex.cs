@@ -49,6 +49,12 @@ namespace CrossfitDiary.Model
 
 
         /// <summary>
+        ///     Time capacity for workout
+        /// </summary>
+        public TimeSpan? TimeCap { get; set; }
+
+
+        /// <summary>
         ///     Possible time to work
         /// </summary>
         public TimeSpan? TimeToWork { get; set; }

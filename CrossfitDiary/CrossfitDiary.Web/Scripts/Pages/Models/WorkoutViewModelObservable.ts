@@ -10,6 +10,7 @@
     private _title: KnockoutObservable<string>;
     private _roundsCount: KnockoutObservable<number>;
     private _timeToWork: KnockoutObservable<string>;
+    private _timeCap: KnockoutObservable<string>;
     private _restBetweenExercises: KnockoutObservable<string>;
     private _restBetweenRounds: KnockoutObservable<string>;
     private _exercisesToBeDone: KnockoutObservableArray<ExerciseViewModelObservable>;
@@ -37,6 +38,7 @@
       this._restBetweenRounds = ko.observable(model.restBetweenRounds);
 
       this._timeToWork = ko.observable(model.timeToWork);
+      this._timeCap = ko.observable(model.timeCap);
       this._roundsCount = ko.observable(model.roundsCount);
 
 
@@ -62,6 +64,14 @@
         required: {
           onlyIf: () => {
             return this._canSeeTimeToWork();
+          }
+        }
+      });
+
+      this._timeCap.extend({
+        required: {
+          onlyIf: () => {
+            return this._canSeeRoundsCount();
           }
         }
       });
@@ -119,6 +129,7 @@
         detailedTitle: this.model.detailedTitle,
         roundsCount: this._roundsCount(),
         timeToWork: this._timeToWork(),
+        timeCap: this._timeCap(),
         restBetweenExercises: this._restBetweenExercises(),
         restBetweenRounds: this._restBetweenRounds(),
         workoutType: this.model.workoutType,
