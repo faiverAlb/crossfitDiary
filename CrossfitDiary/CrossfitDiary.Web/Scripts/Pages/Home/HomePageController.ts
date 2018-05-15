@@ -37,7 +37,7 @@
       this._service.removeWorkout(model.crossfitterWorkoutId)
         .then(() => {
           this.isDataLoading(false);
-          window.location.href = "/Home";
+          window.location.href = "/";
         })
         .fail((response) => {
           this.isDataLoading(false);

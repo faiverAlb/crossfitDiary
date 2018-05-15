@@ -46,7 +46,7 @@
       };
       this.service.createAndLogWorkout(model)
         .then(() => {
-          window.location.href = "/Home";
+          window.location.href = "/";
         })
         .fail((response) => {
           this.errorMessager.addMessage(response.responseText, false);
