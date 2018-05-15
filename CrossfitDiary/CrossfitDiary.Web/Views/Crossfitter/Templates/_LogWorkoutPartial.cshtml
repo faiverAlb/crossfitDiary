@@ -1,8 +1,11 @@
 ﻿<div class="col-md-12 text-right">
     <div class="row justify-content-end" data-bind="with:_logToCreate">
-        <div class="col-lg-3 col-sm data-selector-container pr-1">
+        <div class="horizontal-divider d-block d-sm-none " >
+            <hr  />
+        </div>
+        <div class="col-lg-3 col-sm data-selector-container pr-lg-1">
             <div class="input-group">
-                <input class="" id="DateSelector" readonly="readonly" data-bind="datepicker:_plannedDate" />
+                <input class="" id="DateSelector" readonly="readonly" data-bind="datepicker:_plannedDate"/>
             </div>
         </div>
         <!--ko if:_canSeeTotalRounds -->
@@ -32,7 +35,7 @@
         <!--ko if:_canSeeTotalTime -->
         <div class="col-lg-3 col-sm pr-lg-2 total-time-log-container">
 
-            <div class=" input-group mb-2" >
+            <div class=" input-group mb-2">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                         <i class="fas fa-clock"></i>
@@ -42,8 +45,8 @@
             </div>
         </div>
         <div class="vertical-divider d-none d-sm-block"></div>
-        <div class="horizontal-divider d-block d-sm-none " >
-            <hr  />
+        <div class="horizontal-divider d-block d-sm-none ">
+            <hr/>
         </div>
 
         <div class="col-lg-2 col-sm  pl-lg-2 cap-reps-log-container">
@@ -53,7 +56,7 @@
                         Cap +
                     </span>
                 </div>
-                <input type="number" min="1" class="form-control" id="repsToFinishOnCapTimeInput" placeholder="Count" data-bind="value: _repsToFinishOnCapTime" >
+                <input type="number" min="1" class="form-control" id="repsToFinishOnCapTimeInput" placeholder="Count" data-bind="value: _repsToFinishOnCapTime">
             </div>
 
         </div>
