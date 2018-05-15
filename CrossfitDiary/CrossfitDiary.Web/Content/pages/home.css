@@ -8920,7 +8920,7 @@ table > tbody > tr.empty-data {
     border-bottom: 1px dashed #a6a6a6;
     font-size: 15px;
     padding-bottom: 5px; }
-    .home-container .activities-list .done-item .item-header .user-icon {
+    .home-container .activities-list .done-item .item-header .username {
       font-weight: 700; }
     .home-container .activities-list .done-item .item-header .remove-workout {
       cursor: pointer; }

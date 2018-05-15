@@ -31,7 +31,7 @@ namespace CrossfitDiary.Web.Controllers
         public virtual ActionResult Login(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction(MVC.Home.ActionNames.Index, MVC.Home.Name);
+                return RedirectToAction(MVC.Persons.ActionNames.Index, MVC.Persons.Name);
 
             var model = new LoginModel() {ReturnUrl = returnUrl};
             return View(model);
@@ -49,7 +49,7 @@ namespace CrossfitDiary.Web.Controllers
             var authManager = ctx.Authentication;
 
             authManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction(MVC.Home.ActionNames.Index, MVC.Home.Name);
+            return RedirectToAction(MVC.Persons.ActionNames.Index, MVC.Persons.Name);
         }
 
         private IAuthenticationManager AuthenticationManager
@@ -101,7 +101,7 @@ namespace CrossfitDiary.Web.Controllers
             if (Url.IsLocalUrl(returnUrl))
                 return Redirect(returnUrl);
 
-            return RedirectToAction(MVC.Home.ActionNames.Index, MVC.Home.Name);
+            return RedirectToAction(MVC.Persons.ActionNames.Index, MVC.Persons.Name);
         }
 
         [AllowAnonymous]

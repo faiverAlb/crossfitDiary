@@ -210,19 +210,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CrossfitterController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="CrossfitterController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ErrorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="HomeController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Infrastructure\ExceptionHandlingAttribute.cs" />
     <Compile Include="Mappings\CanBeRemovedResolver.cs" />
     <Compile Include="MvcHelpers\DateTimeExtensions.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,6 +229,9 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="MvcHelpers\EnumHelper.cs" />
     <Compile Include="MvcHelpers\MvcUIHelper.cs" />
+    <Compile Include="PersonsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -243,7 +243,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ExerciseViewModel.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\PersonDataViewModel.cs" />
     <Compile Include="ViewModels\LogWorkoutViewModel.cs" />
     <Compile Include="ViewModels\Pride\PersonExerciseMaximum.cs" />
     <Compile Include="ViewModels\ToCreateAndLogNewWorkoutViewModel.cs" />
@@ -326,6 +326,7 @@
     <Content Include="Content\gijgo\modular\tree.css" />
     <Content Include="Content\gijgo\modular\tree.min.css" />
     <Content Include="Content\img\curly-bracket.svg" />
+    <Content Include="Content\img\empty.jpg" />
     <Content Include="Content\img\error.jpg" />
     <Content Include="Content\pages\home.css">
       <DependentUpon>home.scss</DependentUpon>
@@ -553,7 +554,8 @@
     <Content Include="Views\Shared\_Spinner.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Shared\_ModalTemplate.cshtml" />
-    <Content Include="Views\Home\_RemoveWorkoutTemplate.cshtml" />
+    <Content Include="Views\Persons\_RemoveWorkoutTemplate.cshtml" />
+    <Content Include="Views\Persons\Index.cshtml" />
     <TypeScriptCompile Include="Scripts\index.d.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Home\TemplateNames.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CreateWorkoutController.ts" />
@@ -623,7 +625,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Crossfitter\Templates\_RoutineInfoTemplate.cshtml" />

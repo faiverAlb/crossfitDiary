@@ -4,8 +4,10 @@
 @using CrossfitDiary.Model
 @using CrossfitDiary.Web.ViewModels
 @using CrossfitDiary.Web.ViewModels.Pride
+@using Links
 @using Newtonsoft.Json
-@model HomeViewModel
+@using Scripts = System.Web.Optimization.Scripts
+@model PersonDataViewModel
 
 <div class="home-container">
     <!--ko if:errorMessager.hasMessage -->
@@ -42,8 +44,8 @@
                 <div class="row">
                     <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded @(workout.CanBeRemovedByCurrentUser ? "person-workout" : string.Empty)">
                         <div class="item-header d-flex flex-row justify-content-between  ">
-                            <div class="user-icon">
-                                <span>@workout.WorkouterName</span>
+                            <div class="username">
+                                @Html.ActionLink(workout.WorkouterName,MVC.Persons.Index(workout.WorkouterId), new { @class = "text-info" })
                             </div>
                             <div class="">
                                 <span class="">@workout.DisplayDate</span>
@@ -171,17 +173,12 @@
         }
         @if (Model.AllWorkouts.Count == 0)
         {
-            <div class="row">
-                <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded text-center">
-                    <a class="btn btn-success btn-lg btn-block" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-star" aria-hidden="true"></i> Let's log our first workout? </a>
-                </div>
-            </div>
-
+            <img class="rounded mx-auto d-block img-fluid pt-4" src="@Content.img.empty_jpg" alt="Responsive image" />
         }
 
     </div>
 </div>
-@Html.Partial(MVC.Home.Views.ViewNames._RemoveWorkoutTemplate)
+@Html.Partial(MVC.Persons.Views.ViewNames._RemoveWorkoutTemplate)
 
 @section styles{
     @Styles.Render("~/Content/home")

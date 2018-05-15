@@ -16,7 +16,7 @@ namespace CrossfitDiary.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = MVC.Persons.Name, action = MVC.Persons.ActionNames.Index, id = UrlParameter.Optional }
             );
         }
     }
