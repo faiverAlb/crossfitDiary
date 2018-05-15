@@ -52,7 +52,7 @@ var Pages;
             };
             this.service.createAndLogWorkout(model)
                 .then(function () {
-                window.location.href = "/Home";
+                window.location.href = "/";
             })
                 .fail(function (response) {
                 _this.errorMessager.addMessage(response.responseText, false);
