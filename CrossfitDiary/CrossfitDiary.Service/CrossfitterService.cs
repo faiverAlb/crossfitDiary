@@ -217,9 +217,9 @@ namespace CrossfitDiary.Service
         /// <returns>
         /// The <see cref="List"/>.
         /// </returns>
-        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts()
+        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId)
         {
-            List<CrossfitterWorkout> crossfitterWorkouts = _crossfitterWorkoutRepository.GetAll().ToList();
+            List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)?_crossfitterWorkoutRepository.GetAll().ToList() : _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId).ToList();
             foreach (var workout in crossfitterWorkouts)
             {
                 UpdateWorkoutEntities(workout);

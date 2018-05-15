@@ -30,7 +30,7 @@ public static partial class MVC
     public static CrossfitDiary.Web.Controllers.AccountController Account = new CrossfitDiary.Web.Controllers.T4MVC_AccountController();
     public static CrossfitDiary.Web.Controllers.CrossfitterController Crossfitter = new CrossfitDiary.Web.Controllers.T4MVC_CrossfitterController();
     public static CrossfitDiary.Web.Controllers.ErrorController Error = new CrossfitDiary.Web.Controllers.T4MVC_ErrorController();
-    public static CrossfitDiary.Web.Controllers.HomeController Home = new CrossfitDiary.Web.Controllers.T4MVC_HomeController();
+    public static CrossfitDiary.Web.Controllers.PersonsController Persons = new CrossfitDiary.Web.Controllers.T4MVC_PersonsController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -288,14 +288,27 @@ namespace Links
                 public const string UrlPath = "~/Scripts/Pages/Models";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-                public static readonly string ExerciseMeasureType_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureType.min.js") ? Url("ExerciseMeasureType.min.js") : Url("ExerciseMeasureType.js");
-                public static readonly string ExerciseMeasureTypeViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureTypeViewModel.min.js") ? Url("ExerciseMeasureTypeViewModel.min.js") : Url("ExerciseMeasureTypeViewModel.js");
-                public static readonly string ExerciseViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseViewModel.min.js") ? Url("ExerciseViewModel.min.js") : Url("ExerciseViewModel.js");
-                public static readonly string PersonExerciseRecord_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/PersonExerciseRecord.min.js") ? Url("PersonExerciseRecord.min.js") : Url("PersonExerciseRecord.js");
-                public static readonly string SimpleRoutine_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/SimpleRoutine.min.js") ? Url("SimpleRoutine.min.js") : Url("SimpleRoutine.js");
-                public static readonly string ToLogWorkoutViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ToLogWorkoutViewModel.min.js") ? Url("ToLogWorkoutViewModel.min.js") : Url("ToLogWorkoutViewModel.js");
-                public static readonly string WorkoutType_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/WorkoutType.min.js") ? Url("WorkoutType.min.js") : Url("WorkoutType.js");
-                public static readonly string WorkoutViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/WorkoutViewModel.min.js") ? Url("WorkoutViewModel.min.js") : Url("WorkoutViewModel.js");
+                public static readonly string ExerciseMeasureTypeViewModelObservable_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureTypeViewModelObservable.min.js") ? Url("ExerciseMeasureTypeViewModelObservable.min.js") : Url("ExerciseMeasureTypeViewModelObservable.js");
+                public static readonly string ExerciseMeasureViewModelObservable_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureViewModelObservable.min.js") ? Url("ExerciseMeasureViewModelObservable.min.js") : Url("ExerciseMeasureViewModelObservable.js");
+                public static readonly string ExerciseViewModelObservable_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseViewModelObservable.min.js") ? Url("ExerciseViewModelObservable.min.js") : Url("ExerciseViewModelObservable.js");
+                public static readonly string ObservablePersonExerciseRecord_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ObservablePersonExerciseRecord.min.js") ? Url("ObservablePersonExerciseRecord.min.js") : Url("ObservablePersonExerciseRecord.js");
+                public static readonly string ToLogWorkoutViewModelObservable_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ToLogWorkoutViewModelObservable.min.js") ? Url("ToLogWorkoutViewModelObservable.min.js") : Url("ToLogWorkoutViewModelObservable.js");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class ViewModels {
+                    public const string UrlPath = "~/Scripts/Pages/Models/ViewModels";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string ExerciseMeasureType_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureType.min.js") ? Url("ExerciseMeasureType.min.js") : Url("ExerciseMeasureType.js");
+                    public static readonly string ExerciseMeasureTypeViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureTypeViewModel.min.js") ? Url("ExerciseMeasureTypeViewModel.min.js") : Url("ExerciseMeasureTypeViewModel.js");
+                    public static readonly string ExerciseMeasureViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseMeasureViewModel.min.js") ? Url("ExerciseMeasureViewModel.min.js") : Url("ExerciseMeasureViewModel.js");
+                    public static readonly string ExerciseViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ExerciseViewModel.min.js") ? Url("ExerciseViewModel.min.js") : Url("ExerciseViewModel.js");
+                    public static readonly string PersonExerciseRecord_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/PersonExerciseRecord.min.js") ? Url("PersonExerciseRecord.min.js") : Url("PersonExerciseRecord.js");
+                    public static readonly string ToLogWorkoutViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ToLogWorkoutViewModel.min.js") ? Url("ToLogWorkoutViewModel.min.js") : Url("ToLogWorkoutViewModel.js");
+                    public static readonly string WorkoutType_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/WorkoutType.min.js") ? Url("WorkoutType.min.js") : Url("WorkoutType.js");
+                    public static readonly string WorkoutViewModel_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/WorkoutViewModel.min.js") ? Url("WorkoutViewModel.min.js") : Url("WorkoutViewModel.js");
+                }
+            
+                public static readonly string WorkoutViewModelObservable_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/WorkoutViewModelObservable.min.js") ? Url("WorkoutViewModelObservable.min.js") : Url("WorkoutViewModelObservable.js");
             }
         
         }
@@ -637,6 +650,7 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             public static readonly string curly_bracket_svg = Url("curly-bracket.svg");
+            public static readonly string empty_jpg = Url("empty.jpg");
             public static readonly string error_jpg = Url("error.jpg");
         }
     
@@ -804,6 +818,12 @@ namespace Links
                 }
                 public static partial class Models 
                 {
+                    public static partial class ViewModels 
+                    {
+                        public static class Assets
+                        {
+                        }
+                    }
                     public static class Assets
                     {
                     }
