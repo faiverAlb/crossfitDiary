@@ -57,6 +57,8 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("wasFinished")]
         public bool WasFinished { get; set; }
 
+        public string WorkouterId { get; set; }
+
         [JsonProperty("workouterName")]
         public string WorkouterName { get; set; }
 

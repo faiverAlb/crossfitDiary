@@ -44,8 +44,8 @@
                 <div class="row">
                     <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded @(workout.CanBeRemovedByCurrentUser ? "person-workout" : string.Empty)">
                         <div class="item-header d-flex flex-row justify-content-between  ">
-                            <div class="user-icon">
-                                <span>@workout.WorkouterName</span>
+                            <div class="username">
+                                @Html.ActionLink(workout.WorkouterName,MVC.Persons.Index(workout.WorkouterId), new { @class = "text-info" })
                             </div>
                             <div class="">
                                 <span class="">@workout.DisplayDate</span>

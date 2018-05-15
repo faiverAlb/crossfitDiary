@@ -42,6 +42,7 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.CanBeRemovedByCurrentUser, x => x.ResolveUsing<CanBeRemovedResolver>())
                 .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName))
                 .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex))
+                .ForMember(x => x.WorkouterId, x => x.MapFrom(y => y.Crossfitter.Id))
                 .ForMember(x => x.TimePassed, x => x.ResolveUsing<TimePassedResolver>());
 
             CreateMap<RoutineComplex, WorkoutViewModel>()

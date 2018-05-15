@@ -24,7 +24,7 @@ namespace CrossfitDiary.Web.Controllers
                 AllWorkouts = _crossfitterService.GetAllCrossfittersWorkouts(userId).Select(Mapper.Map<ToLogWorkoutViewModel>).ToList(),
                 PersonMaximums = _crossfitterService.GetPersonMaximumForMainExercises(userIdToCheck).Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)).OrderBy(x => x.ExerciseDisplayName).ToList(),
             };
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Person Page";
             return View(personDataViewModel);
         }
     }
