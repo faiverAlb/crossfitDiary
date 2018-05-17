@@ -136,21 +136,6 @@ namespace CrossfitDiary.Service
             LogWorkout(logWorkoutModel, isEditMode);
         }
 
-        private void SetRoutineComplexTitle(RoutineComplex routineComplexToSave)
-        {
-            if (!string.IsNullOrEmpty(routineComplexToSave.Title))
-            {
-                return;
-            }
-
-            List<string> exerciseNames = new List<string>();
-            foreach (var routineSimple in routineComplexToSave.RoutineSimple)
-            {
-                Exercise exercise = _exerciseRepository.GetById(routineSimple.ExerciseId);
-                exerciseNames.Add(exercise.Abbreviation);
-            }
-            routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
-        }
 
 
         /// <summary>
@@ -178,6 +163,7 @@ namespace CrossfitDiary.Service
                     PersonName = crossfitterWorkout.Crossfitter.FullName,
                     PersonId = crossfitterWorkout.Crossfitter.Id,
                     WorkoutTitle = crossfitterWorkout.RoutineComplex.Title,
+                    WorkoutId = crossfitterWorkout.RoutineComplex.Id,
                     ExerciseDisplayName = exerciseAbbreviation,
                     ExerciseId = exerciseId,
                     MaximumWeight = (
@@ -215,12 +201,12 @@ namespace CrossfitDiary.Service
         /// <summary>
         /// Returns all crossfitters workouts.
         /// </summary>
-        /// <returns>
-        /// The <see cref="List"/>.
-        /// </returns>
-        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId)
+        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId)
         {
             List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)?_crossfitterWorkoutRepository.GetAll().ToList() : _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId).ToList();
+
+            crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
+
             foreach (var workout in crossfitterWorkouts)
             {
                 UpdateWorkoutEntities(workout);
@@ -228,6 +214,22 @@ namespace CrossfitDiary.Service
 
             return crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();
         }
+
+        /// <summary>
+        /// Filters workouts having the exercise if it not null
+        /// </summary>
+        /// <param name="crossfitterWorkouts"></param>
+        /// <param name="exerciseId"></param>
+        private List<CrossfitterWorkout> FilterWorkoutsOnSelectedExercise(List<CrossfitterWorkout> crossfitterWorkouts, int? exerciseId)
+        {
+            if (exerciseId.HasValue == false)
+            {
+                return crossfitterWorkouts;
+            }
+
+            return crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId)).ToList();
+        }
+
 
         /// <summary>
         /// The get crossfitter workout.
@@ -243,6 +245,25 @@ namespace CrossfitDiary.Service
             return crossfitterWorkout;
         }
 
+        //TODO: Move to mapper?w
+        private void SetRoutineComplexTitle(RoutineComplex routineComplexToSave)
+        {
+            if (!string.IsNullOrEmpty(routineComplexToSave.Title))
+            {
+                return;
+            }
+
+            List<string> exerciseNames = new List<string>();
+            foreach (var routineSimple in routineComplexToSave.RoutineSimple)
+            {
+                Exercise exercise = _exerciseRepository.GetById(routineSimple.ExerciseId);
+                exerciseNames.Add(exercise.Abbreviation);
+            }
+            routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
+        }
+
+
+        //TODO: Move to mapper?
         private void UpdateWorkoutEntities(CrossfitterWorkout workout)
         {
             if (workout.Distance.HasValue)
@@ -275,14 +296,25 @@ namespace CrossfitDiary.Service
             _unitOfWork.Commit();
         }
 
-        public List<PersonMaximum> GetPersonMaximumForMainExercises(string userId)
+        public List<PersonMaximum> GetPersonMaximumForMainExercises(string userId, int? exerciseId)
         {
-            var exercisesListTitle = new List<string>(){ "deadlift", "back squat", "bench press", "shoulder press (strict)", "snatch", "power snatch", "clean", "power clean" };
+            var exercisesListTitle = new List<string> { "deadlift", "back squat", "bench press", "shoulder press (strict)", "snatch", "power snatch", "clean", "power clean" };
             var resultMaximums = new List<PersonMaximum>();
 
+            var exercisesList = new List<Exercise>();
             foreach (string exerciseTitle in exercisesListTitle)
             {
                 Exercise exercise = _exerciseRepository.FirstOrDefault(x => x.Title.ToLower() == exerciseTitle.ToLower());
+                exercisesList.Add(exercise);
+            }
+
+            if (exerciseId.HasValue)
+            {
+                exercisesList = exercisesList.Where(x => x.Id == exerciseId).ToList();
+            }
+
+            foreach (Exercise exercise in exercisesList)
+            {
                 PersonMaximum personMaximumForExercise = GetPersonMaximumForExercise(userId, exercise.Id);
                 if (personMaximumForExercise == null)
                 {
