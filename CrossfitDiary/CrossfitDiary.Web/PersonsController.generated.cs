@@ -56,12 +56,6 @@ namespace CrossfitDiary.Web.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Index()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public PersonsController Actions { get { return MVC.Persons; } }
@@ -95,6 +89,7 @@ namespace CrossfitDiary.Web.Controllers
         public class ActionParamsClass_Index
         {
             public readonly string userId = "userId";
+            public readonly string exerciseId = "exerciseId";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -120,14 +115,15 @@ namespace CrossfitDiary.Web.Controllers
         public T4MVC_PersonsController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string userId);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string userId, int? exerciseId);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(string userId)
+        public override System.Web.Mvc.ActionResult Index(string userId, int? exerciseId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userId", userId);
-            IndexOverride(callInfo, userId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "exerciseId", exerciseId);
+            IndexOverride(callInfo, userId, exerciseId);
             return callInfo;
         }
 

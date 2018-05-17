@@ -16,7 +16,7 @@ namespace CrossfitDiary.Web.Controllers
         {
             _crossfitterService = crossfitterService;
         }
-        public virtual ActionResult Index(string userId)
+        public virtual ActionResult Index(string userId = null, int? exerciseId = null)
         {
             string userIdToCheck = string.IsNullOrEmpty(userId)? User.Identity.GetUserId(): userId;
             PersonDataViewModel personDataViewModel = new PersonDataViewModel()
@@ -25,6 +25,7 @@ namespace CrossfitDiary.Web.Controllers
                 PersonMaximums = _crossfitterService.GetPersonMaximumForMainExercises(userIdToCheck).Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)).OrderBy(x => x.ExerciseDisplayName).ToList(),
             };
             ViewBag.Title = "Person Page";
+            ViewBag.UserId = userId;
             return View(personDataViewModel);
         }
     }

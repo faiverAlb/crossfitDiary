@@ -179,6 +179,7 @@ namespace CrossfitDiary.Service
                     PersonId = crossfitterWorkout.Crossfitter.Id,
                     WorkoutTitle = crossfitterWorkout.RoutineComplex.Title,
                     ExerciseDisplayName = exerciseAbbreviation,
+                    ExerciseId = exerciseId,
                     MaximumWeight = (
                         from exercise in crossfitterWorkout.RoutineComplex.RoutineSimple
                         where exercise.ExerciseId == exerciseId
@@ -285,7 +286,7 @@ namespace CrossfitDiary.Service
                 PersonMaximum personMaximumForExercise = GetPersonMaximumForExercise(userId, exercise.Id);
                 if (personMaximumForExercise == null)
                 {
-                    personMaximumForExercise = new PersonMaximum();
+                    continue;
                 }
 
                 personMaximumForExercise.ExerciseDisplayName = exercise.Title;

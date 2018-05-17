@@ -21,6 +21,13 @@ namespace CrossfitDiary.Web.ViewModels.Pride
         [JsonProperty("exerciseDisplayName")]
         public string ExerciseDisplayName { get; set; }
 
+
+        /// <summary>
+        ///     Gets or sets the workout exercise Id.
+        /// </summary>
+        [JsonProperty("exerciseId")]
+        public int ExerciseId { get; set; }
+
         /// <summary>
         ///     Gets or sets a value indicating whether is it me.
         /// </summary>

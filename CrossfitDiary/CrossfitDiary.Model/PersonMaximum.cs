@@ -17,6 +17,11 @@ namespace CrossfitDiary.Model
         public string ExerciseDisplayName { get; set; }
 
         /// <summary>
+        ///     Gets or sets the workout exercise Id.
+        /// </summary>
+        public int ExerciseId { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether is it me.
         /// </summary>
         public bool IsItMe { get; set; }

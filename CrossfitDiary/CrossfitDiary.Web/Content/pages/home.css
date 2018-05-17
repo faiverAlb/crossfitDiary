@@ -8910,6 +8910,10 @@ table > tbody > tr.empty-data {
   opacity: 0.4;
   pointer-events: none; }
 
+.home-container .personal-maximums .item {
+  cursor: pointer;
+  text-decoration: none; }
+
 .home-container .activities-list .done-item {
   background: #f6f1ed;
   box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.05);
