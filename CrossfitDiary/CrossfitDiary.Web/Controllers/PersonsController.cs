@@ -27,6 +27,7 @@ namespace CrossfitDiary.Web.Controllers
             };
             ViewBag.Title = "Person Page";
             ViewBag.UserId = userId;
+            ViewBag.ExerciseId = exerciseId;
             return View(personDataViewModel);
         }
     }
