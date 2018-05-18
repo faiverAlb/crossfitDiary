@@ -53,36 +53,6 @@ namespace CrossfitDiary.Web.Api
 
 
         /// <summary>
-        ///     Create workout by viewmodel
-        /// </summary>
-        /// <param name="model"></param>
-        [HttpPost]
-        [Route("createWorkout")]
-        public void CreateWorkout(WorkoutViewModel model)
-        {
-            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
-
-            RoutineComplex routineComplexToSave = Mapper.Map<RoutineComplex>(model);
-            routineComplexToSave.CreatedBy = user;
-            _crossfitterService.CreateWorkout(routineComplexToSave);
-        }
-
-        /// <summary>
-        ///     Log workout
-        /// </summary>
-        /// <param name="model"></param>
-        [HttpPost]
-        [Route("logWorkout")]
-        public void LogWorkout(ToLogWorkoutViewModel model)
-        {
-            var user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
-
-            var crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model);
-            crossfitterWorkout.Crossfitter = user;
-            _crossfitterService.LogWorkout(crossfitterWorkout, model.IsEditMode);
-        }
-
-        /// <summary>
         ///     Create and log workout
         /// </summary>
         /// <param name="model">Complex model with two properties: new workout and log workout models</param>

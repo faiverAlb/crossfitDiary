@@ -237,7 +237,6 @@ namespace CrossfitDiary.Service
             return crossfitterWorkout;
         }
 
-        //TODO: Move to mapper?w
         private void SetRoutineComplexTitle(RoutineComplex routineComplexToSave)
         {
             if (!string.IsNullOrEmpty(routineComplexToSave.Title))
@@ -254,8 +253,6 @@ namespace CrossfitDiary.Service
             routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
         }
 
-
-        //TODO: Move to mapper?
 
         public void RemoveWorkout(int crossfitterWorkoutId, ApplicationUser user)
         {
