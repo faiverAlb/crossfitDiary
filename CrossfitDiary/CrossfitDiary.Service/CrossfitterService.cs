@@ -285,7 +285,7 @@ namespace CrossfitDiary.Service
                     continue;
                 }
 
-                personMaximumForExercise.ExerciseDisplayName = exercise.Title;
+                personMaximumForExercise.ExerciseDisplayName = exercise.Abbreviation;
                 resultMaximums.Add(personMaximumForExercise);
             }
 
