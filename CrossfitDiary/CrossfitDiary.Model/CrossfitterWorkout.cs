@@ -50,9 +50,6 @@ namespace CrossfitDiary.Model
         /// </summary>
         public bool IsRx { get; set; }
 
-        [NotMapped]
-        public string MeasureDisplayName { get; set; }
-
         /// <summary>
         ///     Gets or sets the partial reps finished of not finished round
         /// </summary>

@@ -204,14 +204,7 @@ namespace CrossfitDiary.Service
         public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId)
         {
             List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)?_crossfitterWorkoutRepository.GetAll().ToList() : _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId).ToList();
-
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
-
-            foreach (var workout in crossfitterWorkouts)
-            {
-                UpdateWorkoutEntities(workout);
-            }
-
             return crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();
         }
 
@@ -241,7 +234,6 @@ namespace CrossfitDiary.Service
         public CrossfitterWorkout GetCrossfitterWorkout(int crossfitterWorkoutId)
         {
             CrossfitterWorkout crossfitterWorkout = _crossfitterWorkoutRepository.Single(x => x.Id == crossfitterWorkoutId);
-            UpdateWorkoutEntities(crossfitterWorkout);
             return crossfitterWorkout;
         }
 
@@ -264,31 +256,6 @@ namespace CrossfitDiary.Service
 
 
         //TODO: Move to mapper?
-        private void UpdateWorkoutEntities(CrossfitterWorkout workout)
-        {
-            if (workout.Distance.HasValue)
-            {
-                workout.MeasureDisplayName = $"{workout.Distance.Value}m";
-            }
-
-            if (workout.RoundsFinished.HasValue)
-            {
-                workout.MeasureDisplayName = $"{workout.RoundsFinished.Value} rnds";
-                if (workout.PartialRepsFinished.HasValue)
-                {
-                    workout.MeasureDisplayName = $"{workout.MeasureDisplayName} + {workout.PartialRepsFinished.Value}";
-                }
-            }
-
-            if (workout.TimePassed.HasValue)
-            {
-                workout.MeasureDisplayName = $"{workout.TimePassed.Value.Minutes}min";
-                if (workout.TimePassed.Value.Seconds > 0)
-                {
-                    workout.MeasureDisplayName = $"{workout.MeasureDisplayName}+{workout.TimePassed.Value.Seconds}sec";
-                }
-            }
-        }
 
         public void RemoveWorkout(int crossfitterWorkoutId, ApplicationUser user)
         {

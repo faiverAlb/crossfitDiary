@@ -31,9 +31,6 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("isRx")]
         public bool IsRx { get; set; }
 
-        [JsonProperty("measureDisplayName")]
-        public string MeasureDisplayName { get; set; }
-
         [JsonProperty("partialRepsFinished")]
         public int? PartialRepsFinished { get; set; }
 
