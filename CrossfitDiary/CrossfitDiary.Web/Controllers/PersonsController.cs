@@ -16,15 +16,18 @@ namespace CrossfitDiary.Web.Controllers
         {
             _crossfitterService = crossfitterService;
         }
-        public virtual ActionResult Index(string userId)
+        public virtual ActionResult Index(string userId = null, int? exerciseId = null)
         {
-            string userIdToCheck = string.IsNullOrEmpty(userId)? User.Identity.GetUserId(): userId;
+            string userIdForWorkouts = exerciseId.HasValue && string.IsNullOrEmpty(userId)? User.Identity.GetUserId() : userId;
+            string userIdForMaximums = string.IsNullOrEmpty(userId) ? User.Identity.GetUserId() : userId;
             PersonDataViewModel personDataViewModel = new PersonDataViewModel()
             {
-                AllWorkouts = _crossfitterService.GetAllCrossfittersWorkouts(userId).Select(Mapper.Map<ToLogWorkoutViewModel>).ToList(),
-                PersonMaximums = _crossfitterService.GetPersonMaximumForMainExercises(userIdToCheck).Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)).OrderBy(x => x.ExerciseDisplayName).ToList(),
+                AllWorkouts = _crossfitterService.GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId).Select(Mapper.Map<ToLogWorkoutViewModel>).ToList(),
+                PersonMaximums = _crossfitterService.GetPersonMaximumForMainExercises(userIdForMaximums, exerciseId).Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)).OrderBy(x => x.ExerciseDisplayName).ToList(),
             };
             ViewBag.Title = "Person Page";
+            ViewBag.UserId = userId;
+            ViewBag.ExerciseId = exerciseId;
             return View(personDataViewModel);
         }
     }

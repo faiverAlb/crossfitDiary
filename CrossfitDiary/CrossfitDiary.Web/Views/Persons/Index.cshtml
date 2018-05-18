@@ -1,5 +1,8 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
+    string predefinedUserId = ViewBag.UserId;
+    int? exerciseId = ViewBag.ExerciseId;
+    bool isResetButtonVisible = string.IsNullOrEmpty(predefinedUserId) == false || exerciseId.HasValue;
 }
 @using CrossfitDiary.Model
 @using CrossfitDiary.Web.ViewModels
@@ -23,15 +26,13 @@
     <div class="personal-maximums container">
         <div class="row justify-content-md-center">
             @{
+                if (isResetButtonVisible)
+                {
+                    @Html.ActionLink("Reset filter",MVC.Persons.Index(), new { @class = "col-auto item bg-warning text-light rounded px-2 py-1 m-1" })
+                }
                 foreach (PersonExerciseMaximumViewModel maximum in Model.PersonMaximums)
                 {
-                    <div class="col-auto item bg-info text-light rounded px-2 py-1 m-1">
-                        <div class="header">
-                        </div>
-                        <div class="body">
-                            @maximum.ExerciseDisplayName : @maximum.MaximumWeight
-                        </div>
-                    </div>
+                    @Html.ActionLink(string.Format("{0} : {1}", maximum.ExerciseDisplayName, maximum.MaximumWeight), MVC.Persons.Index(predefinedUserId, maximum.ExerciseId), new { @class = "col-auto item bg-info text-light rounded px-2 py-1 m-1" })
                 }
 
             }

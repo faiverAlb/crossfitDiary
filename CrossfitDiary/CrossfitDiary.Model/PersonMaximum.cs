@@ -17,6 +17,11 @@ namespace CrossfitDiary.Model
         public string ExerciseDisplayName { get; set; }
 
         /// <summary>
+        ///     Gets or sets the workout exercise Id.
+        /// </summary>
+        public int ExerciseId { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether is it me.
         /// </summary>
         public bool IsItMe { get; set; }
@@ -42,9 +47,14 @@ namespace CrossfitDiary.Model
         public int PositionBetweenOthers { get; set; }
 
         /// <summary>
-        ///     Gets or sets the workout title.
+        ///     Gets or sets the workout title for found maximum in exercise
         /// </summary>
         public string WorkoutTitle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the workout id for found maximum in exercise
+        /// </summary>
+        public int WorkoutId { get; set; }
 
         #endregion
     }
