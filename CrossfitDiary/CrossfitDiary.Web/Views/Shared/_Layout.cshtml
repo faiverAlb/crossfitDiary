@@ -39,18 +39,18 @@
                 <a class="navbar-brand" href="@Url.Action(MVC.Persons.ActionNames.Index, MVC.Persons.Name)">Workouter v@(currentVersion)</a>
                 <div class="collapse navbar-collapse" id="navBar">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item  @Html.IsSelected(MVC.Persons.Name, MVC.Persons.ActionNames.Index)">
-                            <a class="nav-link" href="@Url.Action(MVC.Persons.ActionNames.Index, MVC.Persons.Name)">
+                        <li class="nav-item mr-1 @Html.IsSelected(MVC.Persons.Name, MVC.Persons.ActionNames.Index)">
+                            <a class="nav-link btn btn-secondary text-light" href="@Url.Action(MVC.Persons.ActionNames.Index, MVC.Persons.Name)">
                                 <i class="fa fa-home" aria-hidden="true"></i> <span class="d-none d-md-inline">Home</span>
                             </a>
                         </li>
-                        <li class="nav-item @Html.IsSelected(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.ManageWorkout)">
-                            <a class="nav-link" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-rocket" aria-hidden="true"></i>
+                        <li class="nav-item mr-1 @Html.IsSelected(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.ManageWorkout)">
+                            <a class="nav-link btn btn-success text-light" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-rocket" aria-hidden="true"></i>
                                 <span class="d-none d-md-inline">Create/Log workout</span>
                             </a>
                         </li>
-                        <li class="nav-item @Html.IsSelected(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.Pride)">
-                            <a class="nav-link" href="@Url.Action(MVC.Crossfitter.ActionNames.Pride, MVC.Crossfitter.Name)"><i class="fa fa-calculator" aria-hidden="true"></i>
+                        <li class="nav-item mr-1  @Html.IsSelected(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.Pride)">
+                            <a class="nav-link btn btn-warning text-light" href="@Url.Action(MVC.Crossfitter.ActionNames.Pride, MVC.Crossfitter.Name)"><i class="fa fa-calculator" aria-hidden="true"></i>
                                 <span class="d-none d-md-inline">Our prides</span>
                             </a>
 
