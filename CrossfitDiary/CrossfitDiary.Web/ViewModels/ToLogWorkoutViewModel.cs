@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using CrossfitDiary.Model;
+using CrossfitDiary.Web.ViewModels.Pride;
 using Newtonsoft.Json;
 
 namespace CrossfitDiary.Web.ViewModels
@@ -61,6 +64,11 @@ namespace CrossfitDiary.Web.ViewModels
 
         [JsonProperty("workoutViewModel")]
         public WorkoutViewModel WorkoutViewModel { get; set; }
+
+        [JsonProperty("hasNewMaximum")]
+        public bool HasNewMaximum { get; set; }
+
+
 
         #endregion
     }

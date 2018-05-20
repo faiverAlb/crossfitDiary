@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CrossfitDiary.Model
 {
@@ -65,5 +66,12 @@ namespace CrossfitDiary.Model
         /// Specify does this exercise is alternative exercise (primarily used in EMOM/E2MOM)
         /// </summary>
         public bool IsAlternative { get; set; }
+
+
+        /// <summary>
+        ///     Calculated property from service to identify as new maximum
+        /// </summary>
+        [NotMapped]
+        public bool IsNewWeightMaximum { get; set; }
     }
 }

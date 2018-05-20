@@ -145,7 +145,6 @@ namespace CrossfitDiary.Service
         /// <param name="exerciseId">
         ///     The exercise id.
         /// </param>
-        /// <param name="getUserId"></param>
         /// <returns>
         /// The <see cref="PersonMaximum"/>.
         /// </returns>
@@ -163,7 +162,7 @@ namespace CrossfitDiary.Service
                     PersonName = crossfitterWorkout.Crossfitter.FullName,
                     PersonId = crossfitterWorkout.Crossfitter.Id,
                     WorkoutTitle = crossfitterWorkout.RoutineComplex.Title,
-                    WorkoutId = crossfitterWorkout.RoutineComplex.Id,
+                    CrossfitWorkoutId = crossfitterWorkout.Id,
                     ExerciseDisplayName = exerciseAbbreviation,
                     ExerciseId = exerciseId,
                     MaximumWeight = (
@@ -205,8 +204,41 @@ namespace CrossfitDiary.Service
         {
             List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)?_crossfitterWorkoutRepository.GetAll().ToList() : _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId).ToList();
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
+
+            UpdateWorkoutsWithRecors(crossfitterWorkouts);
+
             return crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();
         }
+
+        private void UpdateWorkoutsWithRecors(List<CrossfitterWorkout> crossfitterWorkouts)
+        {
+            IEnumerable<IGrouping<ApplicationUser, CrossfitterWorkout>> groupedByuser = crossfitterWorkouts.GroupBy(x => x.Crossfitter);
+
+            foreach (IGrouping<ApplicationUser, CrossfitterWorkout> personWorkouts in groupedByuser)
+            {
+                List<Exercise> allDistinctExercisesFromWorkouts = personWorkouts
+                                .SelectMany(x => x.RoutineComplex.RoutineSimple.Select(y => y.Exercise))
+                                .Distinct()
+                                .ToList();
+                foreach (Exercise exercise in allDistinctExercisesFromWorkouts)
+                {
+                    var user = personWorkouts.Key;
+                    PersonMaximum personMaximum =  GetPersonMaximumForExercise(user.Id, exercise.Id);
+                    if (personMaximum == null && personMaximum.MaximumWeight != 0)
+                    {
+                        continue;
+                    }
+
+                    CrossfitterWorkout workoutToAddMaximum = crossfitterWorkouts.SingleOrDefault(x => x.Id == personMaximum.CrossfitWorkoutId);
+                    if (workoutToAddMaximum == null)
+                    {
+                        continue;
+                    }
+                    workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+                    workoutToAddMaximum.HasNewMaximum = true;
+                }
+            }
+        }       
 
         /// <summary>
         /// Filters workouts having the exercise if it not null

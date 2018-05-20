@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CrossfitDiary.Model
 {
@@ -18,5 +19,6 @@ namespace CrossfitDiary.Model
         /// List of Exercise Measures 
         /// </summary>
         public virtual ICollection<ExerciseMeasure> ExerciseMeasures { get; set; }
+
     }
 }

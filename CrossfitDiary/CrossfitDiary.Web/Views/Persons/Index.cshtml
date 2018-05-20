@@ -121,7 +121,15 @@
                                                             throw new ArgumentOutOfRangeException();
                                                     }
                                                 }
-
+                                                if (workout.HasNewMaximum  && exerciseViewModel.IsNewWeightMaximum)
+                                                {
+                                                    <span class="new-record">
+                                                        <span class="fa-layers fa-fw">
+                                                            <i class="fas fa-trophy"></i>
+                                                            <i class="fa-inverse fas fa-star" data-fa-transform="shrink-8 up-3 "></i>
+                                                        </span>
+                                                    </span>
+                                                }
                                             }
                                         </div>
                                     }
@@ -174,7 +182,7 @@
         }
         @if (Model.AllWorkouts.Count == 0)
         {
-            <img class="rounded mx-auto d-block img-fluid pt-4" src="@Content.img.empty_jpg" alt="Responsive image" />
+            <img class="rounded mx-auto d-block img-fluid pt-4" src="@Content.img.empty_jpg" alt="Nothing here :)" />
         }
 
     </div>

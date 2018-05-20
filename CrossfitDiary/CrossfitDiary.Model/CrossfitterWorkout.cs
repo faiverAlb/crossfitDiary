@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CrossfitDiary.Model
@@ -85,6 +86,12 @@ namespace CrossfitDiary.Model
         ///     Gets or sets a value indicating whether was finished.
         /// </summary>
         public bool WasFinished { get; set; }
+
+        /// <summary>
+        ///     Gets or sets flat that current crossfiter workout has new maximum in exercises
+        /// </summary>
+        [NotMapped]
+        public bool HasNewMaximum { get; set; }
 
         #endregion
     }
