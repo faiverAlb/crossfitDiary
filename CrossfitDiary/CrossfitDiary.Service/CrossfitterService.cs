@@ -170,7 +170,7 @@ namespace CrossfitDiary.Service
                         where exercise.ExerciseId == exerciseId
                         select exercise.Weight
                     ).Max()
-                }).OrderByDescending(x => x.MaximumWeight).FirstOrDefault();
+                }).OrderByDescending(x => x.MaximumWeight).ThenBy(x => x.Date).FirstOrDefault();
             return maximum;
 
         }
