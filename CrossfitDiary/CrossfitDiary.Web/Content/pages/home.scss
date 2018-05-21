@@ -41,6 +41,14 @@
                 .workout-result {
                     //border-bottom: 1px dotted black;
                 }
+
+                .workout-exercises {
+                    .exercise {
+                        .new-record {
+                            color: $orange;
+                        }
+                    }
+                }
             }
 
             .item-footer {

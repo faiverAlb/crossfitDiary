@@ -54,7 +54,7 @@ namespace CrossfitDiary.Model
         /// <summary>
         /// Gets or sets the workout id for found maximum in exercise
         /// </summary>
-        public int WorkoutId { get; set; }
+        public int CrossfitWorkoutId { get; set; }
 
         #endregion
     }
