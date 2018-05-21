@@ -205,12 +205,17 @@ namespace CrossfitDiary.Service
             List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)?_crossfitterWorkoutRepository.GetAll().ToList() : _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId).ToList();
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
-            UpdateWorkoutsWithRecors(crossfitterWorkouts);
+            UpdateWorkoutsWithRecords(crossfitterWorkouts);
 
             return crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();
         }
 
-        private void UpdateWorkoutsWithRecors(List<CrossfitterWorkout> crossfitterWorkouts)
+
+        /// <summary>
+        ///     Find exercise maximums and mark crossfitter workout as having new maximum and exercise as new max
+        /// </summary>
+        /// <param name="crossfitterWorkouts"></param>
+        private void UpdateWorkoutsWithRecords(List<CrossfitterWorkout> crossfitterWorkouts)
         {
             IEnumerable<IGrouping<ApplicationUser, CrossfitterWorkout>> groupedByuser = crossfitterWorkouts.GroupBy(x => x.Crossfitter);
 
@@ -224,7 +229,7 @@ namespace CrossfitDiary.Service
                 {
                     var user = personWorkouts.Key;
                     PersonMaximum personMaximum =  GetPersonMaximumForExercise(user.Id, exercise.Id);
-                    if (personMaximum == null && personMaximum.MaximumWeight != 0)
+                    if (personMaximum == null || personMaximum.MaximumWeight == null || personMaximum.MaximumWeight == 0)
                     {
                         continue;
                     }
