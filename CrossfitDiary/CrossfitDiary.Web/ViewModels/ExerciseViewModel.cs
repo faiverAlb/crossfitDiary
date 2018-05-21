@@ -6,7 +6,7 @@ namespace CrossfitDiary.Web.ViewModels
     public class ExerciseViewModel
     {
         [JsonProperty("id")]
-        public int Id { get; set; } 
+        public int Id { get; set; }
 
         [JsonProperty("title")]
         public string Title { get; set; }
@@ -16,6 +16,9 @@ namespace CrossfitDiary.Web.ViewModels
 
         [JsonProperty("isAlternative")]
         public bool IsAlternative { get; set; }
+
+        [JsonProperty("isNewWeightMaximum")]
+        public bool IsNewWeightMaximum { get; set; }
     }
 
 
@@ -41,8 +44,6 @@ namespace CrossfitDiary.Web.ViewModels
 
         [JsonProperty("isRequired")]
         public bool IsRequired { get; set; } = true;
-
-
     }
 
     public enum MeasureTypeViewModel

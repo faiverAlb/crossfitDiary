@@ -145,7 +145,6 @@ namespace CrossfitDiary.Service
         /// <param name="exerciseId">
         ///     The exercise id.
         /// </param>
-        /// <param name="getUserId"></param>
         /// <returns>
         /// The <see cref="PersonMaximum"/>.
         /// </returns>
@@ -163,7 +162,7 @@ namespace CrossfitDiary.Service
                     PersonName = crossfitterWorkout.Crossfitter.FullName,
                     PersonId = crossfitterWorkout.Crossfitter.Id,
                     WorkoutTitle = crossfitterWorkout.RoutineComplex.Title,
-                    WorkoutId = crossfitterWorkout.RoutineComplex.Id,
+                    CrossfitWorkoutId = crossfitterWorkout.Id,
                     ExerciseDisplayName = exerciseAbbreviation,
                     ExerciseId = exerciseId,
                     MaximumWeight = (
@@ -171,7 +170,7 @@ namespace CrossfitDiary.Service
                         where exercise.ExerciseId == exerciseId
                         select exercise.Weight
                     ).Max()
-                }).OrderByDescending(x => x.MaximumWeight).FirstOrDefault();
+                }).OrderByDescending(x => x.MaximumWeight).ThenBy(x => x.Date).FirstOrDefault();
             return maximum;
 
         }
@@ -205,7 +204,55 @@ namespace CrossfitDiary.Service
         {
             List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)?_crossfitterWorkoutRepository.GetAll().ToList() : _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId).ToList();
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
+
+            UpdateWorkoutsWithRecords(crossfitterWorkouts);
+
             return crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();
+        }
+
+
+        /// <summary>
+        ///     Find exercise maximums and mark crossfitter workout as having new maximum and exercise as new max
+        /// </summary>
+        /// <param name="crossfitterWorkouts"></param>
+        private void UpdateWorkoutsWithRecords(List<CrossfitterWorkout> crossfitterWorkouts)
+        {
+            IEnumerable<IGrouping<ApplicationUser, CrossfitterWorkout>> groupedByuser = crossfitterWorkouts.GroupBy(x => x.Crossfitter);
+
+            foreach (IGrouping<ApplicationUser, CrossfitterWorkout> personWorkouts in groupedByuser)
+            {
+                List<Exercise> allDistinctExercisesFromWorkouts = personWorkouts
+                                .SelectMany(x => x.RoutineComplex.RoutineSimple.Select(y => y.Exercise))
+                                .Distinct()
+                                .ToList();
+                foreach (Exercise exercise in allDistinctExercisesFromWorkouts)
+                {
+                    var user = personWorkouts.Key;
+                    PersonMaximum personMaximum =  GetPersonMaximumForExercise(user.Id, exercise.Id);
+                    MarkWorkoutWithWeightRecord(personMaximum, crossfitterWorkouts);
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Implement inner logic for marking crossfit workout with record
+        /// </summary>
+        /// <param name="personMaximum"></param>
+        /// <param name="crossfitterWorkouts"></param>
+        public void MarkWorkoutWithWeightRecord(PersonMaximum personMaximum, List<CrossfitterWorkout> crossfitterWorkouts)
+        {
+            if (personMaximum == null || personMaximum.MaximumWeight == null || personMaximum.MaximumWeight == 0)
+            {
+                return;
+            }
+
+            CrossfitterWorkout workoutToAddMaximum = crossfitterWorkouts.SingleOrDefault(x => x.Id == personMaximum.CrossfitWorkoutId);
+            if (workoutToAddMaximum == null)
+            {
+                return;
+            }
+            workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+            workoutToAddMaximum.HasNewMaximum = true;
         }
 
         /// <summary>

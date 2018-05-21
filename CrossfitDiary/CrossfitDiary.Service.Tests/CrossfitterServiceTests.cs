@@ -32,6 +32,7 @@ namespace CrossfitDiary.Service.Tests
             };
         }
 
+
         private IRoutineComplexRepository GetConfiguredRoutineComplexRepository(ICollection<RoutineComplex> toBeReturned)
         {
             IRoutineComplexRepository stubRoutineComplexRepository = A.Fake<IRoutineComplexRepository>();
@@ -228,5 +229,171 @@ namespace CrossfitDiary.Service.Tests
             // Assert
             Assert.NotZero(actual);
         }
+        
+        [Test]
+        public void MarkWorkoutWithWeightRecord_PersonMaximumIsNull_NRE_NOT_Called()
+        {
+            //  Arrange
+            var crossfitterService = new CrossfitterService(null, null, null, null);
+            PersonMaximum nullPersonMaximum = null;
+            
+            //  Act
+            //  Assert
+            Assert.DoesNotThrow(() =>
+            {
+                crossfitterService.MarkWorkoutWithWeightRecord(nullPersonMaximum, new List<CrossfitterWorkout>() { new CrossfitterWorkout() });
+            });
+
+        }
+
+        [Test]
+        public void MarkWorkoutWithWeightRecord_HasPersonMaximumWitnNullWeight_NoWorkoutsMarked()
+        {
+            //  Arrange
+            PersonMaximum personMaximumWithNullWeight = new PersonMaximum()
+            {
+                MaximumWeight = null,
+                CrossfitWorkoutId = 1,
+                ExerciseId = GetRoutineComplex().RoutineSimple.First().ExerciseId
+            };
+            var crossfitterService = new CrossfitterService(null, null, null, null);
+
+            //  Act
+            var crossfitterWorkouts = new List<CrossfitterWorkout>() {new CrossfitterWorkout() {Id = 1, RoutineComplex = GetRoutineComplex()} };
+            crossfitterService.MarkWorkoutWithWeightRecord(personMaximumWithNullWeight,crossfitterWorkouts);
+
+            //  Assert
+            Assert.That(crossfitterWorkouts, Has.Exactly(0).Matches<CrossfitterWorkout>(x => x.HasNewMaximum));
+        }
+
+        [Test]
+        public void MarkWorkoutWithWeightRecord_HasPersonMaximumWitnNullWeight_NoWorkoutExercisesMarked()
+        {
+            //  Arrange
+            PersonMaximum personMaximumWithNullWeight = new PersonMaximum()
+            {
+                MaximumWeight = null,
+                CrossfitWorkoutId = 1,
+                ExerciseId = GetRoutineComplex().RoutineSimple.First().ExerciseId
+            };
+            var crossfitterService = new CrossfitterService(null, null, null, null);
+
+            //  Act
+            var crossfitterWorkouts = new List<CrossfitterWorkout>() {new CrossfitterWorkout() {Id = 1, RoutineComplex = GetRoutineComplex()} };
+            crossfitterService.MarkWorkoutWithWeightRecord(personMaximumWithNullWeight,crossfitterWorkouts);
+
+            //  Assert
+            Assert.That(crossfitterWorkouts, Has.Exactly(0).Matches<CrossfitterWorkout>(x => x.RoutineComplex.RoutineSimple.Count(y => y.IsNewWeightMaximum) != 0));
+        }
+
+        [Test]
+        public void MarkWorkoutWithWeightRecord_HasPersonMaximumWitnZeroWeight_NoWorkoutsMarked()
+        {
+            //  Arrange
+            PersonMaximum personMaximumWithNullWeight = new PersonMaximum()
+            {
+                MaximumWeight = 0,
+                CrossfitWorkoutId = 1,
+                ExerciseId = GetRoutineComplex().RoutineSimple.First().ExerciseId
+            };
+            var crossfitterService = new CrossfitterService(null, null, null, null);
+
+            //  Act
+            var crossfitterWorkouts = new List<CrossfitterWorkout>() { new CrossfitterWorkout() { Id = 1, RoutineComplex = GetRoutineComplex() } };
+            crossfitterService.MarkWorkoutWithWeightRecord(personMaximumWithNullWeight, crossfitterWorkouts);
+
+            //  Assert
+            Assert.That(crossfitterWorkouts, Has.Exactly(0).Matches<CrossfitterWorkout>(x => x.HasNewMaximum));
+        }
+
+
+        [Test]
+        public void MarkWorkoutWithWeightRecord_HasPersonMaximumWithZeroMaximum_NoWorkoutExercisesMarked()
+        {
+            //  Arrange
+            PersonMaximum personMaximumWithNullWeight = new PersonMaximum()
+            {
+                MaximumWeight = 0,
+                CrossfitWorkoutId = 1,
+                ExerciseId = GetRoutineComplex().RoutineSimple.First().ExerciseId
+            };
+            var crossfitterService = new CrossfitterService(null, null, null, null);
+
+            //  Act
+            var crossfitterWorkouts = new List<CrossfitterWorkout>() {new CrossfitterWorkout() {Id = 1, RoutineComplex = GetRoutineComplex()} };
+            crossfitterService.MarkWorkoutWithWeightRecord(personMaximumWithNullWeight,crossfitterWorkouts);
+
+            //  Assert
+            Assert.That(crossfitterWorkouts, Has.Exactly(0).Matches<CrossfitterWorkout>(x => x.RoutineComplex.RoutineSimple.Count(y => y.IsNewWeightMaximum) != 0));
+        }
+
+
+        [Test]
+        public void MarkWorkoutWithWeightRecord_PersonMaximumWorkoutNotInList_NRE_NotRaised()
+        {
+            //  Arrange
+            PersonMaximum personMaximumNotInList = new PersonMaximum()
+            {
+                MaximumWeight = 100,
+                CrossfitWorkoutId = 0
+            };
+            var crossfitterService = new CrossfitterService(null, null, null, null);
+
+            //  Act
+
+            //  Assert
+            Assert.DoesNotThrow(() =>
+            {
+                crossfitterService.MarkWorkoutWithWeightRecord(personMaximumNotInList, new List<CrossfitterWorkout>() { new CrossfitterWorkout() { Id = 1 } });
+            });
+
+        }
+
+        [Test]
+        public void MarkWorkoutWithWeightRecord_HasExistingPersonMaximum_WorkoutMarked()
+        {
+            //  Arrange
+            RoutineComplex routineComplex = GetRoutineComplex();
+            routineComplex.RoutineSimple.First().Weight = 100;
+
+            PersonMaximum personMaximumWithNullWeight = new PersonMaximum()
+            {
+                MaximumWeight = 100,
+                CrossfitWorkoutId = 1,
+                ExerciseId = routineComplex.RoutineSimple.First().ExerciseId
+            };
+            var crossfitterService = new CrossfitterService(null, null, null, null);
+
+            //  Act
+            var crossfitterWorkouts = new List<CrossfitterWorkout>() { new CrossfitterWorkout() { Id = 1, RoutineComplex = routineComplex } };
+            crossfitterService.MarkWorkoutWithWeightRecord(personMaximumWithNullWeight, crossfitterWorkouts);
+
+            //  Assert
+            Assert.That(crossfitterWorkouts, Has.One.Matches<CrossfitterWorkout>(x => x.HasNewMaximum));
+        }
+
+        [Test]
+        public void MarkWorkoutWithWeightRecord_HasExistingPersonMaximum_WorkoutInnerExerciseMarked()
+        {
+            //  Arrange
+            RoutineComplex routineComplex = GetRoutineComplex();
+            routineComplex.RoutineSimple.First().Weight = 100;
+
+            PersonMaximum personMaximumWithNullWeight = new PersonMaximum()
+            {
+                MaximumWeight = 100,
+                CrossfitWorkoutId = 1,
+                ExerciseId = routineComplex.RoutineSimple.First().ExerciseId
+            };
+            var crossfitterService = new CrossfitterService(null, null, null, null);
+
+            //  Act
+            var crossfitterWorkouts = new List<CrossfitterWorkout>() { new CrossfitterWorkout() { Id = 1, RoutineComplex = routineComplex } };
+            crossfitterService.MarkWorkoutWithWeightRecord(personMaximumWithNullWeight, crossfitterWorkouts);
+
+            //  Assert
+            Assert.That(crossfitterWorkouts, Has.One.Matches<CrossfitterWorkout>(x => x.RoutineComplex.RoutineSimple.Count(y => y.IsNewWeightMaximum) != 0));
+        }
+
     }
 }
