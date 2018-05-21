@@ -229,21 +229,31 @@ namespace CrossfitDiary.Service
                 {
                     var user = personWorkouts.Key;
                     PersonMaximum personMaximum =  GetPersonMaximumForExercise(user.Id, exercise.Id);
-                    if (personMaximum == null || personMaximum.MaximumWeight == null || personMaximum.MaximumWeight == 0)
-                    {
-                        continue;
-                    }
-
-                    CrossfitterWorkout workoutToAddMaximum = crossfitterWorkouts.SingleOrDefault(x => x.Id == personMaximum.CrossfitWorkoutId);
-                    if (workoutToAddMaximum == null)
-                    {
-                        continue;
-                    }
-                    workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
-                    workoutToAddMaximum.HasNewMaximum = true;
+                    MarkWorkoutWithWeightRecord(personMaximum, crossfitterWorkouts);
                 }
             }
-        }       
+        }
+
+        /// <summary>
+        ///     Implement inner logic for marking crossfit workout with record
+        /// </summary>
+        /// <param name="personMaximum"></param>
+        /// <param name="crossfitterWorkouts"></param>
+        public void MarkWorkoutWithWeightRecord(PersonMaximum personMaximum, List<CrossfitterWorkout> crossfitterWorkouts)
+        {
+            if (personMaximum == null || personMaximum.MaximumWeight == null || personMaximum.MaximumWeight == 0)
+            {
+                return;
+            }
+
+            CrossfitterWorkout workoutToAddMaximum = crossfitterWorkouts.SingleOrDefault(x => x.Id == personMaximum.CrossfitWorkoutId);
+            if (workoutToAddMaximum == null)
+            {
+                return;
+            }
+            workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+            workoutToAddMaximum.HasNewMaximum = true;
+        }
 
         /// <summary>
         /// Filters workouts having the exercise if it not null
