@@ -33,28 +33,28 @@
     <header>
         <nav class="navbar navbar-expand navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="@Url.Action(MVC.Persons.ActionNames.Index, MVC.Persons.Name)">Workouter v@(currentVersion)</a>
+                <a class="navbar-brand text-secondary" href="@Url.Action(MVC.Persons.ActionNames.Index, MVC.Persons.Name)">
+                    <i class="fa fa-home" aria-hidden="true"></i> Workouter v@(currentVersion)
+                </a>
+
                 <div class="navbar-collapse" id="navBar">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item mr-1 @Html.SelectActivePage(MVC.Persons.Name, MVC.Persons.ActionNames.Index)">
-                            <a class="nav-link btn btn-secondary text-light" href="@Url.Action(MVC.Persons.ActionNames.Index, MVC.Persons.Name)">
-                                <i class="fa fa-home" aria-hidden="true"></i> <span class="d-none d-md-inline">Home</span>
-                            </a>
-                        </li>
+                        @if (Html.IsSelected(MVC.Persons.Name, MVC.Persons.ActionNames.Index)) { 
+                            <li class="nav-item mr-1 ">
+                                <a class="nav-link btn btn-info text-light" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fas fa-flag-checkered"></i>
+                                    <span class="d-none d-md-inline">Weight maximums</span>
+                                </a>
+                            </li>
+                        }
+
+
                         <li class="nav-item mr-1 @Html.SelectActivePage(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.ManageWorkout)">
                             <a class="nav-link btn btn-success text-light" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)">
                                 <i class="fa fa-rocket" aria-hidden="true"></i>
                                 <span class="d-none d-md-inline">Create/Log workout</span>
                             </a>
                         </li>
-                        @if (Html.IsSelected(MVC.Persons.Name, MVC.Persons.ActionNames.Index)) { 
-                            <li class="nav-item mr-1 ">
-                                <a class="nav-link btn btn-info text-light" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    <i class="fas fa-flag-checkered"></i>
-                                    <span class="d-none d-md-inline">Your weight maximums</span>
-                                </a>
-                            </li>
-                        }
                         <li class="nav-item mr-1  @Html.SelectActivePage(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.Pride)">
                             <a class="nav-link btn btn-warning text-light" href="@Url.Action(MVC.Crossfitter.ActionNames.Pride, MVC.Crossfitter.Name)">
                                 <i class="fa fa-calculator" aria-hidden="true"></i>
