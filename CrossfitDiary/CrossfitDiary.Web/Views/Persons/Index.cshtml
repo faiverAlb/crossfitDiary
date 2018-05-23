@@ -23,7 +23,8 @@
             @Html.Partial(MVC.Shared.Views._Spinner)
         </div>
     </div>
-    <div class="personal-maximums container">
+    
+    <div class="personal-maximums container @(isResetButtonVisible? "collapse show": "collapse")" id="collapseExample">
         <div class="row justify-content-md-center">
             @{
                 if (isResetButtonVisible)

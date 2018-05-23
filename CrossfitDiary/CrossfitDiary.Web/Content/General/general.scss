@@ -1,6 +1,11 @@
 ﻿@import "../fontawesome/scss/fontawesome.scss";
 @import "../fontawesome/scss/fa-solid.scss";
 
+
+.navbar-brand {
+    border-bottom: 1px dashed #545b62;
+}
+
 table {
     > thead > tr > th {
         &.sorting_initial:before {

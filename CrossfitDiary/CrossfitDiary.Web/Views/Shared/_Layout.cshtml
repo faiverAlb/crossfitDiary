@@ -12,19 +12,18 @@
     <script>
 
         var host = window.location.hostname;
-        if(host !== "localhost")
-        {
+        if (host !== "localhost") {
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
 
             gtag('config', 'UA-35949393-2');
         }
     </script>
 
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="shortcut icon" type="image/png" href="@Url.Content(Content.favicon_ico)"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" type="image/png" href="@Url.Content(Content.favicon_ico)" />
 
     <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/font-awesome")
@@ -33,53 +32,89 @@
 <body>
     @if (User.Identity.IsAuthenticated)
     {
+        <header>
+            <nav class="navbar navbar-expand navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand text-secondary" href="@Url.Action(MVC.Persons.ActionNames.Index, MVC.Persons.Name)">
+                        <i class="fa fa-home" aria-hidden="true"></i> Workouter v@(currentVersion)
+                    </a>
 
-        <nav class="navbar navbar-expand navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="@Url.Action(MVC.Persons.ActionNames.Index, MVC.Persons.Name)">Workouter v@(currentVersion)</a>
-                <div class="collapse navbar-collapse" id="navBar">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item mr-1 @Html.IsSelected(MVC.Persons.Name, MVC.Persons.ActionNames.Index)">
-                            <a class="nav-link btn btn-secondary text-light" href="@Url.Action(MVC.Persons.ActionNames.Index, MVC.Persons.Name)">
-                                <i class="fa fa-home" aria-hidden="true"></i> <span class="d-none d-md-inline">Home</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mr-1 @Html.IsSelected(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.ManageWorkout)">
-                            <a class="nav-link btn btn-success text-light" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)"><i class="fa fa-rocket" aria-hidden="true"></i>
-                                <span class="d-none d-md-inline">Create/Log workout</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mr-1  @Html.IsSelected(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.Pride)">
-                            <a class="nav-link btn btn-warning text-light" href="@Url.Action(MVC.Crossfitter.ActionNames.Pride, MVC.Crossfitter.Name)"><i class="fa fa-calculator" aria-hidden="true"></i>
-                                <span class="d-none d-md-inline">Our prides</span>
-                            </a>
+                    <div class="navbar-collapse" id="navBar">
+                        <ul class="navbar-nav mr-auto">
+                            @if (Html.IsSelected(MVC.Persons.Name, MVC.Persons.ActionNames.Index))
+                            {
+                                <li class="nav-item mr-1">
+                                    <a class="nav-link btn btn-info text-light d-inline-block d-md-none" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <span class="fa-layers fa-fw" >
+                                            <i class="fas fa-trophy" aria-hidden="true" data-fa-transform="up-5"></i>
+                                            <span class="fa-layers-text fa-inverse" data-fa-transform="down-12 shrink-7" style="font-weight:900">MAX</span>
+                                        </span>
 
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0 d-none d-lg-inline">
-                        <span class="navbar-text mr-lg-2 ">
-                            @User.Identity.Name
-                        </span>
-                        <a class="btn btn-outline-primary " href="@Url.Action(MVC.Account.ActionNames.LogOut, MVC.Account.Name)">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span class="d-none d-lg-inline">Log Out</span>
-                        </a>
-                    </form>
+                                        <span class="d-none d-md-inline">Weight maximums</span>
+                                    </a>
+                                    <a class="nav-link btn btn-info text-light d-none d-md-inline-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        <i class="fas fa-trophy"></i>
+                                        <span class="d-none d-md-inline">Weight maximums</span>
+                                    </a>
+                                </li>
+                            }
+
+
+                            <li class="nav-item mr-1 @Html.SelectActivePage(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.ManageWorkout)">
+                                <a class="nav-link btn btn-success text-light d-inline-block d-md-none" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)">
+                                    <span class="fa-layers fa-fw" >
+                                        <i class="fa fa-rocket" aria-hidden="true" data-fa-transform="up-5 "></i>
+                                        <span class="fa-layers-text fa-inverse" data-fa-transform="down-12 shrink-7" style="font-weight:900">LOG</span>
+                                    </span>
+                                </a>
+                                <a class="nav-link btn btn-success text-light d-none d-md-inline-block" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name)">
+                                    <i class="fa fa-rocket" aria-hidden="true" ></i>
+                                    <span>Create/Log workout</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mr-1  @Html.SelectActivePage(MVC.Crossfitter.Name, MVC.Crossfitter.ActionNames.Pride)">
+                                <a class="nav-link btn btn-warning text-light d-inline-block d-md-none" href="@Url.Action(MVC.Crossfitter.ActionNames.Pride, MVC.Crossfitter.Name)">
+                                    <span class="fa-layers fa-fw" >
+                                        <i class="fa fa-calculator" aria-hidden="true" data-fa-transform="up-5 "></i>
+                                        <span class="fa-layers-text fa-inverse" data-fa-transform="down-12 shrink-7" style="font-weight:900">PRIDE</span>
+                                    </span>
+
+                                    <span class="d-none d-md-inline">Our prides</span>
+                                </a>
+                                <a class="nav-link btn btn-warning text-light d-none d-md-inline-block" href="@Url.Action(MVC.Crossfitter.ActionNames.Pride, MVC.Crossfitter.Name)">
+                                    <i class="fa fa-calculator" aria-hidden="true"></i>
+                                    <span class="d-none d-md-inline">Our prides</span>
+                                </a>
+
+                            </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0 d-none d-lg-inline">
+                            <span class="navbar-text mr-lg-2 ">
+                                @User.Identity.Name
+                            </span>
+                            <a class="btn btn-outline-primary " href="@Url.Action(MVC.Account.ActionNames.LogOut, MVC.Account.Name)">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span class="d-none d-lg-inline">Log Out</span>
+                            </a>
+                        </form>
+
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+
+        </header>
     }
-<div class="container">
-    <!--ko if:errorMessager.hasMessage -->
-    <div class="alert alert-danger errors-container" role="alert" data-bind="visible:true" style="display: none">
-        <span data-bind="text: errorMessager.message"></span>
-    </div>
-    <!-- /ko -->
-    @RenderBody()
-</div>
+    <main role="main" class="container">
+        <!--ko if:errorMessager.hasMessage -->
+        <div class="alert alert-danger errors-container" role="alert" data-bind="visible:true" style="display: none">
+            <span data-bind="text: errorMessager.message"></span>
+        </div>
+        <!-- /ko -->
+        @RenderBody()
+    </main>
 
 
-@Html.Partial(MVC.Shared.Views.ViewNames._ModalTemplate)
+    @Html.Partial(MVC.Shared.Views.ViewNames._ModalTemplate)
 
 
     @RenderSection("scripts", required: false)
