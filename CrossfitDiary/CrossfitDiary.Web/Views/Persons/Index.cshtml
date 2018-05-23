@@ -76,56 +76,57 @@
                                 <span data-bind="text:workoutViewModel.timeCap"></span>
                             </span>
                         </span>
-@*                        <div class="workout-exercises pl-3 pt-1">*@
-@*                            @{*@
-@*                                foreach (ExerciseViewModel exerciseViewModel in workout.WorkoutViewModel.ExercisesToDoList)*@
-@*                                {*@
-@*                                    <div class="exercise">*@
-@*                                        <span>@exerciseViewModel.Title:</span>*@
-@*                                        @{*@
-@*                                            foreach (ExerciseMeasureViewModel measure in exerciseViewModel.ExerciseMeasures)*@
-@*                                            {*@
-@*                                                if (string.IsNullOrEmpty(@measure.ExerciseMeasureType.MeasureValue))*@
-@*                                                {*@
-@*                                                    continue;*@
-@*                                                }*@
-@**@
-@*                                                switch (measure.ExerciseMeasureType.MeasureType)*@
-@*                                                {*@
-@*                                                    case MeasureTypeViewModel.Distance:*@
-@*                                                        <span>@measure.ExerciseMeasureType.MeasureValue meters</span>*@
-@*                                                        break;*@
-@*                                                    case MeasureTypeViewModel.Count:*@
-@*                                                        <span>@measure.ExerciseMeasureType.MeasureValue</span>*@
-@*                                                        break;*@
-@*                                                    case MeasureTypeViewModel.Weight:*@
-@*                                                        <span>(@measure.ExerciseMeasureType.MeasureValue kgs)</span>*@
-@*                                                        break;*@
-@*                                                    case MeasureTypeViewModel.Calories:*@
-@*                                                        <span>(@measure.ExerciseMeasureType.MeasureValue calories)</span>*@
-@*                                                        break;*@
-@*                                                    case MeasureTypeViewModel.Height:*@
-@*                                                        <span>(@measure.ExerciseMeasureType.MeasureValue cm)</span>*@
-@*                                                        break;*@
-@*                                                    default:*@
-@*                                                        throw new ArgumentOutOfRangeException();*@
-@*                                                }*@
-@*                                            }*@
-@*                                            if (workout.HasNewMaximum && exerciseViewModel.IsNewWeightMaximum)*@
-@*                                            {*@
-@*                                                <span class="new-record" title="Person new weight maximum!">*@
-@*                                                    <span class="fa-layers fa-fw">*@
-@*                                                        <i class="fas fa-trophy"></i>*@
-@*                                                        <i class="fa-inverse fas fa-star" data-fa-transform="shrink-8 up-3 "></i>*@
-@*                                                    </span>*@
-@*                                                </span>*@
-@*                                            }*@
-@*                                        }*@
-@*                                    </div>*@
-@*                                }*@
-@**@
-@*                            }*@
-@*                        </div>*@
+                        <div class="workout-exercises pl-3 pt-1">
+                            @{
+                                <!-- ko foreach:workoutViewModel.exercisesToDoList-->
+                                {
+                            <div class="exercise">
+                                <span data-bind="text:title"></span>:
+                                <!-- ko foreach:exerciseMeasures-->
+                                @{
+                                    foreach (ExerciseMeasureViewModel measure in exerciseViewModel.ExerciseMeasures)
+                                    {
+                                        <!-- ko if:exerciseMeasureType.measureType -->
+
+                                        switch (measure.ExerciseMeasureType.MeasureType)
+                                        {
+                                            case MeasureTypeViewModel.Distance:
+                                                <span>@measure.ExerciseMeasureType.MeasureValue meters</span>
+                                                break;
+                                            case MeasureTypeViewModel.Count:
+                                                <span>@measure.ExerciseMeasureType.MeasureValue</span>
+                                                break;
+                                            case MeasureTypeViewModel.Weight:
+                                                <span>(@measure.ExerciseMeasureType.MeasureValue kgs)</span>
+                                                break;
+                                            case MeasureTypeViewModel.Calories:
+                                                <span>(@measure.ExerciseMeasureType.MeasureValue calories)</span>
+                                                break;
+                                            case MeasureTypeViewModel.Height:
+                                                <span>(@measure.ExerciseMeasureType.MeasureValue cm)</span>
+                                                break;
+                                            default:
+                                                throw new ArgumentOutOfRangeException();
+                                        }
+                                        <!-- /ko -->
+                                    }
+                                    @*                                    if (workout.HasNewMaximum && exerciseViewModel.IsNewWeightMaximum)*@
+                                    @*                                    {*@
+                                    @*                                        <span class="new-record" title="Person new weight maximum!">*@
+                                    @*                                            <span class="fa-layers fa-fw">*@
+                                    @*                                                <i class="fas fa-trophy"></i>*@
+                                    @*                                                <i class="fa-inverse fas fa-star" data-fa-transform="shrink-8 up-3 "></i>*@
+                                    @*                                            </span>*@
+                                    @*                                        </span>*@
+                                    @*                                    }*@
+                                }
+                                <!-- /ko -->
+                            </div>
+                                }
+                                <!-- /ko -->
+
+                            }
+                        </div>
 @*                        <div class="text-right">*@
 @*                            <span class="workout-result">*@
 @**@
