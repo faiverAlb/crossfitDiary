@@ -93,7 +93,7 @@
           selectedWorkoutId: this.selectedWorkoutId,
           timePassed: this._totalTime(),
           isEditMode: this.isEditMode,
-          repsToFinishOnCapTime: this._repsToFinishOnCapTime()
+          repsToFinishOnCapTime: this._repsToFinishOnCapTime(),
         }
       );
       return toLogWorkoutViewModel;

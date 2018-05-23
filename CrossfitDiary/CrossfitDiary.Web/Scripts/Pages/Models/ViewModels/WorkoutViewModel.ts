@@ -12,6 +12,7 @@
     restBetweenRounds?: any,
     workoutType: WorkoutType,
     exercisesToDoList: ExerciseViewModel[];
+    workoutTypeDisplay?: string;
   }
 
   export class WorkoutViewModel implements Serializable<WorkoutViewModel>{
@@ -25,6 +26,7 @@
     restBetweenExercises?: any;
     restBetweenRounds?: any;
     workoutType: WorkoutType;
+    workoutTypeDisplay?: string;
     exercisesToDoList: ExerciseViewModel[];
 
     
@@ -42,6 +44,7 @@
       this.restBetweenRounds = params.restBetweenRounds;
       this.workoutType = params.workoutType;
       this.exercisesToDoList = params.exercisesToDoList;
+      this.workoutTypeDisplay = params.workoutTypeDisplay;
     }
 
     public deserialize(jsonInput): WorkoutViewModel {
@@ -58,6 +61,7 @@
         restBetweenExercises: jsonInput.restBetweenExercises,
         restBetweenRounds: jsonInput.restBetweenRounds,
         workoutType: jsonInput.workoutType,
+        workoutTypeDisplay: jsonInput.workoutTypeDisplay,
         exercisesToDoList: jsonInput.exercisesToDoList.map(x => new ExerciseViewModel().deserialize(x))
       });
     }

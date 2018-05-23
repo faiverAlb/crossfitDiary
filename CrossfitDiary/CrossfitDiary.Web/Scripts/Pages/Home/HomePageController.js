@@ -13,6 +13,7 @@ var Pages;
     var BaseController = General.BaseController;
     var CrossfitterService = General.CrossfitterService;
     var ErrorMessageViewModel = General.ErrorMessageViewModel;
+    var ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
     var HomePageController = (function (_super) {
         __extends(HomePageController, _super);
         /* Observables */
@@ -46,6 +47,7 @@ var Pages;
             };
             _this.errorMessager = new ErrorMessageViewModel();
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
+            _this.allWorkouts = parameters.viewModel.allWorkouts.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
             return _this;
         }
         return HomePageController;
