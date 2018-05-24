@@ -83,43 +83,37 @@
                             <div class="exercise">
                                 <span data-bind="text:title"></span>:
                                 <!-- ko foreach:exerciseMeasures-->
-                                @{
-                                    foreach (ExerciseMeasureViewModel measure in exerciseViewModel.ExerciseMeasures)
-                                    {
-                                        <!-- ko if:exerciseMeasureType.measureType -->
-
-                                        switch (measure.ExerciseMeasureType.MeasureType)
-                                        {
-                                            case MeasureTypeViewModel.Distance:
-                                                <span>@measure.ExerciseMeasureType.MeasureValue meters</span>
-                                                break;
-                                            case MeasureTypeViewModel.Count:
-                                                <span>@measure.ExerciseMeasureType.MeasureValue</span>
-                                                break;
-                                            case MeasureTypeViewModel.Weight:
-                                                <span>(@measure.ExerciseMeasureType.MeasureValue kgs)</span>
-                                                break;
-                                            case MeasureTypeViewModel.Calories:
-                                                <span>(@measure.ExerciseMeasureType.MeasureValue calories)</span>
-                                                break;
-                                            case MeasureTypeViewModel.Height:
-                                                <span>(@measure.ExerciseMeasureType.MeasureValue cm)</span>
-                                                break;
-                                            default:
-                                                throw new ArgumentOutOfRangeException();
-                                        }
-                                        <!-- /ko -->
-                                    }
-                                    @*                                    if (workout.HasNewMaximum && exerciseViewModel.IsNewWeightMaximum)*@
-                                    @*                                    {*@
-                                    @*                                        <span class="new-record" title="Person new weight maximum!">*@
-                                    @*                                            <span class="fa-layers fa-fw">*@
-                                    @*                                                <i class="fas fa-trophy"></i>*@
-                                    @*                                                <i class="fa-inverse fas fa-star" data-fa-transform="shrink-8 up-3 "></i>*@
-                                    @*                                            </span>*@
-                                    @*                                        </span>*@
-                                    @*                                    }*@
-                                }
+                                 <!-- ko if:exerciseMeasureType.measureValue != null --> 
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Count)-->
+                                    <span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <!-- /ko --> 
+                                    
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Distance)-->
+                                    <span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <span> meters</span>
+                                    <!-- /ko -->
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Weight)-->
+                                    (<span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <span> kgs</span>)
+                                    <!-- /ko -->
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Calories)-->
+                                    (<span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <span> calories  </span>)
+                                    <!-- /ko -->
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Height)-->
+                                    (<span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <span> cm</span>)
+                                <!-- /ko -->
+                                <!-- /ko -->
+                                @*                                    if (workout.HasNewMaximum && exerciseViewModel.IsNewWeightMaximum)*@
+                                @*                                    {*@
+                                @*                                        <span class="new-record" title="Person new weight maximum!">*@
+                                @*                                            <span class="fa-layers fa-fw">*@
+                                @*                                                <i class="fas fa-trophy"></i>*@
+                                @*                                                <i class="fa-inverse fas fa-star" data-fa-transform="shrink-8 up-3 "></i>*@
+                                @*                                            </span>*@
+                                @*                                        </span>*@
+                                @*                                    }*@
                                 <!-- /ko -->
                             </div>
                                 }
