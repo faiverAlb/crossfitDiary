@@ -133,45 +133,28 @@
                                         + <span data-bind="text:partialRepsFinished"></span> partials
                                         <!-- /ko -->
                                     </span>
-
+                                <!-- /ko -->   
+                                <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.EMOM)-->
+                                    <span>
+                                        <i class="far fa-clock"></i> Work time: <span data-bind="text:workoutViewModel.timeToWork"></span>
+                                    </span>
                                 <!-- /ko -->
-
-@*                                 @switch (workout.WorkoutViewModel.WorkoutType) *@
-@*                                 { *@
-@*                                     case RoutineComplexType.ForTime: *@
-@*                                         if (workout.RepsToFinishOnCapTime.HasValue) *@
-@*                                         { *@
-@*                                             <span><i class="far fa-smile"></i> Cap + @workout.RepsToFinishOnCapTime.Value</span> *@
-@* *@
-@*                                         } *@
-@*                                         else *@
-@*                                         { *@
-@*                                             <span><i class="far fa-clock"></i> Total time: @workout.TimePassed</span> *@
-@*                                         } *@
-@*                                         break; *@
-@*                                     case RoutineComplexType.AMRAP: *@
-@*                                         <span><i class="fas fa-hashtag"></i> Result rounds: @workout.RoundsFinished @(workout.PartialRepsFinished.HasValue ? string.Format("+ {0} partials", workout.PartialRepsFinished.Value) : string.Empty)</span> *@
-@*                                         break; *@
-@*                                     case RoutineComplexType.EMOM: *@
-@*                                     case RoutineComplexType.E2MOM: *@
-@*                                         <span><i class="far fa-clock"></i> Work time: @workout.WorkoutViewModel.TimeToWork </span> *@
-@*                                         break; *@
-@*                                     case RoutineComplexType.NotForTime: *@
-@*                                         break; *@
-@*                                 } *@
                             </span>
                         </div>
                     </div>
-@*                    <div class="item-footer text-right pt-1">*@
-@*                        <div class="action-buttons">*@
-@*                            @if (workout.CanBeRemovedByCurrentUser)*@
-@*                            {*@
-@*                                <a class="edit-workout-action pointer text-info" title="Edit" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name, new {workoutId = workout.WorkoutViewModel.Id, crossfitterWorkoutId = workout.CrossfitterWorkoutId})"><i class="fas fa-edit "></i></a>*@
-@*                            }*@
-@*                            <a class="repeat-workout-action pointer text-success pl-1" title="Repeat" href="@Url.Action(MVC.Crossfitter.ActionNames.ManageWorkout, MVC.Crossfitter.Name, new {workoutId = workout.WorkoutViewModel.Id})"><i class="fas fa-plus "></i></a>*@
-@**@
-@*                        </div>*@
-@*                    </div>*@
+                    <div class="item-footer text-right pt-1">
+                        <div class="action-buttons">
+                            <!-- ko if:canBeRemovedByCurrentUser-->
+                            @* href="/Crossfitter/ManageWorkout?workoutId=137" *@
+                            <a class="edit-workout-action pointer text-info" data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id + '&crossfitterWorkoutId=' + crossfitterWorkoutId}">
+                                <i class="fas fa-edit "></i>
+                            </a>
+                            <!-- /ko -->
+                            <a class="repeat-workout-action pointer text-success pl-1" data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id}">
+                                <i class="fas fa-plus "></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /ko -->
