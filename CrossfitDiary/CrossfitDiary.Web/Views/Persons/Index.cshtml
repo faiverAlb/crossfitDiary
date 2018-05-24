@@ -1,8 +1,8 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
-    string predefinedUserId = ViewBag.UserId;
-    int? exerciseId = ViewBag.ExerciseId;
-    bool isResetButtonVisible = string.IsNullOrEmpty(predefinedUserId) == false || exerciseId.HasValue;
+    string predefinedUserId = string.IsNullOrEmpty(ViewBag.UserId)? "" : ViewBag.UserId;
+    string exerciseId = string.IsNullOrEmpty(ViewBag.ExerciseId) ? "": ViewBag.ExerciseId;
+    bool isResetButtonVisible = predefinedUserId != "" || exerciseId != "";
 }
 @using CrossfitDiary.Model
 @using CrossfitDiary.Web.ViewModels
@@ -12,7 +12,7 @@
 @using Scripts = System.Web.Optimization.Scripts
 @model PersonDataViewModel
 
-<div class="home-container">
+<div class="home-container" data-bind="visible:true" style="display: none">
     <!--ko if:errorMessager.hasMessage -->
     <div class="alert alert-danger" role="alert" data-bind="visible:true" style="display: none">
         <span data-bind="text: errorMessager.message"></span>
@@ -47,7 +47,7 @@
                     <div class="item-header d-flex flex-row justify-content-between  ">
                         <div class="username">
                             <a class="text-info" data-bind="attr: { href: '/?userId='+ workouterId}, text: workouterName">
-                                
+
                             </a>
                         </div>
                         <div class="">
@@ -118,26 +118,25 @@
                             <span class="workout-result">
                                 <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.ForTime)-->
                                 <!-- ko if:repsToFinishOnCapTime-->
-                                    <span><i class="far fa-smile"></i> Cap + <span data-bind="text:repsToFinishOnCapTime"></span></span>
+                                <span><i class="far fa-smile"></i> Cap + <span data-bind="text:repsToFinishOnCapTime"></span></span>
                                 <!-- /ko -->
                                 <!-- ko ifnot:repsToFinishOnCapTime-->
-                                    <span><i class="far fa-clock"></i> Total time: <span data-bind="text:timePassed"></span></span>
+                                <span><i class="far fa-clock"></i> Total time: <span data-bind="text:timePassed"></span></span>
                                 <!-- /ko -->
                                 <!-- /ko -->
-                                
                                 <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.AMRAP)-->
-                                    <span>
-                                        <i class="fas fa-hashtag"></i> Result rounds:
-                                        <span data-bind="text:roundsFinished"></span>
-                                        <!-- ko if:partialRepsFinished-->
-                                        + <span data-bind="text:partialRepsFinished"></span> partials
-                                        <!-- /ko -->
-                                    </span>
-                                <!-- /ko -->   
+                                <span>
+                                    <i class="fas fa-hashtag"></i> Result rounds:
+                                    <span data-bind="text:roundsFinished"></span>
+                                    <!-- ko if:partialRepsFinished-->
+                                    + <span data-bind="text:partialRepsFinished"></span> partials
+                                    <!-- /ko -->
+                                </span>
+                                <!-- /ko -->
                                 <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.EMOM)-->
-                                    <span>
-                                        <i class="far fa-clock"></i> Work time: <span data-bind="text:workoutViewModel.timeToWork"></span>
-                                    </span>
+                                <span>
+                                    <i class="far fa-clock"></i> Work time: <span data-bind="text:workoutViewModel.timeToWork"></span>
+                                </span>
                                 <!-- /ko -->
                             </span>
                         </div>
@@ -160,11 +159,9 @@
             <!-- /ko -->
 
         }
-        @if (Model.AllWorkouts.Count == 0)
-        {
+        <!-- ko if:allWorkouts().length == 0-->
             <img class="rounded mx-auto d-block img-fluid pt-4" src="@Content.img.empty_jpg" alt="Nothing here :)" />
-        }
-
+        <!-- /ko -->
     </div>
 </div>
 @Html.Partial(MVC.Persons.Views.ViewNames._RemoveWorkoutTemplate)
@@ -186,7 +183,8 @@
             const path = "@Url.Content("~")";
             const model = new Pages.HomePageController({
                 pathToApp: path,
-                viewModel: @Html.Raw(JsonConvert.SerializeObject(Model))
+                userId: '@predefinedUserId',
+                exerciseId: '@exerciseId'
             });
             ko.applyBindings(model);
         });

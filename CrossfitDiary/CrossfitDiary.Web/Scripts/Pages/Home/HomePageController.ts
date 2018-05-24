@@ -6,19 +6,36 @@
 
   export class HomePageController extends  BaseController {
     /* Сivilians */
-    private allWorkouts: ToLogWorkoutViewModel[];
+    private allWorkouts: KnockoutObservable<ToLogWorkoutViewModel[]>;
     private _service: CrossfitterService;
     private errorMessager: ErrorMessageViewModel;
 
     /* Observables */
     /* Computeds */
 
-    constructor(public parameters: { viewModel: { allWorkouts }, pathToApp: string }) {
+    constructor(public parameters: { pathToApp: string, userId:string, exerciseId?:number }) {
       super();
       this.errorMessager = new ErrorMessageViewModel();
       this._service = new CrossfitterService(parameters.pathToApp, this.isDataLoading);
-      this.allWorkouts = parameters.viewModel.allWorkouts.map(x => new ToLogWorkoutViewModel().deserialize(x));
+      this._service.getAvailableWorkouts();
+      this.allWorkouts = ko.observable([]);
+
+      this.initialLoading();
     }
+
+
+    private initialLoading = () => {
+      debugger;
+      this._service.getAllCrossfittersWorkouts(this.parameters.userId, this.parameters.exerciseId)
+        .then((data) => {
+          this.allWorkouts(data);
+        })
+        .fail((response) => {
+          this.isDataLoading(false);
+          this.errorMessager.addMessage(response.responseText, false);
+        });
+
+    };
 
     private removeWorkoutConfirmation = (crossfitterWorkoutId: number) => {
 

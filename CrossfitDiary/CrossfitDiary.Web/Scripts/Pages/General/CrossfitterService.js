@@ -32,6 +32,14 @@ var General;
                 })
                     .finally(function () { _this.isDataLoading(false); });
             };
+            _this.getAllCrossfittersWorkouts = function (userId, exerciseId) {
+                _this.isDataLoading(true);
+                return _this.get(_this.pathToApp + ("api/getAllCrossfittersWorkouts/users/" + userId + "/exercises/" + exerciseId))
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
+            };
             _this.getExercises = function () {
                 _this.isDataLoading(true);
                 return _this.get(_this.pathToApp + "api/getExercises")

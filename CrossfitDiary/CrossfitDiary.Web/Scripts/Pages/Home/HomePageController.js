@@ -13,7 +13,6 @@ var Pages;
     var BaseController = General.BaseController;
     var CrossfitterService = General.CrossfitterService;
     var ErrorMessageViewModel = General.ErrorMessageViewModel;
-    var ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
     var HomePageController = (function (_super) {
         __extends(HomePageController, _super);
         /* Observables */
@@ -21,6 +20,17 @@ var Pages;
         function HomePageController(parameters) {
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
+            _this.initialLoading = function () {
+                debugger;
+                _this._service.getAllCrossfittersWorkouts(_this.parameters.userId, _this.parameters.exerciseId)
+                    .then(function (data) {
+                    _this.allWorkouts(data);
+                })
+                    .fail(function (response) {
+                    _this.isDataLoading(false);
+                    _this.errorMessager.addMessage(response.responseText, false);
+                });
+            };
             _this.removeWorkoutConfirmation = function (crossfitterWorkoutId) {
                 ko.utils.showModalFromTemplate({
                     templateName: Pages.TemplatesNames.ConfirmToRemoveWorkout,
@@ -47,7 +57,9 @@ var Pages;
             };
             _this.errorMessager = new ErrorMessageViewModel();
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
-            _this.allWorkouts = parameters.viewModel.allWorkouts.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
+            _this._service.getAvailableWorkouts();
+            _this.allWorkouts = ko.observable([]);
+            _this.initialLoading();
             return _this;
         }
         return HomePageController;

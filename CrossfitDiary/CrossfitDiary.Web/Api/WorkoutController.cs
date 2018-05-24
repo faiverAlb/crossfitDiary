@@ -50,6 +50,23 @@ namespace CrossfitDiary.Web.Api
             IEnumerable<WorkoutViewModel> availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAllWorkouts());
             return Ok(availableWorkouts.OrderBy(x => x.DetailedTitle));
         }
+        
+        /// <summary>
+        ///     Get available workouts
+        /// </summary>
+        /// <returns>All available workouts</returns>
+        [HttpGet]
+        [Route("getAllCrossfittersWorkouts/users/{userId}/exercises/{exerciseId}")]
+        public IHttpActionResult GetAllCrossfittersWorkouts(string userId = null, int? exerciseId = null)
+        {
+            string userIdForWorkouts = exerciseId.HasValue && string.IsNullOrEmpty(userId) ? User.Identity.GetUserId() : userId;
+
+            List<ToLogWorkoutViewModel> crossfitersWorkouts = _crossfitterService
+                .GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId)
+                .Select(Mapper.Map<ToLogWorkoutViewModel>)
+                .ToList();
+            return Ok(crossfitersWorkouts);
+        }
 
 
         /// <summary>

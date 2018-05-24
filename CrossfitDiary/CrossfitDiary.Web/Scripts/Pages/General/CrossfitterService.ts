@@ -24,6 +24,15 @@
         .finally(() => { this.isDataLoading(false); });
     };
 
+    public getAllCrossfittersWorkouts = (userId:string,exerciseId?:number): Q.Promise<ToLogWorkoutViewModel[]> => {
+      this.isDataLoading(true);
+      return this.get<ToLogWorkoutViewModel[]>(this.pathToApp + `api/getAllCrossfittersWorkouts/users/${userId}/exercises/${exerciseId}`)
+        .then((jsonData) => {
+          return jsonData.map(x => new ToLogWorkoutViewModel().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
+    };
+
     public getExercises = (): Q.Promise<ExerciseViewModel[]> => {
       this.isDataLoading(true);
       return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getExercises")
