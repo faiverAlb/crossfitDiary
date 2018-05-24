@@ -10,6 +10,7 @@ var Models;
             this.title = params.title;
             this.exerciseMeasures = params.exerciseMeasures;
             this.isAlternative = params.isAlternative;
+            this.isNewWeightMaximum = params.isNewWeightMaximum;
         }
         ExerciseViewModel.prototype.deserialize = function (input) {
             if (input == null) {
@@ -20,6 +21,7 @@ var Models;
                 title: input.title,
                 exerciseMeasures: input.exerciseMeasures.map(function (x) { return new Models.ExerciseMeasureViewModel().deserialize(x); }),
                 isAlternative: input.isAlternative,
+                isNewWeightMaximum: input.isNewWeightMaximum,
             });
         };
         ;

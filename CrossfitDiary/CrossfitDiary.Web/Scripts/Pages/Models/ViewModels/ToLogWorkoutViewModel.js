@@ -18,6 +18,7 @@ var Models;
             this.workouterId = params.workouterId;
             this.displayDate = params.displayDate;
             this.workoutViewModel = params.workoutViewModel;
+            this.hasNewMaximum = params.hasNewMaximum;
         }
         ToLogWorkoutViewModel.prototype.deserialize = function (jsonInput) {
             if (jsonInput == null) {
@@ -37,6 +38,7 @@ var Models;
                 workouterId: jsonInput.workouterId,
                 displayDate: jsonInput.displayDate,
                 workoutViewModel: new Models.WorkoutViewModel().deserialize(jsonInput.workoutViewModel),
+                hasNewMaximum: jsonInput.hasNewMaximum,
             });
         };
         return ToLogWorkoutViewModel;

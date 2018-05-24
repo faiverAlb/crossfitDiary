@@ -7,6 +7,7 @@
     title: string;
     exerciseMeasures: ExerciseMeasureViewModel[];
     isAlternative: boolean;
+    isNewWeightMaximum?: boolean;
   };
 
   export class ExerciseViewModel implements Serializable<ExerciseViewModel> {
@@ -15,6 +16,7 @@
     title?: string;
     exerciseMeasures: ExerciseMeasureViewModel[];
     isAlternative: boolean;
+    isNewWeightMaximum?: boolean;
 
     constructor(params?: IExerciseViewModel) {
       if (params == null) {
@@ -24,6 +26,7 @@
       this.title = params.title;
       this.exerciseMeasures = params.exerciseMeasures;
       this.isAlternative = params.isAlternative;
+      this.isNewWeightMaximum = params.isNewWeightMaximum;
     }
 
     deserialize(input): ExerciseViewModel {
@@ -36,6 +39,7 @@
         title: input.title,
         exerciseMeasures: input.exerciseMeasures.map(x => new ExerciseMeasureViewModel().deserialize(x)),
         isAlternative: input.isAlternative,
+        isNewWeightMaximum: input.isNewWeightMaximum,
       });
     };
 
