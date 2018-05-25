@@ -25,13 +25,14 @@
       this.allWorkouts = ko.observableArray([]);
       this.hasMoreElements  = ko.observable(false);
 
-      this.loadElements();
+      this.loadElements(true);
     }
 
 
-    private loadElements = () => {
-      
-      this.isDataLoading(true);
+    private loadElements = (isInitialLoading:boolean = false) => {
+      if (isInitialLoading) {
+        this.isDataLoading(true);
+      }
       this._service.getAllCrossfittersWorkouts(this.parameters.userId, this.parameters.exerciseId, this.page, this.pageSize)
         .then((data) => {
           ko.utils.arrayPushAll(this.allWorkouts, data);
