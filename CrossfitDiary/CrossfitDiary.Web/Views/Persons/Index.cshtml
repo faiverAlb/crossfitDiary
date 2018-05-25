@@ -93,8 +93,8 @@
                                     <span> kgs</span>)
                                     <!-- /ko -->
                                     <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Calories)-->
-                                    (<span data-bind="text:exerciseMeasureType.measureValue"></span>
-                                    <span> calories  </span>)
+                                    <span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <span> calories  </span>
                                     <!-- /ko -->
                                     <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Height)-->
                                     (<span data-bind="text:exerciseMeasureType.measureValue"></span>
@@ -156,7 +156,7 @@
                     </div>
                 </div>
             </div>
-            <div data-bind="scroll: hasMoreElements, scrollOptions: { loadFunc: loadElements, offset: 10 }">loading</div>
+            <div data-bind="scroll: hasMoreElements, scrollOptions: { loadFunc: loadElements, offset: 200 }"></div>
 
         }
         <!-- ko if: isDataLoading() == false &&  allWorkouts().length == 0-->

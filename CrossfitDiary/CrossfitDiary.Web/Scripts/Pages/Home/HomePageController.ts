@@ -11,7 +11,7 @@
     private errorMessager: ErrorMessageViewModel;
 
     private page: number = 1;
-    private pageSize: number = 45;
+    private pageSize: number = 10;
 
     /* Observables */
     private hasMoreElements : KnockoutObservable<boolean>;
@@ -65,12 +65,13 @@
       this.isDataLoading(true);
       this._service.removeWorkout(model.crossfitterWorkoutId)
         .then(() => {
-          this.isDataLoading(false);
           window.location.href = "/";
         })
         .fail((response) => {
-          this.isDataLoading(false);
           this.errorMessager.addMessage(response.responseText, false);
+        })
+        .finally(() => {
+          this.isDataLoading(false);
         });
     }
   };

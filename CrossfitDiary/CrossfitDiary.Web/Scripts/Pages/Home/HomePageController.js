@@ -20,7 +20,7 @@ var Pages;
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
             _this.page = 1;
-            _this.pageSize = 45;
+            _this.pageSize = 10;
             _this.loadElements = function () {
                 _this.isDataLoading(true);
                 _this._service.getAllCrossfittersWorkouts(_this.parameters.userId, _this.parameters.exerciseId, _this.page, _this.pageSize)
@@ -52,12 +52,13 @@ var Pages;
                 _this.isDataLoading(true);
                 _this._service.removeWorkout(model.crossfitterWorkoutId)
                     .then(function () {
-                    _this.isDataLoading(false);
                     window.location.href = "/";
                 })
                     .fail(function (response) {
-                    _this.isDataLoading(false);
                     _this.errorMessager.addMessage(response.responseText, false);
+                })
+                    .finally(function () {
+                    _this.isDataLoading(false);
                 });
             };
             _this.errorMessager = new ErrorMessageViewModel();
