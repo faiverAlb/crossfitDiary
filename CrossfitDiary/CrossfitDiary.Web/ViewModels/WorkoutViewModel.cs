@@ -40,6 +40,7 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("workoutType")]
         public RoutineComplexType WorkoutType { get; set; }
 
+        [JsonProperty("workoutTypeDisplay")]
         public string WorkoutTypeDisplay
         {
             get

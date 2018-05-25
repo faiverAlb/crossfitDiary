@@ -17,7 +17,7 @@ var Models;
                     selectedWorkoutId: _this.selectedWorkoutId,
                     timePassed: _this._totalTime(),
                     isEditMode: _this.isEditMode,
-                    repsToFinishOnCapTime: _this._repsToFinishOnCapTime()
+                    repsToFinishOnCapTime: _this._repsToFinishOnCapTime(),
                 });
                 return toLogWorkoutViewModel;
             };

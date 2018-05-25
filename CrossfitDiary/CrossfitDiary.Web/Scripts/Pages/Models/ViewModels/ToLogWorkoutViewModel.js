@@ -13,6 +13,12 @@ var Models;
             this.timePassed = params.timePassed;
             this.isEditMode = params.isEditMode;
             this.repsToFinishOnCapTime = params.repsToFinishOnCapTime;
+            this.canBeRemovedByCurrentUser = params.canBeRemovedByCurrentUser;
+            this.workouterName = params.workouterName;
+            this.workouterId = params.workouterId;
+            this.displayDate = params.displayDate;
+            this.workoutViewModel = params.workoutViewModel;
+            this.hasNewMaximum = params.hasNewMaximum;
         }
         ToLogWorkoutViewModel.prototype.deserialize = function (jsonInput) {
             if (jsonInput == null) {
@@ -27,6 +33,12 @@ var Models;
                 selectedWorkoutId: jsonInput.selectedWorkoutId,
                 timePassed: jsonInput.timePassed,
                 repsToFinishOnCapTime: jsonInput.repsToFinishOnCapTime,
+                canBeRemovedByCurrentUser: jsonInput.canBeRemovedByCurrentUser,
+                workouterName: jsonInput.workouterName,
+                workouterId: jsonInput.workouterId,
+                displayDate: jsonInput.displayDate,
+                workoutViewModel: new Models.WorkoutViewModel().deserialize(jsonInput.workoutViewModel),
+                hasNewMaximum: jsonInput.hasNewMaximum,
             });
         };
         return ToLogWorkoutViewModel;

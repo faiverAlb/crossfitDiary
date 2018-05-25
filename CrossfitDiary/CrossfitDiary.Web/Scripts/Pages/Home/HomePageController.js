@@ -15,11 +15,30 @@ var Pages;
     var ErrorMessageViewModel = General.ErrorMessageViewModel;
     var HomePageController = (function (_super) {
         __extends(HomePageController, _super);
-        /* Observables */
         /* Computeds */
         function HomePageController(parameters) {
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
+            _this.page = 1;
+            _this.pageSize = 10;
+            _this.loadElements = function (isInitialLoading) {
+                if (isInitialLoading === void 0) { isInitialLoading = false; }
+                if (isInitialLoading) {
+                    _this.isDataLoading(true);
+                }
+                _this._service.getAllCrossfittersWorkouts(_this.parameters.userId, _this.parameters.exerciseId, _this.page, _this.pageSize)
+                    .then(function (data) {
+                    ko.utils.arrayPushAll(_this.allWorkouts, data);
+                    _this.hasMoreElements(data.length === _this.pageSize);
+                })
+                    .fail(function (response) {
+                    _this.errorMessager.addMessage(response.responseText, false);
+                })
+                    .finally(function () {
+                    _this.isDataLoading(false);
+                    _this.page += 1;
+                });
+            };
             _this.removeWorkoutConfirmation = function (crossfitterWorkoutId) {
                 ko.utils.showModalFromTemplate({
                     templateName: Pages.TemplatesNames.ConfirmToRemoveWorkout,
@@ -36,16 +55,20 @@ var Pages;
                 _this.isDataLoading(true);
                 _this._service.removeWorkout(model.crossfitterWorkoutId)
                     .then(function () {
-                    _this.isDataLoading(false);
                     window.location.href = "/";
                 })
                     .fail(function (response) {
-                    _this.isDataLoading(false);
                     _this.errorMessager.addMessage(response.responseText, false);
+                })
+                    .finally(function () {
+                    _this.isDataLoading(false);
                 });
             };
             _this.errorMessager = new ErrorMessageViewModel();
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
+            _this.allWorkouts = ko.observableArray([]);
+            _this.hasMoreElements = ko.observable(false);
+            _this.loadElements(true);
             return _this;
         }
         return HomePageController;
