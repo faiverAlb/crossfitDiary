@@ -83,7 +83,7 @@ namespace CrossfitDiary.Web.Mappings
                         {
                             case MeasureType.Distance:
                                 exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Distance;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Distance?.ToString();
+                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Distance.ToCustomString();
                                 exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Distance).ExerciseMeasureType.Description;
                                 exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Distance).ExerciseMeasureType.ShortMeasureDescription;
                                 break;

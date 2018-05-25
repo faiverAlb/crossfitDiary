@@ -198,16 +198,15 @@ namespace CrossfitDiary.Service
 
 
         /// <summary>
-        /// Returns all crossfitters workouts.
+        ///     Returns all crossfitters workouts.
         /// </summary>
-        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId)
+        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId, int page, int pageSize)
         {
             List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)?_crossfitterWorkoutRepository.GetAll().ToList() : _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId).ToList();
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
             UpdateWorkoutsWithRecords(crossfitterWorkouts);
-
-            return crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();
+            return crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList().Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
         }
 
 
