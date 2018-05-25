@@ -62,7 +62,7 @@ namespace CrossfitDiary.Web.Api
             string userIdForWorkouts = exerciseId.HasValue && string.IsNullOrEmpty(userId) ? User.Identity.GetUserId() : userId;
 
             List<ToLogWorkoutViewModel> crossfitersWorkouts = _crossfitterService
-                .GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId)
+                .GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId, page:0, pageSize:10)
                 .Select(Mapper.Map<ToLogWorkoutViewModel>)
                 .ToList();
             return Ok(crossfitersWorkouts);
