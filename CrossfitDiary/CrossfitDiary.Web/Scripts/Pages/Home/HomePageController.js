@@ -21,11 +21,8 @@ var Pages;
             _this.parameters = parameters;
             _this.page = 1;
             _this.pageSize = 10;
-            _this.loadElements = function (isInitialLoading) {
-                if (isInitialLoading === void 0) { isInitialLoading = false; }
-                if (isInitialLoading) {
-                    _this.isDataLoading(true);
-                }
+            _this.loadElements = function () {
+                _this.isDataLoading(true);
                 _this._service.getAllCrossfittersWorkouts(_this.parameters.userId, _this.parameters.exerciseId, _this.page, _this.pageSize)
                     .then(function (data) {
                     ko.utils.arrayPushAll(_this.allWorkouts, data);
@@ -68,7 +65,7 @@ var Pages;
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
             _this.allWorkouts = ko.observableArray([]);
             _this.hasMoreElements = ko.observable(false);
-            _this.loadElements(true);
+            _this.loadElements();
             return _this;
         }
         return HomePageController;
