@@ -34,7 +34,7 @@ var General;
             };
             _this.getAllCrossfittersWorkouts = function (userId, exerciseId) {
                 _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + ("api/getAllCrossfittersWorkouts/users/" + userId + "/exercises/" + exerciseId))
+                return _this.get(_this.pathToApp + ("api/getAllCrossfittersWorkouts?userId=" + userId + "&exerciseId=" + exerciseId))
                     .then(function (jsonData) {
                     return jsonData.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
                 })

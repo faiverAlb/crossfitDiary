@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
     string predefinedUserId = string.IsNullOrEmpty(ViewBag.UserId)? "" : ViewBag.UserId;
-    string exerciseId = string.IsNullOrEmpty(ViewBag.ExerciseId) ? "": ViewBag.ExerciseId;
+    string exerciseId = ViewBag.ExerciseId == null ? "": ViewBag.ExerciseId.ToString();
     bool isResetButtonVisible = predefinedUserId != "" || exerciseId != "";
 }
 @using CrossfitDiary.Model

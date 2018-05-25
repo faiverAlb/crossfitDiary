@@ -56,7 +56,7 @@ namespace CrossfitDiary.Web.Api
         /// </summary>
         /// <returns>All available workouts</returns>
         [HttpGet]
-        [Route("getAllCrossfittersWorkouts/users/{userId}/exercises/{exerciseId}")]
+        [Route("getAllCrossfittersWorkouts")]
         public IHttpActionResult GetAllCrossfittersWorkouts(string userId = null, int? exerciseId = null)
         {
             string userIdForWorkouts = exerciseId.HasValue && string.IsNullOrEmpty(userId) ? User.Identity.GetUserId() : userId;
