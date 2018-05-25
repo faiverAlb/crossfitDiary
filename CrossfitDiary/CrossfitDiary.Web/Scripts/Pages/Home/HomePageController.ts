@@ -17,7 +17,6 @@
       super();
       this.errorMessager = new ErrorMessageViewModel();
       this._service = new CrossfitterService(parameters.pathToApp, this.isDataLoading);
-      this._service.getAvailableWorkouts();
       this.allWorkouts = ko.observable([]);
 
       this.initialLoading();
@@ -25,14 +24,16 @@
 
 
     private initialLoading = () => {
-      debugger;
+      
       this._service.getAllCrossfittersWorkouts(this.parameters.userId, this.parameters.exerciseId)
         .then((data) => {
           this.allWorkouts(data);
         })
         .fail((response) => {
-          this.isDataLoading(false);
           this.errorMessager.addMessage(response.responseText, false);
+        })
+        .finally(() => {
+          this.isDataLoading(false);
         });
 
     };

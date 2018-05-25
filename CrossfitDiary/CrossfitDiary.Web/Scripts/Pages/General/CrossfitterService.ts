@@ -26,11 +26,11 @@
 
     public getAllCrossfittersWorkouts = (userId:string,exerciseId?:number): Q.Promise<ToLogWorkoutViewModel[]> => {
       this.isDataLoading(true);
-      return this.get<ToLogWorkoutViewModel[]>(this.pathToApp + `api/getAllCrossfittersWorkouts?userId=${userId}&exerciseId=${exerciseId}`)
+      return this.get<ToLogWorkoutViewModel[]>(this.pathToApp +
+          `api/getAllCrossfittersWorkouts?userId=${userId}&exerciseId=${exerciseId}`)
         .then((jsonData) => {
           return jsonData.map(x => new ToLogWorkoutViewModel().deserialize(x));
-        })
-        .finally(() => { this.isDataLoading(false); });
+        });
     };
 
     public getExercises = (): Q.Promise<ExerciseViewModel[]> => {

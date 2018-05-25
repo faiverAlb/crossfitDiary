@@ -8,7 +8,6 @@
 @using CrossfitDiary.Web.ViewModels
 @using CrossfitDiary.Web.ViewModels.Pride
 @using Links
-@using Newtonsoft.Json
 @using Scripts = System.Web.Optimization.Scripts
 @model PersonDataViewModel
 
@@ -159,8 +158,8 @@
             <!-- /ko -->
 
         }
-        <!-- ko if:allWorkouts().length == 0-->
-            <img class="rounded mx-auto d-block img-fluid pt-4" src="@Content.img.empty_jpg" alt="Nothing here :)" />
+        <!-- ko if: isDataLoading() == false &&  allWorkouts().length == 0-->
+        <img class="rounded mx-auto d-block img-fluid pt-4" src="@Content.img.empty_jpg" alt="Nothing here :)" />
         <!-- /ko -->
     </div>
 </div>
