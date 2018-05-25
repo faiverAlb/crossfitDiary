@@ -40,122 +40,123 @@
     </div>
     <div class="activities-list container">
         @{
-            <!-- ko foreach:allWorkouts-->
-            <div class="row">
-                <div data-bind="css:{'person-workout':canBeRemovedByCurrentUser}" class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded">
-                    <div class="item-header d-flex flex-row justify-content-between  ">
-                        <div class="username">
-                            <a class="text-info" data-bind="attr: { href: '/?userId='+ workouterId}, text: workouterName">
+            <div data-bind="foreach:allWorkouts">
+                <div class="row">
+                    <div data-bind="css:{'person-workout':canBeRemovedByCurrentUser}" class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded">
+                        <div class="item-header d-flex flex-row justify-content-between  ">
+                            <div class="username">
+                                <a class="text-info" data-bind="attr: { href: '/?userId='+ workouterId}, text: workouterName">
 
-                            </a>
-                        </div>
-                        <div class="">
-                            <span class="" data-bind="text:displayDate"></span>
-                            <!-- ko if:canBeRemovedByCurrentUser-->
-                            <a class="remove-workout pl-1 text-secondary pointer" title="Remove your workout" data-bind="click: function(){$parent.removeWorkoutConfirmation(crossfitterWorkoutId);}">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                            <!-- /ko -->
-                        </div>
-                    </div>
-                    <div class="item-body pt-1">
-                        <span class="workout-header d-flex justify-content-between">
-                            <span class="workout-title">
-                                <span data-bind="text:workoutViewModel.workoutTypeDisplay"></span>:
-                                <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.ForTime)-->
-                                <span data-bind="text:workoutViewModel.roundsCount"></span>
-                                <span>rounds</span>
-                                <!-- /ko -->
-                                <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.AMRAP)-->
-                                <span data-bind="text:workoutViewModel.timeToWork"></span>
-                                <!-- /ko -->
-                            </span>
-                            <span class="cap-time-info" data-bind="if:workoutViewModel.timeCap">
-                                <span>Cap: </span>
-                                <span data-bind="text:workoutViewModel.timeCap"></span>
-                            </span>
-                        </span>
-                        <div class="workout-exercises pl-3 pt-1">
-                            <!-- ko foreach:workoutViewModel.exercisesToDoList-->
-                            <div class="exercise">
-                                <span data-bind="text:title"></span>:
-                                <!-- ko foreach:exerciseMeasures-->
-                                <!-- ko if:exerciseMeasureType.measureValue != null -->
-                                <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Count)-->
-                                <span data-bind="text:exerciseMeasureType.measureValue"></span>
-                                <!-- /ko -->
-                                <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Distance)-->
-                                <span data-bind="text:exerciseMeasureType.measureValue"></span>
-                                <span> meters</span>
-                                <!-- /ko -->
-                                <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Weight)-->
-                                (<span data-bind="text:exerciseMeasureType.measureValue"></span>
-                                <span> kgs</span>)
-                                <!-- /ko -->
-                                <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Calories)-->
-                                (<span data-bind="text:exerciseMeasureType.measureValue"></span>
-                                <span> calories  </span>)
-                                <!-- /ko -->
-                                <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Height)-->
-                                (<span data-bind="text:exerciseMeasureType.measureValue"></span>
-                                <span> cm</span>)
-                                <!-- /ko -->
-                                <!-- /ko -->
-                                <!-- /ko -->
-                                <!-- ko if: $parent.hasNewMaximum && isNewWeightMaximum -->
-                                <span class="new-record" title="Person new weight maximum!">
-                                    <span class="fa-layers fa-fw">
-                                        <i class="fas fa-trophy"></i>
-                                        <i class="fa-inverse fas fa-star" data-fa-transform="shrink-8 up-3 "></i>
-                                    </span>
-                                </span>
+                                </a>
+                            </div>
+                            <div class="">
+                                <span class="" data-bind="text:displayDate"></span>
+                                <!-- ko if:canBeRemovedByCurrentUser-->
+                                <a class="remove-workout pl-1 text-secondary pointer" title="Remove your workout" data-bind="click: function(){$parent.removeWorkoutConfirmation(crossfitterWorkoutId);}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
                                 <!-- /ko -->
                             </div>
-                            <!-- /ko -->
                         </div>
-                        <div class="text-right">
-                            <span class="workout-result">
-                                <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.ForTime)-->
-                                <!-- ko if:repsToFinishOnCapTime-->
-                                <span><i class="far fa-smile"></i> Cap + <span data-bind="text:repsToFinishOnCapTime"></span></span>
-                                <!-- /ko -->
-                                <!-- ko ifnot:repsToFinishOnCapTime-->
-                                <span><i class="far fa-clock"></i> Total time: <span data-bind="text:timePassed"></span></span>
-                                <!-- /ko -->
-                                <!-- /ko -->
-                                <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.AMRAP)-->
-                                <span>
-                                    <i class="fas fa-hashtag"></i> Result rounds:
-                                    <span data-bind="text:roundsFinished"></span>
-                                    <!-- ko if:partialRepsFinished-->
-                                    + <span data-bind="text:partialRepsFinished"></span> partials
+                        <div class="item-body pt-1">
+                            <span class="workout-header d-flex justify-content-between">
+                                <span class="workout-title">
+                                    <span data-bind="text:workoutViewModel.workoutTypeDisplay"></span>:
+                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.ForTime)-->
+                                    <span data-bind="text:workoutViewModel.roundsCount"></span>
+                                    <span>rounds</span>
+                                    <!-- /ko -->
+                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.AMRAP)-->
+                                    <span data-bind="text:workoutViewModel.timeToWork"></span>
                                     <!-- /ko -->
                                 </span>
-                                <!-- /ko -->
-                                <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.EMOM)-->
-                                <span>
-                                    <i class="far fa-clock"></i> Work time: <span data-bind="text:workoutViewModel.timeToWork"></span>
+                                <span class="cap-time-info" data-bind="if:workoutViewModel.timeCap">
+                                    <span>Cap: </span>
+                                    <span data-bind="text:workoutViewModel.timeCap"></span>
                                 </span>
-                                <!-- /ko -->
                             </span>
+                            <div class="workout-exercises pl-3 pt-1">
+                                <!-- ko foreach:workoutViewModel.exercisesToDoList-->
+                                <div class="exercise">
+                                    <span data-bind="text:title"></span>:
+                                    <!-- ko foreach:exerciseMeasures-->
+                                    <!-- ko if:exerciseMeasureType.measureValue != null -->
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Count)-->
+                                    <span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <!-- /ko -->
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Distance)-->
+                                    <span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <span> meters</span>
+                                    <!-- /ko -->
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Weight)-->
+                                    (<span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <span> kgs</span>)
+                                    <!-- /ko -->
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Calories)-->
+                                    (<span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <span> calories  </span>)
+                                    <!-- /ko -->
+                                    <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Height)-->
+                                    (<span data-bind="text:exerciseMeasureType.measureValue"></span>
+                                    <span> cm</span>)
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                    <!-- ko if: $parent.hasNewMaximum && isNewWeightMaximum -->
+                                    <span class="new-record" title="Person new weight maximum!">
+                                        <span class="fa-layers fa-fw">
+                                            <i class="fas fa-trophy"></i>
+                                            <i class="fa-inverse fas fa-star" data-fa-transform="shrink-8 up-3 "></i>
+                                        </span>
+                                    </span>
+                                    <!-- /ko -->
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                            <div class="text-right">
+                                <span class="workout-result">
+                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.ForTime)-->
+                                    <!-- ko if:repsToFinishOnCapTime-->
+                                    <span><i class="far fa-smile"></i> Cap + <span data-bind="text:repsToFinishOnCapTime"></span></span>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot:repsToFinishOnCapTime-->
+                                    <span><i class="far fa-clock"></i> Total time: <span data-bind="text:timePassed"></span></span>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.AMRAP)-->
+                                    <span>
+                                        <i class="fas fa-hashtag"></i> Result rounds:
+                                        <span data-bind="text:roundsFinished"></span>
+                                        <!-- ko if:partialRepsFinished-->
+                                        + <span data-bind="text:partialRepsFinished"></span> partials
+                                        <!-- /ko -->
+                                    </span>
+                                    <!-- /ko -->
+                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.EMOM)-->
+                                    <span>
+                                        <i class="far fa-clock"></i> Work time: <span data-bind="text:workoutViewModel.timeToWork"></span>
+                                    </span>
+                                    <!-- /ko -->
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="item-footer text-right pt-1">
-                        <div class="action-buttons">
-                            <!-- ko if:canBeRemovedByCurrentUser-->
-                            @* href="/Crossfitter/ManageWorkout?workoutId=137" *@
-                            <a class="edit-workout-action pointer text-info" data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id + '&crossfitterWorkoutId=' + crossfitterWorkoutId}">
-                                <i class="fas fa-edit "></i>
-                            </a>
-                            <!-- /ko -->
-                            <a class="repeat-workout-action pointer text-success pl-1" data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id}">
-                                <i class="fas fa-plus "></i>
-                            </a>
+                        <div class="item-footer text-right pt-1">
+                            <div class="action-buttons">
+                                <!-- ko if:canBeRemovedByCurrentUser-->
+                                @* href="/Crossfitter/ManageWorkout?workoutId=137" *@
+                                <a class="edit-workout-action pointer text-info" data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id + '&crossfitterWorkoutId=' + crossfitterWorkoutId}">
+                                    <i class="fas fa-edit "></i>
+                                </a>
+                                <!-- /ko -->
+                                <a class="repeat-workout-action pointer text-success pl-1" data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id}">
+                                    <i class="fas fa-plus "></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- /ko -->
+            <div data-bind="scroll: hasMoreElements, scrollOptions: { loadFunc: loadElements, offset: 10 }">loading</div>
 
         }
         <!-- ko if: isDataLoading() == false &&  allWorkouts().length == 0-->

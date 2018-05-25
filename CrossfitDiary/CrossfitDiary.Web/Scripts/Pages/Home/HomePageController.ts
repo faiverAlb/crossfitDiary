@@ -6,34 +6,43 @@
 
   export class HomePageController extends  BaseController {
     /* Сivilians */
-    private allWorkouts: KnockoutObservable<ToLogWorkoutViewModel[]>;
+    private allWorkouts: KnockoutObservableArray<ToLogWorkoutViewModel>;
     private _service: CrossfitterService;
     private errorMessager: ErrorMessageViewModel;
 
+    private page: number = 1;
+    private pageSize: number = 45;
+
     /* Observables */
+    private hasMoreElements : KnockoutObservable<boolean>;
+
     /* Computeds */
 
     constructor(public parameters: { pathToApp: string, userId:string, exerciseId?:number }) {
       super();
       this.errorMessager = new ErrorMessageViewModel();
       this._service = new CrossfitterService(parameters.pathToApp, this.isDataLoading);
-      this.allWorkouts = ko.observable([]);
+      this.allWorkouts = ko.observableArray([]);
+      this.hasMoreElements  = ko.observable(false);
 
-      this.initialLoading();
+      this.loadElements();
     }
 
 
-    private initialLoading = () => {
+    private loadElements = () => {
       
-      this._service.getAllCrossfittersWorkouts(this.parameters.userId, this.parameters.exerciseId)
+      this.isDataLoading(true);
+      this._service.getAllCrossfittersWorkouts(this.parameters.userId, this.parameters.exerciseId, this.page, this.pageSize)
         .then((data) => {
-          this.allWorkouts(data);
+          ko.utils.arrayPushAll(this.allWorkouts, data);
+          this.hasMoreElements (data.length === this.pageSize);
         })
         .fail((response) => {
           this.errorMessager.addMessage(response.responseText, false);
         })
         .finally(() => {
           this.isDataLoading(false);
+          this.page += 1;
         });
 
     };

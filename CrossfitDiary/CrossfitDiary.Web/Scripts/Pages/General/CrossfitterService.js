@@ -32,10 +32,9 @@ var General;
                 })
                     .finally(function () { _this.isDataLoading(false); });
             };
-            _this.getAllCrossfittersWorkouts = function (userId, exerciseId) {
-                _this.isDataLoading(true);
+            _this.getAllCrossfittersWorkouts = function (userId, exerciseId, page, pageSize) {
                 return _this.get(_this.pathToApp +
-                    ("api/getAllCrossfittersWorkouts?userId=" + userId + "&exerciseId=" + exerciseId))
+                    ("api/getAllCrossfittersWorkouts?userId=" + userId + "&exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize))
                     .then(function (jsonData) {
                     return jsonData.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
                 });
