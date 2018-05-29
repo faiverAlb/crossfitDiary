@@ -25,14 +25,20 @@
     
     <div class="personal-maximums container @(isResetButtonVisible? "collapse show": "collapse")" id="collapseExample">
         <div class="row justify-content-md-center">
+            @if (Model.PersonMaximums.Count == 0)
+            {
+            <div class=" col col-lg-8 alert alert-warning" role="alert">
+                You don't have any weightlifting records yet! @Html.ActionLink("Click here and create first one!", MVC.Crossfitter.ManageWorkout(), new { @class = "alert-link" })
+            </div>
+            }
             @{
                 if (isResetButtonVisible)
                 {
-                    @Html.ActionLink("Home",MVC.Persons.Index(), new { @class = "col-auto item bg-warning text-light rounded px-2 py-1 m-1" })
+                    @Html.ActionLink("Home", MVC.Persons.Index(), new {@class = "col-auto item bg-warning text-light rounded px-2 py-1 m-1"})
                 }
                 foreach (PersonExerciseMaximumViewModel maximum in Model.PersonMaximums)
                 {
-                    @Html.ActionLink(string.Format("{0} : {1}", maximum.ExerciseDisplayName, maximum.MaximumWeight), MVC.Persons.Index(predefinedUserId, maximum.ExerciseId), new { @class = "col-auto item bg-info text-light rounded px-2 py-1 m-1" })
+                    @Html.ActionLink(string.Format("{0} : {1}", maximum.ExerciseDisplayName, maximum.MaximumWeight), MVC.Persons.Index(predefinedUserId, maximum.ExerciseId), new {@class = "col-auto item bg-info text-light rounded px-2 py-1 m-1"})
                 }
 
             }
