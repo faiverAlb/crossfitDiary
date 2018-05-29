@@ -50,6 +50,20 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations.Seeders
                 new Exercise {Title = "Thruster(DB/KB)", Abbreviation = "Thruster(DB/KB)", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight)},
             };
         }
+        internal static List<Exercise> AddSeeds_May_2018_Fourth(CrossfitDiaryDbContext context)
+        {
+            if (IsExerciseAlreadyExist("DB/KB box step over", context))
+            {
+                return new List<Exercise>();
+            }
+
+            return new List<Exercise>
+            {
+                new Exercise {Title = "DB/KB box step over", Abbreviation = "DB/KB box step over", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight,MeasureType.Height)},
+                new Exercise {Title = "DB/KB box step up", Abbreviation = "DB/KB box step up", ExerciseMeasures = GetExerciseMeasures(context, MeasureType.Count, MeasureType.Weight,MeasureType.Height)},
+                new Exercise {Title = "1 arm DB overhead lunges", Abbreviation = "1 arm DB overhead lunges", ExerciseMeasures = GetExerciseMeasures(context,  MeasureType.Weight, MeasureType.Distance)},
+            };
+        }
 
 
         internal static List<Exercise> UpdateHeightMeasures(CrossfitDiaryDbContext context)
