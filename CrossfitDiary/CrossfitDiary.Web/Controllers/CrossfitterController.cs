@@ -13,8 +13,10 @@ namespace CrossfitDiary.Web.Controllers
 {
     public partial class CrossfitterController : Controller
     {
-        public CrossfitterController()
+        private readonly IWorkoutService _workoutService;
+        public CrossfitterController(IWorkoutService workoutService)
         {
+            _workoutService = workoutService;
         }
 
         public virtual ActionResult ManageWorkout(int? workoutId, int? crossfitterWorkoutId)
@@ -22,7 +24,11 @@ namespace CrossfitDiary.Web.Controllers
             ViewBag.Title = "Manage Workout";
 
             ViewBag.PredefindWorkoutId = workoutId;
-            
+            if (workoutId.HasValue)
+            {
+                ViewBag.PredefindWorkout = Mapper.Map<WorkoutViewModel>(_workoutService.GetWorkout(workoutId.Value));
+            }
+
             //TODO: Check persmissions!
             ViewBag.CrossfitterWorkoutId = crossfitterWorkoutId;
 
