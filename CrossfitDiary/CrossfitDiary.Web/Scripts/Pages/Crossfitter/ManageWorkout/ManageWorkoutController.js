@@ -82,8 +82,11 @@ var Pages;
                 _this._selectedExercise(null);
             });
             _this.selectedWorkoutType.subscribe(function (selectedWorkoutType) {
-                if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
+                if ((selectedWorkoutType == undefined || selectedWorkoutType == null)) {
                     _this.handleLogWorkoutController(true);
+                    if (_this._isEditMode === false) {
+                        _this.workoutToDisplay(null);
+                    }
                     return;
                 }
                 var model = new WorkoutViewModel({

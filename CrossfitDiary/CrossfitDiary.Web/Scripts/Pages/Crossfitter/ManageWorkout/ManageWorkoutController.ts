@@ -85,8 +85,11 @@
       });
 
       this.selectedWorkoutType.subscribe((selectedWorkoutType: BaseKeyValuePairModel<number, string>) => {
-        if (selectedWorkoutType == undefined || selectedWorkoutType == null) {
+        if ((selectedWorkoutType == undefined || selectedWorkoutType == null) ) {
           this.handleLogWorkoutController(true);
+          if (this._isEditMode === false) {
+            this.workoutToDisplay(null);
+          }
           return;
         }
         let model = new WorkoutViewModel({
