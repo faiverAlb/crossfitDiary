@@ -79,5 +79,15 @@ namespace CrossfitDiary.DAL.EF.Infrastructure
         {
             return _dbSet.Single(where);
         }
+
+        /// <summary>
+        ///     Return SingleOrDefault element
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        public T SingleOrDefault(Expression<Func<T, bool>> where)
+        {
+            return _dbSet.SingleOrDefault(where);
+        }
     }
 }
