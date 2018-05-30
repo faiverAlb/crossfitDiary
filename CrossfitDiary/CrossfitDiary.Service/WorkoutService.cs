@@ -21,5 +21,9 @@ namespace CrossfitDiary.Service
             return availableWorkouts;
         }
 
+        public RoutineComplex GetWorkout(int workoutId)
+        {
+            return _routineComplexRepository.SingleOrDefault(x => x.Id == workoutId);
+        }
     }
 }

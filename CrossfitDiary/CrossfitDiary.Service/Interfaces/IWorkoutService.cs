@@ -11,5 +11,12 @@ namespace CrossfitDiary.Service.Interfaces
         /// <returns>
         /// </returns>
         IEnumerable<RoutineComplex> GetAllWorkouts();
+
+        /// <summary>
+        ///     Returns workout by workout id
+        /// </summary>
+        /// <param name="workoutId"></param>
+        /// <returns></returns>
+        RoutineComplex GetWorkout(int workoutId);
     }
 }

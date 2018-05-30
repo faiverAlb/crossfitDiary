@@ -1,9 +1,13 @@
-﻿
+﻿@using CrossfitDiary.Web.ViewModels
+@using Newtonsoft.Json
+
 @{
     ViewBag.Title = "Manage Workout";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int? predefindWorkoutId = ViewBag.PredefindWorkoutId;
     int? crossfitterWorkoutId = ViewBag.CrossfitterWorkoutId;
+    WorkoutViewModel predefindWorkout = ViewBag.PredefindWorkout;
+
 
     bool isEditMode = predefindWorkoutId.HasValue && crossfitterWorkoutId.HasValue;
     bool isRepeatMode = predefindWorkoutId.HasValue && crossfitterWorkoutId.HasValue == false;
@@ -19,20 +23,17 @@
     </div>
 
     <div class="manage-workout-container my-2">
-        <div data-bind="with:_createWorkoutController">
+        <div>
             <div class="crossfitter-edit-workout-container">
                 <div class="col-md-12 add-new-workout-container workout-container">
                     <div class="card ">
                         <div class="card-header bg-info text-light">
-                            New or Existing one?
+                            Create new workout
                         </div>
                         <div class="card-body">
                             <div class="row " data-bind="visible: _isEditMode == false && _isRepeatMode == false">
-                                <div class="workout-type-selector col-sm-6 my-1">
-                                    <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'New workout!',selectPicker: {}"></select>
-                                </div>
-                                <div class="existing-workout-selector col-sm-6 my-1">
-                                    <select class="form-control" data-live-search="true" data-bind="options: _availableWorkouts, optionsText:'detailedTitle',value: selectedWorkout, optionsCaption: 'Existing workout here!',selectPicker: {}"></select>
+                                <div class="workout-type-selector col-sm-12 my-1">
+                                    <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'Choose workout type',selectPicker: {}"></select>
                                 </div>
                             </div>
 
@@ -68,20 +69,20 @@
     @Scripts.Render("~/bundles/general-models")
 
     @Scripts.Render("~/bundles/crossfitter/manageWorkout")
-    <script>
+<script>
         $(function() {
             var path = "@Url.Content("~")";
             @{
                 if (isEditMode)
                 {
                      <text>
-                         ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path), @predefindWorkoutId, @crossfitterWorkoutId));
+                         ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path),  @Html.Raw(JsonConvert.SerializeObject(predefindWorkout)), @crossfitterWorkoutId));
                      </text>
                 }
                 if (isRepeatMode)
                 {
                     <text>
-                        ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path), @predefindWorkoutId));
+                        ko.applyBindings(new Pages.ManageWorkoutController(new General.BasicParameters(path), @Html.Raw(JsonConvert.SerializeObject(predefindWorkout))));
                     </text>
                 }
                 if (isDefaultModel)
@@ -92,5 +93,5 @@
                 }
             }
         });
-    </script>
+</script>
 }

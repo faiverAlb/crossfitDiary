@@ -561,7 +561,6 @@
     <Content Include="Views\Persons\Index.cshtml" />
     <TypeScriptCompile Include="Scripts\index.d.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Home\TemplateNames.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Crossfitter\ManageWorkout\CreateWorkoutController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\KnockoutUtils.ts" />
     <TypeScriptCompile Include="Scripts\Pages\General\ErrorMessageViewModel.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Models\ExerciseMeasureTypeViewModelObservable.ts" />
