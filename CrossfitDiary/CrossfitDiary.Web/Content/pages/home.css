@@ -8939,7 +8939,8 @@ table > tbody > tr.empty-data {
     margin-top: 4px;
     border-top: 1px dashed #a6a6a6; }
     .home-container .activities-list .done-item .item-footer .edit-workout-action {
-      cursor: pointer; }
+      cursor: pointer;
+      text-decoration: none; }
     .home-container .activities-list .done-item .item-footer .repeat-workout-action {
       cursor: pointer; }
 
