@@ -220,7 +220,6 @@
     <Compile Include="Infrastructure\ExceptionHandlingAttribute.cs" />
     <Compile Include="Mappings\CanBeRemovedResolver.cs" />
     <Compile Include="Mappings\DecimalToStringExtension.cs" />
-    <Compile Include="Mappings\Resolvers\DetailedTitleResolver.cs" />
     <Compile Include="Mappings\Resolvers\TimePassedResolver.cs" />
     <Compile Include="MvcHelpers\DateTimeExtensions.cs" />
     <Compile Include="Global.asax.cs">

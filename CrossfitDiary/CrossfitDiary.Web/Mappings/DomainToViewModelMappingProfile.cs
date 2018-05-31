@@ -51,7 +51,6 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.WorkoutType, x => x.MapFrom(y => y.ComplexType))
                 .ForMember(x => x.ExercisesToDoList, x => x.MapFrom(y => y.RoutineSimple))
                 .ForMember(x => x.RoundsCount, x => x.MapFrom(y => y.RoundCount))
-                .ForMember(x => x.DetailedTitle, x => x.ResolveUsing<DetailedTitleResolver>())
                 .ForMember(x => x.TimeToWork,
                     x => x.MapFrom(y =>
                         y.TimeToWork.HasValue

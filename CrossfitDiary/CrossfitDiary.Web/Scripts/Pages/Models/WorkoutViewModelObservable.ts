@@ -126,7 +126,6 @@
       let workoutToCreate = new WorkoutViewModel({
         id: this.model.id,
         title: this._title(),
-        detailedTitle: this.model.detailedTitle,
         roundsCount: this._roundsCount(),
         timeToWork: this._timeToWork(),
         timeCap: this._timeCap(),
