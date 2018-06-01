@@ -28,12 +28,36 @@
                 <div class="col-md-12 add-new-workout-container workout-container">
                     <div class="card ">
                         <div class="card-header ">
-                            <a class="nav-link btn btn-primary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <a class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 <div class="small-action-link-button">
                                     <div class="icon-container">
                                         <i class="fas fa-clock"></i>
                                     </div>
                                     <div class="text-container">FT</div>
+                                </div>
+                            </a>
+                            <a class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <div class="small-action-link-button">
+                                    <div class="icon-container">
+                                        <i class="fas fa-list-ol "></i>
+                                    </div>
+                                    <div class="text-container">AMRAP</div>
+                                </div>
+                            </a>
+                            <a class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <div class="small-action-link-button">
+                                    <div class="icon-container">
+                                        <i class="fas fa-retweet"></i>
+                                    </div>
+                                    <div class="text-container">EMOM</div>
+                                </div>
+                            </a>
+                            <a class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <div class="small-action-link-button">
+                                    <div class="icon-container">
+                                        <i class="far fa-pause-circle "></i>
+                                    </div>
+                                    <div class="text-container">NFT</div>
                                 </div>
                             </a>
                         </div>
@@ -43,8 +67,6 @@
                                     <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'Choose workout type',selectPicker: {}"></select>
                                 </div>
                             </div>
-
-
                             <div data-bind="if:workoutToDisplay() != null">
                                 <div data-bind="template: { name: 'routine-info-template', data: {model: workoutToDisplay, controller: $data} }"></div>
                             </div>

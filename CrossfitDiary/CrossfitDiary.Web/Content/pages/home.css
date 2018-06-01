@@ -8915,7 +8915,7 @@ table > tbody > tr.empty-data {
 
 .small-action-link-button {
   padding: 0 8px;
-  width: 47px; }
+  min-width: 47px; }
   .small-action-link-button .icon-container {
     padding-top: 3px; }
   .small-action-link-button .text-container {
