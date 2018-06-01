@@ -8915,6 +8915,15 @@ table > tbody > tr.empty-data {
   opacity: 0.4;
   pointer-events: none; }
 
+.small-action-link-button {
+  padding: 0 16px; }
+  .small-action-link-button .icon-container {
+    padding-top: 3px; }
+  .small-action-link-button .text-container {
+    font-size: 0.70em;
+    font-weight: 900;
+    margin-top: -3px; }
+
 .manage-workout-page .new-or-existing .choose-buttons {
   margin-bottom: 10px; }
 
