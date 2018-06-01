@@ -68,9 +68,10 @@ var Pages;
             _this._isDefaultMode = _this.preselectedWorkout == null && preselectedCrossfitterWorkoutId == null;
             /* Observables */
             _this._logWorkoutController = ko.observable(null);
-            _this._workoutTypes = ko.observable(new Array(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]), new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP]), new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM]), new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])));
             _this.selectedWorkoutType = ko.observable(null);
             _this.workoutToDisplay = ko.observable(_this.preselectedWorkout == null ? null : new WorkoutViewModelObservable(_this.preselectedWorkout));
+            var workout = _this.workoutToDisplay();
+            _this.selectedWorkoutTypeId = ko.observable(workout == null ? null : workout.model.workoutType);
             _this._exercises = ko.observableArray([]);
             _this._selectedExercise = ko.observable(null);
             ko.computed(function () {
@@ -89,6 +90,7 @@ var Pages;
                     }
                     return;
                 }
+                _this.selectedWorkoutTypeId(_this.selectedWorkoutType().id);
                 var model = new WorkoutViewModel({
                     workoutType: _this.selectedWorkoutType().id,
                     exercisesToDoList: []
@@ -98,10 +100,18 @@ var Pages;
             });
             _this.loadExercises()
                 .then(function () {
+                if (_this._isEditMode === false && _this._isRepeatMode === false) {
+                    _this.selectedWorkoutType(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]));
+                }
+            })
+                .then(function () {
                 return _this._isEditMode ? _this.loadPersonLogging() : null;
             });
             return _this;
         }
+        ManageWorkoutController.prototype.selectWorkoutType = function (workoutType) {
+            this.selectedWorkoutType(new BaseKeyValuePairModel(workoutType, WorkoutType[workoutType]));
+        };
         return ManageWorkoutController;
     }(BaseController));
     Pages.ManageWorkoutController = ManageWorkoutController;

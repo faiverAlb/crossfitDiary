@@ -2,9 +2,9 @@
 
     <div class="routine-complex-info" data-bind="with:model">
         <!--ko if: _canSeeGeneralWorkoutInfo-->
-        <div class=" mb-4 mt-3 general-info-container">
+        <div class=" mb-2 py-2 general-info-container">
             <div class="form-row" data-bind="if: _canSeeRoundsCount">
-                <div class="col-lg-3 mb-2">
+                <div class="col-lg-3 pb-2">
                     <label for="roundsInput" class="sr-only">Rounds count:</label>
                     <div class="input-group ">
                         <div class="input-group-prepend">
@@ -14,7 +14,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-2 time-cap-container">
+                <div class="col-lg-2 time-cap-container pb-2">
                     <label for="timeCapInput" class="sr-only">Time cap:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -40,13 +40,10 @@
         </div>
         <!-- /ko -->
     </div>
-    <div>
+    <div class="py-2">
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options: controller._exercises, optionsText:'title',value: controller._selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
     </div>
-    <div class="selected-workout-type">
-        <div class="text-center" data-bind="text:model()._workoutTypeTitle"></div>
-    </div>
-    <div class="routines-container">
+    <div class="routines-container pt-2">
         <!-- ko foreach:model()._exercisesToBeDone-->
         @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._SimpleRoutineItemTemlate); }
         <!-- /ko -->
