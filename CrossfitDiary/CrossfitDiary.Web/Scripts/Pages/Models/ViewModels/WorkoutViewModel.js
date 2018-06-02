@@ -7,7 +7,6 @@ var Models;
             }
             this.id = params.id;
             this.title = params.title;
-            this.detailedTitle = params.detailedTitle;
             this.roundsCount = params.roundsCount;
             this.timeToWork = params.timeToWork;
             this.timeCap = params.timeCap;
@@ -24,7 +23,6 @@ var Models;
             return new WorkoutViewModel({
                 id: jsonInput.id,
                 title: jsonInput.title,
-                detailedTitle: jsonInput.detailedTitle,
                 roundsCount: jsonInput.roundsCount,
                 timeToWork: jsonInput.timeToWork,
                 timeCap: jsonInput.timeCap,

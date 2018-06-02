@@ -9,8 +9,6 @@ namespace CrossfitDiary.Web.ViewModels
     {
         #region properties
 
-        [JsonProperty("detailedTitle")]
-        public string DetailedTitle { get; set; }
 
 
         [JsonProperty("exercisesToDoList")]

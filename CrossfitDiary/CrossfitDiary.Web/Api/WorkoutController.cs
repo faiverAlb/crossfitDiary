@@ -40,19 +40,7 @@ namespace CrossfitDiary.Web.Api
         #region methods
 
         /// <summary>
-        ///     Get available workouts
-        /// </summary>
-        /// <returns>All available workouts</returns>
-        [HttpGet]
-        [Route("getAvailableWorkouts")]
-        public IHttpActionResult GetAvailableWorkouts()
-        {
-            IEnumerable<WorkoutViewModel> availableWorkouts = Mapper.Map<IEnumerable<WorkoutViewModel>>(_workoutService.GetAllWorkouts());
-            return Ok(availableWorkouts.OrderBy(x => x.DetailedTitle));
-        }
-        
-        /// <summary>
-        ///     Get available workouts
+        ///     Get available crossfitter's workouts
         /// </summary>
         /// <returns>All available workouts</returns>
         [HttpGet]
