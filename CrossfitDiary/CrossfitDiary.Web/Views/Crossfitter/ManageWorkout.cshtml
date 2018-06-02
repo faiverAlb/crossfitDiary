@@ -27,17 +27,45 @@
             <div class="crossfitter-edit-workout-container">
                 <div class="col-md-12 add-new-workout-container workout-container">
                     <div class="card ">
-                        <div class="card-header bg-info text-light">
-                            Create new workout
-                        </div>
-                        <div class="card-body">
-                            <div class="row " data-bind="visible: _isEditMode == false && _isRepeatMode == false">
-                                <div class="workout-type-selector col-sm-12 my-1">
-                                    <select class="form-control" data-live-search="true" data-bind="options:_workoutTypes, optionsText:'text',value: selectedWorkoutType, optionsCaption: 'Choose workout type',selectPicker: {}"></select>
+                        <div class="card-header ">
+                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" 
+                               aria-controls="collapseExample" data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.ForTime},click: function(){selectWorkoutType(Models.WorkoutType.ForTime)}">
+                                <div class="small-action-link-button">
+                                    <div class="icon-container">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="text-container">FT</div>
                                 </div>
-                            </div>
-
-
+                            </a>
+                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+                               data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.AMRAP},click: function(){selectWorkoutType(Models.WorkoutType.AMRAP)}">
+                                <div class="small-action-link-button">
+                                    <div class="icon-container">
+                                        <i class="fas fa-list-ol "></i>
+                                    </div>
+                                    <div class="text-container">AMRAP</div>
+                                </div>
+                            </a>
+                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+                               data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.EMOM},click: function(){selectWorkoutType(Models.WorkoutType.EMOM)}">
+                                <div class="small-action-link-button">
+                                    <div class="icon-container">
+                                        <i class="fas fa-retweet"></i>
+                                    </div>
+                                    <div class="text-container">EMOM</div>
+                                </div>
+                            </a>
+                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+                               data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.NotForTime},click: function(){selectWorkoutType(Models.WorkoutType.NotForTime)}">
+                                <div class="small-action-link-button">
+                                    <div class="icon-container">
+                                        <i class="far fa-pause-circle "></i>
+                                    </div>
+                                    <div class="text-container">NFT</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-body pt-0">
                             <div data-bind="if:workoutToDisplay() != null">
                                 <div data-bind="template: { name: 'routine-info-template', data: {model: workoutToDisplay, controller: $data} }"></div>
                             </div>
@@ -46,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="want-to-log-container my-2">
+        <div class="want-to-log-container my-3">
             <div class="log-workout-container" data-bind="with:_logWorkoutController">
                 @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._LogWorkoutPartial); }
             </div>

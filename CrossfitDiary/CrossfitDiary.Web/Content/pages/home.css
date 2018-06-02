@@ -8913,6 +8913,16 @@ table > tbody > tr.empty-data {
   opacity: 0.4;
   pointer-events: none; }
 
+.small-action-link-button {
+  padding: 0 8px;
+  min-width: 47px; }
+  .small-action-link-button .icon-container {
+    padding-top: 3px; }
+  .small-action-link-button .text-container {
+    font-size: 0.65em;
+    font-weight: 900;
+    margin-top: -3px; }
+
 .home-container .personal-maximums .item {
   cursor: pointer;
   text-decoration: none; }
@@ -8939,7 +8949,8 @@ table > tbody > tr.empty-data {
     margin-top: 4px;
     border-top: 1px dashed #a6a6a6; }
     .home-container .activities-list .done-item .item-footer .edit-workout-action {
-      cursor: pointer; }
+      cursor: pointer;
+      text-decoration: none; }
     .home-container .activities-list .done-item .item-footer .repeat-workout-action {
       cursor: pointer; }
 

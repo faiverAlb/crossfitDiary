@@ -70,7 +70,6 @@
         }
 
         .exercise-selector {
-            margin-bottom: 15px;
             border: 1px solid $gray-600;
         }
 
@@ -88,14 +87,9 @@
 
 .workout-container {
     .routine-complex-info {
-        padding: 0 0 6px 0;
         color: $gray;
-
         .general-info-container {
-            border-top: 1px dashed $cyan;
             border-bottom: 1px dashed $cyan;
-            padding: 8px 0;
-
             .time-cap-container {
                 .time-cap-icon {
                     color: #a94442;

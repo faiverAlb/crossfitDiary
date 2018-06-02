@@ -8913,6 +8913,16 @@ table > tbody > tr.empty-data {
   opacity: 0.4;
   pointer-events: none; }
 
+.small-action-link-button {
+  padding: 0 8px;
+  min-width: 47px; }
+  .small-action-link-button .icon-container {
+    padding-top: 3px; }
+  .small-action-link-button .text-container {
+    font-size: 0.65em;
+    font-weight: 900;
+    margin-top: -3px; }
+
 .pride-container .fixed-pride-width {
   width: 25%; }
 

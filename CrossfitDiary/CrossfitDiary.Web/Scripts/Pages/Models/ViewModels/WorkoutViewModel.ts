@@ -4,7 +4,6 @@
   interface IWorkoutViewModel {
     id?: number,
     title?: string,
-    detailedTitle?: string,
     roundsCount?: number,
     timeToWork?: any,
     timeCap?: any,
@@ -19,7 +18,6 @@
 
     id: number;
     title: string;
-    detailedTitle: string;
     roundsCount?: number;
     timeToWork?: any;
     timeCap?: any;
@@ -36,7 +34,6 @@
       }
       this.id = params.id;
       this.title = params.title;
-      this.detailedTitle = params.detailedTitle;
       this.roundsCount = params.roundsCount;
       this.timeToWork = params.timeToWork;
       this.timeCap = params.timeCap;
@@ -54,7 +51,6 @@
       return new WorkoutViewModel({
         id: jsonInput.id,
         title: jsonInput.title,
-        detailedTitle: jsonInput.detailedTitle,
         roundsCount: jsonInput.roundsCount,
         timeToWork: jsonInput.timeToWork,
         timeCap: jsonInput.timeCap,

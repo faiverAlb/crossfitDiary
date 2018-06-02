@@ -29,7 +29,6 @@ var Models;
                 var workoutToCreate = new Models.WorkoutViewModel({
                     id: _this.model.id,
                     title: _this._title(),
-                    detailedTitle: _this.model.detailedTitle,
                     roundsCount: _this._roundsCount(),
                     timeToWork: _this._timeToWork(),
                     timeCap: _this._timeCap(),

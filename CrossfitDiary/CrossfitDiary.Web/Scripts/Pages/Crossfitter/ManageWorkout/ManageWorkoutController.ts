@@ -35,11 +35,10 @@
     /* Observables */
     private _logWorkoutController: KnockoutObservable<LogWorkoutController>;
     public workoutToDisplay: KnockoutObservable<WorkoutViewModelObservable>;
-    private _workoutTypes: KnockoutObservable<Array<BaseKeyValuePairModel<number, string>>>;
     private selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
+    private selectedWorkoutTypeId: KnockoutObservable<number>;
     private _exercises: KnockoutObservableArray<ExerciseViewModel>;
     private _selectedExercise: KnockoutObservable<ExerciseViewModel>;
-//    private selectedWorkout: KnockoutObservable<WorkoutViewModel>;
 
     private preselectedWorkout: WorkoutViewModel;
 
@@ -60,17 +59,11 @@
       /* Observables */
       this._logWorkoutController = ko.observable(null);
      
-     
-      this._workoutTypes = ko.observable(
-        new Array(
-          new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime])
-          , new BaseKeyValuePairModel(WorkoutType.AMRAP, WorkoutType[WorkoutType.AMRAP])
-          , new BaseKeyValuePairModel(WorkoutType.EMOM, WorkoutType[WorkoutType.EMOM])
-          , new BaseKeyValuePairModel(WorkoutType.NotForTime, WorkoutType[WorkoutType.NotForTime])
-        ));
-
       this.selectedWorkoutType = ko.observable(null);
       this.workoutToDisplay = ko.observable(this.preselectedWorkout == null ? null : new WorkoutViewModelObservable(this.preselectedWorkout));
+
+      let workout = this.workoutToDisplay();
+      this.selectedWorkoutTypeId = ko.observable(workout == null ? null : workout.model.workoutType);
       this._exercises = ko.observableArray([]);
 
       this._selectedExercise = ko.observable(null);
@@ -92,6 +85,7 @@
           }
           return;
         }
+        this.selectedWorkoutTypeId(this.selectedWorkoutType().id);
         let model = new WorkoutViewModel({
           workoutType: this.selectedWorkoutType().id,
           exercisesToDoList: []
@@ -101,11 +95,19 @@
         this.handleLogWorkoutController(false);
       });
 
-
       this.loadExercises()
+        .then(() => {
+          if (this._isEditMode === false && this._isRepeatMode === false) {
+            this.selectedWorkoutType(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]));
+          }
+        })
         .then(() => {
           return this._isEditMode ? this.loadPersonLogging() : null;
         });
+    }
+
+    private selectWorkoutType(workoutType: number) {
+      this.selectedWorkoutType(new BaseKeyValuePairModel(workoutType, WorkoutType[workoutType]));
     }
 
     private handleLogWorkoutController = (needToCleanLog: boolean, logModel?: ToLogWorkoutViewModel) => {

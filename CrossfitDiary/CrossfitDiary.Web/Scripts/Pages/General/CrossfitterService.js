@@ -10,7 +10,6 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var General;
 (function (General) {
-    var WorkoutViewModel = Models.WorkoutViewModel;
     var ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
     var ExerciseViewModel = Models.ExerciseViewModel;
     var PersonExerciseRecord = Models.PersonExerciseRecord;
@@ -23,14 +22,6 @@ var General;
             _this.createAndLogWorkout = function (model) {
                 _this.isDataLoading(true);
                 return _this.post(_this.pathToApp + "api/createAndLogNewWorkout", model);
-            };
-            _this.getAvailableWorkouts = function () {
-                _this.isDataLoading(true);
-                return _this.get(_this.pathToApp + "api/getAvailableWorkouts")
-                    .then(function (jsonData) {
-                    return jsonData.map(function (x) { return new WorkoutViewModel().deserialize(x); });
-                })
-                    .finally(function () { _this.isDataLoading(false); });
             };
             _this.getAllCrossfittersWorkouts = function (userId, exerciseId, page, pageSize) {
                 return _this.get(_this.pathToApp +
