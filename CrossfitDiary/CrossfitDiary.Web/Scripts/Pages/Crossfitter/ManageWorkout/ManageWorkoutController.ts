@@ -64,6 +64,10 @@
 
       let workout = this.workoutToDisplay();
       this.selectedWorkoutTypeId = ko.observable(workout == null ? null : workout.model.workoutType);
+
+      if (workout != null) {
+        this.handleLogWorkoutController(false);
+      }
       this._exercises = ko.observableArray([]);
 
       this._selectedExercise = ko.observable(null);
