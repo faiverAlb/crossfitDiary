@@ -72,6 +72,9 @@ var Pages;
             _this.workoutToDisplay = ko.observable(_this.preselectedWorkout == null ? null : new WorkoutViewModelObservable(_this.preselectedWorkout));
             var workout = _this.workoutToDisplay();
             _this.selectedWorkoutTypeId = ko.observable(workout == null ? null : workout.model.workoutType);
+            if (workout != null) {
+                _this.handleLogWorkoutController(false);
+            }
             _this._exercises = ko.observableArray([]);
             _this._selectedExercise = ko.observable(null);
             ko.computed(function () {
