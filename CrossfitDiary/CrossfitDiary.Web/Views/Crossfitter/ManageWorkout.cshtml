@@ -28,15 +28,25 @@
                 <div class="col-md-12 add-new-workout-container workout-container">
                     <div class="card ">
                         <div class="card-header ">
-                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" 
-                               aria-controls="collapseExample" data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.ForTime},click: function(){selectWorkoutType(Models.WorkoutType.ForTime)}">
+                            <a class="btn btn-secondary text-light  d-inline-block p-0 @(!isDefaultModel?"disabled":null)" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.ForTime},click: function(){selectWorkoutType(Models.WorkoutType.ForTime)}">
                                 <div class="small-action-link-button">
                                     <div class="icon-container">
                                         <i class="fas fa-clock"></i>
                                     </div>
-                                    <div class="text-container">FT</div>
+                                    <div class="text-container">FT <i class="fas fa-caret-down"></i></div>
                                 </div>
                             </a>
+                            <div class="dropdown-menu custom-action-menu-dropdown" aria-labelledby="dropdownMenuLink">
+                                <a class="btn btn-secondary text-light  d-inline-block p-0 @(!isDefaultModel?"disabled":null)" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.ForTimeManyInners},click: function(){selectWorkoutType(Models.WorkoutType.ForTimeManyInners)}">
+                                    <div class="small-action-link-button">
+                                        <div class="icon-container">
+                                            <i class="far fa-clock"></i>
+                                        </div>
+                                        <div class="text-container">FT*n</div>
+                                    </div>
+                                </a>
+
+                            </div>
                             <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
                                data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.AMRAP},click: function(){selectWorkoutType(Models.WorkoutType.AMRAP)}">
                                 <div class="small-action-link-button">

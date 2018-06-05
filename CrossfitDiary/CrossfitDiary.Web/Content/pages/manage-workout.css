@@ -9006,3 +9006,8 @@ table > tbody > tr.empty-data {
       border: 1px #5bc0de dashed;
       border-radius: 3px; }
 
+.custom-action-menu-dropdown {
+  min-width: auto;
+  padding-top: 0;
+  padding-bottom: 0; }
+

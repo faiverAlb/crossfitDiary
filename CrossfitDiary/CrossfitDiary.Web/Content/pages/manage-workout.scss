@@ -140,3 +140,9 @@
 .has-error {
     @extend .is-invalid;
 }
+
+.custom-action-menu-dropdown {
+    min-width: auto;
+    padding-top:0;
+    padding-bottom:0;
+}
