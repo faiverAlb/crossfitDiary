@@ -44,7 +44,7 @@
 
       /* Computeds */
       this._canSeeRoundsCount = ko.computed(() => {
-        return this.model.workoutType === WorkoutType.ForTime;
+        return this.model.workoutType === WorkoutType.ForTime || this.model.workoutType === WorkoutType.ForTimeManyInners;
       });
 
 

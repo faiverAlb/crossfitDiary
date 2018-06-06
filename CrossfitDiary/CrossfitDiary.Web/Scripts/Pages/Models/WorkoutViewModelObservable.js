@@ -54,7 +54,7 @@ var Models;
             this._roundsCount = ko.observable(model.roundsCount);
             /* Computeds */
             this._canSeeRoundsCount = ko.computed(function () {
-                return _this.model.workoutType === Models.WorkoutType.ForTime;
+                return _this.model.workoutType === Models.WorkoutType.ForTime || _this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
             });
             this._anyUsualExercises = ko.computed(function () {
                 return ko.utils.arrayFirst(_this._exercisesToBeDone(), function (exercise) { return exercise.model.isAlternative === false; }) != null;

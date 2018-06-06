@@ -2,18 +2,8 @@
 
     <div class="routine-complex-info" data-bind="with:model">
         <!--ko if: _canSeeGeneralWorkoutInfo-->
-        <div class=" mb-2 py-2 general-info-container">
-            <div class="form-row" data-bind="if: _canSeeRoundsCount">
-                <div class="col-lg-3 pb-2">
-                    <label for="roundsInput" class="sr-only">Rounds count:</label>
-                    <div class="input-group ">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text"><i class="fas fa-hashtag"></i></div>
-                        </div>
-                        <input type="number" min="1" class="form-control " id="roundsInput" placeholder="Rounds count" data-bind="validationElement: _roundsCount, value: _roundsCount, valueUpdate: 'afterkeydown'">
-                    </div>
-
-                </div>
+        <div class=" mb-2 pt-2 general-info-container">
+            <div class="row" data-bind="if: _canSeeRoundsCount">
                 <div class="col-lg-2 time-cap-container pb-2">
                     <label for="timeCapInput" class="sr-only">Time cap:</label>
                     <div class="input-group">
@@ -25,18 +15,31 @@
                         <input type="text" class="form-control " id="timeCapInput" placeholder="Time Cap" data-bind="validationElement: _timeCap, inputmask:{value: _timeCap, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                     </div>
                 </div>
-
+            </div>
+            <div class="row">
+                <div class="col-lg-3 pb-2" data-bind="if: _canSeeTimeToWork">
+                    <label for="timeInput" class="sr-only">Time to work:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                        </div>
+                        <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="validationElement: _timeToWork, inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                    </div>
+                </div>
 
             </div>
-            <div class="col-lg-3 p-0" data-bind="if: _canSeeTimeToWork">
-                <label for="timeInput" class="sr-only">Time to work:</label>
-                <div class="input-group">
+        </div>
+        <div class="row" data-bind="if: _canSeeRoundsCount">
+            <div class="col-lg-3 pb-2" >
+                <label for="roundsInput" class="sr-only">Rounds count:</label>
+                <div class="input-group ">
                     <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                        <div class="input-group-text"><i class="fas fa-hashtag"></i></div>
                     </div>
-                    <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="validationElement: _timeToWork, inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                    <input type="number" min="1" class="form-control " id="roundsInput" placeholder="Rounds count" data-bind="validationElement: _roundsCount, value: _roundsCount, valueUpdate: 'afterkeydown'">
                 </div>
             </div>
+
         </div>
         <!-- /ko -->
     </div>
