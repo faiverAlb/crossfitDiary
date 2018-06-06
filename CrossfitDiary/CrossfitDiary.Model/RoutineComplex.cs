@@ -64,6 +64,23 @@ namespace CrossfitDiary.Model
         /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        ///     Optional link to parent workout if any
+        /// </summary>
+        public int? ParentId { get; set; }
+
+
+        /// <summary>
+        ///     Optional parent workout
+        /// </summary>
+        public virtual RoutineComplex Parent { get; set; }
+
+
+        /// <summary>
+        ///      Children workouts
+        /// </summary>
+        public virtual ICollection<RoutineComplex> Children { get; set; }
+
         #endregion
     }
 }

@@ -5,6 +5,6 @@
     EMOM = 2,
     E2MOM = 3,
     NotForTime = 4,
-    ForTimeManyInners
+    ForTimeManyInners = 5
   }
 }

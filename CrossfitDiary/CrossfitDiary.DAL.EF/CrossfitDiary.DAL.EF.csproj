@@ -105,6 +105,10 @@
     <Compile Include="DataContexts\CrossfitDiaryMigrations\201805110534483_AddCapTime.Designer.cs">
       <DependentUpon>201805110534483_AddCapTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201806060552102_ParentWorkouts.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201806060552102_ParentWorkouts.Designer.cs">
+      <DependentUpon>201806060552102_ParentWorkouts.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder_May_2018.cs" />
@@ -174,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201805110534483_AddCapTime.resx">
       <DependentUpon>201805110534483_AddCapTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201806060552102_ParentWorkouts.resx">
+      <DependentUpon>201806060552102_ParentWorkouts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
