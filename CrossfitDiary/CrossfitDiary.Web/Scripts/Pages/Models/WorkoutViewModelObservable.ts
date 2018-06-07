@@ -16,6 +16,7 @@
     private _exercisesToBeDone: KnockoutObservableArray<ExerciseViewModelObservable>;
     private _canSeeRoundsCount: boolean;
     private _canSeeTimeToWork: boolean;
+    private _canSeeRepeatWorkoutForTimeButton: boolean;
     private _canSeeGeneralWorkoutInfo: boolean;
 
     /* Computeds */
@@ -43,6 +44,7 @@
 
       this._canSeeRoundsCount = this.model.workoutType === WorkoutType.ForTime || this.model.workoutType === WorkoutType.ForTimeManyInners;
       this._canSeeTimeToWork = this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
+      this._canSeeRepeatWorkoutForTimeButton = this.model.workoutType === WorkoutType.ForTimeManyInners;
       this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
 
       /* Computeds */

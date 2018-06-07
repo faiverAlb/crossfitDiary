@@ -9,7 +9,7 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <i class="fas fa-clock fa-lg time-cap-icon" ></i>
+                                <i class="fas fa-clock fa-lg time-cap-icon"></i>
                             </div>
                         </div>
                         <input type="text" class="form-control " id="timeCapInput" placeholder="Time Cap" data-bind="validationElement: _timeCap, inputmask:{value: _timeCap, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="row" data-bind="if: _canSeeRoundsCount">
-            <div class="col-lg-3 pb-2" >
+            <div class="col-lg-3 pb-2">
                 <label for="roundsInput" class="sr-only">Rounds count:</label>
                 <div class="input-group ">
                     <div class="input-group-prepend">
@@ -54,6 +54,11 @@
         <div class="simple-routine-item text-center no-selected-container" data-bind="validationElement: model()._exercisesToBeDone">
             No exercises selected
         </div>
+        <!-- /ko -->
+    </div>
+    <div class="mt-3" data-bind="with:model">
+        <!-- ko if: _canSeeRepeatWorkoutForTimeButton -->
+        <button class="btn btn-warning">Add workout after</button>
         <!-- /ko -->
     </div>
 </script>

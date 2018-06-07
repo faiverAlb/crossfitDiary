@@ -54,6 +54,7 @@ var Models;
             this._roundsCount = ko.observable(model.roundsCount);
             this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime || this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
             this._canSeeTimeToWork = this.model.workoutType === Models.WorkoutType.AMRAP || this.model.workoutType === Models.WorkoutType.EMOM;
+            this._canSeeRepeatWorkoutForTimeButton = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
             this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
             /* Computeds */
             this._anyUsualExercises = ko.computed(function () {
