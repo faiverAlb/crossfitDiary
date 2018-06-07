@@ -52,37 +52,31 @@ var Models;
             this._timeToWork = ko.observable(model.timeToWork);
             this._timeCap = ko.observable(model.timeCap);
             this._roundsCount = ko.observable(model.roundsCount);
+            this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime || this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
+            this._canSeeTimeToWork = this.model.workoutType === Models.WorkoutType.AMRAP || this.model.workoutType === Models.WorkoutType.EMOM;
+            this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
             /* Computeds */
-            this._canSeeRoundsCount = ko.computed(function () {
-                return _this.model.workoutType === Models.WorkoutType.ForTime || _this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
-            });
             this._anyUsualExercises = ko.computed(function () {
                 return ko.utils.arrayFirst(_this._exercisesToBeDone(), function (exercise) { return exercise.model.isAlternative === false; }) != null;
-            });
-            this._canSeeTimeToWork = ko.computed(function () {
-                return _this.model.workoutType === Models.WorkoutType.AMRAP || _this.model.workoutType === Models.WorkoutType.EMOM;
-            });
-            this._canSeeGeneralWorkoutInfo = ko.computed(function () {
-                return _this._canSeeTimeToWork() || _this._canSeeRoundsCount();
             });
             this._timeToWork.extend({
                 required: {
                     onlyIf: function () {
-                        return _this._canSeeTimeToWork();
+                        return _this._canSeeTimeToWork;
                     }
                 }
             });
             this._timeCap.extend({
                 required: {
                     onlyIf: function () {
-                        return _this._canSeeRoundsCount();
+                        return _this._canSeeRoundsCount;
                     }
                 }
             });
             this._roundsCount.extend({
                 required: {
                     onlyIf: function () {
-                        return _this._canSeeRoundsCount();
+                        return _this._canSeeRoundsCount;
                     }
                 }
             });

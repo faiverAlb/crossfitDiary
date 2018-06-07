@@ -14,12 +14,12 @@
     private _restBetweenExercises: KnockoutObservable<string>;
     private _restBetweenRounds: KnockoutObservable<string>;
     private _exercisesToBeDone: KnockoutObservableArray<ExerciseViewModelObservable>;
+    private _canSeeRoundsCount: boolean;
+    private _canSeeTimeToWork: boolean;
+    private _canSeeGeneralWorkoutInfo: boolean;
 
     /* Computeds */
-    private _canSeeRoundsCount: KnockoutComputed<false | boolean>;
-    private _canSeeTimeToWork: KnockoutComputed<false | boolean>;
     private _anyUsualExercises: KnockoutComputed<false | boolean>;
-    private _canSeeGeneralWorkoutInfo: KnockoutComputed<false | boolean>;
 
     private _workoutTypeTitle: string;
 
@@ -41,29 +41,21 @@
       this._timeCap = ko.observable(model.timeCap);
       this._roundsCount = ko.observable(model.roundsCount);
 
+      this._canSeeRoundsCount = this.model.workoutType === WorkoutType.ForTime || this.model.workoutType === WorkoutType.ForTimeManyInners;
+      this._canSeeTimeToWork = this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
+      this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
 
       /* Computeds */
-      this._canSeeRoundsCount = ko.computed(() => {
-        return this.model.workoutType === WorkoutType.ForTime || this.model.workoutType === WorkoutType.ForTimeManyInners;
-      });
-
-
       this._anyUsualExercises = ko.computed(() => {
         return ko.utils.arrayFirst(this._exercisesToBeDone(), exercise => exercise.model.isAlternative === false) != null;
       });
 
-      this._canSeeTimeToWork = ko.computed(() => {
-        return this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
-      });
 
-      this._canSeeGeneralWorkoutInfo = ko.computed(() => {
-        return this._canSeeTimeToWork() || this._canSeeRoundsCount();
-      });
 
       this._timeToWork.extend({
         required: {
           onlyIf: () => {
-            return this._canSeeTimeToWork();
+            return this._canSeeTimeToWork;
           }
         }
       });
@@ -71,14 +63,14 @@
       this._timeCap.extend({
         required: {
           onlyIf: () => {
-            return this._canSeeRoundsCount();
+            return this._canSeeRoundsCount;
           }
         }
       });
       this._roundsCount.extend({
         required: {
           onlyIf: () => {
-            return this._canSeeRoundsCount();
+            return this._canSeeRoundsCount;
           }
         }
       });
