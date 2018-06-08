@@ -14,6 +14,7 @@
     private _restBetweenExercises: KnockoutObservable<string>;
     private _restBetweenRounds: KnockoutObservable<string>;
     private _exercisesToBeDone: KnockoutObservableArray<ExerciseViewModelObservable>;
+    private _innerWorkouts: KnockoutObservableArray<WorkoutViewModelObservable>;
     private _canSeeRoundsCount: boolean;
     private _canSeeTimeToWork: boolean;
     private _canSeeRepeatWorkoutForTimeButton: boolean;
@@ -30,6 +31,10 @@
       this._workoutTypeTitle = WorkoutType[model.workoutType];
       this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map((item) => {
         return new ExerciseViewModelObservable(item);
+      }));
+
+      this._innerWorkouts = ko.observableArray(model.children.map((workout) => {
+        return new WorkoutViewModelObservable(workout);
       }));
 
       /* Observables */
@@ -126,7 +131,8 @@
         restBetweenExercises: this._restBetweenExercises(),
         restBetweenRounds: this._restBetweenRounds(),
         workoutType: this.model.workoutType,
-        exercisesToDoList: this._exercisesToBeDone().map(item => item.toPlainObject())
+        exercisesToDoList: this._exercisesToBeDone().map(item => item.toPlainObject()),
+        children: this._innerWorkouts().map(item => item.toPlainObject())
       });
 
       return workoutToCreate;

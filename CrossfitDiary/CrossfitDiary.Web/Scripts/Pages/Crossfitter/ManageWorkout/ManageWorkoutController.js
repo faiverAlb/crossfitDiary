@@ -59,6 +59,9 @@ var Pages;
                     _this.errorMessager.addMessage(response.responseText, false);
                 });
             };
+            _this.addInnerWorkout = function () {
+                debugger;
+            };
             /* Сivilians */
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
             _this.errorMessager = new ErrorMessageViewModel();
@@ -96,7 +99,8 @@ var Pages;
                 _this.selectedWorkoutTypeId(_this.selectedWorkoutType().id);
                 var model = new WorkoutViewModel({
                     workoutType: _this.selectedWorkoutType().id,
-                    exercisesToDoList: []
+                    exercisesToDoList: [],
+                    children: []
                 });
                 _this.workoutToDisplay(new WorkoutViewModelObservable(model));
                 _this.handleLogWorkoutController(false);

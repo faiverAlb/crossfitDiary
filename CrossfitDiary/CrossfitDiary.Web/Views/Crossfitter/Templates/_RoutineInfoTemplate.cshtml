@@ -39,12 +39,14 @@
                     <input type="number" min="1" class="form-control " id="roundsInput" placeholder="Rounds count" data-bind="validationElement: _roundsCount, value: _roundsCount, valueUpdate: 'afterkeydown'">
                 </div>
             </div>
-
         </div>
         <!-- /ko -->
     </div>
     <div class="py-2">
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options: controller._exercises, optionsText:'title',value: controller._selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
+    </div>
+    <div class="inner-workouts" data-bind="foreach:model()._innerWorkouts">
+        <div data-bind="template: { name: 'routine-info-template', data: {model: $data, controller: $root} }"></div>
     </div>
     <div class="routines-container pt-2">
         <!-- ko foreach:model()._exercisesToBeDone-->
@@ -58,7 +60,7 @@
     </div>
     <div class="mt-3" data-bind="with:model">
         <!-- ko if: _canSeeRepeatWorkoutForTimeButton -->
-        <button class="btn btn-warning">Add workout after</button>
+        <button class="btn btn-warning" data-bind="click: $root.addInnerWorkout">Add workout after</button>
         <!-- /ko -->
     </div>
 </script>

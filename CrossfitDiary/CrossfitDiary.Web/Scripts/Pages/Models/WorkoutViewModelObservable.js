@@ -35,7 +35,8 @@ var Models;
                     restBetweenExercises: _this._restBetweenExercises(),
                     restBetweenRounds: _this._restBetweenRounds(),
                     workoutType: _this.model.workoutType,
-                    exercisesToDoList: _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); })
+                    exercisesToDoList: _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); }),
+                    children: _this._innerWorkouts().map(function (item) { return item.toPlainObject(); })
                 });
                 return workoutToCreate;
             };
@@ -43,6 +44,9 @@ var Models;
             this._workoutTypeTitle = Models.WorkoutType[model.workoutType];
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {
                 return new Models.ExerciseViewModelObservable(item);
+            }));
+            this._innerWorkouts = ko.observableArray(model.children.map(function (workout) {
+                return new WorkoutViewModelObservable(workout);
             }));
             /* Observables */
             this._id = ko.observable(model.id);

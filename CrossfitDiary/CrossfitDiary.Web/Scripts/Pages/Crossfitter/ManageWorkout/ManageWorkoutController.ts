@@ -92,7 +92,8 @@
         this.selectedWorkoutTypeId(this.selectedWorkoutType().id);
         let model = new WorkoutViewModel({
           workoutType: this.selectedWorkoutType().id,
-          exercisesToDoList: []
+          exercisesToDoList: [],
+          children:[]
         });
 
         this.workoutToDisplay(new WorkoutViewModelObservable(model));
@@ -141,5 +142,10 @@
         });
 
     };
+
+    private addInnerWorkout = () => {
+      debugger;
+    };
+
   }
 }
