@@ -59,7 +59,7 @@
       this._logWorkoutController = ko.observable(null);
      
       this.selectedWorkoutType = ko.observable(null);
-      this.workoutToDisplay = ko.observable(this.preselectedWorkout == null ? null : new WorkoutViewModelObservable(this.preselectedWorkout,[]));
+      this.workoutToDisplay = ko.observable(null);
 
       let workout = this.workoutToDisplay();
       this.selectedWorkoutTypeId = ko.observable(workout == null ? null : workout.model.workoutType);
@@ -91,6 +91,11 @@
         .then(() => {
           if (this._isEditMode === false && this._isRepeatMode === false) {
             this.selectedWorkoutType(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]));
+          }
+        })
+        .then(() => {
+          if (this.preselectedWorkout != null) {
+            this.workoutToDisplay(new WorkoutViewModelObservable(this.preselectedWorkout, this._exercises));
           }
         })
         .then(() => {

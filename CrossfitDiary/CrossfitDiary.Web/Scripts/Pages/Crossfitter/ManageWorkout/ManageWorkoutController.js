@@ -69,7 +69,7 @@ var Pages;
             /* Observables */
             _this._logWorkoutController = ko.observable(null);
             _this.selectedWorkoutType = ko.observable(null);
-            _this.workoutToDisplay = ko.observable(_this.preselectedWorkout == null ? null : new WorkoutViewModelObservable(_this.preselectedWorkout, []));
+            _this.workoutToDisplay = ko.observable(null);
             var workout = _this.workoutToDisplay();
             _this.selectedWorkoutTypeId = ko.observable(workout == null ? null : workout.model.workoutType);
             if (workout != null) {
@@ -96,6 +96,11 @@ var Pages;
                 .then(function () {
                 if (_this._isEditMode === false && _this._isRepeatMode === false) {
                     _this.selectedWorkoutType(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]));
+                }
+            })
+                .then(function () {
+                if (_this.preselectedWorkout != null) {
+                    _this.workoutToDisplay(new WorkoutViewModelObservable(_this.preselectedWorkout, _this._exercises));
                 }
             })
                 .then(function () {
