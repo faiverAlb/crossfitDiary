@@ -42,25 +42,25 @@
         </div>
         <!-- /ko -->
     </div>
-    <div class="py-2">
+    <div class="py-2" >
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options: controller._exercises, optionsText:'title',value: controller._selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
     </div>
-    <div class="inner-workouts" data-bind="foreach:model()._innerWorkouts">
+    <div class="inner-workouts" data-bind="foreach:model._innerWorkouts">
         <div data-bind="template: { name: 'routine-info-template', data: {model: $data, controller: $root} }"></div>
     </div>
-    <div class="routines-container pt-2">
-        <!-- ko foreach:model()._exercisesToBeDone-->
+    <div class="routines-container pt-2" >
+        <!-- ko foreach:model._exercisesToBeDone-->
         @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._SimpleRoutineItemTemlate); }
         <!-- /ko -->
-        <!-- ko ifnot: model()._anyUsualExercises -->
-        <div class="simple-routine-item text-center no-selected-container" data-bind="validationElement: model()._exercisesToBeDone">
+        <!-- ko ifnot: model._anyUsualExercises -->
+        <div class="simple-routine-item text-center no-selected-container" data-bind="validationElement: model._exercisesToBeDone">
             No exercises selected
         </div>
         <!-- /ko -->
     </div>
     <div class="mt-3" data-bind="with:model">
         <!-- ko if: _canSeeRepeatWorkoutForTimeButton -->
-        <button class="btn btn-warning" data-bind="click: $root.addInnerWorkout">Add workout after</button>
+        <button class="btn btn-warning" data-bind="click: addInnerWorkout">Add workout after</button>
         <!-- /ko -->
     </div>
 </script>

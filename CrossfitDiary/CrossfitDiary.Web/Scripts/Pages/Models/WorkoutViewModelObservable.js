@@ -5,6 +5,7 @@ var Models;
             var _this = this;
             this.model = model;
             this.addExerciseToList = function (exerciseViewModel) {
+                debugger;
                 _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel));
             };
             this.removeSimpleRoutineFromToDo = function (index) {
@@ -40,6 +41,9 @@ var Models;
                 });
                 return workoutToCreate;
             };
+            this.addInnerWorkout = function () {
+                debugger;
+            };
             /* Сivilians */
             this._workoutTypeTitle = Models.WorkoutType[model.workoutType];
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {
@@ -56,7 +60,8 @@ var Models;
             this._timeToWork = ko.observable(model.timeToWork);
             this._timeCap = ko.observable(model.timeCap);
             this._roundsCount = ko.observable(model.roundsCount);
-            this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime || this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
+            this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime;
+            this._isForTimeManyInnersType = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
             this._canSeeTimeToWork = this.model.workoutType === Models.WorkoutType.AMRAP || this.model.workoutType === Models.WorkoutType.EMOM;
             this._canSeeRepeatWorkoutForTimeButton = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
             this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
@@ -91,6 +96,16 @@ var Models;
                 }
             });
             this.errors = ko.validation.group(this);
+            //  If first time then add default first workout
+            if (model.children.length === 0 && this.model.workoutType === Models.WorkoutType.ForTimeManyInners) {
+                this._innerWorkouts.push(new WorkoutViewModelObservable(new Models.WorkoutViewModel({
+                    id: 0,
+                    title: null,
+                    workoutType: Models.WorkoutType.ForTime,
+                    exercisesToDoList: [],
+                    children: []
+                })));
+            }
         }
         WorkoutViewModelObservable.prototype.getId = function () {
             return this._id();

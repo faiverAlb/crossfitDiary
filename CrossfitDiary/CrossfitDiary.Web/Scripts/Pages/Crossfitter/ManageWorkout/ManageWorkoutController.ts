@@ -142,10 +142,5 @@
         });
 
     };
-
-    private addInnerWorkout = () => {
-      debugger;
-    };
-
   }
 }

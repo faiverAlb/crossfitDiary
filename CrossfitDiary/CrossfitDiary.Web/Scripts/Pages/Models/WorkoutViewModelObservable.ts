@@ -16,6 +16,7 @@
     private _exercisesToBeDone: KnockoutObservableArray<ExerciseViewModelObservable>;
     private _innerWorkouts: KnockoutObservableArray<WorkoutViewModelObservable>;
     private _canSeeRoundsCount: boolean;
+    private _isForTimeManyInnersType: boolean;
     private _canSeeTimeToWork: boolean;
     private _canSeeRepeatWorkoutForTimeButton: boolean;
     private _canSeeGeneralWorkoutInfo: boolean;
@@ -47,7 +48,8 @@
       this._timeCap = ko.observable(model.timeCap);
       this._roundsCount = ko.observable(model.roundsCount);
 
-      this._canSeeRoundsCount = this.model.workoutType === WorkoutType.ForTime || this.model.workoutType === WorkoutType.ForTimeManyInners;
+      this._canSeeRoundsCount = this.model.workoutType === WorkoutType.ForTime;
+      this._isForTimeManyInnersType = this.model.workoutType === WorkoutType.ForTimeManyInners;
       this._canSeeTimeToWork = this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
       this._canSeeRepeatWorkoutForTimeButton = this.model.workoutType === WorkoutType.ForTimeManyInners;
       this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
@@ -88,9 +90,22 @@
         }
       });
       this.errors = ko.validation.group(this);
+
+      //  If first time then add default first workout
+      if (model.children.length === 0 && this.model.workoutType === WorkoutType.ForTimeManyInners) {
+        this._innerWorkouts.push(new WorkoutViewModelObservable(new WorkoutViewModel({
+          id: 0,
+          title: null,
+          workoutType: WorkoutType.ForTime,
+          exercisesToDoList: [],
+          children: []
+        })));
+      }
     }
 
     public addExerciseToList = (exerciseViewModel: ExerciseViewModel) => {
+      debugger;
+
       this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel));
     }
 
@@ -136,6 +151,10 @@
       });
 
       return workoutToCreate;
-    }
+    };
+
+    public addInnerWorkout = () => {
+      debugger;
+    };
   }
 }

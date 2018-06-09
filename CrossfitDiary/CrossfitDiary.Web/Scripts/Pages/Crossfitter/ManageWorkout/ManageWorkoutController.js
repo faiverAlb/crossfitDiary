@@ -59,9 +59,6 @@ var Pages;
                     _this.errorMessager.addMessage(response.responseText, false);
                 });
             };
-            _this.addInnerWorkout = function () {
-                debugger;
-            };
             /* Сivilians */
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
             _this.errorMessager = new ErrorMessageViewModel();
