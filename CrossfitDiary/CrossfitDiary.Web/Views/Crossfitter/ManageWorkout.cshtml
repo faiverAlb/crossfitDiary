@@ -74,7 +74,7 @@
                         </div>
                         <div class="card-body pt-0">
                             <div data-bind="if:workoutToDisplay() != null">
-                                <div data-bind="template: { name: 'routine-info-template', data: {model: workoutToDisplay(), controller: $data} }"></div>
+                                <div data-bind="template: { name: 'routine-info-template', data: workoutToDisplay() }"></div>
                             </div>
                         </div>
                     </div>

@@ -47,7 +47,7 @@ var Pages;
                 return _this._service
                     .getExercises()
                     .then(function (exercises) {
-                    _this._exercises(exercises);
+                    _this._exercises = exercises;
                 });
             };
             _this.loadPersonLogging = function () {
@@ -69,22 +69,12 @@ var Pages;
             /* Observables */
             _this._logWorkoutController = ko.observable(null);
             _this.selectedWorkoutType = ko.observable(null);
-            _this.workoutToDisplay = ko.observable(_this.preselectedWorkout == null ? null : new WorkoutViewModelObservable(_this.preselectedWorkout));
+            _this.workoutToDisplay = ko.observable(_this.preselectedWorkout == null ? null : new WorkoutViewModelObservable(_this.preselectedWorkout, []));
             var workout = _this.workoutToDisplay();
             _this.selectedWorkoutTypeId = ko.observable(workout == null ? null : workout.model.workoutType);
             if (workout != null) {
                 _this.handleLogWorkoutController(false);
             }
-            _this._exercises = ko.observableArray([]);
-            _this._selectedExercise = ko.observable(null);
-            ko.computed(function () {
-                var exercise = _this._selectedExercise();
-                if (!exercise) {
-                    return;
-                }
-                _this.workoutToDisplay().addExerciseToList(exercise);
-                _this._selectedExercise(null);
-            });
             _this.selectedWorkoutType.subscribe(function (selectedWorkoutType) {
                 if ((selectedWorkoutType == undefined || selectedWorkoutType == null)) {
                     _this.handleLogWorkoutController(true);
@@ -99,7 +89,7 @@ var Pages;
                     exercisesToDoList: [],
                     children: []
                 });
-                _this.workoutToDisplay(new WorkoutViewModelObservable(model));
+                _this.workoutToDisplay(new WorkoutViewModelObservable(model, _this._exercises));
                 _this.handleLogWorkoutController(false);
             });
             _this.loadExercises()

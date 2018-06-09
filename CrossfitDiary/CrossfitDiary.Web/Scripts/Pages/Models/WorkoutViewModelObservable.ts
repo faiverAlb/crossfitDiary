@@ -21,13 +21,16 @@
     private _canSeeRepeatWorkoutForTimeButton: boolean;
     private _canSeeGeneralWorkoutInfo: boolean;
 
+    private _exercises: KnockoutObservableArray<ExerciseViewModel>;
+    private _selectedExercise: KnockoutObservable<ExerciseViewModel>;
+
     /* Computeds */
     private _anyUsualExercises: KnockoutComputed<false | boolean>;
 
     private _workoutTypeTitle: string;
 
 
-    constructor(public model: WorkoutViewModel) {
+    constructor(public model: WorkoutViewModel, public exercises: ExerciseViewModel[]) {
       /* Сivilians */
       this._workoutTypeTitle = WorkoutType[model.workoutType];
       this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map((item) => {
@@ -35,8 +38,16 @@
       }));
 
       this._innerWorkouts = ko.observableArray(model.children.map((workout) => {
-        return new WorkoutViewModelObservable(workout);
+        return new WorkoutViewModelObservable(workout, exercises);
       }));
+
+
+      this._canSeeRoundsCount = this.model.workoutType === WorkoutType.ForTime;
+      this._isForTimeManyInnersType = this.model.workoutType === WorkoutType.ForTimeManyInners;
+      this._canSeeTimeToWork = this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
+      this._canSeeRepeatWorkoutForTimeButton = this.model.workoutType === WorkoutType.ForTimeManyInners;
+      this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
+
 
       /* Observables */
       this._id = ko.observable(model.id);
@@ -48,11 +59,20 @@
       this._timeCap = ko.observable(model.timeCap);
       this._roundsCount = ko.observable(model.roundsCount);
 
-      this._canSeeRoundsCount = this.model.workoutType === WorkoutType.ForTime;
-      this._isForTimeManyInnersType = this.model.workoutType === WorkoutType.ForTimeManyInners;
-      this._canSeeTimeToWork = this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
-      this._canSeeRepeatWorkoutForTimeButton = this.model.workoutType === WorkoutType.ForTimeManyInners;
-      this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
+      
+
+      this._exercises = ko.observableArray(exercises);
+      this._selectedExercise = ko.observable(null);
+
+      ko.computed(() => {
+        let exercise = this._selectedExercise();
+        if (!exercise) {
+          return;
+        }
+        this.addExerciseToList(exercise);
+        this._selectedExercise(null);
+      });
+
 
       /* Computeds */
       this._anyUsualExercises = ko.computed(() => {
@@ -99,13 +119,11 @@
           workoutType: WorkoutType.ForTime,
           exercisesToDoList: [],
           children: []
-        })));
+        }), exercises));
       }
     }
 
     public addExerciseToList = (exerciseViewModel: ExerciseViewModel) => {
-      debugger;
-
       this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel));
     }
 
