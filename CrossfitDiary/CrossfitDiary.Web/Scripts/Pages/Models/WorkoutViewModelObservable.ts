@@ -5,6 +5,13 @@
     /* Сivilians */
     public errors:any;
 
+    private _canSeeRoundsCount: boolean;
+    private _isForTimeManyInnersType: boolean;
+    private _canSeeTimeToWork: boolean;
+    private _canSeeGeneralWorkoutInfo: boolean;
+    private _isWorkoutsContainer: boolean;
+    private _workoutTypeTitle: string;
+
     /* Observables */
     private _id: KnockoutObservable<number>;
     private _title: KnockoutObservable<string>;
@@ -15,18 +22,9 @@
     private _restBetweenRounds: KnockoutObservable<string>;
     private _exercisesToBeDone: KnockoutObservableArray<ExerciseViewModelObservable>;
     private _innerWorkouts: KnockoutObservableArray<WorkoutViewModelObservable>;
-    private _canSeeRoundsCount: boolean;
-    private _isForTimeManyInnersType: boolean;
-    private _canSeeTimeToWork: boolean;
-    private _isWorkoutsContainer: boolean;
-    private _canSeeGeneralWorkoutInfo: boolean;
-
     private _exercises: KnockoutObservableArray<ExerciseViewModel>;
     private _selectedExercise: KnockoutObservable<ExerciseViewModel>;
 
-    
-
-    private _workoutTypeTitle: string;
 
 
     constructor(public model: WorkoutViewModel, public exercises: ExerciseViewModel[]) {
@@ -107,13 +105,7 @@
 
       //  If first time then add default first workout
       if (model.children.length === 0 && this.model.workoutType === WorkoutType.ForTimeManyInners) {
-        this._innerWorkouts.push(new WorkoutViewModelObservable(new WorkoutViewModel({
-          id: 0,
-          title: null,
-          workoutType: WorkoutType.ForTime,
-          exercisesToDoList: [],
-          children: []
-        }), exercises));
+        this.addInnerForTimeWorkout();
       }
     }
 
@@ -165,8 +157,20 @@
       return workoutToCreate;
     };
 
+
+    private addInnerForTimeWorkout = () => {
+      this._innerWorkouts.push(new WorkoutViewModelObservable(new WorkoutViewModel({
+        id: 0,
+        title: null,
+        workoutType: WorkoutType.ForTime,
+        exercisesToDoList: [],
+        children: []
+      }), this.exercises));
+
+    }
+
     public addInnerWorkout = () => {
-      debugger;
+      this.addInnerForTimeWorkout();
     };
   }
 }

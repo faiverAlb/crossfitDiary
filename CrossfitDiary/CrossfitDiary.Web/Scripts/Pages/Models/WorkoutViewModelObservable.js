@@ -41,8 +41,17 @@ var Models;
                 });
                 return workoutToCreate;
             };
+            this.addInnerForTimeWorkout = function () {
+                _this._innerWorkouts.push(new WorkoutViewModelObservable(new Models.WorkoutViewModel({
+                    id: 0,
+                    title: null,
+                    workoutType: Models.WorkoutType.ForTime,
+                    exercisesToDoList: [],
+                    children: []
+                }), _this.exercises));
+            };
             this.addInnerWorkout = function () {
-                debugger;
+                _this.addInnerForTimeWorkout();
             };
             /* Сivilians */
             this._workoutTypeTitle = Models.WorkoutType[model.workoutType];
@@ -107,13 +116,7 @@ var Models;
             this.errors = ko.validation.group(this);
             //  If first time then add default first workout
             if (model.children.length === 0 && this.model.workoutType === Models.WorkoutType.ForTimeManyInners) {
-                this._innerWorkouts.push(new WorkoutViewModelObservable(new Models.WorkoutViewModel({
-                    id: 0,
-                    title: null,
-                    workoutType: Models.WorkoutType.ForTime,
-                    exercisesToDoList: [],
-                    children: []
-                }), exercises));
+                this.addInnerForTimeWorkout();
             }
         }
         WorkoutViewModelObservable.prototype.getId = function () {
