@@ -24,8 +24,7 @@
     private _exercises: KnockoutObservableArray<ExerciseViewModel>;
     private _selectedExercise: KnockoutObservable<ExerciseViewModel>;
 
-    /* Computeds */
-    private _anyUsualExercises: KnockoutComputed<false | boolean>;
+    
 
     private _workoutTypeTitle: string;
 
@@ -72,14 +71,6 @@
         this.addExerciseToList(exercise);
         this._selectedExercise(null);
       });
-
-
-      /* Computeds */
-      this._anyUsualExercises = ko.computed(() => {
-        return ko.utils.arrayFirst(this._exercisesToBeDone(), exercise => exercise.model.isAlternative === false) != null;
-      });
-
-
 
       this._timeToWork.extend({
         required: {

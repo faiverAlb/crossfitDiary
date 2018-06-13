@@ -48,11 +48,11 @@
     <div class="inner-workouts" data-bind="foreach:_innerWorkouts">
         <div data-bind="template: { name: 'routine-info-template', data: $data}"></div>
     </div>
-    <div class="routines-container pt-2" >
+    <div class="routines-container pt-2">
         <!-- ko foreach:_exercisesToBeDone-->
         @{ Html.RenderPartial(MVC.Crossfitter.Views.Templates._SimpleRoutineItemTemlate); }
         <!-- /ko -->
-        <!-- ko ifnot: _anyUsualExercises -->
+        <!-- ko if: _exercisesToBeDone().length == 0 && _isWorkoutsContainer === false-->
         <div class="simple-routine-item text-center no-selected-container" data-bind="validationElement: _exercisesToBeDone">
             No exercises selected
         </div>

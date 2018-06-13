@@ -75,10 +75,6 @@ var Models;
                 _this.addExerciseToList(exercise);
                 _this._selectedExercise(null);
             });
-            /* Computeds */
-            this._anyUsualExercises = ko.computed(function () {
-                return ko.utils.arrayFirst(_this._exercisesToBeDone(), function (exercise) { return exercise.model.isAlternative === false; }) != null;
-            });
             this._timeToWork.extend({
                 required: {
                     onlyIf: function () {
