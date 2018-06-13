@@ -55,7 +55,7 @@ var Models;
             this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime;
             this._isForTimeManyInnersType = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
             this._canSeeTimeToWork = this.model.workoutType === Models.WorkoutType.AMRAP || this.model.workoutType === Models.WorkoutType.EMOM;
-            this._canSeeRepeatWorkoutForTimeButton = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
+            this._isWorkoutsContainer = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
             this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
             /* Observables */
             this._id = ko.observable(model.id);
@@ -102,7 +102,10 @@ var Models;
             });
             this._exercisesToBeDone.extend({
                 minLength: {
-                    message: "At least one exercise is required"
+                    message: "At least one exercise is required",
+                    onlyIf: function () {
+                        return _this._isWorkoutsContainer === false;
+                    }
                 }
             });
             this.errors = ko.validation.group(this);

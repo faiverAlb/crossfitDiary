@@ -18,7 +18,7 @@
     private _canSeeRoundsCount: boolean;
     private _isForTimeManyInnersType: boolean;
     private _canSeeTimeToWork: boolean;
-    private _canSeeRepeatWorkoutForTimeButton: boolean;
+    private _isWorkoutsContainer: boolean;
     private _canSeeGeneralWorkoutInfo: boolean;
 
     private _exercises: KnockoutObservableArray<ExerciseViewModel>;
@@ -45,7 +45,7 @@
       this._canSeeRoundsCount = this.model.workoutType === WorkoutType.ForTime;
       this._isForTimeManyInnersType = this.model.workoutType === WorkoutType.ForTimeManyInners;
       this._canSeeTimeToWork = this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
-      this._canSeeRepeatWorkoutForTimeButton = this.model.workoutType === WorkoutType.ForTimeManyInners;
+      this._isWorkoutsContainer = this.model.workoutType === WorkoutType.ForTimeManyInners;
       this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
 
 
@@ -106,7 +106,10 @@
 
       this._exercisesToBeDone.extend({
         minLength: {
-          message: "At least one exercise is required"
+          message: "At least one exercise is required",
+          onlyIf: () => {
+            return this._isWorkoutsContainer === false;
+          }
         }
       });
       this.errors = ko.validation.group(this);
