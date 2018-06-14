@@ -2,8 +2,8 @@
 
     <div class="routine-complex-info">
         <!--ko if: _canSeeGeneralWorkoutInfo-->
-        <div class=" mb-2 pt-2 general-info-container">
-            <div class="row" >
+        <div class="pt-2 general-info-container">
+            <div class="row" data-bind="if: _canSeeTimeCap">
                 <div class="col-lg-3 time-cap-container pb-2">
                     <label for="timeCapInput" class="sr-only">Time cap:</label>
                     <div class="input-group">
@@ -16,8 +16,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-3 pb-2" data-bind="if: _canSeeTimeToWork">
+            <div class="row" data-bind="if: _canSeeTimeToWork">
+                <div class="col-lg-3 pb-2" >
                     <label for="timeInput" class="sr-only">Time to work:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -52,7 +52,6 @@
             <h5 class="inner-workout-header ">
                 <span data-bind="if: $index() != 0"> then </span>
                 <span data-bind="text:($index() + 1)  + ' workout'"></span>
-                <span data-bind="if: $index() != 0"> <i class="fas fa-angle-double-down"></i></span>
             </h5>
             <div data-bind="template: { name: 'routine-info-template', data: $data}"></div>
         </div>

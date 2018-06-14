@@ -89,7 +89,6 @@
     .routine-complex-info {
         color: $gray;
         .general-info-container {
-            border-bottom: 1px dashed $cyan;
             .time-cap-container {
                 .time-cap-icon {
                     color: #a94442;
@@ -138,10 +137,6 @@
         .workout {
             padding: 5px;
             .inner-workout-header {
-                border: 1px solid $gray-500;
-                border-left: 0;
-                border-right: 0;
-                padding: 5px;
             }
         }
     }
