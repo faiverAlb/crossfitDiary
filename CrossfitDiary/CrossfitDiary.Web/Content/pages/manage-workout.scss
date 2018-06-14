@@ -129,6 +129,22 @@
             }
         }
     }
+
+    .inner-workouts {
+        .workout:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        .workout {
+            padding: 5px;
+            .inner-workout-header {
+                border: 1px solid $gray-500;
+                border-left: 0;
+                border-right: 0;
+                padding: 5px;
+            }
+        }
+    }
     /*.curly-bracket {
         content: ' ';
         background-image: url('../../../img/curly-bracket.svg');

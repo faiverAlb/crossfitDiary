@@ -9005,6 +9005,15 @@ table > tbody > tr.empty-data {
       padding: 2px 5px;
       border: 1px #5bc0de dashed;
       border-radius: 3px; }
+  .workout-container .inner-workouts .workout:not(:first-child) {
+    margin-top: 20px; }
+  .workout-container .inner-workouts .workout {
+    padding: 5px; }
+    .workout-container .inner-workouts .workout .inner-workout-header {
+      border: 1px solid #adb5bd;
+      border-left: 0;
+      border-right: 0;
+      padding: 5px; }
 
 .custom-action-menu-dropdown {
   min-width: auto;

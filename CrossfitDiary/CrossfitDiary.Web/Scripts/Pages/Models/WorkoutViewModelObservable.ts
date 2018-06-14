@@ -6,6 +6,7 @@
     public errors:any;
 
     private _canSeeRoundsCount: boolean;
+    private _canSeeTimeCap: boolean;
     private _isForTimeManyInnersType: boolean;
     private _canSeeTimeToWork: boolean;
     private _canSeeGeneralWorkoutInfo: boolean;
@@ -40,10 +41,11 @@
 
 
       this._canSeeRoundsCount = this.model.workoutType === WorkoutType.ForTime;
+      this._canSeeTimeCap = this.model.workoutType === WorkoutType.ForTime || this.model.workoutType === WorkoutType.ForTimeManyInners;
       this._isForTimeManyInnersType = this.model.workoutType === WorkoutType.ForTimeManyInners;
       this._canSeeTimeToWork = this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
       this._isWorkoutsContainer = this.model.workoutType === WorkoutType.ForTimeManyInners;
-      this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount;
+      this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount || this._isForTimeManyInnersType;
 
 
       /* Observables */

@@ -3,7 +3,7 @@
     <div class="routine-complex-info">
         <!--ko if: _canSeeGeneralWorkoutInfo-->
         <div class=" mb-2 pt-2 general-info-container">
-            <div class="row" data-bind="if: _canSeeRoundsCount">
+            <div class="row" >
                 <div class="col-lg-3 time-cap-container pb-2">
                     <label for="timeCapInput" class="sr-only">Time cap:</label>
                     <div class="input-group">
@@ -42,11 +42,20 @@
         </div>
         <!-- /ko -->
     </div>
-    <div class="py-2" >
+    <!-- ko if: _isWorkoutsContainer === false-->
+    <div class="py-2">
         <select class="form-control exercise-selector" data-live-search="true" data-bind="options: _exercises, optionsText:'title',value: _selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
     </div>
+    <!-- /ko -->
     <div class="inner-workouts" data-bind="foreach:_innerWorkouts">
-        <div data-bind="template: { name: 'routine-info-template', data: $data}"></div>
+        <div class="workout">
+            <h5 class="inner-workout-header ">
+                <span data-bind="if: $index() != 0"> then </span>
+                <span data-bind="text:($index() + 1)  + ' workout'"></span>
+                <span data-bind="if: $index() != 0"> <i class="fas fa-angle-double-down"></i></span>
+            </h5>
+            <div data-bind="template: { name: 'routine-info-template', data: $data}"></div>
+        </div>
     </div>
     <div class="routines-container pt-2">
         <!-- ko foreach:_exercisesToBeDone-->
