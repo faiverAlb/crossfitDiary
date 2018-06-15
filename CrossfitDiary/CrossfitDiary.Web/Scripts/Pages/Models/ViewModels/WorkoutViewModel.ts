@@ -67,7 +67,7 @@
         workoutTypeDisplay: jsonInput.workoutTypeDisplay,
         children: jsonInput.children.map(x => new WorkoutViewModel().deserialize(x)),
         exercisesToDoList: jsonInput.exercisesToDoList.map(x => new ExerciseViewModel().deserialize(x)),
-        isInnerWorkout : jsonInput.isInnerWorkout
+        isInnerWorkout : false
       });
     }
   }

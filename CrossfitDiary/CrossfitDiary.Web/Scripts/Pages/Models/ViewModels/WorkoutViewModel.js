@@ -34,7 +34,7 @@ var Models;
                 workoutTypeDisplay: jsonInput.workoutTypeDisplay,
                 children: jsonInput.children.map(function (x) { return new WorkoutViewModel().deserialize(x); }),
                 exercisesToDoList: jsonInput.exercisesToDoList.map(function (x) { return new Models.ExerciseViewModel().deserialize(x); }),
-                isInnerWorkout: jsonInput.isInnerWorkout
+                isInnerWorkout: false
             });
         };
         return WorkoutViewModel;
