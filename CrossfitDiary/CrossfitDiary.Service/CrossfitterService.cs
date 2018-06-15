@@ -296,6 +296,11 @@ namespace CrossfitDiary.Service
                 Exercise exercise = _exerciseRepository.GetById(routineSimple.ExerciseId);
                 exerciseNames.Add(exercise.Abbreviation);
             }
+
+            foreach (RoutineComplex child in routineComplexToSave.Children)
+            {
+                SetRoutineComplexTitle(child);
+            }
             routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
         }
 
