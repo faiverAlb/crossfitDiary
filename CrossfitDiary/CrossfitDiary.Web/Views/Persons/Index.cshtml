@@ -68,7 +68,7 @@
                             <div data-bind="template: { name: 'workout-display-template', data: workoutViewModel}"></div>
                             <div class="text-right">
                                 <span class="workout-result">
-                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.ForTime)-->
+                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.ForTime) || workoutViewModel.workoutType == @((int)RoutineComplexType.ForTimeManyInners)-->
                                     <!-- ko if:repsToFinishOnCapTime-->
                                     <span><i class="far fa-smile"></i> Cap + <span data-bind="text:repsToFinishOnCapTime"></span></span>
                                     <!-- /ko -->
@@ -178,7 +178,9 @@
         <!-- ko foreach:children-->
         <div class="inner-workout">
             <div data-bind="template: { name: 'workout-display-template', workoutViewModel: $data }"></div>
-
+        </div>
+        <div class="then-container" data-bind="if: $index() + 1 < $parent.children.length">
+            then
         </div>
         <!-- /ko -->
     </div>

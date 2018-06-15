@@ -49,6 +49,13 @@
                         }
                     }
                 }
+
+                .inner-workouts {
+                    .then-container {
+                        font-weight: bold;
+                        padding: 3px 0 6px 0;
+                    }
+                }
             }
 
             .item-footer {
@@ -57,7 +64,7 @@
 
                 .edit-workout-action {
                     cursor: pointer;
-                    text-decoration:none;
+                    text-decoration: none;
                 }
 
                 .repeat-workout-action {
