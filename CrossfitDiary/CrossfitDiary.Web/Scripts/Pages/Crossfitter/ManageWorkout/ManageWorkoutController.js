@@ -105,6 +105,9 @@ var Pages;
                 }
             })
                 .then(function () {
+                if (_this._isRepeatMode) {
+                    _this.handleLogWorkoutController(false);
+                }
                 return _this._isEditMode ? _this.loadPersonLogging() : null;
             });
             return _this;

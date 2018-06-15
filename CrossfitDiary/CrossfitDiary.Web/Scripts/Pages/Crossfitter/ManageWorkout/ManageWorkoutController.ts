@@ -100,6 +100,9 @@
           }
         })
         .then(() => {
+          if (this._isRepeatMode) {
+            this.handleLogWorkoutController(false);
+          }
           return this._isEditMode ? this.loadPersonLogging() : null;
         });
     }
