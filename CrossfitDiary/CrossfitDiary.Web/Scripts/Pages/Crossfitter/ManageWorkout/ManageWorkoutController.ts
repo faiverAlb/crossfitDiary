@@ -80,7 +80,8 @@
         let model = new WorkoutViewModel({
           workoutType: this.selectedWorkoutType().id,
           exercisesToDoList: [],
-          children:[]
+          children: [],
+          isInnerWorkout:false
         });
 
         this.workoutToDisplay(new WorkoutViewModelObservable(model, this._exercises));

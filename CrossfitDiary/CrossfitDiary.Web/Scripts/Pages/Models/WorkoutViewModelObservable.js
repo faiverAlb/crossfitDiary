@@ -37,7 +37,8 @@ var Models;
                     restBetweenRounds: _this._restBetweenRounds(),
                     workoutType: _this.model.workoutType,
                     exercisesToDoList: _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); }),
-                    children: _this._innerWorkouts().map(function (item) { return item.toPlainObject(); })
+                    children: _this._innerWorkouts().map(function (item) { return item.toPlainObject(); }),
+                    isInnerWorkout: false
                 });
                 return workoutToCreate;
             };
@@ -47,7 +48,8 @@ var Models;
                     title: null,
                     workoutType: Models.WorkoutType.ForTime,
                     exercisesToDoList: [],
-                    children: []
+                    children: [],
+                    isInnerWorkout: true
                 }), _this.exercises));
             };
             this.addInnerWorkout = function () {
@@ -65,7 +67,7 @@ var Models;
                 return new WorkoutViewModelObservable(workout, exercises);
             }));
             this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime;
-            this._canSeeTimeCap = this.model.workoutType === Models.WorkoutType.ForTime || this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
+            this._canSeeTimeCap = (this.model.workoutType === Models.WorkoutType.ForTime || this.model.workoutType === Models.WorkoutType.ForTimeManyInners) && this.model.isInnerWorkout === false;
             this._isForTimeManyInnersType = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
             this._canSeeTimeToWork = this.model.workoutType === Models.WorkoutType.AMRAP || this.model.workoutType === Models.WorkoutType.EMOM;
             this._isWorkoutsContainer = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
@@ -98,7 +100,7 @@ var Models;
             this._timeCap.extend({
                 required: {
                     onlyIf: function () {
-                        return _this._canSeeRoundsCount;
+                        return (_this._canSeeRoundsCount || _this._isForTimeManyInnersType) && _this.model.isInnerWorkout === false;
                     }
                 }
             });

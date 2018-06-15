@@ -13,6 +13,8 @@
     exercisesToDoList: ExerciseViewModel[];
     workoutTypeDisplay?: string;
     children: WorkoutViewModel[];
+
+    isInnerWorkout: boolean;
   }
 
   export class WorkoutViewModel implements Serializable<WorkoutViewModel>{
@@ -28,6 +30,7 @@
     workoutTypeDisplay?: string;
     exercisesToDoList: ExerciseViewModel[];
     children: WorkoutViewModel[];
+    isInnerWorkout: boolean;
 
     
     constructor(params?: IWorkoutViewModel) {
@@ -45,6 +48,7 @@
       this.exercisesToDoList = params.exercisesToDoList;
       this.workoutTypeDisplay = params.workoutTypeDisplay;
       this.children = params.children;
+      this.isInnerWorkout = params.isInnerWorkout;
     }
 
     public deserialize(jsonInput): WorkoutViewModel {
@@ -62,7 +66,8 @@
         workoutType: jsonInput.workoutType,
         workoutTypeDisplay: jsonInput.workoutTypeDisplay,
         children: jsonInput.children.map(x => new WorkoutViewModel().deserialize(x)),
-        exercisesToDoList: jsonInput.exercisesToDoList.map(x => new ExerciseViewModel().deserialize(x))
+        exercisesToDoList: jsonInput.exercisesToDoList.map(x => new ExerciseViewModel().deserialize(x)),
+        isInnerWorkout : jsonInput.isInnerWorkout
       });
     }
   }

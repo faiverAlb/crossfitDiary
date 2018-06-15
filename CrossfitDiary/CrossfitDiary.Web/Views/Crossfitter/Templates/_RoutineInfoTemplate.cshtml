@@ -53,7 +53,9 @@
                 <h5>
                     <span data-bind="if: $index() != 0"> then </span>
                     <span data-bind="text:($index() + 1)  + ' workout'"></span>
+                    <!-- ko if: $parent._innerWorkouts().length > 1 -->
                     <a href="#" data-bind="click:function(){ $parent.removeInnerWorkout($index())}">  <i class="fas fa-times fa-sm text-secondary" aria-hidden="true"></i></a>
+                    <!-- /ko -->
                 </h5>
             </div>
             <div data-bind="template: { name: 'routine-info-template', data: $data}"></div>

@@ -87,7 +87,8 @@ var Pages;
                 var model = new WorkoutViewModel({
                     workoutType: _this.selectedWorkoutType().id,
                     exercisesToDoList: [],
-                    children: []
+                    children: [],
+                    isInnerWorkout: false
                 });
                 _this.workoutToDisplay(new WorkoutViewModelObservable(model, _this._exercises));
                 _this.handleLogWorkoutController(false);

@@ -41,7 +41,7 @@
 
 
       this._canSeeRoundsCount = this.model.workoutType === WorkoutType.ForTime;
-      this._canSeeTimeCap = this.model.workoutType === WorkoutType.ForTime || this.model.workoutType === WorkoutType.ForTimeManyInners;
+      this._canSeeTimeCap = (this.model.workoutType === WorkoutType.ForTime || this.model.workoutType === WorkoutType.ForTimeManyInners) && this.model.isInnerWorkout === false;
       this._isForTimeManyInnersType = this.model.workoutType === WorkoutType.ForTimeManyInners;
       this._canSeeTimeToWork = this.model.workoutType === WorkoutType.AMRAP || this.model.workoutType === WorkoutType.EMOM;
       this._isWorkoutsContainer = this.model.workoutType === WorkoutType.ForTimeManyInners;
@@ -83,7 +83,7 @@
       this._timeCap.extend({
         required: {
           onlyIf: () => {
-            return this._canSeeRoundsCount;
+            return (this._canSeeRoundsCount || this._isForTimeManyInnersType) && this.model.isInnerWorkout === false;
           }
         }
       });
@@ -153,7 +153,8 @@
         restBetweenRounds: this._restBetweenRounds(),
         workoutType: this.model.workoutType,
         exercisesToDoList: this._exercisesToBeDone().map(item => item.toPlainObject()),
-        children: this._innerWorkouts().map(item => item.toPlainObject())
+        children: this._innerWorkouts().map(item => item.toPlainObject()),
+        isInnerWorkout : false
       });
 
       return workoutToCreate;
@@ -166,7 +167,8 @@
         title: null,
         workoutType: WorkoutType.ForTime,
         exercisesToDoList: [],
-        children: []
+        children: [],
+        isInnerWorkout: true
       }), this.exercises));
 
     }

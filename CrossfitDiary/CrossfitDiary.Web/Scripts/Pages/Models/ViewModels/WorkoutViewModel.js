@@ -16,6 +16,7 @@ var Models;
             this.exercisesToDoList = params.exercisesToDoList;
             this.workoutTypeDisplay = params.workoutTypeDisplay;
             this.children = params.children;
+            this.isInnerWorkout = params.isInnerWorkout;
         }
         WorkoutViewModel.prototype.deserialize = function (jsonInput) {
             if (jsonInput == null) {
@@ -32,7 +33,8 @@ var Models;
                 workoutType: jsonInput.workoutType,
                 workoutTypeDisplay: jsonInput.workoutTypeDisplay,
                 children: jsonInput.children.map(function (x) { return new WorkoutViewModel().deserialize(x); }),
-                exercisesToDoList: jsonInput.exercisesToDoList.map(function (x) { return new Models.ExerciseViewModel().deserialize(x); })
+                exercisesToDoList: jsonInput.exercisesToDoList.map(function (x) { return new Models.ExerciseViewModel().deserialize(x); }),
+                isInnerWorkout: jsonInput.isInnerWorkout
             });
         };
         return WorkoutViewModel;
