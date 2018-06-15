@@ -53,6 +53,9 @@ var Models;
             this.addInnerWorkout = function () {
                 _this.addInnerForTimeWorkout();
             };
+            this.removeInnerWorkout = function (index) {
+                _this._innerWorkouts.splice(index, 1);
+            };
             /* Сivilians */
             this._workoutTypeTitle = Models.WorkoutType[model.workoutType];
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {

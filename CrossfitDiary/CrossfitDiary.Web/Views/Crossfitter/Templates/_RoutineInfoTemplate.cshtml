@@ -49,10 +49,13 @@
     <!-- /ko -->
     <div class="inner-workouts" data-bind="foreach:_innerWorkouts">
         <div class="workout">
-            <h5 class="inner-workout-header ">
-                <span data-bind="if: $index() != 0"> then </span>
-                <span data-bind="text:($index() + 1)  + ' workout'"></span>
-            </h5>
+            <div class="inner-workout-header">
+                <h5>
+                    <span data-bind="if: $index() != 0"> then </span>
+                    <span data-bind="text:($index() + 1)  + ' workout'"></span>
+                    <a href="#" data-bind="click:function(){ $parent.removeInnerWorkout($index())}">  <i class="fas fa-times fa-sm text-secondary" aria-hidden="true"></i></a>
+                </h5>
+            </div>
             <div data-bind="template: { name: 'routine-info-template', data: $data}"></div>
         </div>
     </div>

@@ -174,5 +174,9 @@
     public addInnerWorkout = () => {
       this.addInnerForTimeWorkout();
     };
+
+    public removeInnerWorkout = (index:number) => {
+      this._innerWorkouts.splice(index, 1);
+    };
   }
 }
