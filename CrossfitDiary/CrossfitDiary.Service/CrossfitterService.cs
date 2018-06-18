@@ -55,50 +55,22 @@ namespace CrossfitDiary.Service
 
             foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
             {
-                if (routineComplexToSave.ComplexType != existingRoutineComplex.ComplexType)
+                if (IsTypeMatch(routineComplexToSave, existingRoutineComplex) == false)
                 {
                     continue;
                 }
 
-                if (routineComplexToSave.RoundCount != existingRoutineComplex.RoundCount)
+                if (routineComplexToSave.Children.Count != existingRoutineComplex.Children.Count)
                 {
                     continue;
                 }
 
-                if (routineComplexToSave.TimeToWork != existingRoutineComplex.TimeToWork)
+                if (IsChildrenWorkoutsMatch(routineComplexToSave) == false)
                 {
                     continue;
                 }
 
-                if (routineComplexToSave.TimeCap != existingRoutineComplex.TimeCap)
-                {
-                    continue;
-                }
-
-                if (routineComplexToSave.RoutineSimple.Count != existingRoutineComplex.RoutineSimple.Count)
-                {
-                    continue;
-                }
-
-                bool isExercisesMatch = true;
-
-                for (int i = 0; i < routineComplexToSave.RoutineSimple.Count; i++)
-                {
-                    RoutineSimple routineSimpleToSave = routineComplexToSave.RoutineSimple.ToList()[i];
-                    RoutineSimple existingSimpleRoutine = existingRoutineComplex.RoutineSimple.ToList()[i];
-                    if (routineSimpleToSave.ExerciseId != existingSimpleRoutine.ExerciseId
-                        || routineSimpleToSave.Count != existingSimpleRoutine.Count 
-                        || routineSimpleToSave.Distance != existingSimpleRoutine.Distance
-                        || routineSimpleToSave.Weight != existingSimpleRoutine.Weight
-                        || routineSimpleToSave.Calories != existingSimpleRoutine.Calories
-                        || routineSimpleToSave.Centimeters != existingSimpleRoutine.Centimeters)
-                    {
-                        isExercisesMatch = false;
-                        break;
-                    }
-                }
-
-                if (isExercisesMatch == false)
+                if (IsExercisesMatch(routineComplexToSave, existingRoutineComplex) == false)
                 {
                     continue;
                 }
@@ -107,6 +79,87 @@ namespace CrossfitDiary.Service
             }
 
             return 0;
+        }
+
+        /// <summary>
+        ///     Checks if exercises match
+        /// </summary>
+        /// <param name="routineComplexToSave"></param>
+        /// <param name="existingRoutineComplex"></param>
+        /// <returns></returns>
+        private bool IsExercisesMatch(RoutineComplex routineComplexToSave, RoutineComplex existingRoutineComplex)
+        {
+            for (int i = 0; i < routineComplexToSave.RoutineSimple.Count; i++)
+            {
+                RoutineSimple routineSimpleToSave = routineComplexToSave.RoutineSimple.ToList()[i];
+                RoutineSimple existingSimpleRoutine = existingRoutineComplex.RoutineSimple.ToList()[i];
+                if (routineSimpleToSave.ExerciseId != existingSimpleRoutine.ExerciseId
+                    || routineSimpleToSave.Count != existingSimpleRoutine.Count
+                    || routineSimpleToSave.Distance != existingSimpleRoutine.Distance
+                    || routineSimpleToSave.Weight != existingSimpleRoutine.Weight
+                    || routineSimpleToSave.Calories != existingSimpleRoutine.Calories
+                    || routineSimpleToSave.Centimeters != existingSimpleRoutine.Centimeters)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        ///     Checks if workout children workouts match
+        /// </summary>
+        /// <param name="routineComplexToSave"></param>
+        /// <returns></returns>
+        private bool IsChildrenWorkoutsMatch(RoutineComplex routineComplexToSave)
+        {
+            for (int i = 0; i < routineComplexToSave.Children.Count; i++)
+            {
+                RoutineComplex complexToSave = routineComplexToSave.Children.ToList()[i];
+                if (FindDefaultOrExistingWorkout(complexToSave) == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        /// <summary>
+        ///     Checks if  type of workouts match
+        /// </summary>
+        /// <param name="routineComplexToSave"></param>
+        /// <param name="existingRoutineComplex"></param>
+        /// <returns></returns>
+        private bool IsTypeMatch(RoutineComplex routineComplexToSave, RoutineComplex existingRoutineComplex)
+        {
+            if (routineComplexToSave.ComplexType != existingRoutineComplex.ComplexType)
+            {
+                return false;
+            }
+
+            if (routineComplexToSave.RoundCount != existingRoutineComplex.RoundCount)
+            {
+                return false;
+            }
+
+            if (routineComplexToSave.TimeToWork != existingRoutineComplex.TimeToWork)
+            {
+                return false;
+            }
+
+            if (routineComplexToSave.TimeCap != existingRoutineComplex.TimeCap)
+            {
+                return false;
+            }
+
+            if (routineComplexToSave.RoutineSimple.Count != existingRoutineComplex.RoutineSimple.Count)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -206,7 +259,12 @@ namespace CrossfitDiary.Service
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
             UpdateWorkoutsWithRecords(crossfitterWorkouts);
-            return crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList().Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
+            List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList().Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
+            foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)
+            {
+                allCrossfittersWorkout.RoutineComplex.Children = allCrossfittersWorkout.RoutineComplex.Children.OrderByDescending(x => x.CreatedUtc).ToList();
+            }
+            return allCrossfittersWorkouts;
         }
 
 
@@ -285,6 +343,12 @@ namespace CrossfitDiary.Service
 
         private void SetRoutineComplexTitle(RoutineComplex routineComplexToSave)
         {
+            foreach (RoutineComplex child in routineComplexToSave.Children)
+            {
+                SetRoutineComplexTitle(child);
+            }
+
+
             if (!string.IsNullOrEmpty(routineComplexToSave.Title))
             {
                 return;
@@ -297,10 +361,6 @@ namespace CrossfitDiary.Service
                 exerciseNames.Add(exercise.Abbreviation);
             }
 
-            foreach (RoutineComplex child in routineComplexToSave.Children)
-            {
-                SetRoutineComplexTitle(child);
-            }
             routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
         }
 

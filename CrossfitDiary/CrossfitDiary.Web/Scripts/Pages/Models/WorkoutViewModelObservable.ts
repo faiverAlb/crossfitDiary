@@ -36,6 +36,7 @@
       }));
 
       this._innerWorkouts = ko.observableArray(model.children.map((workout) => {
+        workout.isInnerWorkout = true;
         return new WorkoutViewModelObservable(workout, exercises);
       }));
 

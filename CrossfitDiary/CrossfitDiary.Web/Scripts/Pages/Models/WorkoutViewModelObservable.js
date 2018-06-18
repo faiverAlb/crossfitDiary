@@ -64,6 +64,7 @@ var Models;
                 return new Models.ExerciseViewModelObservable(item);
             }));
             this._innerWorkouts = ko.observableArray(model.children.map(function (workout) {
+                workout.isInnerWorkout = true;
                 return new WorkoutViewModelObservable(workout, exercises);
             }));
             this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime;

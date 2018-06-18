@@ -14,7 +14,13 @@ namespace CrossfitDiary.DAL.EF.Repositories
         public override void Add(RoutineComplex entity)
         {
             entity.CreatedBy = DbContext.Users.Find(entity.CreatedBy.Id);
+            foreach (RoutineComplex routineComplex in entity.Children)
+            {
+                routineComplex.CreatedBy = DbContext.Users.Find(entity.CreatedBy.Id);
+            }
+
             base.Add(entity);
         }
+
     }
 }
