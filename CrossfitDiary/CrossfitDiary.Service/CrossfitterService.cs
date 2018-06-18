@@ -51,26 +51,9 @@ namespace CrossfitDiary.Service
         public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
         {
             List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetAll().ToList();
-
-
             foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
             {
-                if (IsTypeMatch(routineComplexToSave, existingRoutineComplex) == false)
-                {
-                    continue;
-                }
-
-                if (routineComplexToSave.Children.Count != existingRoutineComplex.Children.Count)
-                {
-                    continue;
-                }
-
-                if (IsChildrenWorkoutsMatch(routineComplexToSave) == false)
-                {
-                    continue;
-                }
-
-                if (IsExercisesMatch(routineComplexToSave, existingRoutineComplex) == false)
+                if (IsWorkoutsMatch(existingRoutineComplex,routineComplexToSave) == false)
                 {
                     continue;
                 }
@@ -79,6 +62,50 @@ namespace CrossfitDiary.Service
             }
 
             return 0;
+        }
+
+        private bool IsWorkoutsMatch(RoutineComplex existingRoutineComplex, RoutineComplex routineComplexToSave)
+        {
+            if (IsTypeMatch(routineComplexToSave, existingRoutineComplex) == false)
+            {
+                return false;
+            }
+
+            if (IsChildrenWorkoutParamsMatch(routineComplexToSave, existingRoutineComplex) == false)
+            {
+                return false;
+            }
+
+            if (IsExercisesMatch(routineComplexToSave, existingRoutineComplex) == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsChildrenWorkoutParamsMatch(RoutineComplex routineComplexToSave, RoutineComplex existingRoutineComplex)
+        {
+            if (routineComplexToSave.Children.Count != existingRoutineComplex.Children.Count)
+            {
+                return false;
+            }
+
+            List<RoutineComplex> existingChilds = existingRoutineComplex.OrderedChildren.ToList();
+            List<RoutineComplex> toSaveChilds = routineComplexToSave.Children.ToList();
+
+            for (var i = 0; i < existingChilds.Count; i++)
+            {
+                RoutineComplex existingChild = existingChilds[i];
+                RoutineComplex routineComplex = toSaveChilds[i];
+
+                if (IsWorkoutsMatch(existingChild,routineComplex) == false)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -103,25 +130,6 @@ namespace CrossfitDiary.Service
                     return false;
                 }
             }
-            return true;
-        }
-
-        /// <summary>
-        ///     Checks if workout children workouts match
-        /// </summary>
-        /// <param name="routineComplexToSave"></param>
-        /// <returns></returns>
-        private bool IsChildrenWorkoutsMatch(RoutineComplex routineComplexToSave)
-        {
-            for (int i = 0; i < routineComplexToSave.Children.Count; i++)
-            {
-                RoutineComplex complexToSave = routineComplexToSave.Children.ToList()[i];
-                if (FindDefaultOrExistingWorkout(complexToSave) == 0)
-                {
-                    return false;
-                }
-            }
-
             return true;
         }
 
@@ -262,7 +270,7 @@ namespace CrossfitDiary.Service
             List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList().Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
             foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)
             {
-                allCrossfittersWorkout.RoutineComplex.Children = allCrossfittersWorkout.RoutineComplex.Children.OrderByDescending(x => x.CreatedUtc).ToList();
+                allCrossfittersWorkout.RoutineComplex.Children = allCrossfittersWorkout.RoutineComplex.Children.OrderBy(x => x.Position).ToList();
             }
             return allCrossfittersWorkouts;
         }

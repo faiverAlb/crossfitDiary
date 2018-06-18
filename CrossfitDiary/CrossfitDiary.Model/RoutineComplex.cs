@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace CrossfitDiary.Model
 {
@@ -80,6 +82,21 @@ namespace CrossfitDiary.Model
         ///      Children workouts
         /// </summary>
         public virtual ICollection<RoutineComplex> Children { get; set; }
+
+        [NotMapped]
+        public List<RoutineComplex> OrderedChildren
+        {
+            get
+            {
+                return Children.OrderBy(x => x.Position).ToList();
+            }
+        }
+
+
+        /// <summary>
+        ///     Specify order which is important in Children collection
+        /// </summary>
+        public int Position { get; set; }
 
         #endregion
     }

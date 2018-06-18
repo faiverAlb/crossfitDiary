@@ -53,7 +53,7 @@
                 <h5>
                     <span data-bind="if: $index() != 0"> then </span>
                     <span data-bind="text:($index() + 1)  + ' workout'"></span>
-                    <!-- ko if: $parent._innerWorkouts().length > 1 -->
+                    <!-- ko if: $root._isDefaultMode && $parent._innerWorkouts().length > 1 -->
                     <a href="#" data-bind="click:function(){ $parent.removeInnerWorkout($index())}">  <i class="fas fa-times fa-sm text-secondary" aria-hidden="true"></i></a>
                     <!-- /ko -->
                 </h5>
@@ -72,7 +72,7 @@
         <!-- /ko -->
     </div>
     <div class="mt-3">
-        <!-- ko if: _isWorkoutsContainer -->
+        <!-- ko if: $root._isDefaultMode && _isWorkoutsContainer -->
         <button class="btn btn-warning" data-bind="click: addInnerWorkout">Add workout after</button>
         <!-- /ko -->
     </div>
