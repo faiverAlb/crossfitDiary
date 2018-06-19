@@ -11,9 +11,6 @@
     /* Observables */
     private _logToCreate: KnockoutObservable<ToLogWorkoutViewModelObservable>;
 
-    /* Computeds */
-
-
     constructor(public workoutToUse: WorkoutViewModelObservable
               , public isCreateAndLogWorkout: boolean
               , public service: CrossfitterService

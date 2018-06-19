@@ -14,7 +14,6 @@ var Pages;
     var BaseController = General.BaseController;
     var LogWorkoutController = (function (_super) {
         __extends(LogWorkoutController, _super);
-        /* Computeds */
         function LogWorkoutController(workoutToUse, isCreateAndLogWorkout, service, errorMessager, isEditMode, logModel) {
             var _this = _super.call(this) || this;
             _this.workoutToUse = workoutToUse;

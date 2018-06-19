@@ -213,7 +213,8 @@ namespace CrossfitDiary.Service
         {
             IEnumerable<CrossfitterWorkout> workoutsWithExericesOnly = _crossfitterWorkoutRepository
                         .GetMany(x => x.Crossfitter.Id == userId
-                                      && x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId));
+                                      && x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId)
+                                      && x.RepsToFinishOnCapTime.HasValue == false);
             string exerciseAbbreviation = _exerciseRepository.GetById(exerciseId).Abbreviation;
 
             PersonMaximum maximum = (from crossfitterWorkout in workoutsWithExericesOnly
