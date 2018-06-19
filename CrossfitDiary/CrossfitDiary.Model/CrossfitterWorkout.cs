@@ -87,12 +87,6 @@ namespace CrossfitDiary.Model
         /// </summary>
         public bool WasFinished { get; set; }
 
-        /// <summary>
-        ///     Gets or sets flat that current crossfiter workout has new maximum in exercises
-        /// </summary>
-        [NotMapped]
-        public bool HasNewMaximum { get; set; }
-
         #endregion
     }
 }

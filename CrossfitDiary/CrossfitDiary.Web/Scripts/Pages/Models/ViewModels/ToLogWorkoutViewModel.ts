@@ -15,7 +15,6 @@
     workouterId?: string;
     displayDate?: string;
     workoutViewModel?: WorkoutViewModel;
-    hasNewMaximum?: boolean;
   }
   export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel>{
 
@@ -32,7 +31,6 @@
     workouterId?: string;
     displayDate?: string;
     workoutViewModel?: WorkoutViewModel;
-    hasNewMaximum?: boolean;
 
     constructor(
       params?: IToLogWorkoutViewModel) {
@@ -52,7 +50,6 @@
       this.workouterId = params.workouterId;
       this.displayDate = params.displayDate;
       this.workoutViewModel = params.workoutViewModel;
-      this.hasNewMaximum = params.hasNewMaximum;
     }
 
     deserialize(jsonInput): ToLogWorkoutViewModel {
@@ -73,8 +70,7 @@
         workouterName: jsonInput.workouterName,
         workouterId: jsonInput.workouterId,
         displayDate: jsonInput.displayDate,
-        workoutViewModel: new WorkoutViewModel().deserialize(jsonInput.workoutViewModel),
-        hasNewMaximum: jsonInput.hasNewMaximum,
+        workoutViewModel: new WorkoutViewModel().deserialize(jsonInput.workoutViewModel)
       });
     }
 

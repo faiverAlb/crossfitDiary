@@ -317,7 +317,6 @@ namespace CrossfitDiary.Service
                 return;
             }
             workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
-            workoutToAddMaximum.HasNewMaximum = true;
         }
 
         /// <summary>
