@@ -211,11 +211,30 @@ namespace CrossfitDiary.Service
         /// </returns>
         public PersonMaximum GetPersonMaximumForExercise(string userId, int exerciseId)
         {
-            IEnumerable<CrossfitterWorkout> workoutsWithExericesOnly = _crossfitterWorkoutRepository
+            List<CrossfitterWorkout> workoutsWithExericesOnly = _crossfitterWorkoutRepository
                         .GetMany(x => x.Crossfitter.Id == userId
-                                      && x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId)
-                                      && x.RepsToFinishOnCapTime.HasValue == false);
+                                      && (x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId)
+                                      || x.RoutineComplex.Children.Any(child => child.RoutineSimple.Any(chZ => chZ.ExerciseId == exerciseId)))
+                                      && x.RepsToFinishOnCapTime.HasValue == false)
+                                    
+                        .ToList();
+
             string exerciseAbbreviation = _exerciseRepository.GetById(exerciseId).Abbreviation;
+
+            var routineDictionary = new Dictionary<int, List<RoutineSimple>>();
+            foreach (CrossfitterWorkout workout in workoutsWithExericesOnly)
+            {
+                if (routineDictionary.ContainsKey(workout.Id))
+                {
+                    routineDictionary[workout.Id].AddRange(workout.RoutineComplex.RoutineSimple);
+                }
+                else
+                {
+                    routineDictionary[workout.Id] = new List<RoutineSimple>((workout.RoutineComplex.RoutineSimple));
+                }
+                routineDictionary[workout.Id].AddRange(workout.RoutineComplex.Children.SelectMany(x => x.RoutineSimple));
+
+            }
 
             PersonMaximum maximum = (from crossfitterWorkout in workoutsWithExericesOnly
                 select new PersonMaximum
@@ -228,7 +247,7 @@ namespace CrossfitDiary.Service
                     ExerciseDisplayName = exerciseAbbreviation,
                     ExerciseId = exerciseId,
                     MaximumWeight = (
-                        from exercise in crossfitterWorkout.RoutineComplex.RoutineSimple
+                        from exercise in routineDictionary.Where(x => x.Key == crossfitterWorkout.Id).SelectMany(x => x.Value)
                         where exercise.ExerciseId == exerciseId
                         select exercise.Weight
                     ).Max()
@@ -289,6 +308,7 @@ namespace CrossfitDiary.Service
             {
                 List<Exercise> allDistinctExercisesFromWorkouts = personWorkouts
                                 .SelectMany(x => x.RoutineComplex.RoutineSimple.Select(y => y.Exercise))
+                                .Union(personWorkouts.SelectMany(x => x.RoutineComplex.Children.SelectMany(z => z.RoutineSimple)).Select(x => x.Exercise))
                                 .Distinct()
                                 .ToList();
                 foreach (Exercise exercise in allDistinctExercisesFromWorkouts)
@@ -317,7 +337,18 @@ namespace CrossfitDiary.Service
             {
                 return;
             }
-            workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+
+            if (workoutToAddMaximum.RoutineComplex.Children.Any())
+            {
+                foreach (RoutineComplex routineComplexChild in workoutToAddMaximum.RoutineComplex.Children.Where(z => z.RoutineSimple.Any(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight)))
+                {
+                    routineComplexChild.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+                }
+            }
+            else
+            {
+                workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+            }
         }
 
         /// <summary>
