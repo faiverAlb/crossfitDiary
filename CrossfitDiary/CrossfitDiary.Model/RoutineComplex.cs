@@ -81,7 +81,7 @@ namespace CrossfitDiary.Model
         /// <summary>
         ///      Children workouts
         /// </summary>
-        public virtual ICollection<RoutineComplex> Children { get; set; }
+        public virtual ICollection<RoutineComplex> Children { get; set; } = new List<RoutineComplex>();
 
         [NotMapped]
         public List<RoutineComplex> OrderedChildren
