@@ -42,6 +42,7 @@
     private _exercises: ExerciseViewModel[];
 
     /* Computeds */
+    private selectedForTimeText: KnockoutComputed<string>;
 
     constructor(public parameters: BasicParameters, preselectedWorkoutObject: object, public preselectedCrossfitterWorkoutId: number|null = null) {
       super();
@@ -67,6 +68,14 @@
       if (workout != null) {
         this.handleLogWorkoutController(false);
       }
+
+      /* Computed */
+      this.selectedForTimeText = ko.computed(() => {
+        if (this.selectedWorkoutTypeId() == null || this.selectedWorkoutTypeId() !== WorkoutType.ForTimeManyInners) {
+          return "FT";
+        }
+        return "FT*n";
+      });
       
       this.selectedWorkoutType.subscribe((selectedWorkoutType: BaseKeyValuePairModel<number, string>) => {
         if ((selectedWorkoutType == undefined || selectedWorkoutType == null) ) {

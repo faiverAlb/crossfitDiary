@@ -30,7 +30,6 @@ var Pages;
     });
     var ManageWorkoutController = (function (_super) {
         __extends(ManageWorkoutController, _super);
-        /* Computeds */
         function ManageWorkoutController(parameters, preselectedWorkoutObject, preselectedCrossfitterWorkoutId) {
             if (preselectedCrossfitterWorkoutId === void 0) { preselectedCrossfitterWorkoutId = null; }
             var _this = _super.call(this) || this;
@@ -75,6 +74,13 @@ var Pages;
             if (workout != null) {
                 _this.handleLogWorkoutController(false);
             }
+            /* Computed */
+            _this.selectedForTimeText = ko.computed(function () {
+                if (_this.selectedWorkoutTypeId() == null || _this.selectedWorkoutTypeId() !== WorkoutType.ForTimeManyInners) {
+                    return "FT";
+                }
+                return "FT*n";
+            });
             _this.selectedWorkoutType.subscribe(function (selectedWorkoutType) {
                 if ((selectedWorkoutType == undefined || selectedWorkoutType == null)) {
                     _this.handleLogWorkoutController(true);
