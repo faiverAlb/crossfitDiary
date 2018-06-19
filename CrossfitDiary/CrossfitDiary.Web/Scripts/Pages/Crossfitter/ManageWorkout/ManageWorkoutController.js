@@ -102,6 +102,7 @@ var Pages;
                 .then(function () {
                 if (_this.preselectedWorkout != null) {
                     _this.workoutToDisplay(new WorkoutViewModelObservable(_this.preselectedWorkout, _this._exercises));
+                    _this.selectedWorkoutTypeId(_this.preselectedWorkout.workoutType);
                 }
             })
                 .then(function () {

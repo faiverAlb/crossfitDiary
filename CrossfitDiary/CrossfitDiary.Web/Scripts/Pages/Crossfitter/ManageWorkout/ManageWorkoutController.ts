@@ -97,6 +97,7 @@
         .then(() => {
           if (this.preselectedWorkout != null) {
             this.workoutToDisplay(new WorkoutViewModelObservable(this.preselectedWorkout, this._exercises));
+            this.selectedWorkoutTypeId(this.preselectedWorkout.workoutType);
           }
         })
         .then(() => {
