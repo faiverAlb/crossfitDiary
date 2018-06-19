@@ -1,9 +1,10 @@
 var Models;
 (function (Models) {
     var WorkoutViewModelObservable = (function () {
-        function WorkoutViewModelObservable(model) {
+        function WorkoutViewModelObservable(model, exercises) {
             var _this = this;
             this.model = model;
+            this.exercises = exercises;
             this.addExerciseToList = function (exerciseViewModel) {
                 _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel));
             };
@@ -35,15 +36,43 @@ var Models;
                     restBetweenExercises: _this._restBetweenExercises(),
                     restBetweenRounds: _this._restBetweenRounds(),
                     workoutType: _this.model.workoutType,
-                    exercisesToDoList: _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); })
+                    exercisesToDoList: _this._exercisesToBeDone().map(function (item) { return item.toPlainObject(); }),
+                    children: _this._innerWorkouts().map(function (item) { return item.toPlainObject(); }),
+                    isInnerWorkout: false
                 });
                 return workoutToCreate;
+            };
+            this.addInnerForTimeWorkout = function () {
+                _this._innerWorkouts.push(new WorkoutViewModelObservable(new Models.WorkoutViewModel({
+                    id: 0,
+                    title: null,
+                    workoutType: Models.WorkoutType.ForTime,
+                    exercisesToDoList: [],
+                    children: [],
+                    isInnerWorkout: true
+                }), _this.exercises));
+            };
+            this.addInnerWorkout = function () {
+                _this.addInnerForTimeWorkout();
+            };
+            this.removeInnerWorkout = function (index) {
+                _this._innerWorkouts.splice(index, 1);
             };
             /* Сivilians */
             this._workoutTypeTitle = Models.WorkoutType[model.workoutType];
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {
                 return new Models.ExerciseViewModelObservable(item);
             }));
+            this._innerWorkouts = ko.observableArray(model.children.map(function (workout) {
+                workout.isInnerWorkout = true;
+                return new WorkoutViewModelObservable(workout, exercises);
+            }));
+            this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime;
+            this._canSeeTimeCap = (this.model.workoutType === Models.WorkoutType.ForTime || this.model.workoutType === Models.WorkoutType.ForTimeManyInners) && this.model.isInnerWorkout === false;
+            this._isForTimeManyInnersType = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
+            this._canSeeTimeToWork = this.model.workoutType === Models.WorkoutType.AMRAP || this.model.workoutType === Models.WorkoutType.EMOM;
+            this._isWorkoutsContainer = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
+            this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount || this._isForTimeManyInnersType;
             /* Observables */
             this._id = ko.observable(model.id);
             this._title = ko.observable(model.title);
@@ -52,46 +81,50 @@ var Models;
             this._timeToWork = ko.observable(model.timeToWork);
             this._timeCap = ko.observable(model.timeCap);
             this._roundsCount = ko.observable(model.roundsCount);
-            /* Computeds */
-            this._canSeeRoundsCount = ko.computed(function () {
-                return _this.model.workoutType === Models.WorkoutType.ForTime;
-            });
-            this._anyUsualExercises = ko.computed(function () {
-                return ko.utils.arrayFirst(_this._exercisesToBeDone(), function (exercise) { return exercise.model.isAlternative === false; }) != null;
-            });
-            this._canSeeTimeToWork = ko.computed(function () {
-                return _this.model.workoutType === Models.WorkoutType.AMRAP || _this.model.workoutType === Models.WorkoutType.EMOM;
-            });
-            this._canSeeGeneralWorkoutInfo = ko.computed(function () {
-                return _this._canSeeTimeToWork() || _this._canSeeRoundsCount();
+            this._exercises = ko.observableArray(exercises);
+            this._selectedExercise = ko.observable(null);
+            ko.computed(function () {
+                var exercise = _this._selectedExercise();
+                if (!exercise) {
+                    return;
+                }
+                _this.addExerciseToList(exercise);
+                _this._selectedExercise(null);
             });
             this._timeToWork.extend({
                 required: {
                     onlyIf: function () {
-                        return _this._canSeeTimeToWork();
+                        return _this._canSeeTimeToWork;
                     }
                 }
             });
             this._timeCap.extend({
                 required: {
                     onlyIf: function () {
-                        return _this._canSeeRoundsCount();
+                        return (_this._canSeeRoundsCount || _this._isForTimeManyInnersType) && _this.model.isInnerWorkout === false;
                     }
                 }
             });
             this._roundsCount.extend({
                 required: {
                     onlyIf: function () {
-                        return _this._canSeeRoundsCount();
+                        return _this._canSeeRoundsCount;
                     }
                 }
             });
             this._exercisesToBeDone.extend({
                 minLength: {
-                    message: "At least one exercise is required"
+                    message: "At least one exercise is required",
+                    onlyIf: function () {
+                        return _this._isWorkoutsContainer === false;
+                    }
                 }
             });
             this.errors = ko.validation.group(this);
+            //  If first time then add default first workout
+            if (model.children.length === 0 && this.model.workoutType === Models.WorkoutType.ForTimeManyInners) {
+                this.addInnerForTimeWorkout();
+            }
         }
         WorkoutViewModelObservable.prototype.getId = function () {
             return this._id();

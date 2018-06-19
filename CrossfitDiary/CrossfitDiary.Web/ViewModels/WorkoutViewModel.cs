@@ -9,7 +9,8 @@ namespace CrossfitDiary.Web.ViewModels
     {
         #region properties
 
-
+        [JsonProperty("children")]
+        public ICollection<WorkoutViewModel> Children { get; set; }
 
         [JsonProperty("exercisesToDoList")]
         public List<ExerciseViewModel> ExercisesToDoList { get; set; }
@@ -43,7 +44,7 @@ namespace CrossfitDiary.Web.ViewModels
         {
             get
             {
-                string displayValue = string.Empty;
+                var displayValue = string.Empty;
                 switch (WorkoutType)
                 {
                     case RoutineComplexType.ForTime:
@@ -59,6 +60,9 @@ namespace CrossfitDiary.Web.ViewModels
                         break;
                     case RoutineComplexType.NotForTime:
                         displayValue = "Not for time";
+                        break;
+                    case RoutineComplexType.ForTimeManyInners:
+                        displayValue = "Complex for time";
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

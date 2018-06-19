@@ -37,12 +37,12 @@
     public workoutToDisplay: KnockoutObservable<WorkoutViewModelObservable>;
     private selectedWorkoutType: KnockoutObservable<BaseKeyValuePairModel<number, string>>;
     private selectedWorkoutTypeId: KnockoutObservable<number>;
-    private _exercises: KnockoutObservableArray<ExerciseViewModel>;
-    private _selectedExercise: KnockoutObservable<ExerciseViewModel>;
 
     private preselectedWorkout: WorkoutViewModel;
+    private _exercises: ExerciseViewModel[];
 
     /* Computeds */
+    private selectedForTimeText: KnockoutComputed<string>;
 
     constructor(public parameters: BasicParameters, preselectedWorkoutObject: object, public preselectedCrossfitterWorkoutId: number|null = null) {
       super();
@@ -60,7 +60,7 @@
       this._logWorkoutController = ko.observable(null);
      
       this.selectedWorkoutType = ko.observable(null);
-      this.workoutToDisplay = ko.observable(this.preselectedWorkout == null ? null : new WorkoutViewModelObservable(this.preselectedWorkout));
+      this.workoutToDisplay = ko.observable(null);
 
       let workout = this.workoutToDisplay();
       this.selectedWorkoutTypeId = ko.observable(workout == null ? null : workout.model.workoutType);
@@ -68,19 +68,15 @@
       if (workout != null) {
         this.handleLogWorkoutController(false);
       }
-      this._exercises = ko.observableArray([]);
 
-      this._selectedExercise = ko.observable(null);
-
-      ko.computed(() => {
-        let exercise = this._selectedExercise();
-        if (!exercise) {
-          return;
+      /* Computed */
+      this.selectedForTimeText = ko.computed(() => {
+        if (this.selectedWorkoutTypeId() == null || this.selectedWorkoutTypeId() !== WorkoutType.ForTimeManyInners) {
+          return "FT";
         }
-        this.workoutToDisplay().addExerciseToList(exercise);
-        this._selectedExercise(null);
+        return "FT*n";
       });
-
+      
       this.selectedWorkoutType.subscribe((selectedWorkoutType: BaseKeyValuePairModel<number, string>) => {
         if ((selectedWorkoutType == undefined || selectedWorkoutType == null) ) {
           this.handleLogWorkoutController(true);
@@ -92,10 +88,12 @@
         this.selectedWorkoutTypeId(this.selectedWorkoutType().id);
         let model = new WorkoutViewModel({
           workoutType: this.selectedWorkoutType().id,
-          exercisesToDoList: []
+          exercisesToDoList: [],
+          children: [],
+          isInnerWorkout:false
         });
 
-        this.workoutToDisplay(new WorkoutViewModelObservable(model));
+        this.workoutToDisplay(new WorkoutViewModelObservable(model, this._exercises));
         this.handleLogWorkoutController(false);
       });
 
@@ -106,6 +104,15 @@
           }
         })
         .then(() => {
+          if (this.preselectedWorkout != null) {
+            this.workoutToDisplay(new WorkoutViewModelObservable(this.preselectedWorkout, this._exercises));
+            this.selectedWorkoutTypeId(this.preselectedWorkout.workoutType);
+          }
+        })
+        .then(() => {
+          if (this._isRepeatMode) {
+            this.handleLogWorkoutController(false);
+          }
           return this._isEditMode ? this.loadPersonLogging() : null;
         });
     }
@@ -127,7 +134,7 @@
       return this._service
         .getExercises()
         .then((exercises: ExerciseViewModel[]) => {
-          this._exercises(exercises);
+          this._exercises = exercises;
         });
     };
 

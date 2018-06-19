@@ -23,7 +23,7 @@
       
       this._plannedDate = ko.observable(hasModel ? new Date(logModel.date) : new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
       this._canSeeTotalRounds = workoutType === WorkoutType.AMRAP;
-      this._canSeeTotalTime = workoutType === WorkoutType.ForTime;
+      this._canSeeTotalTime = workoutType === WorkoutType.ForTime || workoutType === WorkoutType.ForTimeManyInners;
 
 
       this._totalTime = ko.observable(hasModel ? logModel.timePassed : null);

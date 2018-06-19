@@ -30,7 +30,6 @@ var Pages;
     });
     var ManageWorkoutController = (function (_super) {
         __extends(ManageWorkoutController, _super);
-        /* Computeds */
         function ManageWorkoutController(parameters, preselectedWorkoutObject, preselectedCrossfitterWorkoutId) {
             if (preselectedCrossfitterWorkoutId === void 0) { preselectedCrossfitterWorkoutId = null; }
             var _this = _super.call(this) || this;
@@ -47,7 +46,7 @@ var Pages;
                 return _this._service
                     .getExercises()
                     .then(function (exercises) {
-                    _this._exercises(exercises);
+                    _this._exercises = exercises;
                 });
             };
             _this.loadPersonLogging = function () {
@@ -69,21 +68,18 @@ var Pages;
             /* Observables */
             _this._logWorkoutController = ko.observable(null);
             _this.selectedWorkoutType = ko.observable(null);
-            _this.workoutToDisplay = ko.observable(_this.preselectedWorkout == null ? null : new WorkoutViewModelObservable(_this.preselectedWorkout));
+            _this.workoutToDisplay = ko.observable(null);
             var workout = _this.workoutToDisplay();
             _this.selectedWorkoutTypeId = ko.observable(workout == null ? null : workout.model.workoutType);
             if (workout != null) {
                 _this.handleLogWorkoutController(false);
             }
-            _this._exercises = ko.observableArray([]);
-            _this._selectedExercise = ko.observable(null);
-            ko.computed(function () {
-                var exercise = _this._selectedExercise();
-                if (!exercise) {
-                    return;
+            /* Computed */
+            _this.selectedForTimeText = ko.computed(function () {
+                if (_this.selectedWorkoutTypeId() == null || _this.selectedWorkoutTypeId() !== WorkoutType.ForTimeManyInners) {
+                    return "FT";
                 }
-                _this.workoutToDisplay().addExerciseToList(exercise);
-                _this._selectedExercise(null);
+                return "FT*n";
             });
             _this.selectedWorkoutType.subscribe(function (selectedWorkoutType) {
                 if ((selectedWorkoutType == undefined || selectedWorkoutType == null)) {
@@ -96,9 +92,11 @@ var Pages;
                 _this.selectedWorkoutTypeId(_this.selectedWorkoutType().id);
                 var model = new WorkoutViewModel({
                     workoutType: _this.selectedWorkoutType().id,
-                    exercisesToDoList: []
+                    exercisesToDoList: [],
+                    children: [],
+                    isInnerWorkout: false
                 });
-                _this.workoutToDisplay(new WorkoutViewModelObservable(model));
+                _this.workoutToDisplay(new WorkoutViewModelObservable(model, _this._exercises));
                 _this.handleLogWorkoutController(false);
             });
             _this.loadExercises()
@@ -108,6 +106,15 @@ var Pages;
                 }
             })
                 .then(function () {
+                if (_this.preselectedWorkout != null) {
+                    _this.workoutToDisplay(new WorkoutViewModelObservable(_this.preselectedWorkout, _this._exercises));
+                    _this.selectedWorkoutTypeId(_this.preselectedWorkout.workoutType);
+                }
+            })
+                .then(function () {
+                if (_this._isRepeatMode) {
+                    _this.handleLogWorkoutController(false);
+                }
                 return _this._isEditMode ? _this.loadPersonLogging() : null;
             });
             return _this;

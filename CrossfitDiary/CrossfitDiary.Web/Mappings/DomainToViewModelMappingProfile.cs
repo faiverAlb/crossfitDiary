@@ -44,11 +44,11 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName))
                 .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex))
                 .ForMember(x => x.WorkouterId, x => x.MapFrom(y => y.Crossfitter.Id))
-                .ForMember(x => x.HasNewMaximum, x => x.MapFrom(y => y.HasNewMaximum))
                 .ForMember(x => x.TimePassed, x => x.ResolveUsing<TimePassedResolver>());
 
             CreateMap<RoutineComplex, WorkoutViewModel>()
                 .ForMember(x => x.WorkoutType, x => x.MapFrom(y => y.ComplexType))
+                .ForMember(x => x.Children, x => x.MapFrom(y => y.OrderedChildren))
                 .ForMember(x => x.ExercisesToDoList, x => x.MapFrom(y => y.RoutineSimple))
                 .ForMember(x => x.RoundsCount, x => x.MapFrom(y => y.RoundCount))
                 .ForMember(x => x.TimeToWork,

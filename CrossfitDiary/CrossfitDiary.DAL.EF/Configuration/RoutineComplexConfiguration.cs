@@ -11,6 +11,11 @@ namespace CrossfitDiary.DAL.EF.Configuration
             Property(x => x.Id).IsRequired();
             Property(x => x.Title).IsRequired();
             Property(x => x.ComplexType).IsRequired();
+
+            HasOptional(x => x.Parent)
+                .WithMany(x => x.Children)
+                .HasForeignKey(x => x.ParentId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

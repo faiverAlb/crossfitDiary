@@ -89,7 +89,6 @@
     .routine-complex-info {
         color: $gray;
         .general-info-container {
-            border-bottom: 1px dashed $cyan;
             .time-cap-container {
                 .time-cap-icon {
                     color: #a94442;
@@ -129,6 +128,18 @@
             }
         }
     }
+
+    .inner-workouts {
+        .workout:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        .workout {
+            padding: 5px;
+            .inner-workout-header {
+            }
+        }
+    }
     /*.curly-bracket {
         content: ' ';
         background-image: url('../../../img/curly-bracket.svg');
@@ -139,4 +150,10 @@
 }
 .has-error {
     @extend .is-invalid;
+}
+
+.custom-action-menu-dropdown {
+    min-width: auto;
+    padding-top:0;
+    padding-bottom:0;
 }

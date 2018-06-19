@@ -66,10 +66,6 @@ namespace CrossfitDiary.Web.ViewModels
         [JsonProperty("workoutViewModel")]
         public WorkoutViewModel WorkoutViewModel { get; set; }
 
-        [JsonProperty("hasNewMaximum")]
-        public bool HasNewMaximum { get; set; }
-
-
 
         #endregion
     }

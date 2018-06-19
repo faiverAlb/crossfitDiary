@@ -8,11 +8,11 @@
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#" data-bind="click:function(){$parent.model().moveSimpleRoutineUp($index());}, css:{disabled: $index() == 0}"> <i class="fas fa-long-arrow-alt-up text-info"></i> Move up </a>
-                        <a class="dropdown-item" href="#" data-bind="click:function(){$parent.model().moveSimpleRoutineDown($index());}, css:{disabled: $parent.model()._exercisesToBeDone().length -1  == $index()}"><i class="fas fa-long-arrow-alt-down text-info"></i> Move down </a>
-                        <a class="dropdown-item" href="#" data-bind="click:$parent.model().addSimpleRoutineFromToDo"><i class="fas fa-plus fa-sm text-success" aria-hidden="true"></i> Repeat </a>
+                        <a class="dropdown-item" href="#" data-bind="click:function(){$parent.moveSimpleRoutineUp($index());}, css:{disabled: $index() == 0}"> <i class="fas fa-long-arrow-alt-up text-info"></i> Move up </a>
+                        <a class="dropdown-item" href="#" data-bind="click:function(){$parent.moveSimpleRoutineDown($index());}, css:{disabled: $parent._exercisesToBeDone().length -1  == $index()}"><i class="fas fa-long-arrow-alt-down text-info"></i> Move down </a>
+                        <a class="dropdown-item" href="#" data-bind="click:$parent.addSimpleRoutineFromToDo"><i class="fas fa-plus fa-sm text-success" aria-hidden="true"></i> Repeat </a>
                         <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item " href="#" data-bind="click:function(){ $parent.model().removeSimpleRoutineFromToDo($index)}"><i class="fas fa-trash fa-sm text-danger" aria-hidden="true"></i> Remove </a>
+                        <a class="dropdown-item " href="#" data-bind="click:function(){ $parent.removeSimpleRoutineFromToDo($index)}"><i class="fas fa-trash fa-sm text-danger" aria-hidden="true"></i> Remove </a>
                     </div>
                 </div>
             </div>

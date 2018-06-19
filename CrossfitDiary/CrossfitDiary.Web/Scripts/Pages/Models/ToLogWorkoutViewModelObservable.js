@@ -24,7 +24,7 @@ var Models;
             var hasModel = logModel != null;
             this._plannedDate = ko.observable(hasModel ? new Date(logModel.date) : new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
             this._canSeeTotalRounds = workoutType === Models.WorkoutType.AMRAP;
-            this._canSeeTotalTime = workoutType === Models.WorkoutType.ForTime;
+            this._canSeeTotalTime = workoutType === Models.WorkoutType.ForTime || workoutType === Models.WorkoutType.ForTimeManyInners;
             this._totalTime = ko.observable(hasModel ? logModel.timePassed : null);
             this._repsToFinishOnCapTime = ko.observable(hasModel ? logModel.repsToFinishOnCapTime : null);
             this._totalRoundsFinished = ko.observable(hasModel ? logModel.roundsFinished : null)
