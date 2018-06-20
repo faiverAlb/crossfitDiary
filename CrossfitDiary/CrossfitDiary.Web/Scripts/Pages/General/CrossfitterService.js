@@ -24,6 +24,7 @@ var General;
                 return _this.post(_this.pathToApp + "api/createAndLogNewWorkout", model);
             };
             _this.getAllCrossfittersWorkouts = function (userId, exerciseId, page, pageSize) {
+                _this.isDataLoading(true);
                 return _this.get(_this.pathToApp +
                     ("api/getAllCrossfittersWorkouts?userId=" + userId + "&exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize))
                     .then(function (jsonData) {

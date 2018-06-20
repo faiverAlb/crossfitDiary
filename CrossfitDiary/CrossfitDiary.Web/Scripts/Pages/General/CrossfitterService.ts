@@ -16,6 +16,7 @@
     };
 
     public getAllCrossfittersWorkouts = (userId:string,exerciseId?:number, page?: number, pageSize?:number): Q.Promise<ToLogWorkoutViewModel[]> => {
+      this.isDataLoading(true);
       return this.get<ToLogWorkoutViewModel[]>(this.pathToApp +
         `api/getAllCrossfittersWorkouts?userId=${userId}&exerciseId=${exerciseId}&page=${page}&pageSize=${pageSize}`)
         .then((jsonData) => {

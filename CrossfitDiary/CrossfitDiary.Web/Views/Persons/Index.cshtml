@@ -8,6 +8,7 @@
 @using CrossfitDiary.Web.ViewModels
 @using CrossfitDiary.Web.ViewModels.Pride
 @using Links
+@using Newtonsoft.Json
 @using Scripts = System.Web.Optimization.Scripts
 @model PersonDataViewModel
 
@@ -205,7 +206,8 @@
             const model = new Pages.HomePageController({
                 pathToApp: path,
                 userId: '@predefinedUserId',
-                exerciseId: '@exerciseId'
+                exerciseId: '@exerciseId',
+                initialWorkouts:@Html.Raw(JsonConvert.SerializeObject(@Model.InitialWorkouts))
             });
             ko.applyBindings(model);
         });

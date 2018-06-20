@@ -10,7 +10,7 @@
     private _service: CrossfitterService;
     private errorMessager: ErrorMessageViewModel;
 
-    private page: number = 1;
+    private page: number = 2;
     private pageSize: number = 10;
 
     /* Observables */
@@ -18,21 +18,17 @@
 
     /* Computeds */
 
-    constructor(public parameters: { pathToApp: string, userId:string, exerciseId?:number }) {
+    constructor(public parameters: { pathToApp: string, userId:string, exerciseId?:number, initialWorkouts:object[] }) {
       super();
       this.errorMessager = new ErrorMessageViewModel();
       this._service = new CrossfitterService(parameters.pathToApp, this.isDataLoading);
-      this.allWorkouts = ko.observableArray([]);
-      this.hasMoreElements  = ko.observable(false);
+      this.allWorkouts = ko.observableArray(parameters.initialWorkouts.map(x => new ToLogWorkoutViewModel().deserialize(x)));
+      this.hasMoreElements = ko.observable(this.allWorkouts().length === this.pageSize);
 
-      this.loadElements(true);
     }
 
 
-    private loadElements = (isInitialLoading:boolean = false) => {
-      if (isInitialLoading) {
-        this.isDataLoading(true);
-      }
+    private loadElements = () => {
       this._service.getAllCrossfittersWorkouts(this.parameters.userId, this.parameters.exerciseId, this.page, this.pageSize)
         .then((data) => {
           ko.utils.arrayPushAll(this.allWorkouts, data);

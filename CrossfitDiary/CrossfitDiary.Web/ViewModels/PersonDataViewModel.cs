@@ -11,5 +11,8 @@ namespace CrossfitDiary.Web.ViewModels
 
         [JsonProperty("personMaximums")]
         public List<PersonExerciseMaximumViewModel> PersonMaximums { get; set; } = new List<PersonExerciseMaximumViewModel>();
+
+        [JsonProperty("initialWorkouts")]
+        public List<ToLogWorkoutViewModel> InitialWorkouts { get; set; }
     }
 }
