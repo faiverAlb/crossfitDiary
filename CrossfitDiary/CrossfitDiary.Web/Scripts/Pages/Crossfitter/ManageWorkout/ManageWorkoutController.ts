@@ -43,6 +43,7 @@
 
     /* Computeds */
     private selectedForTimeText: KnockoutComputed<string>;
+    private selectedEmomText: KnockoutComputed<string>;
 
     constructor(public parameters: BasicParameters, preselectedWorkoutObject: object, public preselectedCrossfitterWorkoutId: number|null = null) {
       super();
@@ -75,6 +76,14 @@
           return "FT";
         }
         return "FT*n";
+      });
+
+
+      this.selectedEmomText = ko.computed(() => {
+        if (this.selectedWorkoutTypeId() == null || this.selectedWorkoutTypeId() !== WorkoutType.E2MOM) {
+          return "EMOM";
+        }
+        return "E2MOM";
       });
       
       this.selectedWorkoutType.subscribe((selectedWorkoutType: BaseKeyValuePairModel<number, string>) => {

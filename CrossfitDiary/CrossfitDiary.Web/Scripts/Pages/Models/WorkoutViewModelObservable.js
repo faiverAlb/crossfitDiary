@@ -70,7 +70,7 @@ var Models;
             this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime;
             this._canSeeTimeCap = (this.model.workoutType === Models.WorkoutType.ForTime || this.model.workoutType === Models.WorkoutType.ForTimeManyInners) && this.model.isInnerWorkout === false;
             this._isForTimeManyInnersType = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
-            this._canSeeTimeToWork = this.model.workoutType === Models.WorkoutType.AMRAP || this.model.workoutType === Models.WorkoutType.EMOM;
+            this._canSeeTimeToWork = this.model.workoutType === Models.WorkoutType.AMRAP || this.model.workoutType === Models.WorkoutType.EMOM || this.model.workoutType === Models.WorkoutType.E2MOM;
             this._isWorkoutsContainer = this.model.workoutType === Models.WorkoutType.ForTimeManyInners;
             this._canSeeGeneralWorkoutInfo = this._canSeeTimeToWork || this._canSeeRoundsCount || this._isForTimeManyInnersType;
             /* Observables */

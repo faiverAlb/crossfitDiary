@@ -86,7 +86,7 @@
                                         <!-- /ko -->
                                     </span>
                                     <!-- /ko -->
-                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.EMOM)-->
+                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.EMOM) || workoutViewModel.workoutType == @((int)RoutineComplexType.E2MOM)-->
                                     <span>
                                         <i class="far fa-clock"></i>: <span data-bind="text:workoutViewModel.timeToWork"></span>
                                     </span>

@@ -81,6 +81,12 @@ var Pages;
                 }
                 return "FT*n";
             });
+            _this.selectedEmomText = ko.computed(function () {
+                if (_this.selectedWorkoutTypeId() == null || _this.selectedWorkoutTypeId() !== WorkoutType.E2MOM) {
+                    return "EMOM";
+                }
+                return "E2MOM";
+            });
             _this.selectedWorkoutType.subscribe(function (selectedWorkoutType) {
                 if ((selectedWorkoutType == undefined || selectedWorkoutType == null)) {
                     _this.handleLogWorkoutController(true);

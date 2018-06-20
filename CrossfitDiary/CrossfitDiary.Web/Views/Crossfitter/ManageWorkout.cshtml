@@ -25,26 +25,29 @@
                 <div class="col-md-12 add-new-workout-container workout-container">
                     <div class="card ">
                         <div class="card-header ">
-                            <a class="btn btn-secondary text-light  d-inline-block p-0 @(!isDefaultModel?"disabled":null)" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.ForTime || selectedWorkoutTypeId() == Models.WorkoutType.ForTimeManyInners},click: function(){selectWorkoutType(Models.WorkoutType.ForTime)}">
-                                <div class="small-action-link-button">
-                                    <div class="icon-container">
-                                        <i class="fas fa-clock"></i>
-                                    </div>
-                                    <div class="text-container"><span data-bind="text:selectedForTimeText">FT</span> <i class="fas fa-caret-down"></i></div>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu custom-action-menu-dropdown" aria-labelledby="dropdownMenuLink">
-                                <a class="btn btn-secondary text-light  d-inline-block p-0 @(!isDefaultModel?"disabled":null)" href="#" role="button" aria-haspopup="true" aria-expanded="false" data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.ForTimeManyInners},click: function(){selectWorkoutType(Models.WorkoutType.ForTimeManyInners)}">
+                            <div class="dropdown show d-inline">
+                                <a class="btn btn-secondary text-light  d-inline-block p-0 @(!isDefaultModel?"disabled":null)" id="dropdownMenuForTimeLink" href="#" data-target="#navbarContent" aria-controls="navbarContent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.ForTime || selectedWorkoutTypeId() == Models.WorkoutType.ForTimeManyInners},click: function(){selectWorkoutType(Models.WorkoutType.ForTime)}">
                                     <div class="small-action-link-button">
                                         <div class="icon-container">
-                                            <i class="far fa-clock"></i>
+                                            <i class="fas fa-clock"></i>
                                         </div>
-                                        <div class="text-container">FT*n</div>
+                                        <div class="text-container"><span data-bind="text:selectedForTimeText">FT</span> <i class="fas fa-caret-down"></i></div>
                                     </div>
                                 </a>
+                                <div class="dropdown-menu custom-action-menu-dropdown" aria-labelledby="dropdownMenuForTimeLink">
+                                    <a class="btn btn-secondary text-light  d-inline-block p-0 @(!isDefaultModel?"disabled":null)" href="#" role="button"  data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.ForTimeManyInners},click: function(){selectWorkoutType(Models.WorkoutType.ForTimeManyInners)}">
+                                        <div class="small-action-link-button">
+                                            <div class="icon-container">
+                                                <i class="far fa-clock"></i>
+                                            </div>
+                                            <div class="text-container">FT*n</div>
+                                        </div>
+                                    </a>
 
+                                </div>
                             </div>
-                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+
+                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" 
                                data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.AMRAP},click: function(){selectWorkoutType(Models.WorkoutType.AMRAP)}">
                                 <div class="small-action-link-button">
                                     <div class="icon-container">
@@ -53,16 +56,33 @@
                                     <div class="text-container">AMRAP</div>
                                 </div>
                             </a>
-                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
-                               data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.EMOM},click: function(){selectWorkoutType(Models.WorkoutType.EMOM)}">
-                                <div class="small-action-link-button">
-                                    <div class="icon-container">
-                                        <i class="fas fa-retweet"></i>
+                            
+
+                            <div class="dropdown show d-inline">
+                                <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" id="dropdownMenuEmomLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+                                   data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.EMOM || selectedWorkoutTypeId() == Models.WorkoutType.E2MOM},click: function(){selectWorkoutType(Models.WorkoutType.EMOM)}">
+                                    <div class="small-action-link-button">
+                                        <div class="icon-container">
+                                            <i class="fas fa-retweet"></i>
+                                        </div>
+                                        <div class="text-container"><span data-bind="text:selectedEmomText"></span> <i class="fas fa-caret-down"></i></div>
                                     </div>
-                                    <div class="text-container">EMOM</div>
+                                </a>
+                            
+                                <div class="dropdown-menu custom-action-menu-dropdown" aria-labelledby="dropdownMenuEmomLink">
+                                    <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" href="#" role="button" data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.E2MOM},click: function(){selectWorkoutType(Models.WorkoutType.E2MOM)}">
+                                        <div class="small-action-link-button">
+                                            <div class="icon-container">
+                                                <i class="fas fa-retweet"></i>
+                                            </div>
+                                            <div class="text-container">E2MOM</div>
+                                        </div>
+                                    </a>
+
                                 </div>
-                            </a>
-                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+                            </div>
+
+                            <a class="btn btn-secondary text-light d-inline-block p-0 @(!isDefaultModel?"disabled":null)" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                                data-bind="css: {'btn-info':selectedWorkoutTypeId() == Models.WorkoutType.NotForTime},click: function(){selectWorkoutType(Models.WorkoutType.NotForTime)}">
                                 <div class="small-action-link-button">
                                     <div class="icon-container">
