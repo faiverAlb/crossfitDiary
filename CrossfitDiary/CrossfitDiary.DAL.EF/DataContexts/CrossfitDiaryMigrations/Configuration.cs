@@ -82,7 +82,11 @@ namespace CrossfitDiary.DAL.EF.DataContexts.CrossfitDiaryMigrations
             //            ExerciseSeeder.UpdateHeightMeasures(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
             //            context.Commit();
 
-//            ExerciseSeeder.AddSeeds_May_2018_Fourth(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+
+            //            ExerciseSeeder.AddSeeds_May_2018_Fourth(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
+            //            context.Commit();
+
+//            ExerciseSeeder.AddSeeds_June_2018_Fourth(context).ForEach(x => context.Exercises.AddOrUpdate(y => new { y.Abbreviation }, x));
 //            context.Commit();
         }
 
