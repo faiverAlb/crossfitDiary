@@ -8,6 +8,7 @@
 @using CrossfitDiary.Web.ViewModels
 @using CrossfitDiary.Web.ViewModels.Pride
 @using Links
+@using Newtonsoft.Json
 @using Scripts = System.Web.Optimization.Scripts
 @model PersonDataViewModel
 
@@ -85,7 +86,7 @@
                                         <!-- /ko -->
                                     </span>
                                     <!-- /ko -->
-                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.EMOM)-->
+                                    <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.EMOM) || workoutViewModel.workoutType == @((int)RoutineComplexType.E2MOM)-->
                                     <span>
                                         <i class="far fa-clock"></i>: <span data-bind="text:workoutViewModel.timeToWork"></span>
                                     </span>
@@ -205,7 +206,8 @@
             const model = new Pages.HomePageController({
                 pathToApp: path,
                 userId: '@predefinedUserId',
-                exerciseId: '@exerciseId'
+                exerciseId: '@exerciseId',
+                initialWorkouts:@Html.Raw(JsonConvert.SerializeObject(@Model.InitialWorkouts))
             });
             ko.applyBindings(model);
         });

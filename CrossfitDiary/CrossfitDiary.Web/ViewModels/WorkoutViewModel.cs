@@ -57,6 +57,7 @@ namespace CrossfitDiary.Web.ViewModels
                         displayValue = "EMOM";
                         break;
                     case RoutineComplexType.E2MOM:
+                        displayValue = "E2MOM";
                         break;
                     case RoutineComplexType.NotForTime:
                         displayValue = "Not for time";

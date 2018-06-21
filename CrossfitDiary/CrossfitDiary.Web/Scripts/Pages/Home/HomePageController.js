@@ -13,16 +13,16 @@ var Pages;
     var BaseController = General.BaseController;
     var CrossfitterService = General.CrossfitterService;
     var ErrorMessageViewModel = General.ErrorMessageViewModel;
+    var ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
     var HomePageController = (function (_super) {
         __extends(HomePageController, _super);
         /* Computeds */
         function HomePageController(parameters) {
             var _this = _super.call(this) || this;
             _this.parameters = parameters;
-            _this.page = 1;
+            _this.page = 2;
             _this.pageSize = 10;
             _this.loadElements = function () {
-                _this.isDataLoading(true);
                 _this._service.getAllCrossfittersWorkouts(_this.parameters.userId, _this.parameters.exerciseId, _this.page, _this.pageSize)
                     .then(function (data) {
                     ko.utils.arrayPushAll(_this.allWorkouts, data);
@@ -63,9 +63,8 @@ var Pages;
             };
             _this.errorMessager = new ErrorMessageViewModel();
             _this._service = new CrossfitterService(parameters.pathToApp, _this.isDataLoading);
-            _this.allWorkouts = ko.observableArray([]);
-            _this.hasMoreElements = ko.observable(false);
-            _this.loadElements();
+            _this.allWorkouts = ko.observableArray(parameters.initialWorkouts.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); }));
+            _this.hasMoreElements = ko.observable(_this.allWorkouts().length === _this.pageSize);
             return _this;
         }
         return HomePageController;
