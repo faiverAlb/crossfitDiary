@@ -21,7 +21,7 @@
         <div class="form-group my-1 col-lg-3" data-bind="validationElement: _exerciseMeasureType.measureValue">
             <label class="sr-only" data-bind="attr:{for:'measure_input_id_' + $index()}"></label>
             <div class="input-group mx-1 pr-1">
-                <input type="number" pattern="[\d\.]*" step="0.01" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: _exerciseMeasureType.measureDesciption, id:'measure_input_id_' + $index()}">
+                <input type="text" pattern="\d*" step="0.01" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: _exerciseMeasureType.measureDesciption, id:'measure_input_id_' + $index()}">
                 <span class="input-group-append">
                     <span class="input-group-text" data-bind="text:_exerciseMeasureType.shortMeasureDescription()"></span>
                 </span>
