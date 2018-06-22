@@ -12,7 +12,7 @@
                                 <i class="fas fa-clock fa-lg time-cap-icon"></i>
                             </div>
                         </div>
-                        <input type="text" class="form-control " id="timeCapInput" placeholder="Time Cap" data-bind="validationElement: _timeCap, inputmask:{value: _timeCap, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" class="form-control " id="timeCapInput" placeholder="Time Cap" data-bind="validationElement: _timeCap, inputmask:{value: _timeCap, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="far fa-clock"></i></div>
                         </div>
-                        <input type="text" class="form-control" id="timeInput" placeholder="Time to work" data-bind="validationElement: _timeToWork, inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" class="form-control" id="timeInput" placeholder="Time to work" data-bind="validationElement: _timeToWork, inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fas fa-hashtag"></i></div>
                     </div>
-                    <input type="number" min="1" class="form-control " id="roundsInput" placeholder="Rounds count" data-bind="validationElement: _roundsCount, value: _roundsCount, valueUpdate: 'afterkeydown'">
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" min="1" class="form-control " id="roundsInput" placeholder="Rounds count" data-bind="validationElement: _roundsCount, value: _roundsCount, valueUpdate: 'afterkeydown'">
                 </div>
             </div>
         </div>
