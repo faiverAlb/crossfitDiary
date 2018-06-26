@@ -39,6 +39,12 @@ namespace CrossfitDiary.Web.ViewModels.Pride
         /// </summary>
         [JsonProperty("maximumWeight")]
         public string MaximumWeight { get; set; }
+        
+        /// <summary>
+        ///     Gets or sets the maximum weight.
+        /// </summary>
+        [JsonProperty("maximumWeightValue")]
+        public decimal? MaximumWeightValue { get; set; }
 
         /// <summary>
         ///     Gets or sets the person name.
