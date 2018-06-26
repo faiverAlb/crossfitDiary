@@ -104,7 +104,7 @@
           isInnerWorkout:false
         });
 
-        this.workoutToDisplay(new WorkoutViewModelObservable(model, this._exercises));
+        this.workoutToDisplay(new WorkoutViewModelObservable(model, this._exercises, this._personMaximums));
         this.handleLogWorkoutController(false);
       });
 
@@ -123,7 +123,7 @@
         })
         .then(() => {
           if (this.preselectedWorkout != null) {
-            this.workoutToDisplay(new WorkoutViewModelObservable(this.preselectedWorkout, this._exercises));
+            this.workoutToDisplay(new WorkoutViewModelObservable(this.preselectedWorkout, this._exercises, this._personMaximums));
             this.selectedWorkoutTypeId(this.preselectedWorkout.workoutType);
           }
         })

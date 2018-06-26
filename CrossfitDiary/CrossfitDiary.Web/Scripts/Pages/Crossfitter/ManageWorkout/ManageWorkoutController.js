@@ -102,7 +102,7 @@ var Pages;
                     children: [],
                     isInnerWorkout: false
                 });
-                _this.workoutToDisplay(new WorkoutViewModelObservable(model, _this._exercises));
+                _this.workoutToDisplay(new WorkoutViewModelObservable(model, _this._exercises, _this._personMaximums));
                 _this.handleLogWorkoutController(false);
             });
             _this.loadExercises()
@@ -120,7 +120,7 @@ var Pages;
             })
                 .then(function () {
                 if (_this.preselectedWorkout != null) {
-                    _this.workoutToDisplay(new WorkoutViewModelObservable(_this.preselectedWorkout, _this._exercises));
+                    _this.workoutToDisplay(new WorkoutViewModelObservable(_this.preselectedWorkout, _this._exercises, _this._personMaximums));
                     _this.selectedWorkoutTypeId(_this.preselectedWorkout.workoutType);
                 }
             })

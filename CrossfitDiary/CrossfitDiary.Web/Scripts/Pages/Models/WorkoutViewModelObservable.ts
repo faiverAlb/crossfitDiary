@@ -28,7 +28,7 @@
 
 
 
-    constructor(public model: WorkoutViewModel, public exercises: ExerciseViewModel[]) {
+    constructor(public model: WorkoutViewModel, public exercises: ExerciseViewModel[], public personMaximums: PersonExerciseRecord[]) {
       /* Сivilians */
       this._workoutTypeTitle = WorkoutType[model.workoutType];
       this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map((item) => {
@@ -37,7 +37,7 @@
 
       this._innerWorkouts = ko.observableArray(model.children.map((workout) => {
         workout.isInnerWorkout = true;
-        return new WorkoutViewModelObservable(workout, exercises);
+        return new WorkoutViewModelObservable(workout, exercises, personMaximums);
       }));
 
 
@@ -170,7 +170,7 @@
         exercisesToDoList: [],
         children: [],
         isInnerWorkout: true
-      }), this.exercises));
+      }), this.exercises, this.personMaximums));
 
     }
 
