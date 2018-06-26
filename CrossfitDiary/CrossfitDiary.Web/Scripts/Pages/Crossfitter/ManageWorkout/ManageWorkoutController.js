@@ -107,6 +107,13 @@ var Pages;
             });
             _this.loadExercises()
                 .then(function () {
+                return _this._service
+                    .getPersonMaximums()
+                    .then(function (personMaximums) {
+                    _this._personMaximums = personMaximums;
+                });
+            })
+                .then(function () {
                 if (_this._isEditMode === false && _this._isRepeatMode === false) {
                     _this.selectedWorkoutType(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]));
                 }

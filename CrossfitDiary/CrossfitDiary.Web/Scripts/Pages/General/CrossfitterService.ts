@@ -33,6 +33,15 @@
         .finally(() => { this.isDataLoading(false); });
     };
 
+    public getPersonMaximums = (): Q.Promise<PersonExerciseRecord[]> => {
+      this.isDataLoading(true);
+      return this.get<PersonExerciseRecord[]>(this.pathToApp + "api/getPersonMaximums")
+        .then((jsonData) => {
+          return jsonData.map(x => new PersonExerciseRecord().deserialize(x));
+        })
+        .finally(() => { this.isDataLoading(false); });
+    };
+
     public getStatisticalExercises = (): Q.Promise<ExerciseViewModel[]> => {
       this.isDataLoading(true);
       return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getStatisticalExercises")

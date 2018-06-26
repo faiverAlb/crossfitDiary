@@ -9,6 +9,7 @@
   import WorkoutViewModelObservable = Models.WorkoutViewModelObservable;
   import BaseKeyValuePairModel = General.BaseKeyValuePairModel;
   import WorkoutType = Models.WorkoutType;
+  import PersonExerciseRecord = Models.PersonExerciseRecord;
 
   declare var ko;
   ko.validation.init({
@@ -40,6 +41,7 @@
 
     private preselectedWorkout: WorkoutViewModel;
     private _exercises: ExerciseViewModel[];
+    private _personMaximums: PersonExerciseRecord[];
 
     /* Computeds */
     private selectedForTimeText: KnockoutComputed<string>;
@@ -107,6 +109,13 @@
       });
 
       this.loadExercises()
+        .then(() => {
+          return this._service
+            .getPersonMaximums()
+            .then((personMaximums: PersonExerciseRecord[]) => {
+              this._personMaximums = personMaximums;
+            });
+        })
         .then(() => {
           if (this._isEditMode === false && this._isRepeatMode === false) {
             this.selectedWorkoutType(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]));

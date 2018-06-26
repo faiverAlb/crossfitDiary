@@ -39,6 +39,14 @@ var General;
                 })
                     .finally(function () { _this.isDataLoading(false); });
             };
+            _this.getPersonMaximums = function () {
+                _this.isDataLoading(true);
+                return _this.get(_this.pathToApp + "api/getPersonMaximums")
+                    .then(function (jsonData) {
+                    return jsonData.map(function (x) { return new PersonExerciseRecord().deserialize(x); });
+                })
+                    .finally(function () { _this.isDataLoading(false); });
+            };
             _this.getStatisticalExercises = function () {
                 _this.isDataLoading(true);
                 return _this.get(_this.pathToApp + "api/getStatisticalExercises")
