@@ -27,10 +27,12 @@
                 <span class="input-group-append">
                     <span class="input-group-text" data-bind="text:_exerciseMeasureType.shortMeasureDescription()"></span>
                 </span>
+                <!-- ko if: $parent._canSeePersonalRecord -->
                 <span class="w-100"></span>
                 <small id="prPercentHelpBlock" class="form-text text-muted">
                     30% of Personal Record
                 </small>
+                <!-- /ko -->
             </div>
         </div>
         <!-- /ko -->
