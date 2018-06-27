@@ -102,10 +102,17 @@ var Pages;
                     children: [],
                     isInnerWorkout: false
                 });
-                _this.workoutToDisplay(new WorkoutViewModelObservable(model, _this._exercises));
+                _this.workoutToDisplay(new WorkoutViewModelObservable(model, _this._exercises, _this._personMaximums));
                 _this.handleLogWorkoutController(false);
             });
             _this.loadExercises()
+                .then(function () {
+                return _this._service
+                    .getPersonMaximums()
+                    .then(function (personMaximums) {
+                    _this._personMaximums = personMaximums;
+                });
+            })
                 .then(function () {
                 if (_this._isEditMode === false && _this._isRepeatMode === false) {
                     _this.selectedWorkoutType(new BaseKeyValuePairModel(WorkoutType.ForTime, WorkoutType[WorkoutType.ForTime]));
@@ -113,7 +120,7 @@ var Pages;
             })
                 .then(function () {
                 if (_this.preselectedWorkout != null) {
-                    _this.workoutToDisplay(new WorkoutViewModelObservable(_this.preselectedWorkout, _this._exercises));
+                    _this.workoutToDisplay(new WorkoutViewModelObservable(_this.preselectedWorkout, _this._exercises, _this._personMaximums));
                     _this.selectedWorkoutTypeId(_this.preselectedWorkout.workoutType);
                 }
             })

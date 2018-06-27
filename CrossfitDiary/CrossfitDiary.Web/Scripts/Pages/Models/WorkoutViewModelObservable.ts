@@ -28,16 +28,16 @@
 
 
 
-    constructor(public model: WorkoutViewModel, public exercises: ExerciseViewModel[]) {
+    constructor(public model: WorkoutViewModel, public exercises: ExerciseViewModel[], public personMaximums: PersonExerciseRecord[]) {
       /* Сivilians */
       this._workoutTypeTitle = WorkoutType[model.workoutType];
       this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map((item) => {
-        return new ExerciseViewModelObservable(item);
+        return new ExerciseViewModelObservable(item, personMaximums);
       }));
 
       this._innerWorkouts = ko.observableArray(model.children.map((workout) => {
         workout.isInnerWorkout = true;
-        return new WorkoutViewModelObservable(workout, exercises);
+        return new WorkoutViewModelObservable(workout, exercises, personMaximums);
       }));
 
 
@@ -113,7 +113,7 @@
     }
 
     public addExerciseToList = (exerciseViewModel: ExerciseViewModel) => {
-      this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel));
+      this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel, this.personMaximums));
     }
 
     public removeSimpleRoutineFromToDo = (index:KnockoutObservable<number>) => {
@@ -121,7 +121,7 @@
     }
 
     public addSimpleRoutineFromToDo = (exerciseViewModel: ExerciseViewModelObservable) => {
-      this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel.model));
+      this._exercisesToBeDone.push(new ExerciseViewModelObservable(exerciseViewModel.model, this.personMaximums));
     }
 
     public moveSimpleRoutineUp = (index: number) => {
@@ -170,7 +170,7 @@
         exercisesToDoList: [],
         children: [],
         isInnerWorkout: true
-      }), this.exercises));
+      }), this.exercises, this.personMaximums));
 
     }
 

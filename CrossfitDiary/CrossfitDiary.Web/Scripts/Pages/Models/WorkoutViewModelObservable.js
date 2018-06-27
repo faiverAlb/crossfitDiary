@@ -1,18 +1,19 @@
 var Models;
 (function (Models) {
     var WorkoutViewModelObservable = (function () {
-        function WorkoutViewModelObservable(model, exercises) {
+        function WorkoutViewModelObservable(model, exercises, personMaximums) {
             var _this = this;
             this.model = model;
             this.exercises = exercises;
+            this.personMaximums = personMaximums;
             this.addExerciseToList = function (exerciseViewModel) {
-                _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel));
+                _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel, _this.personMaximums));
             };
             this.removeSimpleRoutineFromToDo = function (index) {
                 _this._exercisesToBeDone.splice(index(), 1);
             };
             this.addSimpleRoutineFromToDo = function (exerciseViewModel) {
-                _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel.model));
+                _this._exercisesToBeDone.push(new Models.ExerciseViewModelObservable(exerciseViewModel.model, _this.personMaximums));
             };
             this.moveSimpleRoutineUp = function (index) {
                 if (index > 0) {
@@ -50,7 +51,7 @@ var Models;
                     exercisesToDoList: [],
                     children: [],
                     isInnerWorkout: true
-                }), _this.exercises));
+                }), _this.exercises, _this.personMaximums));
             };
             this.addInnerWorkout = function () {
                 _this.addInnerForTimeWorkout();
@@ -61,11 +62,11 @@ var Models;
             /* Сivilians */
             this._workoutTypeTitle = Models.WorkoutType[model.workoutType];
             this._exercisesToBeDone = ko.observableArray(model.exercisesToDoList.map(function (item) {
-                return new Models.ExerciseViewModelObservable(item);
+                return new Models.ExerciseViewModelObservable(item, personMaximums);
             }));
             this._innerWorkouts = ko.observableArray(model.children.map(function (workout) {
                 workout.isInnerWorkout = true;
-                return new WorkoutViewModelObservable(workout, exercises);
+                return new WorkoutViewModelObservable(workout, exercises, personMaximums);
             }));
             this._canSeeRoundsCount = this.model.workoutType === Models.WorkoutType.ForTime;
             this._canSeeTimeCap = (this.model.workoutType === Models.WorkoutType.ForTime || this.model.workoutType === Models.WorkoutType.ForTimeManyInners) && this.model.isInnerWorkout === false;
