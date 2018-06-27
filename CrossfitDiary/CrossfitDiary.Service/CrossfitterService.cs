@@ -277,6 +277,28 @@ namespace CrossfitDiary.Service
             return resultMaximums;
         }
 
+        public List<PersonMaximum> GetPersonMaximumsWithAllExercises(string currentUserId)
+        {
+            IEnumerable<CrossfitterWorkout> crossfiterWorkouts = _crossfitterWorkoutRepository
+                .GetMany(x => x.Crossfitter.Id == currentUserId 
+                              && x.RoutineComplex.RoutineSimple.Any(y => y.Weight.HasValue &&  y.Exercise.ExerciseMeasures.Any(z => z.ExerciseMeasureType.MeasureType == MeasureType.Weight))).ToList();
+            IEnumerable<int> exerciseIds = crossfiterWorkouts.SelectMany(x => x.RoutineComplex.RoutineSimple)
+                .Select(x => x.ExerciseId)
+                .Distinct()
+                .ToList();
+            var personMaximums = new List<PersonMaximum>();
+            foreach (int exerciseId in exerciseIds)
+            {
+                PersonMaximum maximum = GetPersonMaximumForExercise(currentUserId, exerciseId);
+                if (maximum?.MaximumWeight != null && maximum.MaximumWeight != 0)
+                {
+                    personMaximums.Add(maximum);
+                }
+
+            }
+            return personMaximums;
+        }
+
 
         /// <summary>
         ///     Returns all crossfitters workouts.

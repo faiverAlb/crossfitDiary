@@ -47,7 +47,7 @@ namespace CrossfitDiary.Web.Api
         [Route("getPersonMaximums")]
         public IHttpActionResult GetPersonMaximums()
         {
-            List<PersonMaximum> maximums = _crossfitterService.GetAllPersonMaximumForExercise(17, User.Identity.GetUserId());
+            List<PersonMaximum> maximums = _crossfitterService.GetPersonMaximumsWithAllExercises(User.Identity.GetUserId());
             return Ok(maximums.Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)));
         }
     }
