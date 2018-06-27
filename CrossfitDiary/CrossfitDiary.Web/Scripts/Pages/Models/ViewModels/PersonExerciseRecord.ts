@@ -8,16 +8,20 @@
     workoutTitle: string;
     positionBetweenOthers: number;
     isItMe: boolean;
+    exerciseId: number;
+    maximumWeightValue?: number;
   }
 
   export class PersonExerciseRecord implements Serializable<PersonExerciseRecord>{
 
     personName: string;
     maximumWeight: string;
+    maximumWeightValue?: number;
     date: string;
     workoutTitle: string;
     positionBetweenOthers: number;
     isItMe: boolean;
+    exerciseId: number;
 
     constructor(params?:IPersonExerciseRecord) {
       if (params == null) {
@@ -29,6 +33,8 @@
       this.workoutTitle = params.workoutTitle;
       this.positionBetweenOthers = params.positionBetweenOthers;
       this.isItMe = params.isItMe;
+      this.exerciseId = params.exerciseId;
+      this.maximumWeightValue = params.maximumWeightValue;
     }
 
     deserialize(input): PersonExerciseRecord {
@@ -42,7 +48,9 @@
         date: input.date,
         workoutTitle: input.workoutTitle,
         positionBetweenOthers: input.positionBetweenOthers,
-        isItMe: input.isItMe
+        isItMe: input.isItMe,
+        exerciseId: input.exerciseId,
+        maximumWeightValue: input.maximumWeightValue,
       });
     }
 

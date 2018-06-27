@@ -11,6 +11,8 @@ var Models;
             this.workoutTitle = params.workoutTitle;
             this.positionBetweenOthers = params.positionBetweenOthers;
             this.isItMe = params.isItMe;
+            this.exerciseId = params.exerciseId;
+            this.maximumWeightValue = params.maximumWeightValue;
         }
         PersonExerciseRecord.prototype.deserialize = function (input) {
             if (input == null) {
@@ -22,7 +24,9 @@ var Models;
                 date: input.date,
                 workoutTitle: input.workoutTitle,
                 positionBetweenOthers: input.positionBetweenOthers,
-                isItMe: input.isItMe
+                isItMe: input.isItMe,
+                exerciseId: input.exerciseId,
+                maximumWeightValue: input.maximumWeightValue,
             });
         };
         return PersonExerciseRecord;

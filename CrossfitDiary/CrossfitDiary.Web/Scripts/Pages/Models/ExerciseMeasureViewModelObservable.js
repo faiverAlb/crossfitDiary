@@ -1,7 +1,7 @@
 var Models;
 (function (Models) {
     var ExerciseMeasureViewModelObservable = (function () {
-        function ExerciseMeasureViewModelObservable(model) {
+        function ExerciseMeasureViewModelObservable(model, personMaximumWeight) {
             var _this = this;
             this.model = model;
             this.toPlainObject = function () {
@@ -10,7 +10,7 @@ var Models;
                 });
                 return plainObject;
             };
-            this._exerciseMeasureType = new Models.ExerciseMeasureTypeViewModelObservable(model.exerciseMeasureType);
+            this._exerciseMeasureType = new Models.ExerciseMeasureTypeViewModelObservable(model.exerciseMeasureType, personMaximumWeight);
         }
         return ExerciseMeasureViewModelObservable;
     }());
