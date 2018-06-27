@@ -4,8 +4,9 @@
     measureValue: KnockoutObservable<string>;
     measureDesciption: KnockoutObservable<string>;
     shortMeasureDescription: KnockoutObservable<string>;
+    _canSeePersonalRecord: boolean;
 
-    constructor(public model: ExerciseMeasureTypeViewModel) {
+    constructor(public model: ExerciseMeasureTypeViewModel, personMaximumWeight?:number) {
       this.measureType = ko.observable(model.measureType);
       this.measureValue = ko.observable();
       this.measureValue.extend({ required: model.isRequired });
@@ -15,6 +16,7 @@
       }
       this.measureDesciption = ko.observable(model.description);
       this.shortMeasureDescription = ko.observable(model.shortMeasureDescription);
+      this._canSeePersonalRecord = personMaximumWeight != null;
     }
 
     public toPlainObject = (): ExerciseMeasureTypeViewModel => {

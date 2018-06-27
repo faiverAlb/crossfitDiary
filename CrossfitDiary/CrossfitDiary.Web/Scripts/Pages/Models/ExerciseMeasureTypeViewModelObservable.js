@@ -1,7 +1,7 @@
 var Models;
 (function (Models) {
     var ExerciseMeasureTypeViewModelObservable = (function () {
-        function ExerciseMeasureTypeViewModelObservable(model) {
+        function ExerciseMeasureTypeViewModelObservable(model, personMaximumWeight) {
             var _this = this;
             this.model = model;
             this.toPlainObject = function () {
@@ -22,6 +22,7 @@ var Models;
             }
             this.measureDesciption = ko.observable(model.description);
             this.shortMeasureDescription = ko.observable(model.shortMeasureDescription);
+            this._canSeePersonalRecord = personMaximumWeight != null;
         }
         return ExerciseMeasureTypeViewModelObservable;
     }());

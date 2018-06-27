@@ -4,7 +4,14 @@ var Models;
         function ExerciseViewModelObservable(model, personMaximums) {
             var _this = this;
             this.model = model;
-            this.personMaximums = personMaximums;
+            this.getPersonMaximum = function (exerciseId, personMaximums) {
+                for (var i = 0; i < personMaximums.length; i++) {
+                    if (personMaximums[i].exerciseId === exerciseId) {
+                        return personMaximums[i].maximumWeightValue;
+                    }
+                }
+                return null;
+            };
             this.toPlainObject = function () {
                 var plainExercise = new Models.ExerciseViewModel({
                     id: _this.model.id,
@@ -14,8 +21,8 @@ var Models;
                 });
                 return plainExercise;
             };
-            this._exerciseMeasures = model.exerciseMeasures.map(function (item) { return new Models.ExerciseMeasureViewModelObservable(item); });
-            this._canSeePersonalRecord = true;
+            var personMaximumWeight = this.getPersonMaximum(model.id, personMaximums);
+            this._exerciseMeasures = model.exerciseMeasures.map(function (item) { return new Models.ExerciseMeasureViewModelObservable(item, personMaximumWeight); });
         }
         return ExerciseViewModelObservable;
     }());
