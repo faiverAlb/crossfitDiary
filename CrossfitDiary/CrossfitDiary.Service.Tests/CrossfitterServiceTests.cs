@@ -33,6 +33,17 @@ namespace CrossfitDiary.Service.Tests
                 Id = 123
             };
         }
+        private RoutineComplex GetRoutineComplexWithChilds()
+        {
+            return new RoutineComplex()
+            {
+                CreatedBy = new ApplicationUser(),
+                ComplexType = RoutineComplexType.ForTimeManyInners,
+                RoutineSimple =new List<RoutineSimple>(){},
+                Children = new List<RoutineComplex>() { GetRoutineComplex()},
+                Id = 123
+            };
+        }
 
         private WorkoutsMatchDispatcher GetWorkoutsMatchDispatcher()
         {
@@ -243,7 +254,74 @@ namespace CrossfitDiary.Service.Tests
             // Assert
             Assert.NotZero(actual);
         }
-        
+
+        [Test]
+        public void FindDefaultOrExistingWorkout_RepositoryContainsRoutineWithSameChildCount_MethodReturnsNonZeroId()
+        {
+            // Arrange
+
+            // Act
+            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { GetRoutineComplexWithChilds() }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+
+            // Assert
+            Assert.NotZero(actual);
+        }
+        [Test]
+        public void FindDefaultOrExistingWorkout_RepositoryContainsRoutineWithDifferentChildCount_MethodReturnsZeroId()
+        {
+            // Arrange
+            RoutineComplex routineComplexWithChilds = GetRoutineComplexWithChilds();
+            routineComplexWithChilds.Children.Add(GetRoutineComplex());
+            // Act
+
+            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+
+            // Assert
+            Assert.AreEqual(0, actual);
+        }
+
+        [Test]
+        public void FindDefaultOrExistingWorkout_RepositoryContainsChildrentWithDifferentExercisesCount_MethodReturnsZeroId()
+        {
+            // Arrange
+            RoutineComplex routineComplexWithChilds = GetRoutineComplexWithChilds();
+            routineComplexWithChilds.Children.ElementAt(0).RoutineSimple.Add(new RoutineSimple() { Weight = 0, Count = 1, Id = 5, ExerciseId = 1 });
+            // Act
+
+            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+
+            // Assert
+            Assert.AreEqual(0, actual);
+        }
+        [Test]
+        public void FindDefaultOrExistingWorkout_RepositoryContainsChildrentWithDifferentExercisesCalories_MethodReturnsZeroId()
+        {
+            // Arrange
+            RoutineComplex routineComplexWithChilds = GetRoutineComplexWithChilds();
+            routineComplexWithChilds.Children.ElementAt(0).RoutineSimple.ElementAt(0).Calories++;
+            // Act
+
+            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+
+            // Assert
+            Assert.AreEqual(0, actual);
+        }
+
+        [Test]
+        public void FindDefaultOrExistingWorkout_RepositoryContainsChildrentWithDifferentType_MethodReturnsZeroId()
+        {
+            // Arrange
+            RoutineComplex routineComplexWithChilds = GetRoutineComplexWithChilds();
+            routineComplexWithChilds.Children.ElementAt(0).ComplexType = RoutineComplexType.ForTime;
+            // Act
+
+            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+
+            // Assert
+            Assert.AreEqual(0, actual);
+        }
+
+
         [Test]
         public void MarkWorkoutWithWeightRecord_PersonMaximumIsNull_NRE_NOT_Called()
         {
@@ -347,6 +425,8 @@ namespace CrossfitDiary.Service.Tests
             //  Assert
             Assert.That(crossfitterWorkouts, Has.One.Matches<CrossfitterWorkout>(x => x.RoutineComplex.RoutineSimple.Count(y => y.IsNewWeightMaximum) != 0));
         }
+
+
 
     }
 }

@@ -30,11 +30,6 @@ namespace CrossfitDiary.Service.WorkoutMatchers
                 return false;
             }
 
-            if (firstRoutineComplex.RoutineSimple.Count != secondRoutineComplex.RoutineSimple.Count)
-            {
-                return false;
-            }
-
             return true;
 
         }
