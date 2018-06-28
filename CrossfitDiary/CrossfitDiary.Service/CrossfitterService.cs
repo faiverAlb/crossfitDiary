@@ -13,13 +13,19 @@ namespace CrossfitDiary.Service
         private readonly IUnitOfWork _unitOfWork;
         private readonly IExerciseRepository _exerciseRepository;
         private readonly ICrossfitterWorkoutRepository _crossfitterWorkoutRepository;
+        private readonly WorkoutsMatchDispatcher _workoutsMatchDispatcher;
 
-        public CrossfitterService(IRoutineComplexRepository routineComplexRepository, IUnitOfWork unitOfWork, IExerciseRepository exerciseRepository, ICrossfitterWorkoutRepository crossfitterWorkoutRepository)
+        public CrossfitterService(IRoutineComplexRepository routineComplexRepository
+            , IUnitOfWork unitOfWork
+            , IExerciseRepository exerciseRepository
+            , ICrossfitterWorkoutRepository crossfitterWorkoutRepository
+            , WorkoutsMatchDispatcher workoutsMatchDispatcher)
         {
             _routineComplexRepository = routineComplexRepository;
             _unitOfWork = unitOfWork;
             _exerciseRepository = exerciseRepository;
             _crossfitterWorkoutRepository = crossfitterWorkoutRepository;
+            _workoutsMatchDispatcher = workoutsMatchDispatcher;
         }
 
         public int CreateWorkout(RoutineComplex routineComplexToSave)
@@ -53,122 +59,16 @@ namespace CrossfitDiary.Service
             List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetAll().ToList();
             foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
             {
-                if (IsWorkoutsMatch(existingRoutineComplex,routineComplexToSave) == false)
+                if (_workoutsMatchDispatcher.IsWorkoutsMatch(existingRoutineComplex, routineComplexToSave) == false)
                 {
                     continue;
                 }
-
                 return existingRoutineComplex.Id;
             }
 
             return 0;
         }
 
-        private bool IsWorkoutsMatch(RoutineComplex existingRoutineComplex, RoutineComplex routineComplexToSave)
-        {
-            if (IsTypeMatch(routineComplexToSave, existingRoutineComplex) == false)
-            {
-                return false;
-            }
-
-            if (IsChildrenWorkoutParamsMatch(routineComplexToSave, existingRoutineComplex) == false)
-            {
-                return false;
-            }
-
-            if (IsExercisesMatch(routineComplexToSave, existingRoutineComplex) == false)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool IsChildrenWorkoutParamsMatch(RoutineComplex routineComplexToSave, RoutineComplex existingRoutineComplex)
-        {
-            if (routineComplexToSave.Children.Count != existingRoutineComplex.Children.Count)
-            {
-                return false;
-            }
-
-            List<RoutineComplex> existingChilds = existingRoutineComplex.OrderedChildren.ToList();
-            List<RoutineComplex> toSaveChilds = routineComplexToSave.Children.ToList();
-
-            for (var i = 0; i < existingChilds.Count; i++)
-            {
-                RoutineComplex existingChild = existingChilds[i];
-                RoutineComplex routineComplex = toSaveChilds[i];
-
-                if (IsWorkoutsMatch(existingChild,routineComplex) == false)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        ///     Checks if exercises match
-        /// </summary>
-        /// <param name="routineComplexToSave"></param>
-        /// <param name="existingRoutineComplex"></param>
-        /// <returns></returns>
-        private bool IsExercisesMatch(RoutineComplex routineComplexToSave, RoutineComplex existingRoutineComplex)
-        {
-            for (int i = 0; i < routineComplexToSave.RoutineSimple.Count; i++)
-            {
-                RoutineSimple routineSimpleToSave = routineComplexToSave.RoutineSimple.ToList()[i];
-                RoutineSimple existingSimpleRoutine = existingRoutineComplex.RoutineSimple.ToList()[i];
-                if (routineSimpleToSave.ExerciseId != existingSimpleRoutine.ExerciseId
-                    || routineSimpleToSave.Count != existingSimpleRoutine.Count
-                    || routineSimpleToSave.Distance != existingSimpleRoutine.Distance
-                    || routineSimpleToSave.Weight != existingSimpleRoutine.Weight
-                    || routineSimpleToSave.Calories != existingSimpleRoutine.Calories
-                    || routineSimpleToSave.Centimeters != existingSimpleRoutine.Centimeters)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-
-        /// <summary>
-        ///     Checks if  type of workouts match
-        /// </summary>
-        /// <param name="routineComplexToSave"></param>
-        /// <param name="existingRoutineComplex"></param>
-        /// <returns></returns>
-        private bool IsTypeMatch(RoutineComplex routineComplexToSave, RoutineComplex existingRoutineComplex)
-        {
-            if (routineComplexToSave.ComplexType != existingRoutineComplex.ComplexType)
-            {
-                return false;
-            }
-
-            if (routineComplexToSave.RoundCount != existingRoutineComplex.RoundCount)
-            {
-                return false;
-            }
-
-            if (routineComplexToSave.TimeToWork != existingRoutineComplex.TimeToWork)
-            {
-                return false;
-            }
-
-            if (routineComplexToSave.TimeCap != existingRoutineComplex.TimeCap)
-            {
-                return false;
-            }
-
-            if (routineComplexToSave.RoutineSimple.Count != existingRoutineComplex.RoutineSimple.Count)
-            {
-                return false;
-            }
-
-            return true;
-        }
 
         /// <summary>
         /// Log workout: delete first old if <param name="isEditMode">equals true</param> otherwise just log
