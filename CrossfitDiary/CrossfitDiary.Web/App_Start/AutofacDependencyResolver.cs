@@ -11,6 +11,7 @@ using CrossfitDiary.DAL.EF.Repositories;
 using CrossfitDiary.Model;
 using CrossfitDiary.Service;
 using CrossfitDiary.Service.Interfaces;
+using CrossfitDiary.Service.WorkoutMatchers;
 using CrossfitDiary.Web.Configuration;
 using CrossfitDiary.Web.Mappings;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -34,9 +35,7 @@ namespace CrossfitDiary.Web
             var builder = new ContainerBuilder();
 
             builder.RegisterType<CrossfitDiaryDbContext>().AsSelf();//.SingleInstance();
-//            builder.RegisterType<UserStore<ApplicationUser>>().AsImplementedInterfaces();//.InstancePerRequest();
             builder.Register(c => new UserStore<ApplicationUser>(c.Resolve<CrossfitDiaryDbContext>())).AsImplementedInterfaces();//.InstancePerRequest();
-//            builder.RegisterType<UserStore<ApplicationUser>>().As<IUserStore<ApplicationUser>>();
 
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
@@ -48,6 +47,7 @@ namespace CrossfitDiary.Web
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
 
+            RegisterMatchers(builder);
 
             //Repositories
             builder.RegisterAssemblyTypes(typeof (ExerciseRepository).Assembly)
@@ -68,6 +68,15 @@ namespace CrossfitDiary.Web
             DependencyResolver.SetResolver(new Autofac.Integration.Mvc.AutofacDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container); //Set the WebApi DependencyResolver
 
+        }
+
+        private static void RegisterMatchers(ContainerBuilder builder)
+        {
+            builder.RegisterType<WorkoutsMatchDispatcher>().AsSelf();
+
+            builder.RegisterType<TypeMatcher>().As<IWorkoutMatcher>();
+            builder.RegisterType<ChildrenWorkoutsMatcher>().As<IWorkoutMatcher>();
+            builder.RegisterType<ExerciseMatcher>().As<IWorkoutMatcher>();
         }
     }
 }
