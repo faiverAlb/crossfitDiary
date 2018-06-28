@@ -4,9 +4,9 @@ using CrossfitDiary.Service.Interfaces;
 namespace CrossfitDiary.Service.WorkoutMatchers
 {
     /// <summary>
-    ///     Compare types of workouts
+    ///     Compare general properties of workouts
     /// </summary>
-    public class TypeMatcher: IWorkoutMatcher
+    public class ComplexParametersMatcher: IWorkoutMatcher
     {
         public bool IsWorkoutMatch(RoutineComplex firstRoutineComplex, RoutineComplex secondRoutineComplex)
         {
