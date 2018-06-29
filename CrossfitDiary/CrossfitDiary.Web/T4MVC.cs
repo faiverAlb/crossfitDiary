@@ -243,7 +243,6 @@ namespace Links
                     public const string UrlPath = "~/Scripts/Pages/Crossfitter/ManageWorkout";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
-                    public static readonly string CreateWorkoutController_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/CreateWorkoutController.min.js") ? Url("CreateWorkoutController.min.js") : Url("CreateWorkoutController.js");
                     public static readonly string LogWorkoutController_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/LogWorkoutController.min.js") ? Url("LogWorkoutController.min.js") : Url("LogWorkoutController.js");
                     public static readonly string ManageWorkoutController_ts = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ManageWorkoutController.min.js") ? Url("ManageWorkoutController.min.js") : Url("ManageWorkoutController.js");
                 }
@@ -455,7 +454,6 @@ namespace Links
                 public static readonly string _list_group_scss = Url("_list-group.scss");
                 public static readonly string _lists_scss = Url("_lists.scss");
                 public static readonly string _nav_divider_scss = Url("_nav-divider.scss");
-                public static readonly string _navbar_align_scss = Url("_navbar-align.scss");
                 public static readonly string _pagination_scss = Url("_pagination.scss");
                 public static readonly string _reset_text_scss = Url("_reset-text.scss");
                 public static readonly string _resize_scss = Url("_resize.scss");
@@ -484,6 +482,7 @@ namespace Links
                 public static readonly string _float_scss = Url("_float.scss");
                 public static readonly string _position_scss = Url("_position.scss");
                 public static readonly string _screenreaders_scss = Url("_screenreaders.scss");
+                public static readonly string _shadows_scss = Url("_shadows.scss");
                 public static readonly string _sizing_scss = Url("_sizing.scss");
                 public static readonly string _spacing_scss = Url("_spacing.scss");
                 public static readonly string _text_scss = Url("_text.scss");
