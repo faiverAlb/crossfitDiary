@@ -74,7 +74,7 @@ namespace CrossfitDiary.Web
         {
             builder.RegisterType<WorkoutsMatchDispatcher>().AsSelf();
 
-            builder.RegisterType<TypeMatcher>().As<IWorkoutMatcher>();
+            builder.RegisterType<ComplexParametersMatcher>().As<IWorkoutMatcher>();
             builder.RegisterType<ChildrenWorkoutsMatcher>().As<IWorkoutMatcher>();
             builder.RegisterType<ExerciseMatcher>().As<IWorkoutMatcher>();
         }

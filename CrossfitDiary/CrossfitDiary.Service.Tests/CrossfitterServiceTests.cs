@@ -49,7 +49,7 @@ namespace CrossfitDiary.Service.Tests
         {
             return new WorkoutsMatchDispatcher(new List<IWorkoutMatcher>
             {
-                new TypeMatcher(),
+                new ComplexParametersMatcher(),
                 new ChildrenWorkoutsMatcher(),
                 new ExerciseMatcher()
             });
