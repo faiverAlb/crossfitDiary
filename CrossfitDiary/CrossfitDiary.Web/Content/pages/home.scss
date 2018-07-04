@@ -44,6 +44,11 @@
 
                 .workout-exercises {
                     .exercise {
+                        .do-unbroken-info {
+                            font-style: italic;
+                            font-weight: 500;
+                        }
+
                         .new-record {
                             color: $orange;
                         }

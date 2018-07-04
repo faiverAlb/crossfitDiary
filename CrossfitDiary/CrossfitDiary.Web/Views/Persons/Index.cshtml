@@ -140,7 +140,11 @@
     <div class="workout-exercises pl-3 pt-1">
         <!-- ko foreach:exercisesToDoList-->
         <div class="exercise">
-            <span data-bind="text:title"></span>:
+            <span data-bind="text:title"></span>
+            <!-- ko if: isDoUnbroken-->
+            <span class="do-unbroken-info">(unbroken)</span>
+            <!-- /ko -->
+            :
             <!-- ko foreach:exerciseMeasures-->
             <!-- ko if:exerciseMeasureType.measureValue != null && exerciseMeasureType.measureValue != "" -->
             <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Count)-->
