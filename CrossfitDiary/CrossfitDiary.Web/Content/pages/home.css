@@ -9908,5 +9908,8 @@ table > tbody > tr.empty-data {
       font-weight: bold; }
     .home-container .activities-list .done-item .item-footer .repeat-workout-action {
       cursor: pointer;
+      text-decoration: none;
       font-weight: bold; }
+      .home-container .activities-list .done-item .item-footer .repeat-workout-action .do-it-text {
+        margin-left: 2px; }
 
