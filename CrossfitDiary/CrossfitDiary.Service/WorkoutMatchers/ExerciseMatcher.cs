@@ -25,7 +25,8 @@ namespace CrossfitDiary.Service.WorkoutMatchers
                     || routineSimpleToSave.Distance != existingSimpleRoutine.Distance
                     || routineSimpleToSave.Weight != existingSimpleRoutine.Weight
                     || routineSimpleToSave.Calories != existingSimpleRoutine.Calories
-                    || routineSimpleToSave.Centimeters != existingSimpleRoutine.Centimeters)
+                    || routineSimpleToSave.Centimeters != existingSimpleRoutine.Centimeters
+                    || routineSimpleToSave.IsDoUnbroken != existingSimpleRoutine.IsDoUnbroken)
                 {
                     return false;
                 }
