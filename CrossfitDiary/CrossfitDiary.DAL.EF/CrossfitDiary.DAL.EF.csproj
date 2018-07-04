@@ -113,6 +113,10 @@
     <Compile Include="DataContexts\CrossfitDiaryMigrations\201806180618483_AddOrder.Designer.cs">
       <DependentUpon>201806180618483_AddOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201807040627053_AddIsDoUnbroken.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\201807040627053_AddIsDoUnbroken.Designer.cs">
+      <DependentUpon>201807040627053_AddIsDoUnbroken.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder_June_2018.cs" />
@@ -189,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201806180618483_AddOrder.resx">
       <DependentUpon>201806180618483_AddOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\CrossfitDiaryMigrations\201807040627053_AddIsDoUnbroken.resx">
+      <DependentUpon>201807040627053_AddIsDoUnbroken.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

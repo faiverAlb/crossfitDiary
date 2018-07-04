@@ -30,6 +30,7 @@ namespace CrossfitDiary.Web.Mappings
             CreateMap<ExerciseViewModel, RoutineSimple>()
                 .ForMember(x => x.ExerciseId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.Id, x => x.Ignore())
+                .ForMember(x => x.IsDoUnbroken, x => x.MapFrom(y => y.IsDoUnbroken))
                 .ForMember(x => x.Count, opt => opt.ResolveUsing<CountResolver>())
                 .ForMember(x => x.Distance, opt => opt.ResolveUsing<DistanceResolver>())
                 .ForMember(x => x.Weight, opt => opt.ResolveUsing<WeightResolver>())
