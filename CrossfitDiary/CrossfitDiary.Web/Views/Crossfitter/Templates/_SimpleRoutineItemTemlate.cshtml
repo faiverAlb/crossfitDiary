@@ -3,12 +3,17 @@
     <div class="form-row">
         <div class="form-group my-1 col-lg-auto">
             <div class="input-group">
-                <span class="form-control exercise-title" data-bind="text: model.title"></span>
+                <div class="form-control exercise-title" >
+                    <span data-bind="text: model.title"></span>
+                </div>
                 <div class="input-group-append">
+
                     <button type="button" class="btn btn-outline-secondary dropdown-toggle  dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" data-bind="click: changeUnbrokenState"> <input type="checkbox" data-bind="checked: _isDoUnbroken"> Unbroken</a>
+                        <div role="separator" class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" data-bind="click:function(){$parent.moveSimpleRoutineUp($index());}, css:{disabled: $index() == 0}"> <i class="fas fa-long-arrow-alt-up text-info"></i> Move up </a>
                         <a class="dropdown-item" href="#" data-bind="click:function(){$parent.moveSimpleRoutineDown($index());}, css:{disabled: $parent._exercisesToBeDone().length -1  == $index()}"><i class="fas fa-long-arrow-alt-down text-info"></i> Move down </a>
                         <a class="dropdown-item" href="#" data-bind="click:$parent.addSimpleRoutineFromToDo"><i class="fas fa-plus fa-sm text-success" aria-hidden="true"></i> Repeat </a>
