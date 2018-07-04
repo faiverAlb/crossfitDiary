@@ -75,7 +75,12 @@
 
                 .repeat-workout-action {
                     cursor: pointer;
+                    text-decoration: none;
                     font-weight: bold;
+
+                    .do-it-text {
+                        margin-left: 2px;
+                    }
                 }
             }
         }
