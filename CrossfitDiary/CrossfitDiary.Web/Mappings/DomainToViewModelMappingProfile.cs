@@ -73,6 +73,7 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.ExerciseId))
                 .ForMember(x => x.ExerciseMeasures, opt => opt.Ignore())
                 .ForMember(x => x.Title, opt => opt.MapFrom(y => y.Exercise.Title))
+                .ForMember(x => x.IsDoUnbroken, opt => opt.MapFrom(y => y.IsDoUnbroken))
                 .AfterMap((simple, dest) =>
                 {
                     var toMapExercises = new List<ExerciseMeasureViewModel>();

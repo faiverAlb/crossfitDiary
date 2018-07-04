@@ -99,11 +99,11 @@
                                 <!-- ko if:canBeRemovedByCurrentUser-->
                                 @* href="/Crossfitter/ManageWorkout?workoutId=137" *@
                                 <a class="edit-workout-action pointer text-info" data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id + '&crossfitterWorkoutId=' + crossfitterWorkoutId}">
-                                    <i class="fas fa-edit "></i>
+                                    Edit <i class="fas fa-edit "></i>
                                 </a>
                                 <!-- /ko -->
                                 <a class="repeat-workout-action pointer text-success pl-1" data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id}">
-                                    <i class="fas fa-plus "></i>
+                                    <i class="fas fa-plus "></i> Do it
                                 </a>
                             </div>
                         </div>
@@ -140,7 +140,11 @@
     <div class="workout-exercises pl-3 pt-1">
         <!-- ko foreach:exercisesToDoList-->
         <div class="exercise">
-            <span data-bind="text:title"></span>:
+            <span data-bind="text:title"></span>
+            <!-- ko if: isDoUnbroken-->
+            <span class="do-unbroken-info">(unbroken)</span>
+            <!-- /ko -->
+            :
             <!-- ko foreach:exerciseMeasures-->
             <!-- ko if:exerciseMeasureType.measureValue != null && exerciseMeasureType.measureValue != "" -->
             <!-- ko if:exerciseMeasureType.measureType == @((int)MeasureTypeViewModel.Count)-->

@@ -73,5 +73,11 @@ namespace CrossfitDiary.Model
         /// </summary>
         [NotMapped]
         public bool IsNewWeightMaximum { get; set; }
+
+        /// <summary>
+        ///     Should be done without break
+        /// </summary>
+        public bool IsDoUnbroken { get; set; }
+
     }
 }
