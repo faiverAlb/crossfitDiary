@@ -3,8 +3,12 @@
     <div class="form-row">
         <div class="form-group my-1 col-lg-auto">
             <div class="input-group">
-                <div class="form-control exercise-title" >
+                <div class="form-control exercise-title">
                     <span data-bind="text: model.title"></span>
+                    <!-- ko if: _isDoUnbroken-->
+                    <span href="#" class="do-unbroken-info badge badge-warning">do unbroken</span>
+                    <!-- /ko -->
+
                 </div>
                 <div class="input-group-append">
 
