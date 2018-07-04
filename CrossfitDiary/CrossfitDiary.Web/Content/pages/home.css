@@ -9904,7 +9904,9 @@ table > tbody > tr.empty-data {
     border-top: 1px dashed #a6a6a6; }
     .home-container .activities-list .done-item .item-footer .edit-workout-action {
       cursor: pointer;
-      text-decoration: none; }
+      text-decoration: none;
+      font-weight: bold; }
     .home-container .activities-list .done-item .item-footer .repeat-workout-action {
-      cursor: pointer; }
+      cursor: pointer;
+      font-weight: bold; }
 
