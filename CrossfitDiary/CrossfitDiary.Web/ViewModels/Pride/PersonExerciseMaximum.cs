@@ -41,6 +41,12 @@ namespace CrossfitDiary.Web.ViewModels.Pride
         public string MaximumWeight { get; set; }
         
         /// <summary>
+        ///     How much added to previous weight maximum
+        /// </summary>
+        [JsonProperty("addedToPreviousMaximum")]
+        public string AddedToPreviousMaximum { get; set; }
+        
+        /// <summary>
         ///     Gets or sets the maximum weight.
         /// </summary>
         [JsonProperty("maximumWeightValue")]

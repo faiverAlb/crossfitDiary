@@ -111,6 +111,21 @@ namespace CrossfitDiary.Service
                         select exercise.Weight
                     ).Max()
                 }).OrderByDescending(x => x.MaximumWeight).ThenBy(x => x.Date).FirstOrDefault();
+
+            if (maximum?.MaximumWeight != null)
+            {
+                PersonMaximum secondMaximum = (from crossfitterWorkout in workoutsWithExericesOnly
+                    select new PersonMaximum
+                    {
+                        MaximumWeight = (
+                            from exercise in routineDictionary.Where(x => x.Key == crossfitterWorkout.Id).SelectMany(x => x.Value)
+                            where exercise.ExerciseId == exerciseId && exercise.Weight != maximum.MaximumWeight
+                            select exercise.Weight
+                        ).Max()
+                    }).OrderByDescending(x => x.MaximumWeight).ThenBy(x => x.Date).FirstOrDefault();
+
+                maximum.PreviousMaximumWeight = secondMaximum?.MaximumWeight;
+            }
             return maximum;
 
         }

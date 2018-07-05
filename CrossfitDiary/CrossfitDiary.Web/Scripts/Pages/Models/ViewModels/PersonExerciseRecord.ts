@@ -4,6 +4,7 @@
   interface IPersonExerciseRecord {
     personName: string;
     maximumWeight: string;
+    addedToPreviousMaximum: string;
     date: string; 
     workoutTitle: string;
     positionBetweenOthers: number;
@@ -16,6 +17,7 @@
 
     personName: string;
     maximumWeight: string;
+    addedToPreviousMaximum: string;
     maximumWeightValue?: number;
     date: string;
     workoutTitle: string;
@@ -45,6 +47,7 @@
       return new PersonExerciseRecord({
         personName: input.personName,
         maximumWeight: input.maximumWeight,
+        addedToPreviousMaximum: input.addedToPreviousMaximum,
         date: input.date,
         workoutTitle: input.workoutTitle,
         positionBetweenOthers: input.positionBetweenOthers,
