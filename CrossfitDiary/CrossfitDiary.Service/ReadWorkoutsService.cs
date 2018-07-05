@@ -7,7 +7,7 @@ using CrossfitDiary.Model;
 
 namespace CrossfitDiary.Service
 {
-    public class CrossfitterService
+    public class ReadWorkoutsService
     {
         private readonly IRoutineComplexRepository _routineComplexRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -15,7 +15,7 @@ namespace CrossfitDiary.Service
         private readonly ICrossfitterWorkoutRepository _crossfitterWorkoutRepository;
         private readonly WorkoutsMatchDispatcher _workoutsMatchDispatcher;
 
-        public CrossfitterService(IRoutineComplexRepository routineComplexRepository
+        public ReadWorkoutsService(IRoutineComplexRepository routineComplexRepository
             , IUnitOfWork unitOfWork
             , IExerciseRepository exerciseRepository
             , ICrossfitterWorkoutRepository crossfitterWorkoutRepository
@@ -28,19 +28,6 @@ namespace CrossfitDiary.Service
             _workoutsMatchDispatcher = workoutsMatchDispatcher;
         }
 
-        public int CreateWorkout(RoutineComplex routineComplexToSave)
-        {
-            int workoutId = FindDefaultOrExistingWorkout(routineComplexToSave);
-            if (workoutId != 0)
-            {
-                return workoutId;
-            }
-
-//            SetRoutineComplexTitle(routineComplexToSave);
-            _routineComplexRepository.Add(routineComplexToSave);
-            _unitOfWork.Commit();
-            return routineComplexToSave.Id;
-        }
 
         /// <summary>
         /// Find existing workout by workout structure
@@ -67,34 +54,6 @@ namespace CrossfitDiary.Service
             }
 
             return 0;
-        }
-
-
-        /// <summary>
-        /// Log workout: delete first old if <param name="isEditMode">equals true</param> otherwise just log
-        /// </summary>
-        /// <param name="workoutToLog">
-        /// The workout to log.
-        /// </param>
-        /// <param name="isEditMode">
-        /// The is edit mode.
-        /// </param>
-        public void LogWorkout(CrossfitterWorkout workoutToLog, bool isEditMode)
-        {
-            if (isEditMode)
-            {
-                _crossfitterWorkoutRepository.Delete(x => x.Id == workoutToLog.Id);
-                _unitOfWork.Commit();
-            }
-            _crossfitterWorkoutRepository.AddOrUpdate(workoutToLog);
-            _unitOfWork.Commit();
-        }
-
-        public void CreateAndLogNewWorkout(RoutineComplex newWorkoutRoutine, CrossfitterWorkout logWorkoutModel, bool isEditMode)
-        {
-            int newWorkoutId = CreateWorkout(newWorkoutRoutine);
-            logWorkoutModel.RoutineComplexId = newWorkoutId;
-            LogWorkout(logWorkoutModel, isEditMode);
         }
 
 

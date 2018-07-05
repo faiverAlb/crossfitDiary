@@ -12,7 +12,7 @@ using NUnit.Framework;
 namespace CrossfitDiary.Service.Tests
 {
     [TestFixture]
-    public class CrossfitterServiceTests
+    public class ReadWorkoutsServiceTests
     {
         private RoutineComplex GetRoutineComplex()
         {
@@ -73,7 +73,7 @@ namespace CrossfitDiary.Service.Tests
             // Arrange
             
             // Act
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new RoutineComplex[0]), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new RoutineComplex[0]), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -89,7 +89,7 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.ComplexType++;
             
             // Act
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -103,7 +103,7 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoundCount++;
             
             // Act
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -117,7 +117,7 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.TimeToWork = routineComplexToSave.TimeToWork.Value.Add(TimeSpan.FromSeconds(1));
             
             // Act
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -131,7 +131,7 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoutineSimple.Clear();
             
             // Act
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -145,7 +145,7 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoutineSimple = GetRoutineComplex().RoutineSimple.OrderByDescending(x => x.Id).ToList();
             
             // Act
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -160,8 +160,8 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoutineSimple.ElementAt(0).Calories++;
             
             // Act
-            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
-            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+            ReadWorkoutsService readWorkoutsService = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
+            int actual = readWorkoutsService.FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -176,8 +176,8 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoutineSimple.ElementAt(1).Count++;
             
             // Act
-            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
-            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+            ReadWorkoutsService readWorkoutsService = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
+            int actual = readWorkoutsService.FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -191,8 +191,8 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoutineSimple.ElementAt(2).Distance++;
             
             // Act
-            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
-            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+            ReadWorkoutsService readWorkoutsService = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
+            int actual = readWorkoutsService.FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -206,8 +206,8 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoutineSimple.ElementAt(4).IsDoUnbroken = true;
             
             // Act
-            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
-            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+            ReadWorkoutsService readWorkoutsService = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
+            int actual = readWorkoutsService.FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -222,8 +222,8 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoutineSimple.ElementAt(3).Weight++;
             
             // Act
-            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
-            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+            ReadWorkoutsService readWorkoutsService = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
+            int actual = readWorkoutsService.FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -237,8 +237,8 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoutineSimple.ElementAt(3).Count++;
             
             // Act
-            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
-            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+            ReadWorkoutsService readWorkoutsService = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
+            int actual = readWorkoutsService.FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -252,8 +252,8 @@ namespace CrossfitDiary.Service.Tests
             routineComplexToSave.RoutineSimple.ElementAt(0).ExerciseId++;
             
             // Act
-            CrossfitterService crossfitterService = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
-            int actual = crossfitterService.FindDefaultOrExistingWorkout(GetRoutineComplex());
+            ReadWorkoutsService readWorkoutsService = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexToSave }), null, null, null, GetWorkoutsMatchDispatcher());
+            int actual = readWorkoutsService.FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -265,7 +265,7 @@ namespace CrossfitDiary.Service.Tests
             // Arrange
 
             // Act
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { GetRoutineComplex() }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { GetRoutineComplex() }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplex());
 
             // Assert
             Assert.NotZero(actual);
@@ -277,7 +277,7 @@ namespace CrossfitDiary.Service.Tests
             // Arrange
 
             // Act
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { GetRoutineComplexWithChilds() }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { GetRoutineComplexWithChilds() }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
 
             // Assert
             Assert.NotZero(actual);
@@ -290,7 +290,7 @@ namespace CrossfitDiary.Service.Tests
             routineComplexWithChilds.Children.Add(GetRoutineComplex());
             // Act
 
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -304,7 +304,7 @@ namespace CrossfitDiary.Service.Tests
             routineComplexWithChilds.Children.ElementAt(0).RoutineSimple.Add(new RoutineSimple() { Weight = 0, Count = 1, Id = 5, ExerciseId = 1 });
             // Act
 
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -317,7 +317,7 @@ namespace CrossfitDiary.Service.Tests
             routineComplexWithChilds.Children.ElementAt(0).RoutineSimple.ElementAt(0).Calories++;
             // Act
 
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -331,7 +331,7 @@ namespace CrossfitDiary.Service.Tests
             routineComplexWithChilds.Children.ElementAt(0).ComplexType = RoutineComplexType.ForTime;
             // Act
 
-            int actual = new CrossfitterService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
+            int actual = new ReadWorkoutsService(GetConfiguredRoutineComplexRepository(new[] { routineComplexWithChilds }), null, null, null, GetWorkoutsMatchDispatcher()).FindDefaultOrExistingWorkout(GetRoutineComplexWithChilds());
 
             // Assert
             Assert.AreEqual(0, actual);
@@ -342,7 +342,7 @@ namespace CrossfitDiary.Service.Tests
         public void MarkWorkoutWithWeightRecord_PersonMaximumIsNull_NRE_NOT_Called()
         {
             //  Arrange
-            var crossfitterService = new CrossfitterService(null, null, null, null, GetWorkoutsMatchDispatcher());
+            var crossfitterService = new ReadWorkoutsService(null, null, null, null, GetWorkoutsMatchDispatcher());
             PersonMaximum nullPersonMaximum = null;
             
             //  Act
@@ -365,7 +365,7 @@ namespace CrossfitDiary.Service.Tests
                 CrossfitWorkoutId = 1,
                 ExerciseId = GetRoutineComplex().RoutineSimple.First().ExerciseId
             };
-            var crossfitterService = new CrossfitterService(null, null, null, null, GetWorkoutsMatchDispatcher());
+            var crossfitterService = new ReadWorkoutsService(null, null, null, null, GetWorkoutsMatchDispatcher());
 
             //  Act
             var crossfitterWorkouts = new List<CrossfitterWorkout>() {new CrossfitterWorkout() {Id = 1, RoutineComplex = GetRoutineComplex()} };
@@ -386,7 +386,7 @@ namespace CrossfitDiary.Service.Tests
                 CrossfitWorkoutId = 1,
                 ExerciseId = GetRoutineComplex().RoutineSimple.First().ExerciseId
             };
-            var crossfitterService = new CrossfitterService(null, null, null, null, GetWorkoutsMatchDispatcher());
+            var crossfitterService = new ReadWorkoutsService(null, null, null, null, GetWorkoutsMatchDispatcher());
 
             //  Act
             var crossfitterWorkouts = new List<CrossfitterWorkout>() {new CrossfitterWorkout() {Id = 1, RoutineComplex = GetRoutineComplex()} };
@@ -406,7 +406,7 @@ namespace CrossfitDiary.Service.Tests
                 MaximumWeight = 100,
                 CrossfitWorkoutId = 0
             };
-            var crossfitterService = new CrossfitterService(null, null, null, null, GetWorkoutsMatchDispatcher());
+            var crossfitterService = new ReadWorkoutsService(null, null, null, null, GetWorkoutsMatchDispatcher());
 
             //  Act
 
@@ -432,7 +432,7 @@ namespace CrossfitDiary.Service.Tests
                 CrossfitWorkoutId = 1,
                 ExerciseId = routineComplex.RoutineSimple.First().ExerciseId
             };
-            var crossfitterService = new CrossfitterService(null, null, null, null, GetWorkoutsMatchDispatcher());
+            var crossfitterService = new ReadWorkoutsService(null, null, null, null, GetWorkoutsMatchDispatcher());
 
             //  Act
             var crossfitterWorkouts = new List<CrossfitterWorkout>() { new CrossfitterWorkout() { Id = 1, RoutineComplex = routineComplex } };

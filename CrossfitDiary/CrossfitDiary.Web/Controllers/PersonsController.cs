@@ -10,11 +10,11 @@ namespace CrossfitDiary.Web.Controllers
 {
     public partial class PersonsController : Controller
     {
-        private readonly CrossfitterService _crossfitterService;
+        private readonly ReadWorkoutsService _readWorkoutsService;
 
-        public PersonsController(CrossfitterService crossfitterService)
+        public PersonsController(ReadWorkoutsService readWorkoutsService)
         {
-            _crossfitterService = crossfitterService;
+            _readWorkoutsService = readWorkoutsService;
         }
         public virtual ActionResult Index(string userId = null, int? exerciseId = null)
         {
@@ -23,8 +23,8 @@ namespace CrossfitDiary.Web.Controllers
 
             PersonDataViewModel personDataViewModel = new PersonDataViewModel()
             {
-                InitialWorkouts = _crossfitterService.GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId, page: 1, pageSize:10).Select(Mapper.Map<ToLogWorkoutViewModel>).ToList(),
-                PersonMaximums = _crossfitterService.GetPersonMaximumForMainExercises(userIdForMaximums, exerciseId).Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)).OrderBy(x => x.ExerciseDisplayName).ToList(),
+                InitialWorkouts = _readWorkoutsService.GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId, page: 1, pageSize:10).Select(Mapper.Map<ToLogWorkoutViewModel>).ToList(),
+                PersonMaximums = _readWorkoutsService.GetPersonMaximumForMainExercises(userIdForMaximums, exerciseId).Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)).OrderBy(x => x.ExerciseDisplayName).ToList(),
             };
             ViewBag.Title = "Person Page";
             ViewBag.UserId = userId;
