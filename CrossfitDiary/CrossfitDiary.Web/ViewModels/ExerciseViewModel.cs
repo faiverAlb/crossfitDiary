@@ -22,6 +22,9 @@ namespace CrossfitDiary.Web.ViewModels
 
         [JsonProperty("isDoUnbroken")]
         public bool IsDoUnbroken { get; set; }
+
+        [JsonProperty("addedToMaxWeightString")]
+        public string AddedToMaxWeightString { get; set; }
     }
 
 

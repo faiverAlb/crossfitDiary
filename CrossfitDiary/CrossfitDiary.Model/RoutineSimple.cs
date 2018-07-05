@@ -73,6 +73,12 @@ namespace CrossfitDiary.Model
         /// </summary>
         [NotMapped]
         public bool IsNewWeightMaximum { get; set; }
+        
+        /// <summary>
+        ///     Substraction between maximum and previous maximum weights
+        /// </summary>
+        [NotMapped]
+        public decimal? AddedToMaxWeight { get; set; }
 
         /// <summary>
         ///     Should be done without break

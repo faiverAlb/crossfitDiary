@@ -238,12 +238,16 @@ namespace CrossfitDiary.Service
             {
                 foreach (RoutineComplex routineComplexChild in workoutToAddMaximum.RoutineComplex.Children.Where(z => z.RoutineSimple.Any(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight)))
                 {
-                    routineComplexChild.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+                    RoutineSimple routineSimple = routineComplexChild.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight);
+                    routineSimple.IsNewWeightMaximum = true;
+                    routineSimple.AddedToMaxWeight = personMaximum.PreviousMaximumWeight.HasValue?personMaximum.MaximumWeight - personMaximum.PreviousMaximumWeight:null;
                 }
             }
             else
             {
-                workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+                RoutineSimple routineSimple = workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight);
+                routineSimple.IsNewWeightMaximum = true;
+                routineSimple.AddedToMaxWeight = personMaximum.PreviousMaximumWeight.HasValue?personMaximum.MaximumWeight - personMaximum.PreviousMaximumWeight:null;
             }
         }
 
