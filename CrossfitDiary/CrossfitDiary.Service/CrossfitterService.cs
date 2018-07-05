@@ -36,7 +36,7 @@ namespace CrossfitDiary.Service
                 return workoutId;
             }
 
-            SetRoutineComplexTitle(routineComplexToSave);
+//            SetRoutineComplexTitle(routineComplexToSave);
             _routineComplexRepository.Add(routineComplexToSave);
             _unitOfWork.Commit();
             return routineComplexToSave.Id;
@@ -300,29 +300,6 @@ namespace CrossfitDiary.Service
         {
             CrossfitterWorkout crossfitterWorkout = _crossfitterWorkoutRepository.Single(x => x.Id == crossfitterWorkoutId);
             return crossfitterWorkout;
-        }
-
-        private void SetRoutineComplexTitle(RoutineComplex routineComplexToSave)
-        {
-            foreach (RoutineComplex child in routineComplexToSave.Children)
-            {
-                SetRoutineComplexTitle(child);
-            }
-
-
-            if (!string.IsNullOrEmpty(routineComplexToSave.Title))
-            {
-                return;
-            }
-
-            List<string> exerciseNames = new List<string>();
-            foreach (var routineSimple in routineComplexToSave.RoutineSimple)
-            {
-                Exercise exercise = _exerciseRepository.GetById(routineSimple.ExerciseId);
-                exerciseNames.Add(exercise.Abbreviation);
-            }
-
-            routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
         }
 
 
