@@ -80,10 +80,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExerciseService.cs" />
-    <Compile Include="CrossfitterService.cs" />
+    <Compile Include="ReadWorkoutsService.cs" />
     <Compile Include="Interfaces\IExerciseService.cs" />
     <Compile Include="Interfaces\IWorkoutService.cs" />
     <Compile Include="Interfaces\IWorkoutMatcher.cs" />
+    <Compile Include="ManageWorkoutsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkoutMatchers\ChildrenWorkoutsMatcher.cs" />
     <Compile Include="WorkoutMatchers\ExerciseMatcher.cs" />

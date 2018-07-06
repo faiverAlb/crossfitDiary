@@ -224,6 +224,7 @@
     <Compile Include="Mappings\CanBeRemovedResolver.cs" />
     <Compile Include="Mappings\DecimalToStringExtension.cs" />
     <Compile Include="Mappings\Resolvers\TimePassedResolver.cs" />
+    <Compile Include="Mappings\Resolvers\WeightImprovementResolver.cs" />
     <Compile Include="MvcHelpers\DateTimeExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

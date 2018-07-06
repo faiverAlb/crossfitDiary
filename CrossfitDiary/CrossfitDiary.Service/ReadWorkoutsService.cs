@@ -7,7 +7,7 @@ using CrossfitDiary.Model;
 
 namespace CrossfitDiary.Service
 {
-    public class CrossfitterService
+    public class ReadWorkoutsService
     {
         private readonly IRoutineComplexRepository _routineComplexRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -15,7 +15,7 @@ namespace CrossfitDiary.Service
         private readonly ICrossfitterWorkoutRepository _crossfitterWorkoutRepository;
         private readonly WorkoutsMatchDispatcher _workoutsMatchDispatcher;
 
-        public CrossfitterService(IRoutineComplexRepository routineComplexRepository
+        public ReadWorkoutsService(IRoutineComplexRepository routineComplexRepository
             , IUnitOfWork unitOfWork
             , IExerciseRepository exerciseRepository
             , ICrossfitterWorkoutRepository crossfitterWorkoutRepository
@@ -28,19 +28,6 @@ namespace CrossfitDiary.Service
             _workoutsMatchDispatcher = workoutsMatchDispatcher;
         }
 
-        public int CreateWorkout(RoutineComplex routineComplexToSave)
-        {
-            int workoutId = FindDefaultOrExistingWorkout(routineComplexToSave);
-            if (workoutId != 0)
-            {
-                return workoutId;
-            }
-
-            SetRoutineComplexTitle(routineComplexToSave);
-            _routineComplexRepository.Add(routineComplexToSave);
-            _unitOfWork.Commit();
-            return routineComplexToSave.Id;
-        }
 
         /// <summary>
         /// Find existing workout by workout structure
@@ -67,34 +54,6 @@ namespace CrossfitDiary.Service
             }
 
             return 0;
-        }
-
-
-        /// <summary>
-        /// Log workout: delete first old if <param name="isEditMode">equals true</param> otherwise just log
-        /// </summary>
-        /// <param name="workoutToLog">
-        /// The workout to log.
-        /// </param>
-        /// <param name="isEditMode">
-        /// The is edit mode.
-        /// </param>
-        public void LogWorkout(CrossfitterWorkout workoutToLog, bool isEditMode)
-        {
-            if (isEditMode)
-            {
-                _crossfitterWorkoutRepository.Delete(x => x.Id == workoutToLog.Id);
-                _unitOfWork.Commit();
-            }
-            _crossfitterWorkoutRepository.AddOrUpdate(workoutToLog);
-            _unitOfWork.Commit();
-        }
-
-        public void CreateAndLogNewWorkout(RoutineComplex newWorkoutRoutine, CrossfitterWorkout logWorkoutModel, bool isEditMode)
-        {
-            int newWorkoutId = CreateWorkout(newWorkoutRoutine);
-            logWorkoutModel.RoutineComplexId = newWorkoutId;
-            LogWorkout(logWorkoutModel, isEditMode);
         }
 
 
@@ -152,6 +111,21 @@ namespace CrossfitDiary.Service
                         select exercise.Weight
                     ).Max()
                 }).OrderByDescending(x => x.MaximumWeight).ThenBy(x => x.Date).FirstOrDefault();
+
+            if (maximum?.MaximumWeight != null)
+            {
+                PersonMaximum secondMaximum = (from crossfitterWorkout in workoutsWithExericesOnly
+                    select new PersonMaximum
+                    {
+                        MaximumWeight = (
+                            from exercise in routineDictionary.Where(x => x.Key == crossfitterWorkout.Id).SelectMany(x => x.Value)
+                            where exercise.ExerciseId == exerciseId && exercise.Weight != maximum.MaximumWeight
+                            select exercise.Weight
+                        ).Max()
+                    }).OrderByDescending(x => x.MaximumWeight).ThenBy(x => x.Date).FirstOrDefault();
+
+                maximum.PreviousMaximumWeight = secondMaximum?.MaximumWeight;
+            }
             return maximum;
 
         }
@@ -264,12 +238,16 @@ namespace CrossfitDiary.Service
             {
                 foreach (RoutineComplex routineComplexChild in workoutToAddMaximum.RoutineComplex.Children.Where(z => z.RoutineSimple.Any(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight)))
                 {
-                    routineComplexChild.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+                    RoutineSimple routineSimple = routineComplexChild.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight);
+                    routineSimple.IsNewWeightMaximum = true;
+                    routineSimple.AddedToMaxWeight = personMaximum.PreviousMaximumWeight.HasValue?personMaximum.MaximumWeight - personMaximum.PreviousMaximumWeight:null;
                 }
             }
             else
             {
-                workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight).IsNewWeightMaximum = true;
+                RoutineSimple routineSimple = workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight);
+                routineSimple.IsNewWeightMaximum = true;
+                routineSimple.AddedToMaxWeight = personMaximum.PreviousMaximumWeight.HasValue?personMaximum.MaximumWeight - personMaximum.PreviousMaximumWeight:null;
             }
         }
 
@@ -285,7 +263,7 @@ namespace CrossfitDiary.Service
                 return crossfitterWorkouts;
             }
 
-            return crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId)).ToList();
+            return crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId) || x.RoutineComplex.Children.Any(childW => childW.RoutineSimple.Any(c => c.ExerciseId == exerciseId))).ToList();
         }
 
 
@@ -300,29 +278,6 @@ namespace CrossfitDiary.Service
         {
             CrossfitterWorkout crossfitterWorkout = _crossfitterWorkoutRepository.Single(x => x.Id == crossfitterWorkoutId);
             return crossfitterWorkout;
-        }
-
-        private void SetRoutineComplexTitle(RoutineComplex routineComplexToSave)
-        {
-            foreach (RoutineComplex child in routineComplexToSave.Children)
-            {
-                SetRoutineComplexTitle(child);
-            }
-
-
-            if (!string.IsNullOrEmpty(routineComplexToSave.Title))
-            {
-                return;
-            }
-
-            List<string> exerciseNames = new List<string>();
-            foreach (var routineSimple in routineComplexToSave.RoutineSimple)
-            {
-                Exercise exercise = _exerciseRepository.GetById(routineSimple.ExerciseId);
-                exerciseNames.Add(exercise.Abbreviation);
-            }
-
-            routineComplexToSave.Title = $"{routineComplexToSave.ComplexType}: {string.Join(", ", exerciseNames)}";
         }
 
 

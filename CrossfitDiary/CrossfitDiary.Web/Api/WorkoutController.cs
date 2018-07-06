@@ -19,20 +19,19 @@ namespace CrossfitDiary.Web.Api
     {
         #region members
 
-        private readonly CrossfitterService _crossfitterService;
+        private readonly ManageWorkoutsService _manageWorkoutsService;
+        private readonly ReadWorkoutsService _readWorkoutsService;
         private readonly ApplicationUserManager _applicationUserManager;
-        private readonly IWorkoutService _workoutService;
 
         #endregion
 
         #region constructors
 
-        public WorkoutController(CrossfitterService crossfitterService, ApplicationUserManager applicationUserManager,
-            IWorkoutService workoutService)
+        public WorkoutController(ManageWorkoutsService manageWorkoutsService, ReadWorkoutsService readWorkoutsService, ApplicationUserManager applicationUserManager, IWorkoutService workoutService)
         {
-            _crossfitterService = crossfitterService;
+            _manageWorkoutsService = manageWorkoutsService;
+            _readWorkoutsService = readWorkoutsService;
             _applicationUserManager = applicationUserManager;
-            _workoutService = workoutService;
         }
 
         #endregion
@@ -49,7 +48,7 @@ namespace CrossfitDiary.Web.Api
         {
             string userIdForWorkouts = exerciseId.HasValue && string.IsNullOrEmpty(userId) ? User.Identity.GetUserId() : userId;
 
-            List<ToLogWorkoutViewModel> crossfitersWorkouts = _crossfitterService
+            List<ToLogWorkoutViewModel> crossfitersWorkouts = _readWorkoutsService
                 .GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId, page, pageSize)
                 .Select(Mapper.Map<ToLogWorkoutViewModel>)
                 .ToList();
@@ -72,7 +71,7 @@ namespace CrossfitDiary.Web.Api
             RoutineComplex newWorkoutRoutine = Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
             newWorkoutRoutine.CreatedBy = user;
 
-            _crossfitterService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
+            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
         }
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace CrossfitDiary.Web.Api
         public void RemoveWorkout(int crossfitterWorkoutId)
         {
             ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
-            _crossfitterService.RemoveWorkout(crossfitterWorkoutId, user);
+            _readWorkoutsService.RemoveWorkout(crossfitterWorkoutId, user);
         }
 
         /// <summary>
@@ -102,7 +101,7 @@ namespace CrossfitDiary.Web.Api
         [Route("getPersonLoggingInfo/{preselectedCrossfitterWorkoutId}")]
         public IHttpActionResult GetPersonLoggingInfo(int preselectedCrossfitterWorkoutId)
         {
-            CrossfitterWorkout crossfitterWorkout = _crossfitterService.GetCrossfitterWorkout(preselectedCrossfitterWorkoutId);
+            CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(preselectedCrossfitterWorkoutId);
             return Ok(Mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout));
         }
 

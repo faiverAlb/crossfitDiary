@@ -34,6 +34,7 @@ namespace CrossfitDiary.Web.Mappings
             CreateMap<PersonMaximum, PersonExerciseMaximumViewModel>()
                 .ForMember(x => x.Date, x => x.MapFrom(y => y.Date.ToString("d")))
                 .ForMember(x => x.MaximumWeightValue, x => x.MapFrom(y => y.MaximumWeight))
+                .ForMember(x => x.AddedToPreviousMaximum, x => x.ResolveUsing<WeightImprovementResolver>())
                 .ForMember(x => x.MaximumWeight, x => x.MapFrom(y => y.MaximumWeight.HasValue == false? "-": $"{y.MaximumWeight.ToCustomString()} kg"));
 
 
@@ -73,6 +74,7 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.ExerciseId))
                 .ForMember(x => x.ExerciseMeasures, opt => opt.Ignore())
                 .ForMember(x => x.Title, opt => opt.MapFrom(y => y.Exercise.Title))
+                .ForMember(x => x.AddedToMaxWeightString, opt => opt.MapFrom(y => y.AddedToMaxWeight.HasValue? $"+{y.AddedToMaxWeight.ToCustomString()}kg": null))
                 .ForMember(x => x.IsDoUnbroken, opt => opt.MapFrom(y => y.IsDoUnbroken))
                 .AfterMap((simple, dest) =>
                 {

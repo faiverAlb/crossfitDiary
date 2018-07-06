@@ -21,6 +21,7 @@ var Models;
             return new PersonExerciseRecord({
                 personName: input.personName,
                 maximumWeight: input.maximumWeight,
+                addedToPreviousMaximum: input.addedToPreviousMaximum,
                 date: input.date,
                 workoutTitle: input.workoutTitle,
                 positionBetweenOthers: input.positionBetweenOthers,

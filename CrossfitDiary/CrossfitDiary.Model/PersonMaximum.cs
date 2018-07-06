@@ -32,6 +32,11 @@ namespace CrossfitDiary.Model
         public decimal? MaximumWeight { get; set; }
 
         /// <summary>
+        ///     Previous maximum weight
+        /// </summary>
+        public decimal? PreviousMaximumWeight { get; set; }
+
+        /// <summary>
         ///     Gets or sets the person id.
         /// </summary>
         public string PersonId { get; set; }

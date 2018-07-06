@@ -14,11 +14,11 @@ namespace CrossfitDiary.Web.Api
     [RoutePrefix("api")]
     public class CrossfitterController : BaseApiController
     {
-        private readonly CrossfitterService _crossfitterService;
+        private readonly ReadWorkoutsService _readWorkoutsService;
 
-        public CrossfitterController(CrossfitterService crossfitterService)
+        public CrossfitterController(ReadWorkoutsService readWorkoutsService)
         {
-            _crossfitterService = crossfitterService;
+            _readWorkoutsService = readWorkoutsService;
         }
 
         [HttpGet]
@@ -26,7 +26,7 @@ namespace CrossfitDiary.Web.Api
         public IHttpActionResult GetPersonMaximum(int exerciseId)
         {
             var result = new List<PersonExerciseMaximumViewModel>();
-            PersonMaximum gotMaximum = _crossfitterService.GetPersonMaximumForExercise(User.Identity.GetUserId(), exerciseId);
+            PersonMaximum gotMaximum = _readWorkoutsService.GetPersonMaximumForExercise(User.Identity.GetUserId(), exerciseId);
             if (gotMaximum != null)
             {
                 result.Add(Mapper.Map<PersonExerciseMaximumViewModel>(gotMaximum));
@@ -39,7 +39,7 @@ namespace CrossfitDiary.Web.Api
         [Route("exercises/{exerciseId}/allPersonsMaximums")]
         public IHttpActionResult GetAllPersonsMaximums(int exerciseId)
         {
-            List<PersonMaximum> maximums = _crossfitterService.GetAllPersonMaximumForExercise(exerciseId, User.Identity.GetUserId());
+            List<PersonMaximum> maximums = _readWorkoutsService.GetAllPersonMaximumForExercise(exerciseId, User.Identity.GetUserId());
             return Ok(maximums.Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)));
         }
 
@@ -47,7 +47,7 @@ namespace CrossfitDiary.Web.Api
         [Route("getPersonMaximums")]
         public IHttpActionResult GetPersonMaximums()
         {
-            List<PersonMaximum> maximums = _crossfitterService.GetPersonMaximumsWithAllExercises(User.Identity.GetUserId());
+            List<PersonMaximum> maximums = _readWorkoutsService.GetPersonMaximumsWithAllExercises(User.Identity.GetUserId());
             return Ok(maximums.Select(x => Mapper.Map<PersonExerciseMaximumViewModel>(x)));
         }
     }
