@@ -79,7 +79,7 @@
                                     <!-- /ko -->
                                     <!-- ko if:workoutViewModel.workoutType == @((int)RoutineComplexType.AMRAP)-->
                                     <span>
-                                        <i class="fas fa-hashtag"></i>rounds:
+                                        Rounds:
                                         <span data-bind="text:roundsFinished"></span>
                                         <!-- ko if:partialRepsFinished-->
                                         + <span data-bind="text:partialRepsFinished"></span> partials
@@ -174,8 +174,8 @@
                     <i class="fas fa-trophy"></i>
                     <i class="fa-inverse fas fa-star" data-fa-transform="shrink-8 up-3 "></i>
                 </span>
+                <span class="badge badge-warning" data-bind="text:addedToMaxWeightString"></span>
             </span>
-            <span data-bind="text:addedToMaxWeightString"></span>
             <!-- /ko -->
         </div>
         <!-- /ko -->
