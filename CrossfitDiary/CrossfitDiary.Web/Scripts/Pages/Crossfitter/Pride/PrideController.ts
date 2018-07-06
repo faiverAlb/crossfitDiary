@@ -5,7 +5,7 @@
   import ExerciseViewModel = Models.ExerciseViewModel;
   import ErrorMessageViewModel = General.ErrorMessageViewModel;
 
-  export class PrideController extends General.FilterableViewModel {
+  export class PrideController {
     /* Сivilians */
     private _service: CrossfitterService;
     private errorMessager: ErrorMessageViewModel;
@@ -20,8 +20,6 @@
     /* Computeds */
 
     constructor(basicParameters: General.BasicParameters) {
-      super();
-
       this.errorMessager = new ErrorMessageViewModel();
 
 
@@ -33,10 +31,6 @@
       this._allPersonsMaximums = ko.observableArray([]);
 
       this._selectedExercise = ko.observable();
-
-      this.initiateFiltering(this._allPersonsMaximums,
-        [{ value: "personName" }, { value: "date" }, { value: "workoutTitle" }]);
-
 
       this.loadExercises();
 

@@ -19,7 +19,6 @@
                         <th class="fixed-pride-width">Name</th>
                         <th class="fixed-pride-width">Maximum weight</th>
                         <th class="fixed-pride-width">Date</th>
-                        <th class="fixed-pride-width">Workout title</th>
                 </thead>
                 <tbody>
                     <!--ko if:_personMaximums().length == 0 -->
@@ -38,9 +37,6 @@
                         <td>
                             <span data-bind="text: date"></span>
                         </td>
-                        <td>
-                            <span data-bind="text: workoutTitle"></span>
-                        </td>
                     </tr>
                     <!-- /ko -->
                 </tbody>
@@ -55,18 +51,17 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'personName'}">Name</th>
-                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'maximumWeight'}">Maximum weight</th>
-                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'date'}">Date</th>
-                    <th class="fixed-pride-width" data-bind="sort: {arr:_allPersonsMaximums, prop:'workoutTitle'}">Workout title</th>
+                    <th class="fixed-pride-width">Name</th>
+                    <th class="fixed-pride-width" >Maximum weight</th>
+                    <th class="fixed-pride-width" >Date</th>
             </thead>
             <tbody>
-                <!--ko if:filteredItems().length == 0 -->
+                <!--ko if:_allPersonsMaximums().length == 0 -->
                 <tr class="empty-data">
                     <td colspan="5">No records yet</td>
                 </tr>
                 <!-- /ko -->
-                <!-- ko foreach: filteredItems -->
+                <!-- ko foreach: _allPersonsMaximums -->
                 <tr data-bind="css: {'success': isItMe }">
                     <td>
                         <span data-bind="text: positionBetweenOthers"></span>
@@ -79,9 +74,6 @@
                     </td>
                     <td>
                         <span data-bind="text: date"></span>
-                    </td>
-                    <td>
-                        <span data-bind="text: workoutTitle"></span>
                     </td>
                 </tr>
                 <!-- /ko -->

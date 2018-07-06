@@ -1,24 +1,13 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Pages;
 (function (Pages) {
     var CrossfitterService = General.CrossfitterService;
     var ObservablePersonExerciseRecord = Models.ObservablePersonExerciseRecord;
     var ErrorMessageViewModel = General.ErrorMessageViewModel;
-    var PrideController = (function (_super) {
-        __extends(PrideController, _super);
+    var PrideController = (function () {
         /* Computeds */
         function PrideController(basicParameters) {
-            var _this = _super.call(this) || this;
-            _this.loadExercises = function () {
+            var _this = this;
+            this.loadExercises = function () {
                 _this._service.getStatisticalExercises()
                     .then(function (exercises) {
                     _this._exercises(exercises);
@@ -27,15 +16,14 @@ var Pages;
                     _this.errorMessager.addMessage(response.responseText, false);
                 });
             };
-            _this.errorMessager = new ErrorMessageViewModel();
-            _this.isDataLoading = ko.observable(false);
-            _this._service = new CrossfitterService(basicParameters.pathToApp, _this.isDataLoading);
-            _this._exercises = ko.observableArray([]);
-            _this._personMaximums = ko.observableArray([]);
-            _this._allPersonsMaximums = ko.observableArray([]);
-            _this._selectedExercise = ko.observable();
-            _this.initiateFiltering(_this._allPersonsMaximums, [{ value: "personName" }, { value: "date" }, { value: "workoutTitle" }]);
-            _this.loadExercises();
+            this.errorMessager = new ErrorMessageViewModel();
+            this.isDataLoading = ko.observable(false);
+            this._service = new CrossfitterService(basicParameters.pathToApp, this.isDataLoading);
+            this._exercises = ko.observableArray([]);
+            this._personMaximums = ko.observableArray([]);
+            this._allPersonsMaximums = ko.observableArray([]);
+            this._selectedExercise = ko.observable();
+            this.loadExercises();
             ko.computed(function () {
                 var exercise = _this._selectedExercise();
                 if (!exercise) {
@@ -55,10 +43,9 @@ var Pages;
                     _this.errorMessager.addMessage(response.responseText, false);
                 });
             });
-            return _this;
         }
         return PrideController;
-    }(General.FilterableViewModel));
+    }());
     Pages.PrideController = PrideController;
 })(Pages || (Pages = {}));
 //# sourceMappingURL=PrideController.js.map
