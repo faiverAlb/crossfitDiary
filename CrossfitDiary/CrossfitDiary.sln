@@ -15,15 +15,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiary.Service.Tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{28B3E737-A314-49F1-910F-3A96E889C5B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiaryCore.Web", "CoreApp\CrossfitDiaryCore.Web\CrossfitDiaryCore.Web.csproj", "{E829EBE1-1C85-4844-A928-D600E7B57B8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossfitDiaryCore.BL.Services", "CoreApp\CrossfitDiaryCore.BL.Services\CrossfitDiaryCore.BL.Services.csproj", "{695FFBCD-2F39-4AF2-993C-44C0514B7E02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiaryCore.BL.Services", "CoreApp\CrossfitDiaryCore.BL.Services\CrossfitDiaryCore.BL.Services.csproj", "{695FFBCD-2F39-4AF2-993C-44C0514B7E02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossfitDiaryCore.BL.Services.Tests", "CoreApp\CrossfitDiaryCore.BL.Services.Tests\CrossfitDiaryCore.BL.Services.Tests.csproj", "{C06A4D4E-C255-48E6-9C19-DE5E4CD8DF0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiaryCore.BL.Services.Tests", "CoreApp\CrossfitDiaryCore.BL.Services.Tests\CrossfitDiaryCore.BL.Services.Tests.csproj", "{C06A4D4E-C255-48E6-9C19-DE5E4CD8DF0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossfitDiaryCore.DAL.EF", "CoreApp\CrossfitDiaryCore.DAL.EF\CrossfitDiaryCore.DAL.EF.csproj", "{AE29E214-3092-4019-9A59-B296CC84CFE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiaryCore.DAL.EF", "CoreApp\CrossfitDiaryCore.DAL.EF\CrossfitDiaryCore.DAL.EF.csproj", "{AE29E214-3092-4019-9A59-B296CC84CFE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossfitDiaryCore.Model", "CoreApp\CrossfitDiaryCore.Model\CrossfitDiaryCore.Model.csproj", "{20CBAFF6-386A-452A-85A4-67F58C6B9F58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiaryCore.Model", "CoreApp\CrossfitDiaryCore.Model\CrossfitDiaryCore.Model.csproj", "{20CBAFF6-386A-452A-85A4-67F58C6B9F58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiaryCore.Web", "CoreApp\CrossfitDiaryCore.Web\CrossfitDiaryCore.Web.csproj", "{5C7FCA6F-1438-4D1B-A7D2-E07220CCA741}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +51,6 @@ Global
 		{E7905286-1EDC-4185-9A55-295152F43619}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7905286-1EDC-4185-9A55-295152F43619}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7905286-1EDC-4185-9A55-295152F43619}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E829EBE1-1C85-4844-A928-D600E7B57B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E829EBE1-1C85-4844-A928-D600E7B57B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E829EBE1-1C85-4844-A928-D600E7B57B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E829EBE1-1C85-4844-A928-D600E7B57B8C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{695FFBCD-2F39-4AF2-993C-44C0514B7E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{695FFBCD-2F39-4AF2-993C-44C0514B7E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{695FFBCD-2F39-4AF2-993C-44C0514B7E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -71,6 +67,10 @@ Global
 		{20CBAFF6-386A-452A-85A4-67F58C6B9F58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20CBAFF6-386A-452A-85A4-67F58C6B9F58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20CBAFF6-386A-452A-85A4-67F58C6B9F58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C7FCA6F-1438-4D1B-A7D2-E07220CCA741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7FCA6F-1438-4D1B-A7D2-E07220CCA741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7FCA6F-1438-4D1B-A7D2-E07220CCA741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7FCA6F-1438-4D1B-A7D2-E07220CCA741}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
