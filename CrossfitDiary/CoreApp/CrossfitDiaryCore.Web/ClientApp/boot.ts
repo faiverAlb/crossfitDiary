@@ -1,3 +1,9 @@
-﻿class boot {
+﻿
+import 'bootstrap/dist/css/bootstrap.css';
+import 'jquery';
+import 'bootstrap';
+
+
+class boot {
   
 }

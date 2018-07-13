@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\dist\generated\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
