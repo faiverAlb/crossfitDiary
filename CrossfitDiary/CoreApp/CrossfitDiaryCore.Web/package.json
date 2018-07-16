@@ -11,9 +11,11 @@
     "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
+    "autoprefixer": "^8.6.5",
     "css-loader": "^1.0.0",
     "file-loader": "^1.1.11",
     "node-sass": "^4.9.2",
+    "postcss-loader": "^2.1.6",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
