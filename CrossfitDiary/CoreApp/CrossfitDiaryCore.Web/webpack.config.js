@@ -1,6 +1,7 @@
 ﻿const path = require('path');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env) => {
   env = env || {};
@@ -20,30 +21,37 @@ module.exports = (env) => {
       extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
     plugins: [
-      new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' })
+      new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
+      new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: "[name].css",
+        chunkFilename: "[id].css"
+      })
     ],
     module: {
       rules: [
         {
           test: /\.(scss)$/,
-          use: [{
-            loader: 'style-loader', // inject CSS to page
-          }, {
-            loader: 'css-loader', // translates CSS into CommonJS modules
-          }, {
-            loader: 'postcss-loader', // Run post css actions
-            options: {
-              plugins: function () { // post css plugins, can be exported to postcss.config.js
-                return [
-                  require('precss'),
-                  require('autoprefixer')
-                ];
+          use: [
+            isProd === false ? 'style-loader' : MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader', // translates CSS into CommonJS modules
+            }, {
+              loader: 'postcss-loader', // Run post css actions
+              options: {
+                plugins: function() { // post css plugins, can be exported to postcss.config.js
+                  return [
+                    require('precss'),
+                    require('autoprefixer')
+                  ];
+                }
               }
+            }, {
+              loader: 'sass-loader' // compiles Sass to CSS
             }
-          }, {
-            loader: 'sass-loader' // compiles Sass to CSS
-          }]
-        }//        { test: /\.scss$/, use: [
+          ]
+        } //        { test: /\.scss$/, use: [
 //          "style-loader", // creates style nodes from JS strings
 //          "css-loader", // translates CSS into CommonJS
 //          "sass-loader" // compiles Sass to CSS

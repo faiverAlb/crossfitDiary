@@ -17,6 +17,7 @@
     "autoprefixer": "^8.6.5",
     "css-loader": "^1.0.0",
     "file-loader": "^1.1.11",
+    "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.2",
     "postcss-loader": "^2.1.6",
     "sass-loader": "^7.0.3",
@@ -28,8 +29,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --config webpack.config.js --watch --progress --profile",
-    "build": "webpack --config webpack.config.js --progress --profile",
-    "prod": "webpack --env.NODE_ENV=production --config webpack.config.js --progress"
+    "build-local": "webpack --config webpack.config.js --progress --profile",
+    "build-prod": "webpack --env.NODE_ENV=production --config webpack.config.js --progress"
   },
   "keywords": [
     "workouter"
