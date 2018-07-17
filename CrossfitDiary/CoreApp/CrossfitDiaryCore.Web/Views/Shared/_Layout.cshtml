@@ -19,11 +19,12 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-    <title>@ViewData["Title"] - CrossfitDiaryCore.Web</title>
+    <title>@ViewBag.Title</title>
 
     <environment include="Development">
-        @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /> *@
+        @* <link rel="stylesheet" href="~/css/all.cs" /> *@
         @* <link rel="stylesheet" href="~/css/site.css" /> *@
+
     </environment>
     <environment exclude="Development">
         @* <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" *@
@@ -34,41 +35,44 @@
     </environment>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    10
-    <div class="container">
-        11
-        <div class="navbar-header">
-            12
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                13
-                <span class="sr-only">Toggle navigation</span>
-                14
-                <span class="icon-bar"></span>
-                15
-                <span class="icon-bar"></span>
-                16
-                <span class="icon-bar"></span>
-                17
-            </button>
-            18
-            <a asp-area="" asp-controller="Persons" asp-action="Index" class="navbar-brand">MinimalAspNetCore</a>
-            19
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+
+        10
+
+        <i class="fas fa-anchor"></i>
+        <div class="container">
+            11
+            <div class="navbar-header">
+                12
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    13
+                    <span class="sr-only">Toggle navigation</span>
+                    14
+                    <span class="icon-bar"></span>
+                    15
+                    <span class="icon-bar"></span>
+                    16
+                    <span class="icon-bar"></span>
+                    17
+                </button>
+                18
+                <a asp-area="" asp-controller="Persons" asp-action="Index" class="navbar-brand">MinimalAspNetCore</a>
+                19
+            </div>
+            20
+            <div class="navbar-collapse collapse">
+                21
+                <ul class="nav navbar-nav">
+                    22
+                    <li><a asp-area="" asp-controller="Persons" asp-action="Index">Home</a></li>
+                    23
+                </ul>
+                24
+            </div>
+            25
         </div>
-        20
-        <div class="navbar-collapse collapse">
-            21
-            <ul class="nav navbar-nav">
-                22
-                <li><a asp-area="" asp-controller="Persons" asp-action="Index">Home</a></li>
-                23
-            </ul>
-            24
-        </div>
-        25
-    </div>
-    26
-</nav>
+        26
+    </nav>
 
 
 <main role="main" class="container">

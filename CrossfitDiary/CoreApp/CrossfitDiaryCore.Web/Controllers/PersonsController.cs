@@ -6,6 +6,7 @@ namespace CrossfitDiaryCore.Web.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "Person Page";
             return View();
         }
 
