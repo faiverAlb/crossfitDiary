@@ -123,6 +123,7 @@
     </Compile>
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Configuration.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder.cs" />
+    <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder_July_2018.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder_June_2018.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder_May_2018.cs" />
     <Compile Include="DataContexts\CrossfitDiaryMigrations\Seeders\ExerciseSeeder_February_2018.cs" />
