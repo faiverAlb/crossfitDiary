@@ -1,6 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'jquery';
 import 'bootstrap';
+import './style/app.scss';
 var boot = /** @class */ (function () {
     function boot() {
     }

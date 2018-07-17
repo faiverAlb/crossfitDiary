@@ -1,8 +1,5 @@
-﻿
-import 'bootstrap/dist/css/bootstrap.css';
-import 'jquery';
-import 'bootstrap';
-
+﻿import 'bootstrap';
+import './style/app.scss';
 
 class boot {
   
