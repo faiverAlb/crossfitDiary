@@ -2,6 +2,7 @@
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (env) => {
   env = env || {};
@@ -34,10 +35,12 @@ module.exports = (env) => {
         {
           test: /\.(scss)$/,
           use: [
-            isProd === false ? 'style-loader' : MiniCssExtractPlugin.loader,
+            MiniCssExtractPlugin.loader,
+//            isProd === false ? 'style-loader' : MiniCssExtractPlugin.loader,
             {
-              loader: 'css-loader', // translates CSS into CommonJS modules
-            }, {
+              loader: 'css-loader',
+            },
+            {
               loader: 'postcss-loader', // Run post css actions
               options: {
                 plugins: function() { // post css plugins, can be exported to postcss.config.js
@@ -47,15 +50,12 @@ module.exports = (env) => {
                   ];
                 }
               }
-            }, {
+            }, 
+            {
               loader: 'sass-loader' // compiles Sass to CSS
             }
           ]
-        } //        { test: /\.scss$/, use: [
-//          "style-loader", // creates style nodes from JS strings
-//          "css-loader", // translates CSS into CommonJS
-//          "sass-loader" // compiles Sass to CSS
-//        ] },
+        } 
 //        { test: /\.css?$/, use: ['style-loader', 'css-loader'] },
 //        { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
 //        { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
@@ -76,7 +76,8 @@ module.exports = (env) => {
           mangle: true
         },
         sourceMap: false
-      })
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ]);
   }
 
