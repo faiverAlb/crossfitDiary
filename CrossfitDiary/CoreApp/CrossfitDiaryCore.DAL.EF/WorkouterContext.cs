@@ -6,6 +6,13 @@ namespace CrossfitDiaryCore.DAL.EF
 {
     public class WorkouterContext: IdentityDbContext
     {
+        public WorkouterContext()
+        {
+
+        }
+        public WorkouterContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<ExerciseMeasure> ExerciseMeasures { get; set; }

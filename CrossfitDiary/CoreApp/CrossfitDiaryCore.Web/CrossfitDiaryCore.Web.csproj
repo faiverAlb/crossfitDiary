@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
   </ItemGroup>
 
@@ -20,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CrossfitDiaryCore.DAL.EF\CrossfitDiaryCore.DAL.EF.csproj" />
     <ProjectReference Include="..\CrossfitDiaryCore.Model\CrossfitDiaryCore.Model.csproj" />
   </ItemGroup>
 
