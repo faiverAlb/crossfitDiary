@@ -4,6 +4,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const destinationFolder = 'wwwroot/dist/generated';
 module.exports = (env) => {
   env = env || {};
   var isProd = env.NODE_ENV === 'production';
@@ -11,10 +12,12 @@ module.exports = (env) => {
   // Setup base config for all environments
   var config = {
     entry: {
-      main: './ClientApp/boot'
+      main: './ClientApp/boot',
+      login: './ClientApp/login-page-entry',
+      fontAwesome:'@fortawesome/fontawesome-free/js/all.js'
     },
     output: {
-      path: path.join(__dirname, 'wwwroot/dist/generated'),
+      path: path.join(__dirname, destinationFolder),
       filename: '[name].js'
     },
     devtool: 'eval-source-map',
@@ -28,7 +31,7 @@ module.exports = (env) => {
         // both options are optional
         filename: "[name].css",
         chunkFilename: "[id].css"
-      })
+      }),
     ],
     module: {
       rules: [
@@ -52,10 +55,21 @@ module.exports = (env) => {
               }
             }, 
             {
-              loader: 'sass-loader' // compiles Sass to CSS
+              loader: 'sass-loader'
             }
+
           ]
-        } 
+        },
+        // the url-loader uses DataUrls. 
+        // the file-loader emits files. 
+        {
+          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: "url-loader?limit=10000&mimetype=application/font-woff"
+        },
+        {
+          test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: "file-loader"
+        },
 //        { test: /\.css?$/, use: ['style-loader', 'css-loader'] },
 //        { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
 //        { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }

@@ -1,3 +1,53 @@
-﻿<h1>
-    Login here!
-</h1>
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-35949393-2"></script>
+    <script>
+
+        var host = window.location.hostname;
+        if (host !== "localhost") {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-35949393-2');
+        }
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <title>Log in</title>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/dist/generated/login.css" asp-append-version="true" />
+
+</head>
+<body>
+    <main role="main" class="container">
+        <div class="login-container mt-5">
+            <div class="text-center py-2 person-icon"><i class="fas fa-user-circle fa-5x"></i></div>
+            <h1 class="h3 mb-3 font-weight-normal text-center">Workouter v0.3.5</h1>
+
+            <form action="/Account/Login?ReturnUrl=%2F" method="post">
+                <input name="__RequestVerificationToken" type="hidden" value="40lmAH0tjAKzxWzSd18yMIHip02uGqC7h99Fznbuh0Ve9D2a9P5G2MQsq3cEUEldXiwW-N9wTjpH1gb_eFs1uJpFR-_ERVEc9No3vGRyxuI1" />        <button type="submit" class="btn btn-lg btn-block social-button" id="Google" value="Google" name="provider">
+                    <i class="fab fa-google-plus-g"></i> Sign in with Google
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+    @* <script src="/bundles/jquery?v=2u0aRenDpYxArEyILB59ETSCA2cfQkSMlxb6jbMBqf81"></script> *@
+
+    @* <script src="/bundles/bootstrap?v=pi-eiLrA7altUrt8UsvSer3p52Sa2PxzF6njkbcP7sU1"></script> *@
+
+
+</body>
+</html>

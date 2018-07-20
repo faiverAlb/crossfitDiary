@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\style\custom-variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\style\custom-variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
@@ -17,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\dist\generated\" />
-    <Folder Include="wwwroot\lib\" />
+    <None Include="wwwroot\dist\generated\fontAwesome.js" />
+    <None Include="wwwroot\dist\generated\main.js" />
   </ItemGroup>
 
   <ItemGroup>
