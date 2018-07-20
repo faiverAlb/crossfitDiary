@@ -37,7 +37,7 @@
 
   <Target Name="BuildClientAssets" AfterTargets="ComputeFilesToPublish">
     <Exec Command="npm install" />
-    <Exec Command="npm run prod" />
+    <Exec Command="npm run build-prod" />
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
