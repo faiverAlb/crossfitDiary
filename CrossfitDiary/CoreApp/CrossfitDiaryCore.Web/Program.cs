@@ -20,6 +20,18 @@ namespace CrossfitDiaryCore.Web
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .ConfigureAppConfiguration((context, builder) =>
+                {
+//                    if (context.HostingEnvironment.IsDevelopment())
+//                    {
+//                        builder.AddUserSecrets<Startup>();
+//                    }
+
+                    builder.SetBasePath(context.HostingEnvironment.ContentRootPath)
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true)
+                        .AddEnvironmentVariables();
+                })
                 .Build();
     }
 }
