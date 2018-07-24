@@ -88,7 +88,8 @@ namespace CrossfitDiaryCore.Web
             }
 
             app.UseStaticFiles();
-
+            app.UseAuthentication();
+            app.UseStatusCodePagesWithRedirects("/Error");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

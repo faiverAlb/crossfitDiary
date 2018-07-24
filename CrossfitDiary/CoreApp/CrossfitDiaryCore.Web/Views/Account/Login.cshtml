@@ -35,11 +35,12 @@
             <div class="text-center py-2 person-icon"><i class="fas fa-user-circle fa-5x"></i></div>
             <h1 class="h3 mb-3 font-weight-normal text-center">Workouter v0.3.5</h1>
 
-            @* <form action="/Account/Login?ReturnUrl=%2F" method="post"> *@
-            @*     <input name="__RequestVerificationToken" type="hidden" value="40lmAH0tjAKzxWzSd18yMIHip02uGqC7h99Fznbuh0Ve9D2a9P5G2MQsq3cEUEldXiwW-N9wTjpH1gb_eFs1uJpFR-_ERVEc9No3vGRyxuI1" />        <button type="submit" class="btn btn-lg btn-block social-button" id="Google" value="Google" name="provider"> *@
-            @*         <i class="fab fa-google-plus-g"></i> Sign in with Google *@
-            @*     </button> *@
-            @* </form> *@
+            <form asp-action="Confirmation" method="post">
+                <button type="submit" class="btn btn-lg btn-block social-button" id="Google" value="Google" name="provider">
+                    <i class="fab fa-google-plus-g"></i> Sign in with Google
+                </button>
+            </form>
+
         </div>
     </main>
 </body>
