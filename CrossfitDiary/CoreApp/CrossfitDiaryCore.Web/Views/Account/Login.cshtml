@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    string currentVersion = string.Format("{0}.{1}.{2}", typeof(Startup).Assembly.GetName().Version.Major, typeof(Startup).Assembly.GetName().Version.Minor, typeof(Startup).Assembly.GetName().Version.Build);
 }
 <!DOCTYPE html>
 <html>
@@ -33,7 +34,7 @@
     <main role="main" class="container">
         <div class="login-container mt-5">
             <div class="text-center py-2 person-icon"><i class="fas fa-user-circle fa-5x"></i></div>
-            <h1 class="h3 mb-3 font-weight-normal text-center">Workouter v0.3.5</h1>
+            <h1 class="h3 mb-3 font-weight-normal text-center">Workouter v@(currentVersion)</h1>
 
             <form asp-action="Confirmation" method="post">
                 <button type="submit" class="btn btn-lg btn-block social-button" id="Google" value="Google" name="provider">
