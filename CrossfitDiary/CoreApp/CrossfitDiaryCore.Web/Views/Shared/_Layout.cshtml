@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string currentVersion = string.Format("{0}.{1}.{2}", typeof(Startup).Assembly.GetName().Version.Major, typeof(Startup).Assembly.GetName().Version.Minor, typeof(Startup).Assembly.GetName().Version.Build);
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -37,78 +41,110 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <header>
+        <nav class="navbar navbar-expand navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand text-secondary">
+                    <i class="fa fa-home" aria-hidden="true"></i> Workouter v@(currentVersion)
+                </a>
 
-        10
+                <div class="navbar-collapse" id="navBar">
+                    <ul class="navbar-nav mr-auto">
+                            <li class="nav-item mr-1">
+                                <a class="nav-link btn btn-info text-light d-inline-block d-md-none p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <div class="small-action-link-button">
+                                        <div class="icon-container">
+                                            <i class="fas fa-trophy"></i>
+                                        </div>
+                                        <div class="text-container">MAX</div>
+                                    </div>
+                                    <span class="d-none d-md-inline">Weight maximums</span>
+                                </a>
+                                <a class="nav-link btn btn-info text-light d-none d-md-inline-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fas fa-trophy"></i>
+                                    <span class="d-none d-md-inline">Weight maximums</span>
+                                </a>
+                            </li>
 
-        <i class="fas fa-anchor"></i>
-        <i class="fab fa-anchor"></i>
-        <div class="container">
-            11
-            <div class="navbar-header">
-                12
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    13
-                    <span class="sr-only">Toggle navigation</span>
-                    14
-                    <span class="icon-bar"></span>
-                    15
-                    <span class="icon-bar"></span>
-                    16
-                    <span class="icon-bar"></span>
-                    17
-                </button>
-                18
-                <a asp-area="" asp-controller="Persons" asp-action="Index" class="navbar-brand">MinimalAspNetCore</a>
-                19
+
+                        <li class="nav-item mr-1">
+                            <a class="nav-link btn btn-success text-light d-inline-block d-md-none p-0">
+                                <div class="small-action-link-button">
+                                    <div class="icon-container">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <div class="text-container">LOG</div>
+                                </div>
+                            </a>
+                            <a class="nav-link btn btn-success text-light d-none d-md-inline-block">
+                                <i class="fa fa-rocket" aria-hidden="true"></i>
+                                <span>Create/Log workout</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mr-1  ">
+                            <a class="nav-link btn btn-warning text-light d-inline-block d-md-none p-0">
+                                <div class="small-action-link-button">
+                                    <div class="icon-container">
+                                        <i class="fas fa-calculator"></i>
+                                    </div>
+                                    <div class="text-container">PRIDE</div>
+                                </div>
+
+                                <span class="d-none d-md-inline">Our prides</span>
+                            </a>
+                            <a class="nav-link btn btn-warning text-light d-none d-md-inline-block">
+                                <i class="fa fa-calculator" aria-hidden="true"></i>
+                                <span class="d-none d-md-inline">Our prides</span>
+                            </a>
+
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0 d-none d-lg-inline">
+                        <span class="navbar-text mr-lg-2 ">
+                            @User.Identity.Name
+                        </span>
+                        <a class="btn btn-outline-primary ">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="d-none d-lg-inline">Log Out</span>
+                        </a>
+                    </form>
+
+                </div>
             </div>
-            20
-            <div class="navbar-collapse collapse">
-                21
-                <ul class="nav navbar-nav">
-                    22
-                    <li><a asp-area="" asp-controller="Persons" asp-action="Index">Home</a></li>
-                    23
-                </ul>
-                24
-            </div>
-            25
-        </div>
-        26
-    </nav>
+        </nav>
 
+    </header>
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
 
-<main role="main" class="container">
-    @RenderBody()
-</main>
+    <environment include="Development">
+        @* <script src="~/lib/jquery/dist/jquery.js"></script> *@
+        @* <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> *@
+        <script src="~/dist/generated/main.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
 
-<environment include="Development">
-    @* <script src="~/lib/jquery/dist/jquery.js"></script> *@
-    @* <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> *@
-    <script src="~/dist/generated/main.js" asp-append-version="true"></script>
-</environment>
-<environment exclude="Development">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
+        <script src="~/dist/generated/main.js" asp-append-version="true"></script>
 
-    <script src="~/dist/generated/main.js" asp-append-version="true"></script>
+        @*         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js" asp-fallback-src="~/lib/jquery/dist/jquery.min.js" *@
+        @*                 asp-fallback-test="window.jQuery" *@
+        @*                 crossorigin="anonymous" *@
+        @*                 integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk"> *@
+        @*         </script> *@
+        @* <script
+            src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js" *@
+        @* asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js" *@
+        @* asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal" *@
+        @* crossorigin="anonymous" *@
+        @* integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"> *@
+        @* </script> *@
+        @* <script src="~/js/site.min.js" asp-append-version="true"></script> *@
+    </environment>
 
-    @*         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js" asp-fallback-src="~/lib/jquery/dist/jquery.min.js" *@
-    @*                 asp-fallback-test="window.jQuery" *@
-    @*                 crossorigin="anonymous" *@
-    @*                 integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk"> *@
-    @*         </script> *@
-    @* <script
-        src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js" *@
-    @* asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js" *@
-    @* asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal" *@
-    @* crossorigin="anonymous" *@
-    @* integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"> *@
-    @* </script> *@
-    @* <script src="~/js/site.min.js" asp-append-version="true"></script> *@
-</environment>
-
-@RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
