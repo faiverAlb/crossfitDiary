@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CrossfitDiaryCore.DAL.EF.Configurations
+namespace CrossfitDiaryCore.DAL.EF.Exercises
 {
     public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
     {

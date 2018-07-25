@@ -1,4 +1,4 @@
-﻿using CrossfitDiaryCore.DAL.EF.Configurations;
+﻿using CrossfitDiaryCore.DAL.EF.Exercises;
 using CrossfitDiaryCore.Model;
 using Microsoft.EntityFrameworkCore;
 
