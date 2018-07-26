@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CrossfitDiaryCore.DAL.EF;
-using CrossfitDiaryCore.DAL.EF.CrossfitterWorkouts;
 using CrossfitDiaryCore.DAL.EF.Exercises;
-using CrossfitDiaryCore.DAL.EF.RoutinesComplex;
 using CrossfitDiaryCore.DAL.EF.WorkoutMatchers;
 using CrossfitDiaryCore.Model;
 
@@ -12,22 +10,11 @@ namespace CrossfitDiaryCore.BL.Services
     public class ReadWorkoutsService
     {
         private readonly WorkouterContext _context;
-        private readonly RoutineComplexRepository _routineComplexRepository;
-        private readonly ExerciseRepository _exerciseRepository;
-        private readonly CrossfitterWorkoutRepository _crossfitterWorkoutRepository;
         private readonly WorkoutsMatchDispatcher _workoutsMatchDispatcher;
 
-        public ReadWorkoutsService(WorkouterContext  context,
-            RoutineComplexRepository routineComplexRepository
-            , ExerciseRepository exerciseRepository
-            , CrossfitterWorkoutRepository crossfitterWorkoutRepository
-            , WorkoutsMatchDispatcher workoutsMatchDispatcher)
+        public ReadWorkoutsService(WorkouterContext  context, WorkoutsMatchDispatcher workoutsMatchDispatcher)
         {
             _context = context;
-            _routineComplexRepository = routineComplexRepository;
-            
-            _exerciseRepository = exerciseRepository;
-            _crossfitterWorkoutRepository = crossfitterWorkoutRepository;
             _workoutsMatchDispatcher = workoutsMatchDispatcher;
         }
 
@@ -73,15 +60,16 @@ namespace CrossfitDiaryCore.BL.Services
         /// </returns>
         public PersonMaximum GetPersonMaximumForExercise(string userId, int exerciseId)
         {
-            List<CrossfitterWorkout> workoutsWithExericesOnly = _crossfitterWorkoutRepository
-                        .GetMany(x => x.Crossfitter.Id == userId
+            
+            List<CrossfitterWorkout> workoutsWithExericesOnly = _context.CrossfitterWorkouts.Where(x => x.Crossfitter.Id == userId
                                       && (x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId)
                                       || x.RoutineComplex.Children.Any(child => child.RoutineSimple.Any(chZ => chZ.ExerciseId == exerciseId)))
                                       && x.RepsToFinishOnCapTime.HasValue == false)
                                     
                         .ToList();
 
-            string exerciseAbbreviation = _exerciseRepository.GetById(exerciseId).Abbreviation;
+            
+            string exerciseAbbreviation = _context.Exercises.Single(x => x.Id == exerciseId).Abbreviation;
 
             var routineDictionary = new Dictionary<int, List<RoutineSimple>>();
             foreach (CrossfitterWorkout workout in workoutsWithExericesOnly)
@@ -182,7 +170,7 @@ namespace CrossfitDiaryCore.BL.Services
         /// </summary>
         public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId, int page, int pageSize)
         {
-            List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)?_crossfitterWorkoutRepository.GetAll().ToList() : _crossfitterWorkoutRepository.GetMany(x => x.Crossfitter.Id == userId).ToList();
+            List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)? _context.CrossfitterWorkouts.ToList() : _context.CrossfitterWorkouts.Where(x => x.Crossfitter.Id == userId).ToList();
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
             UpdateWorkoutsWithRecords(crossfitterWorkouts);

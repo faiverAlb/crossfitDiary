@@ -1,6 +1,8 @@
 ﻿using System;
 using AutoMapper;
+using CrossfitDiaryCore.BL.Services;
 using CrossfitDiaryCore.DAL.EF;
+using CrossfitDiaryCore.DAL.EF.WorkoutMatchers;
 using CrossfitDiaryCore.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,8 +26,8 @@ namespace CrossfitDiaryCore.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper();
-            services.AddMvc();
-//
+            services.AddMvc().AddControllersAsServices();
+            //
             services.AddDbContext<WorkouterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CrossfitDiaryDB")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -70,8 +72,13 @@ namespace CrossfitDiaryCore.Web
                     options.SlidingExpiration = true;
                 });
 
-//            services.AddTransient<DoneService>();
+            services.AddTransient<ReadWorkoutsService>();
 
+            services.AddTransient<WorkoutsMatchDispatcher>();
+
+            services.AddTransient<IWorkoutMatcher, ComplexParametersMatcher>();
+            services.AddTransient<IWorkoutMatcher, ChildrenWorkoutsMatcher>();
+            services.AddTransient<IWorkoutMatcher, ExerciseMatcher>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
