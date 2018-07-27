@@ -12,7 +12,7 @@ namespace CrossfitDiaryCore.DAL.EF.CrossfitterWorkouts
             builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.RoutineComplexId).IsRequired();
 
-            builder.HasOne(x => x.Crossfitter).WithMany(x => x.CrossfitterWorkout).HasForeignKey("Crossfitter_Id");
+            builder.HasOne(x => x.Crossfitter).WithMany(x => x.CrossfitterWorkout);
             builder.HasOne(x => x.RoutineComplex);
 
             builder.Property(x => x.Date).IsRequired();

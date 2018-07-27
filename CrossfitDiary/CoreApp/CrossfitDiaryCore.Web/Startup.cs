@@ -28,7 +28,7 @@ namespace CrossfitDiaryCore.Web
             services.AddAutoMapper();
             services.AddMvc().AddControllersAsServices();
             //
-            services.AddDbContext<WorkouterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CrossfitDiaryDB")));
+            services.AddDbContext<WorkouterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CrossfitDiaryDB_Core")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<WorkouterContext>()

@@ -84,7 +84,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<DateTime>("CreatedUtc")
                         .ValueGeneratedOnAddOrUpdate();
 
-//                    b.Property<string>("CrossfitterId");
+                    b.Property<string>("CrossfitterId")
+                        .IsRequired();
 
                     b.Property<DateTime>("Date");
 
@@ -364,7 +365,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                 {
                     b.HasOne("CrossfitDiaryCore.Model.ApplicationUser", "Crossfitter")
                         .WithMany("CrossfitterWorkout")
-                        .HasForeignKey("CrossfitterId");
+                        .HasForeignKey("CrossfitterId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CrossfitDiaryCore.Model.RoutineComplex", "RoutineComplex")
                         .WithMany()

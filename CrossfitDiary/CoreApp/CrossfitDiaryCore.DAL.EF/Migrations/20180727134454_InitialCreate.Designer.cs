@@ -12,7 +12,7 @@ using System;
 namespace CrossfitDiaryCore.DAL.EF.Migrations
 {
     [DbContext(typeof(WorkouterContext))]
-    [Migration("20180724070656_InitialCreate")]
+    [Migration("20180727134454_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,7 +85,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<DateTime>("CreatedUtc")
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<string>("CrossfitterId");
+                    b.Property<string>("CrossfitterId")
+                        .IsRequired();
 
                     b.Property<DateTime>("Date");
 
@@ -115,7 +116,7 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.HasIndex("RoutineComplexId");
 
-                    b.ToTable("CrossfitterWorkouts");
+                    b.ToTable("CrossfitterWorkout");
                 });
 
             modelBuilder.Entity("CrossfitDiaryCore.Model.Exercise", b =>
@@ -155,7 +156,7 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.HasIndex("ExerciseMeasureTypeId");
 
-                    b.ToTable("ExerciseMeasures");
+                    b.ToTable("ExerciseMeasure");
                 });
 
             modelBuilder.Entity("CrossfitDiaryCore.Model.ExerciseMeasureType", b =>
@@ -166,15 +167,17 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<DateTime>("CreatedUtc")
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
                     b.Property<int>("MeasureType");
 
-                    b.Property<string>("ShortMeasureDescription");
+                    b.Property<string>("ShortMeasureDescription")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.ToTable("ExerciseMeasureTypes");
+                    b.ToTable("ExerciseMeasureType");
                 });
 
             modelBuilder.Entity("CrossfitDiaryCore.Model.RoutineComplex", b =>
@@ -211,7 +214,7 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("ComplexRoutines");
+                    b.ToTable("RoutineComplex");
                 });
 
             modelBuilder.Entity("CrossfitDiaryCore.Model.RoutineSimple", b =>
@@ -248,7 +251,7 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.HasIndex("RoutineComplexId");
 
-                    b.ToTable("SimpleRoutines");
+                    b.ToTable("RoutineSimple");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -363,7 +366,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                 {
                     b.HasOne("CrossfitDiaryCore.Model.ApplicationUser", "Crossfitter")
                         .WithMany("CrossfitterWorkout")
-                        .HasForeignKey("CrossfitterId");
+                        .HasForeignKey("CrossfitterId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CrossfitDiaryCore.Model.RoutineComplex", "RoutineComplex")
                         .WithMany()
