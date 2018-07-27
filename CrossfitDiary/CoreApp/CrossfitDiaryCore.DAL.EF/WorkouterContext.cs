@@ -1,4 +1,9 @@
-﻿using CrossfitDiaryCore.DAL.EF.Exercises;
+﻿using CrossfitDiaryCore.DAL.EF.CrossfitterWorkouts;
+using CrossfitDiaryCore.DAL.EF.ExerciseMeasures;
+using CrossfitDiaryCore.DAL.EF.ExerciseMeasureTypes;
+using CrossfitDiaryCore.DAL.EF.Exercises;
+using CrossfitDiaryCore.DAL.EF.RoutinesComplex;
+using CrossfitDiaryCore.DAL.EF.RoutinesSimple;
 using CrossfitDiaryCore.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +31,15 @@ namespace CrossfitDiaryCore.DAL.EF
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<ApplicationUser>().HasMany(x => x.CrossfitterWorkout);
+            builder.Entity<ApplicationUser>().HasMany(x => x.RoutineComplexCollection);
+
             builder.ApplyConfiguration(new ExerciseConfiguration());
+            builder.ApplyConfiguration(new CrossfitterWorkoutConfiguration());
+            builder.ApplyConfiguration(new RoutineSimpleConfiguration());
+            builder.ApplyConfiguration(new RoutineComplexConfiguration());
+            builder.ApplyConfiguration(new ExerciseMeasureConfiguration());
+            builder.ApplyConfiguration(new ExerciseMeasureTypeConfiguration());
         }
     }
 }
