@@ -14,5 +14,16 @@ namespace CrossfitDiaryCore.DAL.EF
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<ApplicationUser>()
+                   .HasMany(x => x.CrossfitterWorkout)
+                   .WithOne(x => x.Crossfitter)
+                   .IsRequired();
+            builder.Entity<ApplicationUser>().HasMany(x => x.RoutineComplexCollection);
+        }
     }
 }

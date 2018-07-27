@@ -19,27 +19,26 @@ namespace CrossfitDiaryCore.DAL.EF
         {
         }
 
-        public DbSet<Exercise> Exercises { get; set; }
+        public virtual DbSet<Exercise> Exercises { get; set; }
         public DbSet<ExerciseMeasure> ExerciseMeasures { get; set; }
         public DbSet<RoutineSimple> SimpleRoutines { get; set; }
         public DbSet<RoutineComplex> ComplexRoutines { get; set; }
         public DbSet<ExerciseMeasureType> ExerciseMeasureTypes { get; set; }
 
-        public DbSet<CrossfitterWorkout> CrossfitterWorkouts { get; set; }
+        public virtual DbSet<CrossfitterWorkout> CrossfitterWorkouts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<ApplicationUser>().HasMany(x => x.CrossfitterWorkout);
-            builder.Entity<ApplicationUser>().HasMany(x => x.RoutineComplexCollection);
-
             builder.ApplyConfiguration(new ExerciseConfiguration());
-            builder.ApplyConfiguration(new CrossfitterWorkoutConfiguration());
             builder.ApplyConfiguration(new RoutineSimpleConfiguration());
             builder.ApplyConfiguration(new RoutineComplexConfiguration());
             builder.ApplyConfiguration(new ExerciseMeasureConfiguration());
             builder.ApplyConfiguration(new ExerciseMeasureTypeConfiguration());
+            builder.ApplyConfiguration(new CrossfitterWorkoutConfiguration());
+
+
         }
     }
 }
