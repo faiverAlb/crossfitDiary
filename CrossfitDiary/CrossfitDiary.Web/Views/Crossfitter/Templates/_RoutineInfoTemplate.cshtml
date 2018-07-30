@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="row" data-bind="if: _canSeeTimeToWork">
-                <div class="col-lg-3 pb-2" >
+                <div class="col-lg-3 pb-2">
                     <label for="timeInput" class="sr-only">Time to work:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -42,11 +42,7 @@
         </div>
         <!-- /ko -->
     </div>
-    <!-- ko if: _isWorkoutsContainer === false-->
-    <div class="py-2">
-        <select class="form-control exercise-selector" data-live-search="true" data-bind="options: _exercises, optionsText:'title',value: _selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
-    </div>
-    <!-- /ko -->
+
     <div class="inner-workouts" data-bind="foreach:_innerWorkouts">
         <div class="workout">
             <div class="inner-workout-header">
@@ -70,7 +66,24 @@
             No exercises selected
         </div>
         <!-- /ko -->
+
+        <div class="offset-lg-9 col-lg-3 pb-2 offset-5 col-7" style="padding-right: 0;padding-left: 0;">
+            <label for="timeInput" class="sr-only">Time to work:</label>
+            <div class="input-group py-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Rest after:</div>
+                </div>
+                <input type="text" pattern="[0-9]*" inputmode="numeric" class="form-control" id="timeInput" placeholder="Rest between rounds" data-bind="validationElement: _timeToWork, inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+            </div>
+        </div>
+
     </div>
+
+    <!-- ko if: _isWorkoutsContainer === false-->
+    <div class="py-2">
+        <select class="form-control exercise-selector" data-live-search="true" data-bind="options: _exercises, optionsText:'title',value: _selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
+    </div>
+    <!-- /ko -->
     <div class="mt-3">
         <!-- ko if: $root._isDefaultMode && _isWorkoutsContainer -->
         <button class="btn btn-warning" data-bind="click: addInnerWorkout">Add workout after</button>
