@@ -63,22 +63,9 @@
         <!-- /ko -->
     </div>
 
-    <!-- ko if: _isWorkoutsContainer === false-->
-    <div class="py-2">
-        <select class="form-control exercise-selector" data-live-search="true" data-bind="options: _exercises, optionsText:'title',value: _selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
-    </div>
-    <!-- /ko -->
-    
-    <div class="routines-container pt-2">
-        <!-- ko if: _exercisesToBeDone().length == 0 && _isWorkoutsContainer === false-->
-        <div class="simple-routine-item text-center no-selected-container" data-bind="validationElement: _exercisesToBeDone">
-            No exercises selected
-        </div>
-        <!-- /ko -->
-    </div>
-    
-    <div class="row">
-        <div class="offset-lg-8 col-lg-4 ">
+    <!-- ko if: _exercisesToBeDone().length > 0 -->
+    <div class="row py-1">
+        <div class="col-lg-4 ">
             <label for="timeInput" class="sr-only">Rest after</label>
             <div class="input-group py-2">
                 <div class="input-group-prepend">
@@ -88,6 +75,21 @@
             </div>
         </div>
     </div>
+    <!-- /ko -->
+    <!-- ko if: _isWorkoutsContainer === false-->
+    <div class="py-2 ">
+        <select class="form-control exercise-selector" data-live-search="true" data-bind="options: _exercises, optionsText:'title',value: _selectedExercise, optionsCaption: 'Add an exercise...',selectPicker: {}"></select>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: _exercisesToBeDone().length == 0 && _isWorkoutsContainer === false-->
+    <div class="routines-container pt-2">
+        <div class="simple-routine-item text-center no-selected-container" data-bind="validationElement: _exercisesToBeDone">
+            No exercises selected
+        </div>
+    </div>
+    <!-- /ko -->
+
+
 
     <div class="mt-3">
         <!-- ko if: $root._isDefaultMode && _isWorkoutsContainer -->
