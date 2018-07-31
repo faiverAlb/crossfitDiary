@@ -79,12 +79,12 @@
     
     <div class="row">
         <div class="offset-lg-8 col-lg-4 ">
-            <label for="timeInput" class="sr-only">Time to work:</label>
+            <label for="timeInput" class="sr-only">Rest after</label>
             <div class="input-group py-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Rest after:</div>
                 </div>
-                <input type="text" pattern="[0-9]*" inputmode="numeric" class="form-control" id="timeInput" placeholder="Rest between rounds" data-bind="validationElement: _timeToWork, inputmask:{value: _timeToWork, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
+                <input type="text" pattern="[0-9]*" inputmode="numeric" class="form-control" id="restBetweenRoundsInput" placeholder="Rest between rounds" data-bind="validationElement: _restBetweenRounds, inputmask:{value: _restBetweenRounds, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}">
             </div>
         </div>
     </div>
