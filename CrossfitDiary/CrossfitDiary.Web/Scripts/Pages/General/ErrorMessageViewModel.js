@@ -1,6 +1,6 @@
 var General;
 (function (General) {
-    var ErrorMessageViewModel = /** @class */ (function () {
+    var ErrorMessageViewModel = (function () {
         function ErrorMessageViewModel() {
             var _this = this;
             this.message = ko.observable(null);

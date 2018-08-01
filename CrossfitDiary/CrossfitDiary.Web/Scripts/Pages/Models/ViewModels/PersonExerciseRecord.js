@@ -1,6 +1,6 @@
 var Models;
 (function (Models) {
-    var PersonExerciseRecord = /** @class */ (function () {
+    var PersonExerciseRecord = (function () {
         function PersonExerciseRecord(params) {
             if (params == null) {
                 return;

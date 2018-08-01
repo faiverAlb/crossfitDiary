@@ -1,6 +1,6 @@
 var Models;
 (function (Models) {
-    var WorkoutViewModel = /** @class */ (function () {
+    var WorkoutViewModel = (function () {
         function WorkoutViewModel(params) {
             if (params == null) {
                 return;

@@ -1,4 +1,4 @@
-var ServerProcessedViewModel = /** @class */ (function () {
+var ServerProcessedViewModel = (function () {
     function ServerProcessedViewModel(searchingWord, pageIndex, pageSize, propertyToSortBy, orderByAsc) {
         if (searchingWord === void 0) { searchingWord = ""; }
         if (pageIndex === void 0) { pageIndex = 1; }

@@ -1,6 +1,6 @@
 var General;
 (function (General) {
-    var BasicParameters = /** @class */ (function () {
+    var BasicParameters = (function () {
         function BasicParameters(pathToApp) {
             this.pathToApp = pathToApp;
         }

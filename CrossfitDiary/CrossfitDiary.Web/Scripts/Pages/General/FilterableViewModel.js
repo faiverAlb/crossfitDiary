@@ -1,6 +1,6 @@
 var General;
 (function (General) {
-    var FilterableViewModel = /** @class */ (function () {
+    var FilterableViewModel = (function () {
         function FilterableViewModel() {
             this.filter = ko.observable();
         }

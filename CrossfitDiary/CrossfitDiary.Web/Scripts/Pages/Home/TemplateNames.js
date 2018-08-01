@@ -1,6 +1,6 @@
 var Pages;
 (function (Pages) {
-    var TemplatesNames = /** @class */ (function () {
+    var TemplatesNames = (function () {
         function TemplatesNames() {
         }
         TemplatesNames.ConfirmToRemoveWorkout = "confirm-to-remove-workout-template";

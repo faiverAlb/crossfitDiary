@@ -13,7 +13,7 @@ var General;
     var ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
     var ExerciseViewModel = Models.ExerciseViewModel;
     var PersonExerciseRecord = Models.PersonExerciseRecord;
-    var CrossfitterService = /** @class */ (function (_super) {
+    var CrossfitterService = (function (_super) {
         __extends(CrossfitterService, _super);
         function CrossfitterService(pathToApp, isDataLoading) {
             var _this = _super.call(this) || this;

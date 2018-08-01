@@ -1,6 +1,6 @@
 var General;
 (function (General) {
-    var BaseService = /** @class */ (function () {
+    var BaseService = (function () {
         function BaseService() {
             this.constructPagingUrl = function (url, serverProcessedViewModel) {
                 var trimmed = url.replace(/\/+$/, "");

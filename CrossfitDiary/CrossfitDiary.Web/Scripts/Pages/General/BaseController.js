@@ -1,6 +1,6 @@
 var General;
 (function (General) {
-    var BaseController = /** @class */ (function () {
+    var BaseController = (function () {
         function BaseController() {
             this.isDataLoading = ko.observable(false);
         }

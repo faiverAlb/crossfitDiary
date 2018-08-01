@@ -1,6 +1,6 @@
 var Models;
 (function (Models) {
-    var ToLogWorkoutViewModelObservable = /** @class */ (function () {
+    var ToLogWorkoutViewModelObservable = (function () {
         function ToLogWorkoutViewModelObservable(workoutType, isEditMode, selectedWorkoutId, logModel) {
             var _this = this;
             this.workoutType = workoutType;
