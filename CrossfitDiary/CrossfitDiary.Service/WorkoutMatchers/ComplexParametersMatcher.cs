@@ -30,6 +30,11 @@ namespace CrossfitDiary.Service.WorkoutMatchers
                 return false;
             }
 
+            if (firstRoutineComplex.RestBetweenRounds != secondRoutineComplex.RestBetweenRounds)
+            {
+                return false;
+            }
+
             return true;
 
         }
