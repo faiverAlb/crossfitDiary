@@ -53,22 +53,10 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.Children, x => x.MapFrom(y => y.OrderedChildren))
                 .ForMember(x => x.ExercisesToDoList, x => x.MapFrom(y => y.RoutineSimple))
                 .ForMember(x => x.RoundsCount, x => x.MapFrom(y => y.RoundCount))
-                .ForMember(x => x.TimeToWork,
-                    x => x.MapFrom(y =>
-                        y.TimeToWork.HasValue
-                            ? $"{Math.Floor(y.TimeToWork.Value.TotalMinutes):00}:{y.TimeToWork.Value.Seconds:00}"
-                            : string.Empty))
-                .ForMember(x => x.TimeCap,
-                    x => x.MapFrom(y =>
-                        y.TimeCap.HasValue
-                            ? $"{Math.Floor(y.TimeCap.Value.TotalMinutes):00}:{y.TimeCap.Value.Seconds:00}"
-                            : string.Empty))
-                .ForMember(x => x.RestBetweenExercises,
-                    x => x.MapFrom(y =>
-                        y.RestBetweenExercises.HasValue
-                            ? $"{Math.Floor(y.RestBetweenExercises.Value.TotalMinutes)}:{y.RestBetweenExercises.Value.Seconds}"
-                            : string.Empty))
-                .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => y.RestBetweenRounds.HasValue?$"{Math.Floor(y.RestBetweenRounds.Value.TotalMinutes)}:{y.RestBetweenRounds.Value.Seconds}" :string.Empty));
+                .ForMember(x => x.TimeToWork, x => x.MapFrom(y => ResolveTimeSpan(y.TimeToWork)))
+                .ForMember(x => x.TimeCap, x => x.MapFrom(y => ResolveTimeSpan(y.TimeCap)))
+                .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => ResolveTimeSpan(y.RestBetweenExercises)))
+                .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => ResolveTimeSpan(y.RestBetweenRounds)));
 
             CreateMap<RoutineSimple, ExerciseViewModel>()
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.ExerciseId))
@@ -122,6 +110,16 @@ namespace CrossfitDiary.Web.Mappings
                     }
                     dest.ExerciseMeasures = toMapExercises;
                 });
+        }
+
+        private string ResolveTimeSpan(TimeSpan? timeSpan)
+        {
+            if (timeSpan == null)
+            {
+                return string.Empty;
+            }
+
+            return $"{Math.Floor(timeSpan.Value.TotalMinutes):00}:{timeSpan.Value.Seconds:00}";
         }
     }
 }

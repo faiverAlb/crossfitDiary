@@ -1,0 +1,42 @@
+{
+  "version": "0.3.6",
+  "name": "crossfit.diary.core",
+  "private": true,
+  "description": "crossfit diary on asp.net core ",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "precss": "^3.1.2",
+    "webpack-cli": "^3.0.8"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.1.0",
+    "autoprefixer": "^8.6.5",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "file-loader": "^1.1.11",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.0",
+    "postcss-loader": "^2.1.6",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.16.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --config webpack.config.js --watch --progress --profile",
+    "build-local": "webpack --config webpack.config.js --progress --profile",
+    "build-prod": "webpack --env.NODE_ENV=production --config webpack.config.js --progress"
+  },
+  "keywords": [
+    "workouter"
+  ],
+  "author": "",
+  "license": "ISC"
+}

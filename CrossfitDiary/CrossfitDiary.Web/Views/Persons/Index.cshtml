@@ -179,6 +179,13 @@
             <!-- /ko -->
         </div>
         <!-- /ko -->
+        
+        <!-- ko if: restBetweenRounds-->
+        <div class="rest-between-rounds">
+            <span>Rest: </span>
+            <span data-bind="text: restBetweenRounds"></span>
+        </div>
+        <!-- /ko -->
     </div>
     <div class="inner-workouts pl-3 pt-1">
         <!-- ko foreach:children-->

@@ -9899,6 +9899,9 @@ table > tbody > tr.empty-data {
   .home-container .activities-list .done-item .item-body .inner-workouts .then-container {
     font-weight: bold;
     padding: 3px 0 6px 0; }
+  .home-container .activities-list .done-item .item-body .rest-between-rounds {
+    padding-top: 2px;
+    font-weight: 500; }
   .home-container .activities-list .done-item .item-footer {
     margin-top: 4px;
     border-top: 1px dashed #a6a6a6; }
