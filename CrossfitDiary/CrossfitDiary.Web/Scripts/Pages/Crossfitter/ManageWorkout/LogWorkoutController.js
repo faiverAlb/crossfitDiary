@@ -12,7 +12,7 @@ var Pages;
 (function (Pages) {
     var ToLogWorkoutViewModelObservable = Models.ToLogWorkoutViewModelObservable;
     var BaseController = General.BaseController;
-    var LogWorkoutController = (function (_super) {
+    var LogWorkoutController = /** @class */ (function (_super) {
         __extends(LogWorkoutController, _super);
         function LogWorkoutController(workoutToUse, isCreateAndLogWorkout, service, errorMessager, isEditMode, logModel) {
             var _this = _super.call(this) || this;

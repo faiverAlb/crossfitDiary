@@ -1,6 +1,6 @@
 var Models;
 (function (Models) {
-    var ObservablePersonExerciseRecord = (function () {
+    var ObservablePersonExerciseRecord = /** @class */ (function () {
         function ObservablePersonExerciseRecord(personName, maximumWeight, date, workoutTitle, positionBetweenOthers, isItMe) {
             this.personName = ko.observable(personName);
             this.maximumWeight = ko.observable(maximumWeight);

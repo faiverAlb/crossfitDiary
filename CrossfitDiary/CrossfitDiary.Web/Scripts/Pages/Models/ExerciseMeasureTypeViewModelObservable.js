@@ -1,6 +1,6 @@
 var Models;
 (function (Models) {
-    var ExerciseMeasureTypeViewModelObservable = (function () {
+    var ExerciseMeasureTypeViewModelObservable = /** @class */ (function () {
         function ExerciseMeasureTypeViewModelObservable(model, personMaximumWeight) {
             var _this = this;
             this.model = model;

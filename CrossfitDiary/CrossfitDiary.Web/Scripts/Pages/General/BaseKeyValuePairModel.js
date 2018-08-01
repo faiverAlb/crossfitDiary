@@ -1,6 +1,6 @@
 var General;
 (function (General) {
-    var BaseKeyValuePairModel = (function () {
+    var BaseKeyValuePairModel = /** @class */ (function () {
         function BaseKeyValuePairModel(id, text) {
             this.id = id;
             this.text = text;

@@ -3,7 +3,7 @@ var Pages;
     var CrossfitterService = General.CrossfitterService;
     var ObservablePersonExerciseRecord = Models.ObservablePersonExerciseRecord;
     var ErrorMessageViewModel = General.ErrorMessageViewModel;
-    var PrideController = (function () {
+    var PrideController = /** @class */ (function () {
         /* Computeds */
         function PrideController(basicParameters) {
             var _this = this;

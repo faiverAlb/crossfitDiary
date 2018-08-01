@@ -14,7 +14,7 @@ var Pages;
     var CrossfitterService = General.CrossfitterService;
     var ErrorMessageViewModel = General.ErrorMessageViewModel;
     var ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
-    var HomePageController = (function (_super) {
+    var HomePageController = /** @class */ (function (_super) {
         __extends(HomePageController, _super);
         /* Computeds */
         function HomePageController(parameters) {

@@ -8,7 +8,7 @@
     timeToWork?: any,
     timeCap?: any,
     restBetweenExercises?: any,
-    restBetweenRounds?: any,
+    restBetweenRounds?: string,
     workoutType: WorkoutType,
     exercisesToDoList: ExerciseViewModel[];
     workoutTypeDisplay?: string;
@@ -25,7 +25,7 @@
     timeToWork?: any;
     timeCap?: any;
     restBetweenExercises?: any;
-    restBetweenRounds?: any;
+    restBetweenRounds?: string;
     workoutType: WorkoutType;
     workoutTypeDisplay?: string;
     exercisesToDoList: ExerciseViewModel[];

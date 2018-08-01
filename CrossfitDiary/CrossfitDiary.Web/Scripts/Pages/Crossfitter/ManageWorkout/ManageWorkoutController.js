@@ -28,7 +28,7 @@ var Pages;
             observable: true
         }
     });
-    var ManageWorkoutController = (function (_super) {
+    var ManageWorkoutController = /** @class */ (function (_super) {
         __extends(ManageWorkoutController, _super);
         function ManageWorkoutController(parameters, preselectedWorkoutObject, preselectedCrossfitterWorkoutId) {
             if (preselectedCrossfitterWorkoutId === void 0) { preselectedCrossfitterWorkoutId = null; }
