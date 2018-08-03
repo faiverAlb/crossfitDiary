@@ -52,7 +52,7 @@
                     <div data-bind="css:{'person-workout':canBeRemovedByCurrentUser}" class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded">
                         <div class="item-header d-flex flex-row justify-content-between  ">
                             <div class="username">
-                                <a class="text-info" data-bind="attr: { href: '/?userId='+ workouterId}, text: workouterName">
+                                <a  data-bind="attr: { href: '/?userId='+ workouterId}, text: workouterName, css:canBeRemovedByCurrentUser == true ? 'text-info':'text-secondary'">
 
                                 </a>
                             </div>
@@ -170,10 +170,7 @@
             <!-- /ko -->
             <!-- ko if: isNewWeightMaximum -->
             <span class="new-record" title="Person new weight maximum!">
-                <span class="fa-layers fa-fw">
-                    <i class="fas fa-trophy"></i>
-                    <i class="fa-inverse fas fa-star" data-fa-transform="shrink-8 up-3 "></i>
-                </span>
+                <span class="badge badge-success">new!</span>
                 <span class="badge badge-warning" data-bind="text:addedToMaxWeightString"></span>
             </span>
             <!-- /ko -->
