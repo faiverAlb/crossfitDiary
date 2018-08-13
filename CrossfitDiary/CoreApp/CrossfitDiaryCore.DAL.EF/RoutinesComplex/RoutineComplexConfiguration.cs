@@ -13,7 +13,7 @@ namespace CrossfitDiaryCore.DAL.EF.RoutinesComplex
             builder.Property(x => x.Title);
             builder.Property(x => x.ComplexType).IsRequired();
 
-
+            builder.HasMany(x => x.RoutineSimple).WithOne(x => x.RoutineComplex);
             builder.HasOne(x => x.Parent)
                 .WithMany(x => x.Children)
                 .HasForeignKey(x => x.ParentId);

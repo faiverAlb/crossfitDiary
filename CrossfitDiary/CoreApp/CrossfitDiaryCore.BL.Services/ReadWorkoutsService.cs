@@ -4,6 +4,7 @@ using CrossfitDiaryCore.DAL.EF;
 using CrossfitDiaryCore.DAL.EF.Exercises;
 using CrossfitDiaryCore.DAL.EF.WorkoutMatchers;
 using CrossfitDiaryCore.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrossfitDiaryCore.BL.Services
 {
@@ -170,7 +171,16 @@ namespace CrossfitDiaryCore.BL.Services
         /// </summary>
         public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId, int page, int pageSize)
         {
-            List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)? _context.CrossfitterWorkouts.ToList() : _context.CrossfitterWorkouts.Where(x => x.Crossfitter.Id == userId).ToList();
+            List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)
+                ? _context.CrossfitterWorkouts
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise)
+                    .Include(x => x.Crossfitter)
+                    .ToList()
+                : _context.CrossfitterWorkouts
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise)
+                    .Include(x => x.Crossfitter)
+                    .Where(x => x.Crossfitter.Id == userId)
+                    .ToList();
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
             UpdateWorkoutsWithRecords(crossfitterWorkouts);
