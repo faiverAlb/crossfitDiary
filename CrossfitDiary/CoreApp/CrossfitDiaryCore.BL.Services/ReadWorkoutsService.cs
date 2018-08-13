@@ -173,11 +173,11 @@ namespace CrossfitDiaryCore.BL.Services
         {
             List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)
                 ? _context.CrossfitterWorkouts
-                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise)
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
                     .Include(x => x.Crossfitter)
                     .ToList()
                 : _context.CrossfitterWorkouts
-                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise)
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
                     .Include(x => x.Crossfitter)
                     .Where(x => x.Crossfitter.Id == userId)
                     .ToList();
