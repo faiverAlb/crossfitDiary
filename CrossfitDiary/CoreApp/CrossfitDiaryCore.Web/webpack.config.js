@@ -12,7 +12,7 @@ module.exports = (env) => {
   // Setup base config for all environments
   var config = {
     entry: {
-      main: './ClientApp/boot',
+      main: './ClientApp/boot.ts',
       login: './ClientApp/login-page-entry',
       fontAwesome:'@fortawesome/fontawesome-free/js/all.js'
     },
@@ -70,6 +70,18 @@ module.exports = (env) => {
           test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
           loader: "file-loader"
         },
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader'
+        },
+        {
+          test: /\.ts$/,
+          loader: 'ts-loader',
+          exclude: /node_modules/,
+          options: {
+            appendTsSuffixTo: [/\.vue$/]
+          }
+        }
 //        { test: /\.css?$/, use: ['style-loader', 'css-loader'] },
 //        { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
 //        { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
