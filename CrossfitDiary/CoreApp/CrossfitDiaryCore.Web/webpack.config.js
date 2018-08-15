@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const destinationFolder = 'wwwroot/dist/generated';
 module.exports = (env) => {
   env = env || {};
@@ -12,7 +12,7 @@ module.exports = (env) => {
   // Setup base config for all environments
   var config = {
     entry: {
-      main: './ClientApp/boot.ts',
+      'persons-entry': './ClientApp/persons-entry.ts',
       login: './ClientApp/login-page-entry',
       fontAwesome:'@fortawesome/fontawesome-free/js/all.js'
     },
@@ -22,10 +22,15 @@ module.exports = (env) => {
     },
     devtool: 'eval-source-map',
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx']
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js',
+        jquery: "jquery/src/jquery",
+      }
     },
     plugins: [
       new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
+      new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional

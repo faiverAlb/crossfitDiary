@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\dist\generated\fontAwesome.js" />
-    <None Include="wwwroot\dist\generated\main.js" />
   </ItemGroup>
 
   <ItemGroup>
