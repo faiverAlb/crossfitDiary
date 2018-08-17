@@ -1,5 +1,9 @@
 ﻿<template>
-    <h1>I'm an person Item component, bitccheess</h1>
+    <div class="activities-list container">
+        <div class="row">
+            some text here
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
