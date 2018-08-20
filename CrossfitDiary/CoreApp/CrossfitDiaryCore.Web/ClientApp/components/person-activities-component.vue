@@ -1,6 +1,10 @@
 ﻿<template>
     <div class="home-container">
-       <PersonsActivitesItemComponent></PersonsActivitesItemComponent>
+        <div class="activities-list container">
+            <div class="row">
+                <PersonsActivitesItemComponent></PersonsActivitesItemComponent>
+            </div>
+       </div>
     </div>
 </template>
 

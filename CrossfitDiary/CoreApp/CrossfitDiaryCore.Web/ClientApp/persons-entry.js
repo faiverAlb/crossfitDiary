@@ -1,15 +1,17 @@
 //import fontawesome from '@fortawesome/fontawesome-free/js/all';
+import Vue from 'vue';
+import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap';
 import './style/app.scss';
-import Vue from 'vue';
-import Persons from "./components/persons/persons-component.vue";
-var vueObj = new Vue({
+import PersonsActivitiesComponent from "./components/person-activities-component.vue";
+Vue.use(BootstrapVue);
+var iAmVue = new Vue({
     el: '#home-page-container',
     components: {
-        Persons: Persons
+        PersonsActivitiesComponent: PersonsActivitiesComponent
     },
     render: function (createElement) {
-        return createElement(Persons);
+        return createElement(PersonsActivitiesComponent);
     }
 });
 //# sourceMappingURL=persons-entry.js.map

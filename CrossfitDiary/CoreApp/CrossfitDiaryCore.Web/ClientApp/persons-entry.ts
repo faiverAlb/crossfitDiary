@@ -3,7 +3,7 @@ import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 
 import 'bootstrap';
-import './style/app.scss';
+import './style/persons.scss';
 
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 
