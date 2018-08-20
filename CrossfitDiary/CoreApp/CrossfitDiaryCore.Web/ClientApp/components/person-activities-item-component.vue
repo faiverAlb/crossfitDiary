@@ -3,7 +3,7 @@
         <div class="item-header d-flex flex-row justify-content-between  ">
             <div class="username">
                 <a class="text-info">
-                    Some user name
+                    Super user name
                 </a>
             </div>
             <div class="">

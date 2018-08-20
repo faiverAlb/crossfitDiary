@@ -4,7 +4,9 @@
             <div class="row">
                 <PersonsActivitesItemComponent></PersonsActivitesItemComponent>
             </div>
-       </div>
+
+            <b-alert show> Hello {{ name }}! </b-alert>
+        </div>
     </div>
 </template>
 
@@ -14,16 +16,15 @@
     import Component from 'vue-class-component'
     import PersonsActivitesItemComponent from "./person-activities-item-component.vue"
     @Component({
-        components:{
+        components: {
             PersonsActivitesItemComponent
         }
     })
     export default class PersonsActivitesComponent extends Vue {
-        
+        name:string = 'Albert ;]'
     }
 
 </script>
 
 <style>
-
 </style>
