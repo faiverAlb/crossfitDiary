@@ -4,8 +4,6 @@
             <div class="row">
                 <PersonsActivitesItemComponent></PersonsActivitesItemComponent>
             </div>
-
-            <b-alert show> Hello {{ name }}! </b-alert>
         </div>
     </div>
 </template>
@@ -21,7 +19,6 @@
         }
     })
     export default class PersonsActivitesComponent extends Vue {
-        name:string = 'Albert ;]'
     }
 
 </script>

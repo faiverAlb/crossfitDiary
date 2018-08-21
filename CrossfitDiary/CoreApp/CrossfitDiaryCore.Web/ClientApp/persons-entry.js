@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+//import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './style/persons.scss';
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 Vue.use(BootstrapVue);

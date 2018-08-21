@@ -9,6 +9,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\helpers\BaseController.ts" />
+    <None Remove="ClientApp\helpers\BaseKeyValuePairModel.ts" />
+    <None Remove="ClientApp\helpers\BaseService.ts" />
+    <None Remove="ClientApp\helpers\BasicParameters.ts" />
+    <None Remove="ClientApp\helpers\CrossfitterService.ts" />
+    <None Remove="ClientApp\helpers\ErrorMessageViewModel.ts" />
+    <None Remove="ClientApp\models\ExerciseMeasureTypeViewModelObservable.ts" />
+    <None Remove="ClientApp\models\ExerciseMeasureViewModelObservable.ts" />
+    <None Remove="ClientApp\models\ExerciseViewModelObservable.ts" />
+    <None Remove="ClientApp\models\ObservablePersonExerciseRecord.ts" />
+    <None Remove="ClientApp\models\ToLogWorkoutViewModelObservable.ts" />
+    <None Remove="ClientApp\models\viewModels\ExerciseMeasureType.ts" />
+    <None Remove="ClientApp\models\viewModels\ExerciseMeasureTypeViewModel.ts" />
+    <None Remove="ClientApp\models\viewModels\ExerciseMeasureViewModel.ts" />
+    <None Remove="ClientApp\models\viewModels\ExerciseViewModel.ts" />
+    <None Remove="ClientApp\models\viewModels\PersonExerciseRecord.ts" />
+    <None Remove="ClientApp\models\viewModels\ToLogWorkoutViewModel.ts" />
+    <None Remove="ClientApp\models\viewModels\WorkoutType.ts" />
+    <None Remove="ClientApp\models\viewModels\WorkoutViewModel.ts" />
+    <None Remove="ClientApp\models\WorkoutViewModelObservable.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.1" />
@@ -33,6 +56,29 @@
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\helpers\BaseController.ts" />
+    <TypeScriptCompile Include="ClientApp\helpers\BaseKeyValuePairModel.ts" />
+    <TypeScriptCompile Include="ClientApp\helpers\BaseService.ts" />
+    <TypeScriptCompile Include="ClientApp\helpers\BasicParameters.ts" />
+    <TypeScriptCompile Include="ClientApp\helpers\CrossfitterService.ts" />
+    <TypeScriptCompile Include="ClientApp\helpers\ErrorMessageViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\ExerciseMeasureTypeViewModelObservable.ts" />
+    <TypeScriptCompile Include="ClientApp\models\ExerciseMeasureViewModelObservable.ts" />
+    <TypeScriptCompile Include="ClientApp\models\ExerciseViewModelObservable.ts" />
+    <TypeScriptCompile Include="ClientApp\models\ObservablePersonExerciseRecord.ts" />
+    <TypeScriptCompile Include="ClientApp\models\ToLogWorkoutViewModelObservable.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureType.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureTypeViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\PersonExerciseRecord.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ToLogWorkoutViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\WorkoutType.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\WorkoutViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\WorkoutViewModelObservable.ts" />
   </ItemGroup>
 
 
