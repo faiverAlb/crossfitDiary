@@ -10,7 +10,7 @@ import PersonsActivitiesComponent from "./components/person-activities-component
 
 Vue.use(BootstrapVue);
 
-var iAmVue = new Vue({
+let iAmVue = new Vue({
   el: '#home-page-container',
   components: {
     PersonsActivitiesComponent
