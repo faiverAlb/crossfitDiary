@@ -1,24 +1,22 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var General;
-(function (General) {
-    var CrossfitterService = /** @class */ (function (_super) {
-        __extends(CrossfitterService, _super);
-        function CrossfitterService(pathToApp /*, public isDataLoading: KnockoutObservable<Boolean>*/) {
-            var _this = _super.call(this) || this;
-            _this.pathToApp = pathToApp;
-            return _this;
-        }
-        return CrossfitterService;
-    }(General.BaseService));
-    General.CrossfitterService = CrossfitterService;
-})(General || (General = {}));
+import axios from "axios";
+import { ToLogWorkoutViewModel } from './models/viewModels/ToLogWorkoutViewModel';
+var CrossfitterService = /** @class */ (function () {
+    function CrossfitterService() {
+        //    public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
+        ////      this.isDataLoading(true);
+        //      return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);
+        //    };
+        //
+        this.getAllCrossfittersWorkouts = function (userId, exerciseId, page, pageSize) {
+            //      this.isDataLoading(true);
+            return axios.get("api/getAllCrossfittersWorkouts?userId=" + userId + "&exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize)
+                .then(function (jsonData) {
+                debugger;
+                return jsonData.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
+            });
+        };
+    }
+    return CrossfitterService;
+}());
+export default CrossfitterService;
 //# sourceMappingURL=CrossfitterService.js.map
