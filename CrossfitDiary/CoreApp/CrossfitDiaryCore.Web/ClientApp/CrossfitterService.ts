@@ -1,13 +1,9 @@
-﻿module General {
-  import WorkoutViewModel = Models.WorkoutViewModel;
-  import ToLogWorkoutViewModel = Models.ToLogWorkoutViewModel;
-  import ExerciseViewModel = Models.ExerciseViewModel;
-  import PersonExerciseRecord = Models.PersonExerciseRecord;
+﻿import axios, { AxiosResponse} from "axios";
+ import {ToLogWorkoutViewModel}  from './models/viewModels/ToLogWorkoutViewModel';
 
-  export class CrossfitterService extends BaseService {
+  export default class CrossfitterService  {
 
-    constructor(public readonly  pathToApp: string/*, public isDataLoading: KnockoutObservable<Boolean>*/) {
-      super();
+    constructor() {
     }
 
 //    public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
@@ -15,14 +11,14 @@
 //      return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);
 //    };
 //
-//    public getAllCrossfittersWorkouts = (userId:string,exerciseId?:number, page?: number, pageSize?:number): Q.Promise<ToLogWorkoutViewModel[]> => {
-////      this.isDataLoading(true);
-//      return this.get<ToLogWorkoutViewModel[]>(this.pathToApp +
-//        `api/getAllCrossfittersWorkouts?userId=${userId}&exerciseId=${exerciseId}&page=${page}&pageSize=${pageSize}`)
-//        .then((jsonData) => {
-//          return jsonData.map(x => new ToLogWorkoutViewModel().deserialize(x));
-//        });
-//    };
+    public getAllCrossfittersWorkouts = (userId: string, exerciseId?: number, page?: number, pageSize?: number) => {
+//      this.isDataLoading(true);
+      return axios.get(`api/getAllCrossfittersWorkouts?userId=${userId}&exerciseId=${exerciseId}&page=${page}&pageSize=${pageSize}`)
+        .then((jsonData:any) => {
+          debugger;
+          return jsonData.map(x => new ToLogWorkoutViewModel().deserialize(x));
+        });
+    };
 //
 //    public getExercises = (): Q.Promise<ExerciseViewModel[]> => {
 ////      this.isDataLoading(true);
@@ -87,4 +83,3 @@
 ////        });
 //    };
   }
-}

@@ -1,6 +1,5 @@
-﻿module Models {
-  import Serializable = General.Serializable;
-
+﻿  import Serializable = General.Serializable;
+  import {ExerciseMeasureType} from "./ExerciseMeasureType";
   interface IExerciseMeasureTypeViewModel {
     measureType: ExerciseMeasureType;
     measureValue: string;
@@ -44,4 +43,3 @@
     }
 
   };
-}

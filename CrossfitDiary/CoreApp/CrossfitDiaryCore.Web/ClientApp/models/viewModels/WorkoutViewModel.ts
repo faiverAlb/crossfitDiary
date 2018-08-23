@@ -1,6 +1,6 @@
-﻿module Models {
-  import Serializable = General.Serializable;
-
+﻿  import Serializable = General.Serializable;
+  import {WorkoutType} from './WorkoutType';
+  import {ExerciseViewModel} from './ExerciseViewModel';
   interface IWorkoutViewModel {
     id?: number,
     title?: string,
@@ -17,7 +17,7 @@
     isInnerWorkout: boolean;
   }
 
-  export class WorkoutViewModel implements Serializable<WorkoutViewModel>{
+  export  class WorkoutViewModel implements Serializable<WorkoutViewModel>{
 
     id: number = 0;
     title: string = '';
@@ -71,4 +71,3 @@
       });
     }
   }
-}

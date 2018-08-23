@@ -1,5 +1,4 @@
-﻿module Models {
- export enum WorkoutType {
+﻿ export enum WorkoutType {
     ForTime = 0,
     AMRAP = 1,
     EMOM = 2,
@@ -7,4 +6,3 @@
     NotForTime = 4,
     ForTimeManyInners = 5
   }
-}

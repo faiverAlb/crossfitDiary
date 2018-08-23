@@ -1,5 +1,4 @@
-﻿module Models {
-  import Serializable = General.Serializable;
+﻿  import Serializable = General.Serializable;
 
   interface IPersonExerciseRecord {
     personName: string;
@@ -13,7 +12,7 @@
     maximumWeightValue?: number;
   }
 
-  export class PersonExerciseRecord implements Serializable<PersonExerciseRecord>{
+  export  class PersonExerciseRecord implements Serializable<PersonExerciseRecord>{
 
     personName: string = '';
     maximumWeight: string = '';
@@ -58,4 +57,3 @@
     }
 
   }
-}

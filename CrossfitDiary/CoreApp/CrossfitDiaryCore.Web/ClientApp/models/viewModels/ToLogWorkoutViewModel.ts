@@ -1,5 +1,5 @@
-﻿module Models {
-  import Serializable = General.Serializable;
+﻿  import Serializable = General.Serializable;
+  import {WorkoutViewModel} from "./WorkoutViewModel";
 
   interface IToLogWorkoutViewModel {
     crossfitterWorkoutId: number;
@@ -16,7 +16,7 @@
     displayDate?: string;
     workoutViewModel?: WorkoutViewModel;
   }
-  export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel>{
+  export   class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel>{
 
     crossfitterWorkoutId: number = 0;
     date: string = '';
@@ -75,4 +75,3 @@
     }
 
   }
-}

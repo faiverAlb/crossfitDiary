@@ -1,6 +1,5 @@
-﻿module Models {
-  import Serializable = General.Serializable;
-
+﻿  import Serializable = General.Serializable;
+  import {ExerciseMeasureViewModel} from './ExerciseMeasureViewModel';
 
   interface IExerciseViewModel {
     id: number;
@@ -52,4 +51,3 @@
     };
 
   }
-}

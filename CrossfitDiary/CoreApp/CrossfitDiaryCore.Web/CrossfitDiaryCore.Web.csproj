@@ -11,7 +11,6 @@
   <ItemGroup>
     <None Remove="ClientApp\helpers\BaseController.ts" />
     <None Remove="ClientApp\helpers\BaseKeyValuePairModel.ts" />
-    <None Remove="ClientApp\helpers\BaseService.ts" />
     <None Remove="ClientApp\helpers\BasicParameters.ts" />
     <None Remove="ClientApp\helpers\CrossfitterService.ts" />
     <None Remove="ClientApp\helpers\ErrorMessageViewModel.ts" />
@@ -61,9 +60,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\helpers\BaseController.ts" />
     <TypeScriptCompile Include="ClientApp\helpers\BaseKeyValuePairModel.ts" />
-    <TypeScriptCompile Include="ClientApp\helpers\BaseService.ts" />
     <TypeScriptCompile Include="ClientApp\helpers\BasicParameters.ts" />
-    <TypeScriptCompile Include="ClientApp\helpers\CrossfitterService.ts" />
+    <TypeScriptCompile Include="ClientApp\CrossfitterService.ts" />
     <TypeScriptCompile Include="ClientApp\helpers\ErrorMessageViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\models\ExerciseMeasureTypeViewModelObservable.ts" />
     <TypeScriptCompile Include="ClientApp\models\ExerciseMeasureViewModelObservable.ts" />

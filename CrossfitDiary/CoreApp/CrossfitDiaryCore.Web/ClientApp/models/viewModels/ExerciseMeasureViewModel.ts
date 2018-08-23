@@ -1,7 +1,6 @@
-﻿module Models {
-  import Serializable = General.Serializable;
-
-  export class ExerciseMeasureViewModel implements Serializable<ExerciseMeasureViewModel>{
+﻿  import Serializable = General.Serializable;
+  import {ExerciseMeasureTypeViewModel} from "./ExerciseMeasureTypeViewModel";
+  export  class ExerciseMeasureViewModel implements Serializable<ExerciseMeasureViewModel>{
 
     exerciseMeasureType: ExerciseMeasureTypeViewModel | null = null;
 
@@ -23,4 +22,3 @@
     }
 
   }
-}
