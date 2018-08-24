@@ -15,8 +15,7 @@
 //      this.isDataLoading(true);
       return axios.get(`api/getAllCrossfittersWorkouts?exerciseId=${exerciseId}&page=${page}&pageSize=${pageSize}`)
         .then((jsonData:any) => {
-          debugger;
-          return jsonData.map(x => new ToLogWorkoutViewModel().deserialize(x));
+          return jsonData.data.map(x => new ToLogWorkoutViewModel().deserialize(x));
         });
     };
 //

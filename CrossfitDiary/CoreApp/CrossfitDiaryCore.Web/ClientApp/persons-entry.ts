@@ -21,9 +21,9 @@ let iAmVue = new Vue({
     return createElement(PersonsActivitiesComponent);
   },
   mounted() {
-    debugger;
-    apiService.getAllCrossfittersWorkouts().then(data =>{
-      debugger;
-    });
+    apiService.getAllCrossfittersWorkouts()
+      .then(data => {
+        debugger;
+      });
   },
 });
