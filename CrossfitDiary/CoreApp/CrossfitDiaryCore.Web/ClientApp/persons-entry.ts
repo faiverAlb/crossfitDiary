@@ -22,7 +22,7 @@ let iAmVue = new Vue({
   },
   mounted() {
     debugger;
-    apiService.getAllCrossfittersWorkouts('test').then(data =>{
+    apiService.getAllCrossfittersWorkouts().then(data =>{
       debugger;
     });
   },

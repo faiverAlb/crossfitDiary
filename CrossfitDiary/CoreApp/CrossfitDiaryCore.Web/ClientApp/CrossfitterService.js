@@ -9,7 +9,7 @@ var CrossfitterService = /** @class */ (function () {
         //
         this.getAllCrossfittersWorkouts = function (userId, exerciseId, page, pageSize) {
             //      this.isDataLoading(true);
-            return axios.get("api/getAllCrossfittersWorkouts?userId=" + userId + "&exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize)
+            return axios.get("api/getAllCrossfittersWorkouts?exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize)
                 .then(function (jsonData) {
                 debugger;
                 return jsonData.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });

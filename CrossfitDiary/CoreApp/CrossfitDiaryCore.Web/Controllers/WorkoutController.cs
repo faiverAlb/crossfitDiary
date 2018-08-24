@@ -44,9 +44,9 @@ namespace CrossfitDiary.Web.Api
         /// <returns>All available workouts</returns>
         [HttpGet]
         [Route("getAllCrossfittersWorkouts")]
-        public List<ToLogWorkoutViewModel> GetAllCrossfittersWorkouts(int page, int pageSize, string userId = null, int? exerciseId = null)
+        public List<ToLogWorkoutViewModel> GetAllCrossfittersWorkouts(int page = 1, int pageSize = 20, string userId = null, int? exerciseId = null)
         {
-            string userIdForWorkouts = exerciseId.HasValue && string.IsNullOrEmpty(userId) ? User.Identity.GetUserId() : userId;
+            string userIdForWorkouts = User.Identity.GetUserId();
 
             List<ToLogWorkoutViewModel> crossfitersWorkouts = _readWorkoutsService
                 .GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId, page, pageSize)

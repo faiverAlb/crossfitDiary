@@ -8,6 +8,7 @@ import PersonsActivitiesComponent from "./components/person-activities-component
 import CrossfitterService from "./CrossfitterService";
 var apiService = new CrossfitterService();
 Vue.use(BootstrapVue);
+debugger;
 var iAmVue = new Vue({
     el: '#home-page-container',
     components: {
@@ -18,7 +19,7 @@ var iAmVue = new Vue({
     },
     mounted: function () {
         debugger;
-        apiService.getAllCrossfittersWorkouts('test').then(function (data) {
+        apiService.getAllCrossfittersWorkouts().then(function (data) {
             debugger;
         });
     },
