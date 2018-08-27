@@ -8,6 +8,7 @@
     "noImplicitAny": false,
     "noImplicitReturns": false,
     "target": "es5",
+    "lib": ["es5", "es2015", "dom", "scripthost"],
     "sourceMap": true,
     "skipDefaultLibCheck": true
     ,"strict": false

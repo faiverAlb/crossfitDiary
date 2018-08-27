@@ -1,10 +1,9 @@
-﻿//import fontawesome from '@fortawesome/fontawesome-free/js/all';
-import Vue from 'vue';
+﻿import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 
 import 'bootstrap';
-//import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './style/persons.scss';
+import {ToLogWorkoutViewModel} from './models/viewModels/ToLogWorkoutViewModel';
 
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 import CrossfitterService from "./CrossfitterService"
@@ -22,7 +21,7 @@ let iAmVue = new Vue({
   },
   mounted() {
     apiService.getAllCrossfittersWorkouts()
-      .then(data => {
+      .then((data) => {
         debugger;
       });
   },

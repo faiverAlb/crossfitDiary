@@ -11,11 +11,13 @@
 //      return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);
 //    };
 //
-    public getAllCrossfittersWorkouts = (userId?: string, exerciseId?: number, page?: number, pageSize?: number) => {
+  public getAllCrossfittersWorkouts = (userId?: string, exerciseId?: number, page?: number, pageSize?: number): Promise<ToLogWorkoutViewModel[]> => {
 //      this.isDataLoading(true);
       return axios.get(`api/getAllCrossfittersWorkouts?exerciseId=${exerciseId}&page=${page}&pageSize=${pageSize}`)
-        .then((jsonData:any) => {
-          return jsonData.data.map(x => new ToLogWorkoutViewModel().deserialize(x));
+        .then((jsonData) => {
+          
+          let test = Promise.resolve((jsonData.data.map(x => new ToLogWorkoutViewModel().deserialize(x))));
+          return (jsonData.data.map(x => new ToLogWorkoutViewModel().deserialize(x)));
         });
     };
 //

@@ -11,8 +11,7 @@ var CrossfitterService = /** @class */ (function () {
             //      this.isDataLoading(true);
             return axios.get("api/getAllCrossfittersWorkouts?exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize)
                 .then(function (jsonData) {
-                debugger;
-                return jsonData.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
+                return jsonData.data.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
             });
         };
     }
