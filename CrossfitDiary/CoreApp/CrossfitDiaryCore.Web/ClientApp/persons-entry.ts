@@ -11,18 +11,23 @@ const apiService = new  CrossfitterService();
 
 Vue.use(BootstrapVue);
 
-let iAmVue = new Vue({
+//let workouts: ToLogWorkoutViewModel[] = [];
+
+new Vue({
   el: '#home-page-container',
+  template:"<PersonsActivitiesComponent :activities=\"activities\"/>",
   components: {
     PersonsActivitiesComponent
   },
-  render: function (createElement) {
-    return createElement(PersonsActivitiesComponent);
+  data(){
+    return{
+      activities:ToLogWorkoutViewModel[0],
+    }
   },
   mounted() {
     apiService.getAllCrossfittersWorkouts()
       .then((data) => {
-        debugger;
+        this.activities = data;
       });
   },
 });

@@ -1,6 +1,7 @@
 import { WorkoutViewModel } from "./WorkoutViewModel";
 var ToLogWorkoutViewModel = /** @class */ (function () {
     function ToLogWorkoutViewModel(params) {
+        this.id = 0;
         this.crossfitterWorkoutId = 0;
         this.date = '';
         this.selectedWorkoutId = 0;
@@ -9,6 +10,7 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
         if (params == null) {
             return;
         }
+        this.id = params.id;
         this.crossfitterWorkoutId = params.crossfitterWorkoutId;
         this.date = params.date;
         this.partialRepsFinished = params.partialRepsFinished;
@@ -28,6 +30,7 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
             return (null);
         }
         return new ToLogWorkoutViewModel({
+            id: jsonInput.id,
             crossfitterWorkoutId: jsonInput.crossfitterWorkoutId,
             date: jsonInput.date,
             isEditMode: jsonInput.isEditMode,

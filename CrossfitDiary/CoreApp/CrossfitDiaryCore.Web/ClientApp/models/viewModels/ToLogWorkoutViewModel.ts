@@ -2,6 +2,7 @@
   import {WorkoutViewModel} from "./WorkoutViewModel";
 
   interface IToLogWorkoutViewModel {
+    id: number;
     crossfitterWorkoutId: number;
     date: string;
     partialRepsFinished: number;
@@ -18,6 +19,7 @@
   }
   export   class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel>{
 
+    id: number = 0;
     crossfitterWorkoutId: number = 0;
     date: string = '';
     partialRepsFinished?: number;
@@ -37,6 +39,7 @@
       if (params == null) {
         return;
       }
+      this.id = params.id;
       this.crossfitterWorkoutId = params.crossfitterWorkoutId;
       this.date = params.date;
       this.partialRepsFinished = params.partialRepsFinished;
@@ -58,6 +61,7 @@
       }
 
       return new ToLogWorkoutViewModel({
+        id: jsonInput.id,
         crossfitterWorkoutId: jsonInput.crossfitterWorkoutId,
         date: jsonInput.date,
         isEditMode: jsonInput.isEditMode,

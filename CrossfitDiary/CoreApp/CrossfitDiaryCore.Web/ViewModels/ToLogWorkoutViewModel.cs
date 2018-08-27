@@ -7,6 +7,9 @@ namespace CrossfitDiaryCore.Web.ViewModels
     {
         #region properties
 
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
         [JsonProperty("canBeRemovedByCurrentUser")]
         public bool CanBeRemovedByCurrentUser { get; set; }
 
