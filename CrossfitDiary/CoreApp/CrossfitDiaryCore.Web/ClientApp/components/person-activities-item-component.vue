@@ -2,12 +2,12 @@
     <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded">
         <div class="item-header d-flex flex-row justify-content-between  ">
             <div class="username">
-                <a class="text-info">
-                    Super user name
-                </a>
+                <span class="text-info">
+                    {{model.workouterName}}
+                </span>
             </div>
             <div class="">
-                <span class="">Today date</span>
+                <span class="">{{model.displayDate}}</span>
             </div>
         </div>
         <div class="item-body pt-1">
@@ -29,13 +29,16 @@
 </template>
 
 <script lang="ts">
-    import Vue from "vue";
-    import Component from "vue-class-component";
+    import { Vue, Component, Prop } from 'vue-property-decorator'
+    import { ToLogWorkoutViewModel } from '../models/viewModels/ToLogWorkoutViewModel';
 
     @Component({})
     export default class PersonsActivitesItemComponent extends Vue {
-        msg = 123;
-        test = "best";
+        
+        @Prop()
+        model:ToLogWorkoutViewModel;
+
+
     }
 </script>
 

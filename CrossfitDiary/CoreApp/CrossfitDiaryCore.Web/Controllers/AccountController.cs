@@ -65,7 +65,9 @@ namespace CrossfitDiaryCore.Web.Controllers
             var user = new ApplicationUser
             {
                 UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
-                Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                FirstName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
+                LastName = info.Principal.FindFirstValue(ClaimTypes.Surname)
             };
 
 

@@ -2,8 +2,9 @@
     <div class="home-container">
         <div class="activities-list container" v-for="item in activities" :key="item.id">
             <div class="row">
-                <PersonsActivitesItemComponent></PersonsActivitesItemComponent>
+                <PersonsActivitesItemComponent :model="item"></PersonsActivitesItemComponent>
             </div>
+
         </div>
     </div>
 </template>
@@ -15,7 +16,8 @@
     import { Vue, Component, Prop } from 'vue-property-decorator'
 
     import PersonsActivitesItemComponent from "./person-activities-item-component.vue"
-import { ToLogWorkoutViewModel } from '../models/viewModels/ToLogWorkoutViewModel';
+    import { ToLogWorkoutViewModel } from '../models/viewModels/ToLogWorkoutViewModel';
+    
     @Component({
         components: {
             PersonsActivitesItemComponent

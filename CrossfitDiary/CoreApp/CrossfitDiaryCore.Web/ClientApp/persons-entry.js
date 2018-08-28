@@ -7,26 +7,23 @@ import PersonsActivitiesComponent from "./components/person-activities-component
 import CrossfitterService from "./CrossfitterService";
 var apiService = new CrossfitterService();
 Vue.use(BootstrapVue);
-var workouts = [];
-var iAmVue = new Vue({
+//let workouts: ToLogWorkoutViewModel[] = [];
+new Vue({
     el: '#home-page-container',
-    template: "<PersonsActivitiesComponent activities=\"workouts\"></PersonsActivitiesComponent>",
+    template: "<PersonsActivitiesComponent :activities=\"activities\"/>",
     components: {
         PersonsActivitiesComponent: PersonsActivitiesComponent
     },
     data: function () {
         return {
-            workouts: ToLogWorkoutViewModel[0]
+            activities: ToLogWorkoutViewModel[0],
         };
     },
-    // render: function (createElement) {
-    //   return createElement(PersonsActivitiesComponent);
-    // },
     mounted: function () {
+        var _this = this;
         apiService.getAllCrossfittersWorkouts()
             .then(function (data) {
-            debugger;
-            workouts = data;
+            _this.activities = data;
         });
     },
 });
