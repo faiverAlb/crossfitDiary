@@ -42,10 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\dist\generated\fontAwesome.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CrossfitDiaryCore.BL.Services\CrossfitDiaryCore.BL.Services.csproj" />
     <ProjectReference Include="..\CrossfitDiaryCore.DAL.EF\CrossfitDiaryCore.DAL.EF.csproj" />
     <ProjectReference Include="..\CrossfitDiaryCore.Model\CrossfitDiaryCore.Model.csproj" />

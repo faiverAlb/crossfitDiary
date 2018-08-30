@@ -1,12 +1,10 @@
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue';
-import 'bootstrap';
 import './style/persons.scss';
 import { ToLogWorkoutViewModel } from './models/viewModels/ToLogWorkoutViewModel';
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 import CrossfitterService from "./CrossfitterService";
 var apiService = new CrossfitterService();
-Vue.use(BootstrapVue);
+//Vue.use(BootstrapVue);
 //let workouts: ToLogWorkoutViewModel[] = [];
 new Vue({
     el: '#home-page-container',

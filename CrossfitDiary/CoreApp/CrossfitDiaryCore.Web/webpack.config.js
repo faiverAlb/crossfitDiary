@@ -4,7 +4,18 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const destinationFolder = 'wwwroot/dist/generated';
+const destinationFolder = 'wwwroot/dist/generated/';
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
+// the path(s) that should be cleaned
+let pathsToClean = [destinationFolder + '*.*']
+
+// the clean options to use
+let cleanOptions = {
+  verbose: true,
+  dry: false
+};
+
 module.exports = (env) => {
   env = env || {};
   var isProd = env.NODE_ENV === 'production';
@@ -13,8 +24,8 @@ module.exports = (env) => {
   var config = {
     entry: {
       'persons-entry': './ClientApp/persons-entry.ts',
-      login: './ClientApp/login-page-entry',
-      fontAwesome:'@fortawesome/fontawesome-free/js/all.js'
+      // login: './ClientApp/login-page-entry',
+    //  fontAwesome:'@fortawesome/fontawesome-free/js/all.js'
     },
     output: {
       path: path.join(__dirname, destinationFolder),
@@ -29,14 +40,20 @@ module.exports = (env) => {
       }
     },
     plugins: [
-      new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
+      new CleanWebpackPlugin(pathsToClean, cleanOptions),
+
+      new webpack.ProvidePlugin({
+         $: 'jquery', 
+         jQuery: 'jquery'        
+        }),
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
         filename: "[name].css",
         chunkFilename: "[id].css"
-      }),
+      })
+
     ],
     module: {
       rules: [
@@ -97,10 +114,30 @@ module.exports = (env) => {
             appendTsSuffixTo: [/\.vue$/]
           }
         }
-//        { test: /\.css?$/, use: ['style-loader', 'css-loader'] },
-//        { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
-//        { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
       ]
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'async',
+        minSize: 30000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        name: true,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+          }
+        }
+      }
     }
   }
 
@@ -114,7 +151,8 @@ module.exports = (env) => {
         uglifyOptions: {
           compress: true,
           ecma: 6,
-          mangle: true
+          mangle: true,
+          dead_code: true
         },
         sourceMap: false
       }),

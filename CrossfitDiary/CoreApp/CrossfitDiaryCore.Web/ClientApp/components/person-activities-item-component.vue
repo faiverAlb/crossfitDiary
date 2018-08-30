@@ -4,6 +4,7 @@
             <div class="username">
                 <span class="text-info">
                     {{model.workouterName}}
+                     <font-awesome-icon icon="coffee" />
                 </span>
             </div>
             <div class="">
