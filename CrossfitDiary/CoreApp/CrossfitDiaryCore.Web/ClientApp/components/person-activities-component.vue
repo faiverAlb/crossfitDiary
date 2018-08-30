@@ -11,11 +11,9 @@
 
 <script lang="ts">
 
-    // import Vue from 'vue'
-    // import Component from 'vue-class-component'
-    import { Vue, Component, Prop } from 'vue-property-decorator'
-    import PersonsActivitesItemComponent from "./person-activities-item-component.vue"
-
+    import { Vue, Component, Prop } from 'vue-property-decorator';
+    import PersonsActivitesItemComponent from "./person-activities-item-component.vue";
+    // import bAlert from 'bootstrap-vue/es/components/alert/alert';
     import { ToLogWorkoutViewModel } from '../models/viewModels/ToLogWorkoutViewModel';
     
     @Component({
