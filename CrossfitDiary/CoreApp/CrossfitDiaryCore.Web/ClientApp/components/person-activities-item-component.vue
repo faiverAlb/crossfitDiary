@@ -32,8 +32,17 @@
 <script lang="ts">
     import { Vue, Component, Prop } from 'vue-property-decorator'
     import { ToLogWorkoutViewModel } from '../models/viewModels/ToLogWorkoutViewModel';
+    import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee';
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-    @Component({})
+    import { library } from '@fortawesome/fontawesome-svg-core';
+    library.add(faCoffee);
+
+    @Component({
+        components: {
+            FontAwesomeIcon
+        },
+    })
     export default class PersonsActivitesItemComponent extends Vue {
         
         @Prop()

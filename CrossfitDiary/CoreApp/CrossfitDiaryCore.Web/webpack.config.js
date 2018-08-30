@@ -24,8 +24,7 @@ module.exports = (env) => {
   var config = {
     entry: {
       'persons-entry': './ClientApp/persons-entry.ts',
-      // login: './ClientApp/login-page-entry',
-    //  fontAwesome:'@fortawesome/fontawesome-free/js/all.js'
+      login: './ClientApp/login-page-entry'
     },
     output: {
       path: path.join(__dirname, destinationFolder),

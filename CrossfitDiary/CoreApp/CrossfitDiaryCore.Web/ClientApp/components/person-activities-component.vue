@@ -14,8 +14,8 @@
     // import Vue from 'vue'
     // import Component from 'vue-class-component'
     import { Vue, Component, Prop } from 'vue-property-decorator'
-
     import PersonsActivitesItemComponent from "./person-activities-item-component.vue"
+
     import { ToLogWorkoutViewModel } from '../models/viewModels/ToLogWorkoutViewModel';
     
     @Component({
