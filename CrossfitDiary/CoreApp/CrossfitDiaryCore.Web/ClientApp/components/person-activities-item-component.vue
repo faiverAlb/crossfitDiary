@@ -1,10 +1,9 @@
 ﻿<template>
-    <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded">
+    <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded" v-if="model">
         <div class="item-header d-flex flex-row justify-content-between  ">
             <div class="username">
                 <span class="text-info">
                     {{model.workouterName}}
-                     <font-awesome-icon icon="coffee" />
                 </span>
             </div>
             <div class="">
@@ -12,7 +11,7 @@
             </div>
         </div>
         <div class="item-body pt-1">
-            <div>workout-display-template</div>
+            <WorkoutDisplayComponent :workoutViewModel="model.workoutViewModel"></WorkoutDisplayComponent>
             <div class="text-right">
                 <span class="workout-result">
                     <span><i class="far fa-grin-beam"></i> Cap + </span>
@@ -34,13 +33,15 @@
     import { ToLogWorkoutViewModel } from '../models/viewModels/ToLogWorkoutViewModel';
     import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+    import WorkoutDisplayComponent from "./workout-display-component.vue"
 
     import { library } from '@fortawesome/fontawesome-svg-core';
     library.add(faCoffee);
 
     @Component({
         components: {
-            FontAwesomeIcon
+            FontAwesomeIcon,
+            WorkoutDisplayComponent
         },
     })
     export default class PersonsActivitesItemComponent extends Vue {

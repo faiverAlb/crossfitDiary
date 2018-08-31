@@ -3,9 +3,6 @@
 
   export default class CrossfitterService  {
 
-    constructor() {
-    }
-
 //    public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
 ////      this.isDataLoading(true);
 //      return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);

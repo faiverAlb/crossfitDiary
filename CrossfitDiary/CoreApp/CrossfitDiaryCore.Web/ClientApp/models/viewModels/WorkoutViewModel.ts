@@ -1,6 +1,7 @@
 ﻿  import Serializable = General.Serializable;
   import {WorkoutType} from './WorkoutType';
   import {ExerciseViewModel} from './ExerciseViewModel';
+  
   interface IWorkoutViewModel {
     id?: number,
     title?: string,
@@ -31,6 +32,10 @@
     exercisesToDoList: ExerciseViewModel[] = [];
     children: WorkoutViewModel[] = [];
     isInnerWorkout: boolean = false;
+
+    public  IsForTime = () =>{
+      return this.workoutType == WorkoutType.ForTime;
+    };
 
     
     constructor(params?: IWorkoutViewModel | any) {

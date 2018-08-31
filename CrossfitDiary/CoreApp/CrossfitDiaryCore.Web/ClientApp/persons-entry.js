@@ -4,8 +4,6 @@ import { ToLogWorkoutViewModel } from './models/viewModels/ToLogWorkoutViewModel
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 import CrossfitterService from "./CrossfitterService";
 var apiService = new CrossfitterService();
-//Vue.use(BootstrapVue);
-//let workouts: ToLogWorkoutViewModel[] = [];
 new Vue({
     el: '#home-page-container',
     template: "<PersonsActivitiesComponent :activities=\"activities\"/>",
