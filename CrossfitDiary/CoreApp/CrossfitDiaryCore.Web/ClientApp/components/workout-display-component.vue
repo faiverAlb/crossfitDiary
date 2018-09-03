@@ -6,9 +6,9 @@
                 <span v-if="workoutViewModel.IsForTime()">
                     <span>{{workoutViewModel.roundsCount}} rounds</span>
                 </span>
-                <!-- ko if:workoutType == @((int)RoutineComplexType.AMRAP)-->
-                <span data-bind="text:timeToWork"></span>
-                <!-- /ko -->
+                <span  v-if="workoutViewModel.IsAMRAP()">
+                    {{workoutViewModel.timeToWork}}
+                </span>
             </span>
             <span class="cap-time-info" data-bind="if:timeCap">
                 <span>Cap: </span>

@@ -2,12 +2,16 @@ import { WorkoutType } from './WorkoutType';
 import { ExerciseViewModel } from './ExerciseViewModel';
 var WorkoutViewModel = /** @class */ (function () {
     function WorkoutViewModel(params) {
+        var _this = this;
         this.id = 0;
         this.title = '';
         this.workoutType = WorkoutType.ForTime;
         this.exercisesToDoList = [];
         this.children = [];
         this.isInnerWorkout = false;
+        this.IsForTime = function () {
+            return _this.workoutType == WorkoutType.ForTime;
+        };
         if (params == null) {
             return;
         }
