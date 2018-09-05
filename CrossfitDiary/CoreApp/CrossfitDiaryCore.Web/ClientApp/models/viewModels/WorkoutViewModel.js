@@ -1,16 +1,19 @@
-import { WorkoutType } from './WorkoutType';
-import { ExerciseViewModel } from './ExerciseViewModel';
+import { WorkoutType } from "./WorkoutType";
+import { ExerciseViewModel } from "./ExerciseViewModel";
 var WorkoutViewModel = /** @class */ (function () {
     function WorkoutViewModel(params) {
         var _this = this;
         this.id = 0;
-        this.title = '';
+        this.title = "";
         this.workoutType = WorkoutType.ForTime;
         this.exercisesToDoList = [];
         this.children = [];
         this.isInnerWorkout = false;
         this.IsForTime = function () {
             return _this.workoutType == WorkoutType.ForTime;
+        };
+        this.IsAMRAP = function () {
+            return _this.workoutType == WorkoutType.AMRAP;
         };
         if (params == null) {
             return;
@@ -30,7 +33,7 @@ var WorkoutViewModel = /** @class */ (function () {
     }
     WorkoutViewModel.prototype.deserialize = function (jsonInput) {
         if (jsonInput == null) {
-            return (null);
+            return null;
         }
         return new WorkoutViewModel({
             id: jsonInput.id,
