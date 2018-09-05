@@ -39,6 +39,13 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
   public IsAMRAP = () => {
     return this.workoutType == WorkoutType.AMRAP;
   };
+  public IsEmoms = () => {
+    return this.workoutType == WorkoutType.E2MOM || this.workoutType == WorkoutType.EMOM;
+  };
+
+  public IsHaveCapTime = () => {
+    return (this.workoutType == WorkoutType.ForTime || this.workoutType == WorkoutType.ForTimeManyInners);
+  };
 
 
   constructor(params?: IWorkoutViewModel | any) {
