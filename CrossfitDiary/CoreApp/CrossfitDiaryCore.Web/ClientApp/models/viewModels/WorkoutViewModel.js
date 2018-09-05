@@ -15,6 +15,12 @@ var WorkoutViewModel = /** @class */ (function () {
         this.IsAMRAP = function () {
             return _this.workoutType == WorkoutType.AMRAP;
         };
+        this.IsEmoms = function () {
+            return _this.workoutType == WorkoutType.E2MOM || _this.workoutType == WorkoutType.EMOM;
+        };
+        this.IsHaveCapTime = function () {
+            return (_this.workoutType == WorkoutType.ForTime || _this.workoutType == WorkoutType.ForTimeManyInners);
+        };
         if (params == null) {
             return;
         }

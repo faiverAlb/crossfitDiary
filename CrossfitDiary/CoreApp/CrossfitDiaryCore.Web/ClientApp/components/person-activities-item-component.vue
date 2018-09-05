@@ -7,7 +7,7 @@
                 </span>
             </div>
             <div class="">
-                <span class="">{{model.displayDate}}</span>
+                {{model.displayDate}}
             </div>
         </div>
         <div class="item-body pt-1">
@@ -16,10 +16,10 @@
                 <span class="workout-result">
                     <span v-if="model.workoutViewModel.IsHaveCapTime()">
                         <span v-if="model.repsToFinishOnCapTime">
-                            <i class="far fa-grin-beam"></i> Cap + {{model.repsToFinishOnCapTime}}
+                            <font-awesome-icon :icon="['far','grin-beam']" ></font-awesome-icon> Cap + {{model.repsToFinishOnCapTime}}
                         </span>
                         <span v-else>
-                            <i class="far fa-clock"></i> Total time: {{model.timePassed}}
+                            <font-awesome-icon :icon="['far','clock']"></font-awesome-icon> Total time: {{model.timePassed}}
                         </span>
                     </span>
                     <span v-if="model.workoutViewModel.IsAMRAP()">
@@ -27,7 +27,7 @@
                         <span v-if="model.partialRepsFinished"> + {{model.partialRepsFinished}} partials</span> 
                     </span>
                     <span v-if="model.workoutViewModel.IsEmoms()">
-                        <i class="far fa-clock"></i>: {{model.workoutViewModel.timeToWork}}
+                        <font-awesome-icon :icon="['far','clock']"></font-awesome-icon>: {{model.workoutViewModel.timeToWork}}
                     </span>
                 </span>
             </div>
@@ -47,12 +47,21 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons/faCoffee";
+import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
+import { faGrinBeam } from "@fortawesome/free-regular-svg-icons/faGrinBeam";
+import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
+
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import WorkoutDisplayComponent from "./workout-display-component.vue";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-library.add(faCoffee);
+import { dom } from '@fortawesome/fontawesome-svg-core'
+dom.watch() // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+
+library.add(faGrinBeam, faClock,faPlus);
+
+
+// library.add(faGrinBeam);
 
 @Component({
   components: {
