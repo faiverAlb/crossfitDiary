@@ -1,5 +1,24 @@
 ﻿<template>
     <div :class="{'person-workout': model.canBeRemovedByCurrentUser}" class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded" v-if="model">
+        <bBtn v-b-modal.modal1>Launch demo modal</bBtn>
+
+        <!-- Modal Component -->
+        <bModal id="modal1" title="Bootstrap-Vue">
+            <p class="my-4">Hello from modal!</p>
+        </bModal>
+
+        <div>
+            <bBtn @click="showModal">
+                Open Modal
+            </bBtn>
+            <bModal ref="myModalRef" hide-footer title="Using Component Methods">
+                <div class="d-block text-center">
+                    <h3>Hello From My Modal!</h3>
+                </div>
+                <bBtn class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</bBtn>
+            </bModal>
+        </div>
+
         <div class="item-header d-flex flex-row justify-content-between  ">
             <div class="username">
                 <span class="text-info">
@@ -8,6 +27,9 @@
             </div>
             <div class="">
                 {{model.displayDate}}
+                <a v-if="model.canBeRemovedByCurrentUser" class="remove-workout pl-1 text-secondary pointer" title="Remove your workout" data-bind="click: function(){$parent.removeWorkoutConfirmation(crossfitterWorkoutId);}">
+                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
         <div class="item-body pt-1">
@@ -45,27 +67,48 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
-import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
+/* Font awesome icons */
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faGrinBeam } from "@fortawesome/free-regular-svg-icons/faGrinBeam";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt";
 
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import WorkoutDisplayComponent from "./workout-display-component.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
-library.add(faGrinBeam, faClock, faPlus);
+library.add(faGrinBeam, faClock, faPlus, faTrashAlt);
+/**/
 
-// library.add(faGrinBeam);
+import { Vue, Component, Prop } from "vue-property-decorator";
+import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
+
+import WorkoutDisplayComponent from "./workout-display-component.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import bModal from "bootstrap-vue/es/components/modal/modal";
+import bModalDirective from "bootstrap-vue/es/directives/modal/modal";
+import bBtn from "bootstrap-vue/es/components/button/button";
 
 @Component({
   components: {
     FontAwesomeIcon,
-    WorkoutDisplayComponent
+    WorkoutDisplayComponent,
+    bModal,
+    bModalDirective,
+    bBtn
   }
 })
 export default class PersonsActivitesItemComponent extends Vue {
+  $refs: {
+    myModalRef: HTMLFormElement;
+  };
+
   @Prop() model: ToLogWorkoutViewModel;
+
+  showModal(): void {
+    this.$refs.myModalRef.show();
+  }
+
+  hideModal(): void {
+    this.$refs.myModalRef.hide();
+  }
 }
 </script>
 
