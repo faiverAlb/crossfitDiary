@@ -6,10 +6,12 @@ using CrossfitDiaryCore.DAL.EF.WorkoutMatchers;
 using CrossfitDiaryCore.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CrossfitDiaryCore.Web
 {
@@ -27,6 +29,9 @@ namespace CrossfitDiaryCore.Web
         {
             services.AddAutoMapper();
             services.AddMvc().AddControllersAsServices();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+//            services.AddA(_serviceProvider.GetService<IHttpContextAccessor>());
             //
             services.AddDbContext<WorkouterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CrossfitDiaryDB_Core")));
 

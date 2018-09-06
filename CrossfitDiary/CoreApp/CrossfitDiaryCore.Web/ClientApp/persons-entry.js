@@ -6,7 +6,7 @@ import CrossfitterService from "./CrossfitterService";
 var apiService = new CrossfitterService();
 new Vue({
     el: '#home-page-container',
-    template: "<PersonsActivitiesComponent :activities=\"activities\"/>",
+    template: "<div class=\"home-container\"><PersonsActivitiesComponent :activities=\"activities\"/> </div>",
     components: {
         PersonsActivitiesComponent: PersonsActivitiesComponent
     },

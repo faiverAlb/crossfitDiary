@@ -1,5 +1,5 @@
 ﻿<template>
-    <div class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded" v-if="model">
+    <div :class="{'person-workout': model.canBeRemovedByCurrentUser}" class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded" v-if="model">
         <div class="item-header d-flex flex-row justify-content-between  ">
             <div class="username">
                 <span class="text-info">
@@ -16,7 +16,7 @@
                 <span class="workout-result">
                     <span v-if="model.workoutViewModel.IsHaveCapTime()">
                         <span v-if="model.repsToFinishOnCapTime">
-                            <font-awesome-icon :icon="['far','grin-beam']" ></font-awesome-icon> Cap + {{model.repsToFinishOnCapTime}}
+                            <font-awesome-icon :icon="['far','grin-beam']"></font-awesome-icon> Cap + {{model.repsToFinishOnCapTime}}
                         </span>
                         <span v-else>
                             <font-awesome-icon :icon="['far','clock']"></font-awesome-icon> Total time: {{model.timePassed}}
@@ -24,7 +24,7 @@
                     </span>
                     <span v-if="model.workoutViewModel.IsAMRAP()">
                         Rounds: {{model.roundsFinished}}
-                        <span v-if="model.partialRepsFinished"> + {{model.partialRepsFinished}} partials</span> 
+                        <span v-if="model.partialRepsFinished"> + {{model.partialRepsFinished}} partials</span>
                     </span>
                     <span v-if="model.workoutViewModel.IsEmoms()">
                         <font-awesome-icon :icon="['far','clock']"></font-awesome-icon>: {{model.workoutViewModel.timeToWork}}
@@ -55,11 +55,10 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import WorkoutDisplayComponent from "./workout-display-component.vue";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { dom } from '@fortawesome/fontawesome-svg-core'
-dom.watch() // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+import { dom } from "@fortawesome/fontawesome-svg-core";
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 
-library.add(faGrinBeam, faClock,faPlus);
-
+library.add(faGrinBeam, faClock, faPlus);
 
 // library.add(faGrinBeam);
 

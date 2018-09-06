@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using CrossfitDiary.Web.Mappings;
 using CrossfitDiaryCore.Model;
 using CrossfitDiaryCore.Web.AutomapperConfiguration.Resolvers;
 using CrossfitDiaryCore.Web.ViewModels;
@@ -43,7 +44,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.SelectedWorkoutId, x => x.MapFrom(y => y.RoutineComplex.Id))
                 .ForMember(x => x.CrossfitterWorkoutId, x => x.MapFrom(y => y.Id))
                 //TODO: Fix
-//                .ForMember(x => x.CanBeRemovedByCurrentUser, x => x.ResolveUsing<CanBeRemovedResolver>())
+                .ForMember(x => x.CanBeRemovedByCurrentUser, x => x.ResolveUsing<CanBeRemovedResolver>())
                 .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName))
                 .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex))
                 .ForMember(x => x.WorkouterId, x => x.MapFrom(y => y.Crossfitter.Id))

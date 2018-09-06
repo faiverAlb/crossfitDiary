@@ -21,16 +21,19 @@ namespace CrossfitDiary.Web.Api
 
 //        private readonly ManageWorkoutsService _manageWorkoutsService;
         private readonly ReadWorkoutsService _readWorkoutsService;
+
+        private readonly IMapper _mapper;
 //        private readonly ApplicationUserManager _applicationUserManager;
 
         #endregion
 
         #region constructors
 
-        public WorkoutController(/*ManageWorkoutsService manageWorkoutsService, */ReadWorkoutsService readWorkoutsService/*, ApplicationUserManager applicationUserManager, IWorkoutService workoutService*/)
+        public WorkoutController(ReadWorkoutsService readWorkoutsService, IMapper mapper)
         {
 //            _manageWorkoutsService = manageWorkoutsService;
             _readWorkoutsService = readWorkoutsService;
+            _mapper = mapper;
 //            _applicationUserManager = applicationUserManager;
         }
 
@@ -44,13 +47,13 @@ namespace CrossfitDiary.Web.Api
         /// <returns>All available workouts</returns>
         [HttpGet]
         [Route("getAllCrossfittersWorkouts")]
-        public List<ToLogWorkoutViewModel> GetAllCrossfittersWorkouts(int page = 1, int pageSize = 20, string userId = null, int? exerciseId = null)
+        public List<ToLogWorkoutViewModel> GetAllCrossfittersWorkouts(int page = 1, int pageSize = 30, string userId = null, int? exerciseId = null)
         {
-            string userIdForWorkouts = User.Identity.GetUserId();
+            string userIdForWorkouts = userId;
 
             List<ToLogWorkoutViewModel> crossfitersWorkouts = _readWorkoutsService
                 .GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId, page, pageSize)
-                .Select(Mapper.Map<ToLogWorkoutViewModel>)
+                .Select(_mapper.Map<ToLogWorkoutViewModel>)
                 .ToList();
             return crossfitersWorkouts;
         }

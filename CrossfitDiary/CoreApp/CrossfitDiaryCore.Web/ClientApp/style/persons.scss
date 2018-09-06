@@ -1,5 +1,4 @@
 ﻿@import "_custom.scss";
-
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
@@ -34,7 +33,6 @@
 @import "~bootstrap/scss/popover";
 @import "~bootstrap/scss/carousel";
 @import "~bootstrap/scss/utilities";
-
 // C:\TestProjects\crossfitDiary\CrossfitDiary\CoreApp\CrossfitDiaryCore.Web\node_modules\bootstrap\scss\_variables.scss
 @import "./general.scss";
 
@@ -53,7 +51,7 @@
             font-size: 14px;
 
             &.person-workout {
-                border: 1px dashed '#17a2b8';
+                border: 1px dashed #17a2b8;
             }
 
             .item-header {
@@ -71,7 +69,9 @@
             }
 
             .item-body {
-                .workout-title, .cap-time-info {
+
+                .workout-title,
+                .cap-time-info {
                     border-bottom: 1px dashed black;
                 }
 
