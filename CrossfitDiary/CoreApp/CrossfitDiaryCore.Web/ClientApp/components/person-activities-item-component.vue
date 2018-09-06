@@ -53,11 +53,7 @@ import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import WorkoutDisplayComponent from "./workout-display-component.vue";
-
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { dom } from "@fortawesome/fontawesome-svg-core";
-dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
-
 library.add(faGrinBeam, faClock, faPlus);
 
 // library.add(faGrinBeam);
