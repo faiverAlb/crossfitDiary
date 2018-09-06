@@ -1,24 +1,13 @@
 ﻿<template>
     <div :class="{'person-workout': model.canBeRemovedByCurrentUser}" class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded" v-if="model">
-        <bBtn v-b-modal.modal1>Launch demo modal</bBtn>
-
-        <!-- Modal Component -->
-        <bModal id="modal1" title="Bootstrap-Vue">
-            <p class="my-4">Hello from modal!</p>
-        </bModal>
-
         <div>
-            <bBtn @click="showModal">
-                Open Modal
-            </bBtn>
-            <bModal ref="myModalRef" hide-footer title="Using Component Methods">
+            <b-modal ref="myModalRef" hide-footer title="Using Component Methods">
                 <div class="d-block text-center">
                     <h3>Hello From My Modal!</h3>
                 </div>
-                <bBtn class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</bBtn>
-            </bModal>
+                <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-btn>
+            </b-modal>
         </div>
-
         <div class="item-header d-flex flex-row justify-content-between  ">
             <div class="username">
                 <span class="text-info">
@@ -27,7 +16,7 @@
             </div>
             <div class="">
                 {{model.displayDate}}
-                <a v-if="model.canBeRemovedByCurrentUser" class="remove-workout pl-1 text-secondary pointer" title="Remove your workout" data-bind="click: function(){$parent.removeWorkoutConfirmation(crossfitterWorkoutId);}">
+                <a v-if="model.canBeRemovedByCurrentUser" class="remove-workout pl-1 text-secondary pointer" title="Remove your workout" @click="showModal" data-bind="click: function(){$parent.removeWorkoutConfirmation(crossfitterWorkoutId);}">
                     <i class="fa fa-trash-alt" aria-hidden="true"></i>
                 </a>
             </div>
@@ -82,8 +71,10 @@ import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewMode
 
 import WorkoutDisplayComponent from "./workout-display-component.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 import bModal from "bootstrap-vue/es/components/modal/modal";
-import bModalDirective from "bootstrap-vue/es/directives/modal/modal";
+import vBModal from "bootstrap-vue/es/directives/modal/modal";
+
 import bBtn from "bootstrap-vue/es/components/button/button";
 
 @Component({
@@ -91,7 +82,6 @@ import bBtn from "bootstrap-vue/es/components/button/button";
     FontAwesomeIcon,
     WorkoutDisplayComponent,
     bModal,
-    bModalDirective,
     bBtn
   }
 })
