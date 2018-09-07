@@ -1,11 +1,14 @@
 ﻿<template>
     <div :class="{'person-workout': model.canBeRemovedByCurrentUser}" class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded" v-if="model">
         <div>
-            <b-modal ref="myModalRef" hide-footer title="Using Component Methods">
-                <div class="d-block text-center">
-                    <h3>Hello From My Modal!</h3>
+            <b-modal ref="myModalRef" title="Sure to remove workout?">
+                Are you sure you want to remove it?
+                <!-- <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-btn> -->
+
+                <div slot="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default" @click="hideModal">Close</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary btn-danger" @click="hideModal">Delete</button>
                 </div>
-                <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-btn>
             </b-modal>
         </div>
         <div class="item-header d-flex flex-row justify-content-between  ">
