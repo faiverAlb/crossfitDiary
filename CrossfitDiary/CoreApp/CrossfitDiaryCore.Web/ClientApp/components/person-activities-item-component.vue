@@ -3,11 +3,9 @@
         <div>
             <b-modal ref="myModalRef" title="Sure to remove workout?">
                 Are you sure you want to remove it?
-                <!-- <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-btn> -->
-
                 <div slot="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-default" @click="hideModal">Close</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-primary btn-danger" @click="hideModal">Delete</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary btn-danger" @click="deleteWorkout">Delete</button>
                 </div>
             </b-modal>
         </div>
@@ -77,15 +75,13 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import vBModal from "bootstrap-vue/es/directives/modal/modal";
-
-import bBtn from "bootstrap-vue/es/components/button/button";
+import CrossfitterService from "../CrossfitterService";
 
 @Component({
   components: {
     FontAwesomeIcon,
     WorkoutDisplayComponent,
-    bModal,
-    bBtn
+    bModal
   }
 })
 export default class PersonsActivitesItemComponent extends Vue {
@@ -93,10 +89,22 @@ export default class PersonsActivitesItemComponent extends Vue {
     myModalRef: HTMLFormElement;
   };
 
+  _apiService: CrossfitterService = new CrossfitterService();
   @Prop() model: ToLogWorkoutViewModel;
 
   showModal(): void {
     this.$refs.myModalRef.show();
+  }
+
+  deleteWorkout(): void {
+    this.$refs.myModalRef.hide();
+    debugger;
+
+    this._apiService
+      .removeWorkout(this.model.crossfitterWorkoutId)
+      .then(data => {
+        debugger;
+      });
   }
 
   hideModal(): void {
