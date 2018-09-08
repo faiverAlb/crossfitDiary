@@ -8,6 +8,12 @@
                     <button type="button" data-dismiss="modal" class="btn btn-primary btn-danger" @click="deleteWorkout">Delete</button>
                 </div>
             </b-modal>
+
+            <spinner
+                :status="active"
+                :color="spinnerColor"
+                :size="50"
+                :speed="39"></spinner>
         </div>
         <div class="item-header d-flex flex-row justify-content-between  ">
             <div class="username">
@@ -76,12 +82,14 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import vBModal from "bootstrap-vue/es/directives/modal/modal";
 import CrossfitterService from "../CrossfitterService";
+import Spinner from "vue-spinner-component/src/Spinner.vue";
 
 @Component({
   components: {
     FontAwesomeIcon,
     WorkoutDisplayComponent,
-    bModal
+    bModal,
+    Spinner
   }
 })
 export default class PersonsActivitesItemComponent extends Vue {
