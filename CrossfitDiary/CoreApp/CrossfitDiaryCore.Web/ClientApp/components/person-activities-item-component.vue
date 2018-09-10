@@ -1,20 +1,5 @@
 ﻿<template>
     <div :class="{'person-workout': model.canBeRemovedByCurrentUser}" class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded" v-if="model">
-        <div>
-            <b-modal ref="myModalRef" title="Sure to remove workout?">
-                Are you sure you want to remove it?
-                <div slot="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default" @click="hideModal">Close</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-primary btn-danger" @click="deleteWorkout">Delete</button>
-                </div>
-            </b-modal>
-
-            <spinner
-                :status="active"
-                :color="spinnerColor"
-                :size="50"
-                :speed="39"></spinner>
-        </div>
         <div class="item-header d-flex flex-row justify-content-between  ">
             <div class="username">
                 <span class="text-info">
@@ -23,7 +8,7 @@
             </div>
             <div class="">
                 {{model.displayDate}}
-                <a v-if="model.canBeRemovedByCurrentUser" class="remove-workout pl-1 text-secondary pointer" title="Remove your workout" @click="showModal" data-bind="click: function(){$parent.removeWorkoutConfirmation(crossfitterWorkoutId);}">
+                <a v-if="model.canBeRemovedByCurrentUser" class="remove-workout pl-1 text-secondary pointer" title="Remove your workout" @click="deleteWorkout">
                     <i class="fa fa-trash-alt" aria-hidden="true"></i>
                 </a>
             </div>
@@ -79,44 +64,20 @@ import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewMode
 import WorkoutDisplayComponent from "./workout-display-component.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-import bModal from "bootstrap-vue/es/components/modal/modal";
-import vBModal from "bootstrap-vue/es/directives/modal/modal";
 import CrossfitterService from "../CrossfitterService";
-import Spinner from "vue-spinner-component/src/Spinner.vue";
 
 @Component({
   components: {
     FontAwesomeIcon,
-    WorkoutDisplayComponent,
-    bModal,
-    Spinner
+    WorkoutDisplayComponent
   }
 })
 export default class PersonsActivitesItemComponent extends Vue {
-  $refs: {
-    myModalRef: HTMLFormElement;
-  };
-
   _apiService: CrossfitterService = new CrossfitterService();
   @Prop() model: ToLogWorkoutViewModel;
 
-  showModal(): void {
-    this.$refs.myModalRef.show();
-  }
-
   deleteWorkout(): void {
-    this.$refs.myModalRef.hide();
-    debugger;
-
-    this._apiService
-      .removeWorkout(this.model.crossfitterWorkoutId)
-      .then(data => {
-        debugger;
-      });
-  }
-
-  hideModal(): void {
-    this.$refs.myModalRef.hide();
+    this.$emit("deleteWorkout", this.model.crossfitterWorkoutId);
   }
 }
 </script>

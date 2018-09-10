@@ -1,8 +1,18 @@
 ﻿<template>
     <div>
+        <!-- <spinner></spinner> -->
+        <div>
+            <b-modal ref="myModalRef" title="Sure to remove workout?">
+                Are you sure you want to remove it?
+                <div slot="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default" @click="hideModal">Close</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary btn-danger" @click="deleteWorkout">Delete</button>
+                </div>
+            </b-modal>
+        </div>
         <div class="activities-list container" v-for="item in activities" :key="item.id">
             <div class="row">
-                <PersonsActivitesItemComponent :model="item"></PersonsActivitesItemComponent>
+                <PersonsActivitesItemComponent :model="item" @deleteWorkout="deleteWorkoutClick"></PersonsActivitesItemComponent>
             </div>
         </div>
     </div>
@@ -11,16 +21,46 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import PersonsActivitesItemComponent from "./person-activities-item-component.vue";
-// import bAlert from 'bootstrap-vue/es/components/alert/alert';
 import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
+import bModal from "bootstrap-vue/es/components/modal/modal";
+import Spinner from "vue-spinner-component/src/Spinner.vue";
 
 @Component({
   components: {
-    PersonsActivitesItemComponent
+    PersonsActivitesItemComponent,
+    bModal,
+    Spinner
   }
 })
 export default class PersonsActivitesComponent extends Vue {
+  $refs: {
+    myModalRef: HTMLFormElement;
+  };
   @Prop() activities: ToLogWorkoutViewModel[];
+
+  _toDeleteWorkoutId: number = -1;
+  deleteWorkoutClick(crossfitterWorkoutId: number) {
+    debugger;
+    this.$refs.myModalRef.show(crossfitterWorkoutId);
+    this._toDeleteWorkoutId = crossfitterWorkoutId;
+    // debugger;
+  }
+
+  deleteWorkout(): void {
+    let test = this._toDeleteWorkoutId;
+    this.$refs.myModalRef.hide();
+
+    // this._apiService
+    //   .removeWorkout(this.model.crossfitterWorkoutId)
+    //   .then(data => {
+    //     debugger;
+    //   });
+  }
+
+  hideModal(): void {
+    debugger;
+    this.$refs.myModalRef.hide();
+  }
 }
 </script>
 
