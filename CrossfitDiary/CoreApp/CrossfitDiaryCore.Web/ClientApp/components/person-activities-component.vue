@@ -38,16 +38,13 @@ export default class PersonsActivitesComponent extends Vue {
   };
   @Prop() activities: ToLogWorkoutViewModel[];
 
-  _toDeleteWorkoutId: number = -1;
+  _toDeleteCrossfitWorkoutId: number = -1;
   deleteWorkoutClick(crossfitterWorkoutId: number) {
-    debugger;
     this.$refs.myModalRef.show(crossfitterWorkoutId);
-    this._toDeleteWorkoutId = crossfitterWorkoutId;
-    // debugger;
+    this._toDeleteCrossfitWorkoutId = crossfitterWorkoutId;
   }
-
   deleteWorkout(): void {
-    let test = this._toDeleteWorkoutId;
+    let test = this._toDeleteCrossfitWorkoutId;
     this.$refs.myModalRef.hide();
 
     // this._apiService
@@ -58,7 +55,6 @@ export default class PersonsActivitesComponent extends Vue {
   }
 
   hideModal(): void {
-    debugger;
     this.$refs.myModalRef.hide();
   }
 }
