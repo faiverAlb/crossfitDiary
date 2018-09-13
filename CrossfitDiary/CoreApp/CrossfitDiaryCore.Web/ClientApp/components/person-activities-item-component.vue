@@ -64,8 +64,6 @@ import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewMode
 import WorkoutDisplayComponent from "./workout-display-component.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-import CrossfitterService from "../CrossfitterService";
-
 @Component({
   components: {
     FontAwesomeIcon,
@@ -73,7 +71,6 @@ import CrossfitterService from "../CrossfitterService";
   }
 })
 export default class PersonsActivitesItemComponent extends Vue {
-  _apiService: CrossfitterService = new CrossfitterService();
   @Prop() model: ToLogWorkoutViewModel;
 
   deleteWorkout(): void {

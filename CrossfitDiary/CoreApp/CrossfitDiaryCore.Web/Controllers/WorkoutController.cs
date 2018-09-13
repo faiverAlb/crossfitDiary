@@ -58,56 +58,59 @@ namespace CrossfitDiary.Web.Api
             return crossfitersWorkouts;
         }
 
-//
-//        /// <summary>
-//        ///     Create and log workout
-//        /// </summary>
-//        /// <param name="model">Complex model with two properties: new workout and log workout models</param>
-//        [HttpPost]
-//        [Route("createAndLogNewWorkout")]
-//        public void CreateAndLogNewWorkout(ToCreateAndLogNewWorkoutViewModel model)
-//        {
-//            
-//            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
-//            CrossfitterWorkout crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
-//            crossfitterWorkout.Crossfitter = user;
-//            RoutineComplex newWorkoutRoutine = Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
-//            newWorkoutRoutine.CreatedBy = user;
-//
-//            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
-//        }
-//
-//        /// <summary>
-//        /// Remove workout.
-//        /// </summary>
-//        /// <param name="crossfitterWorkoutId">
-//        /// The crossfitter workout id.
-//        /// </param>
-//        [HttpDelete]
-//        [Route("removeWorkout/{crossfitterWorkoutId}")]
-//        public void RemoveWorkout(int crossfitterWorkoutId)
-//        {
+        /// <summary>
+        /// Remove workout.
+        /// </summary>
+        /// <param name="crossfitterWorkoutId">
+        /// The crossfitter workout id.
+        /// </param>
+        [HttpDelete]
+        [Route("removeWorkout/{crossfitterWorkoutId}")]
+        public void RemoveWorkout(int crossfitterWorkoutId)
+        {
+            var test = 123;
 //            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
 //            _readWorkoutsService.RemoveWorkout(crossfitterWorkoutId, user);
-//        }
-//
-//        /// <summary>
-//        /// Get person logging info by crossfit workout id
-//        /// </summary>
-//        /// <param name="preselectedCrossfitterWorkoutId">
-//        /// The preselected crossfitter workout id.
-//        /// </param>
-//        /// <returns>
-//        /// The <see cref="IHttpActionResult"/>.
-//        /// </returns>
-//        [HttpGet]
-//        [Route("getPersonLoggingInfo/{preselectedCrossfitterWorkoutId}")]
-//        public ToLogWorkoutViewModel GetPersonLoggingInfo(int preselectedCrossfitterWorkoutId)
-//        {
-//            CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(preselectedCrossfitterWorkoutId);
-//            var toLogWorkoutViewModel = Mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout);
-//            return toLogWorkoutViewModel;
-//        }
+        }
+
+        //
+        //        /// <summary>
+        //        ///     Create and log workout
+        //        /// </summary>
+        //        /// <param name="model">Complex model with two properties: new workout and log workout models</param>
+        //        [HttpPost]
+        //        [Route("createAndLogNewWorkout")]
+        //        public void CreateAndLogNewWorkout(ToCreateAndLogNewWorkoutViewModel model)
+        //        {
+        //            
+        //            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
+        //            CrossfitterWorkout crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
+        //            crossfitterWorkout.Crossfitter = user;
+        //            RoutineComplex newWorkoutRoutine = Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
+        //            newWorkoutRoutine.CreatedBy = user;
+        //
+        //            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
+        //        }
+        //
+
+        //
+        //        /// <summary>
+        //        /// Get person logging info by crossfit workout id
+        //        /// </summary>
+        //        /// <param name="preselectedCrossfitterWorkoutId">
+        //        /// The preselected crossfitter workout id.
+        //        /// </param>
+        //        /// <returns>
+        //        /// The <see cref="IHttpActionResult"/>.
+        //        /// </returns>
+        //        [HttpGet]
+        //        [Route("getPersonLoggingInfo/{preselectedCrossfitterWorkoutId}")]
+        //        public ToLogWorkoutViewModel GetPersonLoggingInfo(int preselectedCrossfitterWorkoutId)
+        //        {
+        //            CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(preselectedCrossfitterWorkoutId);
+        //            var toLogWorkoutViewModel = Mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout);
+        //            return toLogWorkoutViewModel;
+        //        }
 
         #endregion
     }

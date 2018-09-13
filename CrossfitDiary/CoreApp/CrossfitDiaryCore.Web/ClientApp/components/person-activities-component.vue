@@ -24,6 +24,7 @@ import PersonsActivitesItemComponent from "./person-activities-item-component.vu
 import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+import CrossfitterService from "../CrossfitterService";
 
 @Component({
   components: {
@@ -33,6 +34,7 @@ import Spinner from "vue-spinner-component/src/Spinner.vue";
   }
 })
 export default class PersonsActivitesComponent extends Vue {
+  _apiService: CrossfitterService = new CrossfitterService();
   $refs: {
     myModalRef: HTMLFormElement;
   };
@@ -43,18 +45,25 @@ export default class PersonsActivitesComponent extends Vue {
     this.$refs.myModalRef.show(crossfitterWorkoutId);
     this._toDeleteCrossfitWorkoutId = crossfitterWorkoutId;
   }
+
+  mounted() {
+    debugger;
+    this._apiService = new CrossfitterService();
+  }
+
   deleteWorkout(): void {
     this.$refs.myModalRef.hide();
     debugger;
-    let indexOfWorkout = this.activities
-      .map(item => item.id)
-      .indexOf(this._toDeleteCrossfitWorkoutId);
-    this.activities.splice(indexOfWorkout, 1);
-    // this._apiService
-    //   .removeWorkout(this.model.crossfitterWorkoutId)
-    //   .then(data => {
-    //     debugger;
-    //   });
+
+    this._apiService
+      .removeWorkout(this._toDeleteCrossfitWorkoutId)
+      .then(data => {
+        debugger;
+        let indexOfWorkout = this.activities
+          .map(item => item.id)
+          .indexOf(this._toDeleteCrossfitWorkoutId);
+        this.activities.splice(indexOfWorkout, 1);
+      });
   }
 
   hideModal(): void {
