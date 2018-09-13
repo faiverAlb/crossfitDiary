@@ -78,6 +78,7 @@ namespace CrossfitDiaryCore.Web
                 });
 
             services.AddTransient<ReadWorkoutsService>();
+            services.AddTransient<ManageWorkoutsService>();
 
             services.AddTransient<WorkoutsMatchDispatcher>();
 

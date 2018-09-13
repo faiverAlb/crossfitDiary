@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using AutoMapper;
 using CrossfitDiaryCore.BL.Services;
 using CrossfitDiaryCore.Model;
@@ -7,6 +8,7 @@ using CrossfitDiaryCore.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,23 +20,21 @@ namespace CrossfitDiary.Web.Api
     public class WorkoutController : Controller
     {
         #region members
-
-//        private readonly ManageWorkoutsService _manageWorkoutsService;
         private readonly ReadWorkoutsService _readWorkoutsService;
-
+        private readonly ManageWorkoutsService _manageWorkoutsService;
         private readonly IMapper _mapper;
-//        private readonly ApplicationUserManager _applicationUserManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         #endregion
 
         #region constructors
 
-        public WorkoutController(ReadWorkoutsService readWorkoutsService, IMapper mapper)
+        public WorkoutController(ReadWorkoutsService readWorkoutsService, ManageWorkoutsService manageWorkoutsService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
-//            _manageWorkoutsService = manageWorkoutsService;
             _readWorkoutsService = readWorkoutsService;
+            _manageWorkoutsService = manageWorkoutsService;
             _mapper = mapper;
-//            _applicationUserManager = applicationUserManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         #endregion
@@ -68,9 +68,9 @@ namespace CrossfitDiary.Web.Api
         [Route("removeWorkout/{crossfitterWorkoutId}")]
         public void RemoveWorkout(int crossfitterWorkoutId)
         {
-            var test = 123;
-//            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
-//            _readWorkoutsService.RemoveWorkout(crossfitterWorkoutId, user);
+            string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            _manageWorkoutsService.RemoveWorkout(crossfitterWorkoutId, userId);
         }
 
         //
