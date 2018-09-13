@@ -6,19 +6,12 @@ import PersonsActivitiesComponent from "./components/person-activities-component
 import CrossfitterService from "./CrossfitterService";
 const apiService = new CrossfitterService();
 
-import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
-import { faRocket } from "@fortawesome/free-solid-svg-icons/faRocket";
-import { faTrophy } from "@fortawesome/free-solid-svg-icons/faTrophy"; //fa-sign-out-alt
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
-
-import { library } from "@fortawesome/fontawesome-svg-core";
 import { dom } from "@fortawesome/fontawesome-svg-core";
 
 import Spinner from "vue-spinner-component/src/Spinner.vue";
 import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
-library.add(faHome, faRocket, faTrophy, faSignOutAlt);
 
 new Vue({
   el: "#home-page-container",
