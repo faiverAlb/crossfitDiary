@@ -1,21 +1,21 @@
 ﻿<template>
+  <div>
+    <!-- <spinner></spinner> -->
     <div>
-        <!-- <spinner></spinner> -->
-        <div>
-            <b-modal ref="myModalRef" title="Sure to remove workout?">
-                Are you sure you want to remove it?
-                <div slot="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default" @click="hideModal">Close</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-primary btn-danger" @click="deleteWorkout">Delete</button>
-                </div>
-            </b-modal>
+      <b-modal ref="myModalRef" title="Sure to remove workout?">
+        Are you sure you want to remove it?
+        <div slot="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-default" @click="hideModal">Close</button>
+          <button type="button" data-dismiss="modal" class="btn btn-primary btn-danger" @click="deleteWorkout">Delete</button>
         </div>
-        <div class="activities-list container" v-for="item in activities" :key="item.id">
-            <div class="row">
-                <PersonsActivitesItemComponent :model="item" @deleteWorkout="deleteWorkoutClick"></PersonsActivitesItemComponent>
-            </div>
-        </div>
+      </b-modal>
     </div>
+    <div class="activities-list container" v-for="item in activities" :key="item.id">
+      <div class="row">
+        <PersonsActivitesItemComponent :model="item" @deleteWorkout="deleteWorkoutClick"></PersonsActivitesItemComponent>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -44,9 +44,12 @@ export default class PersonsActivitesComponent extends Vue {
     this._toDeleteCrossfitWorkoutId = crossfitterWorkoutId;
   }
   deleteWorkout(): void {
-    let test = this._toDeleteCrossfitWorkoutId;
     this.$refs.myModalRef.hide();
-
+    debugger;
+    let indexOfWorkout = this.activities
+      .map(item => item.id)
+      .indexOf(this._toDeleteCrossfitWorkoutId);
+    this.activities.splice(indexOfWorkout, 1);
     // this._apiService
     //   .removeWorkout(this.model.crossfitterWorkoutId)
     //   .then(data => {

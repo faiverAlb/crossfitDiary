@@ -4,29 +4,29 @@ import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 import CrossfitterService from "./CrossfitterService";
 var apiService = new CrossfitterService();
-import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
-import { faRocket } from "@fortawesome/free-solid-svg-icons/faRocket";
-import { faTrophy } from "@fortawesome/free-solid-svg-icons/faTrophy"; //fa-sign-out-alt
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
-import { library } from "@fortawesome/fontawesome-svg-core";
 import { dom } from "@fortawesome/fontawesome-svg-core";
+import Spinner from "vue-spinner-component/src/Spinner.vue";
+import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
-library.add(faHome, faRocket, faTrophy, faSignOutAlt);
 new Vue({
     el: "#home-page-container",
-    template: '<div class="home-container"><PersonsActivitiesComponent :activities="activities"/> </div>',
+    template: "\n    <div class=\"home-container\">\n      <div class=\"row\">\n        <div class=\"offset-5\">\n          <spinner \n            :status=\"spinner.status\"  \n            :size=\"spinner.size\" \n            :color=\"spinner.color\"  \n            :depth=\"spinner.depth\" \n            :rotation=\"spinner.rotation\"\n            :speed=\"spinner.speed\">\n          </spinner>\n        </div>\n      </div>\n      <PersonsActivitiesComponent :activities=\"activities\"/> \n    </div>\n    ",
     components: {
-        PersonsActivitiesComponent: PersonsActivitiesComponent
+        PersonsActivitiesComponent: PersonsActivitiesComponent,
+        Spinner: Spinner
     },
     data: function () {
         return {
-            activities: ToLogWorkoutViewModel[0]
+            activities: ToLogWorkoutViewModel[0],
+            spinner: new SpinnerModel(true)
         };
     },
     mounted: function () {
         var _this = this;
+        this.spinner.activate();
         apiService.getAllCrossfittersWorkouts().then(function (data) {
             _this.activities = data;
+            _this.spinner.disable();
         });
     }
 });
