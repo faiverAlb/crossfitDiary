@@ -1,9 +1,4 @@
-﻿//using CrossfitDiary.DAL.EF.Infrastructure;
-//using CrossfitDiary.DAL.EF.Repositories;
-//using CrossfitDiary.Model;
-
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using CrossfitDiaryCore.DAL.EF;
 using CrossfitDiaryCore.Model;
 

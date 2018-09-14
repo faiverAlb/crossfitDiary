@@ -47,13 +47,11 @@ export default class PersonsActivitesComponent extends Vue {
   }
 
   mounted() {
-    debugger;
     this._apiService = new CrossfitterService();
   }
 
   deleteWorkout(): void {
     this.$refs.myModalRef.hide();
-    debugger;
 
     this._apiService
       .removeWorkout(this._toDeleteCrossfitWorkoutId)
