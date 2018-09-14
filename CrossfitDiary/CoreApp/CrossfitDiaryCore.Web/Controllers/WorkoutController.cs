@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace CrossfitDiary.Web.Api
 {
     [Authorize]
-    [Route("api")]
     public class WorkoutController : Controller
     {
         #region members
@@ -37,6 +36,11 @@ namespace CrossfitDiary.Web.Api
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         #endregion
 
         #region methods
@@ -46,7 +50,7 @@ namespace CrossfitDiary.Web.Api
         /// </summary>
         /// <returns>All available workouts</returns>
         [HttpGet]
-        [Route("getAllCrossfittersWorkouts")]
+        [Route("api/getAllCrossfittersWorkouts")]
         public List<ToLogWorkoutViewModel> GetAllCrossfittersWorkouts(int page = 1, int pageSize = 30, string userId = null, int? exerciseId = null)
         {
             string userIdForWorkouts = userId;
@@ -65,7 +69,7 @@ namespace CrossfitDiary.Web.Api
         /// The crossfitter workout id.
         /// </param>
         [HttpDelete]
-        [Route("removeWorkout/{crossfitterWorkoutId}")]
+        [Route("api/removeWorkout/{crossfitterWorkoutId}")]
         public void RemoveWorkout(int crossfitterWorkoutId)
         {
             string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;

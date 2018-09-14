@@ -24,7 +24,8 @@ module.exports = (env) => {
   var config = {
     entry: {
       'persons-entry': './ClientApp/persons-entry.ts',
-      login: './ClientApp/login-page-entry'
+      login: './ClientApp/login-page-entry',
+      'workout-enty': './ClientApp/workout-enty.ts',
     },
     output: {
       path: path.join(__dirname, destinationFolder),
@@ -42,9 +43,9 @@ module.exports = (env) => {
       new CleanWebpackPlugin(pathsToClean, cleanOptions),
 
       new webpack.ProvidePlugin({
-         $: 'jquery', 
-         jQuery: 'jquery'        
-        }),
+        $: 'jquery',
+        jQuery: 'jquery'
+      }),
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
@@ -55,12 +56,11 @@ module.exports = (env) => {
 
     ],
     module: {
-      rules: [
-        {
+      rules: [{
           test: /\.(scss)$/,
           use: [
             MiniCssExtractPlugin.loader,
-//            isProd === false ? 'style-loader' : MiniCssExtractPlugin.loader,
+            //            isProd === false ? 'style-loader' : MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
             },
@@ -82,7 +82,7 @@ module.exports = (env) => {
           ]
         },
         {
-          test: /\.css?$/, 
+          test: /\.css?$/,
           loaders: ['style-loader', 'css-loader', 'sass-loader']
         },
         // the url-loader uses DataUrls. 
@@ -100,8 +100,8 @@ module.exports = (env) => {
           loader: 'vue-loader',
           options: {
             loaders: {
-                'scss': 'vue-style-loader!css-loader!sass-loader',
-                'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+              'scss': 'vue-style-loader!css-loader!sass-loader',
+              'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
             }
           }
         },

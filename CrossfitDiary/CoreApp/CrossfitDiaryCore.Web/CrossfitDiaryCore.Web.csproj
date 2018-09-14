@@ -75,6 +75,12 @@
     <TypeScriptCompile Include="ClientApp\models\WorkoutViewModelObservable.ts" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Workout\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 
   <Target Name="BuildClientAssets" AfterTargets="ComputeFilesToPublish">
     <Exec Command="npm install" />
