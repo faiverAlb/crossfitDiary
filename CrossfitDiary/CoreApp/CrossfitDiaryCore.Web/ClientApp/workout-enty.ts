@@ -1,4 +1,5 @@
 ﻿import Vue from "vue";
+import "./style/manage-workout.scss";
 
 import CrossfitterService from "./CrossfitterService";
 const apiService = new CrossfitterService();
