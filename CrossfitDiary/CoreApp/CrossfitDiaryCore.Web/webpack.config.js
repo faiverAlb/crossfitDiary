@@ -25,7 +25,7 @@ module.exports = (env) => {
     entry: {
       'persons-entry': './ClientApp/persons-entry.ts',
       login: './ClientApp/login-page-entry',
-      'workout-enty': './ClientApp/workout-enty.ts',
+      'workout-entry': './ClientApp/workout-entry.ts',
     },
     output: {
       path: path.join(__dirname, destinationFolder),

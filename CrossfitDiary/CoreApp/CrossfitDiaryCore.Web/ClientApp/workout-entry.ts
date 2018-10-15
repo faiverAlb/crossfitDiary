@@ -10,7 +10,7 @@ import ErrorAlertComponent from "./components/error-alert-component.vue";
 import WorkoutsNavigationComponent from "./components/manage-workout/workouts-navigation-component.vue";
 
 new Vue({
-  el: "#ManageWorkoutPageContainer",
+  el: "#manage-workout-page-container",
   template: `
    <div class="manage-workout-container my-2">
       <div>
