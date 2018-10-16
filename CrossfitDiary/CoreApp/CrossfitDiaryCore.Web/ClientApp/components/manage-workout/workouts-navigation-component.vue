@@ -1,7 +1,7 @@
 ﻿<template>
     <div>
         <div class="dropdown show d-inline">
-            <a class="btn btn-secondary text-light  d-inline-block p-0" id="dropdownMenuForTimeLink" href="#" data-target="#navbarContent" aria-controls="navbarContent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <router-link to="/fortime" class="btn btn-secondary text-light  d-inline-block p-0" id="dropdownMenuForTimeLink" href="#" data-target="#navbarContent" aria-controls="navbarContent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="small-action-link-button">
                     <div class="icon-container">
                         <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
@@ -11,7 +11,7 @@
                         <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
                     </div>
                 </div>
-            </a>
+            </router-link>
             <div class="dropdown-menu custom-action-menu-dropdown" aria-labelledby="dropdownMenuForTimeLink">
                 <a class="btn btn-secondary text-light  d-inline-block p-0" href="#" role="button">
                     <div class="small-action-link-button">
@@ -21,18 +21,17 @@
                         <div class="text-container">FT*n</div>
                     </div>
                 </a>
-
             </div>
         </div>
 
-        <a class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">
+        <router-link to="/amrap" class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">
             <div class="small-action-link-button">
                 <div class="icon-container">
                     <i class="fas fa-list-ol "></i>
                 </div>
                 <div class="text-container">AMRAP</div>
             </div>
-        </a>
+        </router-link>
 
         <div class="dropdown show d-inline">
             <a class="btn btn-secondary text-light d-inline-block p-0" id="dropdownMenuEmomLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

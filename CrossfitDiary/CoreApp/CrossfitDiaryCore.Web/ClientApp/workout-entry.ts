@@ -16,8 +16,9 @@ import ForTimeEditComponent from "./components/manage-workout/workout-types/fort
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/fortime", component: ForTimeEditComponent },
-  { path: "/amrap", component: AmrapEditComponent }
+  { path: "/fortime", component: ForTimeEditComponent /*, alias: "/"*/ },
+  { path: "/amrap", component: AmrapEditComponent },
+  { path: "/", component: ForTimeEditComponent, redirect: "fortime" }
 ];
 
 new Vue({
@@ -29,8 +30,7 @@ new Vue({
                 <div class="col-md-12 add-new-workout-container workout-container">
                   <div class="card">
                     <div class="card-header ">
-                        <router-link to="/fortime">Go to fortime</router-link>
-                        <router-link to="/amrap">Go to amrap</router-link>
+                        <workouts-navigation-component></workouts-navigation-component>
                     </div>
                   </div>
                   <div class="card-body pt-0">
