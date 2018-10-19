@@ -27,7 +27,7 @@
         <router-link to="/amrap" class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">
             <div class="small-action-link-button">
                 <div class="icon-container">
-                    <i class="fas fa-list-ol "></i>
+                    <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
                 </div>
                 <div class="text-container">AMRAP</div>
             </div>
@@ -37,11 +37,12 @@
             <a class="btn btn-secondary text-light d-inline-block p-0" id="dropdownMenuEmomLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="small-action-link-button">
                     <div class="icon-container">
-                        <i class="fas fa-retweet"></i>
+                        <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
+
                     </div>
                     <div class="text-container">
-                        <span data-bind="text:selectedEmomText"></span>
-                        <i class="fas fa-caret-down"></i>
+                        <span data-bind="text:selectedEmomText">EMOM</span>
+                        <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
                     </div>
                 </div>
             </a>
@@ -50,7 +51,7 @@
                 <a class="btn btn-secondary text-light d-inline-block p-0" href="#" role="button">
                     <div class="small-action-link-button">
                         <div class="icon-container">
-                            <i class="fas fa-retweet"></i>
+                            <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
                         </div>
                         <div class="text-container">E2MOM</div>
                     </div>
@@ -62,7 +63,7 @@
         <a class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">
             <div class="small-action-link-button">
                 <div class="icon-container">
-                    <i class="far fa-pause-circle "></i>
+                    <font-awesome-icon :icon="['far','pause-circle']"></font-awesome-icon>
                 </div>
                 <div class="text-container">NFT</div>
             </div>
@@ -75,9 +76,12 @@
 /* Font awesome icons */
 import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
+import { faListOl } from "@fortawesome/free-solid-svg-icons/faListOl";
+import { faRetweet } from "@fortawesome/free-solid-svg-icons/faRetweet";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPauseCircle } from "@fortawesome/free-regular-svg-icons/faPauseCircle";
 
-library.add(faClock, faCaretDown);
+library.add(faClock, faCaretDown, faListOl, faRetweet, faPauseCircle);
 /**/
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
