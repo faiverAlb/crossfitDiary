@@ -1,5 +1,14 @@
 ﻿<template>
     <div>
+        <div>
+            <b-dropdown id="ddown1" text="Dropdown Button" class="m-md-2">
+                <b-dropdown-item>First Action</b-dropdown-item>
+                <b-dropdown-item>Second Action</b-dropdown-item>
+                <b-dropdown-item>Third Action</b-dropdown-item>
+                <b-dropdown-item>Something else here...</b-dropdown-item>
+                <b-dropdown-item disabled>Disabled action</b-dropdown-item>
+            </b-dropdown>
+        </div>
         <div class="dropdown show d-inline">
             <router-link to="/fortime" class="btn btn-secondary text-light  d-inline-block p-0" id="dropdownMenuForTimeLink" href="#" data-target="#navbarContent" aria-controls="navbarContent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="small-action-link-button">
@@ -86,9 +95,12 @@ library.add(faClock, faCaretDown, faListOl, faRetweet, faPauseCircle);
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Vue, Component, Prop } from "vue-property-decorator";
+import bDropdown from "bootstrap-vue/es/components/dropdown/dropdown";
+import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
+import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-item-button";
 
 @Component({
-  components: { FontAwesomeIcon }
+  components: { FontAwesomeIcon, bDropdown, bDropdownItem }
 })
 export default class WorkoutsNavigationComponent extends Vue {}
 </script>

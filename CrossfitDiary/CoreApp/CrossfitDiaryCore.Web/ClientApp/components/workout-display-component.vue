@@ -6,7 +6,7 @@
                 <span v-if="workoutViewModel.IsForTime()">
                     {{workoutViewModel.roundsCount}} rounds
                 </span>
-                <span  v-if="workoutViewModel.IsAMRAP()">
+                <span v-if="workoutViewModel.IsAMRAP()">
                     {{workoutViewModel.timeToWork}}
                 </span>
             </span>
@@ -14,14 +14,14 @@
                 Cap: {{workoutViewModel.timeCap}}
             </span>
         </span>
-        <div class="workout-exercises pl-3 pt-1" v-for="exercise in workoutViewModel.exercisesToDoList" :key="exercise.id">
+        <div class="workout-exercises pl-3 pt-1" v-for="(exercise,index) in workoutViewModel.exercisesToDoList" :key="`${workoutViewModel.id}-${exercise.id}-${index}`">
             <ExerciseDisplayComponent :model="exercise"></ExerciseDisplayComponent>
             <div class="rest-between-rounds" v-if="workoutViewModel.restBetweenRounds">
                 <span>Rest: {{workoutViewModel.restBetweenRounds}}</span>
             </div>
         </div>
         <div class="inner-workouts pl-3 pt-1">
-            <div class="inner-workout"  v-for="childWorkout in workoutViewModel.children" :key="childWorkout.id">
+            <div class="inner-workout" v-for="childWorkout in workoutViewModel.children" :key="childWorkout.id">
                 <WorkoutDisplayComponent :workoutViewModel="childWorkout"></WorkoutDisplayComponent>
             </div>
         </div>
@@ -35,10 +35,11 @@ import { WorkoutViewModel } from "../models/viewModels/WorkoutViewModel";
 import ExerciseDisplayComponent from "./exercise-display-component.vue";
 
 @Component({
-  components: {ExerciseDisplayComponent}
+  components: { ExerciseDisplayComponent }
 })
 export default class WorkoutDisplayComponent extends Vue {
-  @Prop() workoutViewModel: WorkoutViewModel;
+  @Prop()
+  workoutViewModel: WorkoutViewModel;
 }
 </script>
 

@@ -29,7 +29,7 @@ module.exports = (env) => {
     },
     output: {
       path: path.join(__dirname, destinationFolder),
-      filename: '[name].[contenthash].js'
+      filename: '[name].js'
     },
     devtool: 'eval-source-map',
     resolve: {
