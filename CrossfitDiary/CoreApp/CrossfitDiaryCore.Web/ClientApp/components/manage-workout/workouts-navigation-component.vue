@@ -1,73 +1,51 @@
 ﻿<template>
     <div>
         <div>
-            <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
-                <template slot="button-content">
-                    <a class="btn btn-secondary text-light  d-inline-block p-0" href="#">
+
+        </div>
+        <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
+            <template slot="button-content">
+                <a class="btn btn-secondary text-light  d-inline-block p-0" href="#">
+                    <div class="small-action-link-button">
+                        <div class="icon-container">
+                            <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                        </div>
+                        <div class="text-container">
+                            <span v-if="$route.path == `/fortime` || $route.path != `/fortimen`">FT</span>
+                            <span v-if="$route.path == `/fortimen`">FT*n</span>
+                            <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
+                        </div>
+                    </div>
+                </a>
+            </template>
+            <b-dropdown-item>
+                <template>
+                    <router-link to="/fortime" class="btn btn-secondary text-light  d-inline-block p-0">
                         <div class="small-action-link-button">
                             <div class="icon-container">
                                 <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
                             </div>
                             <div class="text-container">
-                                <span v-if="$route.path == `/fortime` || $route.path != `/fortimen`">FT</span>
-                                <span v-if="$route.path == `/fortimen`">FT*n</span>
+                                <span data-bind="text:selectedForTimeText">FT</span>
                                 <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
                             </div>
                         </div>
-                    </a>
+                    </router-link>
                 </template>
-                <b-dropdown-item>
-                    <template>
-                        <router-link to="/fortime" class="btn btn-secondary text-light  d-inline-block p-0">
-                            <div class="small-action-link-button">
-                                <div class="icon-container">
-                                    <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
-                                </div>
-                                <div class="text-container">
-                                    <span data-bind="text:selectedForTimeText">FT</span>
-                                    <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
-                                </div>
+            </b-dropdown-item>
+            <b-dropdown-item>
+                <template>
+                    <router-link to="/fortimen" class="btn btn-secondary text-light  d-inline-block p-0" href="#" role="button">
+                        <div class="small-action-link-button">
+                            <div class="icon-container">
+                                <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
                             </div>
-                        </router-link>
-                    </template>
-                </b-dropdown-item>
-                <b-dropdown-item>
-                    <template>
-                        <router-link to="/fortimen" class="btn btn-secondary text-light  d-inline-block p-0" href="#" role="button">
-                            <div class="small-action-link-button">
-                                <div class="icon-container">
-                                    <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
-                                </div>
-                                <div class="text-container">FT*n</div>
-                            </div>
-                        </router-link>
-                    </template>
-                </b-dropdown-item>
-            </b-dropdown>
-        </div>
-        <div class="dropdown show d-inline">
-            <router-link to="/fortime" class="btn btn-secondary text-light  d-inline-block p-0" id="dropdownMenuForTimeLink" href="#" data-target="#navbarContent" aria-controls="navbarContent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="small-action-link-button">
-                    <div class="icon-container">
-                        <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
-                    </div>
-                    <div class="text-container">
-                        <span data-bind="text:selectedForTimeText">FT</span>
-                        <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
-                    </div>
-                </div>
-            </router-link>
-            <div class="dropdown-menu custom-action-menu-dropdown" aria-labelledby="dropdownMenuForTimeLink">
-                <a class="btn btn-secondary text-light  d-inline-block p-0" href="#" role="button">
-                    <div class="small-action-link-button">
-                        <div class="icon-container">
-                            <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                            <div class="text-container">FT*n</div>
                         </div>
-                        <div class="text-container">FT*n</div>
-                    </div>
-                </a>
-            </div>
-        </div>
+                    </router-link>
+                </template>
+            </b-dropdown-item>
+        </b-dropdown>
 
         <router-link to="/amrap" class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">
             <div class="small-action-link-button">
