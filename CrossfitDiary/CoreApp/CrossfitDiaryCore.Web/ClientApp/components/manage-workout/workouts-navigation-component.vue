@@ -1,11 +1,8 @@
 ﻿<template>
     <div>
-        <div>
-
-        </div>
         <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
             <template slot="button-content">
-                <a class="btn btn-secondary text-light  d-inline-block p-0" href="#">
+                <a class="btn btn-secondary text-light  d-inline-block p-0 btn-info" href="#">
                     <div class="small-action-link-button">
                         <div class="icon-container">
                             <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
