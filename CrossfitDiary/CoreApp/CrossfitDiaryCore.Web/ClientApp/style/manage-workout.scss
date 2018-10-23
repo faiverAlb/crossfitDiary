@@ -197,3 +197,15 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+
+.workouts-dropdown {
+    .dropdown-menu {
+        min-width: auto;
+        padding: 0;
+
+        .dropdown-item {
+            padding: 0;
+        }
+
+    }
+}

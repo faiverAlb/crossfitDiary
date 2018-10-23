@@ -1,23 +1,24 @@
 ﻿<template>
     <div>
         <div>
-            <b-dropdown id="ddown1" text="Dropdown Button" class="m-md-2">
+            <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
                 <template slot="button-content">
-
-                    <div class="small-action-link-button">
-                        <div class="icon-container">
-                            <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                    <a class="btn btn-secondary text-light  d-inline-block p-0" href="#">
+                        <div class="small-action-link-button">
+                            <div class="icon-container">
+                                <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                            </div>
+                            <div class="text-container">
+                                <span v-if="$route.path == `/fortime` || $route.path != `/fortimen`">FT</span>
+                                <span v-if="$route.path == `/fortimen`">FT*n</span>
+                                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
+                            </div>
                         </div>
-                        <div class="text-container">
-                            <span v-if="$route.path == `/fortime` || $route.path != `/fortimen`">FT</span>
-                            <span v-if="$route.path == `/fortimen`">FT*n</span>
-                            <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
-                        </div>
-                    </div>
+                    </a>
                 </template>
                 <b-dropdown-item>
                     <template>
-                        <router-link to="/fortime" class="btn btn-secondary text-light  d-inline-block p-0" id="dropdownMenuForTimeLink" href="#" data-target="#navbarContent" aria-controls="navbarContent" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <router-link to="/fortime" class="btn btn-secondary text-light  d-inline-block p-0">
                             <div class="small-action-link-button">
                                 <div class="icon-container">
                                     <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>

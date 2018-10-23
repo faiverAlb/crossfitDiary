@@ -24,13 +24,9 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
     <title>@ViewBag.Title</title>
+    @RenderSection("PageStyles", required: false)
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/dist/generated/persons-entry.css" asp-append-version="true" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="~/dist/generated/persons-entry.css" asp-append-version="true" />
-    </environment>
+  
 </head>
 <body>
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

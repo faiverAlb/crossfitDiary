@@ -7,9 +7,11 @@ import ErrorAlertComponent from "./components/error-alert-component.vue";
 import WorkoutsNavigationComponent from "./components/manage-workout/workouts-navigation-component.vue";
 import AmrapEditComponent from "./components/manage-workout/workout-types/amrap-edit-component.vue";
 import ForTimeEditComponent from "./components/manage-workout/workout-types/fortime-edit-component.vue";
+import ForTimeNEditComponent from "./components/manage-workout/workout-types/fortime-n-edit-component.vue";
 Vue.use(VueRouter);
 var routes = [
     { path: "/fortime", component: ForTimeEditComponent /*, alias: "/"*/ },
+    { path: "/fortimen", component: ForTimeNEditComponent /*, alias: "/"*/ },
     { path: "/amrap", component: AmrapEditComponent },
     { path: "/", component: ForTimeEditComponent, redirect: "fortime" }
 ];
