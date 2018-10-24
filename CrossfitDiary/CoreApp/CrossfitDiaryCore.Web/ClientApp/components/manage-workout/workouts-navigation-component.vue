@@ -2,7 +2,7 @@
     <div>
         <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
             <template slot="button-content">
-                <a class="btn btn-secondary text-light  d-inline-block p-0 btn-info" href="#">
+                <a class="btn btn-secondary text-light  d-inline-block p-0 " href="#" v-bind:class="{'btn-info':($route.path == `/fortime` ||  $route.path == `/fortimen`)}">
                     <div class="small-action-link-button">
                         <div class="icon-container">
                             <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
@@ -17,7 +17,7 @@
             </template>
             <b-dropdown-item>
                 <template>
-                    <router-link to="/fortime" class="btn btn-secondary text-light  d-inline-block p-0">
+                    <router-link to="/fortime" active-class="btn-info" class="btn btn-secondary text-light  d-inline-block p-0">
                         <div class="small-action-link-button">
                             <div class="icon-container">
                                 <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
@@ -32,7 +32,7 @@
             </b-dropdown-item>
             <b-dropdown-item>
                 <template>
-                    <router-link to="/fortimen" class="btn btn-secondary text-light  d-inline-block p-0" href="#" role="button">
+                    <router-link to="/fortimen" active-class="btn-info" class="btn btn-secondary text-light  d-inline-block p-0" href="#" role="button">
                         <div class="small-action-link-button">
                             <div class="icon-container">
                                 <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
@@ -44,7 +44,7 @@
             </b-dropdown-item>
         </b-dropdown>
 
-        <router-link to="/amrap" class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">
+        <router-link active-class="btn-info" to="/amrap" class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">
             <div class="small-action-link-button">
                 <div class="icon-container">
                     <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
