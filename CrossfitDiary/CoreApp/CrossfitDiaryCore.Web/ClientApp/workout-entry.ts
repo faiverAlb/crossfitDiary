@@ -13,6 +13,9 @@ import WorkoutsNavigationComponent from "./components/manage-workout/workouts-na
 import AmrapEditComponent from "./components/manage-workout/workout-types/amrap-edit-component.vue";
 import ForTimeEditComponent from "./components/manage-workout/workout-types/fortime-edit-component.vue";
 import ForTimeNEditComponent from "./components/manage-workout/workout-types/fortime-n-edit-component.vue";
+import EmomEditComponent from "./components/manage-workout/workout-types/emom-edit-component.vue";
+import E2momEditComponent from "./components/manage-workout/workout-types/e2mom-edit-component.vue";
+import NFTEditComponent from "./components/manage-workout/workout-types/nft-edit-component.vue";
 
 Vue.use(VueRouter);
 
@@ -20,6 +23,10 @@ const routes = [
   { path: "/fortime", component: ForTimeEditComponent /*, alias: "/"*/ },
   { path: "/fortimen", component: ForTimeNEditComponent /*, alias: "/"*/ },
   { path: "/amrap", component: AmrapEditComponent },
+  { path: "/emom", component: EmomEditComponent },
+  { path: "/e2mom", component: E2momEditComponent },
+  { path: "/amrap", component: AmrapEditComponent },
+  { path: "/nft", component: NFTEditComponent },
   { path: "/", component: ForTimeEditComponent, redirect: "fortime" }
 ];
 

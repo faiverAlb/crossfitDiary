@@ -23,7 +23,7 @@
                                 <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
                             </div>
                             <div class="text-container">
-                                <span data-bind="text:selectedForTimeText">FT</span>
+                                <span>FT</span>
                                 <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
             </b-dropdown-item>
             <b-dropdown-item>
                 <template>
-                    <router-link to="/fortimen" active-class="btn-info" class="btn btn-secondary text-light  d-inline-block p-0" href="#" role="button">
+                    <router-link to="/fortimen" active-class="btn-info" class="btn btn-secondary text-light  d-inline-block p-0" href="#">
                         <div class="small-action-link-button">
                             <div class="icon-container">
                                 <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
@@ -44,7 +44,7 @@
             </b-dropdown-item>
         </b-dropdown>
 
-        <router-link active-class="btn-info" to="/amrap" class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">
+        <router-link active-class="btn-info" to="/amrap" class="btn btn-secondary text-light d-inline-block p-0">
             <div class="small-action-link-button">
                 <div class="icon-container">
                     <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
@@ -53,42 +53,57 @@
             </div>
         </router-link>
 
-        <div class="dropdown show d-inline">
-            <a class="btn btn-secondary text-light d-inline-block p-0" id="dropdownMenuEmomLink" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="small-action-link-button">
-                    <div class="icon-container">
-                        <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
-
-                    </div>
-                    <div class="text-container">
-                        <span data-bind="text:selectedEmomText">EMOM</span>
-                        <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
-                    </div>
-                </div>
-            </a>
-
-            <div class="dropdown-menu custom-action-menu-dropdown" aria-labelledby="dropdownMenuEmomLink">
-                <a class="btn btn-secondary text-light d-inline-block p-0" href="#" role="button">
+        <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
+            <template slot="button-content">
+                <a class="btn btn-secondary text-light  d-inline-block p-0 " href="#" v-bind:class="{'btn-info':($route.path == `/emom` ||  $route.path == `/e2mom`)}">
                     <div class="small-action-link-button">
                         <div class="icon-container">
                             <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
                         </div>
-                        <div class="text-container">E2MOM</div>
+                        <div class="text-container">
+                            <span v-if="$route.path == `/emom` || $route.path != `/e2mom`">EMOM</span>
+                            <span v-if="$route.path == `/e2mom`">E2MOM</span>
+                            <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
+                        </div>
                     </div>
                 </a>
-
-            </div>
-        </div>
-
-        <a class="btn btn-secondary text-light d-inline-block p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false">
+            </template>
+            <b-dropdown-item>
+                <template>
+                    <router-link to="/emom" active-class="btn-info" class="btn btn-secondary text-light  d-inline-block p-0">
+                        <div class="small-action-link-button">
+                            <div class="icon-container">
+                                <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
+                            </div>
+                            <div class="text-container">
+                                <span>EMOM</span>
+                                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
+                            </div>
+                        </div>
+                    </router-link>
+                </template>
+            </b-dropdown-item>
+            <b-dropdown-item>
+                <template>
+                    <router-link to="/e2mom" active-class="btn-info" class="btn btn-secondary text-light  d-inline-block p-0">
+                        <div class="small-action-link-button">
+                            <div class="icon-container">
+                                <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
+                            </div>
+                            <div class="text-container">E2MOM</div>
+                        </div>
+                    </router-link>
+                </template>
+            </b-dropdown-item>
+        </b-dropdown>
+        <router-link to="/nft" active-class="btn-info" class="btn btn-secondary text-light  d-inline-block p-0">
             <div class="small-action-link-button">
                 <div class="icon-container">
                     <font-awesome-icon :icon="['far','pause-circle']"></font-awesome-icon>
                 </div>
                 <div class="text-container">NFT</div>
             </div>
-        </a>
-
+        </router-link>
     </div>
 </template>
 
