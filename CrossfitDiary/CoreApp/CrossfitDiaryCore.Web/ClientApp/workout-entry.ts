@@ -41,9 +41,9 @@ new Vue({
                     <div class="card-header ">
                         <workouts-navigation-component></workouts-navigation-component>
                     </div>
-                  </div>
-                  <div class="card-body pt-0">
-                    <router-view></router-view>
+                    <div class="card-body pt-0">
+                      <router-view></router-view>
+                    </div>
                   </div>
                 </div>
         </div>
