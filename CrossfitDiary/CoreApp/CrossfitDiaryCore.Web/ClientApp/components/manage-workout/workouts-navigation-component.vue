@@ -24,7 +24,6 @@
                             </div>
                             <div class="text-container">
                                 <span>FT</span>
-                                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
                             </div>
                         </div>
                     </router-link>
@@ -77,7 +76,6 @@
                             </div>
                             <div class="text-container">
                                 <span>EMOM</span>
-                                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
                             </div>
                         </div>
                     </router-link>

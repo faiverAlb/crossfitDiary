@@ -209,7 +209,12 @@
 
         .dropdown-item {
             padding: 0;
+        }
+
+        .dropdown-item:not(:last-child) {
+            padding: 0;
             padding-bottom: 5px;
+            text-align: center;
         }
 
     }
