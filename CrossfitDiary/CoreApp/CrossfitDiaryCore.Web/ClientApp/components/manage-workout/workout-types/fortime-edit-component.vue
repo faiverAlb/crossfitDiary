@@ -10,7 +10,7 @@
                 <font-awesome-icon :icon="['fas','clock']" class="fa-lg time-cap-icon"></font-awesome-icon>
               </div>
             </div>
-            <input v-model="model.timeCap" type="text" class="form-control " id="timeCapInput" placeholder="Time Cap"/>
+            <input v-model="model.timeCap" type="text" class="form-control " id="timeCapInput" placeholder="Time Cap" />
           </div>
         </div>
       </div>
@@ -23,10 +23,11 @@
                 <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
               </div>
             </div>
-            <input v-model="model.roundsCount" type="number" pattern="[0-9]*" inputmode="numeric" min="1" class="form-control " id="roundsInput" placeholder="Rounds count"/>
+            <input v-model="model.roundsCount" type="number" pattern="[0-9]*" inputmode="numeric" min="1" class="form-control " id="roundsInput" placeholder="Rounds count" />
           </div>
         </div>
       </div>
+      <ExercisesListComponent></ExercisesListComponent>
     </div>
   </div>
 </template>
@@ -42,14 +43,11 @@ library.add(faClock, faHashtag);
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
+import ExercisesListComponent from "./exercises-list-component.vue";
 
-@Component({ components: { FontAwesomeIcon } })
+@Component({ components: { FontAwesomeIcon, ExercisesListComponent } })
 export default class ForTimeEditComponent extends Vue {
   model: WorkoutViewModel = new WorkoutViewModel();
-
-  // mounted() {
-  //   this.model = new WorkoutViewModel();
-  // }
 }
 </script>
 
