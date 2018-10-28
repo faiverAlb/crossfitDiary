@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <ExercisesListComponent></ExercisesListComponent>
+      <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"></ExercisesListComponent>
     </div>
   </div>
 </template>
