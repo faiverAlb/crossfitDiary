@@ -8,16 +8,34 @@ import WorkoutsNavigationComponent from "./components/manage-workout/workouts-na
 import AmrapEditComponent from "./components/manage-workout/workout-types/amrap-edit-component.vue";
 import ForTimeEditComponent from "./components/manage-workout/workout-types/fortime-edit-component.vue";
 import ForTimeNEditComponent from "./components/manage-workout/workout-types/fortime-n-edit-component.vue";
-Vue.use(VueRouter);
+import EmomEditComponent from "./components/manage-workout/workout-types/emom-edit-component.vue";
+import E2momEditComponent from "./components/manage-workout/workout-types/e2mom-edit-component.vue";
+import NFTEditComponent from "./components/manage-workout/workout-types/nft-edit-component.vue";
+import Vuex from "vuex";
+import { profile } from "./profile/index";
+var store = {
+    state: {
+        version: "1.0.0"
+    },
+    modules: {
+        profile: profile
+    }
+};
+Vue.use(VueRouter, Vuex);
+export default new Vuex.Store(store);
 var routes = [
     { path: "/fortime", component: ForTimeEditComponent /*, alias: "/"*/ },
     { path: "/fortimen", component: ForTimeNEditComponent /*, alias: "/"*/ },
     { path: "/amrap", component: AmrapEditComponent },
+    { path: "/emom", component: EmomEditComponent },
+    { path: "/e2mom", component: E2momEditComponent },
+    { path: "/amrap", component: AmrapEditComponent },
+    { path: "/nft", component: NFTEditComponent },
     { path: "/", component: ForTimeEditComponent, redirect: "fortime" }
 ];
 new Vue({
     el: "#manage-workout-page-container",
-    template: "\n   <div class=\"manage-workout-container my-2\">\n      <div>\n        <div class=\"crossfitter-edit-workout-container\">\n                <div class=\"col-md-12 add-new-workout-container workout-container\">\n                  <div class=\"card\">\n                    <div class=\"card-header \">\n                        <workouts-navigation-component></workouts-navigation-component>\n                    </div>\n                  </div>\n                  <div class=\"card-body pt-0\">\n                    <router-view></router-view>\n                  </div>\n                </div>\n        </div>\n      </div>\n  </div>\n    ",
+    template: "\n   <div class=\"manage-workout-container my-2\">\n      <div>\n        <div class=\"crossfitter-edit-workout-container\">\n                <div class=\"col-md-12 add-new-workout-container workout-container\">\n                  <div class=\"card\">\n                    <div class=\"card-header \">\n                        <workouts-navigation-component></workouts-navigation-component>\n                    </div>\n                    <div class=\"card-body pt-0\">\n                      <router-view></router-view>\n                    </div>\n                  </div>\n                </div>\n        </div>\n      </div>\n  </div>\n    ",
     router: new VueRouter({ routes: routes }),
     components: {
         Spinner: Spinner,
