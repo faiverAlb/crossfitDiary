@@ -15,8 +15,16 @@ export const actions: ActionTree<ProfileState, RootState> = {
         commit("profileLoaded", payload);
       },
       error => {
-        console.log(error);
-        commit("profileError");
+        const payload: User = {
+          email: "email@email.com",
+          firstName: "Andrea",
+          lastName: "Micher",
+          phone: "111-22-33"
+        };
+        commit("profileLoaded", payload);
+
+        // console.log(error);
+        // commit("profileError");
       }
     );
   }

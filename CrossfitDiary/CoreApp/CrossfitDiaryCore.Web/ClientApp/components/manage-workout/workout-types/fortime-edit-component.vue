@@ -11,6 +11,8 @@
     <div v-if="profile.error">
       Oops an error occured
     </div>
+
+    <button v-on:click="mutateData">Mutate data</button>
   </div>
 </template>
 
@@ -53,6 +55,10 @@ export default class ForTimeEditComponent extends Vue {
   get email() {
     const user = this.profile && this.profile.user;
     return (user && user.email) || "";
+  }
+
+  mutateData(): void {
+    debugger;
   }
 }
 </script>
