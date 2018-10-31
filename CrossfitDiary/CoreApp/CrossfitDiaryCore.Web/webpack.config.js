@@ -24,12 +24,13 @@ module.exports = (env) => {
   var config = {
     entry: {
       'persons-entry': './ClientApp/persons-entry.ts',
-      login: './ClientApp/login-page-entry',
+      'login': './ClientApp/login-page-entry',
       'workout-entry': './ClientApp/workout-entry.ts',
     },
     output: {
       path: path.join(__dirname, destinationFolder),
-      filename: '[name].js'
+      filename: '[name].js',
+      pathinfo: false
     },
     devtool: 'eval-source-map',
     resolve: {
@@ -64,17 +65,6 @@ module.exports = (env) => {
             {
               loader: 'css-loader',
             },
-            // {
-            //   loader: 'postcss-loader', // Run post css actions
-            //   options: {
-            //     plugins: function() { // post css plugins, can be exported to postcss.config.js
-            //       return [
-            //         require('precss'),
-            //         require('autoprefixer')
-            //       ];
-            //     }
-            //   }
-            // }, 
             {
               loader: 'sass-loader'
             }
@@ -110,7 +100,9 @@ module.exports = (env) => {
           loader: 'ts-loader',
           exclude: /node_modules/,
           options: {
-            appendTsSuffixTo: [/\.vue$/]
+            appendTsSuffixTo: [/\.vue$/],
+            transpileOnly: true,
+            experimentalWatchApi: true,
           }
         }
       ]
@@ -157,6 +149,12 @@ module.exports = (env) => {
       }),
       new OptimizeCSSAssetsPlugin({})
     ]);
+  }
+
+  if (env.ENTRY) {
+    var temp = config.entry[env.ENTRY];
+    config.entry = {};
+    config.entry[env.ENTRY] = temp;
   }
 
   return config;
