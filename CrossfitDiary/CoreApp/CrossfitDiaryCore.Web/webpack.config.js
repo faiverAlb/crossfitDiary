@@ -8,7 +8,6 @@ const destinationFolder = 'wwwroot/dist/generated/';
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const smp = new SpeedMeasurePlugin();
-var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 // the path(s) that should be cleaned
 let pathsToClean = [destinationFolder + '*.*']
@@ -45,7 +44,6 @@ module.exports = (env) => {
     },
     plugins: [
       new CleanWebpackPlugin(pathsToClean, cleanOptions),
-      new ForkTsCheckerWebpackPlugin(),
       new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery'
@@ -104,8 +102,8 @@ module.exports = (env) => {
           exclude: /node_modules/,
           options: {
             appendTsSuffixTo: [/\.vue$/],
-            transpileOnly: true,
-            experimentalWatchApi: true,
+            transpileOnly: !isProd,
+            experimentalWatchApi: !isProd,
           }
         }
       ]
