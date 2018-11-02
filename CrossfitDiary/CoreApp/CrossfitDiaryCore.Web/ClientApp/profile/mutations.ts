@@ -10,5 +10,9 @@ export const mutations: MutationTree<ProfileState> = {
   profileError(state) {
     state.error = true;
     state.user = undefined;
+  },
+  changeUserName(state: ProfileState, newName: string) {
+    debugger;
+    state.user.firstName = newName;
   }
 };

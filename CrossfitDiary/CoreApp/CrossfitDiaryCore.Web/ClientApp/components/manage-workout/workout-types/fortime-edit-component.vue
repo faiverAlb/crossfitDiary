@@ -45,9 +45,11 @@ export default class ForTimeEditComponent extends Vue {
   @Getter("fullName", { namespace })
   fullName: string;
 
+  @Action("doAction", { namespace })
+  doAction: any;
+
   mounted() {
     // fetching data as soon as the component's been mounted
-    debugger;
     this.fetchData();
   }
 
@@ -59,6 +61,7 @@ export default class ForTimeEditComponent extends Vue {
 
   mutateData(): void {
     debugger;
+    this.doAction({ value: "changed!" });
   }
 }
 </script>

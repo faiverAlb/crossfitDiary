@@ -7,9 +7,7 @@ import { RootState } from "../types";
 
 export const actions: ActionTree<ProfileState, RootState> = {
   fetchData({ commit }): any {
-    axios({
-      url: "https://...."
-    }).then(
+    axios({ url: "https://...." }).then(
       response => {
         const payload: User = response && response.data;
         commit("profileLoaded", payload);
@@ -27,5 +25,8 @@ export const actions: ActionTree<ProfileState, RootState> = {
         // commit("profileError");
       }
     );
+  },
+  doAction({ commit }, payload): any {
+    commit("changeUserName", payload.value);
   }
 };

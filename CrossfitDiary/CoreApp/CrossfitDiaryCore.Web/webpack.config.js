@@ -6,8 +6,8 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const destinationFolder = 'wwwroot/dist/generated/';
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const smp = new SpeedMeasurePlugin();
+// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+// const smp = new SpeedMeasurePlugin();
 
 // the path(s) that should be cleaned
 let pathsToClean = [destinationFolder + '*.*']
@@ -23,7 +23,7 @@ module.exports = (env) => {
   var isProd = env.NODE_ENV === 'production';
 
   // Setup base config for all environments
-  var config = smp.wrap({
+  var config = ({
     entry: {
       'persons-entry': './ClientApp/persons-entry.ts',
       'login': './ClientApp/login-page-entry',
