@@ -1,9 +1,9 @@
 // profile/mutations.ts
 import { MutationTree } from "vuex";
-import { ProfileState, User } from "./types";
+import { IWorkoutEditState, IUser } from "./types";
 
-export const mutations: MutationTree<ProfileState> = {
-  profileLoaded(state: ProfileState, payload: User) {
+export const mutations: MutationTree<IWorkoutEditState> = {
+  profileLoaded(state: IWorkoutEditState, payload: IUser) {
     state.error = false;
     state.user = payload;
   },
@@ -11,7 +11,7 @@ export const mutations: MutationTree<ProfileState> = {
     state.error = true;
     state.user = undefined;
   },
-  changeUserName(state: ProfileState, newName: string) {
+  changeUserName(state: IWorkoutEditState, newName: string) {
     debugger;
     state.user.firstName = newName;
   }

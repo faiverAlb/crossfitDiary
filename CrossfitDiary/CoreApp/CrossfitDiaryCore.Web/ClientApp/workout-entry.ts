@@ -16,7 +16,7 @@ import ForTimeNEditComponent from "./components/manage-workout/workout-types/for
 import EmomEditComponent from "./components/manage-workout/workout-types/emom-edit-component.vue";
 import E2momEditComponent from "./components/manage-workout/workout-types/e2mom-edit-component.vue";
 import NFTEditComponent from "./components/manage-workout/workout-types/nft-edit-component.vue";
-import store from "./store/workout-store";
+import store from "./workout-edit-store/workout-store";
 
 Vue.use(VueRouter);
 

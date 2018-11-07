@@ -2,18 +2,24 @@
 
 import { ActionTree } from "vuex";
 import axios from "axios";
-import { ProfileState, User } from "./types";
+import { IWorkoutEditState, IUser } from "./types";
 import { RootState } from "../types";
+import CrossfitterService from "../CrossfitterService";
 
-export const actions: ActionTree<ProfileState, RootState> = {
+export const actions: ActionTree<IWorkoutEditState, RootState> = {
+  // tslint:disable-next-line:typedef
   fetchData({ commit }): any {
+    let crossfitterService: CrossfitterService = new CrossfitterService();
+    crossfitterService.getExercises().then(data => {
+      debugger;
+    });
     axios({ url: "https://...." }).then(
       response => {
-        const payload: User = response && response.data;
+        const payload: IUser = response && response.data;
         commit("profileLoaded", payload);
       },
       error => {
-        const payload: User = {
+        const payload: IUser = {
           email: "email@email.com",
           firstName: "Andrea",
           lastName: "Micher",
@@ -26,6 +32,7 @@ export const actions: ActionTree<ProfileState, RootState> = {
       }
     );
   },
+  // tslint:disable-next-line:typedef
   doAction({ commit }, payload): any {
     commit("changeUserName", payload.value);
   }

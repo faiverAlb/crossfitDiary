@@ -1,16 +1,5 @@
 ﻿<template>
     <div>
-        <div v-if="profile.user">
-            <p>
-                Full name: {{ fullName }}
-            </p>
-            <p>
-                Email: {{ email }}
-            </p>
-        </div>
-        <div v-if="profile.error">
-            Oops an error occured
-        </div>
 
         <button v-on:click="mutateData">Mutate data</button>
         <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
@@ -136,21 +125,14 @@ import { State, Action, Getter } from "vuex-class";
 import bDropdown from "bootstrap-vue/es/components/dropdown/dropdown";
 import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
 import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-item-button";
-const namespace: string = "profile";
-import { ProfileState, User } from "./../../profile/types";
 
+const namespace: string = "workoutEdit";
 @Component({
   components: { FontAwesomeIcon, bDropdown, bDropdownItem }
 })
 export default class WorkoutsNavigationComponent extends Vue {
-  @State("profile")
-  profile: ProfileState;
-
   @Action("fetchData", { namespace })
   fetchData: any;
-
-  @Getter("fullName", { namespace })
-  fullName: string;
 
   @Action("doAction", { namespace })
   doAction: any;
@@ -158,12 +140,6 @@ export default class WorkoutsNavigationComponent extends Vue {
   mounted() {
     // fetching data as soon as the component's been mounted
     this.fetchData();
-  }
-
-  // computed variable based on user's email
-  get email() {
-    const user = this.profile && this.profile.user;
-    return (user && user.email) || "";
   }
 
   mutateData(): void {

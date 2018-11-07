@@ -1,5 +1,17 @@
 ﻿<template>
   <div class="routine-complex-info">
+    <div v-if="workoutEdit.user">
+      <p>
+        Full name: {{ fullName }}
+      </p>
+      <p>
+        Email: {{ email }}
+      </p>
+    </div>
+    <div v-if="workoutEdit.error">
+      Oops an error occured
+    </div>
+
     <div class="pt-2 general-info-container">
       <div class="row">
         <div class="col-lg-3 time-cap-container pb-2">
@@ -27,7 +39,7 @@
           </div>
         </div>
       </div>
-      <!-- <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"></ExercisesListComponent> -->
+      <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"></ExercisesListComponent>
     </div>
   </div>
 </template>
@@ -45,10 +57,24 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import { State, Action, Getter } from "vuex-class";
 import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
 import ExercisesListComponent from "./exercises-list-component.vue";
+import { IWorkoutEditState, IUser } from "./../../../workout-edit-store/types";
+
+const namespace: string = "workoutEdit";
 
 @Component({ components: { FontAwesomeIcon, ExercisesListComponent } })
 export default class ForTimeEditComponent extends Vue {
   model: WorkoutViewModel = new WorkoutViewModel();
+  @State("workoutEdit")
+  workoutEdit: IWorkoutEditState;
+
+  @Getter("fullName", { namespace })
+  fullName: string;
+
+  // computed variable based on user's email
+  get email() {
+    const user = this.workoutEdit && this.workoutEdit.user;
+    return (user && user.email) || "";
+  }
 
   mounted() {}
 

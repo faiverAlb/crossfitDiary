@@ -79,6 +79,7 @@ namespace CrossfitDiaryCore.Web
 
             services.AddTransient<ReadWorkoutsService>();
             services.AddTransient<ManageWorkoutsService>();
+            services.AddTransient<ReadExercisesService>();
 
             services.AddTransient<WorkoutsMatchDispatcher>();
 
@@ -97,12 +98,12 @@ namespace CrossfitDiaryCore.Web
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+//                app.UseExceptionHandler("/Error");
             }
 
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseStatusCodePagesWithRedirects("/Error");
+//            app.UseStatusCodePagesWithRedirects("/Error");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

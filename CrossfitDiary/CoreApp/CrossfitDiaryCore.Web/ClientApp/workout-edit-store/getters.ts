@@ -1,12 +1,9 @@
-// profile/getters.ts
-
 import { GetterTree } from "vuex";
-import { ProfileState } from "./types";
+import { IWorkoutEditState } from "./types";
 import { RootState } from "../types";
 
-export const getters: GetterTree<ProfileState, RootState> = {
+export const getters: GetterTree<IWorkoutEditState, RootState> = {
   fullName(state): string {
-    debugger;
     const { user } = state;
     const firstName = (user && user.firstName) || "";
     const lastName = (user && user.lastName) || "";

@@ -1,12 +1,12 @@
 // types.ts
-export interface User {
+export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
   phone?: string;
 }
 
-export interface ProfileState {
-  user?: User;
+export interface IWorkoutEditState {
+  user?: IUser;
   error: boolean;
 }

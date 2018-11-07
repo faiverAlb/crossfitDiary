@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel";
+import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 var CrossfitterService = /** @class */ (function () {
     function CrossfitterService() {
         //    public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
@@ -18,14 +19,13 @@ var CrossfitterService = /** @class */ (function () {
             });
         };
         //
-        //    public getExercises = (): Q.Promise<ExerciseViewModel[]> => {
-        ////      this.isDataLoading(true);
-        //      return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getExercises")
-        //        .then((jsonData) => {
-        //          return jsonData.map(x => new ExerciseViewModel().deserialize(x));
-        //        });
-        ////        .finally(() => { this.isDataLoading(false); });
-        //    };
+        this.getExercises = function () {
+            //      this.isDataLoading(true);
+            return axios.get("api/getExercises").then(function (jsonData) {
+                return jsonData.data.map(function (x) { return new ExerciseViewModel().deserialize(x); });
+            });
+            //        .finally(() => { this.isDataLoading(false); });
+        };
         //
         //    public getPersonMaximums = (): Q.Promise<PersonExerciseRecord[]> => {
         ////      this.isDataLoading(true);
