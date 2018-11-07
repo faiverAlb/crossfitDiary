@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CrossfitDiaryCore.DAL.EF;
 using CrossfitDiaryCore.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrossfitDiaryCore.BL.Services
 {
@@ -19,7 +20,8 @@ namespace CrossfitDiaryCore.BL.Services
 
         public List<Exercise> GetExercises()
         {
-            return _context.Exercises.ToList();
+            List<Exercise> exercises = _context.Exercises.Include(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType).ToList();
+            return exercises;
         }
     }
 }

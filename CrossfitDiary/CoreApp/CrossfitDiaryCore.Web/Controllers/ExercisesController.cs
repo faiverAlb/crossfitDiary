@@ -40,7 +40,8 @@ namespace CrossfitDiaryCore.Web.Controllers
         public List<ExerciseViewModel> GetExercises()
         {
             List<Exercise> exercises = _readExercisesService.GetExercises();
-            return _mapper.Map<List<ExerciseViewModel>>(exercises.OrderBy(x => x.Title));
+            List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(exercises.OrderBy(x => x.Title));
+            return exerciseViewModels;
         }
   
         #endregion
