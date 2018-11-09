@@ -46,8 +46,6 @@ import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
 import ExercisesListComponent from "./exercises-list-component.vue";
 import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
 
-const namespace: string = "workoutEdit";
-
 @Component({ components: { FontAwesomeIcon, ExercisesListComponent } })
 export default class ForTimeEditComponent extends Vue {
   model: WorkoutViewModel = new WorkoutViewModel();
