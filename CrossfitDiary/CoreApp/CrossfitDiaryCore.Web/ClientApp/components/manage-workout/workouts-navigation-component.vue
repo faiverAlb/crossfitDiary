@@ -1,7 +1,5 @@
 ﻿<template>
     <div>
-
-        <button v-on:click="mutateData">Mutate data</button>
         <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
             <template slot="button-content">
                 <a class="btn btn-secondary text-light  d-inline-block p-0 " href="#" v-bind:class="{'btn-info':($route.path == `/fortime` ||  $route.path == `/fortimen`)}">
@@ -133,18 +131,9 @@ const namespace: string = "workoutEdit";
 export default class WorkoutsNavigationComponent extends Vue {
   @Action("fetchData", { namespace })
   fetchData: any;
-
-  @Action("doAction", { namespace })
-  doAction: any;
-
   mounted() {
     // fetching data as soon as the component's been mounted
     this.fetchData();
-  }
-
-  mutateData(): void {
-    debugger;
-    this.doAction({ value: "changed!" });
   }
 }
 </script>

@@ -1,12 +1,6 @@
-// types.ts
-export interface IUser {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone?: string;
-}
+import { ExerciseViewModel } from "../models/viewModels/ExerciseViewModel";
 
 export interface IWorkoutEditState {
-  user?: IUser;
+  exercises: ExerciseViewModel[];
   error: boolean;
 }

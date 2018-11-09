@@ -22,7 +22,6 @@ var ExerciseViewModel = /** @class */ (function () {
         if (input == null) {
             return (null);
         }
-        debugger;
         return new ExerciseViewModel({
             id: input.id,
             title: input.title,

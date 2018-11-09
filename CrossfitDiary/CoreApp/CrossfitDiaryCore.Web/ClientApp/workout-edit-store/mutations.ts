@@ -1,18 +1,11 @@
 // profile/mutations.ts
 import { MutationTree } from "vuex";
-import { IWorkoutEditState, IUser } from "./types";
+import { IWorkoutEditState } from "./types";
+import { ExerciseViewModel } from "../models/viewModels/ExerciseViewModel";
 
 export const mutations: MutationTree<IWorkoutEditState> = {
-  profileLoaded(state: IWorkoutEditState, payload: IUser) {
+  exercisesLoaded(state: IWorkoutEditState, payload: ExerciseViewModel[]) {
     state.error = false;
-    state.user = payload;
-  },
-  profileError(state) {
-    state.error = true;
-    state.user = undefined;
-  },
-  changeUserName(state: IWorkoutEditState, newName: string) {
-    debugger;
-    state.user.firstName = newName;
+    state.exercises = payload;
   }
 };

@@ -31,7 +31,6 @@ export default class CrossfitterService {
     return axios.get<ExerciseViewModel[]>("api/getExercises").then(jsonData => {
       return jsonData.data.map(x => new ExerciseViewModel().deserialize(x));
     });
-    //        .finally(() => { this.isDataLoading(false); });
   };
   //
   //    public getPersonMaximums = (): Q.Promise<PersonExerciseRecord[]> => {

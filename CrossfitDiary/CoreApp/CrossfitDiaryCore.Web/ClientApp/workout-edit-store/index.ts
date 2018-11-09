@@ -5,7 +5,10 @@ import { mutations } from "./mutations";
 import { IWorkoutEditState } from "./types";
 import { RootState } from "../types";
 
-export const state: IWorkoutEditState = { user: undefined, error: false };
+export const state: IWorkoutEditState = {
+  exercises: [],
+  error: false
+};
 
 const namespaced: boolean = true;
 

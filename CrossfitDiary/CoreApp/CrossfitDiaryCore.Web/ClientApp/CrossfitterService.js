@@ -24,7 +24,6 @@ var CrossfitterService = /** @class */ (function () {
             return axios.get("api/getExercises").then(function (jsonData) {
                 return jsonData.data.map(function (x) { return new ExerciseViewModel().deserialize(x); });
             });
-            //        .finally(() => { this.isDataLoading(false); });
         };
         //
         //    public getPersonMaximums = (): Q.Promise<PersonExerciseRecord[]> => {
