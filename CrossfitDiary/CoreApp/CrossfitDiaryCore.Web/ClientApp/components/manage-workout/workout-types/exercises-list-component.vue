@@ -1,11 +1,7 @@
 ﻿<template>
   <div class="py-2">
     <div class="form-group">
-      <b-form-select class="form-control" :options="exercisesOptions" text-field="title" value-field="id" :plain="true" v-model="selectedExercise" />
-    </div>
-    <div v-if="selectedExercise">
-      <span>Selected exercise:</span>
-      {{selectedExercise.text}}
+      <b-form-select class="form-control" :options="exercisesOptions" v-on:change="exerciseChange" text-field="title" value-field="id" :plain="true" v-model="selectedExercise" />
     </div>
   </div>
 </template>
@@ -28,6 +24,10 @@ export default class ExercisesListComponent extends Vue {
 
   @State("workoutEdit")
   workoutEdit: IWorkoutEditState;
+
+  exerciseChange(selectedExerciseId: number) {
+    debugger;
+  }
 
   selectedExercise: number = -1;
   get exercisesOptions() {
