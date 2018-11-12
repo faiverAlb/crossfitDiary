@@ -3,6 +3,15 @@
     <div class="form-group">
       <b-form-select class="form-control" :options="exercisesOptions" v-on:change="exerciseChange" text-field="title" value-field="id" :plain="true" v-model="selectedExercise" />
     </div>
+    <div class="routines-container pt-2">
+      <div class="simple-routine-item text-center no-selected-container" v-if="exercisesToDo.length == 0">
+        No exercises selected
+      </div>
+      <div v-for="exerciseToDo in exercisesToDo" :key="exerciseToDo.id">
+        {{exerciseToDo.title}}
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -27,6 +36,7 @@ export default class ExercisesListComponent extends Vue {
 
   exerciseChange(selectedExerciseId: number) {
     debugger;
+    this.exercisesToDo.push(this.workoutEdit.exercises[0]);
   }
 
   selectedExercise: number = -1;
