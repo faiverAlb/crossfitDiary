@@ -7,13 +7,6 @@ export var actions = {
         var crossfitterService = new CrossfitterService();
         crossfitterService.getExercises().then(function (data) {
             var exercises = data;
-            var payload = {
-                email: "email@email.com",
-                firstName: "Andrea",
-                lastName: "Micher",
-                phone: "111-22-33"
-            };
-            commit("profileLoaded", payload);
             commit("exercisesLoaded", exercises);
         });
     }

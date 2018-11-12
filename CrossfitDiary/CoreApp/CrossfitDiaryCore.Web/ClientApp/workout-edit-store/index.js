@@ -3,7 +3,6 @@ import { actions } from "./actions";
 import { mutations } from "./mutations";
 export var state = {
     exercises: [],
-    user: undefined,
     error: false
 };
 var namespaced = true;

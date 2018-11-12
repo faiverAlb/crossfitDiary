@@ -5,12 +5,6 @@ export var getters = {
         // const firstName = (user && user.firstName) || "";
         // const lastName = (user && user.lastName) || "";
         // return `${firstName} ${lastName}`;
-    },
-    fullName: function (state) {
-        var user = state.user;
-        var firstName = (user && user.firstName) || "";
-        var lastName = (user && user.lastName) || "";
-        return firstName + " " + lastName;
     }
 };
 //# sourceMappingURL=getters.js.map
