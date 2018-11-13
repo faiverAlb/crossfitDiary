@@ -7,8 +7,8 @@
       <div class="simple-routine-item text-center no-selected-container" v-if="exercisesToDo.length == 0">
         No exercises selected
       </div>
-      <div v-for="exerciseToDo in exercisesToDo" :key="exerciseToDo.id">
-        {{exerciseToDo.title}}
+      <div v-for="(exercise,index) in exercisesToDo" :key="`${exercise.id}-${index}`">
+        {{exercise.title}}
       </div>
     </div>
 
@@ -36,7 +36,12 @@ export default class ExercisesListComponent extends Vue {
 
   exerciseChange(selectedExerciseId: number) {
     debugger;
-    this.exercisesToDo.push(this.workoutEdit.exercises[0]);
+    let workoutToAdd = this.workoutEdit.exercises.find(
+      x => x.id == selectedExerciseId
+    );
+    if (workoutToAdd.id != -1) {
+      this.exercisesToDo.push(workoutToAdd);
+    }
   }
 
   selectedExercise: number = -1;

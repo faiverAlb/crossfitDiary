@@ -1,23 +1,24 @@
-﻿  import Serializable = General.Serializable;
-  import {ExerciseMeasureTypeViewModel} from "./ExerciseMeasureTypeViewModel";
-  import {ExerciseMeasureType} from "./ExerciseMeasureType";
+﻿import Serializable = General.Serializable;
+import { ExerciseMeasureTypeViewModel } from "./ExerciseMeasureTypeViewModel";
+import { ExerciseMeasureType } from "./ExerciseMeasureType";
 
-  export  class ExerciseMeasureViewModel implements Serializable<ExerciseMeasureViewModel>{
-    
+export class ExerciseMeasureViewModel
+  implements Serializable<ExerciseMeasureViewModel> {
+  exerciseMeasureType: ExerciseMeasureTypeViewModel | null = null;
+  displayMeasure: string;
 
-    exerciseMeasureType: ExerciseMeasureTypeViewModel | null = null;
-    displayMeasure: string;
-
-    constructor(params?: { exerciseMeasureType: ExerciseMeasureTypeViewModel }) {
-      if (params == null) {
-        return;
-      }
-      this.exerciseMeasureType = params.exerciseMeasureType;
-      this.displayMeasure = this.setDisplayByMeasureType(this.exerciseMeasureType.measureType);
+  constructor(params?: { exerciseMeasureType: ExerciseMeasureTypeViewModel }) {
+    if (params == null) {
+      return;
     }
+    this.exerciseMeasureType = params.exerciseMeasureType;
+    this.displayMeasure = this.setDisplayByMeasureType(
+      this.exerciseMeasureType.measureType
+    );
+  }
 
-    setDisplayByMeasureType = (measure: ExerciseMeasureType): string  => {
-      switch (measure) {
+  setDisplayByMeasureType = (measure: ExerciseMeasureType): string => {
+    switch (measure) {
       case ExerciseMeasureType.Distance:
         return "m";
       case ExerciseMeasureType.Count:
@@ -30,17 +31,18 @@
         return "cm";
       default:
         return "";
-      }
+    }
+  };
+
+  deserialize(input: any): ExerciseMeasureViewModel {
+    if (input == null) {
+      return null as any;
     }
 
-    deserialize(input: any): ExerciseMeasureViewModel {
-      if (input == null) {
-        return (null) as any;
-      }
-
-      return new ExerciseMeasureViewModel({
-        exerciseMeasureType: new ExerciseMeasureTypeViewModel().deserialize(input.exerciseMeasureType)
-      });
-    }
-
+    return new ExerciseMeasureViewModel({
+      exerciseMeasureType: new ExerciseMeasureTypeViewModel().deserialize(
+        input.exerciseMeasureType
+      )
+    });
   }
+}
