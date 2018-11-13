@@ -15,7 +15,7 @@
                 <div class="form-control exercise-title">
                   <span>{{exercise.title}}</span>
                   <!-- ko if: _isDoUnbroken-->
-                  <span class="do-unbroken-info badge badge-warning">do unbroken</span>
+                  <span v-if="exercise._isDoUnbroken" class="do-unbroken-info badge badge-warning">do unbroken</span>
                   <!-- /ko -->
 
                 </div>
