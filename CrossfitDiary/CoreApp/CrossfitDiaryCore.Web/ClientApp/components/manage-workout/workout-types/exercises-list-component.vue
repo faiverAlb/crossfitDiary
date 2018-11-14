@@ -17,7 +17,9 @@
                   <span v-if="exercise._isDoUnbroken" class="do-unbroken-info badge badge-warning">do unbroken</span>
                 </b-input-group-prepend>
                 <b-dropdown slot="append">
-                  <b-dropdown-item href="#"><i class="fas fa-long-arrow-alt-up text-info"></i> Move up </b-dropdown-item>
+                  <b-dropdown-item href="#">
+                    <font-awesome-icon :icon="['fas','long-arrow-alt-up']"></font-awesome-icon> Move up
+                  </b-dropdown-item>
                   <b-dropdown-item href="#"><i class="fas fa-long-arrow-alt-down text-info"></i> Move down </b-dropdown-item>
                   <b-dropdown-item href="#"><i class="fas fa-plus fa-sm text-success" aria-hidden="true"></i> Repeat </b-dropdown-item>
                   <b-dropdown-divider></b-dropdown-divider>
@@ -65,6 +67,17 @@
 </template>
 
 <script lang="ts">
+/* Font awesome icons */
+import { faLongArrowAltUp } from "@fortawesome/free-solid-svg-icons/faLongArrowAltUp";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
+import { faListOl } from "@fortawesome/free-solid-svg-icons/faListOl";
+import { faRetweet } from "@fortawesome/free-solid-svg-icons/faRetweet";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPauseCircle } from "@fortawesome/free-regular-svg-icons/faPauseCircle";
+
+library.add(faLongArrowAltUp, faCaretDown, faListOl, faRetweet, faPauseCircle);
+/**/
+
 import { Vue, Component, Prop } from "vue-property-decorator";
 import {
   ExerciseViewModel,
@@ -78,6 +91,7 @@ import bDropdownDivider from "bootstrap-vue/es/components/dropdown/dropdown-divi
 import bInputGroup from "bootstrap-vue/es/components/input-group/input-group";
 import bInputGroupAddon from "bootstrap-vue/es/components/input-group/input-group-addon";
 import bInputGroupPrepend from "bootstrap-vue/es/components/input-group/input-group-prepend";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import { IWorkoutEditState } from "./../../../workout-edit-store/types";
 import { State, Action, Getter } from "vuex-class";
@@ -92,7 +106,8 @@ const namespace: string = "workoutEdit";
     bDropdownDivider,
     bInputGroup,
     bInputGroupAddon,
-    bInputGroupPrepend
+    bInputGroupPrepend,
+    FontAwesomeIcon
   }
 })
 export default class ExercisesListComponent extends Vue {
