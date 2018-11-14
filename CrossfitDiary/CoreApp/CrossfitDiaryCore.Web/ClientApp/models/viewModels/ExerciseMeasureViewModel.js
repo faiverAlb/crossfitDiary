@@ -27,7 +27,7 @@ var ExerciseMeasureViewModel = /** @class */ (function () {
     }
     ExerciseMeasureViewModel.prototype.deserialize = function (input) {
         if (input == null) {
-            return (null);
+            return null;
         }
         return new ExerciseMeasureViewModel({
             exerciseMeasureType: new ExerciseMeasureTypeViewModel().deserialize(input.exerciseMeasureType)

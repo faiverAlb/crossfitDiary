@@ -11,30 +11,19 @@
         <div class="simple-routine-item">
           <div class="form-row">
             <div class="form-group my-1 col-lg-auto">
-              <div class="input-group">
-                <div class="form-control exercise-title">
+              <b-input-group>
+                <b-input-group-prepend class="exercise-title" is-text>
                   <span>{{exercise.title}}</span>
-                  <!-- ko if: _isDoUnbroken-->
                   <span v-if="exercise._isDoUnbroken" class="do-unbroken-info badge badge-warning">do unbroken</span>
-                  <!-- /ko -->
-
-                </div>
-                <div class="input-group-append">
-
-                  <button type="button" class="btn btn-outline-secondary dropdown-toggle  dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#" data-bind="click: changeUnbrokenState"> <input type="checkbox" data-bind="checked: _isDoUnbroken"> Unbroken</a>
-                    <div role="separator" class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" data-bind="click:function(){$parent.moveSimpleRoutineUp($index());}, css:{disabled: $index() == 0}"> <i class="fas fa-long-arrow-alt-up text-info"></i> Move up </a>
-                    <a class="dropdown-item" href="#" data-bind="click:function(){$parent.moveSimpleRoutineDown($index());}, css:{disabled: $parent._exercisesToBeDone().length -1  == $index()}"><i class="fas fa-long-arrow-alt-down text-info"></i> Move down </a>
-                    <a class="dropdown-item" href="#" data-bind="click:$parent.addSimpleRoutineFromToDo"><i class="fas fa-plus fa-sm text-success" aria-hidden="true"></i> Repeat </a>
-                    <div role="separator" class="dropdown-divider"></div>
-                    <a class="dropdown-item " href="#" data-bind="click:function(){ $parent.removeSimpleRoutineFromToDo($index)}"><i class="fas fa-trash fa-sm text-danger" aria-hidden="true"></i> Remove </a>
-                  </div>
-                </div>
-              </div>
+                </b-input-group-prepend>
+                <b-dropdown slot="append">
+                  <b-dropdown-item href="#"><i class="fas fa-long-arrow-alt-up text-info"></i> Move up </b-dropdown-item>
+                  <b-dropdown-item href="#"><i class="fas fa-long-arrow-alt-down text-info"></i> Move down </b-dropdown-item>
+                  <b-dropdown-item href="#"><i class="fas fa-plus fa-sm text-success" aria-hidden="true"></i> Repeat </b-dropdown-item>
+                  <b-dropdown-divider></b-dropdown-divider>
+                  <b-dropdown-item href="#"><i class="fas fa-trash fa-sm text-danger" aria-hidden="true"></i> Remove </b-dropdown-item>
+                </b-dropdown>
+              </b-input-group>
             </div>
             <!-- ko foreach:_exerciseMeasures-->
             <!-- ko if: _exerciseMeasureType.measureType() == @((int)MeasureType.Weight)-->
@@ -82,11 +71,30 @@ import {
   DefaultExerciseViewModel
 } from "../../../models/viewModels/ExerciseViewModel";
 import bFormSelect from "bootstrap-vue/es/components/form-select/form-select";
+import bDropdown from "bootstrap-vue/es/components/dropdown/dropdown";
+import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
+import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-item-button";
+import bDropdownDivider from "bootstrap-vue/es/components/dropdown/dropdown-divider";
+import bInputGroup from "bootstrap-vue/es/components/input-group/input-group";
+import bInputGroupAddon from "bootstrap-vue/es/components/input-group/input-group-addon";
+import bInputGroupPrepend from "bootstrap-vue/es/components/input-group/input-group-prepend";
+
 import { IWorkoutEditState } from "./../../../workout-edit-store/types";
 import { State, Action, Getter } from "vuex-class";
 const namespace: string = "workoutEdit";
 
-@Component({ components: { bFormSelect } })
+@Component({
+  components: {
+    bFormSelect,
+    bDropdown,
+    bDropdownItem,
+    bDropdownItemButton,
+    bDropdownDivider,
+    bInputGroup,
+    bInputGroupAddon,
+    bInputGroupPrepend
+  }
+})
 export default class ExercisesListComponent extends Vue {
   @Prop()
   exercisesToDo: ExerciseViewModel[];
