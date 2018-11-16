@@ -155,6 +155,11 @@
         .exercise-title {
             font-weight: bold;
             background: $gray-lighter;
+
+            .input-group-text {
+
+                border: 0;
+            }
         }
 
         .simple-routine-item {

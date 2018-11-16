@@ -12,23 +12,23 @@
           <div class="form-row">
             <div class="form-group my-1 col-lg-auto">
               <b-input-group>
-                <b-input-group-prepend class="exercise-title" is-text>
+                <b-input-group-prepend class="form-control exercise-title" is-text>
                   <span>{{exercise.title}}</span>
                   <span v-if="exercise._isDoUnbroken" class="do-unbroken-info badge badge-warning">do unbroken</span>
                 </b-input-group-prepend>
                 <b-dropdown slot="append">
-                  <b-dropdown-item href="#">
+                  <b-dropdown-item>
                     <font-awesome-icon :icon="['fas','long-arrow-alt-up']"></font-awesome-icon> Move up
                   </b-dropdown-item>
-                  <b-dropdown-item href="#">
+                  <b-dropdown-item>
                     <font-awesome-icon :icon="['fas','long-arrow-alt-down']"></font-awesome-icon> Move down
                   </b-dropdown-item>
-                  <b-dropdown-item href="#">
+                  <b-dropdown-item>
                     <font-awesome-icon :icon="['fas','plus']" class="text-success" size="sm"></font-awesome-icon>
                     Repeat
                   </b-dropdown-item>
                   <b-dropdown-divider></b-dropdown-divider>
-                  <b-dropdown-item href="#">
+                  <b-dropdown-item>
 
                     <font-awesome-icon :icon="['fas','trash']" class="text-danger" size="sm"></font-awesome-icon>
                     Remove
