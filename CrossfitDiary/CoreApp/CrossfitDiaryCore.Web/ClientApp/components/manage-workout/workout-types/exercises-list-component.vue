@@ -20,10 +20,19 @@
                   <b-dropdown-item href="#">
                     <font-awesome-icon :icon="['fas','long-arrow-alt-up']"></font-awesome-icon> Move up
                   </b-dropdown-item>
-                  <b-dropdown-item href="#"><i class="fas fa-long-arrow-alt-down text-info"></i> Move down </b-dropdown-item>
-                  <b-dropdown-item href="#"><i class="fas fa-plus fa-sm text-success" aria-hidden="true"></i> Repeat </b-dropdown-item>
+                  <b-dropdown-item href="#">
+                    <font-awesome-icon :icon="['fas','long-arrow-alt-down']"></font-awesome-icon> Move down
+                  </b-dropdown-item>
+                  <b-dropdown-item href="#">
+                    <font-awesome-icon :icon="['fas','plus']" class="text-success" size="sm"></font-awesome-icon>
+                    Repeat
+                  </b-dropdown-item>
                   <b-dropdown-divider></b-dropdown-divider>
-                  <b-dropdown-item href="#"><i class="fas fa-trash fa-sm text-danger" aria-hidden="true"></i> Remove </b-dropdown-item>
+                  <b-dropdown-item href="#">
+
+                    <font-awesome-icon :icon="['fas','trash']" class="text-danger" size="sm"></font-awesome-icon>
+                    Remove
+                  </b-dropdown-item>
                 </b-dropdown>
               </b-input-group>
             </div>
@@ -69,13 +78,12 @@
 <script lang="ts">
 /* Font awesome icons */
 import { faLongArrowAltUp } from "@fortawesome/free-solid-svg-icons/faLongArrowAltUp";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
-import { faListOl } from "@fortawesome/free-solid-svg-icons/faListOl";
-import { faRetweet } from "@fortawesome/free-solid-svg-icons/faRetweet";
+import { faLongArrowAltDown } from "@fortawesome/free-solid-svg-icons/faLongArrowAltDown";
+import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
+import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPauseCircle } from "@fortawesome/free-regular-svg-icons/faPauseCircle";
 
-library.add(faLongArrowAltUp, faCaretDown, faListOl, faRetweet, faPauseCircle);
+library.add(faLongArrowAltUp, faLongArrowAltDown, faPlus, faTrash);
 /**/
 
 import { Vue, Component, Prop } from "vue-property-decorator";
