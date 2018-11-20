@@ -40,24 +40,16 @@
             <div class="form-group my-1 col-lg-3" v-for="(measure,index) in exercise.exerciseMeasures" :key="measure.exerciseMeasureType.measureType">
               <label class="sr-only" v-bind:for="`measure_input_id_` + index"></label>
               <b-input-group class="mx-1 pr-1">
-                <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: ['input', 'afterkeydown'], attr: { placeholder: _exerciseMeasureType.measureDesciption, id:'measure_input_id_' + $index()}" aria-describedby="prPercentHelpBlock">
-                <b-input-group-text slot="append">
-                  {{measure.exerciseMeasureType.shortMeasureDescription}}
-                </b-input-group-text>
-
-                <div class="input-group mx-1 pr-1">
-                  <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: ['input', 'afterkeydown'], attr: { placeholder: _exerciseMeasureType.measureDesciption, id:'measure_input_id_' + $index()}" aria-describedby="prPercentHelpBlock">
-
-                  <span class="input-group-append">
-                    <span class="input-group-text">{{measure.exerciseMeasureType.shortMeasureDescription}}</span>
-                  </span>
-                  <!-- ko if: _exerciseMeasureType._canSeePersonalRecord -->
-                  <span class="w-100"></span>
-                  <small id="prPercentHelpBlock" class="form-text text-muted" data-bind="text: _exerciseMeasureType.personalRecordPercent">
-
-                  </small>
-                  <!-- /ko -->
-                </div>
+                <b-form-input type="number" data-bind="value: _exerciseMeasureType.measureValue" class="measure-value-input" :placeholder="measure.exerciseMeasureType.description"  aria-describedby="prPercentHelpBlock"></b-form-input>
+                <b-input-group-append>
+                  <b-input-group-text tag="span">
+                    {{measure.exerciseMeasureType.shortMeasureDescription}}
+                  </b-input-group-text>
+                </b-input-group-append>
+                <span class="w-100"></span>
+                <small id="prPercentHelpBlock" class="form-text text-muted">
+                  personalRecordPercent
+                </small>
               </b-input-group>
 
             </div>
@@ -93,6 +85,7 @@ import bDropdown from "bootstrap-vue/es/components/dropdown/dropdown";
 import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
 import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-item-button";
 import bDropdownDivider from "bootstrap-vue/es/components/dropdown/dropdown-divider";
+import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
 import { InputGroup } from "bootstrap-vue/es/components";
 Vue.use(InputGroup);
 
@@ -109,6 +102,7 @@ const namespace: string = "workoutEdit";
     bDropdownItem,
     bDropdownItemButton,
     bDropdownDivider,
+    bFormInput,
     FontAwesomeIcon
   }
 })
