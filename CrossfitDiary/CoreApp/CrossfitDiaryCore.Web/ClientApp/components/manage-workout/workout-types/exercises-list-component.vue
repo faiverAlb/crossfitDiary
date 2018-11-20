@@ -29,7 +29,6 @@
                   </b-dropdown-item>
                   <b-dropdown-divider></b-dropdown-divider>
                   <b-dropdown-item>
-
                     <font-awesome-icon :icon="['fas','trash']" class="text-danger" size="sm"></font-awesome-icon>
                     Remove
                   </b-dropdown-item>
@@ -38,34 +37,32 @@
             </div>
             <!-- ko foreach:_exerciseMeasures-->
             <!-- ko if: _exerciseMeasureType.measureType() == @((int)MeasureType.Weight)-->
-            <div class="form-group my-1 col-lg-3" data-bind="validationElement: _exerciseMeasureType.measureValue">
-              <label class="sr-only" data-bind="attr:{for:'measure_input_id_' + $index()}"></label>
-              <div class="input-group mx-1 pr-1">
+            <div class="form-group my-1 col-lg-3" v-for="(measure,index) in exercise.exerciseMeasures" :key="measure.exerciseMeasureType.measureType">
+              <label class="sr-only" v-bind:for="`measure_input_id_` + index"></label>
+              <b-input-group class="mx-1 pr-1">
                 <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: ['input', 'afterkeydown'], attr: { placeholder: _exerciseMeasureType.measureDesciption, id:'measure_input_id_' + $index()}" aria-describedby="prPercentHelpBlock">
-                <span class="input-group-append">
-                  <span class="input-group-text" data-bind="text:_exerciseMeasureType.shortMeasureDescription()"></span>
-                </span>
-                <!-- ko if: _exerciseMeasureType._canSeePersonalRecord -->
-                <span class="w-100"></span>
-                <small id="prPercentHelpBlock" class="form-text text-muted" data-bind="text: _exerciseMeasureType.personalRecordPercent">
+                <b-input-group-text slot="append">
+                  {{measure.exerciseMeasureType.shortMeasureDescription}}
+                </b-input-group-text>
 
-                </small>
-                <!-- /ko -->
-              </div>
+                <div class="input-group mx-1 pr-1">
+                  <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: ['input', 'afterkeydown'], attr: { placeholder: _exerciseMeasureType.measureDesciption, id:'measure_input_id_' + $index()}" aria-describedby="prPercentHelpBlock">
+
+                  <span class="input-group-append">
+                    <span class="input-group-text">{{measure.exerciseMeasureType.shortMeasureDescription}}</span>
+                  </span>
+                  <!-- ko if: _exerciseMeasureType._canSeePersonalRecord -->
+                  <span class="w-100"></span>
+                  <small id="prPercentHelpBlock" class="form-text text-muted" data-bind="text: _exerciseMeasureType.personalRecordPercent">
+
+                  </small>
+                  <!-- /ko -->
+                </div>
+              </b-input-group>
+
             </div>
             <!-- /ko -->
-            <!-- ko ifnot: _exerciseMeasureType.measureType() == @((int)MeasureType.Weight)-->
-            <div class="form-group my-1 col-lg-3" data-bind="validationElement: _exerciseMeasureType.measureValue">
-              <label class="sr-only" data-bind="attr:{for:'measure_input_id_' + $index()}"></label>
-              <div class="input-group mx-1 pr-1">
-                <input type="number" min="0" class="form-control measure-value-input" data-bind="value: _exerciseMeasureType.measureValue, valueUpdate: 'afterkeydown', attr: { placeholder: _exerciseMeasureType.measureDesciption, id:'measure_input_id_' + $index()}">
-                <span class="input-group-append">
-                  <span class="input-group-text" data-bind="text:_exerciseMeasureType.shortMeasureDescription()"></span>
-                </span>
-              </div>
-            </div>
-            <!-- /ko -->
-            <!-- /ko -->
+
           </div>
         </div>
 
@@ -96,9 +93,9 @@ import bDropdown from "bootstrap-vue/es/components/dropdown/dropdown";
 import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
 import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-item-button";
 import bDropdownDivider from "bootstrap-vue/es/components/dropdown/dropdown-divider";
-import bInputGroup from "bootstrap-vue/es/components/input-group/input-group";
-import bInputGroupAddon from "bootstrap-vue/es/components/input-group/input-group-addon";
-import bInputGroupPrepend from "bootstrap-vue/es/components/input-group/input-group-prepend";
+import { InputGroup } from "bootstrap-vue/es/components";
+Vue.use(InputGroup);
+
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import { IWorkoutEditState } from "./../../../workout-edit-store/types";
@@ -112,9 +109,6 @@ const namespace: string = "workoutEdit";
     bDropdownItem,
     bDropdownItemButton,
     bDropdownDivider,
-    bInputGroup,
-    bInputGroupAddon,
-    bInputGroupPrepend,
     FontAwesomeIcon
   }
 })
