@@ -17,10 +17,10 @@
                   <span v-if="exercise._isDoUnbroken" class="do-unbroken-info badge badge-warning">do unbroken</span>
                 </b-input-group-prepend>
                 <b-dropdown slot="append">
-                  <b-dropdown-item>
+                  <b-dropdown-item v-on:click="moveExerciseUp(index)" :disabled="canMoveExerciseUp(index)">
                     <font-awesome-icon :icon="['fas','long-arrow-alt-up']"></font-awesome-icon> Move up
                   </b-dropdown-item>
-                  <b-dropdown-item>
+                  <b-dropdown-item v-on:click="moveExerciseDown(index)" :disabled="canMoveExerciseDown(index)">
                     <font-awesome-icon :icon="['fas','long-arrow-alt-down']"></font-awesome-icon> Move down
                   </b-dropdown-item>
                   <b-dropdown-item>
@@ -35,12 +35,10 @@
                 </b-dropdown>
               </b-input-group>
             </div>
-            <!-- ko foreach:_exerciseMeasures-->
-            <!-- ko if: _exerciseMeasureType.measureType() == @((int)MeasureType.Weight)-->
             <div class="form-group my-1 col-lg-3" v-for="(measure,index) in exercise.exerciseMeasures" :key="measure.exerciseMeasureType.measureType">
               <label class="sr-only" v-bind:for="`measure_input_id_` + index"></label>
               <b-input-group class="mx-1 pr-1">
-                <b-form-input type="number" data-bind="value: _exerciseMeasureType.measureValue" v-model="measure.exerciseMeasureType.measureValue" class="measure-value-input" :placeholder="measure.exerciseMeasureType.description" aria-describedby="prPercentHelpBlock"></b-form-input>
+                <b-form-input type="number" v-model="measure.exerciseMeasureType.measureValue" class="measure-value-input" :placeholder="measure.exerciseMeasureType.description" aria-describedby="prPercentHelpBlock"></b-form-input>
                 <b-input-group-append>
                   <b-input-group-text tag="span">
                     {{measure.exerciseMeasureType.shortMeasureDescription}}
@@ -52,13 +50,9 @@
                   personalRecordPercent
                 </small> -->
               </b-input-group>
-
             </div>
-            <!-- /ko -->
-
           </div>
         </div>
-
       </div>
     </div>
 
@@ -128,6 +122,36 @@ export default class ExercisesListComponent extends Vue {
     var exercisesOptions = this.workoutEdit.exercises;
     exercisesOptions.push(new DefaultExerciseViewModel());
     return exercisesOptions;
+  }
+
+  canMoveExerciseDown(index: number) {
+    return this.exercisesToDo.length - 1 == index;
+  }
+
+  canMoveExerciseUp(index: number) {
+    return index == 0;
+  }
+  private moveExerciseUp(index: number) {
+    if (index == 0) {
+      return;
+    }
+    this.exercisesToDo.splice(
+      index - 1,
+      2,
+      this.exercisesToDo[index],
+      this.exercisesToDo[index - 1]
+    );
+  }
+
+  private moveExerciseDown(index: number) {
+    if (index < this.exercisesToDo.length - 1) {
+      this.exercisesToDo.splice(
+        index,
+        2,
+        this.exercisesToDo[index + 1],
+        this.exercisesToDo[index]
+      );
+    }
   }
 }
 </script>
