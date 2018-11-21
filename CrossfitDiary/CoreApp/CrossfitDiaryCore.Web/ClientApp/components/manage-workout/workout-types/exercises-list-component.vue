@@ -23,7 +23,7 @@
                   <b-dropdown-item v-on:click="moveExerciseDown(index)" :disabled="canMoveExerciseDown(index)">
                     <font-awesome-icon :icon="['fas','long-arrow-alt-down']"></font-awesome-icon> Move down
                   </b-dropdown-item>
-                  <b-dropdown-item>
+                  <b-dropdown-item v-on:click="exerciseChange(exercise.id)">
                     <font-awesome-icon :icon="['fas','plus']" class="text-success" size="sm"></font-awesome-icon>
                     Repeat
                   </b-dropdown-item>
@@ -113,7 +113,8 @@ export default class ExercisesListComponent extends Vue {
       x => x.id == selectedExerciseId
     );
     if (workoutToAdd.id != -1) {
-      this.exercisesToDo.push(workoutToAdd);
+      let copy =  JSON.parse(JSON.stringify( workoutToAdd ))
+      this.exercisesToDo.push(copy);
     }
   }
 
