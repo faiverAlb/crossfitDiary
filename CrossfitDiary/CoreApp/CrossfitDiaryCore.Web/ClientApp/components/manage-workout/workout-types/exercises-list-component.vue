@@ -40,16 +40,17 @@
             <div class="form-group my-1 col-lg-3" v-for="(measure,index) in exercise.exerciseMeasures" :key="measure.exerciseMeasureType.measureType">
               <label class="sr-only" v-bind:for="`measure_input_id_` + index"></label>
               <b-input-group class="mx-1 pr-1">
-                <b-form-input type="number" data-bind="value: _exerciseMeasureType.measureValue" class="measure-value-input" :placeholder="measure.exerciseMeasureType.description"  aria-describedby="prPercentHelpBlock"></b-form-input>
+                <b-form-input type="number" data-bind="value: _exerciseMeasureType.measureValue" v-model="measure.exerciseMeasureType.measureValue" class="measure-value-input" :placeholder="measure.exerciseMeasureType.description" aria-describedby="prPercentHelpBlock"></b-form-input>
                 <b-input-group-append>
                   <b-input-group-text tag="span">
                     {{measure.exerciseMeasureType.shortMeasureDescription}}
                   </b-input-group-text>
                 </b-input-group-append>
-                <span class="w-100"></span>
+                <!-- TODO: Problem with border radious because of it -->
+                <!-- <span class="w-100"></span>
                 <small id="prPercentHelpBlock" class="form-text text-muted">
                   personalRecordPercent
-                </small>
+                </small> -->
               </b-input-group>
 
             </div>

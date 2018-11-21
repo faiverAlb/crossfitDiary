@@ -2,9 +2,9 @@ import { ExerciseMeasureType } from "./ExerciseMeasureType";
 var ExerciseMeasureTypeViewModel = /** @class */ (function () {
     function ExerciseMeasureTypeViewModel(params) {
         this.measureType = ExerciseMeasureType.Weight;
-        this.measureValue = '';
-        this.description = '';
-        this.shortMeasureDescription = '';
+        this.measureValue = "";
+        this.description = "";
+        this.shortMeasureDescription = "";
         this.isRequired = false;
         if (params == null) {
             return;
@@ -17,18 +17,17 @@ var ExerciseMeasureTypeViewModel = /** @class */ (function () {
     }
     ExerciseMeasureTypeViewModel.prototype.deserialize = function (jsonInput) {
         if (jsonInput == null) {
-            return (null);
+            return null;
         }
         return new ExerciseMeasureTypeViewModel({
             measureType: jsonInput.measureType,
             measureValue: jsonInput.measureValue,
             description: jsonInput.description,
             isRequired: jsonInput.isRequired,
-            shortMeasureDescription: jsonInput.shortMeasureDescription,
+            shortMeasureDescription: jsonInput.shortMeasureDescription
         });
     };
     return ExerciseMeasureTypeViewModel;
 }());
 export { ExerciseMeasureTypeViewModel };
-;
 //# sourceMappingURL=ExerciseMeasureTypeViewModel.js.map
