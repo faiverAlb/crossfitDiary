@@ -28,7 +28,7 @@
                     Repeat
                   </b-dropdown-item>
                   <b-dropdown-divider></b-dropdown-divider>
-                  <b-dropdown-item>
+                  <b-dropdown-item v-on:click="deleteFromList(index)">
                     <font-awesome-icon :icon="['fas','trash']" class="text-danger" size="sm"></font-awesome-icon>
                     Remove
                   </b-dropdown-item>
@@ -113,7 +113,7 @@ export default class ExercisesListComponent extends Vue {
       x => x.id == selectedExerciseId
     );
     if (workoutToAdd.id != -1) {
-      let copy =  JSON.parse(JSON.stringify( workoutToAdd ))
+      let copy = JSON.parse(JSON.stringify(workoutToAdd));
       this.exercisesToDo.push(copy);
     }
   }
@@ -153,6 +153,9 @@ export default class ExercisesListComponent extends Vue {
         this.exercisesToDo[index]
       );
     }
+  }
+  private deleteFromList(index: number) {
+    this.exercisesToDo.splice(index, 1);
   }
 }
 </script>
