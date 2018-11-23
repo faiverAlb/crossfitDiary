@@ -39,7 +39,7 @@ new Vue({
         <div class="crossfitter-edit-workout-container">
                 <div class="col-md-12 add-new-workout-container workout-container">
                   <div class="card">
-                    <div class="card-header ">
+                    <div class="card-header">
                         <workouts-navigation-component></workouts-navigation-component>
                     </div>
                     <div class="card-body pt-0">
