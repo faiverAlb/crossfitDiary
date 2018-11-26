@@ -3,9 +3,9 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
     function ToLogWorkoutViewModel(params) {
         this.id = 0;
         this.crossfitterWorkoutId = 0;
-        this.date = '';
+        this.date = "";
         this.selectedWorkoutId = 0;
-        this.timePassed = '';
+        this.timePassed = "";
         this.isEditMode = false;
         if (params == null) {
             return;
@@ -27,7 +27,7 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
     }
     ToLogWorkoutViewModel.prototype.deserialize = function (jsonInput) {
         if (jsonInput == null) {
-            return (null);
+            return null;
         }
         return new ToLogWorkoutViewModel({
             id: jsonInput.id,
