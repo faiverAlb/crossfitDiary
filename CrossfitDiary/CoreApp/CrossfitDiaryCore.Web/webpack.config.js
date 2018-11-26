@@ -45,8 +45,11 @@ module.exports = (env) => {
     plugins: [
       new CleanWebpackPlugin(pathsToClean, cleanOptions),
       new webpack.ProvidePlugin({
+        Vue: ['vue/dist/vue.esm.js', 'default'],
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
         $: 'jquery',
-        jQuery: 'jquery'
+        moment: 'moment',
       }),
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({

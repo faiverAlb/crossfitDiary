@@ -21,12 +21,12 @@ export class ToLogWorkoutViewModel
   implements Serializable<ToLogWorkoutViewModel> {
   id: number = 0;
   crossfitterWorkoutId: number = 0;
-  date: string = "";
+  date: string = null;
   partialRepsFinished?: number;
   roundsFinished?: number;
   repsToFinishOnCapTime?: number;
   selectedWorkoutId: number = 0;
-  timePassed: string = "";
+  timePassed: string = null;
   isEditMode: boolean = false;
   canBeRemovedByCurrentUser?: boolean;
   workouterName?: string;

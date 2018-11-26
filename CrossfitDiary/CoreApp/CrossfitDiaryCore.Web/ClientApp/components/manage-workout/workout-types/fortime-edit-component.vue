@@ -45,7 +45,17 @@
           <div class="row justify-content-end">
             <div class="col-lg-3 col-sm data-selector-container pr-lg-3">
               <div class="input-group">
-                <input class="" id="DateSelector" readonly="readonly" data-bind="datepicker:_plannedDate" />
+                <!-- <input class="" id="DateSelector" readonly="readonly" data-bind="datepicker:_plannedDate" /> -->
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <date-picker v-model="toLogModel.date" :config="options" :wrap="true"></date-picker>
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary datepickerbutton" type="button" title="Toggle">
+                      <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-lg-3 col-sm pr-lg-2 total-time-log-container">
@@ -85,10 +95,12 @@
 <script lang="ts">
 /* Font awesome icons */
 import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
+// import { faCalendar } from "@fortawesome/free-regular-svg-icons/faCalendar";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons/faHashtag";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
-library.add(faClock, faHashtag);
+library.add(faClock, faHashtag, faCalendar);
 /**/
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Vue, Component, Prop } from "vue-property-decorator";
@@ -98,12 +110,24 @@ import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel"
 import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
 import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
 
+import datePicker from "vue-bootstrap-datetimepicker";
+import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
+
 @Component({
-  components: { FontAwesomeIcon, ExercisesListComponent, bFormInput }
+  components: {
+    FontAwesomeIcon,
+    ExercisesListComponent,
+    bFormInput,
+    datePicker
+  }
 })
 export default class ForTimeEditComponent extends Vue {
   model: WorkoutViewModel = new WorkoutViewModel();
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
+  date: Date = new Date();
+  options: any = {
+    format: "DD-MM-YYYY"
+  };
   mounted() {}
   // computed variable based on user's email
   mutateData(): void {}
