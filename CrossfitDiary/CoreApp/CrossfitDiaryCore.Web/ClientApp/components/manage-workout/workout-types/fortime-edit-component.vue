@@ -44,44 +44,40 @@
         <div class="col-md-12 text-right">
           <div class="row justify-content-end">
             <div class="col-lg-3 col-sm data-selector-container pr-lg-3">
-              <div class="input-group">
-                <!-- <input class="" id="DateSelector" readonly="readonly" data-bind="datepicker:_plannedDate" /> -->
-              </div>
               <div class="form-group">
-                <div class="input-group">
+                <b-input-group>
                   <date-picker v-model="toLogModel.date" :config="options" :wrap="true"></date-picker>
-                  <div class="input-group-append">
+                  <b-input-group-append>
                     <button class="btn btn-secondary datepickerbutton" type="button" title="Toggle">
                       <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
                     </button>
-                  </div>
-                </div>
+                  </b-input-group-append>
+                </b-input-group>
               </div>
             </div>
             <div class="col-lg-3 col-sm pr-lg-2 total-time-log-container">
-              <div class=" input-group mb-2">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
+              <b-input-group class="mb-2">
+                <b-input-group-prepend>
+                  <b-input-group-text tag="span">
                     <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
-                  </span>
-                </div>
+                  </b-input-group-text>
+                </b-input-group-prepend>
                 <b-form-input type="text" v-model="toLogModel.timePassed" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
-                <!-- <input type="text" pattern="[0-9]*" inputmode="numeric" class="form-control" id="timeToWorkInput" placeholder="Total time" data-bind="validationElement: _totalTime,inputmask:{value: _totalTime, mask:'99:59',definitions: { '5': { validator: '[0-5]' } }}"> -->
-              </div>
+              </b-input-group>
             </div>
             <div class="vertical-divider d-none d-sm-block"></div>
             <div class="horizontal-divider d-block d-sm-none ">
               <hr />
             </div>
             <div class="col-lg-3 col-sm  pl-lg-2 cap-reps-log-container">
-              <div class=" input-group mb-2 ">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
+              <b-input-group class="mb-2">
+                <b-input-group-prepend>
+                  <b-input-group-text tag="span">
                     Cap +
-                  </span>
-                </div>
-                <input type="number" min="1" pattern="[0-9]*" inputmode="numeric" class="form-control" id="repsToFinishOnCapTimeInput" placeholder="Count" data-bind="value: _repsToFinishOnCapTime">
-              </div>
+                  </b-input-group-text>
+                </b-input-group-prepend>
+                <b-form-input type="number" v-model="toLogModel.repsToFinishOnCapTime" placeholder="Count"></b-form-input>
+              </b-input-group>
             </div>
           </div>
           <button class="btn btn-success" v-on:click="logWorkout">Log workout</button>
@@ -112,6 +108,8 @@ import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutVi
 
 import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
+import { InputGroup } from "bootstrap-vue/es/components";
+Vue.use(InputGroup);
 
 @Component({
   components: {
