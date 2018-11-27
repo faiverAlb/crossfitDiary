@@ -4,36 +4,75 @@
       <div class="pt-2 general-info-container">
         <div class="row">
           <div class="col-lg-3 time-cap-container pb-2">
-            <label for="timeCapInput" class="sr-only">Time cap:</label>
+            <label
+              for="timeCapInput"
+              class="sr-only"
+            >Time cap:</label>
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <font-awesome-icon :icon="['fas','clock']" class="fa-lg time-cap-icon"></font-awesome-icon>
+                  <font-awesome-icon
+                    :icon="['fas','clock']"
+                    class="fa-lg time-cap-icon"
+                  ></font-awesome-icon>
                 </div>
               </div>
-              <input v-model="model.timeCap" type="tel" v-mask="'##:##'" class="form-control " id="timeCapInput" placeholder="Time Cap" />
+              <b-form-input
+                v-model="model.timeCap"
+                type="tel"
+                v-mask="'##:##'"
+                id="timeCapInput"
+                placeholder="Time Cap"
+              />
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-3 pb-2">
-            <label for="roundsInput" class="sr-only">Rounds count:</label>
+            <label
+              for="roundsInput"
+              class="sr-only"
+            >Rounds count:</label>
             <div class="input-group ">
               <div class="input-group-prepend">
                 <div class="input-group-text">
                   <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
                 </div>
               </div>
-              <input v-model="model.roundsCount" v-mask="'#####'" type="number" pattern="[0-9]*" inputmode="numeric" min="1" class="form-control " id="roundsInput" placeholder="Rounds count" />
+              <b-form-input
+                v-model="model.roundsCount"
+                v-mask="'#####'"
+                type="number"
+                pattern="[0-9]*"
+                inputmode="numeric"
+                min="1"
+                id="roundsInput"
+                placeholder="Rounds count"
+              />
             </div>
           </div>
         </div>
         <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"></ExercisesListComponent>
-        <div class="row py-1" v-if="model.exercisesToDoList.length > 0">
+        <div
+          class="row py-1"
+          v-if="model.exercisesToDoList.length > 0"
+        >
           <div class="col-lg-4">
-            <label for="timeInput" class="sr-only">Rest after</label>
-            <b-input-group class="py-2" prepend="Rest after round:">
-              <b-form-input type="tel" v-mask="'##:##'" v-model="model.restBetweenRounds" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
+            <label
+              for="timeInput"
+              class="sr-only"
+            >Rest after</label>
+            <b-input-group
+              class="py-2"
+              prepend="Rest after round:"
+            >
+              <b-form-input
+                type="tel"
+                v-mask="'##:##'"
+                v-model="model.restBetweenRounds"
+                placeholder="Time"
+                aria-describedby="prPercentHelpBlock"
+              ></b-form-input>
             </b-input-group>
           </div>
         </div>
@@ -46,9 +85,18 @@
             <div class="col-lg-3 col-sm data-selector-container pr-lg-3">
               <div class="form-group">
                 <b-input-group>
-                  <date-picker v-model="toLogModel.date" :config="options" :wrap="true"></date-picker>
+                  <date-picker
+                    v-model="toLogModel.date"
+                    :config="options"
+                    placeholder="Select date"
+                    :wrap="true"
+                  ></date-picker>
                   <b-input-group-append>
-                    <button class="btn btn-secondary datepickerbutton" type="button" title="Toggle">
+                    <button
+                      class="btn btn-secondary datepickerbutton"
+                      type="button"
+                      title="Toggle"
+                    >
                       <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
                     </button>
                   </b-input-group-append>
@@ -62,7 +110,13 @@
                     <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
                   </b-input-group-text>
                 </b-input-group-prepend>
-                <b-form-input type="tel" v-model="toLogModel.timePassed" v-mask="'##:##'" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
+                <b-form-input
+                  type="tel"
+                  v-model="toLogModel.timePassed"
+                  v-mask="'##:##'"
+                  placeholder="Time"
+                  aria-describedby="prPercentHelpBlock"
+                ></b-form-input>
               </b-input-group>
             </div>
             <div class="vertical-divider d-none d-sm-block"></div>
@@ -76,11 +130,19 @@
                     Cap +
                   </b-input-group-text>
                 </b-input-group-prepend>
-                <b-form-input type="number" v-model="toLogModel.repsToFinishOnCapTime" placeholder="Count"></b-form-input>
+                <b-form-input
+                  type="number"
+                  v-model="toLogModel.repsToFinishOnCapTime"
+                  placeholder="Count"
+                >
+                </b-form-input>
               </b-input-group>
             </div>
           </div>
-          <button class="btn btn-success" v-on:click="logWorkout">Log workout</button>
+          <button
+            class="btn btn-success"
+            v-on:click="logWorkout"
+          >Log workout</button>
         </div>
       </div>
     </div>
