@@ -62,7 +62,7 @@
                     <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
                   </b-input-group-text>
                 </b-input-group-prepend>
-                <b-form-input type="text" v-model="toLogModel.timePassed" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
+                <b-form-input type="text" v-model="toLogModel.timePassed" v-mask="'##:##'" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
               </b-input-group>
             </div>
             <div class="vertical-divider d-none d-sm-block"></div>
@@ -110,6 +110,7 @@ import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import { InputGroup } from "bootstrap-vue/es/components";
 Vue.use(InputGroup);
+import { mask } from "vue-the-mask";
 
 @Component({
   components: {
@@ -117,7 +118,8 @@ Vue.use(InputGroup);
     ExercisesListComponent,
     bFormInput,
     datePicker
-  }
+  },
+  directives: { mask }
 })
 export default class ForTimeEditComponent extends Vue {
   model: WorkoutViewModel = new WorkoutViewModel();
