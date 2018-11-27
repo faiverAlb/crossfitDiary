@@ -36,64 +36,55 @@
 // C:\TestProjects\crossfitDiary\CrossfitDiary\CoreApp\CrossfitDiaryCore.Web\node_modules\bootstrap\scss\_variables.scss
 @import "./general.scss";
 
-
-.manage-workout-page {
-    .new-or-existing {
-        .choose-buttons {
-            margin-bottom: 10px;
-        }
-    }
-
-    .want-to-log-container {
-        .log-or-save-buttons {
-            margin-bottom: 10px;
-        }
-    }
-
-
-    .data-selector-container {
+.want-to-log-container {
+    .log-or-save-buttons {
         margin-bottom: 10px;
     }
+}
 
-    .pointer {
-        cursor: pointer;
-    }
 
-    .manage-workout-container {
-        .workout-type-selector {
-            >select {
-                border: 1px solid $green;
-            }
-        }
+.data-selector-container {
+    margin-bottom: 10px;
+}
 
-        .existing-workout-selector {
-            >select {
-                border: 1px solid $orange;
-            }
-        }
-    }
+.pointer {
+    cursor: pointer;
+}
 
-    .vertical-divider {
-        width: 1px;
-        border-left: 1px solid $gray-500;
-        margin: 8px 0 18px 0;
-        vertical-align: middle;
-    }
-
-    .horizontal-divider {
-        width: 100%;
-
-        >hr {
-            width: 90%;
-            margin-top: 7px;
+.manage-workout-container {
+    .workout-type-selector {
+        >select {
+            border: 1px solid $green;
         }
     }
 
-    .total-time-log-container,
-    .cap-reps-log-container {
-        .has-error {
-            border-color: $yellow;
+    .existing-workout-selector {
+        >select {
+            border: 1px solid $orange;
         }
+    }
+}
+
+.vertical-divider {
+    width: 1px;
+    border-left: 1px solid $gray-500;
+    margin: 8px 0 30px 0;
+    vertical-align: middle;
+}
+
+.horizontal-divider {
+    width: 100%;
+
+    >hr {
+        width: 90%;
+        margin-top: 7px;
+    }
+}
+
+.total-time-log-container,
+.cap-reps-log-container {
+    .has-error {
+        border-color: $yellow;
     }
 }
 
