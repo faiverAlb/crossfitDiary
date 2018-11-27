@@ -33,7 +33,7 @@
           <div class="col-lg-4">
             <label for="timeInput" class="sr-only">Rest after</label>
             <b-input-group class="py-2" prepend="Rest after round:">
-              <b-form-input type="text" v-model="restBetweenRounds" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
+              <b-form-input type="text" v-model="model.restBetweenRounds" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
             </b-input-group>
           </div>
         </div>
@@ -133,7 +133,7 @@ export default class ForTimeEditComponent extends Vue {
   mutateData(): void {}
 
   logWorkout() {
-    debugger;
+    // debugger;
   }
 }
 </script>
