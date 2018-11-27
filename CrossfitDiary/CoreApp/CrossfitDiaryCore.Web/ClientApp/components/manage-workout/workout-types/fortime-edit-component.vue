@@ -11,7 +11,7 @@
                   <font-awesome-icon :icon="['fas','clock']" class="fa-lg time-cap-icon"></font-awesome-icon>
                 </div>
               </div>
-              <input v-model="model.timeCap" type="text" class="form-control " id="timeCapInput" placeholder="Time Cap" />
+              <input v-model="model.timeCap" type="tel" v-mask="'##:##'" class="form-control " id="timeCapInput" placeholder="Time Cap" />
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@
                   <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
                 </div>
               </div>
-              <input v-model="model.roundsCount" type="number" pattern="[0-9]*" inputmode="numeric" min="1" class="form-control " id="roundsInput" placeholder="Rounds count" />
+              <input v-model="model.roundsCount" v-mask="'#####'" type="number" pattern="[0-9]*" inputmode="numeric" min="1" class="form-control " id="roundsInput" placeholder="Rounds count" />
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
           <div class="col-lg-4">
             <label for="timeInput" class="sr-only">Rest after</label>
             <b-input-group class="py-2" prepend="Rest after round:">
-              <b-form-input type="text" v-model="model.restBetweenRounds" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
+              <b-form-input type="tel" v-mask="'##:##'" v-model="model.restBetweenRounds" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
             </b-input-group>
           </div>
         </div>
@@ -62,7 +62,7 @@
                     <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
                   </b-input-group-text>
                 </b-input-group-prepend>
-                <b-form-input type="text" v-model="toLogModel.timePassed" v-mask="'##:##'" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
+                <b-form-input type="tel" v-model="toLogModel.timePassed" v-mask="'##:##'" placeholder="Time" aria-describedby="prPercentHelpBlock"></b-form-input>
               </b-input-group>
             </div>
             <div class="vertical-divider d-none d-sm-block"></div>
