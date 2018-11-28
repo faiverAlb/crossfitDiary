@@ -8,15 +8,15 @@
               for="timeCapInput"
               class="sr-only"
             >Time cap:</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
+            <b-input-group class="input-group">
+              <b-input-group-prepend>
+                <b-input-group-text tag="span">
                   <font-awesome-icon
                     :icon="['fas','clock']"
                     class="fa-lg time-cap-icon"
                   ></font-awesome-icon>
-                </div>
-              </div>
+                </b-input-group-text>
+              </b-input-group-prepend>
               <b-form-input
                 v-model="model.timeCap"
                 type="tel"
@@ -24,7 +24,7 @@
                 id="timeCapInput"
                 placeholder="Time Cap"
               />
-            </div>
+            </b-input-group>
           </div>
         </div>
         <div class="row">
@@ -33,12 +33,12 @@
               for="roundsInput"
               class="sr-only"
             >Rounds count:</label>
-            <div class="input-group ">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
+            <b-input-group>
+              <b-input-group-prepend>
+                <b-input-group-text tag="span">
                   <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
-                </div>
-              </div>
+                </b-input-group-text>
+              </b-input-group-prepend>
               <b-form-input
                 v-model="model.roundsCount"
                 v-mask="'#####'"
@@ -49,7 +49,7 @@
                 id="roundsInput"
                 placeholder="Rounds count"
               />
-            </div>
+            </b-input-group>
           </div>
         </div>
         <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"></ExercisesListComponent>
