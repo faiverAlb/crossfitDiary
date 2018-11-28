@@ -19,10 +19,10 @@
               </b-input-group-prepend>
               <b-form-input
                 v-model="model.timeCap"
-                type="tel"
+                type="text"
                 v-mask="'##:##'"
                 name="capTime"
-                v-validate="'required|numeric'"
+                v-validate="'required|length:5'"
                 id="timeCapInput"
                 :state="fields.capTime && fields.capTime.valid"
                 placeholder="Time Cap"
@@ -195,12 +195,14 @@ export default class ForTimeEditComponent extends Vue {
   options: any = {
     format: "DD-MM-YYYY"
   };
+
   mounted() {}
   // computed variable based on user's email
   mutateData(): void {}
 
   logWorkout() {
-    // debugger;
+    debugger;
+    this.$validator.validate();
   }
 }
 </script>
