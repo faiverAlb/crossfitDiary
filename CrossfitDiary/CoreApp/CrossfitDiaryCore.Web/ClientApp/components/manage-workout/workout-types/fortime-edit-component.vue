@@ -23,8 +23,8 @@
                 v-mask="'##:##'"
                 name="capTime"
                 v-validate="'required|length:5'"
-                id="timeCapInput"
                 :state="fields.capTime && fields.capTime.valid"
+                id="timeCapInput"
                 placeholder="Time Cap"
               />
             </b-input-group>
@@ -46,7 +46,9 @@
                 v-model="model.roundsCount"
                 v-mask="'#####'"
                 type="number"
-                pattern="[0-9]*"
+                name="roundsCount"
+                v-validate="'required'"
+                :state="fields.roundsCount && fields.roundsCount.valid"
                 inputmode="numeric"
                 min="1"
                 id="roundsInput"
