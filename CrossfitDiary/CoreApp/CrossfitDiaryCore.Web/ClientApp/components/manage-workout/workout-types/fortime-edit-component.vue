@@ -21,7 +21,10 @@
                 v-model="model.timeCap"
                 type="tel"
                 v-mask="'##:##'"
+                name="capTime"
+                v-validate="'required|numeric'"
                 id="timeCapInput"
+                :state="fields.capTime && fields.capTime.valid"
                 placeholder="Time Cap"
               />
             </b-input-group>
@@ -173,6 +176,8 @@ import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import { InputGroup } from "bootstrap-vue/es/components";
 Vue.use(InputGroup);
 import { mask } from "vue-the-mask";
+import VeeValidate from "vee-validate";
+Vue.use(VeeValidate);
 
 @Component({
   components: {

@@ -3,9 +3,9 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
     function ToLogWorkoutViewModel(params) {
         this.id = 0;
         this.crossfitterWorkoutId = 0;
-        this.date = "";
+        this.date = null;
         this.selectedWorkoutId = 0;
-        this.timePassed = "";
+        this.timePassed = null;
         this.isEditMode = false;
         if (params == null) {
             return;
