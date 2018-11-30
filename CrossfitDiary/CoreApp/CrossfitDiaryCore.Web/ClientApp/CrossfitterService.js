@@ -3,19 +3,14 @@ import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel
 import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 var CrossfitterService = /** @class */ (function () {
     function CrossfitterService() {
-        //    public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
-        ////      this.isDataLoading(true);
-        //      return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);
-        //    };
-        //
+        this.createAndLogWorkout = function (model) {
+            return axios.post("api/createAndLogNewWorkout", model);
+        };
+        // tslint:disable-next-line:max-line-length
         this.getAllCrossfittersWorkouts = function (userId, exerciseId, page, pageSize) {
             //      this.isDataLoading(true);
-            return axios
-                .get("api/getAllCrossfittersWorkouts?exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize)
-                .then(function (jsonData) {
-                return jsonData.data.map(function (x) {
-                    return new ToLogWorkoutViewModel().deserialize(x);
-                });
+            return axios.get("api/getAllCrossfittersWorkouts?exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize).then(function (jsonData) {
+                return jsonData.data.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
             });
         };
         //

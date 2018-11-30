@@ -162,6 +162,7 @@ import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons/faHashtag";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import CrossfitterService from "../../../CrossfitterService";
 
 library.add(faClock, faHashtag, faCalendar);
 /**/
@@ -203,8 +204,26 @@ export default class ForTimeEditComponent extends Vue {
   mutateData(): void {}
 
   logWorkout() {
-    debugger;
     this.$validator.validate();
+    if (this.$validator.errors.items.length > 0) {
+      //todo: show message and focus on first errored element
+      return;
+    }
+    let workoutModel = this.model;
+    const model = {
+      newWorkoutViewModel: workoutModel,
+      logWorkoutViewModel: this.toLogModel
+    };
+    let crossfitterService: CrossfitterService = new CrossfitterService();
+
+    crossfitterService
+      .createAndLogWorkout(model)
+      .then(data => {
+        // debugger;
+      })
+      .catch(data => {
+        // debugger;
+      });
   }
 }
 </script>

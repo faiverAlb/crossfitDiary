@@ -1,29 +1,24 @@
 ﻿import axios, { AxiosResponse } from "axios";
 import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel";
 import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
+import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 
 export default class CrossfitterService {
-  //    public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel, logWorkoutViewModel: ToLogWorkoutViewModel }) => {
-  ////      this.isDataLoading(true);
-  //      return this.post(this.pathToApp + "api/createAndLogNewWorkout", model);
-  //    };
-  //
-  public getAllCrossfittersWorkouts = (
-    userId?: string,
-    exerciseId?: number,
-    page?: number,
-    pageSize?: number
-  ): Promise<ToLogWorkoutViewModel[]> => {
+  public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel; logWorkoutViewModel: ToLogWorkoutViewModel }) => {
+    // const config = { headers: { "Content-Type": "application/json" } };
+    return axios.post(
+      "api/createAndLogNewWorkout",
+      { newWorkoutViewModel: model.newWorkoutViewModel, logWorkoutViewModel: model.logWorkoutViewModel }
+      // config
+    );
+  };
+
+  // tslint:disable-next-line:max-line-length
+  public getAllCrossfittersWorkouts = (userId?: string, exerciseId?: number, page?: number, pageSize?: number): Promise<ToLogWorkoutViewModel[]> => {
     //      this.isDataLoading(true);
-    return axios
-      .get(
-        `api/getAllCrossfittersWorkouts?exerciseId=${exerciseId}&page=${page}&pageSize=${pageSize}`
-      )
-      .then(jsonData => {
-        return jsonData.data.map(x =>
-          new ToLogWorkoutViewModel().deserialize(x)
-        );
-      });
+    return axios.get(`api/getAllCrossfittersWorkouts?exerciseId=${exerciseId}&page=${page}&pageSize=${pageSize}`).then(jsonData => {
+      return jsonData.data.map(x => new ToLogWorkoutViewModel().deserialize(x));
+    });
   };
   //
   public getExercises = (): Promise<ExerciseViewModel[]> => {

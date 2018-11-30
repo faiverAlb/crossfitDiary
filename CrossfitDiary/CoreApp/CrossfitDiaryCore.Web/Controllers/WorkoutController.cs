@@ -77,25 +77,25 @@ namespace CrossfitDiary.Web.Api
             _manageWorkoutsService.RemoveWorkout(crossfitterWorkoutId, userId);
         }
 
-        //
-        //        /// <summary>
-        //        ///     Create and log workout
-        //        /// </summary>
-        //        /// <param name="model">Complex model with two properties: new workout and log workout models</param>
-        //        [HttpPost]
-        //        [Route("createAndLogNewWorkout")]
-        //        public void CreateAndLogNewWorkout(ToCreateAndLogNewWorkoutViewModel model)
-        //        {
-        //            
-        //            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
-        //            CrossfitterWorkout crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
-        //            crossfitterWorkout.Crossfitter = user;
-        //            RoutineComplex newWorkoutRoutine = Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
-        //            newWorkoutRoutine.CreatedBy = user;
-        //
-        //            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
-        //        }
-        //
+        
+        /// <summary>
+        ///     Create and log workout
+        /// </summary>
+        /// <param name="model">Complex model with two properties: new workout and log workout models</param>
+        [HttpPost]
+        [Route("api/createAndLogNewWorkout")]
+        public void CreateAndLogNewWorkout([FromBody]ToCreateAndLogNewWorkoutViewModel model)
+        {
+            var test = 123;
+//            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
+//            CrossfitterWorkout crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
+//            crossfitterWorkout.Crossfitter = user;
+//            RoutineComplex newWorkoutRoutine = Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
+//            newWorkoutRoutine.CreatedBy = user;
+//        
+//            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
+        }
+        
 
         //
         //        /// <summary>
