@@ -92,8 +92,11 @@
                 <b-input-group>
                   <date-picker
                     v-model="toLogModel.date"
-                    :config="options"
+                    :config="{ format: 'DD.MM.YYYY'}"
                     placeholder="Select date"
+                    name="toLogModelDate"
+                    :state="fields.toLogModelDate && fields.toLogModelDate.valid"
+                    v-validate="'required'"
                     :wrap="true"
                   ></date-picker>
                   <b-input-group-append>
@@ -194,36 +197,32 @@ Vue.use(VeeValidate);
 export default class ForTimeEditComponent extends Vue {
   model: WorkoutViewModel = new WorkoutViewModel();
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
-  date: Date = new Date();
-  options: any = {
-    format: "DD-MM-YYYY"
-  };
-
   mounted() {}
   // computed variable based on user's email
   mutateData(): void {}
 
   logWorkout() {
     this.$validator.validate();
-    if (this.$validator.errors.items.length > 0) {
-      //todo: show message and focus on first errored element
-      return;
-    }
-    let workoutModel = this.model;
-    const model = {
-      newWorkoutViewModel: workoutModel,
-      logWorkoutViewModel: this.toLogModel
-    };
-    let crossfitterService: CrossfitterService = new CrossfitterService();
 
-    crossfitterService
-      .createAndLogWorkout(model)
-      .then(data => {
-        // debugger;
-      })
-      .catch(data => {
-        // debugger;
-      });
+    this.$validator.validate().then(isValid => {
+      if (isValid) {
+        let workoutModel = this.model;
+        const model = {
+          newWorkoutViewModel: workoutModel,
+          logWorkoutViewModel: this.toLogModel
+        };
+        let crossfitterService: CrossfitterService = new CrossfitterService();
+
+        crossfitterService
+          .createAndLogWorkout(model)
+          .then(data => {
+            // debugger;
+          })
+          .catch(data => {
+            // debugger;
+          });
+      }
+    });
   }
 }
 </script>

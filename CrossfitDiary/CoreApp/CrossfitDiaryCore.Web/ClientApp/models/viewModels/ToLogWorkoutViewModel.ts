@@ -17,11 +17,10 @@ interface IToLogWorkoutViewModel {
   displayDate?: string;
   workoutViewModel?: WorkoutViewModel;
 }
-export class ToLogWorkoutViewModel
-  implements Serializable<ToLogWorkoutViewModel> {
+export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel> {
   id: number = 0;
   crossfitterWorkoutId: number = 0;
-  date: string = null;
+  date: string = new Date().toLocaleDateString();
   partialRepsFinished?: number;
   roundsFinished?: number;
   repsToFinishOnCapTime?: number;
@@ -73,9 +72,7 @@ export class ToLogWorkoutViewModel
       workouterName: jsonInput.workouterName,
       workouterId: jsonInput.workouterId,
       displayDate: jsonInput.displayDate,
-      workoutViewModel: new WorkoutViewModel().deserialize(
-        jsonInput.workoutViewModel
-      )
+      workoutViewModel: new WorkoutViewModel().deserialize(jsonInput.workoutViewModel)
     });
   }
 }

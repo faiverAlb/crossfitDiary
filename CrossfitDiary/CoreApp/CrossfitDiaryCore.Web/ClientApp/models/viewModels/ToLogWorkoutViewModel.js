@@ -3,7 +3,7 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
     function ToLogWorkoutViewModel(params) {
         this.id = 0;
         this.crossfitterWorkoutId = 0;
-        this.date = null;
+        this.date = new Date().toLocaleDateString();
         this.selectedWorkoutId = 0;
         this.timePassed = null;
         this.isEditMode = false;

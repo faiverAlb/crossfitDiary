@@ -14,7 +14,7 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("crossfitterWorkoutId")]
         public int CrossfitterWorkoutId { get; set; }
 
-        [JsonConverter(typeof(DateFormatConverter), "dd-MM-yyyy")]
+        [JsonConverter(typeof(DateFormatConverter), "dd.MM.yyyy")]
         public DateTime Date { get; set; }
 
         [JsonProperty("displayDate")]
