@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using AutoMapper;
 using CrossfitDiaryCore.BL.Services;
 using CrossfitDiaryCore.Model;
 using CrossfitDiaryCore.Web.ViewModels;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -23,17 +24,19 @@ namespace CrossfitDiary.Web.Api
         private readonly ManageWorkoutsService _manageWorkoutsService;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         #endregion
 
         #region constructors
 
-        public WorkoutController(ReadWorkoutsService readWorkoutsService, ManageWorkoutsService manageWorkoutsService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public WorkoutController(ReadWorkoutsService readWorkoutsService, ManageWorkoutsService manageWorkoutsService, IMapper mapper, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
         {
             _readWorkoutsService = readWorkoutsService;
             _manageWorkoutsService = manageWorkoutsService;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -73,6 +76,9 @@ namespace CrossfitDiary.Web.Api
         public void RemoveWorkout(int crossfitterWorkoutId)
         {
             string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
+            
+            //TODO: Add check rights!
 
             _manageWorkoutsService.RemoveWorkout(crossfitterWorkoutId, userId);
         }
@@ -84,16 +90,19 @@ namespace CrossfitDiary.Web.Api
         /// <param name="model">Complex model with two properties: new workout and log workout models</param>
         [HttpPost]
         [Route("api/createAndLogNewWorkout")]
-        public void CreateAndLogNewWorkout([FromBody]ToCreateAndLogNewWorkoutViewModel model)
+        public async Task CreateAndLogNewWorkout([FromBody]ToCreateAndLogNewWorkoutViewModel model)
         {
-            var test = 123;
+                //            string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+                //            var user = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
 //            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
-//            CrossfitterWorkout crossfitterWorkout = Mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
-//            crossfitterWorkout.Crossfitter = user;
-//            RoutineComplex newWorkoutRoutine = Mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
-//            newWorkoutRoutine.CreatedBy = user;
-//        
+                CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
+                crossfitterWorkout.Crossfitter = user;
+                RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
+                newWorkoutRoutine.CreatedBy = user;
+        
 //            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
+           
         }
         
 

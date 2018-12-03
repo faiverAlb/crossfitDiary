@@ -219,7 +219,7 @@ export default class ForTimeEditComponent extends Vue {
             // debugger;
           })
           .catch(data => {
-            // debugger;
+            debugger;
           });
       }
     });
