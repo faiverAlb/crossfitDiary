@@ -8,7 +8,7 @@ export default class CrossfitterService {
     // const config = { headers: { "Content-Type": "application/json" } };
     return axios.post(
       "api/createAndLogNewWorkout",
-      { newWorkoutViewModel: model.newWorkoutViewModel, logWorkoutViewModel: model.logWorkoutViewModel }
+      model
       // config
     );
   };

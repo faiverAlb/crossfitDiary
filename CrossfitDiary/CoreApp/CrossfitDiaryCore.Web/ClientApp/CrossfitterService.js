@@ -4,7 +4,10 @@ import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 var CrossfitterService = /** @class */ (function () {
     function CrossfitterService() {
         this.createAndLogWorkout = function (model) {
-            return axios.post("api/createAndLogNewWorkout", model);
+            // const config = { headers: { "Content-Type": "application/json" } };
+            return axios.post("api/createAndLogNewWorkout", model
+            // config
+            );
         };
         // tslint:disable-next-line:max-line-length
         this.getAllCrossfittersWorkouts = function (userId, exerciseId, page, pageSize) {

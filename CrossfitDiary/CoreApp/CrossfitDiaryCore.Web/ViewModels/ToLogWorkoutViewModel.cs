@@ -5,8 +5,6 @@ namespace CrossfitDiaryCore.Web.ViewModels
 {
     public class ToLogWorkoutViewModel
     {
-        #region properties
-
         [JsonProperty("id")]
         public int Id { get; set; }
 
@@ -16,7 +14,7 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("crossfitterWorkoutId")]
         public int CrossfitterWorkoutId { get; set; }
 
-        [JsonProperty("date")]
+        [JsonConverter(typeof(DateFormatConverter), "dd-MM-yyyy")]
         public DateTime Date { get; set; }
 
         [JsonProperty("displayDate")]
@@ -66,7 +64,5 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("workoutViewModel")]
         public WorkoutViewModel WorkoutViewModel { get; set; }
 
-
-        #endregion
     }
 }
