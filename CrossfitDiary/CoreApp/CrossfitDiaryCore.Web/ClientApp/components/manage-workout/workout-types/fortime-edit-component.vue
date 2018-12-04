@@ -1,6 +1,13 @@
 ﻿<template>
   <div>
+
     <div class="routine-complex-info">
+      <b-alert
+        class="my-1 mx-0"
+        :show="showErrorMessage"
+        variant="danger"
+      >{{errorMessage}}</b-alert>
+
       <div class="pt-2 general-info-container">
         <div class="row">
           <div class="col-lg-3 time-cap-container pb-2">
@@ -175,6 +182,7 @@ import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
 import ExercisesListComponent from "./exercises-list-component.vue";
 import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
 import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
+import bAlert from "bootstrap-vue/es/components/alert/alert";
 import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
 
 import datePicker from "vue-bootstrap-datetimepicker";
@@ -190,13 +198,16 @@ Vue.use(VeeValidate);
     FontAwesomeIcon,
     ExercisesListComponent,
     bFormInput,
-    datePicker
+    datePicker,
+    bAlert
   },
   directives: { mask }
 })
 export default class ForTimeEditComponent extends Vue {
   model: WorkoutViewModel = new WorkoutViewModel();
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
+  errorMessage: string = "";
+  showErrorMessage: boolean = false;
   mounted() {}
   // computed variable based on user's email
   mutateData(): void {}
@@ -219,7 +230,8 @@ export default class ForTimeEditComponent extends Vue {
             // debugger;
           })
           .catch(data => {
-            debugger;
+            this.showErrorMessage = true;
+            this.errorMessage = data.message;
           });
       }
     });
