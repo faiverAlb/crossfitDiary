@@ -20,35 +20,36 @@ namespace CrossfitDiaryCore.BL.Services
         }
 
 
-//        /// <summary>
-//        /// Find existing workout by workout structure
-//        /// </summary>
-//        /// <param name="routineComplexToSave">
-//        /// The routine complex to save.
-//        /// </param>
-//        /// <param name="workoutId">
-//        /// The workout id if found
-//        /// </param>
-//        /// <returns>
-//        /// The <see cref="bool"/>.
-//        /// </returns>
-//        public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
-//        {
-//            List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetAll().ToList();
-//            foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
-//            {
-//                if (_workoutsMatchDispatcher.IsWorkoutsMatch(existingRoutineComplex, routineComplexToSave) == false)
-//                {
-//                    continue;
-//                }
-//                return existingRoutineComplex.Id;
-//            }
-//
-//            return 0;
-//        }
-//
-//
-//
+        /// <summary>
+        /// Find existing workout by workout structure
+        /// </summary>
+        /// <param name="routineComplexToSave">
+        /// The routine complex to save.
+        /// </param>
+        /// <param name="workoutId">
+        /// The workout id if found
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
+        {
+
+            List<RoutineComplex> workoutsToCheck = _context.ComplexRoutines.ToList();
+            foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
+            {
+                if (_workoutsMatchDispatcher.IsWorkoutsMatch(existingRoutineComplex, routineComplexToSave) == false)
+                {
+                    continue;
+                }
+                return existingRoutineComplex.Id;
+            }
+
+            return 0;
+        }
+
+
+
         /// <summary>
         /// The get person maximum for exercise.
         /// </summary>

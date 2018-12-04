@@ -12,6 +12,7 @@ namespace CrossfitDiaryCore.DAL.EF.ExerciseMeasures
             builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.ExerciseMeasureTypeId).IsRequired();
             builder.HasOne(x => x.Exercise);
+            builder.Property(x => x.CreatedUtc).HasDefaultValueSql("getutcdate()");
         }
     }
 }

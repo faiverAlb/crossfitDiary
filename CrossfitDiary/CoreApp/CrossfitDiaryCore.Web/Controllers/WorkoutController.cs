@@ -83,28 +83,24 @@ namespace CrossfitDiary.Web.Api
             _manageWorkoutsService.RemoveWorkout(crossfitterWorkoutId, userId);
         }
 
-        
+
         /// <summary>
         ///     Create and log workout
         /// </summary>
         /// <param name="model">Complex model with two properties: new workout and log workout models</param>
         [HttpPost]
         [Route("api/createAndLogNewWorkout")]
-        public async Task CreateAndLogNewWorkout([FromBody]ToCreateAndLogNewWorkoutViewModel model)
+        public async Task CreateAndLogNewWorkout([FromBody] ToCreateAndLogNewWorkoutViewModel model)
         {
-                //            string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-                //            var user = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-//            ApplicationUser user = _applicationUserManager.FindById(HttpContext.Current.User.Identity.GetUserId());
-                CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
-                crossfitterWorkout.Crossfitter = user;
-                RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
-                newWorkoutRoutine.CreatedBy = user;
-        
-//            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
-           
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
+            crossfitterWorkout.Crossfitter = user;
+            RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
+            newWorkoutRoutine.CreatedBy = user;
+            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
+
         }
-        
+
 
         //
         //        /// <summary>

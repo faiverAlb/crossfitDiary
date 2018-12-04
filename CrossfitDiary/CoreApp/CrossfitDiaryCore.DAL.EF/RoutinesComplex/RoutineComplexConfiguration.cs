@@ -17,6 +17,8 @@ namespace CrossfitDiaryCore.DAL.EF.RoutinesComplex
             builder.HasOne(x => x.Parent)
                 .WithMany(x => x.Children)
                 .HasForeignKey(x => x.ParentId);
+
+            builder.Property(x => x.CreatedUtc).HasDefaultValueSql("getutcdate()");
         }
     }
 }
