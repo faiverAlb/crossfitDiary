@@ -52,6 +52,7 @@
       <div class="action-buttons">
         <!-- ko if:canBeRemovedByCurrentUser-->
         <a
+          v-if="model.canBeRemovedByCurrentUser"
           class="edit-workout-action pointer text-info"
           data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id + '&crossfitterWorkoutId=' + crossfitterWorkoutId}"
         >
