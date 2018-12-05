@@ -39,7 +39,7 @@ namespace CrossfitDiary.Web.Api
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? crossfitterWorkoutId)
         {
             return View();
         }

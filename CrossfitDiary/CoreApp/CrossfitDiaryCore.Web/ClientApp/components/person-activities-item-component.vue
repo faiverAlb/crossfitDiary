@@ -50,15 +50,14 @@
     </div>
     <div class="item-footer text-right pt-1">
       <div class="action-buttons">
-        <!-- ko if:canBeRemovedByCurrentUser-->
         <a
           v-if="model.canBeRemovedByCurrentUser"
           class="edit-workout-action pointer text-info"
+          v-bind:href="'Workout?crossfitterWorkoutId='+this.model.crossfitterWorkoutId"
           data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id + '&crossfitterWorkoutId=' + crossfitterWorkoutId}"
         >
           Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon>
         </a>
-        <!-- /ko -->
         <a class="repeat-workout-action pointer text-success pl-1">
           <font-awesome-icon :icon="['fas','plus']"></font-awesome-icon>
           <span class="do-it-text">Do it</span>
