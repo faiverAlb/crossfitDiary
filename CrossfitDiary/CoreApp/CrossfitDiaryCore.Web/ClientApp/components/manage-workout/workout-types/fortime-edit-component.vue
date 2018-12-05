@@ -227,7 +227,7 @@ export default class ForTimeEditComponent extends Vue {
         crossfitterService
           .createAndLogWorkout(model)
           .then(data => {
-            // debugger;
+            window.location.href = "\\";
           })
           .catch(data => {
             this.showErrorMessage = true;
