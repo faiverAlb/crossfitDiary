@@ -223,7 +223,7 @@ namespace CrossfitDiaryCore.BL.Services
         /// </summary>
         /// <param name="personMaximum"></param>
         /// <param name="crossfitterWorkouts"></param>
-        public void MarkWorkoutWithWeightRecord(PersonMaximum personMaximum, List<CrossfitterWorkout> crossfitterWorkouts)
+        private void MarkWorkoutWithWeightRecord(PersonMaximum personMaximum, List<CrossfitterWorkout> crossfitterWorkouts)
         {
             if (personMaximum == null || personMaximum.MaximumWeight == null || personMaximum.MaximumWeight == 0)
             {
@@ -267,20 +267,26 @@ namespace CrossfitDiaryCore.BL.Services
 
             return crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId) || x.RoutineComplex.Children.Any(childW => childW.RoutineSimple.Any(c => c.ExerciseId == exerciseId))).ToList();
         }
-//
-//
-//        /// <summary>
-//        /// The get crossfitter workout.
-//        /// </summary>
-//        /// <param name="crossfitterWorkoutId"></param>
-//        /// <returns>
-//        /// The <see cref="CrossfitterWorkout"/>.
-//        /// </returns>
-//        public CrossfitterWorkout GetCrossfitterWorkout(int crossfitterWorkoutId)
-//        {
-//            CrossfitterWorkout crossfitterWorkout = _crossfitterWorkoutRepository.Single(x => x.Id == crossfitterWorkoutId);
-//            return crossfitterWorkout;
-//        }
+
+
+        /// <summary>
+        /// The get crossfitter workout.
+        /// </summary>
+        /// <param name="crossfitterWorkoutId"></param>
+        /// <returns>
+        /// The <see cref="CrossfitterWorkout"/>.
+        /// </returns>
+        public CrossfitterWorkout GetCrossfitterWorkout(string userId, int crossfitterWorkoutId)
+        {
+            CrossfitterWorkout crossfitterWorkout =
+                _context.CrossfitterWorkouts
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise)
+                    .ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+                    .Include(x => x.Crossfitter)
+                    .Single(x => x.Crossfitter.Id == userId && x.Id == crossfitterWorkoutId);
+
+            return crossfitterWorkout;
+        }
 //
 //
 //        public void RemoveWorkout(int crossfitterWorkoutId, ApplicationUser user)

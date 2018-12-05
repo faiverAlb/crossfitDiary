@@ -54,7 +54,6 @@
           v-if="model.canBeRemovedByCurrentUser"
           class="edit-workout-action pointer text-info"
           v-bind:href="'Workout?crossfitterWorkoutId='+this.model.crossfitterWorkoutId"
-          data-bind="attr: { href: '/Crossfitter/ManageWorkout?workoutId='+ workoutViewModel.id + '&crossfitterWorkoutId=' + crossfitterWorkoutId}"
         >
           Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon>
         </a>

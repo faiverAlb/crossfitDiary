@@ -41,6 +41,14 @@ namespace CrossfitDiary.Web.Api
 
         public IActionResult Index(int? crossfitterWorkoutId)
         {
+            //TODO: Add check rights!
+            if (crossfitterWorkoutId.HasValue) // AND HAS RIGHTS!
+            {
+                string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(userId, crossfitterWorkoutId.Value);
+                ToLogWorkoutViewModel toLogWorkoutViewModel = _mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout);
+                //ToLogWorkoutViewModel
+            }
             return View();
         }
 
