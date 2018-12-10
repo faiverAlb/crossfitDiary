@@ -34,6 +34,7 @@ new Vue({
         WorkoutsNavigationComponent: WorkoutsNavigationComponent
     },
     data: function () {
+        debugger;
         return {
             errorAlertModel: new ErrorAlertModel()
         };

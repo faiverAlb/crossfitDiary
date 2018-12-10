@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,14 +6,12 @@ using AutoMapper;
 using CrossfitDiaryCore.BL.Services;
 using CrossfitDiaryCore.Model;
 using CrossfitDiaryCore.Web.ViewModels;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-
-namespace CrossfitDiary.Web.Api
+namespace CrossfitDiaryCore.Web.Controllers
 {
     [Authorize]
     public class WorkoutController : Controller
@@ -47,8 +44,10 @@ namespace CrossfitDiary.Web.Api
                 string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(userId, crossfitterWorkoutId.Value);
                 ToLogWorkoutViewModel toLogWorkoutViewModel = _mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout);
-                //ToLogWorkoutViewModel
+                ViewBag.toLogWorkoutViewModel = toLogWorkoutViewModel;
+                return View();
             }
+//            ViewBag.crossfitterWorkoutId = crossfitterWorkoutId;
             return View();
         }
 

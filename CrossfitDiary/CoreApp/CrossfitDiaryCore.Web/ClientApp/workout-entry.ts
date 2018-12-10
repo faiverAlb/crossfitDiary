@@ -17,6 +17,7 @@ import EmomEditComponent from "./components/manage-workout/workout-types/emom-ed
 import E2momEditComponent from "./components/manage-workout/workout-types/e2mom-edit-component.vue";
 import NFTEditComponent from "./components/manage-workout/workout-types/nft-edit-component.vue";
 import store from "./workout-edit-store/workout-store";
+import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel";
 
 Vue.use(VueRouter);
 
@@ -59,6 +60,8 @@ new Vue({
     WorkoutsNavigationComponent
   },
   data() {
+    debugger;
+    let test = new ToLogWorkoutViewModel().deserialize(workouter.toLogWorkoutRawModel);
     return {
       errorAlertModel: new ErrorAlertModel()
     };
