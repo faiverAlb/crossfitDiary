@@ -32,7 +32,7 @@ const routes = [
   { path: "/", component: ForTimeEditComponent, redirect: "fortime" }
 ];
 
-new Vue({
+let vue = new Vue({
   el: "#manage-workout-page-container",
   template: `
    <div class="manage-workout-container my-2">
@@ -60,8 +60,9 @@ new Vue({
     WorkoutsNavigationComponent
   },
   data() {
-    debugger;
-    let test = new ToLogWorkoutViewModel().deserialize(workouter.toLogWorkoutRawModel);
+    // let test = new ToLogWorkoutViewModel().deserialize(workouter.toLogWorkoutRawModel);
+    // debugger;
+    // var test2 = this.$router;
     return {
       errorAlertModel: new ErrorAlertModel()
     };

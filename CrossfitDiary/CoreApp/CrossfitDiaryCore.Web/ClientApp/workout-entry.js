@@ -23,7 +23,7 @@ var routes = [
     { path: "/nft", component: NFTEditComponent },
     { path: "/", component: ForTimeEditComponent, redirect: "fortime" }
 ];
-new Vue({
+var vue = new Vue({
     el: "#manage-workout-page-container",
     template: "\n   <div class=\"manage-workout-container my-2\">\n      <div>\n        <div class=\"crossfitter-edit-workout-container\">\n                <div class=\"col-md-12 add-new-workout-container workout-container\">\n                  <div class=\"card\">\n                    <div class=\"card-header\">\n                        <workouts-navigation-component></workouts-navigation-component>\n                    </div>\n                    <div class=\"card-body pt-0\">\n                      <router-view></router-view>\n                    </div>\n                  </div>\n                </div>\n        </div>\n      </div>\n  </div>\n    ",
     store: store,
@@ -34,7 +34,9 @@ new Vue({
         WorkoutsNavigationComponent: WorkoutsNavigationComponent
     },
     data: function () {
-        debugger;
+        // let test = new ToLogWorkoutViewModel().deserialize(workouter.toLogWorkoutRawModel);
+        // debugger;
+        // var test2 = this.$router;
         return {
             errorAlertModel: new ErrorAlertModel()
         };

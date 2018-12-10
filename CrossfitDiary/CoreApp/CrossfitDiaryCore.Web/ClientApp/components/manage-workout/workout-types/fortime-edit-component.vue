@@ -2,13 +2,18 @@
   <div>
 
     <div class="routine-complex-info">
-      <b-alert
-        class="my-1 mx-0"
-        :show="showErrorMessage"
-        variant="danger"
-      >{{errorMessage}}</b-alert>
-
-      <div class="pt-2 general-info-container">
+      <div class="row">
+        <div class="col">
+          <ErrorAlertComponent
+            class="my-1 mx-0"
+            :errorAlertModel="errorAlertModel"
+          ></ErrorAlertComponent>
+        </div>
+      </div>
+      <div
+        class="pt-2 general-info-container"
+        disable
+      >
         <div class="row">
           <div class="col-lg-3 time-cap-container pb-2">
             <label
@@ -168,15 +173,15 @@
 <script lang="ts">
 /* Font awesome icons */
 import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
-// import { faCalendar } from "@fortawesome/free-regular-svg-icons/faCalendar";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons/faHashtag";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import CrossfitterService from "../../../CrossfitterService";
 
 library.add(faClock, faHashtag, faCalendar);
-/**/
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+/**/
+
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
 import ExercisesListComponent from "./exercises-list-component.vue";
@@ -191,6 +196,10 @@ import { InputGroup } from "bootstrap-vue/es/components";
 Vue.use(InputGroup);
 import { mask } from "vue-the-mask";
 import VeeValidate from "vee-validate";
+
+import ErrorAlertComponent from "../../error-alert-component.vue";
+import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
+
 Vue.use(VeeValidate);
 
 @Component({
@@ -199,17 +208,17 @@ Vue.use(VeeValidate);
     ExercisesListComponent,
     bFormInput,
     datePicker,
-    bAlert
+    bAlert,
+    ErrorAlertComponent
   },
   directives: { mask }
 })
 export default class ForTimeEditComponent extends Vue {
   model: WorkoutViewModel = new WorkoutViewModel();
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
-  errorMessage: string = "";
-  showErrorMessage: boolean = false;
+  errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
+
   mounted() {}
-  // computed variable based on user's email
   mutateData(): void {}
 
   logWorkout() {
@@ -230,8 +239,7 @@ export default class ForTimeEditComponent extends Vue {
             window.location.href = "\\";
           })
           .catch(data => {
-            this.showErrorMessage = true;
-            this.errorMessage = data.message;
+            this.errorAlertModel.setError(data.response.statusText);
           });
       }
     });

@@ -15,7 +15,7 @@ import ErrorAlertComponent from "./components/error-alert-component.vue";
 
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 
-new Vue({
+let vue = new Vue({
   el: "#home-page-container",
   template: `
     <div class="home-container">

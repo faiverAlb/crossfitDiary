@@ -10,7 +10,7 @@ import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 import { ErrorAlertModel } from "./models/viewModels/ErrorAlertModel";
 import ErrorAlertComponent from "./components/error-alert-component.vue";
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
-new Vue({
+var vue = new Vue({
     el: "#home-page-container",
     template: "\n    <div class=\"home-container\">\n      <div class=\"row\">\n        <div class=\"col\">\n          <ErrorAlertComponent :errorAlertModel=\"errorAlertModel\"></ErrorAlertComponent>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"offset-5\">\n          <spinner \n            :status=\"spinner.status\"  \n            :size=\"spinner.size\" \n            :color=\"spinner.color\"  \n            :depth=\"spinner.depth\" \n            :rotation=\"spinner.rotation\"\n            :speed=\"spinner.speed\">\n          </spinner>\n        </div>\n      </div>\n      <PersonsActivitiesComponent :activities=\"activities\"/> \n    </div>\n    ",
     components: {
