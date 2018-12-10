@@ -4,7 +4,7 @@ import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel
 
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 import CrossfitterService from "./CrossfitterService";
-const apiService = new CrossfitterService();
+const apiService: CrossfitterService = new CrossfitterService();
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
 

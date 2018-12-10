@@ -9,12 +9,12 @@ import { ExerciseViewModel } from "../models/viewModels/ExerciseViewModel";
 
 export const actions: ActionTree<IWorkoutEditState, RootState> = {
   // tslint:disable-next-line:typedef
-  fetchData({ commit }): any {
+  fetchExercises({ commit }): any {
     let crossfitterService: CrossfitterService = new CrossfitterService();
     crossfitterService.getExercises().then(data => {
       const exercises: ExerciseViewModel[] = data;
       commit("exercisesLoaded", exercises);
     });
   }
-  // }
 };
+// }

@@ -5,28 +5,27 @@ import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 
 export default class CrossfitterService {
   public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel; logWorkoutViewModel: ToLogWorkoutViewModel }) => {
-    // const config = { headers: { "Content-Type": "application/json" } };
     return axios.post(
       "api/createAndLogNewWorkout",
       model
-      // config
     );
   };
-
-  // tslint:disable-next-line:max-line-length
   public getAllCrossfittersWorkouts = (userId?: string, exerciseId?: number, page?: number, pageSize?: number): Promise<ToLogWorkoutViewModel[]> => {
-    //      this.isDataLoading(true);
     return axios.get(`api/getAllCrossfittersWorkouts?exerciseId=${exerciseId}&page=${page}&pageSize=${pageSize}`).then(jsonData => {
       return jsonData.data.map(x => new ToLogWorkoutViewModel().deserialize(x));
     });
   };
-  //
+
   public getExercises = (): Promise<ExerciseViewModel[]> => {
-    //      this.isDataLoading(true);
     return axios.get<ExerciseViewModel[]>("api/getExercises").then(jsonData => {
       return jsonData.data.map(x => new ExerciseViewModel().deserialize(x));
     });
   };
+
+  public removeWorkout = crossfitterWorkoutId => {
+    return axios.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
+  };
+
   //
   //    public getPersonMaximums = (): Q.Promise<PersonExerciseRecord[]> => {
   ////      this.isDataLoading(true);
@@ -64,9 +63,7 @@ export default class CrossfitterService {
   ////        .finally(() => { this.isDataLoading(false); });
   //    };
   //
-  public removeWorkout = crossfitterWorkoutId => {
-    return axios.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
-  };
+
   //
   //    public getPersonLoggingInfo = (preselectedCrossfitterWorkoutId: number): Q.Promise<ToLogWorkoutViewModel> => {
   ////      this.isDataLoading(true);

@@ -218,7 +218,12 @@ export default class ForTimeEditComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
 
-  mounted() {}
+  mounted() {
+    if (workouter != null && workouter.toLogWorkoutRawModel != null) {
+      this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
+      this.toLogModel = workouter.toLogWorkoutRawModel;
+    }
+  }
   mutateData(): void {}
 
   logWorkout() {
