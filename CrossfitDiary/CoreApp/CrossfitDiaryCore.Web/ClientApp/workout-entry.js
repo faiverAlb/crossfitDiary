@@ -35,8 +35,6 @@ var vue = new Vue({
     },
     data: function () {
         // let test = new ToLogWorkoutViewModel().deserialize(workouter.toLogWorkoutRawModel);
-        // debugger;
-        // var test2 = this.$router;
         return {
             errorAlertModel: new ErrorAlertModel()
         };

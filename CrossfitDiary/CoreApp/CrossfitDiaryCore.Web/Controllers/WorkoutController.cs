@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace CrossfitDiaryCore.Web.Controllers
 {
@@ -22,18 +24,27 @@ namespace CrossfitDiaryCore.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMemoryCache _memoryCache;
+            
+        private string _allMainpageResultsConst = "all-mainpage-results";
 
         #endregion
 
         #region constructors
 
-        public WorkoutController(ReadWorkoutsService readWorkoutsService, ManageWorkoutsService manageWorkoutsService, IMapper mapper, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
+        public WorkoutController(ReadWorkoutsService readWorkoutsService
+            , ManageWorkoutsService manageWorkoutsService
+            , IMapper mapper
+            , IHttpContextAccessor httpContextAccessor
+            , UserManager<ApplicationUser> userManager
+            , IMemoryCache memoryCache)
         {
             _readWorkoutsService = readWorkoutsService;
             _manageWorkoutsService = manageWorkoutsService;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
+            _memoryCache = memoryCache;
         }
 
         public IActionResult Index(int? crossfitterWorkoutId)
@@ -63,12 +74,17 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/getAllCrossfittersWorkouts")]
         public List<ToLogWorkoutViewModel> GetAllCrossfittersWorkouts(int page = 1, int pageSize = 30, string userId = null, int? exerciseId = null)
         {
-            string userIdForWorkouts = userId;
+            List<ToLogWorkoutViewModel> crossfitersWorkouts = _memoryCache.GetOrCreate(_allMainpageResultsConst, entry =>
+            {
+                string userIdForWorkouts = userId;
+                List<ToLogWorkoutViewModel> allResults = _readWorkoutsService
+                    .GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId, page, pageSize)
+                    .Select(_mapper.Map<ToLogWorkoutViewModel>)
+                    .ToList();
+                return allResults;
+            });
 
-            List<ToLogWorkoutViewModel> crossfitersWorkouts = _readWorkoutsService
-                .GetAllCrossfittersWorkouts(userIdForWorkouts, exerciseId, page, pageSize)
-                .Select(_mapper.Map<ToLogWorkoutViewModel>)
-                .ToList();
+            
             return crossfitersWorkouts;
         }
 
@@ -84,7 +100,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         {
             string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             
-            
+            _memoryCache.Remove(_allMainpageResultsConst);
             //TODO: Add check rights!
 
             _manageWorkoutsService.RemoveWorkout(crossfitterWorkoutId, userId);
@@ -105,7 +121,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
             newWorkoutRoutine.CreatedBy = user;
             _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
-
+            _memoryCache.Remove(_allMainpageResultsConst);
         }
 
 

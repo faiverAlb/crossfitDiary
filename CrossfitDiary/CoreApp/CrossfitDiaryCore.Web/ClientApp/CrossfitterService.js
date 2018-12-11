@@ -4,24 +4,20 @@ import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 var CrossfitterService = /** @class */ (function () {
     function CrossfitterService() {
         this.createAndLogWorkout = function (model) {
-            // const config = { headers: { "Content-Type": "application/json" } };
-            return axios.post("api/createAndLogNewWorkout", model
-            // config
-            );
+            return axios.post("api/createAndLogNewWorkout", model);
         };
-        // tslint:disable-next-line:max-line-length
         this.getAllCrossfittersWorkouts = function (userId, exerciseId, page, pageSize) {
-            //      this.isDataLoading(true);
             return axios.get("api/getAllCrossfittersWorkouts?exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize).then(function (jsonData) {
                 return jsonData.data.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
             });
         };
-        //
         this.getExercises = function () {
-            //      this.isDataLoading(true);
             return axios.get("api/getExercises").then(function (jsonData) {
                 return jsonData.data.map(function (x) { return new ExerciseViewModel().deserialize(x); });
             });
+        };
+        this.removeWorkout = function (crossfitterWorkoutId) {
+            return axios.delete("api/removeWorkout/" + crossfitterWorkoutId);
         };
         //
         //    public getPersonMaximums = (): Q.Promise<PersonExerciseRecord[]> => {
@@ -60,9 +56,6 @@ var CrossfitterService = /** @class */ (function () {
         ////        .finally(() => { this.isDataLoading(false); });
         //    };
         //
-        this.removeWorkout = function (crossfitterWorkoutId) {
-            return axios.delete("api/removeWorkout/" + crossfitterWorkoutId);
-        };
         //
         //    public getPersonLoggingInfo = (preselectedCrossfitterWorkoutId: number): Q.Promise<ToLogWorkoutViewModel> => {
         ////      this.isDataLoading(true);

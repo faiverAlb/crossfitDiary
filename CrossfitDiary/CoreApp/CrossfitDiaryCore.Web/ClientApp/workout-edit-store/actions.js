@@ -2,7 +2,7 @@
 import CrossfitterService from "../CrossfitterService";
 export var actions = {
     // tslint:disable-next-line:typedef
-    fetchData: function (_a) {
+    fetchExercises: function (_a) {
         var commit = _a.commit;
         var crossfitterService = new CrossfitterService();
         crossfitterService.getExercises().then(function (data) {
@@ -10,6 +10,6 @@ export var actions = {
             commit("exercisesLoaded", exercises);
         });
     }
-    // }
 };
+// }
 //# sourceMappingURL=actions.js.map

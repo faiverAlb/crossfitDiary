@@ -28,6 +28,8 @@ namespace CrossfitDiaryCore.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper();
+            services.AddMemoryCache();
+
             services.AddMvc().AddControllersAsServices();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
