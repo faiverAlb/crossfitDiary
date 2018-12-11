@@ -6,6 +6,7 @@ using CrossfitDiaryCore.Model;
 using CrossfitDiaryCore.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace CrossfitDiaryCore.Web.Controllers
 {
@@ -14,6 +15,8 @@ namespace CrossfitDiaryCore.Web.Controllers
     {
         private readonly ReadExercisesService _readExercisesService;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _memoryCache;
+        private string _allExercisesCacheConst = "all-exercises-cache";
 
         #region members
 
@@ -22,10 +25,11 @@ namespace CrossfitDiaryCore.Web.Controllers
 
         #region constructors
 
-        public ExercisesController(ReadExercisesService readExercisesService, IMapper mapper)
+        public ExercisesController(ReadExercisesService readExercisesService, IMapper mapper, IMemoryCache memoryCache)
         {
             _readExercisesService = readExercisesService;
             _mapper = mapper;
+            _memoryCache = memoryCache;
         }
 
         #endregion
@@ -39,9 +43,13 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/getExercises")]
         public List<ExerciseViewModel> GetExercises()
         {
-            List<Exercise> exercises = _readExercisesService.GetExercises();
-            List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(exercises.OrderBy(x => x.Title));
-            return exerciseViewModels;
+            List<ExerciseViewModel> cachedExerciseViewModels = _memoryCache.GetOrCreate(_allExercisesCacheConst, entry =>
+            {
+                List<Exercise> exercises = _readExercisesService.GetExercises();
+                List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(exercises.OrderBy(x => x.Title));
+                return exerciseViewModels;
+            });
+            return cachedExerciseViewModels;
         }
   
         #endregion
