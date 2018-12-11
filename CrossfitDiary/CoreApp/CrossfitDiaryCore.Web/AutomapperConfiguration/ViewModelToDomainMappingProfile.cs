@@ -5,8 +5,7 @@ using AutoMapper;
 using CrossfitDiaryCore.Model;
 using CrossfitDiaryCore.Web.ViewModels;
 
-
-namespace CrossfitDiary.Web.Mappings
+namespace CrossfitDiaryCore.Web.AutomapperConfiguration
 {
     public class ViewModelToDomainMappingProfile : Profile
     {
@@ -22,10 +21,10 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.ComplexType, x => x.MapFrom(y => y.WorkoutType))
                 .ForMember(x => x.RoutineSimple, x => x.MapFrom(y => y.ExercisesToDoList))
                 .ForMember(x => x.RoundCount, x => x.MapFrom(y => y.RoundsCount))
-                .ForMember(x => x.TimeToWork, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.TimeToWork.Split(':',StringSplitOptions.None)[0]), int.Parse(y.TimeToWork.Split(':', StringSplitOptions.None)[1]))))
-                .ForMember(x => x.TimeCap, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.TimeCap.Split(':', StringSplitOptions.None)[0]), int.Parse(y.TimeCap.Split(':', StringSplitOptions.None)[1]))))
-                .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.RestBetweenRounds.Split(':', StringSplitOptions.None)[0]), int.Parse(y.RestBetweenRounds.Split(':', StringSplitOptions.None)[1]))))
-                .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.RestBetweenExercises.Split(':', StringSplitOptions.None)[0]), int.Parse(y.RestBetweenExercises.Split(':', StringSplitOptions.None)[1]))));
+                .ForMember(x => x.TimeToWork, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeToWork)))
+                .ForMember(x => x.TimeCap, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeCap)))
+                .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => ParseTimeSpanFromString(y.RestBetweenRounds)))
+                .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => ParseTimeSpanFromString(y.RestBetweenExercises)));
 
             
             CreateMap<ExerciseViewModel, RoutineSimple>()
@@ -43,7 +42,17 @@ namespace CrossfitDiary.Web.Mappings
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.CrossfitterWorkoutId))
                 .ForMember(x => x.Date, x => x.MapFrom(y => y.Date))
                 .ForMember(x => x.IsModified, x => x.MapFrom(y => !y.IsRx))
-                .ForMember(x => x.TimePassed, x => x.MapFrom(y => new TimeSpan(0, int.Parse(y.TimePassed.Split(':', StringSplitOptions.None)[0]), int.Parse(y.TimePassed.Split(':', StringSplitOptions.None)[1]))));
+                .ForMember(x => x.TimePassed, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimePassed)));
+        }
+
+        private TimeSpan? ParseTimeSpanFromString(string toParseTimeSpan)
+        {
+            if (string.IsNullOrEmpty(toParseTimeSpan))
+            {
+                return null;
+            }
+            TimeSpan timeSpan = new TimeSpan(0, int.Parse(toParseTimeSpan.Split(':')[0]), int.Parse(toParseTimeSpan.Split(':')[1]));
+            return timeSpan;
         }
     }
 

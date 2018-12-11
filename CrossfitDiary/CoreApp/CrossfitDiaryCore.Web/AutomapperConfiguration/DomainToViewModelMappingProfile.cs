@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using CrossfitDiary.Web.Mappings;
 using CrossfitDiaryCore.Model;
 using CrossfitDiaryCore.Web.AutomapperConfiguration.Resolvers;
 using CrossfitDiaryCore.Web.ViewModels;

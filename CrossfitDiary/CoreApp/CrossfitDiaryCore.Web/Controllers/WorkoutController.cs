@@ -115,13 +115,22 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/createAndLogNewWorkout")]
         public async Task CreateAndLogNewWorkout([FromBody] ToCreateAndLogNewWorkoutViewModel model)
         {
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
-            crossfitterWorkout.Crossfitter = user;
-            RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
-            newWorkoutRoutine.CreatedBy = user;
-            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
-            _memoryCache.Remove(_allMainpageResultsConst);
+
+            try
+            {
+                ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+                CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
+                crossfitterWorkout.Crossfitter = user;
+                RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
+                newWorkoutRoutine.CreatedBy = user;
+                _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, model.LogWorkoutViewModel.IsEditMode);
+                _memoryCache.Remove(_allMainpageResultsConst);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
         }
 
 

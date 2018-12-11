@@ -103,7 +103,7 @@
               <div class="form-group">
                 <b-input-group>
                   <date-picker
-                    v-model="toLogModel.date"
+                    v-model="toLogModel.displayDate"
                     :config="{ format: 'DD.MM.YYYY'}"
                     placeholder="Select date"
                     name="toLogModelDate"
