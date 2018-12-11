@@ -18,7 +18,7 @@ namespace CrossfitDiaryCore.Web.ViewModels
         public DateTime Date { get; set; }
 
         [JsonProperty("displayDate")]
-        public string DisplayDate => Date.ToString("dd.MM.yyyy");
+        public string DisplayDate { get; set; }
 
         [JsonProperty("distance")]
         public int? Distance { get; set; }

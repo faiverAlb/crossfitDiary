@@ -42,6 +42,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.SelectedWorkoutName, x => x.MapFrom(y => y.RoutineComplex.Title))
                 .ForMember(x => x.SelectedWorkoutId, x => x.MapFrom(y => y.RoutineComplex.Id))
                 .ForMember(x => x.CrossfitterWorkoutId, x => x.MapFrom(y => y.Id))
+                .ForMember(x => x.DisplayDate, x => x.MapFrom(y => y.Date.ToString("dd.MM.yyyy")))
                 //TODO: Fix
                 .ForMember(x => x.CanBeRemovedByCurrentUser, x => x.ResolveUsing<CanBeRemovedResolver>())
                 .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName))

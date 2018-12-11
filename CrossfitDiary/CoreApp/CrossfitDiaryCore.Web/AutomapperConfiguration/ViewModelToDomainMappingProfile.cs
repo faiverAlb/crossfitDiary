@@ -40,7 +40,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
             CreateMap<ToLogWorkoutViewModel, CrossfitterWorkout>()
                 .ForMember(x => x.RoutineComplexId, x => x.MapFrom(y => y.SelectedWorkoutId))
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.CrossfitterWorkoutId))
-                .ForMember(x => x.Date, x => x.MapFrom(y => y.Date))
+                .ForMember(x => x.Date, x => x.MapFrom(y => DateTime.Parse(y.DisplayDate)))
                 .ForMember(x => x.IsModified, x => x.MapFrom(y => !y.IsRx))
                 .ForMember(x => x.TimePassed, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimePassed)));
         }

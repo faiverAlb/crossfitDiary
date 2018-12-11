@@ -23,9 +23,17 @@ namespace CrossfitDiaryCore.BL.Services
             _context.SaveChanges();
         }
 
-        public void CreateAndLogNewWorkout(RoutineComplex newWorkoutRoutine, CrossfitterWorkout logWorkoutModel, bool isEditMode)
+        public void CreateAndLogNewWorkout(RoutineComplex newWorkoutRoutine, CrossfitterWorkout logWorkoutModel)
         {
-            int newWorkoutId = CreateWorkout(newWorkoutRoutine);
+            int newWorkoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(newWorkoutRoutine);
+            bool isEditMode = newWorkoutId != 0;
+            if (newWorkoutId == 0)
+            {
+                _context.ComplexRoutines.Add(newWorkoutRoutine);
+                _context.SaveChanges();
+                newWorkoutId = newWorkoutRoutine.Id;
+            }
+
             logWorkoutModel.RoutineComplexId = newWorkoutId;
             LogWorkout(logWorkoutModel, isEditMode);
         }
@@ -39,20 +47,16 @@ namespace CrossfitDiaryCore.BL.Services
         /// <param name="isEditMode">
         /// The is edit mode.
         /// </param>
-        public void LogWorkout(CrossfitterWorkout workoutToLog, bool isEditMode)
+        private void LogWorkout(CrossfitterWorkout workoutToLog, bool isEditMode)
         {
             if (isEditMode)
             {
                 _context.CrossfitterWorkouts.Remove(_context.CrossfitterWorkouts.Single(x => x.Id == workoutToLog.Id));
                 _context.SaveChanges();
-//                _crossfitterWorkoutRepository.Delete(x => x.Id == workoutToLog.Id);
-//                _unitOfWork.Commit();
+                workoutToLog.Id = 0;
             }
-
             _context.CrossfitterWorkouts.Add(workoutToLog);
             _context.SaveChanges();
-//            _crossfitterWorkoutRepository.AddOrUpdate(workoutToLog);
-//            _unitOfWork.Commit();
         }
 
 
