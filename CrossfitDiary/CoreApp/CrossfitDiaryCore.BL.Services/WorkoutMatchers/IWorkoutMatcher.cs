@@ -1,6 +1,6 @@
 ﻿using CrossfitDiaryCore.Model;
 
-namespace CrossfitDiaryCore.DAL.EF.WorkoutMatchers
+namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
 {
     /// <summary>
     ///     Interface for any workouts matchers to compare two routine complexes

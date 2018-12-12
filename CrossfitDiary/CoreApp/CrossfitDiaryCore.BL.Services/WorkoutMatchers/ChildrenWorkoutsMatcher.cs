@@ -1,6 +1,6 @@
 ﻿using CrossfitDiaryCore.Model;
 
-namespace CrossfitDiaryCore.DAL.EF.WorkoutMatchers
+namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
 {
     /// <summary>
     ///     Compare children workout properties

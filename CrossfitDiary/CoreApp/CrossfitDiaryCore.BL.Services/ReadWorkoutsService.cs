@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CrossfitDiaryCore.BL.Services.WorkoutMatchers;
 using CrossfitDiaryCore.DAL.EF;
 using CrossfitDiaryCore.DAL.EF.Exercises;
-using CrossfitDiaryCore.DAL.EF.WorkoutMatchers;
 using CrossfitDiaryCore.Model;
 using Microsoft.EntityFrameworkCore;
 

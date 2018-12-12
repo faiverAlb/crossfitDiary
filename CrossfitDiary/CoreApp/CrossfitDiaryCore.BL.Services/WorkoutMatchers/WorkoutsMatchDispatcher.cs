@@ -2,7 +2,7 @@
 using System.Linq;
 using CrossfitDiaryCore.Model;
 
-namespace CrossfitDiaryCore.DAL.EF.WorkoutMatchers
+namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
 {
     /// <summary>
     ///     Represents general point to compare to routine complexes
@@ -11,9 +11,14 @@ namespace CrossfitDiaryCore.DAL.EF.WorkoutMatchers
     {
         private readonly IEnumerable<IWorkoutMatcher> _matcherList;
 
-        public WorkoutsMatchDispatcher(IEnumerable<IWorkoutMatcher> matcherList)
+        public WorkoutsMatchDispatcher()
         {
-            _matcherList = matcherList;
+            _matcherList = new IWorkoutMatcher[]
+            {
+                new ExerciseMatcher(),
+                new ComplexParametersMatcher(), 
+                new ChildrenWorkoutsMatcher()
+            };
         }
 
         /// <summary>

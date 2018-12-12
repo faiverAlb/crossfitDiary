@@ -1,6 +1,6 @@
 ﻿using CrossfitDiaryCore.Model;
 
-namespace CrossfitDiaryCore.DAL.EF.WorkoutMatchers
+namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
 {
     /// <summary>
     ///     Compare general properties of workouts
@@ -25,6 +25,11 @@ namespace CrossfitDiaryCore.DAL.EF.WorkoutMatchers
             }
 
             if (firstRoutineComplex.TimeCap != secondRoutineComplex.TimeCap)
+            {
+                return false;
+            }
+
+            if (firstRoutineComplex.RestBetweenRounds != secondRoutineComplex.RestBetweenRounds)
             {
                 return false;
             }

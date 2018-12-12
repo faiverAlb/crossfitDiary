@@ -7,10 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FakeItEasy" Version="4.9.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.11.2" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CrossfitDiaryCore.BL.Services\CrossfitDiaryCore.BL.Services.csproj" />
+    <ProjectReference Include="..\CrossfitDiaryCore.DAL.EF\CrossfitDiaryCore.DAL.EF.csproj" />
+    <ProjectReference Include="..\CrossfitDiaryCore.Model\CrossfitDiaryCore.Model.csproj" />
   </ItemGroup>
 
 </Project>

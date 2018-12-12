@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using CrossfitDiaryCore.Model;
 
-namespace CrossfitDiaryCore.DAL.EF.WorkoutMatchers
+namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
 {
     /// <summary>
     ///     Compare all exercises between two complex routines
