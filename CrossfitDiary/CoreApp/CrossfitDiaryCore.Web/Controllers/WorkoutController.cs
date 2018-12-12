@@ -56,9 +56,7 @@ namespace CrossfitDiaryCore.Web.Controllers
                 CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(userId, crossfitterWorkoutId.Value);
                 ToLogWorkoutViewModel toLogWorkoutViewModel = _mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout);
                 ViewBag.toLogWorkoutViewModel = toLogWorkoutViewModel;
-                return View();
             }
-//            ViewBag.crossfitterWorkoutId = crossfitterWorkoutId;
             return View();
         }
 
@@ -102,7 +100,6 @@ namespace CrossfitDiaryCore.Web.Controllers
             
             _memoryCache.Remove(_allMainpageResultsConst);
             //TODO: Add check rights!
-
             _manageWorkoutsService.RemoveWorkout(crossfitterWorkoutId, userId);
         }
 
@@ -115,7 +112,6 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/createAndLogNewWorkout")]
         public async Task CreateAndLogNewWorkout([FromBody] ToCreateAndLogNewWorkoutViewModel model)
         {
-
             try
             {
                 ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
