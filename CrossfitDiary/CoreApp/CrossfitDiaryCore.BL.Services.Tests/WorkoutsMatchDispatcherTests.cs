@@ -51,6 +51,8 @@ namespace CrossfitDiaryCore.BL.Services.Tests
             WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
             RoutineComplex firstWorkout = GetRoutineComplexWithChilds();
             RoutineComplex secondWorkout = GetRoutineComplexWithChilds();
+            secondWorkout.Children.Add(GetRoutineComplex());
+
             bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
             Assert.IsFalse(actual);
         }

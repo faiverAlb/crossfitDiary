@@ -57,6 +57,11 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
             List<RoutineComplex> existingChilds = existingRoutineComplex.OrderedChildren.ToList();
             List<RoutineComplex> toSaveChilds = routineComplexToSave.Children.ToList();
 
+            if (existingChilds.Count != toSaveChilds.Count)
+            {
+                return false;
+            }
+
             for (var i = 0; i < existingChilds.Count; i++)
             {
                 RoutineComplex existingChild = existingChilds[i];
