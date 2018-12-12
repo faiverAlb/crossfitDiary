@@ -23,58 +23,28 @@ namespace CrossfitDiaryCore.BL.Services
             _context.SaveChanges();
         }
 
-        public void CreateAndLogNewWorkout(RoutineComplex newWorkoutRoutine, CrossfitterWorkout logWorkoutModel)
+        public void CreateAndLogNewWorkout(RoutineComplex workoutRoutine, CrossfitterWorkout logWorkoutModel, ApplicationUser user)
         {
-            int newWorkoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(newWorkoutRoutine);
-            bool isEditMode = newWorkoutId != 0;
-            if (newWorkoutId == 0)
+            //todo: precheck rights for workout + log
+            int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
+            if (workoutId == 0)
             {
-                _context.ComplexRoutines.Add(newWorkoutRoutine);
+                workoutRoutine.Id = 0;
+                _context.ComplexRoutines.Add(workoutRoutine);
                 _context.SaveChanges();
-                newWorkoutId = newWorkoutRoutine.Id;
+                workoutId = workoutRoutine.Id;
             }
 
-            logWorkoutModel.RoutineComplexId = newWorkoutId;
-            LogWorkout(logWorkoutModel, isEditMode);
-        }
-
-        /// <summary>
-        /// Log workout: delete first old if <param name="isEditMode">equals true</param> otherwise just log
-        /// </summary>
-        /// <param name="workoutToLog">
-        /// The workout to log.
-        /// </param>
-        /// <param name="isEditMode">
-        /// The is edit mode.
-        /// </param>
-        private void LogWorkout(CrossfitterWorkout workoutToLog, bool isEditMode)
-        {
-            if (isEditMode)
+            CrossfitterWorkout foundCrossfitterWorkout =  _context.CrossfitterWorkouts.SingleOrDefault(x => x.Crossfitter == user && x.Id == logWorkoutModel.Id);
+            if (foundCrossfitterWorkout != null)
             {
-                _context.CrossfitterWorkouts.Remove(_context.CrossfitterWorkouts.Single(x => x.Id == workoutToLog.Id));
+                _context.CrossfitterWorkouts.Remove(foundCrossfitterWorkout);
                 _context.SaveChanges();
-                workoutToLog.Id = 0;
             }
-            _context.CrossfitterWorkouts.Add(workoutToLog);
+            logWorkoutModel.RoutineComplexId = workoutId;
+            logWorkoutModel.Id = 0;
+            _context.CrossfitterWorkouts.Add(logWorkoutModel);
             _context.SaveChanges();
         }
-
-
-        public int CreateWorkout(RoutineComplex routineComplexToSave)
-        {
-            int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(routineComplexToSave);
-            if (workoutId != 0)
-            {
-                return workoutId;
-            }
-
-            _context.ComplexRoutines.Add(routineComplexToSave);
-            _context.SaveChanges();
-            //            _routineComplexRepository.Add(routineComplexToSave);
-            //            _unitOfWork.Commit();
-            return routineComplexToSave.Id;
-        }
-
-
     }
 }

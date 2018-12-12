@@ -123,7 +123,7 @@ namespace CrossfitDiaryCore.Web.Controllers
                 crossfitterWorkout.Crossfitter = user;
                 RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
                 newWorkoutRoutine.CreatedBy = user;
-                _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout);
+                _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
                 _memoryCache.Remove(_allMainpageResultsConst);
             }
             catch (Exception exception)

@@ -30,7 +30,7 @@ export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel
   canBeRemovedByCurrentUser?: boolean;
   workouterName?: string;
   workouterId?: string;
-  displayDate?: string;
+  displayDate?: string = new Date().toLocaleDateString(); // Default value for new model
   workoutViewModel?: WorkoutViewModel;
 
   constructor(params?: IToLogWorkoutViewModel) {

@@ -287,44 +287,5 @@ namespace CrossfitDiaryCore.BL.Services
 
             return crossfitterWorkout;
         }
-//
-//
-//        public void RemoveWorkout(int crossfitterWorkoutId, ApplicationUser user)
-//        {
-//            _crossfitterWorkoutRepository.Delete(x => x.Id == crossfitterWorkoutId && x.Crossfitter.Id == user.Id);
-//            _unitOfWork.Commit();
-//        }
-//
-//        public List<PersonMaximum> GetPersonMaximumForMainExercises(string userId, int? exerciseId)
-//        {
-//            var exercisesListTitle = new List<string> { "deadlift", "back squat", "bench press", "shoulder press (strict)", "snatch", "power snatch", "clean", "power clean" };
-//            var resultMaximums = new List<PersonMaximum>();
-//
-//            var exercisesList = new List<Exercise>();
-//            foreach (string exerciseTitle in exercisesListTitle)
-//            {
-//                Exercise exercise = _exerciseRepository.FirstOrDefault(x => x.Title.ToLower() == exerciseTitle.ToLower());
-//                exercisesList.Add(exercise);
-//            }
-//
-//            if (exerciseId.HasValue)
-//            {
-//                exercisesList = exercisesList.Where(x => x.Id == exerciseId).ToList();
-//            }
-//
-//            foreach (Exercise exercise in exercisesList)
-//            {
-//                PersonMaximum personMaximumForExercise = GetPersonMaximumForExercise(userId, exercise.Id);
-//                if (personMaximumForExercise == null)
-//                {
-//                    continue;
-//                }
-//
-//                personMaximumForExercise.ExerciseDisplayName = exercise.Abbreviation;
-//                resultMaximums.Add(personMaximumForExercise);
-//            }
-//
-//            return resultMaximums;
-//        }
     }
 }
