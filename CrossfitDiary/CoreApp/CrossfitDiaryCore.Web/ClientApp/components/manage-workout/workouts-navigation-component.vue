@@ -168,15 +168,42 @@ import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
 import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-item-button";
 
 const namespace: string = "workoutEdit";
+import { WorkoutType } from "../../models/viewModels/WorkoutType";
+
 @Component({
   components: { FontAwesomeIcon, bDropdown, bDropdownItem }
 })
 export default class WorkoutsNavigationComponent extends Vue {
+  private routes = [
+    { workoutType: WorkoutType.ForTime, path: "/fortime" },
+    { workoutType: WorkoutType.ForTimeManyInners, path: "/fortimen" },
+    { workoutType: WorkoutType.AMRAP, path: "/amrap" },
+    { workoutType: WorkoutType.EMOM, path: "/emom" },
+    { workoutType: WorkoutType.E2MOM, path: "/e2mom" },
+    { workoutType: WorkoutType.NotForTime, path: "/nft" },
+    { workoutType: WorkoutType.ForTime, path: "/" }
+  ];
+
   @Action("fetchExercises", { namespace })
   fetchExercises: any;
   mounted() {
     // fetching data as soon as the component's been mounted
     this.fetchExercises();
+    this.redirectIfNeeded();
+  }
+
+  redirectIfNeeded() {
+    if (workouter != null && workouter.toLogWorkoutRawModel != null) {
+      let currentWorkoutType =
+        workouter.toLogWorkoutRawModel.workoutViewModel.workoutType;
+      for (let i = 0; i < this.routes.length; i++) {
+        if (this.routes[i].workoutType == currentWorkoutType) {
+          let newPath = this.routes[i].path;
+          this.$router.replace({ path: newPath });
+          break;
+        }
+      }
+    }
   }
 }
 </script>
