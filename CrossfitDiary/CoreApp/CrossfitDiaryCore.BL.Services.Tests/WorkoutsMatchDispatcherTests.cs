@@ -284,6 +284,27 @@ namespace CrossfitDiaryCore.BL.Services.Tests
         }
 
         [Test]
+        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveSame_TimeToWork_TheySame()
+        {
+            //  Arrange
+            WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
+            RoutineComplex firstWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){ TimeToWork = TimeSpan.Zero.Add(new TimeSpan(1)) } },
+            };
+            RoutineComplex secondWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){ new RoutineSimple(){ TimeToWork = TimeSpan.Zero.Add(new TimeSpan(1)) } },
+            };
+
+            //  Act
+            bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
+
+            //  Assert
+            Assert.IsTrue(actual);
+        }
+
+        [Test]
         public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveDifferent_Calories_TheyDifferent()
         {
             //  Arrange
@@ -302,6 +323,27 @@ namespace CrossfitDiaryCore.BL.Services.Tests
 
             //  Assert
             Assert.IsFalse(actual);
+        }
+
+        [Test]
+        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveSame_Calories_TheySame()
+        {
+            //  Arrange
+            WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
+            RoutineComplex firstWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){Calories = 1}},
+            };
+            RoutineComplex secondWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){ new RoutineSimple(){ Calories = 1 } },
+            };
+
+            //  Act
+            bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
+
+            //  Assert
+            Assert.IsTrue(actual);
         }
 
 
@@ -327,6 +369,27 @@ namespace CrossfitDiaryCore.BL.Services.Tests
         }
 
         [Test]
+        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveSame_Centimeters_TheySame()
+        {
+            //  Arrange
+            WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
+            RoutineComplex firstWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){Centimeters = 2 }},
+            };
+            RoutineComplex secondWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){ new RoutineSimple(){ Centimeters = 2 } },
+            };
+
+            //  Act
+            bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
+
+            //  Assert
+            Assert.IsTrue(actual);
+        }
+
+        [Test]
         public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveDifferent_Count_TheyDifferent()
         {
             //  Arrange
@@ -345,6 +408,27 @@ namespace CrossfitDiaryCore.BL.Services.Tests
 
             //  Assert
             Assert.IsFalse(actual);
+        }
+
+        [Test]
+        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveSame_Count_TheySame()
+        {
+            //  Arrange
+            WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
+            RoutineComplex firstWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){Count = 2}},
+            };
+            RoutineComplex secondWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){ new RoutineSimple(){ Count = 2 } },
+            };
+
+            //  Act
+            bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
+
+            //  Assert
+            Assert.IsTrue(actual);
         }
 
 
@@ -369,15 +453,36 @@ namespace CrossfitDiaryCore.BL.Services.Tests
             Assert.IsFalse(actual);
         }
 
-
         [Test]
-        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveDifferent_Exercise_TheyDifferent()
+        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveSame_Distance_TheySame()
         {
             //  Arrange
             WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
             RoutineComplex firstWorkout = new RoutineComplex
             {
-                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){ExerciseId = 1}},
+                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){Distance = 2}},
+            };
+            RoutineComplex secondWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){ new RoutineSimple(){ Distance = 2 } },
+            };
+
+            //  Act
+            bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
+
+            //  Assert
+            Assert.IsTrue(actual);
+        }
+
+
+        [Test]
+        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveSame_Exercise_TheySame()
+        {
+            //  Arrange
+            WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
+            RoutineComplex firstWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){ExerciseId = 2}},
             };
             RoutineComplex secondWorkout = new RoutineComplex
             {
@@ -388,7 +493,7 @@ namespace CrossfitDiaryCore.BL.Services.Tests
             bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
 
             //  Assert
-            Assert.IsFalse(actual);
+            Assert.IsTrue(actual);
         }
 
 
@@ -413,6 +518,27 @@ namespace CrossfitDiaryCore.BL.Services.Tests
             Assert.IsFalse(actual);
         }
 
+        [Test]
+        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveSame_IsAlternative_TheySame()
+        {
+            //  Arrange
+            WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
+            RoutineComplex firstWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){IsAlternative = false}},
+            };
+            RoutineComplex secondWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){ new RoutineSimple(){ IsAlternative = false } },
+            };
+
+            //  Act
+            bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
+
+            //  Assert
+            Assert.IsTrue(actual);
+        }
+
 
         [Test]
         public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveDifferent_IsDoUnbroken_TheyDifferent()
@@ -435,6 +561,27 @@ namespace CrossfitDiaryCore.BL.Services.Tests
             Assert.IsFalse(actual);
         }
 
+        [Test]
+        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveSame_IsDoUnbroken_TheySame()
+        {
+            //  Arrange
+            WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
+            RoutineComplex firstWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){ IsDoUnbroken = true}},
+            };
+            RoutineComplex secondWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){ new RoutineSimple(){ IsDoUnbroken = true } },
+            };
+
+            //  Act
+            bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
+
+            //  Assert
+            Assert.IsTrue(actual);
+        }
+
 
         [Test]
         public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveDifferent_Weight_TheyDifferent()
@@ -455,6 +602,28 @@ namespace CrossfitDiaryCore.BL.Services.Tests
 
             //  Assert
             Assert.IsFalse(actual);
+        }
+
+
+        [Test]
+        public void WorkoutsMatchDispatcher_ExerciseInWorkoutHaveSame_Weight_TheySame()
+        {
+            //  Arrange
+            WorkoutsMatchDispatcher workoutsMatchDispatcher = new WorkoutsMatchDispatcher();
+            RoutineComplex firstWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){new RoutineSimple(){ Weight = 2}},
+            };
+            RoutineComplex secondWorkout = new RoutineComplex
+            {
+                RoutineSimple = new List<RoutineSimple>(){ new RoutineSimple(){ Weight = 2 } },
+            };
+
+            //  Act
+            bool actual = workoutsMatchDispatcher.IsWorkoutsMatch(firstWorkout, secondWorkout);
+
+            //  Assert
+            Assert.IsTrue(actual);
         }
 
 
