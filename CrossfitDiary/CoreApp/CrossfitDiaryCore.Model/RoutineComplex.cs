@@ -47,7 +47,7 @@ namespace CrossfitDiaryCore.Model
         /// <summary>
         ///     List of Simple Routines.
         /// </summary>
-        public virtual ICollection<RoutineSimple> RoutineSimple { get; set; }
+        public virtual ICollection<RoutineSimple> RoutineSimple { get; set; } = new List<RoutineSimple>();
 
 
         /// <summary>

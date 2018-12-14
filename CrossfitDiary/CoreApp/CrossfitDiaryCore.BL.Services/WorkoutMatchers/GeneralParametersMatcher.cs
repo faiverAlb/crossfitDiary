@@ -5,7 +5,7 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
     /// <summary>
     ///     Compare general properties of workouts
     /// </summary>
-    public class ComplexParametersMatcher: IWorkoutMatcher
+    public class GeneralParametersMatcher: IWorkoutMatcher
     {
         public bool IsWorkoutMatch(RoutineComplex firstRoutineComplex, RoutineComplex secondRoutineComplex)
         {
@@ -30,6 +30,11 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
             }
 
             if (firstRoutineComplex.RestBetweenRounds != secondRoutineComplex.RestBetweenRounds)
+            {
+                return false;
+            }
+
+            if (firstRoutineComplex.RestBetweenExercises != secondRoutineComplex.RestBetweenExercises)
             {
                 return false;
             }

@@ -16,7 +16,7 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
             _matcherList = new IWorkoutMatcher[]
             {
                 new ExerciseMatcher(),
-                new ComplexParametersMatcher(), 
+                new GeneralParametersMatcher(), 
                 new ChildrenWorkoutsMatcher()
             };
         }
