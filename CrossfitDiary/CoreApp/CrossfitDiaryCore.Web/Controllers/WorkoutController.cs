@@ -18,7 +18,6 @@ namespace CrossfitDiaryCore.Web.Controllers
     [Authorize]
     public class WorkoutController : Controller
     {
-        #region members
         private readonly ReadWorkoutsService _readWorkoutsService;
         private readonly ManageWorkoutsService _manageWorkoutsService;
         private readonly IMapper _mapper;
@@ -27,10 +26,6 @@ namespace CrossfitDiaryCore.Web.Controllers
         private readonly IMemoryCache _memoryCache;
             
         private string _allMainpageResultsConst = "all-mainpage-results";
-
-        #endregion
-
-        #region constructors
 
         public WorkoutController(ReadWorkoutsService readWorkoutsService
             , ManageWorkoutsService manageWorkoutsService
@@ -59,10 +54,6 @@ namespace CrossfitDiaryCore.Web.Controllers
             }
             return View();
         }
-
-        #endregion
-
-        #region methods
 
         /// <summary>
         ///     Get available crossfitter's workouts
@@ -148,7 +139,5 @@ namespace CrossfitDiaryCore.Web.Controllers
         //            var toLogWorkoutViewModel = Mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout);
         //            return toLogWorkoutViewModel;
         //        }
-
-        #endregion
     }
 }

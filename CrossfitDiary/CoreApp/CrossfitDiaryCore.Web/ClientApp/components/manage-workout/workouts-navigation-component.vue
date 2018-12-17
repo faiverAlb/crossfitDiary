@@ -172,7 +172,7 @@ import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-i
 
 const namespace: string = "workoutEdit";
 import { WorkoutType } from "../../models/viewModels/WorkoutType";
-
+declare var workouter;
 @Component({
   components: { FontAwesomeIcon, bDropdown, bDropdownItem }
 })

@@ -1,6 +1,5 @@
 ﻿<template>
   <div>
-
     <div class="routine-complex-info">
       <div class="row">
         <div class="col">
@@ -10,10 +9,7 @@
           ></ErrorAlertComponent>
         </div>
       </div>
-      <div
-        class="pt-2 general-info-container"
-        disable
-      >
+      <div class="pt-2 general-info-container">
         <div class="row">
           <div class="col-lg-3 time-cap-container pb-2">
             <label
@@ -201,6 +197,7 @@ import ErrorAlertComponent from "../../error-alert-component.vue";
 import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 
 Vue.use(VeeValidate);
+declare var workouter: { toLogWorkoutRawModel: ToLogWorkoutViewModel };
 
 @Component({
   components: {
