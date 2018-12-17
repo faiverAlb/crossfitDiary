@@ -1,150 +1,153 @@
 ﻿<template>
   <div>
-    <b-dropdown
-      variant="link"
-      size="lg"
-      no-caret
-      class="workouts-dropdown"
-    >
-      <template slot="button-content">
-        <a
-          class="btn btn-secondary text-light  d-inline-block p-0 "
-          href="#"
-          v-bind:class="{'btn-info':($route.path == `/fortime` ||  $route.path == `/fortimen`)}"
-        >
-          <div class="small-action-link-button">
-            <div class="icon-container">
-              <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
-            </div>
-            <div class="text-container">
-              <span v-if="$route.path == `/fortime` || $route.path != `/fortimen`">FT</span>
-              <span v-if="$route.path == `/fortimen`">FT*n</span>
-              <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
-            </div>
-          </div>
-        </a>
-      </template>
-      <b-dropdown-item>
-        <template>
-          <router-link
-            to="/fortime"
-            active-class="btn-info"
-            class="btn btn-secondary text-light  d-inline-block p-0"
-          >
-            <div class="small-action-link-button">
-              <div class="icon-container">
-                <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
-              </div>
-              <div class="text-container">
-                <span>FT</span>
-              </div>
-            </div>
-          </router-link>
-        </template>
-      </b-dropdown-item>
-      <b-dropdown-item>
-        <template>
-          <router-link
-            to="/fortimen"
-            active-class="btn-info"
-            class="btn btn-secondary text-light  d-inline-block p-0"
+    <div v-if="isEditMode">{{workoutTypeDisplay}}</div>
+    <div v-else>
+      <b-dropdown
+        variant="link"
+        size="lg"
+        no-caret
+        class="workouts-dropdown"
+      >
+        <template slot="button-content">
+          <a
+            class="btn btn-secondary text-light  d-inline-block p-0 "
             href="#"
+            v-bind:class="{'btn-info':($route.path == `/fortime` ||  $route.path == `/fortimen`)}"
           >
             <div class="small-action-link-button">
               <div class="icon-container">
                 <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
               </div>
-              <div class="text-container">FT*n</div>
+              <div class="text-container">
+                <span v-if="$route.path == `/fortime` || $route.path != `/fortimen`">FT</span>
+                <span v-if="$route.path == `/fortimen`">FT*n</span>
+                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
+              </div>
             </div>
-          </router-link>
+          </a>
         </template>
-      </b-dropdown-item>
-    </b-dropdown>
+        <b-dropdown-item>
+          <template>
+            <router-link
+              to="/fortime"
+              active-class="btn-info"
+              class="btn btn-secondary text-light  d-inline-block p-0"
+            >
+              <div class="small-action-link-button">
+                <div class="icon-container">
+                  <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                </div>
+                <div class="text-container">
+                  <span>FT</span>
+                </div>
+              </div>
+            </router-link>
+          </template>
+        </b-dropdown-item>
+        <b-dropdown-item>
+          <template>
+            <router-link
+              to="/fortimen"
+              active-class="btn-info"
+              class="btn btn-secondary text-light  d-inline-block p-0"
+              href="#"
+            >
+              <div class="small-action-link-button">
+                <div class="icon-container">
+                  <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                </div>
+                <div class="text-container">FT*n</div>
+              </div>
+            </router-link>
+          </template>
+        </b-dropdown-item>
+      </b-dropdown>
 
-    <router-link
-      active-class="btn-info"
-      to="/amrap"
-      class="btn btn-secondary text-light d-inline-block p-0"
-    >
-      <div class="small-action-link-button">
-        <div class="icon-container">
-          <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
-        </div>
-        <div class="text-container">AMRAP</div>
-      </div>
-    </router-link>
-
-    <b-dropdown
-      variant="link"
-      size="lg"
-      no-caret
-      class="workouts-dropdown"
-    >
-      <template slot="button-content">
-        <a
-          class="btn btn-secondary text-light  d-inline-block p-0 "
-          href="#"
-          v-bind:class="{'btn-info':($route.path == `/emom` ||  $route.path == `/e2mom`)}"
-        >
-          <div class="small-action-link-button">
-            <div class="icon-container">
-              <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
-            </div>
-            <div class="text-container">
-              <span v-if="$route.path == `/emom` || $route.path != `/e2mom`">EMOM</span>
-              <span v-if="$route.path == `/e2mom`">E2MOM</span>
-              <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
-            </div>
+      <router-link
+        active-class="btn-info"
+        to="/amrap"
+        class="btn btn-secondary text-light d-inline-block p-0"
+      >
+        <div class="small-action-link-button">
+          <div class="icon-container">
+            <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
           </div>
-        </a>
-      </template>
-      <b-dropdown-item>
-        <template>
-          <router-link
-            to="/emom"
-            active-class="btn-info"
-            class="btn btn-secondary text-light  d-inline-block p-0"
+          <div class="text-container">AMRAP</div>
+        </div>
+      </router-link>
+
+      <b-dropdown
+        variant="link"
+        size="lg"
+        no-caret
+        class="workouts-dropdown"
+      >
+        <template slot="button-content">
+          <a
+            class="btn btn-secondary text-light  d-inline-block p-0 "
+            href="#"
+            v-bind:class="{'btn-info':($route.path == `/emom` ||  $route.path == `/e2mom`)}"
           >
             <div class="small-action-link-button">
               <div class="icon-container">
                 <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
               </div>
               <div class="text-container">
-                <span>EMOM</span>
+                <span v-if="$route.path == `/emom` || $route.path != `/e2mom`">EMOM</span>
+                <span v-if="$route.path == `/e2mom`">E2MOM</span>
+                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
               </div>
             </div>
-          </router-link>
+          </a>
         </template>
-      </b-dropdown-item>
-      <b-dropdown-item>
-        <template>
-          <router-link
-            to="/e2mom"
-            active-class="btn-info"
-            class="btn btn-secondary text-light  d-inline-block p-0"
-          >
-            <div class="small-action-link-button">
-              <div class="icon-container">
-                <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
+        <b-dropdown-item>
+          <template>
+            <router-link
+              to="/emom"
+              active-class="btn-info"
+              class="btn btn-secondary text-light  d-inline-block p-0"
+            >
+              <div class="small-action-link-button">
+                <div class="icon-container">
+                  <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
+                </div>
+                <div class="text-container">
+                  <span>EMOM</span>
+                </div>
               </div>
-              <div class="text-container">E2MOM</div>
-            </div>
-          </router-link>
-        </template>
-      </b-dropdown-item>
-    </b-dropdown>
-    <router-link
-      to="/nft"
-      active-class="btn-info"
-      class="btn btn-secondary text-light  d-inline-block p-0"
-    >
-      <div class="small-action-link-button">
-        <div class="icon-container">
-          <font-awesome-icon :icon="['far','pause-circle']"></font-awesome-icon>
+            </router-link>
+          </template>
+        </b-dropdown-item>
+        <b-dropdown-item>
+          <template>
+            <router-link
+              to="/e2mom"
+              active-class="btn-info"
+              class="btn btn-secondary text-light  d-inline-block p-0"
+            >
+              <div class="small-action-link-button">
+                <div class="icon-container">
+                  <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
+                </div>
+                <div class="text-container">E2MOM</div>
+              </div>
+            </router-link>
+          </template>
+        </b-dropdown-item>
+      </b-dropdown>
+      <router-link
+        to="/nft"
+        active-class="btn-info"
+        class="btn btn-secondary text-light  d-inline-block p-0"
+      >
+        <div class="small-action-link-button">
+          <div class="icon-container">
+            <font-awesome-icon :icon="['far','pause-circle']"></font-awesome-icon>
+          </div>
+          <div class="text-container">NFT</div>
         </div>
-        <div class="text-container">NFT</div>
-      </div>
-    </router-link>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -186,9 +189,13 @@ export default class WorkoutsNavigationComponent extends Vue {
 
   @Action("fetchExercises", { namespace })
   fetchExercises: any;
+  isEditMode: boolean = false;
+  workoutTypeDisplay: string = "";
   mounted() {
     // fetching data as soon as the component's been mounted
     this.fetchExercises();
+    this.isEditMode =
+      workouter != null && workouter.toLogWorkoutRawModel != null;
     this.redirectIfNeeded();
   }
 
@@ -200,6 +207,8 @@ export default class WorkoutsNavigationComponent extends Vue {
         if (this.routes[i].workoutType == currentWorkoutType) {
           let newPath = this.routes[i].path;
           this.$router.replace({ path: newPath });
+          this.workoutTypeDisplay =
+            workouter.toLogWorkoutRawModel.workoutViewModel.workoutTypeDisplay;
           break;
         }
       }

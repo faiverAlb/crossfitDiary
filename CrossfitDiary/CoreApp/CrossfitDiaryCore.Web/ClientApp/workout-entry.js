@@ -19,7 +19,6 @@ var routes = [
     { path: "/amrap", component: AmrapEditComponent },
     { path: "/emom", component: EmomEditComponent },
     { path: "/e2mom", component: E2momEditComponent },
-    { path: "/amrap", component: AmrapEditComponent },
     { path: "/nft", component: NFTEditComponent },
     { path: "/", component: ForTimeEditComponent, redirect: "fortime" }
 ];
