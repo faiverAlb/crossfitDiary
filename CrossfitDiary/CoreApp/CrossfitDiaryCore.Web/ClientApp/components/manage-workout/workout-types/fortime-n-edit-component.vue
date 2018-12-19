@@ -67,9 +67,8 @@
         </div>
         <div
           class="inner-workouts"
-          data-bind="foreach:_innerWorkouts"
           v-for="(childWorkout,index) in model.children"
-          :key="`${childrWorkout.id}-${index}`"
+          :key="`${childWorkout.id}-${index}`"
         >
           <div class="workout">
             <div class="inner-workout-header">
@@ -87,8 +86,98 @@
                 <!-- /ko -->
               </h5>
             </div>
-            <div data-bind="template: { name: 'routine-info-template', data: $data}"></div>
+            <div class="routine-complex-info">
+
+              <div class="pt-2 general-info-container">
+                <div class="row">
+                  <div class="col-lg-3 time-cap-container pb-2">
+                    <label
+                      for="timeCapInput"
+                      class="sr-only"
+                    >Time cap:</label>
+                    <b-input-group class="input-group">
+                      <b-input-group-prepend>
+                        <b-input-group-text tag="span">
+                          <font-awesome-icon
+                            :icon="['fas','clock']"
+                            class="fa-lg time-cap-icon"
+                          ></font-awesome-icon>
+                        </b-input-group-text>
+                      </b-input-group-prepend>
+                      <b-form-input
+                        v-model="childWorkout.timeCap"
+                        type="text"
+                        v-mask="'##:##'"
+                        name="capTime"
+                        v-validate="'required|length:5'"
+                        :state="fields.capTime && fields.capTime.valid"
+                        id="timeCapInput"
+                        placeholder="Time Cap"
+                      />
+                    </b-input-group>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 pb-2">
+                    <label
+                      for="roundsInput"
+                      class="sr-only"
+                    >Rounds count:</label>
+                    <b-input-group>
+                      <b-input-group-prepend>
+                        <b-input-group-text tag="span">
+                          <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
+                        </b-input-group-text>
+                      </b-input-group-prepend>
+                      <b-form-input
+                        v-model="childWorkout.roundsCount"
+                        v-mask="'#####'"
+                        type="number"
+                        name="roundsCount"
+                        v-validate="'required'"
+                        :state="fields.roundsCount && fields.roundsCount.valid"
+                        inputmode="numeric"
+                        min="1"
+                        id="roundsInput"
+                        placeholder="Rounds count"
+                      />
+                    </b-input-group>
+                  </div>
+                </div>
+                <ExercisesListComponent :exercisesToDo="childWorkout.exercisesToDoList"></ExercisesListComponent>
+                <div
+                  class="row py-1"
+                  v-if="childWorkout.exercisesToDoList.length > 0"
+                >
+                  <div class="col-lg-4">
+                    <label
+                      for="timeInput"
+                      class="sr-only"
+                    >Rest after</label>
+                    <b-input-group
+                      class="py-2"
+                      prepend="Rest after round:"
+                    >
+                      <b-form-input
+                        type="tel"
+                        v-mask="'##:##'"
+                        v-model="childWorkout.restBetweenRounds"
+                        placeholder="Time"
+                        aria-describedby="prPercentHelpBlock"
+                      ></b-form-input>
+                    </b-input-group>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="mt-3">
+          <button
+            class="btn btn-warning"
+            data-bind="click: addInnerWorkout"
+            v-on:click="addInnerWorkout"
+          >Add workout after</button>
         </div>
       </div>
     </div>
@@ -198,6 +287,8 @@ import ErrorAlertComponent from "../../error-alert-component.vue";
 import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 
 Vue.use(VeeValidate);
+import { WorkoutType } from "../../../models/viewModels/WorkoutType";
+
 declare var workouter: { toLogWorkoutRawModel: ToLogWorkoutViewModel };
 
 @Component({
@@ -245,6 +336,19 @@ export default class ForTimeEdiForTimeNEditComponenttComponent extends Vue {
           });
       }
     });
+  }
+
+  addInnerWorkout() {
+    this.model.children.push(
+      new WorkoutViewModel({
+        id: 0,
+        title: null,
+        workoutType: WorkoutType.ForTime,
+        exercisesToDoList: [],
+        children: [],
+        isInnerWorkout: true
+      })
+    );
   }
 }
 </script>

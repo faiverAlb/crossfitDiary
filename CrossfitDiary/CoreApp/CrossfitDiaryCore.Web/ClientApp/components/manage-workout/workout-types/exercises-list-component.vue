@@ -1,44 +1,91 @@
 ﻿<template>
   <div class="py-2">
     <div class="form-group">
-      <b-form-select class="form-control" :options="exercisesOptions" v-on:change="exerciseChange" text-field="title" value-field="id" :plain="true" v-model="selectedExercise" />
+      <b-form-select
+        class="form-control"
+        :options="exercisesOptions"
+        v-on:change="exerciseChange"
+        text-field="title"
+        value-field="id"
+        :plain="true"
+        v-model="selectedExercise"
+      />
     </div>
     <div class="routines-container pt-2">
-      <div class="simple-routine-item text-center no-selected-container" v-if="exercisesToDo.length == 0">
+      <div
+        class="simple-routine-item text-center no-selected-container"
+        v-if="exercisesToDo.length == 0"
+      >
         No exercises selected
       </div>
-      <div v-for="(exercise,index) in exercisesToDo" :key="`${exercise.id}-${index}`">
+      <div
+        v-for="(exercise,index) in exercisesToDo"
+        :key="`${exercise.id}-${index}`"
+      >
         <div class="simple-routine-item">
           <div class="form-row">
             <div class="form-group my-1 col-lg-auto">
               <b-input-group>
-                <b-input-group-prepend class="form-control exercise-title" is-text>
+                <b-input-group-prepend
+                  class="form-control exercise-title"
+                  is-text
+                >
                   <span>{{exercise.title}}</span>
-                  <span v-if="exercise._isDoUnbroken" class="do-unbroken-info badge badge-warning">do unbroken</span>
+                  <span
+                    v-if="exercise._isDoUnbroken"
+                    class="do-unbroken-info badge badge-warning"
+                  >do unbroken</span>
                 </b-input-group-prepend>
                 <b-dropdown slot="append">
-                  <b-dropdown-item v-on:click="moveExerciseUp(index)" :disabled="canMoveExerciseUp(index)">
+                  <b-dropdown-item
+                    v-on:click="moveExerciseUp(index)"
+                    :disabled="canMoveExerciseUp(index)"
+                  >
                     <font-awesome-icon :icon="['fas','long-arrow-alt-up']"></font-awesome-icon> Move up
                   </b-dropdown-item>
-                  <b-dropdown-item v-on:click="moveExerciseDown(index)" :disabled="canMoveExerciseDown(index)">
+                  <b-dropdown-item
+                    v-on:click="moveExerciseDown(index)"
+                    :disabled="canMoveExerciseDown(index)"
+                  >
                     <font-awesome-icon :icon="['fas','long-arrow-alt-down']"></font-awesome-icon> Move down
                   </b-dropdown-item>
                   <b-dropdown-item v-on:click="exerciseChange(exercise.id)">
-                    <font-awesome-icon :icon="['fas','plus']" class="text-success" size="sm"></font-awesome-icon>
+                    <font-awesome-icon
+                      :icon="['fas','plus']"
+                      class="text-success"
+                      size="sm"
+                    ></font-awesome-icon>
                     Repeat
                   </b-dropdown-item>
                   <b-dropdown-divider></b-dropdown-divider>
                   <b-dropdown-item v-on:click="deleteFromList(index)">
-                    <font-awesome-icon :icon="['fas','trash']" class="text-danger" size="sm"></font-awesome-icon>
+                    <font-awesome-icon
+                      :icon="['fas','trash']"
+                      class="text-danger"
+                      size="sm"
+                    ></font-awesome-icon>
                     Remove
                   </b-dropdown-item>
                 </b-dropdown>
               </b-input-group>
             </div>
-            <div class="form-group my-1 col-lg-3" v-for="(measure,index) in exercise.exerciseMeasures" :key="measure.exerciseMeasureType.measureType">
-              <label class="sr-only" v-bind:for="`measure_input_id_` + index"></label>
+            <div
+              class="form-group my-1 col-lg-3"
+              v-for="(measure,index) in exercise.exerciseMeasures"
+              :key="measure.exerciseMeasureType.measureType"
+            >
+              <label
+                class="sr-only"
+                v-bind:for="`measure_input_id_` + index"
+              ></label>
               <b-input-group class="mx-1 pr-1">
-                <b-form-input type="number" v-model="measure.exerciseMeasureType.measureValue" class="measure-value-input" :placeholder="measure.exerciseMeasureType.description" aria-describedby="prPercentHelpBlock"></b-form-input>
+                <b-form-input
+                  type="number"
+                  v-model="measure.exerciseMeasureType.measureValue"
+                  class="measure-value-input"
+                  :placeholder="measure.exerciseMeasureType.description"
+                  aria-describedby="prPercentHelpBlock"
+                ></b-form-input>
                 <b-input-group-append>
                   <b-input-group-text tag="span">
                     {{measure.exerciseMeasureType.shortMeasureDescription}}
@@ -121,7 +168,7 @@ export default class ExercisesListComponent extends Vue {
 
   selectedExercise: number = -1;
   get exercisesOptions() {
-    var exercisesOptions = this.workoutEdit.exercises;
+    var exercisesOptions = this.workoutEdit.exercises.slice();
     exercisesOptions.push(new DefaultExerciseViewModel());
     return exercisesOptions;
   }
