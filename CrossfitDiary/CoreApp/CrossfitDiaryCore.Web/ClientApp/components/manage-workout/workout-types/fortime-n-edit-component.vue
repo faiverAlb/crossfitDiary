@@ -55,6 +55,7 @@
                 <a
                   v-if="model.children.length > 1"
                   href="#"
+                  v-on:click="removeInnerWorkout(index)"
                   data-bind="click:function(){ $parent.removeInnerWorkout($index())}"
                 >
                   <font-awesome-icon
@@ -71,7 +72,7 @@
                 <div class="row">
                   <div class="col-lg-3 pb-2">
                     <label
-                      for="roundsInput"
+                      v-bind:for="'roundsCount'+index"
                       class="sr-only"
                     >Rounds count:</label>
                     <b-input-group>
@@ -83,13 +84,13 @@
                       <b-form-input
                         v-model="childWorkout.roundsCount"
                         v-mask="'#####'"
-                        type="number"
-                        name="roundsCount"
+                        type="text"
                         v-validate="'required'"
-                        :state="fields.roundsCount && fields.roundsCount.valid"
+                        :state="fields['roundsCount'+index] && fields['roundsCount'+index].valid"
                         inputmode="numeric"
                         min="1"
-                        id="roundsInput"
+                        v-bind:id="'rounds'+ index"
+                        v-bind:name="'roundsCount'+ index"
                         placeholder="Rounds count"
                       />
                     </b-input-group>
@@ -126,7 +127,6 @@
         <div class="mt-3">
           <button
             class="btn btn-warning"
-            data-bind="click: addInnerWorkout"
             v-on:click="addInnerWorkout"
           >Add workout after</button>
         </div>
@@ -303,6 +303,10 @@ export default class ForTimeEdiForTimeNEditComponenttComponent extends Vue {
         isInnerWorkout: true
       })
     );
+  }
+
+  removeInnerWorkout(index) {
+    this.model.children.splice(index, 1);
   }
 }
 </script>
