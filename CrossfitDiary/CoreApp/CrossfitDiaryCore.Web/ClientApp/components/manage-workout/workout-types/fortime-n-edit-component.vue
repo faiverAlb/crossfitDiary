@@ -263,6 +263,7 @@ export default class ForTimeEdiForTimeNEditComponenttComponent extends Vue {
       this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
       this.toLogModel = workouter.toLogWorkoutRawModel;
     } else {
+      this.model.workoutType = WorkoutType.ForTimeManyInners;
       this.addInnerWorkout();
     }
   }
