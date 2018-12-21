@@ -33,34 +33,7 @@
                 v-validate="'required|length:5'"
                 :state="fields.capTime && fields.capTime.valid"
                 id="timeCapInput"
-                placeholder="Time Cap"
-              />
-            </b-input-group>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-3 pb-2">
-            <label
-              for="roundsInput"
-              class="sr-only"
-            >Rounds count:</label>
-            <b-input-group>
-              <b-input-group-prepend>
-                <b-input-group-text tag="span">
-                  <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
-                </b-input-group-text>
-              </b-input-group-prepend>
-              <b-form-input
-                v-model="model.roundsCount"
-                v-mask="'#####'"
-                type="number"
-                name="roundsCount"
-                v-validate="'required'"
-                :state="fields.roundsCount && fields.roundsCount.valid"
-                inputmode="numeric"
-                min="1"
-                id="roundsInput"
-                placeholder="Rounds count"
+                placeholder="General time Cap"
               />
             </b-input-group>
           </div>
@@ -73,50 +46,28 @@
           <div class="workout">
             <div class="inner-workout-header">
               <h5>
-                <span data-bind="if: $index() != 0"> then </span>
-                <span data-bind="text:($index() + 1)  + ' workout'"></span>
+                <span
+                  v-if="index != 0"
+                  data-bind="if: $index() != 0"
+                > then </span>
+                <span>{{index + 1}} workout</span>
                 <!-- ko if: $root._isDefaultMode && $parent._innerWorkouts().length > 1 -->
                 <a
+                  v-if="model.children.length > 1"
                   href="#"
                   data-bind="click:function(){ $parent.removeInnerWorkout($index())}"
-                > <i
-                    class="fas fa-times fa-sm text-secondary"
-                    aria-hidden="true"
-                  ></i></a>
+                >
+                  <font-awesome-icon
+                    :icon="['fas','times']"
+                    class="fa-sm text-secondary"
+                  ></font-awesome-icon>
+                </a>
                 <!-- /ko -->
               </h5>
             </div>
             <div class="routine-complex-info">
 
               <div class="pt-2 general-info-container">
-                <div class="row">
-                  <div class="col-lg-3 time-cap-container pb-2">
-                    <label
-                      for="timeCapInput"
-                      class="sr-only"
-                    >Time cap:</label>
-                    <b-input-group class="input-group">
-                      <b-input-group-prepend>
-                        <b-input-group-text tag="span">
-                          <font-awesome-icon
-                            :icon="['fas','clock']"
-                            class="fa-lg time-cap-icon"
-                          ></font-awesome-icon>
-                        </b-input-group-text>
-                      </b-input-group-prepend>
-                      <b-form-input
-                        v-model="childWorkout.timeCap"
-                        type="text"
-                        v-mask="'##:##'"
-                        name="capTime"
-                        v-validate="'required|length:5'"
-                        :state="fields.capTime && fields.capTime.valid"
-                        id="timeCapInput"
-                        placeholder="Time Cap"
-                      />
-                    </b-input-group>
-                  </div>
-                </div>
                 <div class="row">
                   <div class="col-lg-3 pb-2">
                     <label
@@ -259,12 +210,13 @@
 <script lang="ts">
 /* Font awesome icons */
 import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons/faHashtag";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import CrossfitterService from "../../../CrossfitterService";
 
-library.add(faClock, faHashtag, faCalendar);
+library.add(faClock, faHashtag, faCalendar, faTimes);
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 /**/
 
@@ -310,6 +262,8 @@ export default class ForTimeEdiForTimeNEditComponenttComponent extends Vue {
     if (workouter != null && workouter.toLogWorkoutRawModel != null) {
       this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
       this.toLogModel = workouter.toLogWorkoutRawModel;
+    } else {
+      this.addInnerWorkout();
     }
   }
   mutateData(): void {}
