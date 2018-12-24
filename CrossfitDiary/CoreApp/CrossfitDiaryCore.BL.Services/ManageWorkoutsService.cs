@@ -30,6 +30,10 @@ namespace CrossfitDiaryCore.BL.Services
             if (workoutId == 0)
             {
                 workoutRoutine.Id = 0;
+                foreach (RoutineComplex routineChild in workoutRoutine.Children)
+                {
+                    routineChild.Id = 0;
+                }
                 _context.ComplexRoutines.Add(workoutRoutine);
                 _context.SaveChanges();
                 workoutId = workoutRoutine.Id;

@@ -283,6 +283,7 @@ namespace CrossfitDiaryCore.BL.Services
         {
             CrossfitterWorkout crossfitterWorkout =
                 _context.CrossfitterWorkouts
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
                     .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise)
                     .ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
                     .Include(x => x.Crossfitter)
