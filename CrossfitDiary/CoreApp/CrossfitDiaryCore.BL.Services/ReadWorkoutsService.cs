@@ -175,15 +175,18 @@ namespace CrossfitDiaryCore.BL.Services
             List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)
                 ? _context.CrossfitterWorkouts
                     .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
                     .Include(x => x.Crossfitter)
                     .ToList()
                 : _context.CrossfitterWorkouts
                     .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
                     .Include(x => x.Crossfitter)
                     .Where(x => x.Crossfitter.Id == userId)
                     .ToList();
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
+            // Commented to improve performance
             UpdateWorkoutsWithRecords(crossfitterWorkouts);
             List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList().Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
             foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)
