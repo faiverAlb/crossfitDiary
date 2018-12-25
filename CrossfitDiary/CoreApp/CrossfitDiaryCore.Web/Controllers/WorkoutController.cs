@@ -91,7 +91,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             
             _memoryCache.Remove(_allMainpageResultsConst);
             //TODO: Add check rights!
-            _manageWorkoutsService.RemoveWorkout(crossfitterWorkoutId, userId);
+            _manageWorkoutsService.RemoveWorkoutResult(crossfitterWorkoutId, userId);
         }
 
 

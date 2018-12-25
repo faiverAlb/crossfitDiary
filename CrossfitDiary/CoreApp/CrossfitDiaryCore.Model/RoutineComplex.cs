@@ -96,6 +96,5 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public int Position { get; set; }
 
-        public virtual ICollection<CrossfitterWorkout> CrossfittersWorkouts { get; set; }
     }
 }
