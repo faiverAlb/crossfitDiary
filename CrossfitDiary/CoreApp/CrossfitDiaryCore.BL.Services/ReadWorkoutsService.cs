@@ -60,7 +60,7 @@ namespace CrossfitDiaryCore.BL.Services
         /// <returns>
         /// The <see cref="PersonMaximum"/>.
         /// </returns>
-        public PersonMaximum GetPersonMaximumForExercise(string userId, int exerciseId)
+        private PersonMaximum GetPersonMaximumForExercise(string userId, int exerciseId)
         {
             
             List<CrossfitterWorkout> workoutsWithExericesOnly = _context.CrossfitterWorkouts.Where(x => x.Crossfitter.Id == userId
@@ -284,12 +284,26 @@ namespace CrossfitDiaryCore.BL.Services
             CrossfitterWorkout crossfitterWorkout =
                 _context.CrossfitterWorkouts
                     .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
-                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise)
-                    .ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
                     .Include(x => x.Crossfitter)
-                    .Single(x => x.Crossfitter.Id == userId && x.Id == crossfitterWorkoutId);
+                    .SingleOrDefault(x => x.Crossfitter.Id == userId && x.Id == crossfitterWorkoutId);
 
             return crossfitterWorkout;
+        }
+
+        public RoutineComplex GetWorkout(int workoutId)
+        {
+            return _context.ComplexRoutines
+                .Include(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .ThenInclude(x => x.ExerciseMeasureType)
+                .Include(x => x.Children)
+                .ThenInclude(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .ThenInclude(x => x.ExerciseMeasureType)
+                .SingleOrDefault(x => x.Id == workoutId);
         }
     }
 }

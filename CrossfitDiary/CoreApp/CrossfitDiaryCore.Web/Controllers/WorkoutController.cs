@@ -42,16 +42,36 @@ namespace CrossfitDiaryCore.Web.Controllers
             _memoryCache = memoryCache;
         }
 
-        public IActionResult Index(int? crossfitterWorkoutId)
+        public IActionResult Index(int? crossfitterWorkoutId, int? workoutId)
         {
             //TODO: Add check rights!
             if (crossfitterWorkoutId.HasValue) // AND HAS RIGHTS!
             {
                 string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(userId, crossfitterWorkoutId.Value);
+                if (crossfitterWorkout == null)
+                {
+                    return View();
+                }
                 ToLogWorkoutViewModel toLogWorkoutViewModel = _mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout);
                 ViewBag.toLogWorkoutViewModel = toLogWorkoutViewModel;
+                return View();
             }
+
+            if (!workoutId.HasValue)
+            {
+                return View();
+            }
+
+            RoutineComplex routineComplex = _readWorkoutsService.GetWorkout(workoutId.Value);
+            if (routineComplex == null)
+            {
+                return View();
+            }
+
+            WorkoutViewModel workoutViewModel = _mapper.Map<WorkoutViewModel>(routineComplex);
+            ViewBag.workoutViewModel = workoutViewModel;
+
             return View();
         }
 

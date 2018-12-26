@@ -192,6 +192,7 @@ import { InputGroup } from "bootstrap-vue/es/components";
 Vue.use(InputGroup);
 import { mask } from "vue-the-mask";
 import VeeValidate from "vee-validate";
+import { WorkoutType } from "../../../models/viewModels/WorkoutType";
 
 import ErrorAlertComponent from "../../error-alert-component.vue";
 import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
@@ -219,6 +220,10 @@ export default class ForTimeEditComponent extends Vue {
     if (workouter != null && workouter.toLogWorkoutRawModel != null) {
       this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
       this.toLogModel = workouter.toLogWorkoutRawModel;
+    } else if (workouter != null && workouter.workoutViewModel != null) {
+      this.model = workouter.workoutViewModel;
+    } else {
+      this.model.workoutType = WorkoutType.ForTime;
     }
   }
   mutateData(): void {}

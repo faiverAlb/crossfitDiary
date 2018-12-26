@@ -2,17 +2,37 @@
   <div>
     <!-- <spinner></spinner> -->
     <div>
-      <b-modal ref="myModalRef" title="Sure to remove workout?">
+      <b-modal
+        ref="myModalRef"
+        title="Sure to remove workout?"
+      >
         Are you sure you want to remove it?
         <div slot="modal-footer">
-          <button type="button" data-dismiss="modal" class="btn btn-default" @click="hideModal">Close</button>
-          <button type="button" data-dismiss="modal" class="btn btn-primary btn-danger" @click="deleteWorkout">Delete</button>
+          <button
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-default"
+            @click="hideModal"
+          >Close</button>
+          <button
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-danger"
+            @click="deleteWorkout"
+          >Delete</button>
         </div>
       </b-modal>
     </div>
-    <div class="activities-list container" v-for="item in activities" :key="item.id">
+    <div
+      class="activities-list container"
+      v-for="item in activities"
+      :key="item.id"
+    >
       <div class="row">
-        <PersonsActivitesItemComponent :model="item" @deleteWorkout="deleteWorkoutClick"></PersonsActivitesItemComponent>
+        <PersonsActivitesItemComponent
+          :model="item"
+          @deleteWorkout="deleteWorkoutClick"
+        ></PersonsActivitesItemComponent>
       </div>
     </div>
   </div>
@@ -56,7 +76,6 @@ export default class PersonsActivitesComponent extends Vue {
     this._apiService
       .removeWorkout(this._toDeleteCrossfitWorkoutId)
       .then(data => {
-        debugger;
         let indexOfWorkout = this.activities
           .map(item => item.id)
           .indexOf(this._toDeleteCrossfitWorkoutId);

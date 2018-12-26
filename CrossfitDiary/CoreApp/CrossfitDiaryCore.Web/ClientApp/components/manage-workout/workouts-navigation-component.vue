@@ -195,22 +195,31 @@ export default class WorkoutsNavigationComponent extends Vue {
     // fetching data as soon as the component's been mounted
     this.fetchExercises();
     this.isEditMode =
-      workouter != null && workouter.toLogWorkoutRawModel != null;
+      workouter != null &&
+      (workouter.toLogWorkoutRawModel != null ||
+        workouter.workoutViewModel != null);
     this.redirectIfNeeded();
   }
 
   redirectIfNeeded() {
-    if (workouter != null && workouter.toLogWorkoutRawModel != null) {
-      let currentWorkoutType =
-        workouter.toLogWorkoutRawModel.workoutViewModel.workoutType;
-      for (let i = 0; i < this.routes.length; i++) {
-        if (this.routes[i].workoutType == currentWorkoutType) {
-          let newPath = this.routes[i].path;
-          this.$router.replace({ path: newPath });
-          this.workoutTypeDisplay =
-            workouter.toLogWorkoutRawModel.workoutViewModel.workoutTypeDisplay;
-          break;
-        }
+    if (
+      workouter == null ||
+      (workouter.toLogWorkoutRawModel == null &&
+        workouter.workoutViewModel == null)
+    ) {
+      return;
+    }
+    let workoutViewModel =
+      workouter.toLogWorkoutRawModel != null
+        ? workouter.toLogWorkoutRawModel.workoutViewModel
+        : workouter.workoutViewModel;
+    let currentWorkoutType = workoutViewModel.workoutType;
+    for (let i = 0; i < this.routes.length; i++) {
+      if (this.routes[i].workoutType == currentWorkoutType) {
+        let newPath = this.routes[i].path;
+        this.$router.replace({ path: newPath });
+        this.workoutTypeDisplay = workoutViewModel.workoutTypeDisplay;
+        break;
       }
     }
   }

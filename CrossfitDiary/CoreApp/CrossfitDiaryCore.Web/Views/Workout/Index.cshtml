@@ -2,6 +2,7 @@
 <script>
     let workouter = {};
     workouter.toLogWorkoutRawModel = @{@Html.Raw(JsonConvert.SerializeObject(ViewBag.toLogWorkoutViewModel));};
+    workouter.workoutViewModel = @{@Html.Raw(JsonConvert.SerializeObject(ViewBag.workoutViewModel));};
 </script>
 <div id="manage-workout-page-container"></div>
 

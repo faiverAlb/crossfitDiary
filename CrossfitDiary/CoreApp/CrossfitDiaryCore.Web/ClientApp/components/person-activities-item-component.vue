@@ -57,7 +57,10 @@
         >
           Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon>
         </a>
-        <a class="repeat-workout-action pointer text-success pl-1">
+        <a
+          class="repeat-workout-action pointer text-success pl-1"
+          v-bind:href="'Workout?workoutId='+this.model.workoutViewModel.id"
+        >
           <font-awesome-icon :icon="['fas','plus']"></font-awesome-icon>
           <span class="do-it-text">Do it</span>
         </a>
