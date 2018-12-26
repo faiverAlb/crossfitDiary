@@ -241,7 +241,10 @@ import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 Vue.use(VeeValidate);
 import { WorkoutType } from "../../../models/viewModels/WorkoutType";
 
-declare var workouter: { toLogWorkoutRawModel: ToLogWorkoutViewModel };
+declare var workouter: {
+  toLogWorkoutRawModel: ToLogWorkoutViewModel;
+  workoutViewModel: WorkoutViewModel;
+};
 
 @Component({
   components: {
