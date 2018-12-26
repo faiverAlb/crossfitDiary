@@ -63,7 +63,74 @@
         </div>
       </div>
     </div>
-
+    <div class="want-to-log-container my-3">
+      <div class="log-workout-container">
+        <div class="col-md-12 text-right">
+          <div class="row justify-content-end">
+            <div class="col-lg-3 col-sm data-selector-container pr-lg-3">
+              <div class="form-group">
+                <b-input-group>
+                  <date-picker
+                    v-model="toLogModel.displayDate"
+                    :config="{ format: 'DD.MM.YYYY'}"
+                    placeholder="Select date"
+                    name="toLogModelDate"
+                    :state="fields.toLogModelDate && fields.toLogModelDate.valid"
+                    v-validate="'required'"
+                    :wrap="true"
+                  ></date-picker>
+                  <b-input-group-append>
+                    <button
+                      class="btn btn-secondary datepickerbutton"
+                      type="button"
+                      title="Toggle"
+                    >
+                      <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
+                    </button>
+                  </b-input-group-append>
+                </b-input-group>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm pr-lg-1">
+              <b-input-group class="mb-2">
+                <b-input-group-prepend>
+                  <b-input-group-text tag="span">
+                    <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
+                  </b-input-group-text>
+                </b-input-group-prepend>
+                <b-form-input
+                  type="tel"
+                  v-model="toLogModel.roundsFinished"
+                  v-mask="'####'"
+                  placeholder="Rounds finished"
+                  aria-describedby="prPercentHelpBlock"
+                ></b-form-input>
+              </b-input-group>
+            </div>
+            <div class="col-lg-3 col-sm ">
+              <b-input-group class="mb-2">
+                <b-input-group-prepend>
+                  <b-input-group-text tag="span">
+                    <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
+                  </b-input-group-text>
+                </b-input-group-prepend>
+                <b-form-input
+                  type="tel"
+                  v-model="toLogModel.partialRepsFinished"
+                  v-mask="'####'"
+                  placeholder="Partial repetitions"
+                  aria-describedby="prPercentHelpBlock"
+                ></b-form-input>
+              </b-input-group>
+            </div>
+          </div>
+          <button
+            class="btn btn-success"
+            v-on:click="logWorkout"
+          >Log workout</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
