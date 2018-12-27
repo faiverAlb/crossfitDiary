@@ -63,9 +63,10 @@ namespace CrossfitDiaryCore.BL.Services
         {
             //todo: precheck rights for workout + log
             int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
-            int currentWorkoutIdFromUI = workoutRoutine.Id;
+            int currentWorkoutIdFromUI = -1;
             if (workoutId == 0)
             {
+                currentWorkoutIdFromUI = workoutRoutine.Id;
                 workoutRoutine.Id = 0;
                 foreach (RoutineComplex routineChild in workoutRoutine.Children)
                 {
