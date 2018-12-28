@@ -85,5 +85,11 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public bool IsDoUnbroken { get; set; }
 
+
+        /// <summary>
+        ///     Specify position of exercise between other exercises
+        /// </summary>
+        public int Position { get; set; }
+
     }
 }

@@ -72,6 +72,12 @@ namespace CrossfitDiaryCore.BL.Services
                 {
                     routineChild.Id = 0;
                 }
+
+                int index = 0;
+                foreach (RoutineSimple routineSimple in workoutRoutine.RoutineSimple)
+                {
+                    routineSimple.Position = index++;
+                }
                 _context.ComplexRoutines.Add(workoutRoutine);
                 _context.SaveChanges();
                 workoutId = workoutRoutine.Id;

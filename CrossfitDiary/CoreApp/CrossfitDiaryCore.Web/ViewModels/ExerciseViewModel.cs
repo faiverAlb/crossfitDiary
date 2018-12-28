@@ -25,6 +25,9 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
         [JsonProperty("addedToMaxWeightString")]
         public string AddedToMaxWeightString { get; set; }
+
+        [JsonProperty("position")]
+        public int Position { get; set; }
     }
 
 
