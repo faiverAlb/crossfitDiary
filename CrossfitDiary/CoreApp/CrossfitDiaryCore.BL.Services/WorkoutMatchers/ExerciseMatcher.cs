@@ -15,6 +15,8 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
                 return false;
             }
 
+            firstRoutineComplex.RoutineSimple = firstRoutineComplex.RoutineSimple.OrderBy(x => x.Position).ToList();
+            secondRoutineComplex.RoutineSimple = secondRoutineComplex.RoutineSimple.OrderBy(x => x.Position).ToList();
             for (int i = 0; i < firstRoutineComplex.RoutineSimple.Count; i++)
             {
                 RoutineSimple routineSimpleToSave = firstRoutineComplex.RoutineSimple.ToList()[i];

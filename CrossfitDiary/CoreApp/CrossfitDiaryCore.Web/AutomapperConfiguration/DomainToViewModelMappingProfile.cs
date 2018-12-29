@@ -58,7 +58,11 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.TimeToWork, x => x.MapFrom(y => ResolveTimeSpan(y.TimeToWork)))
                 .ForMember(x => x.TimeCap, x => x.MapFrom(y => ResolveTimeSpan(y.TimeCap)))
                 .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => ResolveTimeSpan(y.RestBetweenExercises)))
-                .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => ResolveTimeSpan(y.RestBetweenRounds)));
+                .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => ResolveTimeSpan(y.RestBetweenRounds)))
+                .AfterMap((routineComplex, workoutViewModel) =>
+                    {
+                        workoutViewModel.ExercisesToDoList = workoutViewModel.ExercisesToDoList.OrderBy(x => x.Position).ToList();
+                    });
 
             CreateMap<RoutineSimple, ExerciseViewModel>()
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.ExerciseId))
