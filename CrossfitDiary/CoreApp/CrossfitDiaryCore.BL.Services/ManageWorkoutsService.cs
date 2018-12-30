@@ -68,9 +68,11 @@ namespace CrossfitDiaryCore.BL.Services
             {
                 currentWorkoutIdFromUI = workoutRoutine.Id;
                 workoutRoutine.Id = 0;
+                int childIndex = 0;
                 foreach (RoutineComplex routineChild in workoutRoutine.Children)
                 {
                     routineChild.Id = 0;
+                    routineChild.Position = childIndex++;
                 }
 
                 int index = 0;
