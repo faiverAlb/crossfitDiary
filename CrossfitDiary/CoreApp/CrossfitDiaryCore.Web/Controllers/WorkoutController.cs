@@ -83,7 +83,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/getAllCrossfittersWorkouts")]
         public List<ToLogWorkoutViewModel> GetAllCrossfittersWorkouts(int page = 1, int pageSize = 30, string userId = null, int? exerciseId = null)
         {
-            //List<ToLogWorkoutViewModel> crossfitersWorkouts = _memoryCache.GetOrCreate(_allMainpageResultsConst, entry =>
+            List<ToLogWorkoutViewModel> crossfitersWorkouts = _memoryCache.GetOrCreate(_allMainpageResultsConst, entry =>
             {
                 string userIdForWorkouts = userId;
                 List<ToLogWorkoutViewModel> allResults = _readWorkoutsService
@@ -92,10 +92,10 @@ namespace CrossfitDiaryCore.Web.Controllers
                     .ToList();
                 return allResults;
             }
-            //);
+            );
 
             
-            //return crossfitersWorkouts;
+            return crossfitersWorkouts;
         }
 
         /// <summary>

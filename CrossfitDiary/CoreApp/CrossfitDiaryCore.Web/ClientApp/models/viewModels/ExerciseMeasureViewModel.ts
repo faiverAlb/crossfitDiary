@@ -1,20 +1,24 @@
 ﻿import Serializable = General.Serializable;
-import { ExerciseMeasureTypeViewModel } from "./ExerciseMeasureTypeViewModel";
+// import { ExerciseMeasureTypeViewModel } from "./ExerciseMeasureTypeViewModel";
 import { ExerciseMeasureType } from "./ExerciseMeasureType";
 
 export class ExerciseMeasureViewModel
   implements Serializable<ExerciseMeasureViewModel> {
-  exerciseMeasureType: ExerciseMeasureTypeViewModel | null = null;
-  displayMeasure: string;
+  measureType: ExerciseMeasureType = ExerciseMeasureType.Weight;
+  measureValue: string = "";
+  description: string = "";
+  shortMeasureDescription: string = "";
+  isRequired: boolean = false;
 
-  constructor(params?: { exerciseMeasureType: ExerciseMeasureTypeViewModel }) {
+  constructor(params?:any) {
     if (params == null) {
       return;
     }
-    this.exerciseMeasureType = params.exerciseMeasureType;
-    this.displayMeasure = this.setDisplayByMeasureType(
-      this.exerciseMeasureType.measureType
-    );
+    this.measureType = params.measureType;
+    this.measureValue = params.measureValue;
+    this.description = params.description;
+    this.shortMeasureDescription = params.shortMeasureDescription;
+    this.isRequired = params.isRequired;
   }
 
   setDisplayByMeasureType = (measure: ExerciseMeasureType): string => {
@@ -34,15 +38,16 @@ export class ExerciseMeasureViewModel
     }
   };
 
-  deserialize(input: any): ExerciseMeasureViewModel {
-    if (input == null) {
+  deserialize(jsonInput: any): ExerciseMeasureViewModel {
+    if (jsonInput == null) {
       return null as any;
     }
-
     return new ExerciseMeasureViewModel({
-      exerciseMeasureType: new ExerciseMeasureTypeViewModel().deserialize(
-        input.exerciseMeasureType
-      )
+      measureType: <ExerciseMeasureType>jsonInput.measureType,
+      measureValue: jsonInput.measureValue,
+      description: jsonInput.description,
+      isRequired: jsonInput.isRequired,
+      shortMeasureDescription: jsonInput.shortMeasureDescription
     });
   }
 }
