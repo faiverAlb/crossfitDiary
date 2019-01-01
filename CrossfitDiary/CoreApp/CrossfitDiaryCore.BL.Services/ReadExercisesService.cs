@@ -20,7 +20,7 @@ namespace CrossfitDiaryCore.BL.Services
 
         public List<Exercise> GetExercises()
         {
-            List<Exercise> exercises = _context.Exercises.Include(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType).ToList();
+            List<Exercise> exercises = _context.Exercises.Include(x => x.ExerciseMeasures).ToList();
             return exercises;
         }
     }

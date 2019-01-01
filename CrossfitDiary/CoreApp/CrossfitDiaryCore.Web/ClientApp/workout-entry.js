@@ -20,7 +20,7 @@ var routes = [
     { path: "/emom", component: EmomEditComponent },
     { path: "/e2mom", component: E2momEditComponent },
     { path: "/nft", component: NFTEditComponent },
-    { path: "/", component: NFTEditComponent, redirect: "/nft" }
+    { path: "/", component: ForTimeEditComponent, redirect: "/fortime" }
 ];
 var vue = new Vue({
     el: "#manage-workout-page-container",

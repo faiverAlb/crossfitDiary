@@ -35,7 +35,7 @@ namespace CrossfitDiaryCore.BL.Services
         public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
         {
 
-            List<RoutineComplex> workoutsToCheck = _context.ComplexRoutines.Include(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType).ToList();
+            List<RoutineComplex> workoutsToCheck = _context.ComplexRoutines.Include(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ToList();
             foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
             {
                 if (_workoutsMatchDispatcher.IsWorkoutsMatch(existingRoutineComplex, routineComplexToSave) == false)
@@ -172,23 +172,34 @@ namespace CrossfitDiaryCore.BL.Services
         /// </summary>
         public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId, int page, int pageSize)
         {
-            List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)
-                ? _context.CrossfitterWorkouts
-                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
-                    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+
+            var ids = _context.CrossfitterWorkouts
+                .OrderByDescending(x => x.Date)
+                .ThenByDescending(x => x.CreatedUtc)
+                .Skip(((page - 1) * pageSize))
+                .Take(pageSize)
+                .Select(x => x.Id)
+                .ToList();
+            List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts
+                    .Where(x => ids.Contains(x.Id))
+
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
+
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children)
+                    .ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
                     .Include(x => x.Crossfitter)
-                    .ToList()
-                : _context.CrossfitterWorkouts
-                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
-                    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
-                    .Include(x => x.Crossfitter)
-                    .Where(x => x.Crossfitter.Id == userId)
                     .ToList();
+                //: _context.CrossfitterWorkouts
+                //    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+                //    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+                //    .Include(x => x.Crossfitter)
+                //    .Where(x => x.Crossfitter.Id == userId)
+                //    .ToList();
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
             // Commented to improve performance
             UpdateWorkoutsWithRecords(crossfitterWorkouts);
-            List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList().Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
+            List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
             foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)
             {
                 allCrossfittersWorkout.RoutineComplex.Children = allCrossfittersWorkout.RoutineComplex.Children.OrderBy(x => x.Position).ToList();
@@ -283,8 +294,8 @@ namespace CrossfitDiaryCore.BL.Services
         {
             CrossfitterWorkout crossfitterWorkout =
                 _context.CrossfitterWorkouts
-                    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
-                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
                     .Include(x => x.Crossfitter)
                     .SingleOrDefault(x => x.Crossfitter.Id == userId && x.Id == crossfitterWorkoutId);
 
@@ -297,12 +308,10 @@ namespace CrossfitDiaryCore.BL.Services
                 .Include(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
                 .ThenInclude(x => x.ExerciseMeasures)
-                .ThenInclude(x => x.ExerciseMeasureType)
                 .Include(x => x.Children)
                 .ThenInclude(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
                 .ThenInclude(x => x.ExerciseMeasures)
-                .ThenInclude(x => x.ExerciseMeasureType)
                 .SingleOrDefault(x => x.Id == workoutId);
         }
     }

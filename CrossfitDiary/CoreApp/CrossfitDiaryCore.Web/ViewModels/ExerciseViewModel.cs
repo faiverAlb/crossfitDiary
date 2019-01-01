@@ -33,12 +33,6 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
     public class ExerciseMeasureViewModel
     {
-        [JsonProperty("exerciseMeasureType")]
-        public ExerciseMeasureTypeViewModel ExerciseMeasureType { get; set; }
-    }
-
-    public class ExerciseMeasureTypeViewModel
-    {
         [JsonProperty("measureType")]
         public MeasureTypeViewModel MeasureType { get; set; }
 
@@ -54,6 +48,7 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("isRequired")]
         public bool IsRequired { get; set; } = true;
     }
+    
 
     public enum MeasureTypeViewModel
     {

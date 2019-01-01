@@ -20,16 +20,16 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 {
                     foreach (var exerciseMeasureViewModel in model.ExerciseMeasures)
                     {
-                        switch (exerciseMeasureViewModel.ExerciseMeasureType.MeasureType)
+                        switch (exerciseMeasureViewModel.MeasureType)
                         {
                             case MeasureTypeViewModel.Weight:
-                                exerciseMeasureViewModel.ExerciseMeasureType.IsRequired = exercise.ExerciseMeasures.Count <= 1;
+                                exerciseMeasureViewModel.IsRequired = exercise.ExerciseMeasures.Count <= 1;
                                 break;
                         }
                     }
                 });
             CreateMap<MeasureType, MeasureTypeViewModel>();
-            CreateMap<ExerciseMeasureType, ExerciseMeasureTypeViewModel>();
+            //CreateMap<ExerciseMeasureType, ExerciseMeasureTypeViewModel>();
             CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>();
             CreateMap<PersonMaximum, PersonExerciseMaximumViewModel>()
                 .ForMember(x => x.Date, x => x.MapFrom(y => y.Date.ToString("d")))
@@ -75,39 +75,40 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                     var toMapExercises = new List<ExerciseMeasureViewModel>();
                     foreach (ExerciseMeasure exerciseMeasure in simple.Exercise.ExerciseMeasures)
                     {
-                        var exerviseMeasureVm = new ExerciseMeasureViewModel() {ExerciseMeasureType = new ExerciseMeasureTypeViewModel()};
-                        switch (exerciseMeasure.ExerciseMeasureType.MeasureType)
+                        var exerviseMeasureVm = new ExerciseMeasureViewModel() {};
+                        switch (exerciseMeasure.ExerciseMeasureTypeId)
                         {
                             case MeasureType.Distance:
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Distance;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Distance.ToCustomString();
-                                exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Distance).ExerciseMeasureType.Description;
-                                exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Distance).ExerciseMeasureType.ShortMeasureDescription;
+                                exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Distance;
+                                exerviseMeasureVm.MeasureValue = simple.Distance.ToCustomString();
+                                exerviseMeasureVm.Description = "Distance";
+                                //simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureTypeId == MeasureType.Distance).Description;
+                                exerviseMeasureVm.ShortMeasureDescription = "m";
                                 break;
                             case MeasureType.Count:
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Count;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = $"{simple.Count:0}";
-                                exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Count).ExerciseMeasureType.Description;
-                                exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Count).ExerciseMeasureType.ShortMeasureDescription;
+                                exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Count;
+                                exerviseMeasureVm.MeasureValue = $"{simple.Count:0}";
+                                exerviseMeasureVm.Description = "General count";
+                                exerviseMeasureVm.ShortMeasureDescription = "count";
                                 break;
                             case MeasureType.Weight:
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Weight;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = simple.Weight.ToCustomString();
-                                exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Weight).ExerciseMeasureType.Description;
-                                exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Weight).ExerciseMeasureType.ShortMeasureDescription;
-                                exerviseMeasureVm.ExerciseMeasureType.IsRequired = simple.Exercise.ExerciseMeasures.Count <= 1;
+                                exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Weight;
+                                exerviseMeasureVm.MeasureValue = simple.Weight.ToCustomString();
+                                exerviseMeasureVm.Description = "Weight";
+                                exerviseMeasureVm.ShortMeasureDescription = "kgs";
+                                exerviseMeasureVm.IsRequired = simple.Exercise.ExerciseMeasures.Count <= 1;
                                 break;
                             case MeasureType.Calories:
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Calories;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = $"{simple.Calories:0}";
-                                exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Calories).ExerciseMeasureType.Description;
-                                exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Calories).ExerciseMeasureType.ShortMeasureDescription;
+                                exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Calories;
+                                exerviseMeasureVm.MeasureValue = $"{simple.Calories:0}";
+                                exerviseMeasureVm.Description = "calories";
+                                exerviseMeasureVm.ShortMeasureDescription = "cal";
                                 break;
                             case MeasureType.Height:
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureType = MeasureTypeViewModel.Height;
-                                exerviseMeasureVm.ExerciseMeasureType.MeasureValue = $"{simple.Centimeters:0}";
-                                exerviseMeasureVm.ExerciseMeasureType.Description = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Height).ExerciseMeasureType.Description;
-                                exerviseMeasureVm.ExerciseMeasureType.ShortMeasureDescription = simple.Exercise.ExerciseMeasures.Single(x => x.ExerciseMeasureType.MeasureType == MeasureType.Height).ExerciseMeasureType.ShortMeasureDescription;
+                                exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Height;
+                                exerviseMeasureVm.MeasureValue = $"{simple.Centimeters:0}";
+                                exerviseMeasureVm.Description = "height";
+                                exerviseMeasureVm.ShortMeasureDescription = "m";
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();
