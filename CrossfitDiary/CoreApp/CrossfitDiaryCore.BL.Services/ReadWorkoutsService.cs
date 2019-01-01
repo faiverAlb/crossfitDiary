@@ -62,12 +62,12 @@ namespace CrossfitDiaryCore.BL.Services
         /// </returns>
         private PersonMaximum GetPersonMaximumForExercise(string userId, int exerciseId)
         {
-            
+
             List<CrossfitterWorkout> workoutsWithExericesOnly = _context.CrossfitterWorkouts.Where(x => x.Crossfitter.Id == userId
                                       && (x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId)
                                       || x.RoutineComplex.Children.Any(child => child.RoutineSimple.Any(chZ => chZ.ExerciseId == exerciseId)))
-                                      && x.RepsToFinishOnCapTime.HasValue == false)
-                                    
+                                      && x.RepsToFinishOnCapTime.HasValue == false).Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
+
                         .ToList();
 
             
