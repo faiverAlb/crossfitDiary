@@ -1,8 +1,12 @@
-import { ExerciseMeasureTypeViewModel } from "./ExerciseMeasureTypeViewModel";
+// import { ExerciseMeasureTypeViewModel } from "./ExerciseMeasureTypeViewModel";
 import { ExerciseMeasureType } from "./ExerciseMeasureType";
 var ExerciseMeasureViewModel = /** @class */ (function () {
     function ExerciseMeasureViewModel(params) {
-        this.exerciseMeasureType = null;
+        this.measureType = ExerciseMeasureType.Weight;
+        this.measureValue = "";
+        this.description = "";
+        this.shortMeasureDescription = "";
+        this.isRequired = false;
         this.setDisplayByMeasureType = function (measure) {
             switch (measure) {
                 case ExerciseMeasureType.Distance:
@@ -22,15 +26,22 @@ var ExerciseMeasureViewModel = /** @class */ (function () {
         if (params == null) {
             return;
         }
-        this.exerciseMeasureType = params.exerciseMeasureType;
-        this.displayMeasure = this.setDisplayByMeasureType(this.exerciseMeasureType.measureType);
+        this.measureType = params.measureType;
+        this.measureValue = params.measureValue;
+        this.description = params.description;
+        this.shortMeasureDescription = params.shortMeasureDescription;
+        this.isRequired = params.isRequired;
     }
-    ExerciseMeasureViewModel.prototype.deserialize = function (input) {
-        if (input == null) {
+    ExerciseMeasureViewModel.prototype.deserialize = function (jsonInput) {
+        if (jsonInput == null) {
             return null;
         }
         return new ExerciseMeasureViewModel({
-            exerciseMeasureType: new ExerciseMeasureTypeViewModel().deserialize(input.exerciseMeasureType)
+            measureType: jsonInput.measureType,
+            measureValue: jsonInput.measureValue,
+            description: jsonInput.description,
+            isRequired: jsonInput.isRequired,
+            shortMeasureDescription: jsonInput.shortMeasureDescription
         });
     };
     return ExerciseMeasureViewModel;

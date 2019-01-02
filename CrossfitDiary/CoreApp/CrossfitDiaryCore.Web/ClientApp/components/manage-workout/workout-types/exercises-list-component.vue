@@ -72,7 +72,7 @@
             <div
               class="form-group my-1 col-lg-3"
               v-for="(measure,index) in exercise.exerciseMeasures"
-              :key="measure.exerciseMeasureType.measureType"
+              :key="measure.measureType + index"
             >
               <label
                 class="sr-only"
@@ -81,14 +81,14 @@
               <b-input-group class="mx-1 pr-1">
                 <b-form-input
                   type="number"
-                  v-model="measure.exerciseMeasureType.measureValue"
+                  v-model="measure.measureValue"
                   class="measure-value-input"
-                  :placeholder="measure.exerciseMeasureType.description"
+                  :placeholder="measure.description"
                   aria-describedby="prPercentHelpBlock"
                 ></b-form-input>
                 <b-input-group-append>
                   <b-input-group-text tag="span">
-                    {{measure.exerciseMeasureType.shortMeasureDescription}}
+                    {{measure.shortMeasureDescription}}
                   </b-input-group-text>
                 </b-input-group-append>
                 <!-- TODO: Problem with border radious because of it -->
@@ -157,6 +157,7 @@ export default class ExercisesListComponent extends Vue {
   workoutEdit: IWorkoutEditState;
 
   exerciseChange(selectedExerciseId: number) {
+    debugger;
     let workoutToAdd = this.workoutEdit.exercises.find(
       x => x.id == selectedExerciseId
     );

@@ -95,7 +95,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             );
 
             
-            return crossfitersWorkouts;
+                return crossfitersWorkouts;
         }
 
         /// <summary>

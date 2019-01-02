@@ -1,7 +1,7 @@
 ﻿    export  enum ExerciseMeasureType {
-        Distance = 0,
-        Count = 1,
-        Weight = 2,
-        Calories = 3,
-        Height = 4
+        Distance = 1,
+        Count = 2,
+        Weight = 3,
+        Calories = 4,
+        Height = 5
   }

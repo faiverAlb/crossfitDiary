@@ -30,7 +30,31 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 });
             CreateMap<MeasureType, MeasureTypeViewModel>();
             //CreateMap<ExerciseMeasureType, ExerciseMeasureTypeViewModel>();
-            CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>();
+            CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>().AfterMap((exerciseMeasure, viewModel) =>
+            {
+                string shortDescription = "";
+                switch (exerciseMeasure.ExerciseMeasureTypeId)
+                {
+                    case MeasureType.Distance:
+                        shortDescription= "m";
+                        break;
+                    case MeasureType.Count:
+                        shortDescription = "count";
+                        break;
+                    case MeasureType.Weight:
+                        shortDescription = "kgs";
+                        break;
+                    case MeasureType.Calories:
+                        shortDescription = "cal";
+                        break;
+                    case MeasureType.Height:
+                        shortDescription = "m";
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                viewModel.ShortMeasureDescription = shortDescription;
+            });
             CreateMap<PersonMaximum, PersonExerciseMaximumViewModel>()
                 .ForMember(x => x.Date, x => x.MapFrom(y => y.Date.ToString("d")))
                 .ForMember(x => x.MaximumWeightValue, x => x.MapFrom(y => y.MaximumWeight))
