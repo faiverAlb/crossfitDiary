@@ -30,30 +30,35 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 });
             CreateMap<MeasureType, MeasureTypeViewModel>();
             //CreateMap<ExerciseMeasureType, ExerciseMeasureTypeViewModel>();
-            CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>().AfterMap((exerciseMeasure, viewModel) =>
+            CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>()
+                .ForMember(x => x.MeasureType, x => x.MapFrom(y => y.ExerciseMeasureTypeId))
+                .AfterMap((exerciseMeasure, viewModel) =>
             {
-                string shortDescription = "";
                 switch (exerciseMeasure.ExerciseMeasureTypeId)
                 {
                     case MeasureType.Distance:
-                        shortDescription= "m";
+                        viewModel.ShortMeasureDescription = "m";
+                        viewModel.Description = "Distance";
                         break;
                     case MeasureType.Count:
-                        shortDescription = "count";
+                        viewModel.ShortMeasureDescription = "count";
+                        viewModel.Description = "General count";
                         break;
                     case MeasureType.Weight:
-                        shortDescription = "kgs";
+                        viewModel.ShortMeasureDescription = "kgs";
+                        viewModel.Description = "Weight";
                         break;
                     case MeasureType.Calories:
-                        shortDescription = "cal";
+                        viewModel.ShortMeasureDescription = "cal";
+                        viewModel.Description = "Calories";
                         break;
                     case MeasureType.Height:
-                        shortDescription = "m";
+                        viewModel.ShortMeasureDescription = "cm";
+                        viewModel.Description = "Height";
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                viewModel.ShortMeasureDescription = shortDescription;
             });
             CreateMap<PersonMaximum, PersonExerciseMaximumViewModel>()
                 .ForMember(x => x.Date, x => x.MapFrom(y => y.Date.ToString("d")))
@@ -125,14 +130,14 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                             case MeasureType.Calories:
                                 exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Calories;
                                 exerviseMeasureVm.MeasureValue = $"{simple.Calories:0}";
-                                exerviseMeasureVm.Description = "calories";
+                                exerviseMeasureVm.Description = "Calories";
                                 exerviseMeasureVm.ShortMeasureDescription = "cal";
                                 break;
                             case MeasureType.Height:
                                 exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Height;
                                 exerviseMeasureVm.MeasureValue = $"{simple.Centimeters:0}";
-                                exerviseMeasureVm.Description = "height";
-                                exerviseMeasureVm.ShortMeasureDescription = "m";
+                                exerviseMeasureVm.Description = "Height";
+                                exerviseMeasureVm.ShortMeasureDescription = "cm";
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();

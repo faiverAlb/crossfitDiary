@@ -157,7 +157,6 @@ export default class ExercisesListComponent extends Vue {
   workoutEdit: IWorkoutEditState;
 
   exerciseChange(selectedExerciseId: number) {
-    debugger;
     let workoutToAdd = this.workoutEdit.exercises.find(
       x => x.id == selectedExerciseId
     );

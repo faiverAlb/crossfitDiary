@@ -7,7 +7,6 @@ export var actions = {
         var crossfitterService = new CrossfitterService();
         crossfitterService.getExercises().then(function (data) {
             var exercises = data;
-            debugger;
             commit("exercisesLoaded", exercises);
         });
     }
