@@ -198,7 +198,7 @@ namespace CrossfitDiaryCore.BL.Services
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
             // Commented to improve performance
-            UpdateWorkoutsWithRecords(crossfitterWorkouts);
+            //UpdateWorkoutsWithRecords(crossfitterWorkouts);
             List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
             foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)
             {
