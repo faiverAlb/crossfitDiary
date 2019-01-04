@@ -185,10 +185,24 @@ namespace CrossfitDiaryCore.BL.Services
             List<RoutineSimple> simpleRoutingForChild = _routineComplexRepository.GetSimpleRoutinesFromChild(ids);
             List<ExerciseMeasure> exerciseMeasuresForChild = _routineComplexRepository.GetExerciseMeasuresForChild(ids);
 
+
+            foreach (RoutineComplex childRoutine in childRoutines)
+            {
+                childRoutine.RoutineSimple = simpleRoutingForChild.Where(x => x.RoutineComplexId == childRoutine.Id).ToList();
+                foreach (var routine in childRoutine.RoutineSimple)
+                {
+                    routine.Exercise.ExerciseMeasures = exerciseMeasuresForChild.Where(x => x.ExerciseId == routine.ExerciseId).ToList();
+                }
+            }
+
             foreach (CrossfitterWorkout workout in crossfitterWorkouts2)
             {
-                IEnumerable<RoutineSimple> routines = routineSimples.Where(x => x.RoutineComplexId == workout.RoutineComplexId);
-                workout.RoutineComplex.RoutineSimple = routines.ToList();
+                workout.RoutineComplex.RoutineSimple = routineSimples.Where(x => x.RoutineComplexId == workout.RoutineComplexId).ToList();
+                foreach (var routine in workout.RoutineComplex.RoutineSimple)
+                {
+                    routine.Exercise.ExerciseMeasures = exerciseMeasures.Where(x => x.ExerciseId == routine.ExerciseId).ToList();
+                }
+                workout.RoutineComplex.Children = childRoutines.Where(x => x.ParentId == workout.RoutineComplexId).ToList();
             }
             List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts
                     .Where(x => ids.Contains(x.Id))
@@ -199,12 +213,20 @@ namespace CrossfitDiaryCore.BL.Services
                     .ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
                     .Include(x => x.Crossfitter)
                     .ToList();
-                //: _context.CrossfitterWorkouts
-                //    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
-                //    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
-                //    .Include(x => x.Crossfitter)
-                //    .Where(x => x.Crossfitter.Id == userId)
-                //    .ToList();
+            //: _context.CrossfitterWorkouts
+            //    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+            //    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ThenInclude(x => x.ExerciseMeasureType)
+            //    .Include(x => x.Crossfitter)
+            //    .Where(x => x.Crossfitter.Id == userId)
+            //    .ToList();
+
+            foreach (var item in crossfitterWorkouts)
+            {
+                foreach (var item2 in crossfitterWorkouts2)
+                {
+                    var test = item.Id == item2.Id;
+                }
+            }
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
             // Commented to improve performance
