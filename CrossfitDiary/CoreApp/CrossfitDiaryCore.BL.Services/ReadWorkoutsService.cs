@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CrossfitDiaryCore.BL.Services.DapperStuff;
 using CrossfitDiaryCore.BL.Services.WorkoutMatchers;
 using CrossfitDiaryCore.DAL.EF;
 using CrossfitDiaryCore.DAL.EF.Exercises;
@@ -12,11 +13,13 @@ namespace CrossfitDiaryCore.BL.Services
     {
         private readonly WorkouterContext _context;
         private readonly WorkoutsMatchDispatcher _workoutsMatchDispatcher;
+        private readonly RoutineComplexRepository _routineComplexRepository;
 
-        public ReadWorkoutsService(WorkouterContext  context, WorkoutsMatchDispatcher workoutsMatchDispatcher)
+        public ReadWorkoutsService(WorkouterContext  context, WorkoutsMatchDispatcher workoutsMatchDispatcher, RoutineComplexRepository routineComplexRepository)
         {
             _context = context;
             _workoutsMatchDispatcher = workoutsMatchDispatcher;
+            _routineComplexRepository = routineComplexRepository;
         }
 
 
@@ -172,14 +175,10 @@ namespace CrossfitDiaryCore.BL.Services
         /// </summary>
         public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId, int page, int pageSize)
         {
-
-            var ids = _context.CrossfitterWorkouts
-                .OrderByDescending(x => x.Date)
-                .ThenByDescending(x => x.CreatedUtc)
-                .Skip(((page - 1) * pageSize))
-                .Take(pageSize)
-                .Select(x => x.Id)
-                .ToList();
+            List<int> ids = _routineComplexRepository.GetIds(((page - 1) * pageSize), pageSize);
+            List<CrossfitterWorkout> crossfitterWorkouts2 = _routineComplexRepository.GetCrossfitterRoutines(ids);
+            List<RoutineSimple> routineSimples= _routineComplexRepository.GetSimpleRoutines(ids);
+            List<ExerciseMeasure> exerciseMeasures = _routineComplexRepository.GetExerciseMeasures(ids);
             List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts
                     .Where(x => ids.Contains(x.Id))
 

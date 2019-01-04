@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using CrossfitDiaryCore.BL.Services;
+using CrossfitDiaryCore.BL.Services.DapperStuff;
 using CrossfitDiaryCore.BL.Services.WorkoutMatchers;
 using CrossfitDiaryCore.DAL.EF;
 using CrossfitDiaryCore.Model;
@@ -27,6 +28,9 @@ namespace CrossfitDiaryCore.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = Configuration.GetConnectionString("CrossfitDiaryDB_Core");
+            services.AddTransient<RoutineComplexRepository>(provider => new RoutineComplexRepository(connectionString));
+
             services.AddAutoMapper();
             services.AddMemoryCache();
 
