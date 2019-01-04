@@ -42,6 +42,35 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                 .ToList();
             }
         }
+
+        public List<ExerciseMeasure> GetExerciseMeasuresForChild(List<int> ids)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = @"SELECT [r.Exercise.ExerciseMeasures0].[Id], [r.Exercise.ExerciseMeasures0].[CreatedUtc], [r.Exercise.ExerciseMeasures0].[ExerciseId], [r.Exercise.ExerciseMeasures0].[ExerciseMeasureTypeId]
+                                FROM [ExerciseMeasure] AS [r.Exercise.ExerciseMeasures0]
+                                INNER JOIN (
+                                    SELECT DISTINCT [r.Exercise2].[Id], [t6].[Id0], [t6].[Id] AS [Id1]
+                                    FROM [RoutineSimple] AS [x.RoutineComplex.Children.RoutineSimple0]
+                                    INNER JOIN [Exercise] AS [r.Exercise2] ON [x.RoutineComplex.Children.RoutineSimple0].[ExerciseId] = [r.Exercise2].[Id]
+                                    INNER JOIN (
+                                        SELECT DISTINCT [x.RoutineComplex.Children1].[Id], [t5].[Id] AS [Id0]
+                                        FROM [RoutineComplex] AS [x.RoutineComplex.Children1]
+                                        INNER JOIN (
+                                            SELECT DISTINCT [x.RoutineComplex4].[Id]
+                                            FROM [CrossfitterWorkout] AS [x4]
+                                            INNER JOIN [AspNetUsers] AS [x.Crossfitter4] ON [x4].[CrossfitterId] = [x.Crossfitter4].[Id]
+                                            INNER JOIN [RoutineComplex] AS [x.RoutineComplex4] ON [x4].[RoutineComplexId] = [x.RoutineComplex4].[Id]
+                                            WHERE [x4].[Id] IN @ids
+                                        ) AS [t5] ON [x.RoutineComplex.Children1].[ParentId] = [t5].[Id]
+                                    ) AS [t6] ON [x.RoutineComplex.Children.RoutineSimple0].[RoutineComplexId] = [t6].[Id]
+                                ) AS [t7] ON [r.Exercise.ExerciseMeasures0].[ExerciseId] = [t7].[Id]
+                                ORDER BY [t7].[Id0], [t7].[Id1], [t7].[Id]";
+                return db.Query<ExerciseMeasure>(sql, new { ids })
+                .ToList();
+            }
+        }
+
         public List<RoutineSimple> GetSimpleRoutines(List<int> ids)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
@@ -63,6 +92,49 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                     return routineSimple;
                 }, new { ids })
                 .ToList();
+            }
+        }
+        public List<RoutineSimple> GetSimpleRoutinesFromChild(List<int> ids)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = @"SELECT [x.RoutineComplex.Children.RoutineSimple].[Id], [x.RoutineComplex.Children.RoutineSimple].[Calories], [x.RoutineComplex.Children.RoutineSimple].[Centimeters], [x.RoutineComplex.Children.RoutineSimple].[Count], [x.RoutineComplex.Children.RoutineSimple].[CreatedUtc], [x.RoutineComplex.Children.RoutineSimple].[Distance], [x.RoutineComplex.Children.RoutineSimple].[ExerciseId], [x.RoutineComplex.Children.RoutineSimple].[IsAlternative], [x.RoutineComplex.Children.RoutineSimple].[IsDoUnbroken], [x.RoutineComplex.Children.RoutineSimple].[Position], [x.RoutineComplex.Children.RoutineSimple].[RoutineComplexId], [x.RoutineComplex.Children.RoutineSimple].[TimeToWork], [x.RoutineComplex.Children.RoutineSimple].[Weight], [r.Exercise1].[Id], [r.Exercise1].[Abbreviation], [r.Exercise1].[CreatedUtc], [r.Exercise1].[Title]
+                    FROM [RoutineSimple] AS [x.RoutineComplex.Children.RoutineSimple]
+                    INNER JOIN [Exercise] AS [r.Exercise1] ON [x.RoutineComplex.Children.RoutineSimple].[ExerciseId] = [r.Exercise1].[Id]
+                    INNER JOIN (
+                        SELECT DISTINCT [x.RoutineComplex.Children0].[Id], [t3].[Id] AS [Id0]
+                        FROM [RoutineComplex] AS [x.RoutineComplex.Children0]
+                        INNER JOIN (
+                            SELECT DISTINCT [x.RoutineComplex3].[Id]
+                            FROM [CrossfitterWorkout] AS [x3]
+                            INNER JOIN [AspNetUsers] AS [x.Crossfitter3] ON [x3].[CrossfitterId] = [x.Crossfitter3].[Id]
+                            INNER JOIN [RoutineComplex] AS [x.RoutineComplex3] ON [x3].[RoutineComplexId] = [x.RoutineComplex3].[Id]
+                            WHERE [x3].[Id] IN @ids
+                        ) AS [t3] ON [x.RoutineComplex.Children0].[ParentId] = [t3].[Id]
+                    ) AS [t4] ON [x.RoutineComplex.Children.RoutineSimple].[RoutineComplexId] = [t4].[Id]
+                    ORDER BY [t4].[Id0], [t4].[Id], [r.Exercise1].[Id]";
+                return db.Query<RoutineSimple, Exercise, RoutineSimple>(sql, (routineSimple, exercise) =>
+                {
+                    routineSimple.Exercise = exercise;
+                    return routineSimple;
+                }, new { ids })
+                .ToList();
+            }
+        }
+        public List<RoutineComplex> GetChildRoutineComplex(List<int> ids)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                return db.Query<RoutineComplex>(@"SELECT [x.RoutineComplex.Children].[Id], [x.RoutineComplex.Children].[ComplexType], [x.RoutineComplex.Children].[CreatedById], [x.RoutineComplex.Children].[CreatedUtc], [x.RoutineComplex.Children].[ParentId], [x.RoutineComplex.Children].[Position], [x.RoutineComplex.Children].[RestBetweenExercises], [x.RoutineComplex.Children].[RestBetweenRounds], [x.RoutineComplex.Children].[RoundCount], [x.RoutineComplex.Children].[TimeCap], [x.RoutineComplex.Children].[TimeToWork], [x.RoutineComplex.Children].[Title]
+                    FROM [RoutineComplex] AS [x.RoutineComplex.Children]
+                    INNER JOIN (
+                        SELECT DISTINCT [x.RoutineComplex2].[Id]
+                        FROM [CrossfitterWorkout] AS [x2]
+                        INNER JOIN [AspNetUsers] AS [x.Crossfitter2] ON [x2].[CrossfitterId] = [x.Crossfitter2].[Id]
+                        INNER JOIN [RoutineComplex] AS [x.RoutineComplex2] ON [x2].[RoutineComplexId] = [x.RoutineComplex2].[Id]
+                        WHERE [x2].[Id] IN @ids
+                    ) AS [t2] ON [x.RoutineComplex.Children].[ParentId] = [t2].[Id]
+                    ORDER BY [t2].[Id], [x.RoutineComplex.Children].[Id]", new { ids}).ToList();
             }
         }
 

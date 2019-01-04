@@ -176,9 +176,20 @@ namespace CrossfitDiaryCore.BL.Services
         public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId, int page, int pageSize)
         {
             List<int> ids = _routineComplexRepository.GetIds(((page - 1) * pageSize), pageSize);
+
             List<CrossfitterWorkout> crossfitterWorkouts2 = _routineComplexRepository.GetCrossfitterRoutines(ids);
             List<RoutineSimple> routineSimples= _routineComplexRepository.GetSimpleRoutines(ids);
             List<ExerciseMeasure> exerciseMeasures = _routineComplexRepository.GetExerciseMeasures(ids);
+
+            List<RoutineComplex> childRoutines = _routineComplexRepository.GetChildRoutineComplex(ids);
+            List<RoutineSimple> simpleRoutingForChild = _routineComplexRepository.GetSimpleRoutinesFromChild(ids);
+            List<ExerciseMeasure> exerciseMeasuresForChild = _routineComplexRepository.GetExerciseMeasuresForChild(ids);
+
+            foreach (CrossfitterWorkout workout in crossfitterWorkouts2)
+            {
+                IEnumerable<RoutineSimple> routines = routineSimples.Where(x => x.RoutineComplexId == workout.RoutineComplexId);
+                workout.RoutineComplex.RoutineSimple = routines.ToList();
+            }
             List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts
                     .Where(x => ids.Contains(x.Id))
 
