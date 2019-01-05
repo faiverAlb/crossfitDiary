@@ -19,57 +19,18 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
             _connectionString = connectionString;
         }
 
-        public List<ExerciseMeasure> GetExerciseMeasures(List<int> ids)
+        public List<ExerciseMeasure> GetAllExerciseMeasures()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string sql = @"SELECT [r.Exercise.ExerciseMeasures].[Id], [r.Exercise.ExerciseMeasures].[CreatedUtc], [r.Exercise.ExerciseMeasures].[ExerciseId], [r.Exercise.ExerciseMeasures].[ExerciseMeasureTypeId]
-                            FROM [ExerciseMeasure] AS [r.Exercise.ExerciseMeasures]
-                            INNER JOIN (
-                                SELECT DISTINCT [r.Exercise0].[Id], [t0].[Id] AS [Id0]
-                                FROM [RoutineSimple] AS [x.RoutineComplex.RoutineSimple0]
-                                INNER JOIN [Exercise] AS [r.Exercise0] ON [x.RoutineComplex.RoutineSimple0].[ExerciseId] = [r.Exercise0].[Id]
-                                INNER JOIN (
-                                    SELECT DISTINCT [x.RoutineComplex1].[Id]
-                                    FROM [CrossfitterWorkout] AS [x1]
-                                    INNER JOIN [AspNetUsers] AS [x.Crossfitter1] ON [x1].[CrossfitterId] = [x.Crossfitter1].[Id]
-                                    INNER JOIN [RoutineComplex] AS [x.RoutineComplex1] ON [x1].[RoutineComplexId] = [x.RoutineComplex1].[Id]
-                                    WHERE [x1].[Id] IN @ids
-                                ) AS [t0] ON [x.RoutineComplex.RoutineSimple0].[RoutineComplexId] = [t0].[Id]
-                            ) AS [t1] ON [r.Exercise.ExerciseMeasures].[ExerciseId] = [t1].[Id]
-                            ORDER BY [t1].[Id0], [t1].[Id]";
-                return db.Query<ExerciseMeasure>(sql, new { ids })
+                string sql = @"SELECT *
+                            FROM [ExerciseMeasure]";
+                return db.Query<ExerciseMeasure>(sql)
                 .ToList();
             }
         }
 
-        public List<ExerciseMeasure> GetExerciseMeasuresForChild(List<int> ids)
-        {
-            using (IDbConnection db = new SqlConnection(_connectionString))
-            {
-                string sql = @"SELECT [r.Exercise.ExerciseMeasures0].[Id], [r.Exercise.ExerciseMeasures0].[CreatedUtc], [r.Exercise.ExerciseMeasures0].[ExerciseId], [r.Exercise.ExerciseMeasures0].[ExerciseMeasureTypeId]
-                                FROM [ExerciseMeasure] AS [r.Exercise.ExerciseMeasures0]
-                                INNER JOIN (
-                                    SELECT DISTINCT [r.Exercise2].[Id], [t6].[Id0], [t6].[Id] AS [Id1]
-                                    FROM [RoutineSimple] AS [x.RoutineComplex.Children.RoutineSimple0]
-                                    INNER JOIN [Exercise] AS [r.Exercise2] ON [x.RoutineComplex.Children.RoutineSimple0].[ExerciseId] = [r.Exercise2].[Id]
-                                    INNER JOIN (
-                                        SELECT DISTINCT [x.RoutineComplex.Children1].[Id], [t5].[Id] AS [Id0]
-                                        FROM [RoutineComplex] AS [x.RoutineComplex.Children1]
-                                        INNER JOIN (
-                                            SELECT DISTINCT [x.RoutineComplex4].[Id]
-                                            FROM [CrossfitterWorkout] AS [x4]
-                                            INNER JOIN [AspNetUsers] AS [x.Crossfitter4] ON [x4].[CrossfitterId] = [x.Crossfitter4].[Id]
-                                            INNER JOIN [RoutineComplex] AS [x.RoutineComplex4] ON [x4].[RoutineComplexId] = [x.RoutineComplex4].[Id]
-                                            WHERE [x4].[Id] IN @ids
-                                        ) AS [t5] ON [x.RoutineComplex.Children1].[ParentId] = [t5].[Id]
-                                    ) AS [t6] ON [x.RoutineComplex.Children.RoutineSimple0].[RoutineComplexId] = [t6].[Id]
-                                ) AS [t7] ON [r.Exercise.ExerciseMeasures0].[ExerciseId] = [t7].[Id]
-                                ORDER BY [t7].[Id0], [t7].[Id1], [t7].[Id]";
-                return db.Query<ExerciseMeasure>(sql, new { ids })
-                .ToList();
-            }
-        }
+        
 
         public List<RoutineSimple> GetSimpleRoutines(List<int> ids)
         {
@@ -94,6 +55,8 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                 .ToList();
             }
         }
+
+
         public List<RoutineSimple> GetSimpleRoutinesFromChild(List<int> ids)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
