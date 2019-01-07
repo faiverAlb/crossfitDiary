@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CrossfitDiaryCore.BL.Services.DapperStuff;
 using CrossfitDiaryCore.BL.Services.WorkoutMatchers;
 using CrossfitDiaryCore.DAL.EF;
@@ -173,16 +174,17 @@ namespace CrossfitDiaryCore.BL.Services
         /// <summary>
         ///     Returns all crossfitters workouts.
         /// </summary>
-        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId, int page, int pageSize)
+        public async Task<List<CrossfitterWorkout>> GetAllCrossfittersWorkoutsAsync(string userId, int? exerciseId, int page, int pageSize)
         {
             List<int> ids = _routineComplexRepository.GetIds(((page - 1) * pageSize), pageSize);
+            DapperResults dapperResults = _routineComplexRepository.GetMultiQuery(ids);
 
-            List<CrossfitterWorkout> crossfitterWorkouts = _routineComplexRepository.GetCrossfitterRoutines(ids);
-            List<RoutineSimple> routineSimples= _routineComplexRepository.GetSimpleRoutines(ids);
-            List<ExerciseMeasure> allExerciseMeasures = _routineComplexRepository.GetAllExerciseMeasures();
-            List<RoutineComplex> childRoutines = _routineComplexRepository.GetChildRoutineComplex(ids);
-            List<RoutineSimple> simpleRoutingForChild = _routineComplexRepository.GetSimpleRoutinesFromChild(ids);
+            IEnumerable<ExerciseMeasure> allExerciseMeasures = _routineComplexRepository.GetAllExerciseMeasures();
+            IEnumerable<CrossfitterWorkout> crossfitterWorkouts = dapperResults.CrossfitterWorkouts;
 
+            IEnumerable<RoutineComplex> childRoutines = dapperResults.ChildRoutines;
+            IEnumerable<RoutineSimple> simpleRoutingForChild = dapperResults.ChildRoutineSimples;
+            IEnumerable<RoutineSimple> routineSimples = dapperResults.RoutineSimples;
 
             foreach (RoutineComplex childRoutine in childRoutines)
             {
@@ -281,7 +283,7 @@ namespace CrossfitDiaryCore.BL.Services
         /// </summary>
         /// <param name="crossfitterWorkouts"></param>
         /// <param name="exerciseId"></param>
-        private List<CrossfitterWorkout> FilterWorkoutsOnSelectedExercise(List<CrossfitterWorkout> crossfitterWorkouts, int? exerciseId)
+        private IEnumerable<CrossfitterWorkout> FilterWorkoutsOnSelectedExercise(IEnumerable<CrossfitterWorkout> crossfitterWorkouts, int? exerciseId)
         {
             if (exerciseId.HasValue == false)
             {
