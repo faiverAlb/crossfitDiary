@@ -86,7 +86,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                         WHERE [x0].[Id] IN @ids
                     ) AS [t] ON [x.RoutineComplex.RoutineSimple].[RoutineComplexId] = [t].[Id];
 
-                    SELECT [x.RoutineComplex.Children].[Id], [x.RoutineComplex.Children].[ComplexType], [x.RoutineComplex.Children].[CreatedById], [x.RoutineComplex.Children].[CreatedUtc], [x.RoutineComplex.Children].[ParentId], [x.RoutineComplex.Children].[Position], [x.RoutineComplex.Children].[RestBetweenExercises], [x.RoutineComplex.Children].[RestBetweenRounds], [x.RoutineComplex.Children].[RoundCount], [x.RoutineComplex.Children].[TimeCap], [x.RoutineComplex.Children].[TimeToWork], [x.RoutineComplex.Children].[Title]
+                    SELECT [x.RoutineComplex.Children].*
                     FROM [RoutineComplex] AS [x.RoutineComplex.Children]
                     INNER JOIN (
                         SELECT DISTINCT [x.RoutineComplex2].[Id]
@@ -96,7 +96,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                         WHERE [x2].[Id] IN @ids
                     ) AS [t2] ON [x.RoutineComplex.Children].[ParentId] = [t2].[Id];       
 
-                    SELECT [x.RoutineComplex.Children.RoutineSimple].[Id], [x.RoutineComplex.Children.RoutineSimple].[Calories], [x.RoutineComplex.Children.RoutineSimple].[Centimeters], [x.RoutineComplex.Children.RoutineSimple].[Count], [x.RoutineComplex.Children.RoutineSimple].[CreatedUtc], [x.RoutineComplex.Children.RoutineSimple].[Distance], [x.RoutineComplex.Children.RoutineSimple].[ExerciseId], [x.RoutineComplex.Children.RoutineSimple].[IsAlternative], [x.RoutineComplex.Children.RoutineSimple].[IsDoUnbroken], [x.RoutineComplex.Children.RoutineSimple].[Position], [x.RoutineComplex.Children.RoutineSimple].[RoutineComplexId], [x.RoutineComplex.Children.RoutineSimple].[TimeToWork], [x.RoutineComplex.Children.RoutineSimple].[Weight], [r.Exercise1].[Id], [r.Exercise1].[Abbreviation], [r.Exercise1].[CreatedUtc], [r.Exercise1].[Title]
+                    SELECT [x.RoutineComplex.Children.RoutineSimple].*, [r.Exercise1].*
                     FROM [RoutineSimple] AS [x.RoutineComplex.Children.RoutineSimple]
                     INNER JOIN [Exercise] AS [r.Exercise1] ON [x.RoutineComplex.Children.RoutineSimple].[ExerciseId] = [r.Exercise1].[Id]
                     INNER JOIN (
