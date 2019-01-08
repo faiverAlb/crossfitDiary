@@ -142,8 +142,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                     FROM [CrossfitterWorkout] AS [x]
                     INNER JOIN [AspNetUsers] AS [x.Crossfitter] ON [x].[CrossfitterId] = [x.Crossfitter].[Id]
                     INNER JOIN [RoutineComplex] AS [x.RoutineComplex] ON [x].[RoutineComplexId] = [x.RoutineComplex].[Id]
-                    WHERE [x].[Id] IN @ids
-                    ORDER BY [x.RoutineComplex].[Id]; 
+                    WHERE [x].[Id] IN @ids; 
 
                     SELECT [x.RoutineComplex.RoutineSimple].[Id], [x.RoutineComplex.RoutineSimple].[Calories], [x.RoutineComplex.RoutineSimple].[Centimeters], [x.RoutineComplex.RoutineSimple].[Count], [x.RoutineComplex.RoutineSimple].[CreatedUtc], [x.RoutineComplex.RoutineSimple].[Distance], [x.RoutineComplex.RoutineSimple].[ExerciseId], [x.RoutineComplex.RoutineSimple].[IsAlternative], [x.RoutineComplex.RoutineSimple].[IsDoUnbroken], [x.RoutineComplex.RoutineSimple].[Position], [x.RoutineComplex.RoutineSimple].[RoutineComplexId], [x.RoutineComplex.RoutineSimple].[TimeToWork], [x.RoutineComplex.RoutineSimple].[Weight], [r.Exercise].[Id], [r.Exercise].[Abbreviation], [r.Exercise].[CreatedUtc], [r.Exercise].[Title]
                     FROM [RoutineSimple] AS [x.RoutineComplex.RoutineSimple]
@@ -154,8 +153,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                         INNER JOIN [AspNetUsers] AS [x.Crossfitter0] ON [x0].[CrossfitterId] = [x.Crossfitter0].[Id]
                         INNER JOIN [RoutineComplex] AS [x.RoutineComplex0] ON [x0].[RoutineComplexId] = [x.RoutineComplex0].[Id]
                         WHERE [x0].[Id] IN @ids
-                    ) AS [t] ON [x.RoutineComplex.RoutineSimple].[RoutineComplexId] = [t].[Id]
-                    ORDER BY [t].[Id], [r.Exercise].[Id];
+                    ) AS [t] ON [x.RoutineComplex.RoutineSimple].[RoutineComplexId] = [t].[Id];
 
                     SELECT [x.RoutineComplex.Children].[Id], [x.RoutineComplex.Children].[ComplexType], [x.RoutineComplex.Children].[CreatedById], [x.RoutineComplex.Children].[CreatedUtc], [x.RoutineComplex.Children].[ParentId], [x.RoutineComplex.Children].[Position], [x.RoutineComplex.Children].[RestBetweenExercises], [x.RoutineComplex.Children].[RestBetweenRounds], [x.RoutineComplex.Children].[RoundCount], [x.RoutineComplex.Children].[TimeCap], [x.RoutineComplex.Children].[TimeToWork], [x.RoutineComplex.Children].[Title]
                     FROM [RoutineComplex] AS [x.RoutineComplex.Children]
@@ -165,8 +163,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                         INNER JOIN [AspNetUsers] AS [x.Crossfitter2] ON [x2].[CrossfitterId] = [x.Crossfitter2].[Id]
                         INNER JOIN [RoutineComplex] AS [x.RoutineComplex2] ON [x2].[RoutineComplexId] = [x.RoutineComplex2].[Id]
                         WHERE [x2].[Id] IN @ids
-                    ) AS [t2] ON [x.RoutineComplex.Children].[ParentId] = [t2].[Id]
-                    ORDER BY [t2].[Id], [x.RoutineComplex.Children].[Id];       
+                    ) AS [t2] ON [x.RoutineComplex.Children].[ParentId] = [t2].[Id];       
 
                     SELECT [x.RoutineComplex.Children.RoutineSimple].[Id], [x.RoutineComplex.Children.RoutineSimple].[Calories], [x.RoutineComplex.Children.RoutineSimple].[Centimeters], [x.RoutineComplex.Children.RoutineSimple].[Count], [x.RoutineComplex.Children.RoutineSimple].[CreatedUtc], [x.RoutineComplex.Children.RoutineSimple].[Distance], [x.RoutineComplex.Children.RoutineSimple].[ExerciseId], [x.RoutineComplex.Children.RoutineSimple].[IsAlternative], [x.RoutineComplex.Children.RoutineSimple].[IsDoUnbroken], [x.RoutineComplex.Children.RoutineSimple].[Position], [x.RoutineComplex.Children.RoutineSimple].[RoutineComplexId], [x.RoutineComplex.Children.RoutineSimple].[TimeToWork], [x.RoutineComplex.Children.RoutineSimple].[Weight], [r.Exercise1].[Id], [r.Exercise1].[Abbreviation], [r.Exercise1].[CreatedUtc], [r.Exercise1].[Title]
                     FROM [RoutineSimple] AS [x.RoutineComplex.Children.RoutineSimple]
@@ -181,9 +178,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                             INNER JOIN [RoutineComplex] AS [x.RoutineComplex3] ON [x3].[RoutineComplexId] = [x.RoutineComplex3].[Id]
                             WHERE [x3].[Id] IN @ids
                         ) AS [t3] ON [x.RoutineComplex.Children0].[ParentId] = [t3].[Id]
-                    ) AS [t4] ON [x.RoutineComplex.Children.RoutineSimple].[RoutineComplexId] = [t4].[Id]
-                    ORDER BY [t4].[Id0], [t4].[Id], [r.Exercise1].[Id]                    
-";
+                    ) AS [t4] ON [x.RoutineComplex.Children.RoutineSimple].[RoutineComplexId] = [t4].[Id]";
                 using (var multi = db.QueryMultiple(sql, new { ids }))
                 {
                     IEnumerable<CrossfitterWorkout> crossfitterWorkouts = multi.Read<CrossfitterWorkout, ApplicationUser, RoutineComplex, CrossfitterWorkout>((crossfiterWorkout, user, routine) =>
