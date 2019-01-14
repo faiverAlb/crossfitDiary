@@ -218,6 +218,7 @@
           <button
             class="btn btn-success"
             v-on:click="logWorkout"
+            v-if="spinner.status == false"
           >Log workout</button>
         </div>
       </div>
