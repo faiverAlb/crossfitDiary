@@ -9,8 +9,11 @@
           ></ErrorAlertComponent>
         </div>
       </div>
-      
-      <div class="pt-2 general-info-container">
+
+      <div
+        class="pt-2 general-info-container"
+        v-bind:class="{saving:spinner.status}"
+      >
         <div class="row">
           <div class="col-lg-3 time-cap-container pb-2">
             <label
@@ -95,7 +98,10 @@
     <div class="want-to-log-container my-3">
       <div class="log-workout-container">
         <div class="col-md-12 text-right">
-          <div class="row justify-content-end">
+          <div
+            class="row justify-content-end"
+            v-bind:class="{saving:spinner.status}"
+          >
             <div class="col-lg-3 col-sm data-selector-container pr-lg-3">
               <div class="form-group">
                 <b-input-group>
@@ -158,19 +164,21 @@
           </div>
           <div class="row">
             <div class="offset-5">
-              <spinner 
-                :status="spinner.status"  
-                :size="spinner.size" 
-                :color="spinner.color"  
-                :depth="spinner.depth" 
+              <spinner
+                :status="spinner.status"
+                :size="spinner.size"
+                :color="spinner.color"
+                :depth="spinner.depth"
                 :rotation="spinner.rotation"
-                :speed="spinner.speed">
+                :speed="spinner.speed"
+              >
               </spinner>
             </div>
           </div>
           <button
             class="btn btn-success"
             v-on:click="logWorkout"
+            v-if="spinner.status == false"
           >Log workout</button>
         </div>
       </div>
@@ -212,7 +220,6 @@ import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
 import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
 
-
 Vue.use(VeeValidate);
 declare var workouter: {
   toLogWorkoutRawModel: ToLogWorkoutViewModel;
@@ -235,7 +242,7 @@ export default class ForTimeEditComponent extends Vue {
   model: WorkoutViewModel = new WorkoutViewModel();
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
-  spinner:SpinnerModel = new SpinnerModel(true);
+  spinner: SpinnerModel = new SpinnerModel(false);
 
   mounted() {
     if (workouter != null && workouter.toLogWorkoutRawModel != null) {
@@ -260,7 +267,6 @@ export default class ForTimeEditComponent extends Vue {
           logWorkoutViewModel: this.toLogModel
         };
         let crossfitterService: CrossfitterService = new CrossfitterService();
-
         this.spinner.activate();
         crossfitterService
           .createAndLogWorkout(model)
