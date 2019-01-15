@@ -160,12 +160,10 @@ import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons/faHashtag";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import CrossfitterService from "../../../CrossfitterService";
-
 library.add(faClock, faHashtag, faCalendar);
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* public components */
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Vue, Component, Prop } from "vue-property-decorator";
 import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
 import bAlert from "bootstrap-vue/es/components/alert/alert";
@@ -176,8 +174,10 @@ import VeeValidate from "vee-validate";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
 Vue.use(InputGroup);
 Vue.use(VeeValidate);
+import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 
 /* app components */
+import CrossfitterService from "../../../CrossfitterService";
 import ExercisesListComponent from "./exercises-list-component.vue";
 import ErrorAlertComponent from "../../error-alert-component.vue";
 
@@ -185,7 +185,6 @@ import ErrorAlertComponent from "../../error-alert-component.vue";
 import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
 import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
 import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
-import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import { WorkoutType } from "../../../models/viewModels/WorkoutType";
 import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
