@@ -184,7 +184,7 @@
       </div>
     </div>
     <div>
-      <h3>Visible if can plan workouts</h3>
+      <!-- <h3>Visible if can plan workouts</h3> -->
       <!-- <PlanworkoutComponent></PlanworkoutComponent> -->
     </div>
   </div>

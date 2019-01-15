@@ -164,31 +164,32 @@ import CrossfitterService from "../../../CrossfitterService";
 
 library.add(faClock, faHashtag, faCalendar);
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-/**/
 
+/* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
-import ExercisesListComponent from "./exercises-list-component.vue";
-import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
 import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
 import bAlert from "bootstrap-vue/es/components/alert/alert";
-import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
-
 import datePicker from "vue-bootstrap-datetimepicker";
-import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import { InputGroup } from "bootstrap-vue/es/components";
-Vue.use(InputGroup);
 import { mask } from "vue-the-mask";
 import VeeValidate from "vee-validate";
-import { WorkoutType } from "../../../models/viewModels/WorkoutType";
-
-import ErrorAlertComponent from "../../error-alert-component.vue";
-import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
-
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+Vue.use(InputGroup);
+Vue.use(VeeValidate);
+
+/* app components */
+import ExercisesListComponent from "./exercises-list-component.vue";
+import ErrorAlertComponent from "../../error-alert-component.vue";
+
+/* models and styles */
+import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
+import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
+import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
+import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
+import { WorkoutType } from "../../../models/viewModels/WorkoutType";
+import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
 
-Vue.use(VeeValidate);
 declare var workouter: {
   toLogWorkoutRawModel: ToLogWorkoutViewModel;
   workoutViewModel: WorkoutViewModel;
