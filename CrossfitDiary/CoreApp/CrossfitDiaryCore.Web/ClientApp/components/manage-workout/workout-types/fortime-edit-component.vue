@@ -218,7 +218,6 @@ import ExercisesListComponent from "./exercises-list-component.vue";
 import ErrorAlertComponent from "../../error-alert-component.vue";
 
 /* models and styles */
-
 import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
 import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
 import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
