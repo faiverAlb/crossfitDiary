@@ -179,7 +179,7 @@
             class="row justify-content-end mt-3"
             v-if="spinner.status == false"
           >
-            <span class="col-md-2 col-sm mb-1">
+            <div class="col-md-2 col-sm mb-1">
               <b-button-group class="btn-group d-flex">
                 <b-button
                   class="w-100"
@@ -194,7 +194,7 @@
                   variant="danger"
                 >Rx+</b-button>
               </b-button-group>
-            </span>
+            </div>
             <span class="col-md-2 col-sm mr-sm-2 px-md-1 mb-3 ">
               <button
                 class="btn btn-info btn-block"
