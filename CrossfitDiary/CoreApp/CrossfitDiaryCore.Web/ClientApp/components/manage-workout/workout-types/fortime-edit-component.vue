@@ -163,7 +163,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="offset-5">
+            <div class="col-sm offset-5">
               <spinner
                 :status="spinner.status"
                 :size="spinner.size"
@@ -175,18 +175,45 @@
               </spinner>
             </div>
           </div>
-          <button
-            class="btn btn-success"
-            v-on:click="logWorkout"
+          <div
+            class="row justify-content-end mt-3"
             v-if="spinner.status == false"
-          >Log workout</button>
+          >
+            <span class="col-md-2 col-sm mb-1">
+              <b-button-group class="btn-group d-flex">
+                <b-button
+                  class="w-100"
+                  variant="success"
+                >Sc</b-button>
+                <b-button
+                  class="w-100"
+                  variant="warning"
+                >Rx</b-button>
+                <b-button
+                  class="w-100"
+                  variant="danger"
+                >Rx+</b-button>
+              </b-button-group>
+            </span>
+            <span class="col-md-2 col-sm mr-sm-2 px-md-1 mb-3 ">
+              <button
+                class="btn btn-info btn-block"
+                v-on:click="logWorkout"
+              >Plan workout</button>
+            </span>
+
+            <span class="col-md-2 col-sm px-md-1">
+              <button
+                class=" btn btn-success btn-block"
+                v-on:click="logWorkout"
+              >Log workout</button>
+            </span>
+          </div>
+
         </div>
       </div>
     </div>
-    <div>
-      <!-- <h3>Visible if can plan workouts</h3> -->
-      <!-- <PlanworkoutComponent></PlanworkoutComponent> -->
-    </div>
+
   </div>
 </template>
 
@@ -203,6 +230,8 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Vue, Component, Prop } from "vue-property-decorator";
 import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
 import bAlert from "bootstrap-vue/es/components/alert/alert";
+import bButton from "bootstrap-vue/es/components/button/button";
+import bButtonGroup from "bootstrap-vue/es/components/button-group/button-group";
 import datePicker from "vue-bootstrap-datetimepicker";
 import { mask } from "vue-the-mask";
 import { InputGroup } from "bootstrap-vue/es/components";
@@ -234,9 +263,11 @@ declare var workouter: {
   components: {
     FontAwesomeIcon,
     ExercisesListComponent,
-    bFormInput,
     datePicker,
+    bFormInput,
     bAlert,
+    bButton,
+    bButtonGroup,
     Spinner,
     ErrorAlertComponent
   },
