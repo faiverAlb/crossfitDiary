@@ -95,6 +95,58 @@
         </div>
       </div>
     </div>
+    <div
+      class="row justify-content-end mt-3"
+      v-if="spinner.status == false"
+    >
+      <div class="col-md-3 col-sm data-selector-container">
+        <div class="form-group">
+          <b-input-group>
+            <date-picker
+              v-model="toLogModel.displayDate"
+              :config="{ format: 'DD.MM.YYYY'}"
+              placeholder="Select date"
+              name="toLogModelDate"
+              :state="fields.toLogModelDate && fields.toLogModelDate.valid"
+              v-validate="'required'"
+              :wrap="true"
+            ></date-picker>
+            <b-input-group-append>
+              <button
+                class="btn btn-secondary datepickerbutton"
+                type="button"
+                title="Toggle"
+              >
+                <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
+              </button>
+            </b-input-group-append>
+          </b-input-group>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm mb-1">
+        <b-button-group class="btn-group d-flex">
+          <b-button
+            class="w-100"
+            variant="success"
+          >Sc</b-button>
+          <b-button
+            class="w-100"
+            variant="warning"
+          >Rx</b-button>
+          <b-button
+            class="w-100"
+            variant="danger"
+          >Rx+</b-button>
+        </b-button-group>
+      </div>
+      <span class="col-md-2 col-sm mr-sm-2 px-md-1 mb-3 ">
+        <button
+          class="btn btn-info btn-block"
+          v-on:click="logWorkout"
+        >Plan workout</button>
+      </span>
+
+    </div>
     <div class="want-to-log-container my-3">
       <div class="log-workout-container">
         <div class="col-md-12 text-right">
@@ -102,30 +154,6 @@
             class="row justify-content-end"
             v-bind:class="{saving:spinner.status}"
           >
-            <div class="col-lg-3 col-sm data-selector-container pr-lg-3">
-              <div class="form-group">
-                <b-input-group>
-                  <date-picker
-                    v-model="toLogModel.displayDate"
-                    :config="{ format: 'DD.MM.YYYY'}"
-                    placeholder="Select date"
-                    name="toLogModelDate"
-                    :state="fields.toLogModelDate && fields.toLogModelDate.valid"
-                    v-validate="'required'"
-                    :wrap="true"
-                  ></date-picker>
-                  <b-input-group-append>
-                    <button
-                      class="btn btn-secondary datepickerbutton"
-                      type="button"
-                      title="Toggle"
-                    >
-                      <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
-                    </button>
-                  </b-input-group-append>
-                </b-input-group>
-              </div>
-            </div>
             <div class="col-lg-3 col-sm pr-lg-2 total-time-log-container">
               <b-input-group class="mb-2">
                 <b-input-group-prepend>
@@ -179,29 +207,6 @@
             class="row justify-content-end mt-3"
             v-if="spinner.status == false"
           >
-            <div class="col-md-2 col-sm mb-1">
-              <b-button-group class="btn-group d-flex">
-                <b-button
-                  class="w-100"
-                  variant="success"
-                >Sc</b-button>
-                <b-button
-                  class="w-100"
-                  variant="warning"
-                >Rx</b-button>
-                <b-button
-                  class="w-100"
-                  variant="danger"
-                >Rx+</b-button>
-              </b-button-group>
-            </div>
-            <span class="col-md-2 col-sm mr-sm-2 px-md-1 mb-3 ">
-              <button
-                class="btn btn-info btn-block"
-                v-on:click="logWorkout"
-              >Plan workout</button>
-            </span>
-
             <span class="col-md-2 col-sm px-md-1">
               <button
                 class=" btn btn-success btn-block"
