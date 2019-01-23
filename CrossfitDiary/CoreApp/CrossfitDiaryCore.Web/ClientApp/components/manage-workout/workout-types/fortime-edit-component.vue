@@ -25,7 +25,7 @@
         ref="planWorkoutModal"
         title="Sure to plan this workout?"
       >
-        Are you sure you want to plan this workout?
+        Are you sure you want to plan this workout as {{selectedWorkoutDispayLevel}}?
         <div slot="modal-footer">
           <button
             type="button"
@@ -141,7 +141,7 @@
       class="row justify-content-end mt-3"
       v-if="spinner.status == false"
     >
-      <div class="col-md-3 col-sm data-selector-container">
+      <div class="col-lg-4 col-sm data-selector-container">
         <div class="form-group">
           <b-input-group>
             <date-picker
@@ -165,33 +165,25 @@
           </b-input-group>
         </div>
       </div>
-      <div class="col-md-2 col-sm mb-1">
+      <div class="col-lg-4 col-sm mb-1">
         <b-button-group class="btn-group d-flex">
           <b-button
             class="w-100"
             variant="success"
-            v-on:click="setPlanningWorkoutType(0)"
-          >Sc</b-button>
+            v-on:click="showPlanWorkoutModal(0)"
+          >Plan as Scaled</b-button>
           <b-button
             class="w-100"
             variant="warning"
-            v-on:click="setPlanningWorkoutType(1)"
-          >Rx</b-button>
+            v-on:click="showPlanWorkoutModal(1)"
+          >Plan as Rx</b-button>
           <b-button
             class="w-100"
             variant="danger"
-            v-on:click="setPlanningWorkoutType(2)"
-          >Rx+</b-button>
+            v-on:click="showPlanWorkoutModal(2)"
+          >Plan as Rx+</b-button>
         </b-button-group>
       </div>
-      <span class="col-md-2 col-sm mr-sm-2 px-md-1 mb-3 ">
-        <button
-          :disabled="toLogModel.isPlanned == false"
-          class="btn btn-info btn-block"
-          v-on:click="showPlanWorkoutModal"
-        >Plan workout</button>
-      </span>
-
     </div>
     <div class="want-to-log-container my-3">
       <div class="log-workout-container">
@@ -334,6 +326,7 @@ export default class ForTimeEditComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
   spinner: SpinnerModel = new SpinnerModel(false);
+  selectedWorkoutDispayLevel: string = "";
   $refs: {
     logWorkoutModal: HTMLFormElement;
     planWorkoutModal: HTMLFormElement;
@@ -375,10 +368,7 @@ export default class ForTimeEditComponent extends Vue {
     });
   }
 
-  setPlanningWorkoutType(type: PlanningWorkoutLevel) {
-    this.toLogModel.isPlanned = true;
-    this.toLogModel.planningWorkoutLevel = type;
-  }
+  setPlanningWorkoutType(type: PlanningWorkoutLevel) {}
 
   showLogWorkoutModal(): void {
     this.$validator.validate();
@@ -390,11 +380,13 @@ export default class ForTimeEditComponent extends Vue {
     });
   }
 
-  showPlanWorkoutModal(): void {
+  showPlanWorkoutModal(type: PlanningWorkoutLevel): void {
     this.$validator.validate();
 
     this.$validator.validate().then(isValid => {
       if (isValid) {
+        this.toLogModel.planningWorkoutLevel = type;
+        this.selectedWorkoutDispayLevel = PlanningWorkoutLevel[type];
         this.$refs.planWorkoutModal.show();
       }
     });
