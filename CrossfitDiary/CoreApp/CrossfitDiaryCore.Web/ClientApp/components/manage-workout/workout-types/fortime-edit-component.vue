@@ -21,6 +21,26 @@
           >Confirm</button>
         </div>
       </b-modal>
+      <b-modal
+        ref="planWorkoutModal"
+        title="Sure to plan this workout?"
+      >
+        Are you sure you want to plan this workout?
+        <div slot="modal-footer">
+          <button
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-default"
+            @click="hidePlanModal"
+          >Close</button>
+          <button
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-info"
+            @click="logWorkout"
+          >Confirm</button>
+        </div>
+      </b-modal>
     </div>
     <div class="routine-complex-info">
       <div class="row">
@@ -168,7 +188,7 @@
         <button
           :disabled="toLogModel.isPlanned == false"
           class="btn btn-info btn-block"
-          v-on:click="logWorkout"
+          v-on:click="showPlanWorkoutModal"
         >Plan workout</button>
       </span>
 
@@ -316,6 +336,7 @@ export default class ForTimeEditComponent extends Vue {
   spinner: SpinnerModel = new SpinnerModel(false);
   $refs: {
     logWorkoutModal: HTMLFormElement;
+    planWorkoutModal: HTMLFormElement;
   };
   mounted() {
     if (workouter != null && workouter.toLogWorkoutRawModel != null) {
@@ -369,8 +390,21 @@ export default class ForTimeEditComponent extends Vue {
     });
   }
 
+  showPlanWorkoutModal(): void {
+    this.$validator.validate();
+
+    this.$validator.validate().then(isValid => {
+      if (isValid) {
+        this.$refs.planWorkoutModal.show();
+      }
+    });
+  }
+
   hideLogModal(): void {
     this.$refs.logWorkoutModal.hide();
+  }
+  hidePlanModal(): void {
+    this.$refs.planWorkoutModal.hide();
   }
 }
 </script>
