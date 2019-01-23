@@ -171,7 +171,7 @@
             class="w-100"
             variant="success"
             v-on:click="showPlanWorkoutModal(0)"
-          >Plan as Scaled</b-button>
+          >Plan as Sc</b-button>
           <b-button
             class="w-100"
             variant="warning"
