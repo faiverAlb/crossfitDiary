@@ -1,5 +1,27 @@
 ﻿<template>
   <div>
+    <div>
+      <b-modal
+        ref="logWorkoutModal"
+        title="Sure to log this workout?"
+      >
+        Are you sure you want to log this workout?
+        <div slot="modal-footer">
+          <button
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-default"
+            @click="hideLogModal"
+          >Close</button>
+          <button
+            type="button"
+            data-dismiss="modal"
+            class="btn btn-primary btn-success"
+            @click="logWorkout"
+          >Confirm</button>
+        </div>
+      </b-modal>
+    </div>
     <div class="routine-complex-info">
       <div class="row">
         <div class="col">
@@ -57,7 +79,7 @@
               <b-form-input
                 v-model="model.roundsCount"
                 v-mask="'#####'"
-                type="number"
+                type="text"
                 name="roundsCount"
                 v-validate="'required'"
                 :state="fields.roundsCount && fields.roundsCount.valid"
@@ -128,19 +150,23 @@
           <b-button
             class="w-100"
             variant="success"
+            v-on:click="setPlanningWorkoutType(0)"
           >Sc</b-button>
           <b-button
             class="w-100"
             variant="warning"
+            v-on:click="setPlanningWorkoutType(1)"
           >Rx</b-button>
           <b-button
             class="w-100"
             variant="danger"
+            v-on:click="setPlanningWorkoutType(2)"
           >Rx+</b-button>
         </b-button-group>
       </div>
       <span class="col-md-2 col-sm mr-sm-2 px-md-1 mb-3 ">
         <button
+          :disabled="toLogModel.isPlanned == false"
           class="btn btn-info btn-block"
           v-on:click="logWorkout"
         >Plan workout</button>
@@ -210,7 +236,7 @@
             <span class="col-md-2 col-sm px-md-1">
               <button
                 class=" btn btn-success btn-block"
-                v-on:click="logWorkout"
+                v-on:click="showLogWorkoutModal"
               >Log workout</button>
             </span>
           </div>
@@ -237,6 +263,7 @@ import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
 import bAlert from "bootstrap-vue/es/components/alert/alert";
 import bButton from "bootstrap-vue/es/components/button/button";
 import bButtonGroup from "bootstrap-vue/es/components/button-group/button-group";
+import bModal from "bootstrap-vue/es/components/modal/modal";
 import datePicker from "vue-bootstrap-datetimepicker";
 import { mask } from "vue-the-mask";
 import { InputGroup } from "bootstrap-vue/es/components";
@@ -254,7 +281,10 @@ import ErrorAlertComponent from "../../error-alert-component.vue";
 /* models and styles */
 import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
 import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
-import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
+import {
+  ToLogWorkoutViewModel,
+  PlanningWorkoutLevel
+} from "../../../models/viewModels/ToLogWorkoutViewModel";
 import { WorkoutType } from "../../../models/viewModels/WorkoutType";
 import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
@@ -273,6 +303,7 @@ declare var workouter: {
     bAlert,
     bButton,
     bButtonGroup,
+    bModal,
     Spinner,
     ErrorAlertComponent
   },
@@ -283,7 +314,9 @@ export default class ForTimeEditComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
   spinner: SpinnerModel = new SpinnerModel(false);
-
+  $refs: {
+    logWorkoutModal: HTMLFormElement;
+  };
   mounted() {
     if (workouter != null && workouter.toLogWorkoutRawModel != null) {
       this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
@@ -319,6 +352,25 @@ export default class ForTimeEditComponent extends Vue {
           });
       }
     });
+  }
+
+  setPlanningWorkoutType(type: PlanningWorkoutLevel) {
+    this.toLogModel.isPlanned = true;
+    this.toLogModel.planningWorkoutLevel = type;
+  }
+
+  showLogWorkoutModal(): void {
+    this.$validator.validate();
+
+    this.$validator.validate().then(isValid => {
+      if (isValid) {
+        this.$refs.logWorkoutModal.show();
+      }
+    });
+  }
+
+  hideLogModal(): void {
+    this.$refs.logWorkoutModal.hide();
   }
 }
 </script>
