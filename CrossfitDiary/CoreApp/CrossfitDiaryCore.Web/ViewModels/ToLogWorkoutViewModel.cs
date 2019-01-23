@@ -26,12 +26,6 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("isEditMode")]
         public bool IsEditMode { get; set; }
 
-        [JsonProperty("isPlanned")]
-        public bool IsPlanned { get; set; }
-
-        [JsonProperty("planningWorkoutLevel")]
-        public PlanningWorkoutLevel? PlanningWorkoutLevel { get; set; }
-
         [JsonProperty("isRx")]
         public bool IsRx { get; set; }
 
@@ -67,12 +61,5 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("workoutViewModel")]
         public WorkoutViewModel WorkoutViewModel { get; set; }
 
-    }
-
-    public enum PlanningWorkoutLevel
-    {
-        Scaled = 0,
-        Rx = 1,
-        RxPlus = 2
     }
 }

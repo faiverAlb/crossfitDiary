@@ -145,11 +145,11 @@
         <div class="form-group">
           <b-input-group>
             <date-picker
-              v-model="toLogModel.displayDate"
+              v-model="model.displayPlanDate"
               :config="{ format: 'DD.MM.YYYY'}"
               placeholder="Select date"
-              name="toLogModelDate"
-              :state="fields.toLogModelDate && fields.toLogModelDate.valid"
+              name="toPlanModelDate"
+              :state="fields.displayPlanDate && fields.displayPlanDate.valid"
               v-validate="'required'"
               :wrap="true"
             ></date-picker>
@@ -192,6 +192,30 @@
             class="row justify-content-end"
             v-bind:class="{saving:spinner.status}"
           >
+            <div class="col-lg-4 col-sm data-selector-container">
+              <div class="form-group">
+                <b-input-group>
+                  <date-picker
+                    v-model="toLogModel.displayDate"
+                    :config="{ format: 'DD.MM.YYYY'}"
+                    placeholder="Select date"
+                    name="toLogModelDate"
+                    :state="fields.toLogModelDate && fields.toLogModelDate.valid"
+                    v-validate="'required'"
+                    :wrap="true"
+                  ></date-picker>
+                  <b-input-group-append>
+                    <button
+                      class="btn btn-secondary datepickerbutton"
+                      type="button"
+                      title="Toggle"
+                    >
+                      <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
+                    </button>
+                  </b-input-group-append>
+                </b-input-group>
+              </div>
+            </div>
             <div class="col-lg-3 col-sm pr-lg-2 total-time-log-container">
               <b-input-group class="mb-2">
                 <b-input-group-prepend>
@@ -291,12 +315,12 @@ import ExercisesListComponent from "./exercises-list-component.vue";
 import ErrorAlertComponent from "../../error-alert-component.vue";
 
 /* models and styles */
-import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
-import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
 import {
-  ToLogWorkoutViewModel,
+  WorkoutViewModel,
   PlanningWorkoutLevel
-} from "../../../models/viewModels/ToLogWorkoutViewModel";
+} from "../../../models/viewModels/WorkoutViewModel";
+import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
+import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
 import { WorkoutType } from "../../../models/viewModels/WorkoutType";
 import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
@@ -382,10 +406,9 @@ export default class ForTimeEditComponent extends Vue {
 
   showPlanWorkoutModal(type: PlanningWorkoutLevel): void {
     this.$validator.validate();
-
     this.$validator.validate().then(isValid => {
       if (isValid) {
-        this.toLogModel.planningWorkoutLevel = type;
+        this.model.planningWorkoutLevel = type;
         this.selectedWorkoutDispayLevel = PlanningWorkoutLevel[type];
         this.$refs.planWorkoutModal.show();
       }
