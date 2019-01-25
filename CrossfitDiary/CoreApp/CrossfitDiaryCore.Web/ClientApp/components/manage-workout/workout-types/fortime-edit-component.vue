@@ -37,7 +37,7 @@
             type="button"
             data-dismiss="modal"
             class="btn btn-primary btn-info"
-            @click="logWorkout"
+            @click="planWorkout"
           >Confirm</button>
         </div>
       </b-modal>
@@ -367,6 +367,26 @@ export default class ForTimeEditComponent extends Vue {
   }
   mutateData(): void {}
 
+  planWorkout() {
+    this.$validator.validate();
+
+    this.$validator.validate().then(isValid => {
+      if (isValid) {
+        let crossfitterService: CrossfitterService = new CrossfitterService();
+        this.hidePlanModal();
+        this.spinner.activate();
+        crossfitterService
+          .createAndPlanWorkout(this.model)
+          .then(data => {
+            window.location.href = "\\";
+          })
+          .catch(data => {
+            this.spinner.disable();
+            this.errorAlertModel.setError(data.response.statusText);
+          });
+      }
+    });
+  }
   logWorkout() {
     this.$validator.validate();
 
@@ -378,7 +398,9 @@ export default class ForTimeEditComponent extends Vue {
           logWorkoutViewModel: this.toLogModel
         };
         let crossfitterService: CrossfitterService = new CrossfitterService();
+        this.hideLogModal();
         this.spinner.activate();
+
         crossfitterService
           .createAndLogWorkout(model)
           .then(data => {

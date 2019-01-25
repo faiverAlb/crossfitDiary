@@ -15,7 +15,7 @@ var WorkoutViewModel = /** @class */ (function () {
         this.exercisesToDoList = [];
         this.children = [];
         this.isInnerWorkout = false;
-        this.displayPlanDate = null;
+        this.displayPlanDate = new Date().toLocaleDateString(); // default value for new model;
         this.IsForTime = function () {
             return _this.workoutType == WorkoutType.ForTime;
         };

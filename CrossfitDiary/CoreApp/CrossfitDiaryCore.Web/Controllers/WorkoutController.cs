@@ -142,6 +142,21 @@ namespace CrossfitDiaryCore.Web.Controllers
             }
         }
 
+        /// <summary>
+        ///     Create and log workout
+        /// </summary>
+        /// <param name="workoutViewModel">Complex model with two properties: new workout and log workout models</param>
+        [HttpPost]
+        [Route("api/createAndPlanWorkout")]
+        public async Task CreateAndPlanWorkout([FromBody] WorkoutViewModel workoutViewModel)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(workoutViewModel);
+            newWorkoutRoutine.CreatedBy = user;
+            _manageWorkoutsService.PlanWorkout(newWorkoutRoutine, user);
+            _memoryCache.Remove(_allMainpageResultsConst);
+        }
+
 
         //
         //        /// <summary>
