@@ -33,6 +33,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.TimeToWork, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeToWork)))
                 .ForMember(x => x.TimeCap, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeCap)))
                 .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => ParseTimeSpanFromString(y.RestBetweenRounds)))
+                .ForMember(x => x.PlanningLevel, x => x.MapFrom(y => y.PlanningWorkoutLevel))
                 .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => ParseTimeSpanFromString(y.RestBetweenExercises)));
 
             
