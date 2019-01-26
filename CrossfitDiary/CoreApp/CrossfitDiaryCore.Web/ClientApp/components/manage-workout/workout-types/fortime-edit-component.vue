@@ -21,26 +21,6 @@
           >Confirm</button>
         </div>
       </b-modal>
-      <b-modal
-        ref="planWorkoutModal"
-        title="Sure to plan this workout?"
-      >
-        Are you sure you want to plan this workout as {{selectedWorkoutDispayLevel}}?
-        <div slot="modal-footer">
-          <button
-            type="button"
-            data-dismiss="modal"
-            class="btn btn-default"
-            @click="hidePlanModal"
-          >Close</button>
-          <button
-            type="button"
-            data-dismiss="modal"
-            class="btn btn-primary btn-info"
-            @click="planWorkout"
-          >Confirm</button>
-        </div>
-      </b-modal>
     </div>
     <div class="routine-complex-info">
       <div class="row">
@@ -137,54 +117,11 @@
         </div>
       </div>
     </div>
-    <div
-      class="row justify-content-end mt-3"
+    <EditPlannedWorkoutComponent
+      :planningWorkout="model"
       v-if="spinner.status == false"
-    >
-      <div class="col-lg-4 col-sm data-selector-container">
-        <div class="form-group">
-          <b-input-group>
-            <date-picker
-              v-model="model.displayPlanDate"
-              :config="{ format: 'DD.MM.YYYY'}"
-              placeholder="Select date"
-              name="toPlanModelDate"
-              :state="fields.displayPlanDate && fields.displayPlanDate.valid"
-              v-validate="'required'"
-              :wrap="true"
-            ></date-picker>
-            <b-input-group-append>
-              <button
-                class="btn btn-secondary datepickerbutton"
-                type="button"
-                title="Toggle"
-              >
-                <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
-              </button>
-            </b-input-group-append>
-          </b-input-group>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm mb-1">
-        <b-button-group class="btn-group d-flex">
-          <b-button
-            class="w-100"
-            variant="success"
-            v-on:click="showPlanWorkoutModal(0)"
-          >Plan as Sc</b-button>
-          <b-button
-            class="w-100"
-            variant="warning"
-            v-on:click="showPlanWorkoutModal(1)"
-          >Plan as Rx</b-button>
-          <b-button
-            class="w-100"
-            variant="danger"
-            v-on:click="showPlanWorkoutModal(2)"
-          >Plan as Rx+</b-button>
-        </b-button-group>
-      </div>
-    </div>
+    ></EditPlannedWorkoutComponent>
+
     <div class="want-to-log-container my-3">
       <div class="log-workout-container">
         <div class="col-md-12 text-right">
@@ -313,7 +250,7 @@ import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import CrossfitterService from "../../../CrossfitterService";
 import ExercisesListComponent from "./exercises-list-component.vue";
 import ErrorAlertComponent from "../../error-alert-component.vue";
-
+import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
 /* models and styles */
 import {
   WorkoutViewModel,
@@ -341,7 +278,8 @@ declare var workouter: {
     bButtonGroup,
     bModal,
     Spinner,
-    ErrorAlertComponent
+    ErrorAlertComponent,
+    EditPlannedWorkoutComponent
   },
   directives: { mask }
 })
@@ -350,10 +288,8 @@ export default class ForTimeEditComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
   spinner: SpinnerModel = new SpinnerModel(false);
-  selectedWorkoutDispayLevel: string = "";
   $refs: {
     logWorkoutModal: HTMLFormElement;
-    planWorkoutModal: HTMLFormElement;
   };
   mounted() {
     if (workouter != null && workouter.toLogWorkoutRawModel != null) {
@@ -367,26 +303,6 @@ export default class ForTimeEditComponent extends Vue {
   }
   mutateData(): void {}
 
-  planWorkout() {
-    this.$validator.validate();
-
-    this.$validator.validate().then(isValid => {
-      if (isValid) {
-        let crossfitterService: CrossfitterService = new CrossfitterService();
-        this.hidePlanModal();
-        this.spinner.activate();
-        crossfitterService
-          .createAndPlanWorkout(this.model)
-          .then(data => {
-            window.location.href = "\\";
-          })
-          .catch(data => {
-            this.spinner.disable();
-            this.errorAlertModel.setError(data.response.statusText);
-          });
-      }
-    });
-  }
   logWorkout() {
     this.$validator.validate();
 
@@ -426,22 +342,8 @@ export default class ForTimeEditComponent extends Vue {
     });
   }
 
-  showPlanWorkoutModal(type: PlanningWorkoutLevel): void {
-    this.$validator.validate();
-    this.$validator.validate().then(isValid => {
-      if (isValid) {
-        this.model.planningWorkoutLevel = type;
-        this.selectedWorkoutDispayLevel = PlanningWorkoutLevel[type];
-        this.$refs.planWorkoutModal.show();
-      }
-    });
-  }
-
   hideLogModal(): void {
     this.$refs.logWorkoutModal.hide();
-  }
-  hidePlanModal(): void {
-    this.$refs.planWorkoutModal.hide();
   }
 }
 </script>
