@@ -47,16 +47,19 @@
         <b-button
           class="w-100"
           variant="success"
+          v-bind:class="{focus:isActive(0)}"
           v-on:click="showPlanWorkoutModal(0)"
         >Plan as Sc</b-button>
         <b-button
           class="w-100"
           variant="warning"
+          v-bind:class="{focus:isActive(1)}"
           v-on:click="showPlanWorkoutModal(1)"
         >Plan as Rx</b-button>
         <b-button
           class="w-100"
           variant="danger"
+          v-bind:class="{focus:isActive(2)}"
           v-on:click="showPlanWorkoutModal(2)"
         >Plan as Rx+</b-button>
       </b-button-group>
@@ -92,18 +95,14 @@ import {
 export default class EditPlannedWorkoutComponent extends Vue {
   @Prop() planningWorkout: WorkoutViewModel;
   selectedWorkoutDispayLevel: string = "";
+  selectedPlanningLevel?: PlanningWorkoutLevel = null;
   $refs: {
     planWorkoutModal: HTMLFormElement;
   };
   showPlanWorkoutModal(type: PlanningWorkoutLevel): void {
-    this.$validator.validate();
-    this.$validator.validate().then(isValid => {
-      if (isValid) {
-        this.planningWorkout.planningWorkoutLevel = type;
-        this.selectedWorkoutDispayLevel = PlanningWorkoutLevel[type];
-        this.$refs.planWorkoutModal.show();
-      }
-    });
+    this.selectedPlanningLevel = type;
+    this.selectedWorkoutDispayLevel = PlanningWorkoutLevel[type];
+    this.$refs.planWorkoutModal.show();
   }
 
   hidePlanModal(): void {
@@ -111,8 +110,13 @@ export default class EditPlannedWorkoutComponent extends Vue {
   }
 
   planWorkout() {
+    this.planningWorkout.planningWorkoutLevel = this.selectedPlanningLevel;
     this.hidePlanModal();
     this.$emit("planWorkoutAction", {});
+  }
+
+  isActive(type: PlanningWorkoutLevel) {
+    return type == this.planningWorkout.planningWorkoutLevel;
   }
 }
 </script>
