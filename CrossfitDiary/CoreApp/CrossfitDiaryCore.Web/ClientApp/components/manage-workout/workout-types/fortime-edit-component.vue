@@ -120,7 +120,7 @@
     <EditPlannedWorkoutComponent
       :planningWorkout="model"
       @planWorkoutAction="planWorkoutAction"
-      v-if="spinner.status == false"
+      v-if="canUserPlanWorkouts && spinner.status == false"
     ></EditPlannedWorkoutComponent>
 
     <div class="want-to-log-container my-3">
@@ -266,6 +266,7 @@ import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
 declare var workouter: {
   toLogWorkoutRawModel: ToLogWorkoutViewModel;
   workoutViewModel: WorkoutViewModel;
+  canUserPlanWorkouts: boolean;
 };
 
 @Component({
@@ -289,6 +290,7 @@ export default class ForTimeEditComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
   spinner: SpinnerModel = new SpinnerModel(false);
+  canUserPlanWorkouts: boolean = false;
   $refs: {
     logWorkoutModal: HTMLFormElement;
   };
@@ -301,6 +303,7 @@ export default class ForTimeEditComponent extends Vue {
     } else {
       this.model.workoutType = WorkoutType.ForTime;
     }
+    this.canUserPlanWorkouts = workouter.canUserPlanWorkouts;
   }
   mutateData(): void {}
 

@@ -19,6 +19,7 @@ namespace CrossfitDiaryCore.Web.Controllers
     public class WorkoutController : Controller
     {
         private readonly ReadWorkoutsService _readWorkoutsService;
+        private readonly ReadUsersService _readUsersService;
         private readonly ManageWorkoutsService _manageWorkoutsService;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -28,6 +29,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         private string _allMainpageResultsConst = "all-mainpage-results";
 
         public WorkoutController(ReadWorkoutsService readWorkoutsService
+            , ReadUsersService readUsersService
             , ManageWorkoutsService manageWorkoutsService
             , IMapper mapper
             , IHttpContextAccessor httpContextAccessor
@@ -35,6 +37,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             , IMemoryCache memoryCache)
         {
             _readWorkoutsService = readWorkoutsService;
+            _readUsersService = readUsersService;
             _manageWorkoutsService = manageWorkoutsService;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
@@ -45,9 +48,10 @@ namespace CrossfitDiaryCore.Web.Controllers
         public IActionResult Index(int? crossfitterWorkoutId, int? workoutId)
         {
             //TODO: Add check rights!
+            string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            ViewBag.canUserPlanWorkouts = _readUsersService.CanUserPlanWorkouts(userId);
             if (crossfitterWorkoutId.HasValue) // AND HAS RIGHTS!
             {
-                string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(userId, crossfitterWorkoutId.Value);
                 if (crossfitterWorkout == null)
                 {

@@ -22,7 +22,8 @@ namespace CrossfitDiaryCore.DAL.EF
         public DbSet<ExerciseMeasure> ExerciseMeasures { get; set; }
         public DbSet<RoutineSimple> SimpleRoutines { get; set; }
         public DbSet<RoutineComplex> ComplexRoutines { get; set; }
-        //public DbSet<ExerciseMeasureType> ExerciseMeasureTypes { get; set; }
+
+        public DbSet<ApplicationUser> Users { get; set; }
 
         public virtual DbSet<CrossfitterWorkout> CrossfitterWorkouts { get; set; }
 
