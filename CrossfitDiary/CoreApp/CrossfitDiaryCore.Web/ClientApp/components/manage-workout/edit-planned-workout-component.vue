@@ -112,24 +112,7 @@ export default class EditPlannedWorkoutComponent extends Vue {
 
   planWorkout() {
     this.hidePlanModal();
-    // this.$validator.validate();
-
-    // this.$validator.validate().then(isValid => {
-    //   if (isValid) {
-    //     let crossfitterService: CrossfitterService = new CrossfitterService();
-    //     this.hidePlanModal();
-    //     this.spinner.activate();
-    //     crossfitterService
-    //       .createAndPlanWorkout(this.model)
-    //       .then(data => {
-    //         window.location.href = "\\";
-    //       })
-    //       .catch(data => {
-    //         this.spinner.disable();
-    //         this.errorAlertModel.setError(data.response.statusText);
-    //       });
-    //   }
-    // });
+    this.$emit("planWorkoutAction", {});
   }
 }
 </script>

@@ -119,6 +119,7 @@
     </div>
     <EditPlannedWorkoutComponent
       :planningWorkout="model"
+      @planWorkoutAction="planWorkoutAction"
       v-if="spinner.status == false"
     ></EditPlannedWorkoutComponent>
 
@@ -330,7 +331,25 @@ export default class ForTimeEditComponent extends Vue {
     });
   }
 
-  setPlanningWorkoutType(type: PlanningWorkoutLevel) {}
+  planWorkoutAction(): void {
+    this.$validator.validate();
+
+    this.$validator.validate().then(isValid => {
+      if (isValid) {
+        let crossfitterService: CrossfitterService = new CrossfitterService();
+        this.spinner.activate();
+        crossfitterService
+          .createAndPlanWorkout(this.model)
+          .then(data => {
+            window.location.href = "\\";
+          })
+          .catch(data => {
+            this.spinner.disable();
+            this.errorAlertModel.setError(data.response.statusText);
+          });
+      }
+    });
+  }
 
   showLogWorkoutModal(): void {
     this.$validator.validate();
