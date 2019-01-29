@@ -120,11 +120,15 @@
     <EditPlannedWorkoutComponent
       :planningWorkout="model"
       @planWorkoutAction="planWorkoutAction"
-      v-if="canUserPlanWorkouts && spinner.status == false"
+      v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
     ></EditPlannedWorkoutComponent>
 
-    <div class="want-to-log-container my-3">
-      <div class="log-workout-container">
+    <div
+      class="want-to-log-container my-3"
+      v-if="!workoutEdit.canUserSeePlanWorkouts"
+    >
+      <div class="
+      log-workout-container">
         <div class="col-md-12 text-right">
           <div
             class="row justify-content-end"
@@ -247,6 +251,10 @@ Vue.use(InputGroup);
 Vue.use(VeeValidate);
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 
+import { IWorkoutEditState } from "./../../../workout-edit-store/types";
+import { State, Action, Getter } from "vuex-class";
+const namespace: string = "workoutEdit";
+
 /* app components */
 import CrossfitterService from "../../../CrossfitterService";
 import ExercisesListComponent from "./exercises-list-component.vue";
@@ -266,7 +274,6 @@ import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
 declare var workouter: {
   toLogWorkoutRawModel: ToLogWorkoutViewModel;
   workoutViewModel: WorkoutViewModel;
-  canUserPlanWorkouts: boolean;
 };
 
 @Component({
@@ -290,10 +297,13 @@ export default class ForTimeEditComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
   spinner: SpinnerModel = new SpinnerModel(false);
-  canUserPlanWorkouts: boolean = false;
   $refs: {
     logWorkoutModal: HTMLFormElement;
   };
+
+  @State("workoutEdit")
+  workoutEdit: IWorkoutEditState;
+
   mounted() {
     if (workouter != null && workouter.toLogWorkoutRawModel != null) {
       this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
@@ -303,7 +313,6 @@ export default class ForTimeEditComponent extends Vue {
     } else {
       this.model.workoutType = WorkoutType.ForTime;
     }
-    this.canUserPlanWorkouts = workouter.canUserPlanWorkouts;
   }
   mutateData(): void {}
 

@@ -1,7 +1,10 @@
 ﻿<template>
-  <div>
+  <div class="d-flex justify-content-between">
     <div v-if="isEditMode">{{workoutTypeDisplay}}</div>
-    <div v-else>
+    <div
+      class="d-inline-block"
+      v-else
+    >
       <b-dropdown
         variant="link"
         size="lg"
@@ -148,19 +151,44 @@
         </div>
       </router-link>
     </div>
+    <div v-if="canUserPlanWorkouts">
+      <a
+        class="btn btn-warning text-light  d-inline-block p-0 "
+        href="#"
+        v-on:click="planWorkoutClick"
+      >
+        <div class="small-action-link-button">
+          <div class="icon-container">
+            <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
+          </div>
+          <div class="text-container">
+            <span v-if="!canUserSeePlanWorkouts">Plan</span>
+            <span v-else>Log</span>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 /* Font awesome icons */
 import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
 import { faListOl } from "@fortawesome/free-solid-svg-icons/faListOl";
 import { faRetweet } from "@fortawesome/free-solid-svg-icons/faRetweet";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPauseCircle } from "@fortawesome/free-regular-svg-icons/faPauseCircle";
 
-library.add(faClock, faCaretDown, faListOl, faRetweet, faPauseCircle);
+library.add(
+  faClock,
+  faCaretDown,
+  faListOl,
+  faRetweet,
+  faPauseCircle,
+  faCalendar
+);
 /**/
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -172,7 +200,12 @@ import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-i
 
 const namespace: string = "workoutEdit";
 import { WorkoutType } from "../../models/viewModels/WorkoutType";
-declare var workouter;
+declare var workouter: {
+  toLogWorkoutRawModel: any;
+  workoutViewModel: any;
+  canUserPlanWorkouts: boolean;
+};
+
 @Component({
   components: { FontAwesomeIcon, bDropdown, bDropdownItem }
 })
@@ -189,10 +222,19 @@ export default class WorkoutsNavigationComponent extends Vue {
 
   @Action("fetchExercises", { namespace })
   fetchExercises: any;
+
+  @Action("setCanUserSeePlanWorkouts", { namespace })
+  setCanUserSeePlanWorkouts: any;
+
   isEditMode: boolean = false;
+  canUserPlanWorkouts: boolean = false;
+  canUserSeePlanWorkouts: boolean = false;
   workoutTypeDisplay: string = "";
+
   mounted() {
     // fetching data as soon as the component's been mounted
+    this.canUserPlanWorkouts = workouter.canUserPlanWorkouts;
+    this.setCanUserSeePlanWorkouts(this.canUserSeePlanWorkouts);
     this.fetchExercises();
     this.isEditMode =
       workouter != null &&
@@ -222,6 +264,11 @@ export default class WorkoutsNavigationComponent extends Vue {
         break;
       }
     }
+  }
+
+  planWorkoutClick() {
+    this.canUserSeePlanWorkouts = !this.canUserSeePlanWorkouts;
+    this.setCanUserSeePlanWorkouts(this.canUserSeePlanWorkouts);
   }
 }
 </script>

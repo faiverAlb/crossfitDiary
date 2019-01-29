@@ -7,5 +7,8 @@ export const mutations: MutationTree<IWorkoutEditState> = {
   exercisesLoaded(state: IWorkoutEditState, payload: ExerciseViewModel[]) {
     state.error = false;
     state.exercises = payload;
+  },
+  canUserSeePlanWorkoutsConfigured(state: IWorkoutEditState, payload: boolean) {
+    state.canUserSeePlanWorkouts = payload;
   }
 };
