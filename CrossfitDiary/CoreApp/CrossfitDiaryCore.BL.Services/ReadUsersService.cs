@@ -1,4 +1,5 @@
-﻿using CrossfitDiaryCore.DAL.EF;
+﻿using System.Linq;
+using CrossfitDiaryCore.DAL.EF;
 
 namespace CrossfitDiaryCore.BL.Services
 {
@@ -16,7 +17,7 @@ namespace CrossfitDiaryCore.BL.Services
 
         public bool CanUserPlanWorkouts(string userId)
         {
-            return true;
+            return _workouterContext.Users.Single(x => x.Id == userId).CanPlanWorkouts;
         }
     }
 }
