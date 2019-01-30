@@ -1,1 +1,1 @@
-{"version":3,"file":"getters.js","sourceRoot":"","sources":["getters.ts"],"names":[],"mappings":"AAKA,MAAM,CAAC,IAAM,OAAO,GAA6C;IAC/D,kBAAkB,EAAlB,UAAmB,KAAK;QACtB,OAAO,KAAK,CAAC,SAAS,CAAC;QACvB,0BAA0B;QAC1B,oDAAoD;QACpD,kDAAkD;QAClD,qCAAqC;IACvC,CAAC;CACF,CAAC"}
+{"version":3,"file":"getters.js","sourceRoot":"","sources":["getters.ts"],"names":[],"mappings":"AAKA,MAAM,CAAC,IAAM,OAAO,GAA6C;IAC/D,kBAAkB,EAAlB,UAAmB,KAAwB;QACzC,OAAO,KAAK,CAAC,SAAS,CAAC;QACvB,0BAA0B;QAC1B,oDAAoD;QACpD,kDAAkD;QAClD,qCAAqC;IACvC,CAAC;CACF,CAAC"}

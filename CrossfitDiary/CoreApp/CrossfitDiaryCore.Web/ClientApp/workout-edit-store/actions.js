@@ -9,6 +9,11 @@ export var actions = {
             var exercises = data;
             commit("exercisesLoaded", exercises);
         });
+    },
+    // tslint:disable-next-line:typedef
+    setCanUserSeePlanWorkouts: function (_a, newValue) {
+        var commit = _a.commit;
+        commit("canUserSeePlanWorkoutsConfigured", newValue);
     }
 };
 // }

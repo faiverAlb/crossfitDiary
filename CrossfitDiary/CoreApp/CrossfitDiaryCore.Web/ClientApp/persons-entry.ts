@@ -1,19 +1,21 @@
-﻿import Vue from "vue";
+﻿/* Font awesome icons */
+import { dom } from "@fortawesome/fontawesome-svg-core";
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+
+/* public components */
+import Vue from "vue";
+import Spinner from "vue-spinner-component/src/Spinner.vue";
+/* app components */
+import PersonsActivitiesComponent from "./components/person-activities-component.vue";
+import PlannedWorkoutDisplayComponent from "./components/planned-workout-display-component.vue";
+import CrossfitterService from "./CrossfitterService";
+import ErrorAlertComponent from "./components/error-alert-component.vue";
+/* models and styles */
 import "./style/persons.scss";
 import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel";
-
-import PersonsActivitiesComponent from "./components/person-activities-component.vue";
-import CrossfitterService from "./CrossfitterService";
-const apiService: CrossfitterService = new CrossfitterService();
-
-import { dom } from "@fortawesome/fontawesome-svg-core";
-
-import Spinner from "vue-spinner-component/src/Spinner.vue";
 import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 import { ErrorAlertModel } from "./models/viewModels/ErrorAlertModel";
-import ErrorAlertComponent from "./components/error-alert-component.vue";
-
-dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+const apiService: CrossfitterService = new CrossfitterService();
 
 let vue = new Vue({
   el: "#home-page-container",
@@ -26,21 +28,23 @@ let vue = new Vue({
       </div>
       <div class="row">
         <div class="offset-5">
-          <spinner 
-            :status="spinner.status"  
-            :size="spinner.size" 
-            :color="spinner.color"  
-            :depth="spinner.depth" 
+          <spinner
+            :status="spinner.status"
+            :size="spinner.size"
+            :color="spinner.color"
+            :depth="spinner.depth"
             :rotation="spinner.rotation"
             :speed="spinner.speed">
           </spinner>
         </div>
       </div>
-      <PersonsActivitiesComponent :activities="activities"/> 
+      <PlannedWorkoutDisplayComponent></PlannedWorkoutDisplayComponent>
+      <PersonsActivitiesComponent :activities="activities"/>
     </div>
     `,
   components: {
     PersonsActivitiesComponent,
+    PlannedWorkoutDisplayComponent,
     Spinner,
     ErrorAlertComponent
   },
