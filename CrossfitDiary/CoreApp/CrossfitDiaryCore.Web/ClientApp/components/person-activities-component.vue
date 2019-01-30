@@ -1,6 +1,5 @@
 ﻿<template>
   <div>
-    <!-- <spinner></spinner> -->
     <div>
       <b-modal
         ref="myModalRef"
