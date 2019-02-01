@@ -27,7 +27,7 @@ let vue = new Vue({
           <ErrorAlertComponent :errorAlertModel="errorAlertModel"></ErrorAlertComponent>
         </div>
       </div>
-      <PlannedWorkoutDisplayComponent></PlannedWorkoutDisplayComponent>
+      <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts"></PlannedWorkoutDisplayComponent>
       <div class="row">
         <div class="offset-5">
           <spinner

@@ -4,24 +4,23 @@
       name="fade"
       mode="out-in"
     >
-      <div class="row">
+      <div
+        class="row"
+        v-if="plannedScaled"
+      >
         <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
           <div class="item-header d-flex flex-row justify-content-between  ">
             <div class="username">
               <span class="text-info">
-                Planned workout
+                Scaled
               </span>
             </div>
             <div class="">
               Today
-
             </div>
           </div>
           <div class="item-body pt-1">
-            <!-- <WorkoutDisplayComponent :workoutViewModel="model.workoutViewModel"></WorkoutDisplayComponent> -->
-            test test
-            <hr />
-            test test
+            <WorkoutDisplayComponent :workoutViewModel="plannedScaled"></WorkoutDisplayComponent>
           </div>
           <div class="item-footer text-right pt-1">
             <div class="action-buttons">
@@ -71,11 +70,11 @@ import bButton from "bootstrap-vue/es/components/button/button";
 
 /* app components */
 import WorkoutDisplayComponent from "./workout-display-component.vue";
-// import CrossfitterService from "./../CrossfitterService";
-// const _apiService: CrossfitterService = new CrossfitterService();
-
 /* models and styles */
-import { WorkoutViewModel } from "../models/viewModels/WorkoutViewModel";
+import {
+  WorkoutViewModel,
+  PlanningWorkoutLevel
+} from "../models/viewModels/WorkoutViewModel";
 
 @Component({
   components: {
@@ -86,8 +85,18 @@ import { WorkoutViewModel } from "../models/viewModels/WorkoutViewModel";
   }
 })
 export default class PlannedWorkoutDisplayComponent extends Vue {
-  @Prop() model: WorkoutViewModel;
+  @Prop() plannedWorkouts: WorkoutViewModel[];
+
   show: boolean = true;
+
+  get plannedScaled() {
+    if (this.plannedWorkouts[0]) {
+      return this.plannedWorkouts.find(
+        x => x.planningWorkoutLevel == PlanningWorkoutLevel.Scaled
+      );
+    }
+    return null;
+  }
 }
 </script>
 

@@ -15,7 +15,7 @@ interface IWorkoutViewModel {
   workoutTypeDisplay?: string;
   children: WorkoutViewModel[];
   displayPlanDate?: string;
-
+  planningWorkoutLevel: PlanningWorkoutLevel;
   isInnerWorkout: boolean;
 }
 export enum PlanningWorkoutLevel {
