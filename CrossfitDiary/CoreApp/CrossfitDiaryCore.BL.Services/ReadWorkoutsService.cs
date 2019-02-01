@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CrossfitDiaryCore.BL.Services.DapperStuff;
@@ -324,6 +325,18 @@ namespace CrossfitDiaryCore.BL.Services
                 .ThenInclude(x => x.Exercise)
                 .ThenInclude(x => x.ExerciseMeasures)
                 .SingleOrDefault(x => x.Id == workoutId);
+        }
+
+        public List<RoutineComplex> GetPlannedWorkouts(DateTime today)
+        {
+            return _context.ComplexRoutines.Where(x => x.PlanDate.HasValue && x.PlanDate.Value.Date == today.Date)
+                .Include(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .Include(x => x.Children)
+                .ThenInclude(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures).ToList();
         }
     }
 }

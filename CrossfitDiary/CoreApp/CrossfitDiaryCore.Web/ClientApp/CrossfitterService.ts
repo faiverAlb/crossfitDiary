@@ -20,6 +20,11 @@ export default class CrossfitterService {
       return jsonData.data.map(x => new ToLogWorkoutViewModel().deserialize(x));
     });
   };
+  public getPlannedWorkoutsForToday = (): Promise<WorkoutViewModel[]> => {
+    return axios.get(`api/getPlannedWorkoutsForToday`).then(jsonData => {
+      return jsonData.data.map(x => new WorkoutViewModel().deserialize(x));
+    });
+  };
 
   public getExercises = (): Promise<ExerciseViewModel[]> => {
     return axios.get<ExerciseViewModel[]>("api/getExercises").then(jsonData => {

@@ -15,6 +15,7 @@ import "./style/persons.scss";
 import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel";
 import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 import { ErrorAlertModel } from "./models/viewModels/ErrorAlertModel";
+import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 const apiService: CrossfitterService = new CrossfitterService();
 
 let vue = new Vue({
@@ -51,12 +52,21 @@ let vue = new Vue({
   data() {
     return {
       activities: ToLogWorkoutViewModel[0],
+      plannedWorkouts: WorkoutViewModel,
       spinner: new SpinnerModel(true),
       errorAlertModel: new ErrorAlertModel()
     };
   },
   mounted() {
     this.spinner.activate();
+    apiService
+      .getPlannedWorkoutsForToday()
+      .then(data => {
+        this.plannedWorkouts = data;
+      })
+      .catch(data => {
+        this.errorAlertModel.setError(data.response.statusText);
+      });
     apiService
       .getAllCrossfittersWorkouts()
       .then(data => {

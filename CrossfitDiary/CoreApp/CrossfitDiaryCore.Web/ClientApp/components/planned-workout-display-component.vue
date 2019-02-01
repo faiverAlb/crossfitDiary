@@ -1,34 +1,40 @@
 ﻿<template>
   <div class="planned-workouts container">
-    <div class="row">
-      <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
-        <div class="item-header d-flex flex-row justify-content-between  ">
-          <div class="username">
-            <span class="text-info">
-              Planned workout
-            </span>
-          </div>
-          <div class="">
-            Today
+    <transition
+      name="fade"
+      mode="out-in"
+    >
+      <div class="row">
+        <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
+          <div class="item-header d-flex flex-row justify-content-between  ">
+            <div class="username">
+              <span class="text-info">
+                Planned workout
+              </span>
+            </div>
+            <div class="">
+              Today
 
+            </div>
           </div>
-        </div>
-        <div class="item-body pt-1">
-          <!-- <WorkoutDisplayComponent :workoutViewModel="model.workoutViewModel"></WorkoutDisplayComponent> -->
-          test test
-          <hr />
-          test test
-        </div>
-        <div class="item-footer text-right pt-1">
-          <div class="action-buttons">
+          <div class="item-body pt-1">
+            <!-- <WorkoutDisplayComponent :workoutViewModel="model.workoutViewModel"></WorkoutDisplayComponent> -->
+            test test
+            <hr />
+            test test
+          </div>
+          <div class="item-footer text-right pt-1">
+            <div class="action-buttons">
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
     <div class="row mt-1">
       <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-3 py-2">
         <b-button-group class="btn-group d-flex">
           <b-button
+            v-on:click="show = !show"
             class="w-100 "
             variant="success"
           >Scaled</b-button>
@@ -69,7 +75,7 @@ import WorkoutDisplayComponent from "./workout-display-component.vue";
 // const _apiService: CrossfitterService = new CrossfitterService();
 
 /* models and styles */
-import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
+import { WorkoutViewModel } from "../models/viewModels/WorkoutViewModel";
 
 @Component({
   components: {
@@ -79,7 +85,10 @@ import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewMode
     bButton
   }
 })
-export default class PlannedWorkoutDisplayComponent extends Vue {}
+export default class PlannedWorkoutDisplayComponent extends Vue {
+  @Prop() model: WorkoutViewModel;
+  show: boolean = true;
+}
 </script>
 
 <style>

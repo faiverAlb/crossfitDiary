@@ -27,6 +27,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         private readonly IMemoryCache _memoryCache;
             
         private string _allMainpageResultsConst = "all-mainpage-results";
+        private string _plannedWorkouts = "planned-workouts";
 
         public WorkoutController(ReadWorkoutsService readWorkoutsService
             , ReadUsersService readUsersService
@@ -104,6 +105,28 @@ namespace CrossfitDiaryCore.Web.Controllers
         }
 
         /// <summary>
+        ///     Get planned workouts
+        /// </summary>
+        /// <returns>All available workouts to do</returns>
+        [HttpGet]
+        [Route("api/getPlannedWorkoutsForToday")]
+        public List<WorkoutViewModel> GetPlannedWorkoutsForToday()
+        {
+            List<WorkoutViewModel> workoutViewModels = _memoryCache.GetOrCreate(_plannedWorkouts,  entry =>
+                {
+                    List<RoutineComplex> workouts =  _readWorkoutsService.GetPlannedWorkouts(DateTime.Today);
+                    List<WorkoutViewModel> allResults = workouts
+                        .Select(_mapper.Map<WorkoutViewModel>)
+                        .ToList();
+                    return allResults;
+                }
+            );
+
+
+            return workoutViewModels;
+        }
+
+        /// <summary>
         /// Remove workout.
         /// </summary>
         /// <param name="crossfitterWorkoutId">
@@ -159,6 +182,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             newWorkoutRoutine.CreatedBy = user;
             _manageWorkoutsService.PlanWorkout(newWorkoutRoutine, user);
             _memoryCache.Remove(_allMainpageResultsConst);
+            _memoryCache.Remove(_plannedWorkouts);
         }
 
 
