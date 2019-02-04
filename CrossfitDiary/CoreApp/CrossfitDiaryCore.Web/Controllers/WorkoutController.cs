@@ -112,18 +112,18 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/getPlannedWorkoutsForToday")]
         public List<WorkoutViewModel> GetPlannedWorkoutsForToday()
         {
-            List<WorkoutViewModel> workoutViewModels = _memoryCache.GetOrCreate(_plannedWorkouts,  entry =>
-                {
+//            List<WorkoutViewModel> workoutViewModels = _memoryCache.GetOrCreate(_plannedWorkouts,  entry =>
+//                {
                     List<RoutineComplex> workouts =  _readWorkoutsService.GetPlannedWorkouts(DateTime.Today);
                     List<WorkoutViewModel> allResults = workouts
                         .Select(_mapper.Map<WorkoutViewModel>)
                         .ToList();
                     return allResults;
-                }
-            );
+//                }
+//            );
 
 
-            return workoutViewModels;
+//            return workoutViewModels;
         }
 
         /// <summary>
