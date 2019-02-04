@@ -156,7 +156,7 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
       let foundScaled = this.plannedWorkouts.find(
         x => x.planningWorkoutLevel == PlanningWorkoutLevel.Scaled
       );
-      this.isScaledSelected = foundScaled != null;
+      this.setSelectedPlanned(this.plannedWorkouts[0].planningWorkoutLevel);
       return foundScaled;
     }
     return null;

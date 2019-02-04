@@ -118,7 +118,8 @@ namespace CrossfitDiaryCore.Web.Controllers
                     List<WorkoutViewModel> allResults = workouts
                         .Select(_mapper.Map<WorkoutViewModel>)
                         .ToList();
-                    return allResults;
+
+                    return allResults.OrderBy(x => x.PlanningWorkoutLevel).ToList();
 //                }
 //            );
 
