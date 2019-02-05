@@ -1,10 +1,64 @@
 ﻿<template>
   <div class="planned-workouts container">
-    <!-- <transition-group
-      tag="div"
-      name="fade"
-      mode="out-in"
-    > -->
+    <b-modal
+      ref="logWorkoutModal"
+      title="Log workout"
+    >
+      <div class="log-workout">
+        <div class="log-workout-container">
+          <div class="row">
+            <div class="col-sm-12 total-time-log-container">
+              <b-input-group class="mb-2">
+                <b-input-group-prepend>
+                  <b-input-group-text tag="span">
+                    <font-awesome-icon :icon="['far','clock']"></font-awesome-icon>
+                  </b-input-group-text>
+                </b-input-group-prepend>
+                <b-form-input
+                  type="tel"
+                  v-model="toLogModel.timePassed"
+                  v-mask="'##:##'"
+                  placeholder="Time"
+                  aria-describedby="prPercentHelpBlock"
+                ></b-form-input>
+              </b-input-group>
+            </div>
+          </div>
+          <div class="horizontal-divider d-block ">
+            <hr class="mt-2" />
+          </div>
+          <div class="row">
+            <div class="col-sm  pl-lg-2 cap-reps-log-container">
+              <b-input-group class="mb-2">
+                <b-input-group-prepend>
+                  <b-input-group-text tag="span">
+                    Cap +
+                  </b-input-group-text>
+                </b-input-group-prepend>
+                <b-form-input
+                  type="number"
+                  v-model="toLogModel.repsToFinishOnCapTime"
+                  placeholder="Count"
+                >
+                </b-form-input>
+              </b-input-group>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div slot="modal-footer">
+        <b-button
+          variant="warning"
+          data-dismiss="modal"
+          @click="logWorkout"
+        >Log workout</b-button>
+        <b-button
+          data-dismiss="modal"
+          @click="()=>{this.$refs.logWorkoutModal.hide();}"
+        >Close</b-button>
+      </div>
+    </b-modal>
     <div
       class="row"
       v-if="isScaledSelected"
@@ -23,8 +77,12 @@
         <div class="item-body pt-1">
           <WorkoutDisplayComponent :workoutViewModel="plannedScaled"></WorkoutDisplayComponent>
         </div>
-        <div class="item-footer text-right pt-1">
+        <div class="item-footer text-right pt-2">
           <div class="action-buttons">
+            <b-button
+              variant="warning"
+              @click="showLogWorkout(plannedScaled)"
+            >Log workout</b-button>
           </div>
         </div>
       </div>
@@ -49,6 +107,13 @@
         </div>
         <div class="item-footer text-right pt-1">
           <div class="action-buttons">
+            <a
+              class="repeat-workout-action pointer text-success pl-1"
+              v-bind:href="'Workout?workoutId='+this.plannedRx.id"
+            >
+              <font-awesome-icon :icon="['fas','plus']"></font-awesome-icon>
+              <span class="do-it-text">Do it</span>
+            </a>
           </div>
         </div>
       </div>
@@ -73,11 +138,17 @@
         </div>
         <div class="item-footer text-right pt-1">
           <div class="action-buttons">
+            <a
+              class="repeat-workout-action pointer text-success pl-1"
+              v-bind:href="'Workout?workoutId='+this.plannedRxPlus.id"
+            >
+              <font-awesome-icon :icon="['fas','plus']"></font-awesome-icon>
+              <span class="do-it-text">Do it</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <!-- </transition-group> -->
     <div class="row mt-1">
       <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-3 py-2">
         <b-button-group class="btn-group d-flex">
@@ -115,19 +186,29 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
 import { faGrinBeam } from "@fortawesome/free-regular-svg-icons/faGrinBeam";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit);
+library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit, faCalendar);
 
 /* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import bButtonGroup from "bootstrap-vue/es/components/button-group/button-group";
 import bButton from "bootstrap-vue/es/components/button/button";
+import bModal from "bootstrap-vue/es/components/modal/modal";
+import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
+import datePicker from "vue-bootstrap-datetimepicker";
+import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
+import { InputGroup } from "bootstrap-vue/es/components";
+Vue.use(InputGroup);
+import { mask } from "vue-the-mask";
 
 /* app components */
 import WorkoutDisplayComponent from "./workout-display-component.vue";
 /* models and styles */
+import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
+
 import {
   WorkoutViewModel,
   PlanningWorkoutLevel
@@ -138,8 +219,12 @@ import {
     FontAwesomeIcon,
     WorkoutDisplayComponent,
     bButtonGroup,
-    bButton
-  }
+    bButton,
+    bModal,
+    bFormInput,
+    datePicker
+  },
+  directives: { mask }
 })
 export default class PlannedWorkoutDisplayComponent extends Vue {
   @Prop() plannedWorkouts: WorkoutViewModel[];
@@ -148,8 +233,20 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
   isScaledSelected: boolean = false;
   isRxSelected: boolean = false;
   isRxPlusSelected: boolean = false;
+  selectedWorkout: WorkoutViewModel = null;
+  toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
+  $refs: {
+    logWorkoutModal: HTMLFormElement;
+  };
 
-  mounted() {}
+  showLogWorkout(workoutViewModel: WorkoutViewModel) {
+    this.selectedWorkout = workoutViewModel;
+    this.$refs.logWorkoutModal.show();
+  }
+
+  logWorkout(workoutViewModel: WorkoutViewModel) {
+    debugger;
+  }
   get plannedScaled() {
     if (this.plannedWorkouts[0]) {
       //isScaledSelected
