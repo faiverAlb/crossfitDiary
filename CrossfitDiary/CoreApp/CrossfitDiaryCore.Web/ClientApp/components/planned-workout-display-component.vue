@@ -4,9 +4,15 @@
       ref="logWorkoutModal"
       title="Log workout"
     >
-      <div class="log-workout">
+      <div
+        class="log-workout"
+        v-if="selectedWorkout"
+      >
         <div class="log-workout-container">
-          <div class="row">
+          <div
+            class="row"
+            v-if="selectedWorkout.IsHaveCapTime"
+          >
             <div class="col-sm-12 total-time-log-container">
               <b-input-group class="mb-2">
                 <b-input-group-prepend>
@@ -24,10 +30,16 @@
               </b-input-group>
             </div>
           </div>
-          <div class="horizontal-divider d-block ">
+          <div
+            class="horizontal-divider d-block "
+            v-if="selectedWorkout.IsHaveCapTime"
+          >
             <hr class="mt-2" />
           </div>
-          <div class="row">
+          <div
+            class="row"
+            v-if="selectedWorkout.IsHaveCapTime"
+          >
             <div class="col-sm  pl-lg-2 cap-reps-log-container">
               <b-input-group class="mb-2">
                 <b-input-group-prepend>
@@ -235,6 +247,8 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
   isRxPlusSelected: boolean = false;
   selectedWorkout: WorkoutViewModel = null;
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
+  isForTimesWorkouts: boolean = false;
+
   $refs: {
     logWorkoutModal: HTMLFormElement;
   };
@@ -244,7 +258,7 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
     this.$refs.logWorkoutModal.show();
   }
 
-  logWorkout(workoutViewModel: WorkoutViewModel) {
+  logWorkout() {
     debugger;
   }
   get plannedScaled() {
