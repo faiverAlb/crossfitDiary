@@ -66,7 +66,15 @@
         </div>
       </div>
     </div>
-    <div class="want-to-log-container my-3">
+    <EditPlannedWorkoutComponent
+      :planningWorkout="model"
+      @planWorkoutAction="planWorkoutAction"
+      v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
+    ></EditPlannedWorkoutComponent>
+    <div
+      class="want-to-log-container my-3"
+      v-if="!workoutEdit.canUserSeePlanWorkouts"
+    >
       <div class="log-workout-container">
         <div class="col-md-12 text-right">
           <div
@@ -143,11 +151,15 @@ import VeeValidate from "vee-validate";
 Vue.use(InputGroup);
 Vue.use(VeeValidate);
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+import { IWorkoutEditState } from "./../../../workout-edit-store/types";
+import { State, Action, Getter } from "vuex-class";
+const namespace: string = "workoutEdit";
 
 /* app components */
 import CrossfitterService from "../../../CrossfitterService";
 import ExercisesListComponent from "./exercises-list-component.vue";
 import ErrorAlertComponent from "../../error-alert-component.vue";
+import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
 
 /* models and styles */
 import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
@@ -170,7 +182,8 @@ declare var workouter: {
     datePicker,
     bAlert,
     Spinner,
-    ErrorAlertComponent
+    ErrorAlertComponent,
+    EditPlannedWorkoutComponent
   },
   directives: { mask }
 })
@@ -190,7 +203,29 @@ export default class E2momEditComponent extends Vue {
       this.model.workoutType = WorkoutType.E2MOM;
     }
   }
-  mutateData(): void {}
+
+  @State("workoutEdit")
+  workoutEdit: IWorkoutEditState;
+
+  planWorkoutAction(): void {
+    this.$validator.validate();
+
+    this.$validator.validate().then(isValid => {
+      if (isValid) {
+        let crossfitterService: CrossfitterService = new CrossfitterService();
+        this.spinner.activate();
+        crossfitterService
+          .createAndPlanWorkout(this.model)
+          .then(data => {
+            window.location.href = "\\";
+          })
+          .catch(data => {
+            this.spinner.disable();
+            this.errorAlertModel.setError(data.response.statusText);
+          });
+      }
+    });
+  }
 
   logWorkout() {
     this.$validator.validate();
