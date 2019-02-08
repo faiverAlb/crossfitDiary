@@ -101,38 +101,57 @@ namespace CrossfitDiaryCore.BL.Services
 
         public void PlanWorkout(RoutineComplex workoutRoutine, ApplicationUser user)
         {
-            int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
-            if (workoutId == 0)
+            try
             {
-                if (workoutRoutine.Id != -1)
+                int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
+
+
+                List<RoutineComplex> sameDayPlanned = _context.ComplexRoutines.Where(x =>
+                    x.PlanDate.HasValue && x.PlanDate.GetValueOrDefault().Date == workoutRoutine.PlanDate.GetValueOrDefault().Date &&
+                    x.PlanningLevel.HasValue && x.PlanningLevel.GetValueOrDefault() == workoutRoutine.PlanningLevel.GetValueOrDefault()).ToList();
+                foreach (RoutineComplex routineComplex in sameDayPlanned)
                 {
-                    RemoveObsoleteWorkoutIfUserAuthor(workoutRoutine.Id, user.Id);
+                    routineComplex.PlanDate = null;
+                    routineComplex.PlanningLevel = null;
                 }
 
-                workoutRoutine.Id = 0;
-                int childIndex = 0;
-                foreach (RoutineComplex routineChild in workoutRoutine.Children)
+                if (workoutId == 0)
                 {
-                    routineChild.Id = 0;
-                    routineChild.Position = childIndex++;
-                }
+                    if (workoutRoutine.Id != -1)
+                    {
+                        RemoveObsoleteWorkoutIfUserAuthor(workoutRoutine.Id, user.Id);
+                    }
 
-                int index = 0;
-                foreach (RoutineSimple routineSimple in workoutRoutine.RoutineSimple)
-                {
-                    routineSimple.Position = index++;
+                    workoutRoutine.Id = 0;
+                    int childIndex = 0;
+                    foreach (RoutineComplex routineChild in workoutRoutine.Children)
+                    {
+                        routineChild.Id = 0;
+                        routineChild.Position = childIndex++;
+                    }
+
+                    int index = 0;
+                    foreach (RoutineSimple routineSimple in workoutRoutine.RoutineSimple)
+                    {
+                        routineSimple.Position = index++;
+                    }
+                    _context.ComplexRoutines.Add(workoutRoutine);
+                    _context.SaveChanges();
                 }
-                _context.ComplexRoutines.Add(workoutRoutine);
-                _context.SaveChanges();
+                else
+                {
+                    RoutineComplex complexToUpdate=  _context.ComplexRoutines.Single(x => x.Id == workoutId);
+                    complexToUpdate.PlanDate = workoutRoutine.PlanDate;
+                    complexToUpdate.PlanningLevel = workoutRoutine.PlanningLevel;
+                    _context.ComplexRoutines.Update(complexToUpdate);
+                    _context.SaveChanges();;
+
+                }
             }
-            else
+            catch (Exception e)
             {
-                RoutineComplex complexToUpdate=  _context.ComplexRoutines.Single(x => x.Id == workoutId);
-                complexToUpdate.PlanDate = workoutRoutine.PlanDate;
-                complexToUpdate.PlanningLevel = workoutRoutine.PlanningLevel;
-                _context.ComplexRoutines.Update(complexToUpdate);
-                _context.SaveChanges();;
-
+                Console.WriteLine(e);
+                throw;
             }
 
         }
