@@ -6,7 +6,6 @@
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
     <Version>0.4.0</Version>
     <AssemblyVersion>0.4.0.0</AssemblyVersion>
-    <UserSecretsId>57e19a34-531a-47d5-a113-e208cbf67604</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

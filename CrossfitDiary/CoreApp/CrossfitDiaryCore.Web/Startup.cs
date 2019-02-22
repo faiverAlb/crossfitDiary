@@ -47,8 +47,8 @@ namespace CrossfitDiaryCore.Web
 //
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
-                googleOptions.ClientId = Configuration["googleOptions.ClientId"];
-                googleOptions.ClientSecret = Configuration["googleOptions.ClientSecret"];
+                googleOptions.ClientId = Configuration["oAuthConfiguration:google:clientId"];
+                googleOptions.ClientSecret = Configuration["oAuthConfiguration:google:clientSecret"];
             });
 
             services.Configure<IdentityOptions>(
