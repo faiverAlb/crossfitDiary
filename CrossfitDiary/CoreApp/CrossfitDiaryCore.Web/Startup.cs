@@ -39,7 +39,7 @@ namespace CrossfitDiaryCore.Web
 
 //            services.AddA(_serviceProvider.GetService<IHttpContextAccessor>());
             //
-            services.AddDbContext<WorkouterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CrossfitDiaryDB_Core")));
+            services.AddDbContext<WorkouterContext>(options => options.UseSqlServer(connectionString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<WorkouterContext>()
@@ -47,8 +47,8 @@ namespace CrossfitDiaryCore.Web
 //
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
-                googleOptions.ClientId = "807578390975-ldab7hpsaa56tmtjl1fcdga6vhf3p36s.apps.googleusercontent.com";
-                googleOptions.ClientSecret = "78ZHtssCWBmtvt_w1Pfq-NHz";
+                googleOptions.ClientId = Configuration["googleOptions.ClientId"];
+                googleOptions.ClientSecret = Configuration["googleOptions.ClientSecret"];
             });
 
             services.Configure<IdentityOptions>(

@@ -22,11 +22,10 @@ namespace CrossfitDiaryCore.Web
                 .UseStartup<Startup>()
                 .ConfigureAppConfiguration((context, builder) =>
                 {
-//                    if (context.HostingEnvironment.IsDevelopment())
-//                    {
-//                        builder.AddUserSecrets<Startup>();
-//                    }
-
+                    if (context.HostingEnvironment.IsDevelopment())
+                    {
+                        builder.AddUserSecrets<Startup>();
+                    }
                     builder.SetBasePath(context.HostingEnvironment.ContentRootPath)
                         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                         .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true)
