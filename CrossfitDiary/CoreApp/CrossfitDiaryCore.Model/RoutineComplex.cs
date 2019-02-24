@@ -15,8 +15,6 @@ namespace CrossfitDiaryCore.Model
     /// </example>
     public class RoutineComplex : BaseModel
     {
-        #region properties
-
         /// <summary>
         ///     Gets or sets the complex type.
         /// </summary>
@@ -47,7 +45,7 @@ namespace CrossfitDiaryCore.Model
         /// <summary>
         ///     List of Simple Routines.
         /// </summary>
-        public virtual ICollection<RoutineSimple> RoutineSimple { get; set; }
+        public virtual ICollection<RoutineSimple> RoutineSimple { get; set; } = new List<RoutineSimple>();
 
 
         /// <summary>
@@ -98,6 +96,14 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public int Position { get; set; }
 
-        #endregion
+        /// <summary>
+        ///     Possible planning date
+        /// </summary>
+        public DateTime? PlanDate { get; set; }
+
+        /// <summary>
+        ///     Possible Planning Level
+        /// </summary>
+        public PlanningLevel? PlanningLevel { get; set; }
     }
 }

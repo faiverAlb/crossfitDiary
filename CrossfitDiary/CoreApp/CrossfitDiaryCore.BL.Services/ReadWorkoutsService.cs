@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using CrossfitDiaryCore.BL.Services.DapperStuff;
+using CrossfitDiaryCore.BL.Services.WorkoutMatchers;
 using CrossfitDiaryCore.DAL.EF;
 using CrossfitDiaryCore.DAL.EF.Exercises;
-using CrossfitDiaryCore.DAL.EF.WorkoutMatchers;
 using CrossfitDiaryCore.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrossfitDiaryCore.BL.Services
 {
@@ -11,43 +15,46 @@ namespace CrossfitDiaryCore.BL.Services
     {
         private readonly WorkouterContext _context;
         private readonly WorkoutsMatchDispatcher _workoutsMatchDispatcher;
+        private readonly RoutineComplexRepository _routineComplexRepository;
 
-        public ReadWorkoutsService(WorkouterContext  context, WorkoutsMatchDispatcher workoutsMatchDispatcher)
+        public ReadWorkoutsService(WorkouterContext  context, WorkoutsMatchDispatcher workoutsMatchDispatcher, RoutineComplexRepository routineComplexRepository)
         {
             _context = context;
             _workoutsMatchDispatcher = workoutsMatchDispatcher;
+            _routineComplexRepository = routineComplexRepository;
         }
 
 
-//        /// <summary>
-//        /// Find existing workout by workout structure
-//        /// </summary>
-//        /// <param name="routineComplexToSave">
-//        /// The routine complex to save.
-//        /// </param>
-//        /// <param name="workoutId">
-//        /// The workout id if found
-//        /// </param>
-//        /// <returns>
-//        /// The <see cref="bool"/>.
-//        /// </returns>
-//        public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
-//        {
-//            List<RoutineComplex> workoutsToCheck = _routineComplexRepository.GetAll().ToList();
-//            foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
-//            {
-//                if (_workoutsMatchDispatcher.IsWorkoutsMatch(existingRoutineComplex, routineComplexToSave) == false)
-//                {
-//                    continue;
-//                }
-//                return existingRoutineComplex.Id;
-//            }
-//
-//            return 0;
-//        }
-//
-//
-//
+        /// <summary>
+        /// Find existing workout by workout structure
+        /// </summary>
+        /// <param name="routineComplexToSave">
+        /// The routine complex to save.
+        /// </param>
+        /// <param name="workoutId">
+        /// The workout id if found
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
+        {
+
+            List<RoutineComplex> workoutsToCheck = _context.ComplexRoutines.Include(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ToList();
+            foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
+            {
+                if (_workoutsMatchDispatcher.IsWorkoutsMatch(existingRoutineComplex, routineComplexToSave) == false)
+                {
+                    continue;
+                }
+                return existingRoutineComplex.Id;
+            }
+
+            return 0;
+        }
+
+
+
         /// <summary>
         /// The get person maximum for exercise.
         /// </summary>
@@ -58,14 +65,14 @@ namespace CrossfitDiaryCore.BL.Services
         /// <returns>
         /// The <see cref="PersonMaximum"/>.
         /// </returns>
-        public PersonMaximum GetPersonMaximumForExercise(string userId, int exerciseId)
+        private PersonMaximum GetPersonMaximumForExercise(string userId, int exerciseId)
         {
-            
+
             List<CrossfitterWorkout> workoutsWithExericesOnly = _context.CrossfitterWorkouts.Where(x => x.Crossfitter.Id == userId
                                       && (x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId)
                                       || x.RoutineComplex.Children.Any(child => child.RoutineSimple.Any(chZ => chZ.ExerciseId == exerciseId)))
-                                      && x.RepsToFinishOnCapTime.HasValue == false)
-                                    
+                                      && x.RepsToFinishOnCapTime.HasValue == false).Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
+
                         .ToList();
 
             
@@ -168,13 +175,43 @@ namespace CrossfitDiaryCore.BL.Services
         /// <summary>
         ///     Returns all crossfitters workouts.
         /// </summary>
-        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int? exerciseId, int page, int pageSize)
+        public async Task<List<CrossfitterWorkout>> GetAllCrossfittersWorkoutsAsync(string userId, int? exerciseId, int page, int pageSize)
         {
-            List<CrossfitterWorkout> crossfitterWorkouts = string.IsNullOrEmpty(userId)? _context.CrossfitterWorkouts.ToList() : _context.CrossfitterWorkouts.Where(x => x.Crossfitter.Id == userId).ToList();
+            List<int> ids = _routineComplexRepository.GetIds(((page - 1) * pageSize), pageSize);
+            DapperResults dapperResults = _routineComplexRepository.GetMultiQuery(ids);
+
+            IEnumerable<ExerciseMeasure> allExerciseMeasures = _routineComplexRepository.GetAllExerciseMeasures();
+            IEnumerable<CrossfitterWorkout> crossfitterWorkouts = dapperResults.CrossfitterWorkouts;
+
+            IEnumerable<RoutineComplex> childRoutines = dapperResults.ChildRoutines;
+            IEnumerable<RoutineSimple> simpleRoutingForChild = dapperResults.ChildRoutineSimples;
+            IEnumerable<RoutineSimple> routineSimples = dapperResults.RoutineSimples;
+
+            foreach (RoutineComplex childRoutine in childRoutines)
+            {
+                childRoutine.RoutineSimple = simpleRoutingForChild.Where(x => x.RoutineComplexId == childRoutine.Id).ToList();
+                foreach (var routine in childRoutine.RoutineSimple)
+                {
+                    routine.Exercise.ExerciseMeasures = allExerciseMeasures.Where(x => x.ExerciseId == routine.ExerciseId).ToList();
+                }
+            }
+
+            foreach (CrossfitterWorkout workout in crossfitterWorkouts)
+            {
+                workout.RoutineComplex.RoutineSimple = routineSimples.Where(x => x.RoutineComplexId == workout.RoutineComplexId).ToList();
+                foreach (var routine in workout.RoutineComplex.RoutineSimple)
+                {
+                    routine.Exercise.ExerciseMeasures = allExerciseMeasures.Where(x => x.ExerciseId == routine.ExerciseId).ToList();
+                }
+                workout.RoutineComplex.Children = childRoutines.Where(x => x.ParentId == workout.RoutineComplexId).ToList();
+            }
+
+            
             crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
-            UpdateWorkoutsWithRecords(crossfitterWorkouts);
-            List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList().Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
+            // Commented to improve performance
+            //UpdateWorkoutsWithRecords(crossfitterWorkouts);
+            List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
             foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)
             {
                 allCrossfittersWorkout.RoutineComplex.Children = allCrossfittersWorkout.RoutineComplex.Children.OrderBy(x => x.Position).ToList();
@@ -212,7 +249,7 @@ namespace CrossfitDiaryCore.BL.Services
         /// </summary>
         /// <param name="personMaximum"></param>
         /// <param name="crossfitterWorkouts"></param>
-        public void MarkWorkoutWithWeightRecord(PersonMaximum personMaximum, List<CrossfitterWorkout> crossfitterWorkouts)
+        private void MarkWorkoutWithWeightRecord(PersonMaximum personMaximum, List<CrossfitterWorkout> crossfitterWorkouts)
         {
             if (personMaximum == null || personMaximum.MaximumWeight == null || personMaximum.MaximumWeight == 0)
             {
@@ -247,7 +284,7 @@ namespace CrossfitDiaryCore.BL.Services
         /// </summary>
         /// <param name="crossfitterWorkouts"></param>
         /// <param name="exerciseId"></param>
-        private List<CrossfitterWorkout> FilterWorkoutsOnSelectedExercise(List<CrossfitterWorkout> crossfitterWorkouts, int? exerciseId)
+        private IEnumerable<CrossfitterWorkout> FilterWorkoutsOnSelectedExercise(IEnumerable<CrossfitterWorkout> crossfitterWorkouts, int? exerciseId)
         {
             if (exerciseId.HasValue == false)
             {
@@ -256,58 +293,50 @@ namespace CrossfitDiaryCore.BL.Services
 
             return crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId) || x.RoutineComplex.Children.Any(childW => childW.RoutineSimple.Any(c => c.ExerciseId == exerciseId))).ToList();
         }
-//
-//
-//        /// <summary>
-//        /// The get crossfitter workout.
-//        /// </summary>
-//        /// <param name="crossfitterWorkoutId"></param>
-//        /// <returns>
-//        /// The <see cref="CrossfitterWorkout"/>.
-//        /// </returns>
-//        public CrossfitterWorkout GetCrossfitterWorkout(int crossfitterWorkoutId)
-//        {
-//            CrossfitterWorkout crossfitterWorkout = _crossfitterWorkoutRepository.Single(x => x.Id == crossfitterWorkoutId);
-//            return crossfitterWorkout;
-//        }
-//
-//
-//        public void RemoveWorkout(int crossfitterWorkoutId, ApplicationUser user)
-//        {
-//            _crossfitterWorkoutRepository.Delete(x => x.Id == crossfitterWorkoutId && x.Crossfitter.Id == user.Id);
-//            _unitOfWork.Commit();
-//        }
-//
-//        public List<PersonMaximum> GetPersonMaximumForMainExercises(string userId, int? exerciseId)
-//        {
-//            var exercisesListTitle = new List<string> { "deadlift", "back squat", "bench press", "shoulder press (strict)", "snatch", "power snatch", "clean", "power clean" };
-//            var resultMaximums = new List<PersonMaximum>();
-//
-//            var exercisesList = new List<Exercise>();
-//            foreach (string exerciseTitle in exercisesListTitle)
-//            {
-//                Exercise exercise = _exerciseRepository.FirstOrDefault(x => x.Title.ToLower() == exerciseTitle.ToLower());
-//                exercisesList.Add(exercise);
-//            }
-//
-//            if (exerciseId.HasValue)
-//            {
-//                exercisesList = exercisesList.Where(x => x.Id == exerciseId).ToList();
-//            }
-//
-//            foreach (Exercise exercise in exercisesList)
-//            {
-//                PersonMaximum personMaximumForExercise = GetPersonMaximumForExercise(userId, exercise.Id);
-//                if (personMaximumForExercise == null)
-//                {
-//                    continue;
-//                }
-//
-//                personMaximumForExercise.ExerciseDisplayName = exercise.Abbreviation;
-//                resultMaximums.Add(personMaximumForExercise);
-//            }
-//
-//            return resultMaximums;
-//        }
+
+
+        /// <summary>
+        /// The get crossfitter workout.
+        /// </summary>
+        /// <param name="crossfitterWorkoutId"></param>
+        /// <returns>
+        /// The <see cref="CrossfitterWorkout"/>.
+        /// </returns>
+        public CrossfitterWorkout GetCrossfitterWorkout(string userId, int crossfitterWorkoutId)
+        {
+            CrossfitterWorkout crossfitterWorkout =
+                _context.CrossfitterWorkouts
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.Children).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
+                    .Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
+                    .Include(x => x.Crossfitter)
+                    .SingleOrDefault(x => x.Crossfitter.Id == userId && x.Id == crossfitterWorkoutId);
+
+            return crossfitterWorkout;
+        }
+
+        public RoutineComplex GetWorkout(int workoutId)
+        {
+            return _context.ComplexRoutines
+                .Include(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .Include(x => x.Children)
+                .ThenInclude(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .SingleOrDefault(x => x.Id == workoutId);
+        }
+
+        public List<RoutineComplex> GetPlannedWorkouts(DateTime today)
+        {
+            return _context.ComplexRoutines.Where(x => x.PlanDate.HasValue && x.PlanDate.Value.Date == today.Date)
+                .Include(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .Include(x => x.Children)
+                .ThenInclude(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures).ToList();
+        }
     }
 }

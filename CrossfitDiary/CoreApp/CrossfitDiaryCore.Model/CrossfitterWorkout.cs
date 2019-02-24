@@ -39,12 +39,6 @@ namespace CrossfitDiaryCore.Model
         public bool IsModified { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether is workout is planned.
-        ///     TODO: To be removed
-        /// </summary>
-        public bool IsPlanned { get; set; }
-
-        /// <summary>
         ///     Gets or sets a value indicating whether workout was done in Rx mode
         /// </summary>
         public bool IsRx { get; set; }

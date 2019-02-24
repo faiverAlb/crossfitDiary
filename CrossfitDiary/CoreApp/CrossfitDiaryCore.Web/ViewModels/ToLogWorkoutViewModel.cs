@@ -5,7 +5,8 @@ namespace CrossfitDiaryCore.Web.ViewModels
 {
     public class ToLogWorkoutViewModel
     {
-        #region properties
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
         [JsonProperty("canBeRemovedByCurrentUser")]
         public bool CanBeRemovedByCurrentUser { get; set; }
@@ -13,20 +14,17 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("crossfitterWorkoutId")]
         public int CrossfitterWorkoutId { get; set; }
 
-        [JsonProperty("date")]
+        [JsonConverter(typeof(DateFormatConverter), "dd.MM.yyyy")]
         public DateTime Date { get; set; }
 
         [JsonProperty("displayDate")]
-        public string DisplayDate => Date.ToString("d");
+        public string DisplayDate { get; set; }
 
         [JsonProperty("distance")]
         public int? Distance { get; set; }
 
         [JsonProperty("isEditMode")]
         public bool IsEditMode { get; set; }
-
-        [JsonProperty("isPlanned")]
-        public bool IsPlanned { get; set; }
 
         [JsonProperty("isRx")]
         public bool IsRx { get; set; }
@@ -63,7 +61,5 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("workoutViewModel")]
         public WorkoutViewModel WorkoutViewModel { get; set; }
 
-
-        #endregion
     }
 }

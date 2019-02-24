@@ -1,0 +1,17 @@
+﻿@using Newtonsoft.Json
+<script>
+    let workouter = {};
+    workouter.toLogWorkoutRawModel = @{@Html.Raw(JsonConvert.SerializeObject(ViewBag.toLogWorkoutViewModel));};
+    workouter.workoutViewModel = @{@Html.Raw(JsonConvert.SerializeObject(ViewBag.workoutViewModel));};
+    workouter.canUserPlanWorkouts = @{@Html.Raw(JsonConvert.SerializeObject(ViewBag.canUserPlanWorkouts));};
+</script>
+<div id="manage-workout-page-container"></div>
+
+@section scripts {
+    <script src="~/dist/generated/workout-entry.js" asp-append-version="true"></script>
+}
+
+@section PageStyles {
+    <link rel="stylesheet" href="~/dist/generated/workout-entry.css" asp-append-version="true" />
+}
+

@@ -11,6 +11,11 @@ namespace CrossfitDiaryCore.Model
 
         public string FullName => $"{LastName} {FirstName}";
 
+        /// <summary>
+        ///     Rights to plan new workouts for others
+        /// </summary>
+        public bool CanPlanWorkouts { get; set; }
+
 
         public virtual ICollection<CrossfitterWorkout> CrossfitterWorkout { get; set; }
 

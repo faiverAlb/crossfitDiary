@@ -3,18 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiary.Web", "CrossfitDiary.Web\CrossfitDiary.Web.csproj", "{D503B9E6-9A00-461F-B477-496A1101081D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiary.Model", "CrossfitDiary.Model\CrossfitDiary.Model.csproj", "{4D5F868B-082F-462A-AA67-25B1E325CC52}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiary.DAL.EF", "CrossfitDiary.DAL.EF\CrossfitDiary.DAL.EF.csproj", "{2CDB88DA-F521-49CE-A344-3C4DFD1232B1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiary.Service", "CrossfitDiary.Service\CrossfitDiary.Service.csproj", "{F812071F-004F-4E15-8EFE-AD58A35CE336}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiary.Service.Tests", "CrossfitDiary.Service.Tests\CrossfitDiary.Service.Tests.csproj", "{E7905286-1EDC-4185-9A55-295152F43619}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{28B3E737-A314-49F1-910F-3A96E889C5B6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossfitDiaryCore.BL.Services", "CoreApp\CrossfitDiaryCore.BL.Services\CrossfitDiaryCore.BL.Services.csproj", "{695FFBCD-2F39-4AF2-993C-44C0514B7E02}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossfitDiaryCore.BL.Services.Tests", "CoreApp\CrossfitDiaryCore.BL.Services.Tests\CrossfitDiaryCore.BL.Services.Tests.csproj", "{C06A4D4E-C255-48E6-9C19-DE5E4CD8DF0F}"
@@ -23,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossfitDiaryCore.DAL.EF", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossfitDiaryCore.Model", "CoreApp\CrossfitDiaryCore.Model\CrossfitDiaryCore.Model.csproj", "{20CBAFF6-386A-452A-85A4-67F58C6B9F58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitDiaryCore.Web", "CoreApp\CrossfitDiaryCore.Web\CrossfitDiaryCore.Web.csproj", "{5C7FCA6F-1438-4D1B-A7D2-E07220CCA741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossfitDiaryCore.Web", "CoreApp\CrossfitDiaryCore.Web\CrossfitDiaryCore.Web.csproj", "{5C7FCA6F-1438-4D1B-A7D2-E07220CCA741}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,26 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D503B9E6-9A00-461F-B477-496A1101081D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D503B9E6-9A00-461F-B477-496A1101081D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D503B9E6-9A00-461F-B477-496A1101081D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D503B9E6-9A00-461F-B477-496A1101081D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4D5F868B-082F-462A-AA67-25B1E325CC52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D5F868B-082F-462A-AA67-25B1E325CC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D5F868B-082F-462A-AA67-25B1E325CC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D5F868B-082F-462A-AA67-25B1E325CC52}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CDB88DA-F521-49CE-A344-3C4DFD1232B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CDB88DA-F521-49CE-A344-3C4DFD1232B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CDB88DA-F521-49CE-A344-3C4DFD1232B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CDB88DA-F521-49CE-A344-3C4DFD1232B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F812071F-004F-4E15-8EFE-AD58A35CE336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F812071F-004F-4E15-8EFE-AD58A35CE336}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F812071F-004F-4E15-8EFE-AD58A35CE336}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F812071F-004F-4E15-8EFE-AD58A35CE336}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7905286-1EDC-4185-9A55-295152F43619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7905286-1EDC-4185-9A55-295152F43619}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7905286-1EDC-4185-9A55-295152F43619}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7905286-1EDC-4185-9A55-295152F43619}.Release|Any CPU.Build.0 = Release|Any CPU
 		{695FFBCD-2F39-4AF2-993C-44C0514B7E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{695FFBCD-2F39-4AF2-993C-44C0514B7E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{695FFBCD-2F39-4AF2-993C-44C0514B7E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,13 +42,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D503B9E6-9A00-461F-B477-496A1101081D} = {28B3E737-A314-49F1-910F-3A96E889C5B6}
-		{4D5F868B-082F-462A-AA67-25B1E325CC52} = {28B3E737-A314-49F1-910F-3A96E889C5B6}
-		{2CDB88DA-F521-49CE-A344-3C4DFD1232B1} = {28B3E737-A314-49F1-910F-3A96E889C5B6}
-		{F812071F-004F-4E15-8EFE-AD58A35CE336} = {28B3E737-A314-49F1-910F-3A96E889C5B6}
-		{E7905286-1EDC-4185-9A55-295152F43619} = {28B3E737-A314-49F1-910F-3A96E889C5B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3511C5A-D96F-473B-81F1-347B616904D0}

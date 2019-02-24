@@ -1,33 +1,54 @@
-﻿.navbar-brand {
-    border-bottom: 1px dashed #545b62;
+﻿nav {
+    .navbar-brand {
+        border-bottom: 1px dashed #545b62;
+    }
+
+    .svg-inline {
+        display: inline-block;
+        font-size: inherit;
+        height: 1em;
+        overflow: visible;
+        vertical-align: -.125em;
+
+        &.w-18 {
+            width: 1.125em;
+        }
+
+        &.w-16 {
+            width: 1em;
+        }
+    }
 }
 
 table {
-    > thead > tr > th {
+    >thead>tr>th {
         &.sorting_initial:before {
             font-family: 'Font Awesome 5 Free';
             content: ' \f0dc';
-            font-weight: 900; /* Fix version 5.0.9 */
+            font-weight: 900;
+            /* Fix version 5.0.9 */
             padding-right: $base-sorting-padding;
         }
 
         &.sorting_asc:before {
             font-family: 'Font Awesome 5 Free';
             content: ' \f0de';
-            font-weight: 900; /* Fix version 5.0.9 */
+            font-weight: 900;
+            /* Fix version 5.0.9 */
             padding-right: $base-sorting-padding;
         }
 
         &.sorting_desc:before {
             font-family: 'Font Awesome 5 Free';
             content: ' \f0dd';
-            font-weight: 900; /* Fix version 5.0.9 */
+            font-weight: 900;
+            /* Fix version 5.0.9 */
             padding-right: $base-sorting-padding;
         }
     }
 
-    > tbody {
-        > tr {
+    >tbody {
+        >tr {
             &.empty-data {
                 background: $gray-lighter;
             }
@@ -73,4 +94,9 @@ table {
         font-weight: 900;
         margin-top: -3px;
     }
+}
+
+div.saving {
+    pointer-events: none;
+    opacity: 0.5;
 }

@@ -25,16 +25,13 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
         [JsonProperty("addedToMaxWeightString")]
         public string AddedToMaxWeightString { get; set; }
+
+        [JsonProperty("position")]
+        public int Position { get; set; }
     }
 
 
     public class ExerciseMeasureViewModel
-    {
-        [JsonProperty("exerciseMeasureType")]
-        public ExerciseMeasureTypeViewModel ExerciseMeasureType { get; set; }
-    }
-
-    public class ExerciseMeasureTypeViewModel
     {
         [JsonProperty("measureType")]
         public MeasureTypeViewModel MeasureType { get; set; }
@@ -51,13 +48,14 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("isRequired")]
         public bool IsRequired { get; set; } = true;
     }
+    
 
     public enum MeasureTypeViewModel
     {
-        Distance = 0,
-        Count = 1,
-        Weight = 2,
-        Calories = 3,
-        Height = 4,
+        Distance = 1,
+        Count = 2,
+        Weight = 3,
+        Calories = 4,
+        Height = 5,
     }
 }

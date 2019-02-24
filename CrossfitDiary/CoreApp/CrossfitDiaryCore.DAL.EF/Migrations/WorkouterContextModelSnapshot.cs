@@ -28,6 +28,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<bool>("CanPlanWorkouts");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -82,7 +84,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedUtc")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("getutcdate()");
 
                     b.Property<string>("CrossfitterId")
                         .IsRequired();
@@ -92,8 +95,6 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<int?>("Distance");
 
                     b.Property<bool>("IsModified");
-
-                    b.Property<bool>("IsPlanned");
 
                     b.Property<bool>("IsRx");
 
@@ -127,7 +128,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                         .IsRequired();
 
                     b.Property<DateTime>("CreatedUtc")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("getutcdate()");
 
                     b.Property<string>("Title")
                         .IsRequired();
@@ -143,7 +145,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedUtc")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("getutcdate()");
 
                     b.Property<int>("ExerciseId");
 
@@ -153,30 +156,7 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.HasIndex("ExerciseId");
 
-                    b.HasIndex("ExerciseMeasureTypeId");
-
                     b.ToTable("ExerciseMeasure");
-                });
-
-            modelBuilder.Entity("CrossfitDiaryCore.Model.ExerciseMeasureType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreatedUtc")
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<int>("MeasureType");
-
-                    b.Property<string>("ShortMeasureDescription")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExerciseMeasureType");
                 });
 
             modelBuilder.Entity("CrossfitDiaryCore.Model.RoutineComplex", b =>
@@ -189,9 +169,14 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<string>("CreatedById");
 
                     b.Property<DateTime>("CreatedUtc")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("getutcdate()");
 
                     b.Property<int?>("ParentId");
+
+                    b.Property<DateTime?>("PlanDate");
+
+                    b.Property<int?>("PlanningLevel");
 
                     b.Property<int>("Position");
 
@@ -228,7 +213,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<decimal?>("Count");
 
                     b.Property<DateTime>("CreatedUtc")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("getutcdate()");
 
                     b.Property<decimal?>("Distance");
 
@@ -237,6 +223,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<bool>("IsAlternative");
 
                     b.Property<bool>("IsDoUnbroken");
+
+                    b.Property<int>("Position");
 
                     b.Property<int>("RoutineComplexId");
 
@@ -379,11 +367,6 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.HasOne("CrossfitDiaryCore.Model.Exercise", "Exercise")
                         .WithMany("ExerciseMeasures")
                         .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CrossfitDiaryCore.Model.ExerciseMeasureType", "ExerciseMeasureType")
-                        .WithMany()
-                        .HasForeignKey("ExerciseMeasureTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

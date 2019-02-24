@@ -18,6 +18,5 @@ namespace CrossfitDiaryCore.Model
         /// List of Exercise Measures 
         /// </summary>
         public virtual ICollection<ExerciseMeasure> ExerciseMeasures { get; set; }
-
     }
 }

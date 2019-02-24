@@ -1,15 +1,18 @@
 ﻿using System;
 using AutoMapper;
 using CrossfitDiaryCore.BL.Services;
+using CrossfitDiaryCore.BL.Services.DapperStuff;
+using CrossfitDiaryCore.BL.Services.WorkoutMatchers;
 using CrossfitDiaryCore.DAL.EF;
-using CrossfitDiaryCore.DAL.EF.WorkoutMatchers;
 using CrossfitDiaryCore.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CrossfitDiaryCore.Web
 {
@@ -25,10 +28,18 @@ namespace CrossfitDiaryCore.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = Configuration.GetConnectionString("CrossfitDiaryDB_Core");
+            services.AddTransient<RoutineComplexRepository>(provider => new RoutineComplexRepository(connectionString));
+
             services.AddAutoMapper();
+            services.AddMemoryCache();
+
             services.AddMvc().AddControllersAsServices();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+//            services.AddA(_serviceProvider.GetService<IHttpContextAccessor>());
             //
-            services.AddDbContext<WorkouterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CrossfitDiaryDB_Core")));
+            services.AddDbContext<WorkouterContext>(options => options.UseSqlServer(connectionString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<WorkouterContext>()
@@ -36,8 +47,8 @@ namespace CrossfitDiaryCore.Web
 //
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
-                googleOptions.ClientId = "807578390975-ldab7hpsaa56tmtjl1fcdga6vhf3p36s.apps.googleusercontent.com";
-                googleOptions.ClientSecret = "78ZHtssCWBmtvt_w1Pfq-NHz";
+                googleOptions.ClientId = Configuration["oAuthConfiguration:google:clientId"];
+                googleOptions.ClientSecret = Configuration["oAuthConfiguration:google:clientSecret"];
             });
 
             services.Configure<IdentityOptions>(
@@ -73,12 +84,11 @@ namespace CrossfitDiaryCore.Web
                 });
 
             services.AddTransient<ReadWorkoutsService>();
+            services.AddTransient<ReadUsersService>();
+            services.AddTransient<ManageWorkoutsService>();
+            services.AddTransient<ReadExercisesService>();
 
             services.AddTransient<WorkoutsMatchDispatcher>();
-
-            services.AddTransient<IWorkoutMatcher, ComplexParametersMatcher>();
-            services.AddTransient<IWorkoutMatcher, ChildrenWorkoutsMatcher>();
-            services.AddTransient<IWorkoutMatcher, ExerciseMatcher>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,12 +101,12 @@ namespace CrossfitDiaryCore.Web
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+//                app.UseExceptionHandler("/Error");
             }
 
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseStatusCodePagesWithRedirects("/Error");
+//            app.UseStatusCodePagesWithRedirects("/Error");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

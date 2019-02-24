@@ -4,23 +4,36 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
-    <Version>0.3.6</Version>
+    <Version>0.4.0</Version>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\helpers\BaseController.ts" />
+    <None Remove="ClientApp\helpers\BaseKeyValuePairModel.ts" />
+    <None Remove="ClientApp\helpers\BasicParameters.ts" />
+    <None Remove="ClientApp\helpers\CrossfitterService.ts" />
+    <None Remove="ClientApp\helpers\ErrorMessageViewModel.ts" />
+    <None Remove="ClientApp\models\viewModels\ExerciseMeasureType.ts" />
+    <None Remove="ClientApp\models\viewModels\ExerciseMeasureTypeViewModel.ts" />
+    <None Remove="ClientApp\models\viewModels\ExerciseMeasureViewModel.ts" />
+    <None Remove="ClientApp\models\viewModels\ExerciseViewModel.ts" />
+    <None Remove="ClientApp\models\viewModels\PersonExerciseRecord.ts" />
+    <None Remove="ClientApp\models\viewModels\ToLogWorkoutViewModel.ts" />
+    <None Remove="ClientApp\models\viewModels\WorkoutType.ts" />
+    <None Remove="ClientApp\models\viewModels\WorkoutViewModel.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\dist\generated\fontAwesome.js" />
-    <None Include="wwwroot\dist\generated\main.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +46,28 @@
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\helpers\BaseController.ts" />
+    <TypeScriptCompile Include="ClientApp\helpers\BaseKeyValuePairModel.ts" />
+    <TypeScriptCompile Include="ClientApp\helpers\BasicParameters.ts" />
+    <TypeScriptCompile Include="ClientApp\CrossfitterService.ts" />
+    <TypeScriptCompile Include="ClientApp\helpers\ErrorMessageViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureType.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureTypeViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\PersonExerciseRecord.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\ToLogWorkoutViewModel.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\WorkoutType.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\WorkoutViewModel.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Workout\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 

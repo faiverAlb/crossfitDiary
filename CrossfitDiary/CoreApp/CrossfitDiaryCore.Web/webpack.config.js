@@ -3,62 +3,81 @@ const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const destinationFolder = 'wwwroot/dist/generated/';
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+// const smp = new SpeedMeasurePlugin();
 
-const destinationFolder = 'wwwroot/dist/generated';
+// the path(s) that should be cleaned
+let pathsToClean = [destinationFolder + '*.*']
+
+// the clean options to use
+let cleanOptions = {
+  verbose: true,
+  dry: false
+};
+
 module.exports = (env) => {
   env = env || {};
   var isProd = env.NODE_ENV === 'production';
 
   // Setup base config for all environments
-  var config = {
+  var config = ({
     entry: {
-      main: './ClientApp/boot',
-      login: './ClientApp/login-page-entry',
-      fontAwesome:'@fortawesome/fontawesome-free/js/all.js'
+      'persons-entry': './ClientApp/persons-entry.ts',
+      'login': './ClientApp/login-page-entry',
+      'workout-entry': './ClientApp/workout-entry.ts',
     },
     output: {
       path: path.join(__dirname, destinationFolder),
-      filename: '[name].js'
+      filename: '[name].js',
+      pathinfo: false
     },
     devtool: 'eval-source-map',
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx']
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js',
+        jquery: "jquery/src/jquery",
+      }
     },
     plugins: [
-      new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
+      new CleanWebpackPlugin(pathsToClean, cleanOptions),
+      new webpack.ProvidePlugin({
+        Vue: ['vue/dist/vue.esm.js', 'default'],
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+        $: 'jquery',
+        moment: 'moment',
+      }),
+      new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
         filename: "[name].css",
         chunkFilename: "[id].css"
-      }),
+      })
+
     ],
     module: {
-      rules: [
-        {
+      rules: [{
           test: /\.(scss)$/,
           use: [
             MiniCssExtractPlugin.loader,
-//            isProd === false ? 'style-loader' : MiniCssExtractPlugin.loader,
+            //            isProd === false ? 'style-loader' : MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
             },
-            {
-              loader: 'postcss-loader', // Run post css actions
-              options: {
-                plugins: function() { // post css plugins, can be exported to postcss.config.js
-                  return [
-                    require('precss'),
-                    require('autoprefixer')
-                  ];
-                }
-              }
-            }, 
             {
               loader: 'sass-loader'
             }
 
           ]
+        },
+        {
+          test: /\.css?$/,
+          loaders: ['style-loader', 'css-loader', 'sass-loader']
         },
         // the url-loader uses DataUrls. 
         // the file-loader emits files. 
@@ -70,12 +89,52 @@ module.exports = (env) => {
           test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
           loader: "file-loader"
         },
-//        { test: /\.css?$/, use: ['style-loader', 'css-loader'] },
-//        { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
-//        { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              'scss': 'vue-style-loader!css-loader!sass-loader',
+              'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+            }
+          }
+        },
+        {
+          test: /\.ts$/,
+          loader: 'ts-loader',
+          exclude: /node_modules/,
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+            transpileOnly: !isProd,
+            experimentalWatchApi: !isProd,
+          }
+        }
       ]
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'async',
+        minSize: 30000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        name: true,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+          }
+        }
+      }
     }
-  }
+  })
 
   // Alter config for prod environment
   if (isProd) {
@@ -87,12 +146,19 @@ module.exports = (env) => {
         uglifyOptions: {
           compress: true,
           ecma: 6,
-          mangle: true
+          mangle: true,
+          dead_code: true
         },
         sourceMap: false
       }),
       new OptimizeCSSAssetsPlugin({})
     ]);
+  }
+
+  if (env.ENTRY) {
+    var temp = config.entry[env.ENTRY];
+    config.entry = {};
+    config.entry[env.ENTRY] = temp;
   }
 
   return config;

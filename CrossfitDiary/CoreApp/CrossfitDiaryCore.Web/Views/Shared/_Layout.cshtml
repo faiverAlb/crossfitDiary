@@ -24,127 +24,113 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
     <title>@ViewBag.Title</title>
+    @RenderSection("PageStyles", required: false)
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/dist/generated/main.css" asp-append-version="true" />
-        <script src="~/dist/generated/fontAwesome.js" asp-append-version="true"></script>
-        @* <link rel="stylesheet" href="~/css/site.css" /> *@
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="~/dist/generated/main.css" asp-append-version="true" />
-
-        @* <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" *@
-        @* asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css" *@
-        @* asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" /> *@
-        @* <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" /> *@
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    </environment>
+  
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand text-secondary">
-                    <i class="fa fa-home" aria-hidden="true"></i> Workouter v@(currentVersion)
-                </a>
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <svg id="home-icon" aria-hidden="true" data-prefix="fa" data-icon="home" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
+            <path fill="currentColor" d="M488 312.7V456c0 13.3-10.7 24-24 24H348c-6.6 0-12-5.4-12-12V356c0-6.6-5.4-12-12-12h-72c-6.6 0-12 5.4-12 12v112c0 6.6-5.4 12-12 12H112c-13.3 0-24-10.7-24-24V312.7c0-3.6 1.6-7 4.4-9.3l188-154.8c4.4-3.6 10.8-3.6 15.3 0l188 154.8c2.7 2.3 4.3 5.7 4.3 9.3zm83.6-60.9L488 182.9V44.4c0-6.6-5.4-12-12-12h-56c-6.6 0-12 5.4-12 12V117l-89.5-73.7c-17.7-14.6-43.3-14.6-61 0L4.4 251.8c-5.1 4.2-5.8 11.8-1.6 16.9l25.5 31c4.2 5.1 11.8 5.8 16.9 1.6l235.2-193.7c4.4-3.6 10.8-3.6 15.3 0l235.2 193.7c5.1 4.2 12.7 3.5 16.9-1.6l25.5-31c4.2-5.2 3.4-12.7-1.7-16.9z"></path>
+        </svg>
+        <svg id="rocket-icon" aria-hidden="true" data-prefix="fa" data-icon="rocket" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+            <path fill="currentColor" d="M505.1 19.1C503.8 13 499 8.2 492.9 6.9 460.7 0 435.5 0 410.4 0 307.2 0 245.3 55.2 199.1 128H94.9c-18.2 0-34.8 10.3-42.9 26.5L2.6 253.3c-8 16 3.6 34.7 21.5 34.7h95.1c-5.9 12.8-11.9 25.5-18 37.7-3.1 6.2-1.9 13.6 3 18.5l63.6 63.6c4.9 4.9 12.3 6.1 18.5 3 12.2-6.1 24.9-12 37.7-17.9V488c0 17.8 18.8 29.4 34.7 21.5l98.7-49.4c16.3-8.1 26.5-24.8 26.5-42.9V312.8c72.6-46.3 128-108.4 128-211.1.1-25.2.1-50.4-6.8-82.6zM400 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z"></path>
+        </svg>
+        <svg id="trophy-icon" aria-hidden="true" data-prefix="fas" data-icon="trophy" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M552 64H448V24c0-13.3-10.7-24-24-24H152c-13.3 0-24 10.7-24 24v40H24C10.7 64 0 74.7 0 88v56c0 35.7 22.5 72.4 61.9 100.7 31.5 22.7 69.8 37.1 110 41.7C203.3 338.5 240 360 240 360v72h-48c-35.3 0-64 20.7-64 56v12c0 6.6 5.4 12 12 12h296c6.6 0 12-5.4 12-12v-12c0-35.3-28.7-56-64-56h-48v-72s36.7-21.5 68.1-73.6c40.3-4.6 78.6-19 110-41.7 39.3-28.3 61.9-65 61.9-100.7V88c0-13.3-10.7-24-24-24zM99.3 192.8C74.9 175.2 64 155.6 64 144v-16h64.2c1 32.6 5.8 61.2 12.8 86.2-15.1-5.2-29.2-12.4-41.7-21.4zM512 144c0 16.1-17.7 36.1-35.3 48.8-12.5 9-26.7 16.2-41.8 21.4 7-25 11.8-53.6 12.8-86.2H512v16z"></path></svg>
+        <svg id="signout-icon" aria-hidden="true" data-prefix="fas" data-icon="sign-out-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path></svg>
+    </defs>
+</svg>
+<header>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand text-secondary" asp-controller="Persons" asp-action="Index">
+                <svg class=" svg-inline w-18"><use xlink:href="#home-icon"></use></svg>
+                Workouter v@(currentVersion)
+            </a>
 
-                <div class="navbar-collapse" id="navBar">
-                    <ul class="navbar-nav mr-auto">
-                            <li class="nav-item mr-1">
-                                <a class="nav-link btn btn-info text-light d-inline-block d-md-none p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    <div class="small-action-link-button">
-                                        <div class="icon-container">
-                                            <i class="fas fa-trophy"></i>
-                                        </div>
-                                        <div class="text-container">MAX</div>
-                                    </div>
-                                    <span class="d-none d-md-inline">Weight maximums</span>
-                                </a>
-                                <a class="nav-link btn btn-info text-light d-none d-md-inline-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    <i class="fas fa-trophy"></i>
-                                    <span class="d-none d-md-inline">Weight maximums</span>
-                                </a>
-                            </li>
+            <div class="navbar-collapse" id="navBar">
+                <ul class="navbar-nav mr-auto">
 
 
-                        <li class="nav-item mr-1">
-                            <a class="nav-link btn btn-success text-light d-inline-block d-md-none p-0" href="#">
-                                <div class="small-action-link-button">
-                                    <div class="icon-container">
-                                        <i class="fas fa-rocket"></i>
-                                    </div>
-                                    <div class="text-container">LOG</div>
+                    <li class="nav-item mr-1">
+                        <a class="nav-link btn btn-success text-light d-inline-block d-md-none p-0" asp-controller="Workout" asp-action="Index">
+                            <div class="small-action-link-button">
+                                <div class="icon-container">
+                                    <svg class="svg-inline w-16"><use xlink:href="#rocket-icon"></use></svg>
+
                                 </div>
-                            </a>
-                            <a class="nav-link btn btn-success text-light d-none d-md-inline-block">
-                                <i class="fa fa-rocket" aria-hidden="true"></i>
-                                <span>Create/Log workout</span>
-                            </a>
-                        </li>
-                        <li class="nav-item mr-1  ">
-                            <a class="nav-link btn btn-warning text-light d-inline-block d-md-none p-0">
-                                <div class="small-action-link-button">
-                                    <div class="icon-container">
-                                        <i class="fas fa-calculator"></i>
-                                    </div>
-                                    <div class="text-container">PRIDE</div>
-                                </div>
-
-                                <span class="d-none d-md-inline">Our prides</span>
-                            </a>
-                            <a class="nav-link btn btn-warning text-light d-none d-md-inline-block">
-                                <i class="fa fa-calculator" aria-hidden="true"></i>
-                                <span class="d-none d-md-inline">Our prides</span>
-                            </a>
-
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0 d-none d-lg-inline">
-                        <span class="navbar-text mr-lg-2 ">
-                            @User.Identity.Name
-                        </span>
-                        <a class="btn btn-outline-primary " asp-controller="Account" asp-action="Logout">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span class="d-none d-lg-inline">Log Out</span>
+                                <div class="text-container">LOG</div>
+                            </div>
                         </a>
-                    </form>
+                        <a class="nav-link btn btn-success text-light d-none d-md-inline-block" asp-controller="Workout" asp-action="Index">
+                            <svg class=" svg-inline w-18"><use xlink:href="#rocket-icon"></use></svg>
+                            <span>Create/Log workout</span>
+                        </a>
+                    </li>
+                    @* <li class="nav-item mr-1"> *@
+                    @*     <a class="nav-link btn btn-info text-light d-inline-block d-md-none p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"> *@
+                    @*         <div class="small-action-link-button"> *@
+                    @*             <div class="icon-container"> *@
+                    @*                 <svg class="svg-inline w-18"><use xlink:href="#trophy-icon"></use></svg> *@
+                    @*             </div> *@
+                    @*             <div class="text-container">MAX</div> *@
+                    @*         </div> *@
+                    @*         <span class="d-none d-md-inline">Weight maximums</span> *@
+                    @*     </a> *@
+                    @*     <a class="nav-link btn btn-info text-light d-none d-md-inline-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"> *@
+                    @*         <svg class="svg-inline w-18"><use xlink:href="#trophy-icon"></use></svg> *@
+                    @*         <span class="d-none d-md-inline">Weight maximums</span> *@
+                    @*     </a> *@
+                    @* </li> *@
 
-                </div>
+                </ul>
+                <form class="form-inline my-2 my-lg-0 d-none d-lg-inline">
+                    <span class="navbar-text mr-lg-2 ">
+                        @User.Identity.Name
+                    </span>
+                    <a class="btn btn-outline-primary " asp-controller="Account" asp-action="Logout">
+                        <svg class="svg-inline w-16"><use xlink:href="#signout-icon"></use></svg>
+                        <span class="d-none d-lg-inline">Log Out</span>
+                    </a>
+                </form>
+
             </div>
-        </nav>
+        </div>
+    </nav>
 
-    </header>
-    <main role="main" class="container">
-        @RenderBody()
-    </main>
+</header>
+<main role="main" class="container">
+    @RenderBody()
+</main>
 
-    <environment include="Development">
-        @* <script src="~/lib/jquery/dist/jquery.js"></script> *@
-        @* <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> *@
-        <script src="~/dist/generated/main.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
+<environment include="Development">
+    @* <script src="~/lib/jquery/dist/jquery.js"></script> *@
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> *@
+    @* <script src="~/dist/generated/main.js" asp-append-version="true"></script> *@
+</environment>
+<environment exclude="Development">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
 
-        <script src="~/dist/generated/main.js" asp-append-version="true"></script>
+    @* <script src="~/dist/generated/main.js" asp-append-version="true"></script> *@
 
-        @*         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js" asp-fallback-src="~/lib/jquery/dist/jquery.min.js" *@
-        @*                 asp-fallback-test="window.jQuery" *@
-        @*                 crossorigin="anonymous" *@
-        @*                 integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk"> *@
-        @*         </script> *@
-        @* <script
+    @*         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js" asp-fallback-src="~/lib/jquery/dist/jquery.min.js" *@
+    @*                 asp-fallback-test="window.jQuery" *@
+    @*                 crossorigin="anonymous" *@
+    @*                 integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk"> *@
+    @*         </script> *@
+    @* <script
             src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js" *@
-        @* asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js" *@
-        @* asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal" *@
-        @* crossorigin="anonymous" *@
-        @* integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"> *@
-        @* </script> *@
-        @* <script src="~/js/site.min.js" asp-append-version="true"></script> *@
-    </environment>
+    @* asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js" *@
+    @* asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal" *@
+    @* crossorigin="anonymous" *@
+    @* integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"> *@
+    @* </script> *@
+    @* <script src="~/js/site.min.js" asp-append-version="true"></script> *@
+</environment>
 
-    @RenderSection("Scripts", required: false)
+@RenderSection("Scripts", required: false)
 </body>
 </html>
