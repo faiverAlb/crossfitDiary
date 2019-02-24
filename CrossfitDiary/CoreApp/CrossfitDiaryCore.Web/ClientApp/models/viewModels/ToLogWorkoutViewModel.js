@@ -7,7 +7,7 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
         this.selectedWorkoutId = 0;
         this.timePassed = null;
         this.isEditMode = false;
-        this.displayDate = new Date().toLocaleDateString(); // Default value for new model
+        this.displayDate = new Date().toLocaleDateString(); // default value for new model
         if (params == null) {
             return;
         }

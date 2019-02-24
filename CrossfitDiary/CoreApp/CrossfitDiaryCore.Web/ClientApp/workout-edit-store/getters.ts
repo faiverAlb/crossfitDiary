@@ -4,7 +4,7 @@ import { RootState } from "../types";
 import { ExerciseViewModel } from "../models/viewModels/ExerciseViewModel";
 
 export const getters: GetterTree<IWorkoutEditState, RootState> = {
-  exercisesFromState(state): ExerciseViewModel[] {
+  exercisesFromState(state: IWorkoutEditState): ExerciseViewModel[] {
     return state.exercises;
     // const { user } = state;
     // const firstName = (user && user.firstName) || "";

@@ -14,10 +14,15 @@ interface IWorkoutViewModel {
   exercisesToDoList: ExerciseViewModel[];
   workoutTypeDisplay?: string;
   children: WorkoutViewModel[];
-
+  displayPlanDate?: string;
+  planningWorkoutLevel: PlanningWorkoutLevel;
   isInnerWorkout: boolean;
 }
-
+export enum PlanningWorkoutLevel {
+  Scaled = 0,
+  Rx = 1,
+  RxPlus = 2
+}
 export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
   id: number = 0;
   title: string = "";
@@ -31,6 +36,8 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
   exercisesToDoList: ExerciseViewModel[] = [];
   children: WorkoutViewModel[] = [];
   isInnerWorkout: boolean = false;
+  planningWorkoutLevel: PlanningWorkoutLevel;
+  displayPlanDate?: string = new Date().toLocaleDateString(); // default value for new model;
 
   public IsForTime = () => {
     return this.workoutType == WorkoutType.ForTime;
@@ -44,9 +51,8 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
   };
 
   public IsHaveCapTime = () => {
-    return (this.workoutType == WorkoutType.ForTime || this.workoutType == WorkoutType.ForTimeManyInners);
+    return this.workoutType == WorkoutType.ForTime || this.workoutType == WorkoutType.ForTimeManyInners;
   };
-
 
   constructor(params?: IWorkoutViewModel | any) {
     if (params == null) {
@@ -64,6 +70,8 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
     this.workoutTypeDisplay = params.workoutTypeDisplay;
     this.children = params.children;
     this.isInnerWorkout = params.isInnerWorkout;
+    this.planningWorkoutLevel = params.planningWorkoutLevel;
+    this.displayPlanDate = params.displayPlanDate;
   }
 
   public deserialize(jsonInput: any): WorkoutViewModel {
@@ -80,13 +88,11 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
       restBetweenRounds: jsonInput.restBetweenRounds,
       workoutType: jsonInput.workoutType,
       workoutTypeDisplay: jsonInput.workoutTypeDisplay,
-      children: jsonInput.children.map(
-        (x): WorkoutViewModel => new WorkoutViewModel().deserialize(x)
-      ),
-      exercisesToDoList: jsonInput.exercisesToDoList.map(
-        (x): ExerciseViewModel => new ExerciseViewModel().deserialize(x)
-      ),
-      isInnerWorkout: false
+      children: jsonInput.children.map((x): WorkoutViewModel => new WorkoutViewModel().deserialize(x)),
+      exercisesToDoList: jsonInput.exercisesToDoList.map((x): ExerciseViewModel => new ExerciseViewModel().deserialize(x)),
+      isInnerWorkout: false,
+      planningWorkoutLevel: jsonInput.planningWorkoutLevel,
+      displayPlanDate: jsonInput.displayPlanDate
     });
   }
 }

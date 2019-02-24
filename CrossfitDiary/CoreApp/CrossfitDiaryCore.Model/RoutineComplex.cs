@@ -96,5 +96,14 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public int Position { get; set; }
 
+        /// <summary>
+        ///     Possible planning date
+        /// </summary>
+        public DateTime? PlanDate { get; set; }
+
+        /// <summary>
+        ///     Possible Planning Level
+        /// </summary>
+        public PlanningLevel? PlanningLevel { get; set; }
     }
 }

@@ -15,6 +15,10 @@ export const actions: ActionTree<IWorkoutEditState, RootState> = {
       const exercises: ExerciseViewModel[] = data;
       commit("exercisesLoaded", exercises);
     });
+  },
+  // tslint:disable-next-line:typedef
+  setCanUserSeePlanWorkouts({ commit }, newValue): any {
+    commit("canUserSeePlanWorkoutsConfigured", newValue);
   }
 };
 // }

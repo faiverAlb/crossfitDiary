@@ -44,7 +44,8 @@
         }
     }
 
-    .activities-list {
+    .activities-list,
+    .planned-workouts {
         .done-item {
             background: #f6f1ed;
             box-shadow: 0 0.20rem 0.1rem rgba(0, 0, 0, .05);
@@ -127,4 +128,17 @@
             }
         }
     }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active до версии 2.1.8 */
+    {
+    opacity: 0;
 }
