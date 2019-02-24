@@ -13,7 +13,16 @@
         <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"></ExercisesListComponent>
       </div>
     </div>
-    <div class="want-to-log-container my-3">
+    <EditPlannedWorkoutComponent
+      :planningWorkout="model"
+      @planWorkoutAction="planWorkoutAction"
+      v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
+    ></EditPlannedWorkoutComponent>
+
+    <div
+      class="want-to-log-container my-3"
+      v-if="!workoutEdit.canUserSeePlanWorkouts"
+    >
       <div class="log-workout-container">
         <div class="col-md-12 text-right">
           <div
@@ -76,34 +85,39 @@ import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons/faHashtag";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import CrossfitterService from "../../../CrossfitterService";
-
 library.add(faClock, faHashtag, faCalendar);
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-/**/
 
+/* public components */
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
-import ExercisesListComponent from "./exercises-list-component.vue";
-import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
 import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
 import bAlert from "bootstrap-vue/es/components/alert/alert";
-import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
-
 import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import { InputGroup } from "bootstrap-vue/es/components";
-Vue.use(InputGroup);
 import { mask } from "vue-the-mask";
 import VeeValidate from "vee-validate";
-import { WorkoutType } from "../../../models/viewModels/WorkoutType";
-
-import ErrorAlertComponent from "../../error-alert-component.vue";
-import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+Vue.use(InputGroup);
+Vue.use(VeeValidate);
+import { IWorkoutEditState } from "./../../../workout-edit-store/types";
+import { State, Action, Getter } from "vuex-class";
+const namespace: string = "workoutEdit";
+
+/* app components */
+import CrossfitterService from "../../../CrossfitterService";
+import ExercisesListComponent from "./exercises-list-component.vue";
+import ErrorAlertComponent from "../../error-alert-component.vue";
+import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
+
+/* models and styles */
+import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
+import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
+import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
+import { WorkoutType } from "../../../models/viewModels/WorkoutType";
+import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
 
-Vue.use(VeeValidate);
 declare var workouter: {
   toLogWorkoutRawModel: ToLogWorkoutViewModel;
   workoutViewModel: WorkoutViewModel;
@@ -117,7 +131,8 @@ declare var workouter: {
     datePicker,
     bAlert,
     Spinner,
-    ErrorAlertComponent
+    ErrorAlertComponent,
+    EditPlannedWorkoutComponent
   },
   directives: { mask }
 })
@@ -126,6 +141,9 @@ export default class NFTEditComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
   spinner: SpinnerModel = new SpinnerModel(false);
+
+  @State("workoutEdit")
+  workoutEdit: IWorkoutEditState;
 
   mounted() {
     if (workouter != null && workouter.toLogWorkoutRawModel != null) {
@@ -138,7 +156,25 @@ export default class NFTEditComponent extends Vue {
     }
   }
   mutateData(): void {}
+  planWorkoutAction(): void {
+    this.$validator.validate();
 
+    this.$validator.validate().then(isValid => {
+      if (isValid) {
+        let crossfitterService: CrossfitterService = new CrossfitterService();
+        this.spinner.activate();
+        crossfitterService
+          .createAndPlanWorkout(this.model)
+          .then(data => {
+            window.location.href = "\\";
+          })
+          .catch(data => {
+            this.spinner.disable();
+            this.errorAlertModel.setError(data.response.statusText);
+          });
+      }
+    });
+  }
   logWorkout() {
     this.$validator.validate();
 

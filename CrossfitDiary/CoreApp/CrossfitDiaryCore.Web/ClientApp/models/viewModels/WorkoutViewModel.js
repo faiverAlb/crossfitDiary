@@ -1,5 +1,11 @@
 import { WorkoutType } from "./WorkoutType";
 import { ExerciseViewModel } from "./ExerciseViewModel";
+export var PlanningWorkoutLevel;
+(function (PlanningWorkoutLevel) {
+    PlanningWorkoutLevel[PlanningWorkoutLevel["Scaled"] = 0] = "Scaled";
+    PlanningWorkoutLevel[PlanningWorkoutLevel["Rx"] = 1] = "Rx";
+    PlanningWorkoutLevel[PlanningWorkoutLevel["RxPlus"] = 2] = "RxPlus";
+})(PlanningWorkoutLevel || (PlanningWorkoutLevel = {}));
 var WorkoutViewModel = /** @class */ (function () {
     function WorkoutViewModel(params) {
         var _this = this;
@@ -9,6 +15,7 @@ var WorkoutViewModel = /** @class */ (function () {
         this.exercisesToDoList = [];
         this.children = [];
         this.isInnerWorkout = false;
+        this.displayPlanDate = new Date().toLocaleDateString(); // default value for new model;
         this.IsForTime = function () {
             return _this.workoutType == WorkoutType.ForTime;
         };
@@ -19,7 +26,7 @@ var WorkoutViewModel = /** @class */ (function () {
             return _this.workoutType == WorkoutType.E2MOM || _this.workoutType == WorkoutType.EMOM;
         };
         this.IsHaveCapTime = function () {
-            return (_this.workoutType == WorkoutType.ForTime || _this.workoutType == WorkoutType.ForTimeManyInners);
+            return _this.workoutType == WorkoutType.ForTime || _this.workoutType == WorkoutType.ForTimeManyInners;
         };
         if (params == null) {
             return;
@@ -36,6 +43,8 @@ var WorkoutViewModel = /** @class */ (function () {
         this.workoutTypeDisplay = params.workoutTypeDisplay;
         this.children = params.children;
         this.isInnerWorkout = params.isInnerWorkout;
+        this.planningWorkoutLevel = params.planningWorkoutLevel;
+        this.displayPlanDate = params.displayPlanDate;
     }
     WorkoutViewModel.prototype.deserialize = function (jsonInput) {
         if (jsonInput == null) {
@@ -53,7 +62,9 @@ var WorkoutViewModel = /** @class */ (function () {
             workoutTypeDisplay: jsonInput.workoutTypeDisplay,
             children: jsonInput.children.map(function (x) { return new WorkoutViewModel().deserialize(x); }),
             exercisesToDoList: jsonInput.exercisesToDoList.map(function (x) { return new ExerciseViewModel().deserialize(x); }),
-            isInnerWorkout: false
+            isInnerWorkout: false,
+            planningWorkoutLevel: jsonInput.planningWorkoutLevel,
+            displayPlanDate: jsonInput.displayPlanDate
         });
     };
     return WorkoutViewModel;

@@ -26,7 +26,6 @@ namespace CrossfitDiaryCore.Web
 //                    {
 //                        builder.AddUserSecrets<Startup>();
 //                    }
-
                     builder.SetBasePath(context.HostingEnvironment.ContentRootPath)
                         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                         .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true)

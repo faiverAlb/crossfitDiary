@@ -19,6 +19,7 @@ namespace CrossfitDiaryCore.Web.Controllers
     public class WorkoutController : Controller
     {
         private readonly ReadWorkoutsService _readWorkoutsService;
+        private readonly ReadUsersService _readUsersService;
         private readonly ManageWorkoutsService _manageWorkoutsService;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -26,8 +27,10 @@ namespace CrossfitDiaryCore.Web.Controllers
         private readonly IMemoryCache _memoryCache;
             
         private string _allMainpageResultsConst = "all-mainpage-results";
+        private string _plannedWorkouts = "planned-workouts";
 
         public WorkoutController(ReadWorkoutsService readWorkoutsService
+            , ReadUsersService readUsersService
             , ManageWorkoutsService manageWorkoutsService
             , IMapper mapper
             , IHttpContextAccessor httpContextAccessor
@@ -35,6 +38,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             , IMemoryCache memoryCache)
         {
             _readWorkoutsService = readWorkoutsService;
+            _readUsersService = readUsersService;
             _manageWorkoutsService = manageWorkoutsService;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
@@ -45,9 +49,10 @@ namespace CrossfitDiaryCore.Web.Controllers
         public IActionResult Index(int? crossfitterWorkoutId, int? workoutId)
         {
             //TODO: Add check rights!
+            string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            ViewBag.canUserPlanWorkouts = _readUsersService.CanUserPlanWorkouts(userId);
             if (crossfitterWorkoutId.HasValue) // AND HAS RIGHTS!
             {
-                string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(userId, crossfitterWorkoutId.Value);
                 if (crossfitterWorkout == null)
                 {
@@ -100,6 +105,29 @@ namespace CrossfitDiaryCore.Web.Controllers
         }
 
         /// <summary>
+        ///     Get planned workouts
+        /// </summary>
+        /// <returns>All available workouts to do</returns>
+        [HttpGet]
+        [Route("api/getPlannedWorkoutsForToday")]
+        public List<WorkoutViewModel> GetPlannedWorkoutsForToday()
+        {
+//            List<WorkoutViewModel> workoutViewModels = _memoryCache.GetOrCreate(_plannedWorkouts,  entry =>
+//                {
+                    List<RoutineComplex> workouts =  _readWorkoutsService.GetPlannedWorkouts(DateTime.Today);
+                    List<WorkoutViewModel> allResults = workouts
+                        .Select(_mapper.Map<WorkoutViewModel>)
+                        .ToList();
+
+                    return allResults.OrderBy(x => x.PlanningWorkoutLevel).ToList();
+//                }
+//            );
+
+
+//            return workoutViewModels;
+        }
+
+        /// <summary>
         /// Remove workout.
         /// </summary>
         /// <param name="crossfitterWorkoutId">
@@ -140,6 +168,22 @@ namespace CrossfitDiaryCore.Web.Controllers
                 Console.WriteLine(exception);
                 throw;
             }
+        }
+
+        /// <summary>
+        ///     Create and log workout
+        /// </summary>
+        /// <param name="workoutViewModel">Complex model with two properties: new workout and log workout models</param>
+        [HttpPost]
+        [Route("api/createAndPlanWorkout")]
+        public async Task CreateAndPlanWorkout([FromBody] WorkoutViewModel workoutViewModel)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(workoutViewModel);
+            newWorkoutRoutine.CreatedBy = user;
+            _manageWorkoutsService.PlanWorkout(newWorkoutRoutine, user);
+            _memoryCache.Remove(_allMainpageResultsConst);
+            _memoryCache.Remove(_plannedWorkouts);
         }
 
 

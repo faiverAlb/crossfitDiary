@@ -7,7 +7,8 @@ import { RootState } from "../types";
 
 export const state: IWorkoutEditState = {
   exercises: [],
-  error: false
+  error: false,
+  canUserSeePlanWorkouts: false
 };
 
 const namespaced: boolean = true;

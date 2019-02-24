@@ -12,9 +12,10 @@ using System;
 namespace CrossfitDiaryCore.DAL.EF.Migrations
 {
     [DbContext(typeof(WorkouterContext))]
-    partial class WorkouterContextModelSnapshot : ModelSnapshot
+    [Migration("20190123105638_MoveAddPlanning")]
+    partial class MoveAddPlanning
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,8 +28,6 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
-
-                    b.Property<bool>("CanPlanWorkouts");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();

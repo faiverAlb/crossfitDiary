@@ -11,6 +11,7 @@ interface IToLogWorkoutViewModel {
   selectedWorkoutId: number;
   timePassed: string;
   isEditMode: boolean;
+
   canBeRemovedByCurrentUser?: boolean;
   workouterName?: string;
   workouterId?: string;
@@ -27,10 +28,11 @@ export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel
   selectedWorkoutId: number = 0;
   timePassed: string = null;
   isEditMode: boolean = false;
+
   canBeRemovedByCurrentUser?: boolean;
   workouterName?: string;
   workouterId?: string;
-  displayDate?: string = new Date().toLocaleDateString(); // Default value for new model
+  displayDate?: string = new Date().toLocaleDateString(); // default value for new model
   workoutViewModel?: WorkoutViewModel;
 
   constructor(params?: IToLogWorkoutViewModel) {
@@ -45,6 +47,7 @@ export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel
     this.selectedWorkoutId = params.selectedWorkoutId;
     this.timePassed = params.timePassed;
     this.isEditMode = params.isEditMode;
+
     this.repsToFinishOnCapTime = params.repsToFinishOnCapTime;
     this.canBeRemovedByCurrentUser = params.canBeRemovedByCurrentUser;
     this.workouterName = params.workouterName;

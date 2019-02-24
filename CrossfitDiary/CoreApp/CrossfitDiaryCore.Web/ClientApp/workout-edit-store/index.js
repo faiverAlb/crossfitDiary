@@ -3,7 +3,8 @@ import { actions } from "./actions";
 import { mutations } from "./mutations";
 export var state = {
     exercises: [],
-    error: false
+    error: false,
+    canUserSeePlanWorkouts: false
 };
 var namespaced = true;
 export var workoutEdit = {

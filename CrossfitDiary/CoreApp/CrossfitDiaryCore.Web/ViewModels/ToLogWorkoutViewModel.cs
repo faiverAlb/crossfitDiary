@@ -26,9 +26,6 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("isEditMode")]
         public bool IsEditMode { get; set; }
 
-        [JsonProperty("isPlanned")]
-        public bool IsPlanned { get; set; }
-
         [JsonProperty("isRx")]
         public bool IsRx { get; set; }
 
