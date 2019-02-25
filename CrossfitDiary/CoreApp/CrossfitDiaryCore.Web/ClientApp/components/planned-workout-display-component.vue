@@ -9,51 +9,83 @@
         v-if="selectedWorkout"
       >
         <div class="log-workout-container">
-          <div
-            class="row"
-            v-if="selectedWorkout.IsHaveCapTime"
-          >
-            <div class="col-sm-12 total-time-log-container">
-              <b-input-group class="mb-2">
-                <b-input-group-prepend>
-                  <b-input-group-text tag="span">
-                    <font-awesome-icon :icon="['far','clock']"></font-awesome-icon>
-                  </b-input-group-text>
-                </b-input-group-prepend>
-                <b-form-input
-                  type="tel"
-                  v-model="toLogModel.timePassed"
-                  v-mask="'##:##'"
-                  placeholder="Time"
-                  aria-describedby="prPercentHelpBlock"
-                ></b-form-input>
-              </b-input-group>
+          <div v-if="selectedWorkout.IsHaveCapTime()">
+            <div class="row">
+              <div class="col-sm-12">
+                <b-input-group class="mb-2">
+                  <b-input-group-prepend>
+                    <b-input-group-text tag="span">
+                      <font-awesome-icon :icon="['far','clock']"></font-awesome-icon>
+                    </b-input-group-text>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    type="tel"
+                    v-model="toLogModel.timePassed"
+                    v-mask="'##:##'"
+                    placeholder="Time"
+                    aria-describedby="prPercentHelpBlock"
+                  ></b-form-input>
+                </b-input-group>
+              </div>
+            </div>
+            <div class="horizontal-divider d-block ">
+              <hr class="mt-2" />
+            </div>
+            <div class="row">
+              <div class="col-sm-12 cap-reps-log-container">
+                <b-input-group class="mb-2">
+                  <b-input-group-prepend>
+                    <b-input-group-text tag="span">
+                      Cap +
+                    </b-input-group-text>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    type="number"
+                    v-model="toLogModel.repsToFinishOnCapTime"
+                    placeholder="Count"
+                  >
+                  </b-form-input>
+                </b-input-group>
+              </div>
             </div>
           </div>
-          <div
-            class="horizontal-divider d-block "
-            v-if="selectedWorkout.IsHaveCapTime"
-          >
-            <hr class="mt-2" />
-          </div>
-          <div
-            class="row"
-            v-if="selectedWorkout.IsHaveCapTime"
-          >
-            <div class="col-sm  pl-lg-2 cap-reps-log-container">
-              <b-input-group class="mb-2">
-                <b-input-group-prepend>
-                  <b-input-group-text tag="span">
-                    Cap +
-                  </b-input-group-text>
-                </b-input-group-prepend>
-                <b-form-input
-                  type="number"
-                  v-model="toLogModel.repsToFinishOnCapTime"
-                  placeholder="Count"
-                >
-                </b-form-input>
-              </b-input-group>
+          <div v-if="selectedWorkout.IsAMRAP()">
+            <div class="row">
+              <div class="col-sm-12">
+                <b-input-group class="mb-2">
+                  <b-input-group-prepend>
+                    <b-input-group-text tag="span">
+                      <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
+                    </b-input-group-text>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    type="tel"
+                    v-model="toLogModel.roundsFinished"
+                    v-mask="'####'"
+                    placeholder="Rounds finished"
+                    aria-describedby="prPercentHelpBlock"
+                  ></b-form-input>
+                </b-input-group>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-sm-12">
+                <b-input-group class="mb-2">
+                  <b-input-group-prepend>
+                    <b-input-group-text tag="span">
+                      <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
+                    </b-input-group-text>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    type="tel"
+                    v-model="toLogModel.partialRepsFinished"
+                    v-mask="'####'"
+                    placeholder="Partial repetitions"
+                    aria-describedby="prPercentHelpBlock"
+                  ></b-form-input>
+                </b-input-group>
+              </div>
             </div>
           </div>
         </div>
@@ -71,6 +103,7 @@
         >Close</b-button>
       </div>
     </b-modal>
+
     <div
       class="row"
       v-if="isScaledSelected"
@@ -117,15 +150,12 @@
         <div class="item-body pt-1">
           <WorkoutDisplayComponent :workoutViewModel="plannedRx"></WorkoutDisplayComponent>
         </div>
-        <div class="item-footer text-right pt-1">
+        <div class="item-footer text-right pt-2">
           <div class="action-buttons">
-            <a
-              class="repeat-workout-action pointer text-success pl-1"
-              v-bind:href="'Workout?workoutId='+this.plannedRx.id"
-            >
-              <font-awesome-icon :icon="['fas','plus']"></font-awesome-icon>
-              <span class="do-it-text">Do it</span>
-            </a>
+            <b-button
+              variant="warning"
+              @click="showLogWorkout(plannedRx)"
+            >Log workout</b-button>
           </div>
         </div>
       </div>
@@ -199,9 +229,18 @@ import { faGrinBeam } from "@fortawesome/free-regular-svg-icons/faGrinBeam";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
+import { faHashtag } from "@fortawesome/free-solid-svg-icons/faHashtag";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit, faCalendar);
+library.add(
+  faGrinBeam,
+  faClock,
+  faPlus,
+  faTrashAlt,
+  faEdit,
+  faCalendar,
+  faHashtag
+);
 
 /* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
