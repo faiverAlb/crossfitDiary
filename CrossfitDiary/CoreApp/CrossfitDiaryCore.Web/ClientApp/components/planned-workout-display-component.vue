@@ -88,6 +88,9 @@
               </div>
             </div>
           </div>
+          <div v-if="!selectedWorkout.IsAMRAP() && !selectedWorkout.IsHaveCapTime()">
+            Just log workout
+          </div>
         </div>
       </div>
 
@@ -178,15 +181,12 @@
         <div class="item-body pt-1">
           <WorkoutDisplayComponent :workoutViewModel="plannedRxPlus"></WorkoutDisplayComponent>
         </div>
-        <div class="item-footer text-right pt-1">
+        <div class="item-footer text-right pt-2">
           <div class="action-buttons">
-            <a
-              class="repeat-workout-action pointer text-success pl-1"
-              v-bind:href="'Workout?workoutId='+this.plannedRxPlus.id"
-            >
-              <font-awesome-icon :icon="['fas','plus']"></font-awesome-icon>
-              <span class="do-it-text">Do it</span>
-            </a>
+            <b-button
+              variant="warning"
+              @click="showLogWorkout(plannedRxPlus)"
+            >Log workout</b-button>
           </div>
         </div>
       </div>
