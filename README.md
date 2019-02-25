@@ -32,5 +32,6 @@ Coming soon (after first release I hope)
 
 # Development
 
-"npm start" to start watching only current entry point page. Check package.json -> "scripts" -> "start" for more info
-"npm run build-local" to build entire UI
+
+* "npm start" to start watching only current entry point page. Check package.json -> "scripts" -> "start" for more info 
+* "npm run build-local" to build entire UI
