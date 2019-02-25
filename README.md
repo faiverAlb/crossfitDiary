@@ -28,7 +28,7 @@ Coming soon (after first release I hope)
 
 1. Create customer local appsettings.json
 2. Specify credentials for Sql Server and credentials for Google Authentication (you need to create ones using Google Dev Console)
-3. "npm install" in terminal to intall related UI packages: Vue, Bootstrap, Font Awesome, etc.
+3. "npm install" in terminal to install related UI packages: Vue, Bootstrap, Font Awesome, etc.
 
 # Development
 
