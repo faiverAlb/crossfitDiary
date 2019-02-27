@@ -18,7 +18,7 @@ import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 var apiService = new CrossfitterService();
 var vue = new Vue({
     el: "#home-page-container",
-    template: "\n    <div class=\"home-container\">\n      <div class=\"row\">\n        <div class=\"col\">\n          <ErrorAlertComponent :errorAlertModel=\"errorAlertModel\"></ErrorAlertComponent>\n        </div>\n      </div>\n      <PlannedWorkoutDisplayComponent :plannedWorkouts=\"plannedWorkouts\"></PlannedWorkoutDisplayComponent>\n      <div class=\"row\">\n        <div class=\"offset-5\">\n          <spinner\n            :status=\"spinner.status\"\n            :size=\"spinner.size\"\n            :color=\"spinner.color\"\n            :depth=\"spinner.depth\"\n            :rotation=\"spinner.rotation\"\n            :speed=\"spinner.speed\">\n          </spinner>\n        </div>\n      </div>\n      <PersonsActivitiesComponent :activities=\"activities\"/>\n    </div>\n    ",
+    template: "\n    <div class=\"home-container\">\n      <div class=\"row\">\n        <div class=\"col\">\n          <ErrorAlertComponent :errorAlertModel=\"errorAlertModel\"></ErrorAlertComponent>\n        </div>\n      </div>\n      <PlannedWorkoutDisplayComponent :plannedWorkouts=\"plannedWorkouts\" @logWorkout=\"logWorkout\"></PlannedWorkoutDisplayComponent>\n      <div class=\"row\">\n        <div class=\"offset-5\">\n          <spinner\n            :status=\"spinner.status\"\n            :size=\"spinner.size\"\n            :color=\"spinner.color\"\n            :depth=\"spinner.depth\"\n            :rotation=\"spinner.rotation\"\n            :speed=\"spinner.speed\">\n          </spinner>\n        </div>\n      </div>\n      <PersonsActivitiesComponent :activities=\"activities\"/>\n    </div>\n    ",
     components: {
         PersonsActivitiesComponent: PersonsActivitiesComponent,
         PlannedWorkoutDisplayComponent: PlannedWorkoutDisplayComponent,
@@ -54,6 +54,23 @@ var vue = new Vue({
             _this.errorAlertModel.setError(data.response.statusText);
             _this.spinner.disable();
         });
+    },
+    methods: {
+        logWorkout: function (logModel) {
+            var _this = this;
+            this.spinner.activate();
+            apiService
+                .quickLogWorkout(logModel)
+                .then(function () { return apiService.getAllCrossfittersWorkouts(); })
+                .then(function (data) {
+                _this.activities = data;
+                _this.spinner.disable();
+            })
+                .catch(function (data) {
+                _this.spinner.disable();
+                _this.errorAlertModel.setError(data.response.statusText);
+            });
+        }
     }
 });
 //# sourceMappingURL=persons-entry.js.map
