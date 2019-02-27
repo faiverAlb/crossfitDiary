@@ -55,7 +55,6 @@
     <TypeScriptCompile Include="ClientApp\CrossfitterService.ts" />
     <TypeScriptCompile Include="ClientApp\helpers\ErrorMessageViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureType.ts" />
-    <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureTypeViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\models\viewModels\PersonExerciseRecord.ts" />

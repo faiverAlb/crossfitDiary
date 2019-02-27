@@ -171,6 +171,21 @@ namespace CrossfitDiaryCore.Web.Controllers
         }
 
         /// <summary>
+        ///     Log workout from main page
+        /// </summary>
+        /// <param name="logWorkoutViewModel">To log workout view model</param>
+        [HttpPost]
+        [Route("api/quickLogWorkout")]
+        public async Task QuickLogWorkout([FromBody] ToLogWorkoutViewModel logWorkoutViewModel)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+//            CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(logWorkoutViewModel);
+//            crossfitterWorkout.Crossfitter = user;
+//            _manageWorkoutsService.LogNewWorkout(crossfitterWorkout);
+//            _memoryCache.Remove(_allMainpageResultsConst);
+        }
+
+        /// <summary>
         ///     Create and log workout
         /// </summary>
         /// <param name="workoutViewModel">Complex model with two properties: new workout and log workout models</param>

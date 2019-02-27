@@ -294,11 +294,16 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
 
   showLogWorkout(workoutViewModel: WorkoutViewModel) {
     this.selectedWorkout = workoutViewModel;
+    this.toLogModel = new ToLogWorkoutViewModel();
+    this.toLogModel.selectedWorkoutId = this.selectedWorkout.id;
+
     this.$refs.logWorkoutModal.show();
   }
 
   logWorkout() {
-    debugger;
+    this.$refs.logWorkoutModal.hide();
+    let toLogWorkoutModel = this.toLogModel;
+    this.$emit("logWorkout", toLogWorkoutModel);
   }
   get plannedScaled() {
     if (this.plannedWorkouts[0]) {
