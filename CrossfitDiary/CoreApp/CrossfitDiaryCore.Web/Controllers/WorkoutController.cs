@@ -179,10 +179,10 @@ namespace CrossfitDiaryCore.Web.Controllers
         public async Task QuickLogWorkout([FromBody] ToLogWorkoutViewModel logWorkoutViewModel)
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-//            CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(logWorkoutViewModel);
-//            crossfitterWorkout.Crossfitter = user;
-//            _manageWorkoutsService.LogNewWorkout(crossfitterWorkout);
-//            _memoryCache.Remove(_allMainpageResultsConst);
+            CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(logWorkoutViewModel);
+            crossfitterWorkout.Crossfitter = user;
+            _manageWorkoutsService.LogNewWorkout(crossfitterWorkout);
+            _memoryCache.Remove(_allMainpageResultsConst);
         }
 
         /// <summary>

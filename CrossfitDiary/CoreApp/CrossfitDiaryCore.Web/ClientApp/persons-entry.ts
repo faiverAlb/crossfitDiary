@@ -80,12 +80,12 @@ let vue = new Vue({
   },
   methods: {
     logWorkout(logModel: ToLogWorkoutViewModel): void {
-      debugger;
       this.spinner.activate();
       apiService
         .quickLogWorkout(logModel)
+        .then(() => apiService.getAllCrossfittersWorkouts())
         .then(data => {
-          debugger;
+          this.activities = data;
           this.spinner.disable();
         })
         .catch(data => {

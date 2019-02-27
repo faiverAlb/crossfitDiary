@@ -61,8 +61,9 @@ var vue = new Vue({
             this.spinner.activate();
             apiService
                 .quickLogWorkout(logModel)
+                .then(function () { return apiService.getAllCrossfittersWorkouts(); })
                 .then(function (data) {
-                debugger;
+                _this.activities = data;
                 _this.spinner.disable();
             })
                 .catch(function (data) {

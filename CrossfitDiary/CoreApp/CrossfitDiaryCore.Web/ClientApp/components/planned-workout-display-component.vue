@@ -294,8 +294,10 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
 
   showLogWorkout(workoutViewModel: WorkoutViewModel) {
     this.selectedWorkout = workoutViewModel;
+
     this.toLogModel = new ToLogWorkoutViewModel();
     this.toLogModel.selectedWorkoutId = this.selectedWorkout.id;
+    this.toLogModel.displayDate = workoutViewModel.displayPlanDate;
 
     this.$refs.logWorkoutModal.show();
   }
