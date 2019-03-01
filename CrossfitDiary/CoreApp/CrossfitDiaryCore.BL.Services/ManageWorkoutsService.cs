@@ -146,5 +146,12 @@ namespace CrossfitDiaryCore.BL.Services
 
             }
         }
+
+        public void LogNewWorkout(CrossfitterWorkout crossfitterWorkout)
+        {
+
+            _context.CrossfitterWorkouts.Add(crossfitterWorkout);
+            _context.SaveChanges();
+        }
     }
 }

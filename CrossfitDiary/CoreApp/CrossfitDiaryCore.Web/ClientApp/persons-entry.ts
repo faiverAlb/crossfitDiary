@@ -27,7 +27,7 @@ let vue = new Vue({
           <ErrorAlertComponent :errorAlertModel="errorAlertModel"></ErrorAlertComponent>
         </div>
       </div>
-      <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts"></PlannedWorkoutDisplayComponent>
+      <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts" @logWorkout="logWorkout"></PlannedWorkoutDisplayComponent>
       <div class="row">
         <div class="offset-5">
           <spinner
@@ -77,5 +77,21 @@ let vue = new Vue({
         this.errorAlertModel.setError(data.response.statusText);
         this.spinner.disable();
       });
+  },
+  methods: {
+    logWorkout(logModel: ToLogWorkoutViewModel): void {
+      this.spinner.activate();
+      apiService
+        .quickLogWorkout(logModel)
+        .then(() => apiService.getAllCrossfittersWorkouts())
+        .then(data => {
+          this.activities = data;
+          this.spinner.disable();
+        })
+        .catch(data => {
+          this.spinner.disable();
+          this.errorAlertModel.setError(data.response.statusText);
+        });
+    }
   }
 });

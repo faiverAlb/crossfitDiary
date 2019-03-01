@@ -31,55 +31,9 @@ var CrossfitterService = /** @class */ (function () {
         this.removeWorkout = function (crossfitterWorkoutId) {
             return axios.delete("api/removeWorkout/" + crossfitterWorkoutId);
         };
-        //
-        //    public getPersonMaximums = (): Q.Promise<PersonExerciseRecord[]> => {
-        ////      this.isDataLoading(true);
-        //      return this.get<PersonExerciseRecord[]>(this.pathToApp + "api/getPersonMaximums")
-        //        .then((jsonData) => {
-        //          return jsonData.map(x => new PersonExerciseRecord().deserialize(x));
-        //        });
-        ////        .finally(() => { this.isDataLoading(false); });
-        //    };
-        //
-        //    public getStatisticalExercises = (): Q.Promise<ExerciseViewModel[]> => {
-        ////      this.isDataLoading(true);
-        //      return this.get<ExerciseViewModel[]>(this.pathToApp + "api/getStatisticalExercises")
-        //        .then((jsonData) => {
-        //          return jsonData.map(x => new ExerciseViewModel().deserialize(x));
-        //        });
-        ////        .finally(() => { this.isDataLoading(false); });
-        //    };
-        //
-        //    public getPersonExerciseMaximumWeight = (exerciseId: number) => {
-        ////      this.isDataLoading(true);
-        //      return this.get<PersonExerciseRecord[]>(this.pathToApp + `api/exercises/${exerciseId}/personMaximum`)
-        //        .then((jsonData) => {
-        //          return jsonData.map(x => new PersonExerciseRecord().deserialize(x));
-        //        });
-        ////        .finally(() => { this.isDataLoading(false); });
-        //    };
-        //
-        //    public getAllPersonsExerciseMaximumWeights = (exerciseId: number) => {
-        ////      this.isDataLoading(true);
-        //      return this.get<PersonExerciseRecord[]>(this.pathToApp + `api/exercises/${exerciseId}/allPersonsMaximums`)
-        //        .then((jsonData) => {
-        //          return jsonData.map(x => new PersonExerciseRecord().deserialize(x));
-        //        });
-        ////        .finally(() => { this.isDataLoading(false); });
-        //    };
-        //
-        //
-        //    public getPersonLoggingInfo = (preselectedCrossfitterWorkoutId: number): Q.Promise<ToLogWorkoutViewModel> => {
-        ////      this.isDataLoading(true);
-        //      return this.get<ToLogWorkoutViewModel>(this.pathToApp +
-        //          `api/getPersonLoggingInfo/${preselectedCrossfitterWorkoutId}`)
-        //        .then((jsonData) => {
-        //          return new ToLogWorkoutViewModel().deserialize(jsonData);
-        //        });
-        ////        .finally(() => {
-        ////          this.isDataLoading(false);
-        ////        });
-        //    };
+        this.quickLogWorkout = function (logModel) {
+            return axios.post("api/quickLogWorkout", logModel);
+        };
     }
     return CrossfitterService;
 }());
