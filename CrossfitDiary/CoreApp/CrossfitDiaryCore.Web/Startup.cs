@@ -45,7 +45,8 @@ namespace CrossfitDiaryCore.Web
                 .AddEntityFrameworkStores<WorkouterContext>()
                 .AddDefaultTokenProviders();
             //
-            services.AddAuthentication().AddGoogle(googleOptions =>
+            services.AddAuthentication()
+            .AddGoogle(googleOptions =>
             {
                 googleOptions.ClientId = Configuration["oAuthConfiguration:google:clientId"];
                 googleOptions.ClientSecret = Configuration["oAuthConfiguration:google:clientSecret"];
