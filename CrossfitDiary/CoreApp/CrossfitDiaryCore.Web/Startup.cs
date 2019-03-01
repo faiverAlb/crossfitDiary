@@ -54,6 +54,7 @@ namespace CrossfitDiaryCore.Web
             {
                 options.ClientId = Configuration["oAuthConfiguration:vkontakte:clientId"];
                 options.ClientSecret = Configuration["oAuthConfiguration:vkontakte:clientSecret"];
+                options.Scope.Add("email");
             });
 
             services.Configure<IdentityOptions>(
