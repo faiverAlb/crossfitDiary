@@ -52,15 +52,17 @@ namespace CrossfitDiaryCore.Web.Controllers
                 return RedirectToAction("Index", "Persons");
             }
 
-            bool isSucceedCreateUser = await CreateUser(info);
-            if (isSucceedCreateUser)
+            CreateUserStatus status = await CreateUser(info);
+            if (status == CreateUserStatus.Success)
             {
                 return RedirectToAction("Index", "Persons");
             }
+
+            TempData["error-login-reason"] = status;
             return RedirectToAction("ErrorLogin");
         }
 
-        private async Task<bool> CreateUser(ExternalLoginInfo info)
+        private async Task<CreateUserStatus> CreateUser(ExternalLoginInfo info)
         {
             var user = new ApplicationUser
             {
@@ -78,17 +80,30 @@ namespace CrossfitDiaryCore.Web.Controllers
                 if (createUserStatus.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: true);
-                    return true;
+                    return CreateUserStatus.Success;
                 }
             }
-            return false;
+
+            if (createUserStatus.Errors.Any(x => x.Code == "DuplicateUserName"))
+            {
+                return CreateUserStatus.SameUserNameAndEmail;
+            }
+
+            return CreateUserStatus.NotGiveEmail;
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ErrorLogin()
         {
-            return View();
+            if (TempData["error-login-reason"] != null)
+            {
+                CreateUserStatus createUserStatus = (CreateUserStatus)TempData["error-login-reason"];
+                return View(createUserStatus);
+            }
+            return View(CreateUserStatus.DontKnow);
+
+
         }
 
         public async Task<IActionResult> Logout()
@@ -98,5 +113,13 @@ namespace CrossfitDiaryCore.Web.Controllers
         }
 
 
+    }
+
+    public enum CreateUserStatus    
+    {
+        Success,
+        SameUserNameAndEmail,
+        NotGiveEmail,
+        DontKnow
     }
 }

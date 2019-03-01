@@ -34,13 +34,17 @@
     <main role="main" class="container">
         <div class="login-container mt-5">
             <div class="text-center py-2 person-icon">
-                <i class="far fa-grin-beam fa-5x"></i>
+                <i class="fas fa-rocket fa-5x"></i>
             </div>
             <h1 class="h3 mb-3 font-weight-normal text-center">Workouter v@(currentVersion)</h1>
 
             <form asp-action="Confirmation" method="post">
-                <button type="submit" class="btn btn-lg btn-block social-button" id="Google" value="Google" name="provider">
+                <button type="submit" class="btn btn-lg btn-block social-button google" id="Google" value="Google" name="provider">
                     <i class="fab fa-google-plus-g"></i> Sign in with Google
+                </button>
+
+                <button type="submit" class="btn btn-lg btn-block social-button  vk" id="Vkontakte" value="Vkontakte" name="provider">
+                    <i class="fab fa-vk"></i> Sign in with Vkontakte
                 </button>
             </form>
 

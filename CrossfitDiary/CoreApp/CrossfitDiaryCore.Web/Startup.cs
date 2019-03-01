@@ -44,11 +44,17 @@ namespace CrossfitDiaryCore.Web
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<WorkouterContext>()
                 .AddDefaultTokenProviders();
-//
+            //
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
                 googleOptions.ClientId = Configuration["oAuthConfiguration:google:clientId"];
                 googleOptions.ClientSecret = Configuration["oAuthConfiguration:google:clientSecret"];
+            })
+            .AddVkontakte(options =>
+            {
+                options.ClientId = Configuration["oAuthConfiguration:vkontakte:clientId"];
+                options.ClientSecret = Configuration["oAuthConfiguration:vkontakte:clientSecret"];
+                options.Scope.Add("email");
             });
 
             services.Configure<IdentityOptions>(
