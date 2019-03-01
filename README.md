@@ -17,7 +17,7 @@ Asp.net Core 2.0 (at current point) + Vuejs + Typescript + MSSql (EF Core + Dapp
 *  [Font awesome](https://fontawesome.com/)
 *  Typescript: [axios](https://github.com/axios/axios) for server api calls
 *  Asp.net Core: WebApi + MVC
-*  Asp.net Core: EF Core with Identity using Google Plus auth. Coming soon: Vk Auth, Facebook Auth
+*  Asp.net Core: EF Core with Identity using Google auth, Vk Auth. Coming soon: Facebook Auth
 *  Asp.net Core: [Dapper](https://github.com/StackExchange/Dapper) for some performance improvements
 *  DB: MSSQL
 
