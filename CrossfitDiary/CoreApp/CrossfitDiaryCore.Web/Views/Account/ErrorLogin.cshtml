@@ -1,15 +1,57 @@
-﻿@{
+﻿@using CrossfitDiaryCore.Web.Controllers
+@model CreateUserStatus
+@{
     Layout = null;
+    string currentVersion = string.Format("{0}.{1}.{2}", typeof(Startup).Assembly.GetName().Version.Major, typeof(Startup).Assembly.GetName().Version.Minor, typeof(Startup).Assembly.GetName().Version.Build);
 }
 <!DOCTYPE html>
 <html>
 <head>
     <title>Look at me. Look at me again.</title>
 </head>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<link rel="stylesheet" href="~/dist/generated/login.css" asp-append-version="true" />
 <body>
-<a asp-controller="Persons" asp-action="Index">
-    <h2>We were unable to login you, sorry :( Maybe try again?</h2>
-    <img src="images/error.jpg" alt="Error message here ;)"/>
-</a>
+    <a asp-controller="Persons" asp-action="Index">
+    </a>
+
+    <main role="main" class="container">
+        <div class="login-container mt-5">
+            <div class="text-center py-2 person-icon">
+                <i class="far fa-sad-tear fa-5x"></i>
+            </div>
+            <div class="error-login-status">
+                @switch (Model)
+                {
+                    case CreateUserStatus.SameUserNameAndEmail:
+                        <div>User with the same username and email already exists!</div>
+                        break;
+                    case CreateUserStatus.NotGiveEmail:
+                        <span>Please give the access to your email. It's only needed to verify account. No spam. I promise.</span>
+                        break;
+                    default:
+                        <span>Seems something goes wrong. Ask admin to check WTF is going on</span>
+                        break;
+                }
+            </div>
+            <form asp-action="Confirmation" method="post">
+                <hr />
+
+                <button type="submit" class="btn btn-lg btn-block social-button  vk" id="Vkontakte" value="Vkontakte" name="provider">
+                    <i class="fab fa-vk"></i> Sign in with Vkontakte
+                </button>
+                <hr />
+
+                <button type="submit" class="btn btn-lg btn-block social-button google" id="Google" value="Google" name="provider">
+                    <i class="fab fa-google-plus-g"></i> Sign in with Google
+                </button>
+            </form>
+
+        </div>
+    </main>
+
+
 </body>
 </html>
