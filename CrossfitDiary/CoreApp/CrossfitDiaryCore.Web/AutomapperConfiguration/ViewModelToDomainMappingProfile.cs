@@ -44,6 +44,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.Count, opt => opt.ResolveUsing<CountResolver>())
                 .ForMember(x => x.Distance, opt => opt.ResolveUsing<DistanceResolver>())
                 .ForMember(x => x.Weight, opt => opt.ResolveUsing<WeightResolver>())
+                .ForMember(x => x.AlternativeWeight, opt => opt.ResolveUsing<AlternativeWeightResolver>())
                 .ForMember(x => x.Calories, opt => opt.ResolveUsing<CaloriesResolver>())
                 .ForMember(x => x.Centimeters, opt => opt.ResolveUsing<CentimetersResolver>());
 
@@ -78,13 +79,13 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
     {
         public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
         {
-            ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Count);
-            if (string.IsNullOrEmpty(foundTimeMeasure?.MeasureValue))
+            ExerciseMeasureViewModel measure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Count);
+            if (string.IsNullOrEmpty(measure?.MeasureValue))
             {
                 return null;
             }
 
-            return DecimalParse.ParseDecimal(foundTimeMeasure.MeasureValue);
+            return DecimalParse.ParseDecimal(measure.MeasureValue);
         }
 
     }
@@ -93,13 +94,13 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
     {
         public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
         {
-            ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Distance);
-            if (string.IsNullOrEmpty(foundTimeMeasure?.MeasureValue))
+            ExerciseMeasureViewModel measure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Distance);
+            if (string.IsNullOrEmpty(measure?.MeasureValue))
             {
                 return null;
             }
 
-            return DecimalParse.ParseDecimal(foundTimeMeasure.MeasureValue);
+            return DecimalParse.ParseDecimal(measure.MeasureValue);
         }
     }
 
@@ -107,38 +108,51 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
     {
         public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
         {
-            ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Weight);
-            if (string.IsNullOrEmpty(foundTimeMeasure?.MeasureValue))
+            ExerciseMeasureViewModel measure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Weight);
+            if (string.IsNullOrEmpty(measure?.MeasureValue))
             {
                 return null;
             }
 
-            return DecimalParse.ParseDecimal(foundTimeMeasure.MeasureValue);
+            return DecimalParse.ParseDecimal(measure.MeasureValue);
+        }
+    }
+    public class AlternativeWeightResolver : IValueResolver<ExerciseViewModel, RoutineSimple, decimal?>
+    {
+        public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
+        {
+            ExerciseMeasureViewModel measure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.AlternativeWeight);
+            if (string.IsNullOrEmpty(measure?.MeasureValue))
+            {
+                return null;
+            }
+
+            return DecimalParse.ParseDecimal(measure.MeasureValue);
         }
     }
     public class CaloriesResolver : IValueResolver<ExerciseViewModel, RoutineSimple, decimal?>
     {
         public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
         {
-            ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Calories);
-            if (string.IsNullOrEmpty(foundTimeMeasure?.MeasureValue))
+            ExerciseMeasureViewModel measure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Calories);
+            if (string.IsNullOrEmpty(measure?.MeasureValue))
             {
                 return null;
             }
-            return DecimalParse.ParseDecimal(foundTimeMeasure.MeasureValue);
+            return DecimalParse.ParseDecimal(measure.MeasureValue);
         }
     }
     public class CentimetersResolver : IValueResolver<ExerciseViewModel, RoutineSimple, decimal?>
     {
         public decimal? Resolve(ExerciseViewModel source, RoutineSimple destination, decimal? destMember, ResolutionContext context)
         {
-            ExerciseMeasureViewModel foundTimeMeasure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Height);
-            if (string.IsNullOrEmpty(foundTimeMeasure?.MeasureValue))
+            ExerciseMeasureViewModel measure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Height);
+            if (string.IsNullOrEmpty(measure?.MeasureValue))
             {
                 return null;
             }
 
-            return DecimalParse.ParseDecimal(foundTimeMeasure.MeasureValue);
+            return DecimalParse.ParseDecimal(measure.MeasureValue);
         }
     }
 }
