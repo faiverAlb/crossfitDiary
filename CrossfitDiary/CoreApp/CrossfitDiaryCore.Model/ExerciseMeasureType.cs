@@ -1,14 +1,5 @@
 namespace CrossfitDiaryCore.Model
 {
-    //public class ExerciseMeasureType : BaseModel
-    //{
-    //    public MeasureType MeasureType { get; set; }
-
-    //    public string Description { get; set; }
-
-    //    public string ShortMeasureDescription { get; set; }
-
-    //}
     public enum MeasureType
     {
         Distance = 1,
@@ -16,5 +7,10 @@ namespace CrossfitDiaryCore.Model
         Weight = 3,
         Calories = 4,
         Height = 5,
+        AlternativeDistance = 6,
+        AlternativeCount = 7,
+        AlternativeWeight = 8,
+        AlternativeCalories = 9,
+        AlternativeHeight = 10,
     }
 }
