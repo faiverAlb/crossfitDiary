@@ -52,6 +52,12 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public decimal? Weight { get; set; }
 
+
+        /// <summary>
+        /// Possible alternative weight in kgs
+        /// </summary>
+        public decimal? AlternativeWeight { get; set; }
+
         /// <summary>
         /// Calories to make
         /// </summary>

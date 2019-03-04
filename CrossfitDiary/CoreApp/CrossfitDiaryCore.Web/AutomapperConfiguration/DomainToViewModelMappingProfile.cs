@@ -56,6 +56,10 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                         viewModel.ShortMeasureDescription = "cm";
                         viewModel.Description = "Height";
                         break;
+                    case MeasureType.AlternativeWeight:
+                        viewModel.ShortMeasureDescription = "kgs";
+                        viewModel.Description = "Alt weight";
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -126,6 +130,13 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                                 exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Weight;
                                 exerviseMeasureVm.MeasureValue = simple.Weight.ToCustomString();
                                 exerviseMeasureVm.Description = "Weight";
+                                exerviseMeasureVm.ShortMeasureDescription = "kgs";
+                                exerviseMeasureVm.IsRequired = simple.Exercise.ExerciseMeasures.Count <= 1;
+                                break;
+                            case MeasureType.AlternativeWeight:
+                                exerviseMeasureVm.MeasureType = MeasureTypeViewModel.AlternativeWeight;
+                                exerviseMeasureVm.MeasureValue = simple.AlternativeWeight.ToCustomString();
+                                exerviseMeasureVm.Description = "Alt weight";
                                 exerviseMeasureVm.ShortMeasureDescription = "kgs";
                                 exerviseMeasureVm.IsRequired = simple.Exercise.ExerciseMeasures.Count <= 1;
                                 break;

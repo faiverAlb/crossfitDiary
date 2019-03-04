@@ -12,9 +12,10 @@ using System;
 namespace CrossfitDiaryCore.DAL.EF.Migrations
 {
     [DbContext(typeof(WorkouterContext))]
-    partial class WorkouterContextModelSnapshot : ModelSnapshot
+    [Migration("20190304100724_AddAlternatveWeight")]
+    partial class AddAlternatveWeight
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
