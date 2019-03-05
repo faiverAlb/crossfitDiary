@@ -16,6 +16,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Exercise, ExerciseViewModel>()
+                .ForMember(x =>x.ExerciseMeasures, x => x.MapFrom(y => y.OrderedExerciseMeasures))
                 .AfterMap((exercise, model) =>
                 {
                     foreach (var exerciseMeasureViewModel in model.ExerciseMeasures)
