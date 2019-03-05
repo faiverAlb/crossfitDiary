@@ -281,3 +281,4 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 /CrossfitDiary/CoreApp/CrossfitDiaryCore.Web/wwwroot/dist/generated
+/CrossfitDiary/CoreApp/CrossfitDiaryCore.Web/Properties/PublishProfiles/ToPc.pubxml
