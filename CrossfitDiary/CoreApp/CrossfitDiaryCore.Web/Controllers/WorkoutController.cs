@@ -88,7 +88,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/getAllCrossfittersWorkouts")]
         public async Task<List<ToLogWorkoutViewModel>> GetAllCrossfittersWorkoutsAsync(int page = 1, int pageSize = 30, string userId = null, int? exerciseId = null)
         {
-            List<ToLogWorkoutViewModel> crossfitersWorkouts = await _memoryCache.GetOrCreate(_allMainpageResultsConst, async entry =>
+//            List<ToLogWorkoutViewModel> crossfitersWorkouts = await _memoryCache.GetOrCreate(_allMainpageResultsConst, async entry =>
              {
                  string userIdForWorkouts = userId;
                  List<CrossfitterWorkout> crossfitterWorkouts = await _readWorkoutsService
@@ -98,10 +98,10 @@ namespace CrossfitDiaryCore.Web.Controllers
                      .ToList();
                  return allResults;
              }
-            );
+//            );
 
 
-            return crossfitersWorkouts;
+//            return crossfitersWorkouts;
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         {
             string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             
-            _memoryCache.Remove(_allMainpageResultsConst);
+//            _memoryCache.Remove(_allMainpageResultsConst);
             //TODO: Add check rights!
             _manageWorkoutsService.RemoveWorkoutResult(crossfitterWorkoutId, userId);
         }
@@ -161,7 +161,7 @@ namespace CrossfitDiaryCore.Web.Controllers
                 RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
                 newWorkoutRoutine.CreatedBy = user;
                 _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
-                _memoryCache.Remove(_allMainpageResultsConst);
+//                _memoryCache.Remove(_allMainpageResultsConst);
             }
             catch (Exception exception)
             {
@@ -182,7 +182,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(logWorkoutViewModel);
             crossfitterWorkout.Crossfitter = user;
             _manageWorkoutsService.LogNewWorkout(crossfitterWorkout);
-            _memoryCache.Remove(_allMainpageResultsConst);
+//            _memoryCache.Remove(_allMainpageResultsConst);
         }
 
         /// <summary>
@@ -197,8 +197,8 @@ namespace CrossfitDiaryCore.Web.Controllers
             RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(workoutViewModel);
             newWorkoutRoutine.CreatedBy = user;
             _manageWorkoutsService.PlanWorkout(newWorkoutRoutine, user);
-            _memoryCache.Remove(_allMainpageResultsConst);
-            _memoryCache.Remove(_plannedWorkouts);
+//            _memoryCache.Remove(_allMainpageResultsConst);
+//            _memoryCache.Remove(_plannedWorkouts);
         }
 
 
