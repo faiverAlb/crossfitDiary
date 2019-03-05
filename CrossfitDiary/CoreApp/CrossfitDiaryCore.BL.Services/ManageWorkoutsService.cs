@@ -40,6 +40,11 @@ namespace CrossfitDiaryCore.BL.Services
             {
                 return;
             }
+
+            if (workoutToCheckAndDelete.PlanDate.HasValue)
+            {
+                return;
+            }
             if (workoutToCheckAndDelete.CreatedBy?.Id != userId)
             {
                 return;
@@ -68,6 +73,8 @@ namespace CrossfitDiaryCore.BL.Services
             {
                 currentWorkoutIdFromUI = workoutRoutine.Id;
                 workoutRoutine.Id = 0;
+                workoutRoutine.PlanDate = null;
+                workoutRoutine.PlanningLevel = null;
                 int childIndex = 0;
                 foreach (RoutineComplex routineChild in workoutRoutine.Children)
                 {
