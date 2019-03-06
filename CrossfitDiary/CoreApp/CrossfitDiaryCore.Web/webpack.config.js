@@ -140,17 +140,17 @@ module.exports = (env) => {
   if (isProd) {
     config.devtool = 'source-map';
     config.plugins = config.plugins.concat([
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        uglifyOptions: {
-          compress: true,
-          ecma: 6,
-          mangle: true,
-          dead_code: true
-        },
-        sourceMap: false
-      }),
+      // new UglifyJsPlugin({
+      //   cache: true,
+      //   parallel: true,
+      //   uglifyOptions: {
+      //     compress: true,
+      //     // ecma: 6,
+      //     mangle: true,
+      //     dead_code: true
+      //   },
+      //   sourceMap: false
+      // }),
       new OptimizeCSSAssetsPlugin({})
     ]);
   }
