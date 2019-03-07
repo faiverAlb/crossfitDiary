@@ -1,5 +1,25 @@
 ﻿<template>
   <div>
+    <b-modal
+      ref="logWorkoutModal"
+      title="Sure to log this workout?"
+    >
+      Are you sure you want to log this workout?
+      <div slot="modal-footer">
+        <button
+          type="button"
+          data-dismiss="modal"
+          class="btn btn-default"
+          @click="hideLogModal"
+        >Close</button>
+        <button
+          type="button"
+          data-dismiss="modal"
+          class="btn btn-primary btn-success"
+          @click="logWorkout"
+        >Confirm</button>
+      </div>
+    </b-modal>
     <div class="routine-complex-info">
       <div class="row">
         <div class="col">
@@ -134,6 +154,26 @@
           >Add workout after</button>
         </div>
       </div>
+      <div class="comments-section">
+        <b-form-textarea
+          id="commentSection"
+          class="mt-2"
+          v-model="model.comment"
+          name="commentSection"
+          placeholder="Note: ex. girls do max 30kg"
+          :maxlength="150"
+          type="text"
+          rows="3"
+          max-rows="3"
+          no-resize
+        />
+        <small
+          id="passwordHelpBlock"
+          class="form-text text-muted"
+        >
+          Workout note
+        </small>
+      </div>
     </div>
     <EditPlannedWorkoutComponent
       :planningWorkout="model"
@@ -225,7 +265,7 @@
           </div>
           <button
             class="btn btn-success"
-            v-on:click="logWorkout"
+            v-on:click="showLogWorkoutModal"
             v-if="spinner.status == false"
           >Log workout</button>
         </div>
@@ -254,6 +294,8 @@ import { mask } from "vue-the-mask";
 import { InputGroup } from "bootstrap-vue/es/components";
 import VeeValidate from "vee-validate";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+import BFormTextarea from "bootstrap-vue/es/components/form-textarea/form-textarea";
+import bModal from "bootstrap-vue/es/components/modal/modal";
 Vue.use(InputGroup);
 Vue.use(VeeValidate);
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
@@ -286,6 +328,8 @@ declare var workouter: {
     ExercisesListComponent,
     bFormInput,
     datePicker,
+    BFormTextarea,
+    bModal,
     bAlert,
     Spinner,
     ErrorAlertComponent,
@@ -298,6 +342,9 @@ export default class ForTimeEdiForTimeNEditComponenttComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
   spinner: SpinnerModel = new SpinnerModel(false);
+  $refs: {
+    logWorkoutModal: HTMLFormElement;
+  };
 
   @State("workoutEdit")
   workoutEdit: IWorkoutEditState;
@@ -333,6 +380,20 @@ export default class ForTimeEdiForTimeNEditComponenttComponent extends Vue {
           });
       }
     });
+  }
+
+  showLogWorkoutModal(): void {
+    this.$validator.validate();
+
+    this.$validator.validate().then(isValid => {
+      if (isValid) {
+        this.$refs.logWorkoutModal.show();
+      }
+    });
+  }
+
+  hideLogModal(): void {
+    this.$refs.logWorkoutModal.hide();
   }
 
   logWorkout() {

@@ -115,6 +115,26 @@
             </b-input-group>
           </div>
         </div>
+        <div class="comments-section">
+          <b-form-textarea
+            id="commentSection"
+            class="mt-2"
+            v-model="model.comment"
+            name="commentSection"
+            placeholder="Note: ex. girls do max 30kg"
+            :maxlength="150"
+            type="text"
+            rows="3"
+            max-rows="3"
+            no-resize
+          />
+          <small
+            id="passwordHelpBlock"
+            class="form-text text-muted"
+          >
+            Workout note
+          </small>
+        </div>
       </div>
     </div>
     <EditPlannedWorkoutComponent
@@ -247,6 +267,7 @@ import { mask } from "vue-the-mask";
 import { InputGroup } from "bootstrap-vue/es/components";
 import VeeValidate from "vee-validate";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+import BFormTextarea from "bootstrap-vue/es/components/form-textarea/form-textarea";
 Vue.use(InputGroup);
 Vue.use(VeeValidate);
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
@@ -282,6 +303,7 @@ declare var workouter: {
     ExercisesListComponent,
     datePicker,
     bFormInput,
+    BFormTextarea,
     bAlert,
     bButton,
     bButtonGroup,
