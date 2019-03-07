@@ -41,7 +41,7 @@
       </div>
     </div>
     <div
-      class="comment-section"
+      class="workout-comment-section"
       v-if="workoutViewModel.comment"
     >Note: <span class="workout-comment">{{workoutViewModel.comment}}</span></div>
   </div>
