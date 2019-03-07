@@ -105,5 +105,10 @@ namespace CrossfitDiaryCore.Model
         ///     Possible Planning Level
         /// </summary>
         public PlanningLevel? PlanningLevel { get; set; }
+
+        /// <summary>
+        ///     General comment regarding workout
+        /// </summary>
+        public string Comment { get; set; }
     }
 }

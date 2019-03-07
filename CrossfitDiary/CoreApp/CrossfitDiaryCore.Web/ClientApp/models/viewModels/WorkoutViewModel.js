@@ -45,6 +45,7 @@ var WorkoutViewModel = /** @class */ (function () {
         this.isInnerWorkout = params.isInnerWorkout;
         this.planningWorkoutLevel = params.planningWorkoutLevel;
         this.displayPlanDate = params.displayPlanDate;
+        this.comment = params.comment;
     }
     WorkoutViewModel.prototype.deserialize = function (jsonInput) {
         if (jsonInput == null) {
@@ -64,7 +65,8 @@ var WorkoutViewModel = /** @class */ (function () {
             exercisesToDoList: jsonInput.exercisesToDoList.map(function (x) { return new ExerciseViewModel().deserialize(x); }),
             isInnerWorkout: false,
             planningWorkoutLevel: jsonInput.planningWorkoutLevel,
-            displayPlanDate: jsonInput.displayPlanDate
+            displayPlanDate: jsonInput.displayPlanDate,
+            comment: jsonInput.comment
         });
     };
     return WorkoutViewModel;

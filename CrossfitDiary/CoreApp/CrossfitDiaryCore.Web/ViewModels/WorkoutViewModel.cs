@@ -7,8 +7,6 @@ namespace CrossfitDiaryCore.Web.ViewModels
 {
     public class WorkoutViewModel
     {
-        #region properties
-
         [JsonProperty("children")]
         public ICollection<WorkoutViewModel> Children { get; set; }
 
@@ -79,6 +77,8 @@ namespace CrossfitDiaryCore.Web.ViewModels
             }
         }
 
-        #endregion
+        [JsonProperty("comment")]
+        public string Comment { get; set; }
+
     }
 }
