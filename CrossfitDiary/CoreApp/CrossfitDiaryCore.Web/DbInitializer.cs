@@ -9,6 +9,7 @@ namespace CrossfitDiaryCore.Web
     {
         public static void Seed(WorkouterContext context)
         {
+            
             AddExerciseIfPossible("L-Sit Hold", "L-Sit Hold", new List<ExerciseMeasure> { }, context);
             AddExerciseIfPossible("L-Sit Rope Climb", "L-Sit RC", new List<ExerciseMeasure> { new ExerciseMeasure(){ExerciseMeasureTypeId = MeasureType.Count}}, context);
             AddExerciseIfPossible("Rope Climb from floor", "RC from floor", new List<ExerciseMeasure> { new ExerciseMeasure(){ExerciseMeasureTypeId = MeasureType.Count } }, context);

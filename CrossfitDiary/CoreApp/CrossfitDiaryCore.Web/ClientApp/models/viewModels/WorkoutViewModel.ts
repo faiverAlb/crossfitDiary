@@ -17,6 +17,7 @@ interface IWorkoutViewModel {
   displayPlanDate?: string;
   planningWorkoutLevel: PlanningWorkoutLevel;
   isInnerWorkout: boolean;
+  comment?: string;
 }
 export enum PlanningWorkoutLevel {
   Scaled = 0,
@@ -38,6 +39,7 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
   isInnerWorkout: boolean = false;
   planningWorkoutLevel: PlanningWorkoutLevel;
   displayPlanDate?: string = new Date().toLocaleDateString(); // default value for new model;
+  comment?: string;
 
   public IsForTime = () => {
     return this.workoutType == WorkoutType.ForTime;
@@ -72,6 +74,7 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
     this.isInnerWorkout = params.isInnerWorkout;
     this.planningWorkoutLevel = params.planningWorkoutLevel;
     this.displayPlanDate = params.displayPlanDate;
+    this.comment = params.comment;
   }
 
   public deserialize(jsonInput: any): WorkoutViewModel {
@@ -92,7 +95,8 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
       exercisesToDoList: jsonInput.exercisesToDoList.map((x): ExerciseViewModel => new ExerciseViewModel().deserialize(x)),
       isInnerWorkout: false,
       planningWorkoutLevel: jsonInput.planningWorkoutLevel,
-      displayPlanDate: jsonInput.displayPlanDate
+      displayPlanDate: jsonInput.displayPlanDate,
+      comment: jsonInput.comment
     });
   }
 }

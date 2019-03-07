@@ -64,6 +64,15 @@
             </b-input-group>
           </div>
         </div>
+        <div class="comments-section">
+          <b-form-textarea
+            id="textarea1"
+            v-model="model.comment"
+            placeholder="Enter something"
+            rows="3"
+            max-rows="6"
+          />
+        </div>
       </div>
     </div>
     <EditPlannedWorkoutComponent
@@ -181,6 +190,7 @@ import { InputGroup } from "bootstrap-vue/es/components";
 import { mask } from "vue-the-mask";
 import VeeValidate from "vee-validate";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+import BFormTextarea from "bootstrap-vue/es/components/form-textarea/form-textarea";
 Vue.use(InputGroup);
 Vue.use(VeeValidate);
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
@@ -214,6 +224,7 @@ declare var workouter: {
     bFormInput,
     datePicker,
     bAlert,
+    BFormTextarea,
     Spinner,
     ErrorAlertComponent,
     EditPlannedWorkoutComponent
