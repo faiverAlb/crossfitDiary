@@ -16,8 +16,6 @@ namespace CrossfitDiaryCore.Model
 
         #endregion
 
-        #region properties
-
         /// <summary>
         ///     Gets or sets the crossfitter.
         /// </summary>
@@ -79,6 +77,10 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public bool WasFinished { get; set; }
 
-        #endregion
+
+        /// <summary>
+        ///     Comment regarding workout from crossfitter
+        /// </summary>
+        public string Comment { get; set; }
     }
 }
