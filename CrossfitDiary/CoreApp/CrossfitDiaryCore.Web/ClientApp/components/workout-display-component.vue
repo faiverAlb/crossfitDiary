@@ -40,6 +40,10 @@
         <WorkoutDisplayComponent :workoutViewModel="childWorkout"></WorkoutDisplayComponent>
       </div>
     </div>
+    <div
+      class="workout-comment-section"
+      v-if="workoutViewModel.comment"
+    >Note: <span class="workout-comment">{{workoutViewModel.comment}}</span></div>
   </div>
 
 </template>

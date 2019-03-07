@@ -17,6 +17,7 @@ interface IToLogWorkoutViewModel {
   workouterId?: string;
   displayDate?: string;
   workoutViewModel?: WorkoutViewModel;
+  comment?: string;
 }
 export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel> {
   id: number = 0;
@@ -34,6 +35,7 @@ export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel
   workouterId?: string;
   displayDate?: string = new Date().toLocaleDateString(); // default value for new model
   workoutViewModel?: WorkoutViewModel;
+  comment?: string;
 
   constructor(params?: IToLogWorkoutViewModel) {
     if (params == null) {
@@ -54,6 +56,7 @@ export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel
     this.workouterId = params.workouterId;
     this.displayDate = params.displayDate;
     this.workoutViewModel = params.workoutViewModel;
+    this.comment = params.comment;
   }
 
   deserialize(jsonInput: any): ToLogWorkoutViewModel {
@@ -75,7 +78,8 @@ export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel
       workouterName: jsonInput.workouterName,
       workouterId: jsonInput.workouterId,
       displayDate: jsonInput.displayDate,
-      workoutViewModel: new WorkoutViewModel().deserialize(jsonInput.workoutViewModel)
+      workoutViewModel: new WorkoutViewModel().deserialize(jsonInput.workoutViewModel),
+      comment: jsonInput.comment
     });
   }
 }

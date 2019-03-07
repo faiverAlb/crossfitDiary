@@ -38,6 +38,10 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
             {
                 return false;
             }
+            if (firstRoutineComplex.Comment != secondRoutineComplex.Comment)
+            {
+                return false;
+            }
 
             return true;
 

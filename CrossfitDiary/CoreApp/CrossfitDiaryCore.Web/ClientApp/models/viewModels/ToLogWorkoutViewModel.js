@@ -25,6 +25,7 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
         this.workouterId = params.workouterId;
         this.displayDate = params.displayDate;
         this.workoutViewModel = params.workoutViewModel;
+        this.comment = params.comment;
     }
     ToLogWorkoutViewModel.prototype.deserialize = function (jsonInput) {
         if (jsonInput == null) {
@@ -44,7 +45,8 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
             workouterName: jsonInput.workouterName,
             workouterId: jsonInput.workouterId,
             displayDate: jsonInput.displayDate,
-            workoutViewModel: new WorkoutViewModel().deserialize(jsonInput.workoutViewModel)
+            workoutViewModel: new WorkoutViewModel().deserialize(jsonInput.workoutViewModel),
+            comment: jsonInput.comment
         });
     };
     return ToLogWorkoutViewModel;
