@@ -18,6 +18,13 @@ namespace CrossfitDiaryCore.Web
         {
             var host = BuildWebHost(args);
 
+
+            SeedData(host);
+            host.Run();
+        }
+
+        private static void SeedData(IWebHost host)
+        {
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -33,7 +40,6 @@ namespace CrossfitDiaryCore.Web
                 }
             }
 
-            host.Run();
         }
 
         private static IWebHost BuildWebHost(string[] args) =>
