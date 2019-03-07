@@ -66,12 +66,22 @@
         </div>
         <div class="comments-section">
           <b-form-textarea
-            id="textarea1"
+            id="commentSection"
             v-model="model.comment"
-            placeholder="Enter something"
+            name="commentSection"
+            placeholder="Note: ex. girls do max 30kg"
+            :maxlength="150"
+            type="text"
             rows="3"
-            max-rows="6"
+            max-rows="3"
+            no-resize
           />
+          <small
+            id="passwordHelpBlock"
+            class="form-text text-muted"
+          >
+            Workout note: ex. girls do max 30kg
+          </small>
         </div>
       </div>
     </div>
