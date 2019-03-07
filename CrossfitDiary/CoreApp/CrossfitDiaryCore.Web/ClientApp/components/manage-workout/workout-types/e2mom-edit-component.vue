@@ -237,6 +237,9 @@ export default class E2momEditComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
   spinner: SpinnerModel = new SpinnerModel(false);
+  $refs: {
+    logWorkoutModal: HTMLFormElement;
+  };
 
   mounted() {
     if (workouter != null && workouter.toLogWorkoutRawModel != null) {
