@@ -117,7 +117,7 @@
         </div>
         <div class="comments-section">
           <b-form-textarea
-            id="commentSection"
+            id="workoutCommentSection"
             class="mt-2"
             v-model="model.comment"
             name="commentSection"
@@ -226,6 +226,29 @@
               >
               </spinner>
             </div>
+          </div>
+          <div
+            class="comments-section"
+            v-bind:class="{saving:spinner.status}"
+          >
+            <b-form-textarea
+              id="logWorkoutCommentSection"
+              class="mt-2"
+              v-model="toLogModel.comment"
+              name="commentSection"
+              placeholder="Note: ex. Holy sh*t! Will do it again! Never!"
+              :maxlength="50"
+              type="text"
+              rows="2"
+              max-rows="2"
+              no-resize
+            />
+            <small
+              id="passwordHelpBlock"
+              class="form-text text-muted"
+            >
+              Your thoughts on workout. Max length = 50;
+            </small>
           </div>
           <div
             class="row justify-content-end mt-3"
