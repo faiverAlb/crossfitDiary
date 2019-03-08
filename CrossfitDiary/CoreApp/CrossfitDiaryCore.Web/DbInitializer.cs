@@ -15,6 +15,8 @@ namespace CrossfitDiaryCore.Web
             AddExerciseIfPossible("Rope Climb from floor", "RC from floor", new List<ExerciseMeasure> { new ExerciseMeasure(){ExerciseMeasureTypeId = MeasureType.Count } }, context);
             AddExerciseIfPossible("Rope Climb legless", "RC legless", new List<ExerciseMeasure> { new ExerciseMeasure(){ExerciseMeasureTypeId = MeasureType.Count } }, context);
             AddExerciseIfPossible("Lateral step up box", "Lateral step up box", new List<ExerciseMeasure> { new ExerciseMeasure(){ExerciseMeasureTypeId = MeasureType.Count }, new ExerciseMeasure() { ExerciseMeasureTypeId = MeasureType.Height } }, context);
+
+            AddExerciseIfPossible("Dumbbell/Kettlebell box step-ups", "DB/KB box step-up", new List<ExerciseMeasure> { new ExerciseMeasure(){ExerciseMeasureTypeId = MeasureType.Count }, new ExerciseMeasure() { ExerciseMeasureTypeId = MeasureType.Height } }, context);
         }
 
         private static void AddExerciseIfPossible(string title, string abbreviation, List<ExerciseMeasure> exerciseMeasures, WorkouterContext context)
