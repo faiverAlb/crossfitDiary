@@ -33,11 +33,17 @@ export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel
   canBeRemovedByCurrentUser?: boolean;
   workouterName?: string;
   workouterId?: string;
-  displayDate?: string = new Date().toLocaleDateString(); // default value for new model
+  displayDate?: string;// default value for new model
+  // displayDate?: string = new Date().toLocaleDateString(); // default value for new model
+  
   workoutViewModel?: WorkoutViewModel;
   comment?: string;
 
+  
   constructor(params?: IToLogWorkoutViewModel) {
+    this.displayDate = this.getDefaultDate();
+    this.date = this.getDefaultDate();
+
     if (params == null) {
       return;
     }
@@ -57,6 +63,15 @@ export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel
     this.displayDate = params.displayDate;
     this.workoutViewModel = params.workoutViewModel;
     this.comment = params.comment;
+  }
+
+  getDefaultDate = ():string => {
+      let date = new Date();
+      let result =  ('0' + date.getDate()).slice(-2) + '.'
+                  + ('0' + (date.getMonth()+1)).slice(-2) + '.'
+                  + date.getFullYear();
+                  
+      return  result;
   }
 
   deserialize(jsonInput: any): ToLogWorkoutViewModel {
