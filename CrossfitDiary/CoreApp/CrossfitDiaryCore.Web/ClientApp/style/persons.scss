@@ -77,7 +77,12 @@
                 }
 
                 .workout-result {
+
                     //border-bottom: 1px dotted black;
+                    .result-comment {
+                        font-style: italic;
+                        font-size: 12px;
+                    }
                 }
 
                 .workout-exercises {

@@ -7,7 +7,15 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
         this.selectedWorkoutId = 0;
         this.timePassed = null;
         this.isEditMode = false;
-        this.displayDate = new Date().toLocaleDateString(); // default value for new model
+        this.getDefaultDate = function () {
+            var date = new Date();
+            var result = ('0' + date.getDate()).slice(-2) + '.'
+                + ('0' + (date.getMonth() + 1)).slice(-2) + '.'
+                + date.getFullYear();
+            return result;
+        };
+        this.displayDate = this.getDefaultDate();
+        this.date = this.getDefaultDate();
         if (params == null) {
             return;
         }

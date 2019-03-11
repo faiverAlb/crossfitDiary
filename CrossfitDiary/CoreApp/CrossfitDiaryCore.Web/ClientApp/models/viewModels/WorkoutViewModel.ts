@@ -38,9 +38,15 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
   children: WorkoutViewModel[] = [];
   isInnerWorkout: boolean = false;
   planningWorkoutLevel: PlanningWorkoutLevel;
-  displayPlanDate?: string = new Date().toLocaleDateString(); // default value for new model;
+  displayPlanDate?: string; // default value for new model;
   comment?: string;
 
+  getDefaultDate = (): string => {
+    let date = new Date();
+    let result = ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
+
+    return result;
+  };
   public IsForTime = () => {
     return this.workoutType == WorkoutType.ForTime;
   };
@@ -57,6 +63,7 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
   };
 
   constructor(params?: IWorkoutViewModel | any) {
+    this.displayPlanDate = this.getDefaultDate();
     if (params == null) {
       return;
     }
