@@ -44,7 +44,12 @@
           <span v-if="model.workoutViewModel.IsEmoms()">
             <font-awesome-icon :icon="['far','clock']"></font-awesome-icon>: {{model.workoutViewModel.timeToWork}}
           </span>
+          <div
+            class="result-comment"
+            v-if="model.comment"
+          >{{model.comment}}</div>
         </span>
+
       </div>
 
     </div>
