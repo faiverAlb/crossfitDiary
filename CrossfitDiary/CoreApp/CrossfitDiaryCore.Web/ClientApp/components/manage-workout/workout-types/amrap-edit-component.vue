@@ -99,7 +99,7 @@
           />
           <small
             id="passwordHelpBlock"
-            class="form-text text-muted"
+            class="form-text text-muted text-right"
           >
             Workout note
           </small>
@@ -201,7 +201,7 @@
               class="mt-2"
               v-model="toLogModel.comment"
               name="commentSection"
-              placeholder="Note: ex. Holy sh*t! Will do it again! Never!"
+              placeholder="Note: ex. Holy sh*t! Will do it again!"
               :maxlength="50"
               type="text"
               rows="2"
@@ -212,7 +212,7 @@
               id="passwordHelpBlock"
               class="form-text text-muted"
             >
-              Your thoughts on workout. Max length = 50;
+              Your thoughts on wod. Max length = 50
             </small>
           </div>
           <div
