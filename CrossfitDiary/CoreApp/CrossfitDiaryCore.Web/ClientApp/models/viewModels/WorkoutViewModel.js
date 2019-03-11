@@ -15,7 +15,11 @@ var WorkoutViewModel = /** @class */ (function () {
         this.exercisesToDoList = [];
         this.children = [];
         this.isInnerWorkout = false;
-        this.displayPlanDate = new Date().toLocaleDateString(); // default value for new model;
+        this.getDefaultDate = function () {
+            var date = new Date();
+            var result = ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
+            return result;
+        };
         this.IsForTime = function () {
             return _this.workoutType == WorkoutType.ForTime;
         };
@@ -28,6 +32,7 @@ var WorkoutViewModel = /** @class */ (function () {
         this.IsHaveCapTime = function () {
             return _this.workoutType == WorkoutType.ForTime || _this.workoutType == WorkoutType.ForTimeManyInners;
         };
+        this.displayPlanDate = this.getDefaultDate();
         if (params == null) {
             return;
         }
