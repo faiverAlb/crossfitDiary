@@ -80,9 +80,9 @@
               ></label>
               <b-input-group class="mx-1 pr-1">
                 <b-form-input
-                  type="number"
+                  
                   v-model="measure.measureValue"
-                  step="0.01"
+                  
                   class="measure-value-input"
                   :placeholder="measure.description"
                   aria-describedby="prPercentHelpBlock"
