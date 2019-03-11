@@ -99,7 +99,7 @@
           />
           <small
             id="passwordHelpBlock"
-            class="form-text text-muted"
+            class="form-text text-muted text-right"
           >
             Workout note
           </small>
@@ -192,11 +192,40 @@
               </spinner>
             </div>
           </div>
-          <button
-            class="btn btn-success"
-            v-on:click="showLogWorkoutModal"
+          <div
+            class="comments-section"
+            v-bind:class="{saving:spinner.status}"
+          >
+            <b-form-textarea
+              id="logWorkoutCommentSection"
+              class="mt-2"
+              v-model="toLogModel.comment"
+              name="commentSection"
+              placeholder="Note: ex. Holy sh*t! Will do it again!"
+              :maxlength="50"
+              type="text"
+              rows="2"
+              max-rows="2"
+              no-resize
+            />
+            <small
+              id="passwordHelpBlock"
+              class="form-text text-muted"
+            >
+              Your thoughts on wod. Max length = 50
+            </small>
+          </div>
+          <div
+            class="row justify-content-end mt-3"
             v-if="spinner.status == false"
-          >Log workout</button>
+          >
+            <span class="col-md-2 col-sm px-md-1">
+              <button
+                class=" btn btn-success btn-block"
+                v-on:click="showLogWorkoutModal"
+              >Log workout</button>
+            </span>
+          </div>
         </div>
       </div>
     </div>

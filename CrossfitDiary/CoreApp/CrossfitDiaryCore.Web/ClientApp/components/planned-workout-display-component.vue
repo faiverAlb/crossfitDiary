@@ -94,7 +94,30 @@
         </div>
       </div>
 
+      <div class="col-md-12 text-right">
+        <div class="row justify-content-end comments-section">
+          <b-form-textarea
+            id="logWorkoutCommentSection"
+            class="mt-2"
+            v-model="toLogModel.comment"
+            name="commentSection"
+            placeholder="Note: ex. Holy sh*t! Will do it again! Never!"
+            :maxlength="50"
+            type="text"
+            rows="2"
+            max-rows="2"
+            no-resize
+          />
+          <small
+            id="passwordHelpBlock"
+            class="form-text text-muted"
+          >
+            Your thoughts on workout. Max length = 50;
+          </small>
+        </div>
+      </div>
       <div slot="modal-footer">
+
         <b-button
           variant="warning"
           data-dismiss="modal"
@@ -252,6 +275,7 @@ import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
 import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import { InputGroup } from "bootstrap-vue/es/components";
+import BFormTextarea from "bootstrap-vue/es/components/form-textarea/form-textarea";
 Vue.use(InputGroup);
 import { mask } from "vue-the-mask";
 
@@ -273,7 +297,8 @@ import {
     bButton,
     bModal,
     bFormInput,
-    datePicker
+    datePicker,
+    BFormTextarea
   },
   directives: { mask }
 })
