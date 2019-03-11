@@ -72,7 +72,13 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
         public static decimal ParseDecimal(string measureValue)
         {
 //            return 0;
-            return decimal.Parse(measureValue, NumberStyles.Any);
+            measureValue = measureValue.Replace(',', '.');
+            decimal decimalResult = 0;
+            if (decimal.TryParse(measureValue, NumberStyles.Any, CultureInfo.InvariantCulture, out decimalResult))
+            {
+                return decimalResult;
+            }
+            return decimal.Parse(measureValue, NumberStyles.Any,CultureInfo.InvariantCulture);
         }
     }
     public class CountResolver : IValueResolver<ExerciseViewModel, RoutineSimple, decimal?>
