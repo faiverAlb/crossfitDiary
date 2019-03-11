@@ -282,3 +282,4 @@ __pycache__/
 # tools/
 /CrossfitDiary/CoreApp/CrossfitDiaryCore.Web/wwwroot/dist/generated
 /CrossfitDiary/CoreApp/CrossfitDiaryCore.Web/Properties/PublishProfiles/ToPc.pubxml
+*.pubxml
