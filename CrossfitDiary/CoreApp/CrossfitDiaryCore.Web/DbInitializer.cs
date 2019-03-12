@@ -17,6 +17,22 @@ namespace CrossfitDiaryCore.Web
             AddExerciseIfPossible("Lateral step up box", "Lateral step up box", new List<ExerciseMeasure> { new ExerciseMeasure(){ExerciseMeasureTypeId = MeasureType.Count }, new ExerciseMeasure() { ExerciseMeasureTypeId = MeasureType.Height } }, context);
 
             AddExerciseIfPossible("Dumbbell/Kettlebell box step-ups", "DB/KB box step-up", new List<ExerciseMeasure> { new ExerciseMeasure(){ExerciseMeasureTypeId = MeasureType.Count }, new ExerciseMeasure() { ExerciseMeasureTypeId = MeasureType.Height } }, context);
+            AddExerciseIfPossible("Single-under", "Single-under", new List<ExerciseMeasure> { new ExerciseMeasure(){ExerciseMeasureTypeId = MeasureType.Count } }, context);
+            AddExerciseIfPossible("Muscle Snatch", "Muscle Snatch",
+                new List<ExerciseMeasure>
+                {
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Count},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Weight},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeWeight},
+                }, context);
+
+            AddExerciseIfPossible("Turkish Sit-up", "Turkish SU",
+                new List<ExerciseMeasure>
+                {
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Count},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Weight},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeWeight},
+                }, context);
         }
 
         private static void AddExerciseIfPossible(string title, string abbreviation, List<ExerciseMeasure> exerciseMeasures, WorkouterContext context)
