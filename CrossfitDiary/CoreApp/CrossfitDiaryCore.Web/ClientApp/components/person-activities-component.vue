@@ -22,6 +22,24 @@
         </div>
       </b-modal>
     </div>
+    <div class="container person-setting">
+      <div
+        class="row"
+        v-if="activities"
+      >
+        <div class="offset-lg-3 col col-lg-5">
+          <b-form-checkbox
+            id="checkbox1"
+            name="checkbox1"
+            v-model="status"
+            value="accepted"
+            unchecked-value="not_accepted"
+          >
+            Show only my wods
+          </b-form-checkbox>
+        </div>
+      </div>
+    </div>
     <div
       class="activities-list container"
       v-for="item in activities"
@@ -38,22 +56,31 @@
 </template>
 
 <script lang="ts">
+/* Font awesome icons */
+/* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import PersonsActivitesItemComponent from "./person-activities-item-component.vue";
-import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+import BFormCheckbox from "bootstrap-vue/es/components/form-checkbox/form-checkbox";
+
+/* app components */
+import PersonsActivitesItemComponent from "./person-activities-item-component.vue";
+/* models and styles */
+import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
+
 import CrossfitterService from "../CrossfitterService";
 
 @Component({
   components: {
     PersonsActivitesItemComponent,
     bModal,
+    BFormCheckbox,
     Spinner
   }
 })
 export default class PersonsActivitesComponent extends Vue {
   _apiService: CrossfitterService = new CrossfitterService();
+  status: string = "accepted";
   $refs: {
     myModalRef: HTMLFormElement;
   };
