@@ -150,6 +150,13 @@
         </div>
         <div class="item-footer text-right pt-2">
           <div class="action-buttons">
+            <a
+              class="btn btn-secondary float-left"
+              role="button"
+              v-bind:href="'Workout?workoutId='+this.plannedWorkouts[0].id"
+            >
+              <span class="do-it-text">Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon></span>
+            </a>
             <b-button
               variant="warning"
               @click="showLogWorkout(plannedScaled)"
@@ -178,6 +185,13 @@
         </div>
         <div class="item-footer text-right pt-2">
           <div class="action-buttons">
+            <a
+              class="btn btn-secondary float-left"
+              role="button"
+              v-bind:href="'Workout?workoutId='+this.plannedWorkouts[1].id"
+            >
+              <span class="do-it-text">Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon></span>
+            </a>
             <b-button
               variant="warning"
               @click="showLogWorkout(plannedRx)"
@@ -206,6 +220,13 @@
         </div>
         <div class="item-footer text-right pt-2">
           <div class="action-buttons">
+            <a
+              class="btn btn-secondary float-left"
+              role="button"
+              v-bind:href="'Workout?workoutId='+this.plannedWorkouts[2].id"
+            >
+              <span class="do-it-text">Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon></span>
+            </a>
             <b-button
               variant="warning"
               @click="showLogWorkout(plannedRxPlus)"
