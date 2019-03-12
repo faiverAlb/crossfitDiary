@@ -23,10 +23,10 @@ Asp.net Core 2.0 (at current point) + Vuejs + Typescript + MSSql (EF Core + Dapp
 
 # Screenshots
 
-![Main-wide](https://user-images.githubusercontent.com/3446779/54178070-839e6800-44a5-11e9-8486-a4059dbceb84.png)
-![Main-mobile](https://user-images.githubusercontent.com/3446779/54178069-839e6800-44a5-11e9-8432-7ab0f7938219.png)
-![Edit-wide](https://user-images.githubusercontent.com/3446779/54178068-839e6800-44a5-11e9-98b8-db69ab93cdd9.png)
-![Edit-mobile](https://user-images.githubusercontent.com/3446779/54178071-839e6800-44a5-11e9-951d-6757df6a641b.png)
+<img src="https://user-images.githubusercontent.com/3446779/54178070-839e6800-44a5-11e9-8486-a4059dbceb84.png" height="400"></img>
+<img src="https://user-images.githubusercontent.com/3446779/54178069-839e6800-44a5-11e9-8432-7ab0f7938219.png" height="800"></img>
+<img src="https://user-images.githubusercontent.com/3446779/54178068-839e6800-44a5-11e9-98b8-db69ab93cdd9.png" height="400"></img>
+<img src="https://user-images.githubusercontent.com/3446779/54178071-839e6800-44a5-11e9-951d-6757df6a641b.png" height="800"></img>
 
 # Installation:
 
