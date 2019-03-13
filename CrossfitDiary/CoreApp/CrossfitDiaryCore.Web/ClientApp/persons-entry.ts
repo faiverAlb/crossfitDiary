@@ -5,6 +5,7 @@ dom.watch(); // This will kick of the initial replacement of i to svg tags and c
 /* public components */
 import Vue from "vue";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+import BFormCheckbox from "bootstrap-vue/es/components/form-checkbox/form-checkbox";
 /* app components */
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 import PlannedWorkoutDisplayComponent from "./components/planned-workout-display-component.vue";
@@ -17,6 +18,10 @@ import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 import { ErrorAlertModel } from "./models/viewModels/ErrorAlertModel";
 import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 const apiService: CrossfitterService = new CrossfitterService();
+declare var workouter: {
+  showOnlyUserWods: boolean;
+};
+Vue.component("b-form-checkbox", BFormCheckbox);
 
 let vue = new Vue({
   el: "#home-page-container",
@@ -40,6 +45,21 @@ let vue = new Vue({
           </spinner>
         </div>
       </div>
+      <div class="container person-setting">
+      <div
+        class="row"
+        v-if="activities"
+      >
+        <div class="offset-lg-3 col col-lg-5">
+          <b-form-checkbox
+            id="checkbox1"
+            name="checkbox1"
+            v-model="showOnlyUserWods">
+            Show only my wods
+          </b-form-checkbox>
+        </div>
+      </div>
+    </div>
       <PersonsActivitiesComponent :activities="activities"/>
     </div>
     `,
@@ -54,10 +74,12 @@ let vue = new Vue({
       activities: ToLogWorkoutViewModel[0],
       plannedWorkouts: WorkoutViewModel,
       spinner: new SpinnerModel(true),
-      errorAlertModel: new ErrorAlertModel()
+      errorAlertModel: new ErrorAlertModel(),
+      showOnlyUserWods: false
     };
   },
   mounted() {
+    this.showOnlyUserWods = workouter.showOnlyUserWods;
     this.spinner.activate();
     apiService
       .getPlannedWorkoutsForToday()

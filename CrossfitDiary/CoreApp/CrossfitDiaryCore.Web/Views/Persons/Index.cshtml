@@ -1,4 +1,9 @@
-﻿<div id="home-page-container"></div>
+﻿@using Newtonsoft.Json
+<div id="home-page-container"></div>
+<script>
+    let workouter = {};
+    workouter.showOnlyUserWods = @{@Html.Raw(JsonConvert.SerializeObject(ViewBag.showOnlyUserWods));};
+</script>
 
 @section scripts {
     <script src="~/dist/generated/persons-entry.js" asp-append-version="true"></script>

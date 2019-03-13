@@ -22,24 +22,6 @@
         </div>
       </b-modal>
     </div>
-    <div class="container person-setting">
-      <div
-        class="row"
-        v-if="activities"
-      >
-        <div class="offset-lg-3 col col-lg-5">
-          <b-form-checkbox
-            id="checkbox1"
-            name="checkbox1"
-            v-model="status"
-            value="accepted"
-            unchecked-value="not_accepted"
-          >
-            Show only my wods
-          </b-form-checkbox>
-        </div>
-      </div>
-    </div>
     <div
       class="activities-list container"
       v-for="item in activities"
@@ -80,7 +62,6 @@ import CrossfitterService from "../CrossfitterService";
 })
 export default class PersonsActivitesComponent extends Vue {
   _apiService: CrossfitterService = new CrossfitterService();
-  status: string = "accepted";
   $refs: {
     myModalRef: HTMLFormElement;
   };

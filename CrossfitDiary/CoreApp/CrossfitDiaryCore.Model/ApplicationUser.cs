@@ -16,6 +16,10 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public bool CanPlanWorkouts { get; set; }
 
+        /// <summary>
+        ///     Show only user's wods
+        /// </summary>
+        public bool ShowOnlyUserWods { get; set; }
 
         public virtual ICollection<CrossfitterWorkout> CrossfitterWorkout { get; set; }
 

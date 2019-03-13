@@ -1,10 +1,12 @@
 ﻿using System.Linq;
+using System.Security.Claims;
 using AutoMapper;
 using CrossfitDiaryCore.BL.Services;
 using CrossfitDiaryCore.Web.ViewModels;
 using CrossfitDiaryCore.Web.ViewModels.Pride;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrossfitDiaryCore.Web.Controllers
@@ -12,10 +14,13 @@ namespace CrossfitDiaryCore.Web.Controllers
     [Authorize]
     public class PersonsController : Controller
     {
-        private readonly ReadWorkoutsService _readWorkoutsService;
-        public PersonsController(ReadWorkoutsService readWorkoutsService)
+        private readonly ReadUsersService _readUsersService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public PersonsController(ReadUsersService readUsersService, IHttpContextAccessor httpContextAccessor)
         {
-            _readWorkoutsService = readWorkoutsService;
+            _readUsersService = readUsersService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -24,6 +29,8 @@ namespace CrossfitDiaryCore.Web.Controllers
             ViewBag.Title = "Person Page";
             ViewBag.UserId = userId;
             ViewBag.ExerciseId = exerciseId;
+            string currentUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            ViewBag.showOnlyUserWods = _readUsersService.GetShowOnlyUserWods(currentUserId);
             return View();
         }
 

@@ -19,5 +19,10 @@ namespace CrossfitDiaryCore.BL.Services
         {
             return _workouterContext.Users.Single(x => x.Id == userId).CanPlanWorkouts;
         }
+
+        public bool GetShowOnlyUserWods(string userId)
+        {
+            return _workouterContext.Users.Single(x => x.Id == userId).ShowOnlyUserWods;
+        }
     }
 }
