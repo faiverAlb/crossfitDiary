@@ -38,17 +38,25 @@
 </template>
 
 <script lang="ts">
+/* Font awesome icons */
+/* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import PersonsActivitesItemComponent from "./person-activities-item-component.vue";
-import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
+import BFormCheckbox from "bootstrap-vue/es/components/form-checkbox/form-checkbox";
+
+/* app components */
+import PersonsActivitesItemComponent from "./person-activities-item-component.vue";
+/* models and styles */
+import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
+
 import CrossfitterService from "../CrossfitterService";
 
 @Component({
   components: {
     PersonsActivitesItemComponent,
     bModal,
+    BFormCheckbox,
     Spinner
   }
 })

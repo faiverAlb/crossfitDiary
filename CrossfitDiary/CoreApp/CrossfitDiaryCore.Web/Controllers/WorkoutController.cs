@@ -86,13 +86,13 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts</returns>
         [HttpGet]
         [Route("api/getAllCrossfittersWorkouts")]
-        public async Task<List<ToLogWorkoutViewModel>> GetAllCrossfittersWorkoutsAsync(int page = 1, int pageSize = 30, string userId = null, int? exerciseId = null)
+        public  List<ToLogWorkoutViewModel> GetAllCrossfittersWorkoutsAsync(int page = 1, int pageSize = 50)
         {
 //            List<ToLogWorkoutViewModel> crossfitersWorkouts = await _memoryCache.GetOrCreate(_allMainpageResultsConst, async entry =>
              {
-                 string userIdForWorkouts = userId;
-                 List<CrossfitterWorkout> crossfitterWorkouts = await _readWorkoutsService
-                     .GetAllCrossfittersWorkoutsAsync(userIdForWorkouts, exerciseId, page, pageSize);
+                 string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                 
+                 List<CrossfitterWorkout> crossfitterWorkouts = _readWorkoutsService.GetAllCrossfittersWorkoutsAsync(userId, page, pageSize);
                  List<ToLogWorkoutViewModel> allResults = crossfitterWorkouts
                      .Select(_mapper.Map<ToLogWorkoutViewModel>)
                      .ToList();

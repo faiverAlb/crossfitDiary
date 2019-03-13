@@ -33,6 +33,24 @@ namespace CrossfitDiaryCore.Web
                     new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Weight},
                     new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeWeight},
                 }, context);
+
+
+            AddExerciseIfPossible("Barbell biceps curl", "Barbell biceps curl",
+                new List<ExerciseMeasure>
+                {
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Count},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Weight},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeWeight},
+                }, context);
+
+
+            AddExerciseIfPossible("Rope pull up", "Rope PU",
+                new List<ExerciseMeasure>
+                {
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Count},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Weight},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeWeight},
+                }, context);
         }
 
         private static void AddExerciseIfPossible(string title, string abbreviation, List<ExerciseMeasure> exerciseMeasures, WorkouterContext context)

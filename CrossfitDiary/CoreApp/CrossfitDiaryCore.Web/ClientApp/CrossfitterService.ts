@@ -15,8 +15,8 @@ export default class CrossfitterService {
   };
 
   // tslint:disable-next-line:max-line-length
-  public getAllCrossfittersWorkouts = (userId?: string, exerciseId?: number, page?: number, pageSize?: number): Promise<ToLogWorkoutViewModel[]> => {
-    return axios.get(`api/getAllCrossfittersWorkouts?exerciseId=${exerciseId}&page=${page}&pageSize=${pageSize}`).then(jsonData => {
+  public getAllCrossfittersWorkouts = (page?: number, pageSize?: number): Promise<ToLogWorkoutViewModel[]> => {
+    return axios.get(`api/getAllCrossfittersWorkouts?page=${page}&pageSize=${pageSize}`).then(jsonData => {
       return jsonData.data.map(x => new ToLogWorkoutViewModel().deserialize(x));
     });
   };
@@ -38,5 +38,9 @@ export default class CrossfitterService {
 
   public quickLogWorkout = (logModel: ToLogWorkoutViewModel) => {
     return axios.post("api/quickLogWorkout", logModel);
+  };
+
+  public setShowOnlyUserWods = (showOnlyUserWods: boolean) => {
+    return axios.post(`api/setShowOnlyUserWods?showOnlyUserWods=${showOnlyUserWods}`);
   };
 }
