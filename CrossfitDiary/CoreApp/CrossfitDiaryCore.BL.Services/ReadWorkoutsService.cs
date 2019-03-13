@@ -127,57 +127,23 @@ namespace CrossfitDiaryCore.BL.Services
             return maximum;
 
         }
-//
-//
-//        public List<PersonMaximum> GetAllPersonMaximumForExercise(int exerciseId, string currentUserId)
-//        {
-//            IEnumerable<CrossfitterWorkout> workoutsWithExericesOnly = _crossfitterWorkoutRepository.GetMany(x => x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId));
-//            var groupedByCrossfitter = workoutsWithExericesOnly.GroupBy(x => x.Crossfitter.Id);
-//            var resultMaximums = new List<PersonMaximum>();
-//            foreach (var group in groupedByCrossfitter)
-//            {
-//                resultMaximums.Add(GetPersonMaximumForExercise(group.Key, exerciseId));
-//            }
-//
-//            resultMaximums = resultMaximums.OrderByDescending(x => x.MaximumWeight).ToList();
-//            for (int i = 0; i < resultMaximums.Count; i++)
-//            {
-//                resultMaximums[i].PositionBetweenOthers = i + 1;
-//                resultMaximums[i].IsItMe = resultMaximums[i].PersonId == currentUserId;
-//            }
-//
-//            return resultMaximums;
-//        }
-//
-//        public List<PersonMaximum> GetPersonMaximumsWithAllExercises(string currentUserId)
-//        {
-//            IEnumerable<CrossfitterWorkout> crossfiterWorkouts = _crossfitterWorkoutRepository
-//                .GetMany(x => x.Crossfitter.Id == currentUserId 
-//                              && x.RoutineComplex.RoutineSimple.Any(y => y.Weight.HasValue &&  y.Exercise.ExerciseMeasures.Any(z => z.ExerciseMeasureType.MeasureType == MeasureType.Weight))).ToList();
-//            IEnumerable<int> exerciseIds = crossfiterWorkouts.SelectMany(x => x.RoutineComplex.RoutineSimple)
-//                .Select(x => x.ExerciseId)
-//                .Distinct()
-//                .ToList();
-//            var personMaximums = new List<PersonMaximum>();
-//            foreach (int exerciseId in exerciseIds)
-//            {
-//                PersonMaximum maximum = GetPersonMaximumForExercise(currentUserId, exerciseId);
-//                if (maximum?.MaximumWeight != null && maximum.MaximumWeight != 0)
-//                {
-//                    personMaximums.Add(maximum);
-//                }
-//
-//            }
-//            return personMaximums;
-//        }
-//
-//
+ 
         /// <summary>
         ///     Returns all crossfitters workouts.
         /// </summary>
-        public async Task<List<CrossfitterWorkout>> GetAllCrossfittersWorkoutsAsync(string userId, int? exerciseId, int page, int pageSize)
+        public List<CrossfitterWorkout> GetAllCrossfittersWorkoutsAsync(string userId, int page, int pageSize)
         {
-            List<int> ids = _routineComplexRepository.GetIds(((page - 1) * pageSize), pageSize);
+            List<int> ids = new List<int>();
+            var showOnlyUserWods = _context.Users.Single(x => x.Id == userId).ShowOnlyUserWods;
+            if (showOnlyUserWods == false)
+            {
+                ids = _routineComplexRepository.GetIds(((page - 1) * pageSize), pageSize);
+            }
+            else
+            {
+                ids = _routineComplexRepository.GetAllIdsForUser(userId);
+            }
+
             DapperResults dapperResults = _routineComplexRepository.GetMultiQuery(ids);
 
             IEnumerable<ExerciseMeasure> allExerciseMeasures = _routineComplexRepository.GetAllExerciseMeasures();
@@ -205,9 +171,6 @@ namespace CrossfitDiaryCore.BL.Services
                 }
                 workout.RoutineComplex.Children = childRoutines.Where(x => x.ParentId == workout.RoutineComplexId).ToList();
             }
-
-            
-            crossfitterWorkouts = FilterWorkoutsOnSelectedExercise(crossfitterWorkouts, exerciseId);
 
             // Commented to improve performance
             //UpdateWorkoutsWithRecords(crossfitterWorkouts);
@@ -279,20 +242,6 @@ namespace CrossfitDiaryCore.BL.Services
             }
         }
 
-        /// <summary>
-        /// Filters workouts having the exercise if it not null
-        /// </summary>
-        /// <param name="crossfitterWorkouts"></param>
-        /// <param name="exerciseId"></param>
-        private IEnumerable<CrossfitterWorkout> FilterWorkoutsOnSelectedExercise(IEnumerable<CrossfitterWorkout> crossfitterWorkouts, int? exerciseId)
-        {
-            if (exerciseId.HasValue == false)
-            {
-                return crossfitterWorkouts;
-            }
-
-            return crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId) || x.RoutineComplex.Children.Any(childW => childW.RoutineSimple.Any(c => c.ExerciseId == exerciseId))).ToList();
-        }
 
 
         /// <summary>

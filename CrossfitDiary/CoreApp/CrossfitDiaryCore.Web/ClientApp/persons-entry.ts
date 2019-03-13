@@ -50,7 +50,7 @@ let vue = new Vue({
         class="row"
         v-if="activities"
       >
-        <div class="offset-lg-3 col col-lg-5">
+        <div class="offset-lg-3 col col-lg-5 pl-0">
           <b-form-checkbox
             id="showOnlyUserWods"
             name="shouShowOnlyUserWods"

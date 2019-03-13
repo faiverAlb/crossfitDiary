@@ -13,8 +13,8 @@ var CrossfitterService = /** @class */ (function () {
             return axios.post("api/createAndPlanWorkout", workoutViewModel);
         };
         // tslint:disable-next-line:max-line-length
-        this.getAllCrossfittersWorkouts = function (userId, exerciseId, page, pageSize) {
-            return axios.get("api/getAllCrossfittersWorkouts?exerciseId=" + exerciseId + "&page=" + page + "&pageSize=" + pageSize).then(function (jsonData) {
+        this.getAllCrossfittersWorkouts = function (page, pageSize) {
+            return axios.get("api/getAllCrossfittersWorkouts?page=" + page + "&pageSize=" + pageSize).then(function (jsonData) {
                 return jsonData.data.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
             });
         };

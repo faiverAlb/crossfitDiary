@@ -65,6 +65,19 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
             
         }
 
+        public List<int> GetAllIdsForUser(string userId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                return db.Query<int>(@"SELECT [x].[Id]
+                                        FROM [CrossfitterWorkout] AS [x]
+                                        WHERE [x].CrossfitterId = @userId
+                                        ORDER BY[x].[Date] DESC, [x].[CreatedUtc] DESC", new { userId }).ToList();
+            }
+
+        }
+
+
         public DapperResults GetMultiQuery(List<int> ids)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))

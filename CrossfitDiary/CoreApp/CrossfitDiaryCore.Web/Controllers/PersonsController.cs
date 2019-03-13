@@ -16,11 +16,13 @@ namespace CrossfitDiaryCore.Web.Controllers
     public class PersonsController : Controller
     {
         private readonly ReadUsersService _readUsersService;
+        private readonly ManagerUsersService _managerUsersService;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PersonsController(ReadUsersService readUsersService, IHttpContextAccessor httpContextAccessor)
+        public PersonsController(ReadUsersService readUsersService,ManagerUsersService managerUsersService, IHttpContextAccessor httpContextAccessor)
         {
             _readUsersService = readUsersService;
+            _managerUsersService = managerUsersService;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -42,7 +44,8 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/setShowOnlyUserWods")]
         public async Task SetShowOnlyUserWods([FromQuery] bool showOnlyUserWods)
         {
-            var test = 123;
+            string currentUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            await _managerUsersService.SetShowOnlyUserWods(currentUserId, showOnlyUserWods);
 
         }
 
