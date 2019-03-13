@@ -34,6 +34,9 @@ var CrossfitterService = /** @class */ (function () {
         this.quickLogWorkout = function (logModel) {
             return axios.post("api/quickLogWorkout", logModel);
         };
+        this.setShowOnlyUserWods = function (showOnlyUserWods) {
+            return axios.post("api/setShowOnlyUserWods?showOnlyUserWods=" + showOnlyUserWods);
+        };
     }
     return CrossfitterService;
 }());

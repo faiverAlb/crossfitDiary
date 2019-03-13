@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using AutoMapper;
 using CrossfitDiaryCore.BL.Services;
 using CrossfitDiaryCore.Web.ViewModels;
@@ -33,6 +34,18 @@ namespace CrossfitDiaryCore.Web.Controllers
             ViewBag.showOnlyUserWods = _readUsersService.GetShowOnlyUserWods(currentUserId);
             return View();
         }
+
+        /// <summary>
+        ///     Change setting about display of user wods
+        /// </summary>
+        [HttpPost]
+        [Route("api/setShowOnlyUserWods")]
+        public async Task SetShowOnlyUserWods([FromQuery] bool showOnlyUserWods)
+        {
+            var test = 123;
+
+        }
+
 
     }
 }

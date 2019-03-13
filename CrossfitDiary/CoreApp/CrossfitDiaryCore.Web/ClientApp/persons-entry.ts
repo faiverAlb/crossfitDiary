@@ -52,9 +52,10 @@ let vue = new Vue({
       >
         <div class="offset-lg-3 col col-lg-5">
           <b-form-checkbox
-            id="checkbox1"
-            name="checkbox1"
-            v-model="showOnlyUserWods">
+            id="showOnlyUserWods"
+            name="shouShowOnlyUserWods"
+            v-model="showOnlyUserWods"
+            @change="changeShowUserWods">
             Show only my wods
           </b-form-checkbox>
         </div>
@@ -113,6 +114,20 @@ let vue = new Vue({
         .catch(data => {
           this.spinner.disable();
           this.errorAlertModel.setError(data.response.statusText);
+        });
+    },
+    changeShowUserWods(showOnlyUserWods: boolean): void {
+      this.spinner.activate();
+      apiService
+        .setShowOnlyUserWods(showOnlyUserWods)
+        .then(() => apiService.getAllCrossfittersWorkouts())
+        .then(data => {
+          this.activities = data;
+          this.spinner.disable();
+        })
+        .catch(data => {
+          this.errorAlertModel.setError(data.response.statusText);
+          this.spinner.disable();
         });
     }
   }

@@ -39,4 +39,8 @@ export default class CrossfitterService {
   public quickLogWorkout = (logModel: ToLogWorkoutViewModel) => {
     return axios.post("api/quickLogWorkout", logModel);
   };
+
+  public setShowOnlyUserWods = (showOnlyUserWods: boolean) => {
+    return axios.post(`api/setShowOnlyUserWods?showOnlyUserWods=${showOnlyUserWods}`);
+  };
 }
