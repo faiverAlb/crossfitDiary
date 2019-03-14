@@ -149,9 +149,15 @@ module.exports = (env) => {
           mangle: true,
           dead_code: true
         },
-        sourceMap: false
+        sourceMap: false,
       }),
-      new OptimizeCSSAssetsPlugin({})
+      // new OptimizeCSSAssetsPlugin({
+      //   cssProcessorOptions: {
+      //     discardComments: {
+      //       removeAll: true
+      //     },
+      //   },
+      // })
     ]);
   }
 
