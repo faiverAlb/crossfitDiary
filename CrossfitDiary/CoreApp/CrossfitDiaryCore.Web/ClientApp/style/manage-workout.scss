@@ -221,6 +221,8 @@
     padding-top: 20px;
 }
 
-.dropdown-toggle:after {
-    content: none
+.dropdown-toggle-no-caret {
+    &.dropdown-toggle:after {
+        content: none
+    }
 }
