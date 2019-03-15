@@ -80,7 +80,7 @@
                     placeholder="Select date"
                     name="toLogModelDate"
                     :state="fields.toLogModelDate && fields.toLogModelDate.valid"
-                    v-validate="'required'"
+                    v-validate.initial="'required'"
                     :wrap="true"
                   ></date-picker>
                   <b-input-group-append>

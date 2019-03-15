@@ -50,7 +50,7 @@
                 v-mask="'##:##'"
                 type="tel"
                 name="timeToWork"
-                v-validate="'required|length:5'"
+                v-validate.initial="'required|length:5'"
                 :state="fields.timeToWork && fields.timeToWork.valid"
                 id="timeToWork"
                 placeholder="Time to work"
@@ -130,7 +130,7 @@
                     placeholder="Select date"
                     name="toLogModelDate"
                     :state="fields.toLogModelDate && fields.toLogModelDate.valid"
-                    v-validate="'required'"
+                    v-validate.initial="'required'"
                     :wrap="true"
                   ></date-picker>
                   <b-input-group-append>
