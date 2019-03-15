@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cleanCss = require('clean-css');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const destinationFolder = 'wwwroot/dist/generated/';
 const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -151,13 +152,11 @@ module.exports = (env) => {
         },
         sourceMap: false,
       }),
-      // new OptimizeCSSAssetsPlugin({
-      //   cssProcessorOptions: {
-      //     discardComments: {
-      //       removeAll: true
-      //     },
-      //   },
-      // })
+      new OptimizeCSSAssetsPlugin({
+        cssProcessor: cleanCss,
+        cssProcessorOptions: {},
+        canPrint: true,
+      }),
     ]);
   }
 
