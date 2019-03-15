@@ -56,7 +56,7 @@
                 type="text"
                 v-mask="'##:##'"
                 name="capTime"
-                v-validate="'required|length:5'"
+                v-validate.initial="'required|length:5'"
                 :state="fields.capTime && fields.capTime.valid"
                 id="timeCapInput"
                 placeholder="Time Cap"
@@ -81,7 +81,7 @@
                 v-mask="'#####'"
                 type="text"
                 name="roundsCount"
-                v-validate="'required'"
+                v-validate.initial="'required'"
                 :state="fields.roundsCount && fields.roundsCount.valid"
                 inputmode="numeric"
                 min="1"
@@ -163,7 +163,7 @@
                     placeholder="Select date"
                     name="toLogModelDate"
                     :state="fields.toLogModelDate && fields.toLogModelDate.valid"
-                    v-validate="'required'"
+                    v-validate.initial="'required'"
                     :wrap="true"
                   ></date-picker>
                   <b-input-group-append>
@@ -359,6 +359,7 @@ export default class ForTimeEditComponent extends Vue {
       this.model.workoutType = WorkoutType.ForTime;
     }
   }
+
   mutateData(): void {}
 
   logWorkout() {
