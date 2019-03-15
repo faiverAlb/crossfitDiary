@@ -36,7 +36,10 @@
                     class="do-unbroken-info badge badge-warning"
                   >do unbroken</span>
                 </b-input-group-prepend>
-                <b-dropdown slot="append">
+                <b-dropdown
+                  slot="append"
+                  dropleft
+                >
                   <b-dropdown-item
                     v-on:click="moveExerciseUp(index)"
                     :disabled="canMoveExerciseUp(index)"
@@ -80,9 +83,7 @@
               ></label>
               <b-input-group class="mx-1 pr-1">
                 <b-form-input
-                  
                   v-model="measure.measureValue"
-                  
                   class="measure-value-input"
                   :placeholder="measure.description"
                   aria-describedby="prPercentHelpBlock"
