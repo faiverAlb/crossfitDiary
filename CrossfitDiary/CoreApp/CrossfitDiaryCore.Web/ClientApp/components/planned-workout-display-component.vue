@@ -148,12 +148,12 @@
         <div class="item-body pt-1">
           <WorkoutDisplayComponent :workoutViewModel="plannedScaled"></WorkoutDisplayComponent>
         </div>
-        <div class="item-footer text-right pt-2">
+        <div class="item-footer text-right pt-2" v-if="plannedScaled">
           <div class="action-buttons">
             <a
               class="btn btn-secondary float-left"
               role="button"
-              v-bind:href="'Workout?workoutId='+this.plannedWorkouts[0].id"
+              v-bind:href="'Workout?workoutId='+this.plannedScaled.id"
             >
               <span class="do-it-text">Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon></span>
             </a>
@@ -183,12 +183,12 @@
         <div class="item-body pt-1">
           <WorkoutDisplayComponent :workoutViewModel="plannedRx"></WorkoutDisplayComponent>
         </div>
-        <div class="item-footer text-right pt-2">
+        <div class="item-footer text-right pt-2" v-if="plannedRx">
           <div class="action-buttons">
             <a
               class="btn btn-secondary float-left"
               role="button"
-              v-bind:href="'Workout?workoutId='+this.plannedWorkouts[1].id"
+              v-bind:href="'Workout?workoutId='+this.plannedRx.id"
             >
               <span class="do-it-text">Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon></span>
             </a>
@@ -218,12 +218,12 @@
         <div class="item-body pt-1">
           <WorkoutDisplayComponent :workoutViewModel="plannedRxPlus"></WorkoutDisplayComponent>
         </div>
-        <div class="item-footer text-right pt-2">
+        <div class="item-footer text-right pt-2" v-if="plannedRxPlus">
           <div class="action-buttons">
             <a
               class="btn btn-secondary float-left"
               role="button"
-              v-bind:href="'Workout?workoutId='+this.plannedWorkouts[2].id"
+              v-bind:href="'Workout?workoutId='+this.plannedRxPlus.id"
             >
               <span class="do-it-text">Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon></span>
             </a>
