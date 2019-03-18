@@ -135,23 +135,24 @@ namespace CrossfitDiaryCore.BL.Services
         {
             List<int> ids = new List<int>();
             var showOnlyUserWods = _context.Users.Single(x => x.Id == userId).ShowOnlyUserWods;
+            DapperResults crossfitterCombinedResults;
             if (showOnlyUserWods == false)
             {
                 ids = _routineComplexRepository.GetIds(((page - 1) * pageSize), pageSize);
+                crossfitterCombinedResults = _routineComplexRepository.GetCrossfitterResultsByResultIds(ids);
             }
             else
             {
-                ids = _routineComplexRepository.GetAllIdsForUser(userId);
+                crossfitterCombinedResults = _routineComplexRepository.GetCrossfitterResultsByUserId(userId);
             }
 
-            DapperResults dapperResults = _routineComplexRepository.GetMultiQuery(ids);
 
             IEnumerable<ExerciseMeasure> allExerciseMeasures = _routineComplexRepository.GetAllExerciseMeasures();
-            IEnumerable<CrossfitterWorkout> crossfitterWorkouts = dapperResults.CrossfitterWorkouts;
+            IEnumerable<CrossfitterWorkout> crossfitterWorkouts = crossfitterCombinedResults.CrossfitterWorkouts;
 
-            IEnumerable<RoutineComplex> childRoutines = dapperResults.ChildRoutines;
-            IEnumerable<RoutineSimple> simpleRoutingForChild = dapperResults.ChildRoutineSimples;
-            IEnumerable<RoutineSimple> routineSimples = dapperResults.RoutineSimples;
+            IEnumerable<RoutineComplex> childRoutines = crossfitterCombinedResults.ChildRoutines;
+            IEnumerable<RoutineSimple> simpleRoutingForChild = crossfitterCombinedResults.ChildRoutineSimples;
+            IEnumerable<RoutineSimple> routineSimples = crossfitterCombinedResults.RoutineSimples;
 
             foreach (RoutineComplex childRoutine in childRoutines)
             {
@@ -174,7 +175,8 @@ namespace CrossfitDiaryCore.BL.Services
 
             // Commented to improve performance
             //UpdateWorkoutsWithRecords(crossfitterWorkouts);
-            List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
+
+            List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();//.Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
             foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)
             {
                 allCrossfittersWorkout.RoutineComplex.Children = allCrossfittersWorkout.RoutineComplex.Children.OrderBy(x => x.Position).ToList();
@@ -187,7 +189,7 @@ namespace CrossfitDiaryCore.BL.Services
         ///     Find exercise maximums and mark crossfitter workout as having new maximum and exercise as new max
         /// </summary>
         /// <param name="crossfitterWorkouts"></param>
-        private void UpdateWorkoutsWithRecords(List<CrossfitterWorkout> crossfitterWorkouts)
+        private void UpdateWorkoutsWithRecords(IEnumerable<CrossfitterWorkout> crossfitterWorkouts)
         {
             IEnumerable<IGrouping<ApplicationUser, CrossfitterWorkout>> groupedByuser = crossfitterWorkouts.GroupBy(x => x.Crossfitter);
 
@@ -212,7 +214,7 @@ namespace CrossfitDiaryCore.BL.Services
         /// </summary>
         /// <param name="personMaximum"></param>
         /// <param name="crossfitterWorkouts"></param>
-        private void MarkWorkoutWithWeightRecord(PersonMaximum personMaximum, List<CrossfitterWorkout> crossfitterWorkouts)
+        private void MarkWorkoutWithWeightRecord(PersonMaximum personMaximum, IEnumerable<CrossfitterWorkout> crossfitterWorkouts)
         {
             if (personMaximum == null || personMaximum.MaximumWeight == null || personMaximum.MaximumWeight == 0)
             {
