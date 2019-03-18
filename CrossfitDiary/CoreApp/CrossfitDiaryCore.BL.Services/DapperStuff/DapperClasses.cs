@@ -196,7 +196,8 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                               INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
                               INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
                               WHERE [CrossfitterWorkout].CrossfitterId = @userId AND ([RoutineSimple].Weight IS NOT NULL OR [RoutineSimple].AlternativeWeight IS NOT NULL)
-                              GROUP BY [RoutineSimple].ExerciseId";
+                              GROUP BY [RoutineSimple].ExerciseId
+                              ORDER BY [RoutineSimple].ExerciseId";
                 return db.Query<TempPersonMaximum>(sql, new {userId});
             }
         }

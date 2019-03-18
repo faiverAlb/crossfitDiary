@@ -32,7 +32,7 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("maximumWeight")]
         public double? MaximumWeight { get; set; }
 
-        [JsonProperty("maxAlternativeWeight")]
+        [JsonProperty("maximumAlternativeWeight")]
         public double? MaximumAlternativeWeight { get; set; }
     }
 

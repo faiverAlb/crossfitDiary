@@ -26,6 +26,9 @@ var ExerciseViewModel = /** @class */ (function () {
         this.isNewWeightMaximum = params.isNewWeightMaximum;
         this.isDoUnbroken = params.isDoUnbroken;
         this.addedToMaxWeightString = params.addedToMaxWeightString;
+        this.maximumWeight = params.maximumWeight;
+        this.maximumAlternativeWeight = params.maximumAlternativeWeight;
+        debugger;
     }
     ExerciseViewModel.prototype.deserialize = function (input) {
         if (input == null) {
@@ -34,13 +37,13 @@ var ExerciseViewModel = /** @class */ (function () {
         return new ExerciseViewModel({
             id: input.id,
             title: input.title,
-            exerciseMeasures: input.exerciseMeasures.map(function (x) {
-                return new ExerciseMeasureViewModel().deserialize(x);
-            }),
+            exerciseMeasures: input.exerciseMeasures.map(function (x) { return new ExerciseMeasureViewModel().deserialize(x); }),
             isAlternative: input.isAlternative,
             isNewWeightMaximum: input.isNewWeightMaximum,
             isDoUnbroken: input.isDoUnbroken,
-            addedToMaxWeightString: input.addedToMaxWeightString
+            addedToMaxWeightString: input.addedToMaxWeightString,
+            maximumWeight: input.maximumWeight,
+            maximumAlternativeWeight: input.maximumAlternativeWeight
         });
     };
     return ExerciseViewModel;

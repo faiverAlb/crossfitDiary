@@ -50,8 +50,17 @@ namespace CrossfitDiaryCore.Web.Controllers
             });
 
             string currentUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            List<TempPersonMaximum> personMaxumums = _readWorkoutsService.GetPersonMaxumums(currentUserId);
+            List<TempPersonMaximum> personMaxumumsByExercise = _readWorkoutsService.GetPersonMaxumums(currentUserId);
             List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(cachedExercises.OrderBy(x => x.Title));
+            foreach (ExerciseViewModel exerciseViewModel in exerciseViewModels)
+            {
+                TempPersonMaximum tempPersonMaximum = personMaxumumsByExercise.SingleOrDefault(x => x.ExerciseId == exerciseViewModel.Id);
+                if (tempPersonMaximum != null)
+                {
+                    exerciseViewModel.MaximumWeight = tempPersonMaximum.MaximumWeight;
+                    exerciseViewModel.MaximumAlternativeWeight = tempPersonMaximum.MaximumAlternativeWeight;
+                }
+            }
             return exerciseViewModels;
         }
     }

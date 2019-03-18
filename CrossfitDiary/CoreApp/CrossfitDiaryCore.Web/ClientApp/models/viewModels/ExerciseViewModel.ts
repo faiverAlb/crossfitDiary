@@ -9,6 +9,8 @@ interface IExerciseViewModel {
   isNewWeightMaximum?: boolean;
   isDoUnbroken: boolean;
   addedToMaxWeightString?: string;
+  maximumWeight?: number;
+  maximumAlternativeWeight?: number;
 }
 
 export class ExerciseViewModel implements Serializable<ExerciseViewModel> {
@@ -19,6 +21,8 @@ export class ExerciseViewModel implements Serializable<ExerciseViewModel> {
   isNewWeightMaximum?: boolean = false;
   isDoUnbroken: boolean = false;
   addedToMaxWeightString?: string;
+  maximumWeight?: number;
+  maximumAlternativeWeight?: number;
 
   constructor(params?: IExerciseViewModel) {
     if (params == null) {
@@ -31,6 +35,8 @@ export class ExerciseViewModel implements Serializable<ExerciseViewModel> {
     this.isNewWeightMaximum = params.isNewWeightMaximum;
     this.isDoUnbroken = params.isDoUnbroken;
     this.addedToMaxWeightString = params.addedToMaxWeightString;
+    this.maximumWeight = params.maximumWeight;
+    this.maximumAlternativeWeight = params.maximumAlternativeWeight;
   }
 
   deserialize(input: any): ExerciseViewModel {
@@ -41,13 +47,13 @@ export class ExerciseViewModel implements Serializable<ExerciseViewModel> {
     return new ExerciseViewModel({
       id: input.id,
       title: input.title,
-      exerciseMeasures: input.exerciseMeasures.map(x =>
-        new ExerciseMeasureViewModel().deserialize(x)
-      ),
+      exerciseMeasures: input.exerciseMeasures.map(x => new ExerciseMeasureViewModel().deserialize(x)),
       isAlternative: input.isAlternative,
       isNewWeightMaximum: input.isNewWeightMaximum,
       isDoUnbroken: input.isDoUnbroken,
-      addedToMaxWeightString: input.addedToMaxWeightString
+      addedToMaxWeightString: input.addedToMaxWeightString,
+      maximumWeight: input.maximumWeight,
+      maximumAlternativeWeight: input.maximumAlternativeWeight
     });
   }
 }
