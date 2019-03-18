@@ -7,36 +7,14 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrossfitDiaryCore.Model.TempModels;
 
 namespace CrossfitDiaryCore.BL.Services.DapperStuff
 {
-    public class DapperResults {
-        public IEnumerable<CrossfitterWorkout> CrossfitterWorkouts { get; }
-        public IEnumerable<RoutineSimple> RoutineSimples { get; }
-        public IEnumerable<RoutineComplex> ChildRoutines { get; }
-        public IEnumerable<RoutineSimple> ChildRoutineSimples { get; }
-
-        
-
-        public DapperResults()
-        {
-
-        }
-
-        public DapperResults(IEnumerable<CrossfitterWorkout> crossfitterWorkouts, IEnumerable<RoutineSimple> routineSimples, IEnumerable<RoutineComplex> routineComplex, IEnumerable<RoutineSimple> childRoutineSimples)
-        {
-            CrossfitterWorkouts = crossfitterWorkouts;
-            RoutineSimples = routineSimples;
-            ChildRoutines = routineComplex;
-            ChildRoutineSimples = childRoutineSimples;
-        }
-    }
-
-
-    public class RoutineComplexRepository
+    public class DapperRepository
     {
         string _connectionString;
-        public RoutineComplexRepository(string connectionString)
+        public DapperRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -63,18 +41,6 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
             }
 
             
-        }
-
-        public List<int> GetAllIdsForUser(string userId)
-        {
-            using (IDbConnection db = new SqlConnection(_connectionString))
-            {
-                return db.Query<int>(@"SELECT [x].[Id]
-                                        FROM [CrossfitterWorkout] AS [x]
-                                        WHERE [x].CrossfitterId = @userId
-                                        ORDER BY[x].[Date] DESC, [x].[CreatedUtc] DESC", new { userId }).ToList();
-            }
-
         }
 
 
@@ -221,5 +187,18 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
             }
         }
 
+        public IEnumerable<TempPersonMaximum> GetPersonMaxumums(string userId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = @"SELECT [RoutineSimple].ExerciseId as ExerciseId, MAX([RoutineSimple].Weight) as MaximumWeight, Max([RoutineSimple].AlternativeWeight) as MaximumAlternativeWeight
+                              FROM [RoutineSimple]
+                              INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
+                              INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+                              WHERE [CrossfitterWorkout].CrossfitterId = @userId AND ([RoutineSimple].Weight IS NOT NULL OR [RoutineSimple].AlternativeWeight IS NOT NULL)
+                              GROUP BY [RoutineSimple].ExerciseId";
+                return db.Query<TempPersonMaximum>(sql, new {userId});
+            }
+        }
     }
 }

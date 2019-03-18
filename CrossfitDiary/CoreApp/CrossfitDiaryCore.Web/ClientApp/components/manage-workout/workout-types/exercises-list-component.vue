@@ -73,7 +73,7 @@
               </b-input-group>
             </div>
             <div
-              class="form-group my-1 col-lg-3"
+              class="form-group my-1 col-lg-2"
               v-for="(measure,index) in exercise.exerciseMeasures"
               :key="measure.measureType + index"
             >
@@ -94,10 +94,13 @@
                   </b-input-group-text>
                 </b-input-group-append>
                 <!-- TODO: Problem with border radious because of it -->
-                <!-- <span class="w-100"></span>
-                <small id="prPercentHelpBlock" class="form-text text-muted">
+                <span class="w-100"></span>
+                <small
+                  id="prPercentHelpBlock"
+                  class="form-text text-muted"
+                >
                   personalRecordPercent
-                </small> -->
+                </small>
               </b-input-group>
             </div>
           </div>

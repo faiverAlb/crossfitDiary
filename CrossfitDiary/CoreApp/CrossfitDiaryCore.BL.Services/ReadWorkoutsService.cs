@@ -7,6 +7,7 @@ using CrossfitDiaryCore.BL.Services.WorkoutMatchers;
 using CrossfitDiaryCore.DAL.EF;
 using CrossfitDiaryCore.DAL.EF.Exercises;
 using CrossfitDiaryCore.Model;
+using CrossfitDiaryCore.Model.TempModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrossfitDiaryCore.BL.Services
@@ -15,13 +16,13 @@ namespace CrossfitDiaryCore.BL.Services
     {
         private readonly WorkouterContext _context;
         private readonly WorkoutsMatchDispatcher _workoutsMatchDispatcher;
-        private readonly RoutineComplexRepository _routineComplexRepository;
+        private readonly DapperRepository _dapperRepository;
 
-        public ReadWorkoutsService(WorkouterContext  context, WorkoutsMatchDispatcher workoutsMatchDispatcher, RoutineComplexRepository routineComplexRepository)
+        public ReadWorkoutsService(WorkouterContext  context, WorkoutsMatchDispatcher workoutsMatchDispatcher, DapperRepository dapperRepository)
         {
             _context = context;
             _workoutsMatchDispatcher = workoutsMatchDispatcher;
-            _routineComplexRepository = routineComplexRepository;
+            _dapperRepository = dapperRepository;
         }
 
 
@@ -138,16 +139,16 @@ namespace CrossfitDiaryCore.BL.Services
             DapperResults crossfitterCombinedResults;
             if (showOnlyUserWods == false)
             {
-                ids = _routineComplexRepository.GetIds(((page - 1) * pageSize), pageSize);
-                crossfitterCombinedResults = _routineComplexRepository.GetCrossfitterResultsByResultIds(ids);
+                ids = _dapperRepository.GetIds(((page - 1) * pageSize), pageSize);
+                crossfitterCombinedResults = _dapperRepository.GetCrossfitterResultsByResultIds(ids);
             }
             else
             {
-                crossfitterCombinedResults = _routineComplexRepository.GetCrossfitterResultsByUserId(userId);
+                crossfitterCombinedResults = _dapperRepository.GetCrossfitterResultsByUserId(userId);
             }
 
 
-            IEnumerable<ExerciseMeasure> allExerciseMeasures = _routineComplexRepository.GetAllExerciseMeasures();
+            IEnumerable<ExerciseMeasure> allExerciseMeasures = _dapperRepository.GetAllExerciseMeasures();
             IEnumerable<CrossfitterWorkout> crossfitterWorkouts = crossfitterCombinedResults.CrossfitterWorkouts;
 
             IEnumerable<RoutineComplex> childRoutines = crossfitterCombinedResults.ChildRoutines;
@@ -288,6 +289,11 @@ namespace CrossfitDiaryCore.BL.Services
                 .ThenInclude(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
                 .ThenInclude(x => x.ExerciseMeasures).ToList();
+        }
+
+        public List<TempPersonMaximum> GetPersonMaxumums(string userId)
+        {
+            return _dapperRepository.GetPersonMaxumums(userId).ToList();
         }
     }
 }
