@@ -115,7 +115,7 @@
                   class="form-text text-muted"
                   v-if="canSeeAltMaximumHelper(exercise,measure)"
                 >
-                  {{calculatePersentForAltWeight(exercise,measure.measureValue)}}% of PM
+                  {{calculatePersentForMainWeight(exercise,measure.measureValue)}}% of PM
                 </small>
               </b-input-group>
             </div>
@@ -282,27 +282,18 @@ export default class ExercisesListComponent extends Vue {
   ) {
     if (this.isFloat(measureValue) == false) return "";
     let maxValue = this.getUserMaximumByExerciseId(exercise.id);
-    if (maxValue.maximumWeight == null || maxValue.maximumWeight == 0)
-      return "";
-    let parsed = parseFloat(measureValue);
-    let returnValue = (parsed / maxValue.maximumWeight) * 100;
-
-    return Math.round((returnValue + 0.00001) * 100) / 100;
-  }
-
-  private calculatePersentForAltWeight(
-    exercise: ExerciseViewModel,
-    measureValue: string
-  ) {
-    if (this.isFloat(measureValue) == false) return "";
-    let maxValue = this.getUserMaximumByExerciseId(exercise.id);
     if (
-      maxValue.maximumAlternativeWeight == null ||
-      maxValue.maximumAlternativeWeight == 0
+      (maxValue.maximumWeight == null || maxValue.maximumWeight == 0) &&
+      (maxValue.maximumAlternativeWeight == null ||
+        maxValue.maximumAlternativeWeight == 0)
     )
       return "";
+    let max = Math.max(
+      maxValue.maximumWeight,
+      maxValue.maximumAlternativeWeight
+    );
     let parsed = parseFloat(measureValue);
-    let returnValue = (parsed / maxValue.maximumAlternativeWeight) * 100;
+    let returnValue = (parsed / max) * 100;
 
     return Math.round((returnValue + 0.00001) * 100) / 100;
   }
