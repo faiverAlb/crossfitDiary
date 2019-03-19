@@ -41,9 +41,7 @@ export class ExerciseViewModel implements Serializable<ExerciseViewModel> {
     return new ExerciseViewModel({
       id: input.id,
       title: input.title,
-      exerciseMeasures: input.exerciseMeasures.map(x =>
-        new ExerciseMeasureViewModel().deserialize(x)
-      ),
+      exerciseMeasures: input.exerciseMeasures.map(x => new ExerciseMeasureViewModel().deserialize(x)),
       isAlternative: input.isAlternative,
       isNewWeightMaximum: input.isNewWeightMaximum,
       isDoUnbroken: input.isDoUnbroken,

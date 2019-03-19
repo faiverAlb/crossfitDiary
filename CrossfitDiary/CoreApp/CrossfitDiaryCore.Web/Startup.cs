@@ -29,7 +29,7 @@ namespace CrossfitDiaryCore.Web
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration.GetConnectionString("CrossfitDiaryDB_Core");
-            services.AddTransient<RoutineComplexRepository>(provider => new RoutineComplexRepository(connectionString));
+            services.AddTransient(provider => new DapperRepository(connectionString));
 
             services.AddAutoMapper();
             services.AddMemoryCache();

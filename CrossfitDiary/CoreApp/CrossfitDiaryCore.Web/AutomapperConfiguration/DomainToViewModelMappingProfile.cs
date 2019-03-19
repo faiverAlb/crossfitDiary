@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using CrossfitDiaryCore.Model;
+using CrossfitDiaryCore.Model.TempModels;
 using CrossfitDiaryCore.Web.AutomapperConfiguration.Resolvers;
 using CrossfitDiaryCore.Web.ViewModels;
 using CrossfitDiaryCore.Web.ViewModels.Pride;
@@ -30,7 +31,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                     }
                 });
             CreateMap<MeasureType, MeasureTypeViewModel>();
-            //CreateMap<ExerciseMeasureType, ExerciseMeasureTypeViewModel>();
+            CreateMap<TempPersonMaximum, PersonMaximumViewModel>();
             CreateMap<ExerciseMeasure, ExerciseMeasureViewModel>()
                 .ForMember(x => x.MeasureType, x => x.MapFrom(y => y.ExerciseMeasureTypeId))
                 .AfterMap((exerciseMeasure, viewModel) =>
@@ -43,7 +44,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                         break;
                     case MeasureType.Count:
                         viewModel.ShortMeasureDescription = "count";
-                        viewModel.Description = "General count";
+                        viewModel.Description = "Count";
                         break;
                     case MeasureType.Weight:
                         viewModel.ShortMeasureDescription = "kgs";
@@ -124,7 +125,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                             case MeasureType.Count:
                                 exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Count;
                                 exerviseMeasureVm.MeasureValue = $"{simple.Count:0}";
-                                exerviseMeasureVm.Description = "General count";
+                                exerviseMeasureVm.Description = "Count";
                                 exerviseMeasureVm.ShortMeasureDescription = "count";
                                 break;
                             case MeasureType.Weight:

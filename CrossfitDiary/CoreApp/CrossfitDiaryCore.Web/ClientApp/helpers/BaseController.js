@@ -1,9 +1,7 @@
 var General;
 (function (General) {
     var BaseController = /** @class */ (function () {
-        //    isDataLoading: KnockoutObservable<boolean>;
         function BaseController() {
-            //      this.isDataLoading = ko.observable<boolean>(false);
         }
         return BaseController;
     }());

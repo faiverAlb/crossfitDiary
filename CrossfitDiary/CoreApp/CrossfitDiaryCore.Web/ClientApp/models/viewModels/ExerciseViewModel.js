@@ -34,9 +34,7 @@ var ExerciseViewModel = /** @class */ (function () {
         return new ExerciseViewModel({
             id: input.id,
             title: input.title,
-            exerciseMeasures: input.exerciseMeasures.map(function (x) {
-                return new ExerciseMeasureViewModel().deserialize(x);
-            }),
+            exerciseMeasures: input.exerciseMeasures.map(function (x) { return new ExerciseMeasureViewModel().deserialize(x); }),
             isAlternative: input.isAlternative,
             isNewWeightMaximum: input.isNewWeightMaximum,
             isDoUnbroken: input.isDoUnbroken,

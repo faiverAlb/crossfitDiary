@@ -2,6 +2,7 @@
 import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel";
 import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
+import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
 
 export default class CrossfitterService {
   // tslint:disable-next-line:max-line-length
@@ -29,6 +30,12 @@ export default class CrossfitterService {
   public getExercises = (): Promise<ExerciseViewModel[]> => {
     return axios.get<ExerciseViewModel[]>("api/getExercises").then(jsonData => {
       return jsonData.data.map(x => new ExerciseViewModel().deserialize(x));
+    });
+  };
+
+  public getExerciseMaximums = (): Promise<PersonMaximumViewModel[]> => {
+    return axios.get<PersonMaximumViewModel[]>("api/getExerciseMaximums").then(jsonData => {
+      return jsonData.data.map(x => new PersonMaximumViewModel().deserialize(x));
     });
   };
 

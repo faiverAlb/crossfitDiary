@@ -73,7 +73,7 @@
               </b-input-group>
             </div>
             <div
-              class="form-group my-1 col-lg-3"
+              class="form-group my-1 col-lg-2"
               v-for="(measure,index) in exercise.exerciseMeasures"
               :key="measure.measureType + index"
             >
@@ -94,10 +94,29 @@
                   </b-input-group-text>
                 </b-input-group-append>
                 <!-- TODO: Problem with border radious because of it -->
-                <!-- <span class="w-100"></span>
-                <small id="prPercentHelpBlock" class="form-text text-muted">
-                  personalRecordPercent
-                </small> -->
+                <span
+                  class="w-100"
+                  v-if="canSeeMaximumHelper(exercise,measure)"
+                ></span>
+                <small
+                  id="prPercentHelpBlock"
+                  class="form-text text-muted"
+                  v-if="canSeeMaximumHelper(exercise,measure)"
+                >
+                  {{calculatePersentForMainWeight(exercise,measure.measureValue)}}% of PM
+                </small>
+
+                <span
+                  class="w-100"
+                  v-if="canSeeAltMaximumHelper(exercise,measure)"
+                ></span>
+                <small
+                  id="prPercentHelpBlock"
+                  class="form-text text-muted"
+                  v-if="canSeeAltMaximumHelper(exercise,measure)"
+                >
+                  {{calculatePersentForAltWeight(exercise,measure.measureValue)}}% of PM
+                </small>
               </b-input-group>
             </div>
           </div>
@@ -125,6 +144,7 @@ import {
   ExerciseViewModel,
   DefaultExerciseViewModel
 } from "../../../models/viewModels/ExerciseViewModel";
+import { ExerciseMeasureViewModel } from "../../../models/viewModels/ExerciseMeasureViewModel";
 import bFormSelect from "bootstrap-vue/es/components/form-select/form-select";
 import bDropdown from "bootstrap-vue/es/components/dropdown/dropdown";
 import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
@@ -138,6 +158,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import { IWorkoutEditState } from "./../../../workout-edit-store/types";
 import { State, Action, Getter } from "vuex-class";
+import { ExerciseMeasureType } from "../../../models/viewModels/ExerciseMeasureType";
 const namespace: string = "workoutEdit";
 
 @Component({
@@ -206,6 +227,84 @@ export default class ExercisesListComponent extends Vue {
   }
   private deleteFromList(index: number) {
     this.exercisesToDo.splice(index, 1);
+  }
+
+  isFloat(val) {
+    var floatRegex = /^-?\d+(?:[.,]\d*?)?$/;
+    if (!floatRegex.test(val)) return false;
+
+    val = parseFloat(val);
+    if (isNaN(val)) return false;
+    return true;
+  }
+
+  private getUserMaximumByExerciseId(exerciseId: number) {
+    let maximum = this.workoutEdit.userMaximums.find(
+      x => x.exerciseId == exerciseId
+    );
+    return maximum;
+  }
+  private canSeeMaximumHelper(
+    exercise: ExerciseViewModel,
+    measure: ExerciseMeasureViewModel
+  ): boolean {
+    if (
+      measure.measureType != ExerciseMeasureType.Weight ||
+      measure.measureValue == null
+    )
+      return;
+    let foundMaximum = this.getUserMaximumByExerciseId(exercise.id);
+    if (foundMaximum && foundMaximum.maximumWeight != null) {
+      return true;
+    }
+    return false;
+  }
+
+  private canSeeAltMaximumHelper(
+    exercise: ExerciseViewModel,
+    measure: ExerciseMeasureViewModel
+  ): boolean {
+    if (
+      measure.measureType != ExerciseMeasureType.AlternativeWeight ||
+      measure.measureValue == null
+    )
+      return;
+    let foundMaximum = this.getUserMaximumByExerciseId(exercise.id);
+    if (foundMaximum && foundMaximum.maximumAlternativeWeight != null) {
+      return true;
+    }
+    return false;
+  }
+
+  private calculatePersentForMainWeight(
+    exercise: ExerciseViewModel,
+    measureValue: string
+  ) {
+    if (this.isFloat(measureValue) == false) return "";
+    let maxValue = this.getUserMaximumByExerciseId(exercise.id);
+    if (maxValue.maximumWeight == null || maxValue.maximumWeight == 0)
+      return "";
+    let parsed = parseFloat(measureValue);
+    let returnValue = (parsed / maxValue.maximumWeight) * 100;
+
+    return Math.round((returnValue + 0.00001) * 100) / 100;
+  }
+
+  private calculatePersentForAltWeight(
+    exercise: ExerciseViewModel,
+    measureValue: string
+  ) {
+    if (this.isFloat(measureValue) == false) return "";
+    let maxValue = this.getUserMaximumByExerciseId(exercise.id);
+    if (
+      maxValue.maximumAlternativeWeight == null ||
+      maxValue.maximumAlternativeWeight == 0
+    )
+      return "";
+    let parsed = parseFloat(measureValue);
+    let returnValue = (parsed / maxValue.maximumAlternativeWeight) * 100;
+
+    return Math.round((returnValue + 0.00001) * 100) / 100;
   }
 }
 </script>
