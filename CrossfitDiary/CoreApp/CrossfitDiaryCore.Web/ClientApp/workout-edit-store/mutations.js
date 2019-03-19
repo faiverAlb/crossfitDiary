@@ -4,7 +4,6 @@ export var mutations = {
         state.exercises = payload;
     },
     userMaximumsLoaded: function (state, payload) {
-        debugger;
         state.error = false;
         state.userMaximums = payload;
     },
