@@ -1,15 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using CrossfitDiaryCore.BL.Services;
-using CrossfitDiaryCore.Model;
-using CrossfitDiaryCore.Web.ViewModels.Pride;
-using Microsoft.AspNet.Identity;
+﻿using CrossfitDiaryCore.BL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-
-namespace CrossfitDiary.Web.Api
+namespace CrossfitDiaryCore.Web.Controllers
 {
     [Authorize]
     [Route("api")]

@@ -3,6 +3,7 @@ import { actions } from "./actions";
 import { mutations } from "./mutations";
 export var state = {
     exercises: [],
+    userMaximums: [],
     error: false,
     canUserSeePlanWorkouts: false
 };

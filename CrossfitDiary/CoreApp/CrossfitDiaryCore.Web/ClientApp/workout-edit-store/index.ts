@@ -7,6 +7,7 @@ import { RootState } from "../types";
 
 export const state: IWorkoutEditState = {
   exercises: [],
+  userMaximums:[],
   error: false,
   canUserSeePlanWorkouts: false
 };
