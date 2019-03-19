@@ -223,6 +223,9 @@ export default class WorkoutsNavigationComponent extends Vue {
   @Action("fetchExercises", { namespace })
   fetchExercises: any;
 
+  @Action("fetchUserMaximums", { namespace })
+  fetchUserMaximums: any;
+
   @Action("setCanUserSeePlanWorkouts", { namespace })
   setCanUserSeePlanWorkouts: any;
 
@@ -236,6 +239,7 @@ export default class WorkoutsNavigationComponent extends Vue {
     this.canUserPlanWorkouts = workouter.canUserPlanWorkouts;
     this.setCanUserSeePlanWorkouts(this.canUserSeePlanWorkouts);
     this.fetchExercises();
+    this.fetchUserMaximums();
     this.isEditMode =
       workouter != null &&
       (workouter.toLogWorkoutRawModel != null ||

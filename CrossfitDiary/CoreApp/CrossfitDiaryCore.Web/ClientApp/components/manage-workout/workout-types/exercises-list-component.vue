@@ -94,12 +94,28 @@
                   </b-input-group-text>
                 </b-input-group-append>
                 <!-- TODO: Problem with border radious because of it -->
-                <span class="w-100"></span>
+                <span
+                  class="w-100"
+                  v-if="canSeeMaximumHelper(exercise.maximumWeight,measure)"
+                ></span>
                 <small
                   id="prPercentHelpBlock"
                   class="form-text text-muted"
+                  v-if="canSeeMaximumHelper(exercise.maximumWeight,measure)"
                 >
-                  personalRecordPercent
+                  {{calculatePersent(exercise.maximumWeight,measure.measureValue)}}% of PM
+                </small>
+
+                <span
+                  class="w-100"
+                  v-if="canSeeAltMaximumHelper(exercise.maximumAlternativeWeight,measure)"
+                ></span>
+                <small
+                  id="prPercentHelpBlock"
+                  class="form-text text-muted"
+                  v-if="canSeeAltMaximumHelper(exercise.maximumAlternativeWeight,measure)"
+                >
+                  {{calculatePersent(exercise.maximumAlternativeWeight,measure.measureValue)}}% of PM
                 </small>
               </b-input-group>
             </div>
@@ -209,6 +225,32 @@ export default class ExercisesListComponent extends Vue {
   }
   private deleteFromList(index: number) {
     this.exercisesToDo.splice(index, 1);
+  }
+
+  isFloat(val) {
+    var floatRegex = /^-?\d+(?:[.,]\d*?)?$/;
+    if (!floatRegex.test(val)) return false;
+
+    val = parseFloat(val);
+    if (isNaN(val)) return false;
+    return true;
+  }
+
+  private canSeeMaximumHelper(maximumWeight, measure) {
+    return maximumWeight && measure.measureType == 3 && measure.measureValue;
+  }
+
+  private canSeeAltMaximumHelper(altMaximumWeight, measure) {
+    return altMaximumWeight && measure.measureType == 8 && measure.measureValue;
+  }
+  private calculatePersent(maxValue: number, measureValue: string) {
+    debugger;
+    if (this.isFloat(measureValue) == false) return "";
+    if (maxValue == 0) return "";
+    let parsed = parseFloat(measureValue);
+    let returnValue = (parsed / maxValue) * 100;
+
+    return Math.round((returnValue + 0.00001) * 100) / 100;
   }
 }
 </script>

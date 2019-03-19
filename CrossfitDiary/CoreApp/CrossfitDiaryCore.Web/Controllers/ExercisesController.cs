@@ -49,19 +49,22 @@ namespace CrossfitDiaryCore.Web.Controllers
                 return exercises;
             });
 
+            List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(cachedExercises.OrderBy(x => x.Title));
+            return exerciseViewModels;
+        }
+        
+        /// <summary>
+        ///     The get exercises maximums.
+        /// </summary>
+        [HttpGet]
+        [Route("api/getExerciseMaximums")]
+        public List<PersonMaximumViewModel> GetExerciseMaximums()
+        {
+
             string currentUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             List<TempPersonMaximum> personMaxumumsByExercise = _readWorkoutsService.GetPersonMaxumums(currentUserId);
-            List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(cachedExercises.OrderBy(x => x.Title));
-            foreach (ExerciseViewModel exerciseViewModel in exerciseViewModels)
-            {
-                TempPersonMaximum tempPersonMaximum = personMaxumumsByExercise.SingleOrDefault(x => x.ExerciseId == exerciseViewModel.Id);
-                if (tempPersonMaximum != null)
-                {
-                    exerciseViewModel.MaximumWeight = tempPersonMaximum.MaximumWeight;
-                    exerciseViewModel.MaximumAlternativeWeight = tempPersonMaximum.MaximumAlternativeWeight;
-                }
-            }
-            return exerciseViewModels;
+            return _mapper.Map<List<PersonMaximumViewModel>>(personMaxumumsByExercise);
+
         }
     }
 }

@@ -28,7 +28,6 @@ var ExerciseViewModel = /** @class */ (function () {
         this.addedToMaxWeightString = params.addedToMaxWeightString;
         this.maximumWeight = params.maximumWeight;
         this.maximumAlternativeWeight = params.maximumAlternativeWeight;
-        debugger;
     }
     ExerciseViewModel.prototype.deserialize = function (input) {
         if (input == null) {
