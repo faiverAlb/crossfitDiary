@@ -201,5 +201,44 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                 return db.Query<TempPersonMaximum>(sql, new {userId});
             }
         }
+        public IEnumerable<TempPersonMaximum> GetPersonMainMaxumumsOnly(string userId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = @"SELECT [RoutineSimple].ExerciseId, MAX([RoutineSimple].Weight) as MaxWeight
+                                  FROM [RoutineSimple]
+                                  INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
+                                  INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+                                  WHERE [CrossfitterWorkout].CrossfitterId = @userId AND ([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS NULL)
+                                  GROUP BY [RoutineSimple].ExerciseId
+                                  ORDER BY [RoutineSimple].ExerciseId";
+                return db.Query<TempPersonMaximum>(sql, new {userId});
+            }
+        }
+        public IEnumerable<TempPersonMaximum> GetPersonPreviousMainMaxumumsOnly(string userId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = @"SELECT rs.ExerciseId, MAX(rs.Weight) as MaxWeight
+                                  FROM [RoutineSimple] rs
+                                  INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = rs.RoutineComplexId
+                                  INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+                                  WHERE [CrossfitterWorkout].CrossfitterId = @userId AND (rs.Weight IS NOT NULL AND rs.AlternativeWeight IS NULL)
+                                  AND rs.Weight < (
+			                                SELECT MAX([RoutineSimple].Weight) as MaxWeight
+		                                  FROM [RoutineSimple]
+		                                  INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
+		                                  INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+		                                  WHERE [CrossfitterWorkout].CrossfitterId = @userId AND ([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS NULL)
+		                                  AND [RoutineSimple].ExerciseId = rs.ExerciseId
+		                                  GROUP BY [RoutineSimple].ExerciseId
+                                  )
+                                  GROUP BY rs.ExerciseId
+                                  ORDER BY rs.ExerciseId";
+                return db.Query<TempPersonMaximum>(sql, new {userId});
+            }
+        }
+
+
     }
 }
