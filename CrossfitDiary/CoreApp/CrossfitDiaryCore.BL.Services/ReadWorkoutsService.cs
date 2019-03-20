@@ -188,6 +188,12 @@ namespace CrossfitDiaryCore.BL.Services
         private void UpdateWorkoutsWithRecords(List<CrossfitterWorkout> crossfitterWorkouts)
         {
             List<string> distinctUsers = crossfitterWorkouts.GroupBy(x => x.Crossfitter.Id).Select(x => x.Key).ToList();
+            foreach (string userId in distinctUsers)
+            {
+                List<TempPersonMaximum> personMainMaxumumsOnly =  _dapperRepository.GetPersonMainMaxumumsOnly(userId).ToList();
+                List<TempPersonMaximum> previousMaximumsList =  _dapperRepository.GetPersonPreviousMainMaxumumsOnly(userId).ToList();
+
+            }
         }
 
 
