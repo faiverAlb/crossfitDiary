@@ -192,8 +192,33 @@ namespace CrossfitDiaryCore.BL.Services
             {
                 List<TempPersonMaximum> personMainMaxumumsOnly =  _dapperRepository.GetPersonMainMaxumumsOnly(userId).ToList();
                 List<TempPersonMaximum> previousMaximumsList =  _dapperRepository.GetPersonPreviousMainMaxumumsOnly(userId).ToList();
-
+                List<RoutineSimple> usersSimpleRoutines = crossfitterWorkouts.Where(x => x.Crossfitter.Id == userId).SelectMany(x => x.RoutineComplex.RoutineSimple.Select(y => y)).ToList();
+                UpdateRoutinesWithMaximums(usersSimpleRoutines, personMainMaxumumsOnly, previousMaximumsList);
             }
+        }
+
+        private void UpdateRoutinesWithMaximums(List<RoutineSimple> usersSimpleRoutines, List<TempPersonMaximum> personMainMaxumumsOnly, List<TempPersonMaximum> previousMaximumsList)
+        {
+            foreach (TempPersonMaximum personMaximum in personMainMaxumumsOnly)
+            {
+                RoutineSimple foundLastRoutineSimple = usersSimpleRoutines.OrderByDescending(x => x.Id).FirstOrDefault(x => x.ExerciseId == personMaximum.ExerciseId);
+                if (foundLastRoutineSimple == null)
+                {
+                    continue;
+                }
+
+                foundLastRoutineSimple.IsNewWeightMaximum = true;
+                TempPersonMaximum previousMaximum = previousMaximumsList.FirstOrDefault(x => x.ExerciseId == personMaximum.ExerciseId);
+                if (previousMaximum == null)
+                {
+                    foundLastRoutineSimple.AddedToMaxWeight =  personMaximum.MaximumWeight;
+                }
+                else
+                {
+                    foundLastRoutineSimple.AddedToMaxWeight = personMaximum.MaximumWeight - previousMaximum.MaximumWeight;
+                }
+            }
+            
         }
 
 

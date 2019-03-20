@@ -7,8 +7,8 @@
     {
         public int ExerciseId { get; set; }
 
-        public double? MaximumWeight { get; set; }
+        public decimal? MaximumWeight { get; set; }
 
-        public double? MaximumAlternativeWeight { get; set; }
+        public decimal? MaximumAlternativeWeight { get; set; }
     }
 }
