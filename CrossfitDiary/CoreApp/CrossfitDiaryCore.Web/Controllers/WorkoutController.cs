@@ -86,7 +86,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts</returns>
         [HttpGet]
         [Route("api/getAllCrossfittersWorkouts")]
-        public  List<ToLogWorkoutViewModel> GetAllCrossfittersWorkoutsAsync(int page = 1, int pageSize = 50)
+        public  List<ToLogWorkoutViewModel> GetAllCrossfittersWorkoutsAsync(int page = 1, int pageSize = 300)
         {
 //            List<ToLogWorkoutViewModel> crossfitersWorkouts = await _memoryCache.GetOrCreate(_allMainpageResultsConst, async entry =>
              {

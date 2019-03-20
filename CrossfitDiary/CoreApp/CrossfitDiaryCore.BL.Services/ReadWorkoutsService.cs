@@ -148,12 +148,12 @@ namespace CrossfitDiaryCore.BL.Services
             }
 
 
-            IEnumerable<ExerciseMeasure> allExerciseMeasures = _dapperRepository.GetAllExerciseMeasures();
-            IEnumerable<CrossfitterWorkout> crossfitterWorkouts = crossfitterCombinedResults.CrossfitterWorkouts;
+            List<ExerciseMeasure> allExerciseMeasures = _dapperRepository.GetAllExerciseMeasures().ToList();
+            List<CrossfitterWorkout> crossfitterWorkouts = crossfitterCombinedResults.CrossfitterWorkouts.ToList();
 
-            IEnumerable<RoutineComplex> childRoutines = crossfitterCombinedResults.ChildRoutines;
-            IEnumerable<RoutineSimple> simpleRoutingForChild = crossfitterCombinedResults.ChildRoutineSimples;
-            IEnumerable<RoutineSimple> routineSimples = crossfitterCombinedResults.RoutineSimples;
+            List<RoutineComplex> childRoutines = crossfitterCombinedResults.ChildRoutines.ToList();
+            List<RoutineSimple> simpleRoutingForChild = crossfitterCombinedResults.ChildRoutineSimples.ToList();
+            List<RoutineSimple> routineSimples = crossfitterCombinedResults.RoutineSimples.ToList();
 
             foreach (RoutineComplex childRoutine in childRoutines)
             {
@@ -175,7 +175,7 @@ namespace CrossfitDiaryCore.BL.Services
             }
 
             // Commented to improve performance
-            //UpdateWorkoutsWithRecords(crossfitterWorkouts);
+            UpdateWorkoutsWithRecords(crossfitterWorkouts);
 
             List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();//.Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
             foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)
@@ -185,12 +185,17 @@ namespace CrossfitDiaryCore.BL.Services
             return allCrossfittersWorkouts;
         }
 
+        private void UpdateWorkoutsWithRecords(List<CrossfitterWorkout> crossfitterWorkouts)
+        {
+            List<string> distinctUsers = crossfitterWorkouts.GroupBy(x => x.Crossfitter.Id).Select(x => x.Key).ToList();
+        }
+
 
         /// <summary>
         ///     Find exercise maximums and mark crossfitter workout as having new maximum and exercise as new max
         /// </summary>
         /// <param name="crossfitterWorkouts"></param>
-        private void UpdateWorkoutsWithRecords(IEnumerable<CrossfitterWorkout> crossfitterWorkouts)
+        private void UpdateWorkoutsWithRecords2(IEnumerable<CrossfitterWorkout> crossfitterWorkouts)
         {
             IEnumerable<IGrouping<ApplicationUser, CrossfitterWorkout>> groupedByuser = crossfitterWorkouts.GroupBy(x => x.Crossfitter);
 
