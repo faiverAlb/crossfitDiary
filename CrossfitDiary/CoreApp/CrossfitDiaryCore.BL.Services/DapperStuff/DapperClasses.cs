@@ -205,7 +205,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string sql = @"SELECT [RoutineSimple].ExerciseId, MAX([RoutineSimple].Weight) as MaximumWeight
+                string sql = @"SELECT [RoutineSimple].ExerciseId, MAX([RoutineSimple].Weight) as MaximumWeight, MIN(RoutineSimple.Id) as RoutineSimpleId
                                   FROM [RoutineSimple]
                                   INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
                                   INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id

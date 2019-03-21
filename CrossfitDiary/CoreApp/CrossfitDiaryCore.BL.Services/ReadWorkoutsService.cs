@@ -201,21 +201,23 @@ namespace CrossfitDiaryCore.BL.Services
         {
             foreach (TempPersonMaximum personMaximum in personMainMaxumumsOnly)
             {
-                RoutineSimple foundLastRoutineSimple = usersSimpleRoutines.OrderByDescending(x => x.Id).FirstOrDefault(x => x.ExerciseId == personMaximum.ExerciseId);
-                if (foundLastRoutineSimple == null)
+                RoutineSimple foundFirstRoutineSimple = usersSimpleRoutines
+                    .OrderByDescending(x => x.Id)
+                    .FirstOrDefault(x => x.Id == personMaximum.RoutineSimpleId.Value && x.ExerciseId == personMaximum.ExerciseId);
+                if (foundFirstRoutineSimple == null)
                 {
                     continue;
                 }
 
-                foundLastRoutineSimple.IsNewWeightMaximum = true;
+                foundFirstRoutineSimple.IsNewWeightMaximum = true;
                 TempPersonMaximum previousMaximum = previousMaximumsList.FirstOrDefault(x => x.ExerciseId == personMaximum.ExerciseId);
                 if (previousMaximum == null)
                 {
-                    foundLastRoutineSimple.AddedToMaxWeight =  personMaximum.MaximumWeight;
+                    foundFirstRoutineSimple.AddedToMaxWeight =  personMaximum.MaximumWeight;
                 }
                 else
                 {
-                    foundLastRoutineSimple.AddedToMaxWeight = personMaximum.MaximumWeight - previousMaximum.MaximumWeight;
+                    foundFirstRoutineSimple.AddedToMaxWeight = personMaximum.MaximumWeight - previousMaximum.MaximumWeight;
                 }
             }
             
