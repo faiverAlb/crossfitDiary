@@ -205,13 +205,16 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string sql = @"SELECT [RoutineSimple].ExerciseId, MAX([RoutineSimple].Weight) as MaximumWeight, MIN(RoutineSimple.Id) as RoutineSimpleId
-                                  FROM [RoutineSimple]
+                string sql = @"SELECT sub.ExerciseId,sub.Weight as MaximumWeight,sub.Id as RoutineSimpleId
+FROM (
+SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id
+FROM [RoutineSimple]
                                   INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
                                   INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
-                                  WHERE [CrossfitterWorkout].CrossfitterId = @userId AND ([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS NULL)
-                                  GROUP BY [RoutineSimple].ExerciseId
-                                  ORDER BY [RoutineSimple].ExerciseId";
+                                  WHERE [CrossfitterWorkout].CrossfitterId = @userId 
+								  AND ([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS NULL) ) as sub
+WHERE rn = 1
+";
                 return db.Query<TempPersonMaximum>(sql, new {userId});
             }
         }
