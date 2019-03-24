@@ -205,10 +205,10 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string sql = @"SELECT sub.ExerciseId,sub.Weight as MaximumWeight,sub.Id as RoutineSimpleId
-FROM (
-SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id
-FROM [RoutineSimple]
+                string sql = @"SELECT sub.ExerciseId,sub.Weight as MaximumWeight,sub.Id as RoutineSimpleId,sub.CrossfitterWorkoutId 
+                                FROM (
+                                SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id,[CrossfitterWorkout].Id as CrossfitterWorkoutId
+                                FROM [RoutineSimple]
                                   INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
                                   INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
                                   WHERE [CrossfitterWorkout].CrossfitterId = @userId 

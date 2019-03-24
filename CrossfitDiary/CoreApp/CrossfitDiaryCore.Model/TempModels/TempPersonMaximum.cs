@@ -7,10 +7,14 @@
     {
         public int ExerciseId { get; set; }
 
-        public int? RoutineSimpleId { get; set; }
+        public int RoutineSimpleId { get; set; }
+
+        public int CrossfitterWorkoutId { get; set; }
         
         public decimal? MaximumWeight { get; set; }
 
         public decimal? MaximumAlternativeWeight { get; set; }
+
+        public decimal? AddedToMaxWeight { get; set; }
     }
 }
