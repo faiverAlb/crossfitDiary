@@ -74,17 +74,17 @@ namespace CrossfitDiaryCore.Model
         public bool IsAlternative { get; set; }
 
 
-        /// <summary>
-        ///     Calculated property from service to identify as new maximum
-        /// </summary>
-        [NotMapped]
-        public bool IsNewWeightMaximum { get; set; }
-        
-        /// <summary>
-        ///     Substraction between maximum and previous maximum weights
-        /// </summary>
-        [NotMapped]
-        public decimal? AddedToMaxWeight { get; set; }
+//        /// <summary>
+//        ///     Calculated property from service to identify as new maximum
+//        /// </summary>
+//        [NotMapped]
+//        public bool IsNewWeightMaximum { get; set; }
+//        
+//        /// <summary>
+//        ///     Substraction between maximum and previous maximum weights
+//        /// </summary>
+//        [NotMapped]
+//        public decimal? AddedToMaxWeight { get; set; }
 
         /// <summary>
         ///     Should be done without break
