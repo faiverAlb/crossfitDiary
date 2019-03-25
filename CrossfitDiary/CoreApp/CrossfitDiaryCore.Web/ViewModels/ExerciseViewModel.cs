@@ -28,6 +28,8 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
         [JsonProperty("position")]
         public int Position { get; set; }
+
+        public int? TempRoutineSimpleId { get; set; }
     }
 
 

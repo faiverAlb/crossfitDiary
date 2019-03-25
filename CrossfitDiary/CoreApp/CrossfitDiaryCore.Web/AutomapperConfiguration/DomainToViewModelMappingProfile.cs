@@ -83,7 +83,18 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName))
                 .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex))
                 .ForMember(x => x.WorkouterId, x => x.MapFrom(y => y.Crossfitter.Id))
-                .ForMember(x => x.TimePassed, x => x.ResolveUsing<TimePassedResolver>());
+                .ForMember(x => x.TimePassed, x => x.ResolveUsing<TimePassedResolver>())
+                .AfterMap((crossfitterWorkout, toLogWorkoutViewModel) =>
+                {
+                    foreach (TempPersonMaximum personalRecord in crossfitterWorkout.PersonalRecords)
+                    {
+
+                        ExerciseViewModel routineSimple = toLogWorkoutViewModel.WorkoutViewModel.ExercisesToDoList.Single(x => x.TempRoutineSimpleId == personalRecord.RoutineSimpleId);
+                        routineSimple.IsNewWeightMaximum = true;
+                        routineSimple.AddedToMaxWeightString = $"+{personalRecord.AddedToMaxWeight.ToCustomString()}kg";
+                    }
+                    
+                });
 
             CreateMap<RoutineComplex, WorkoutViewModel>()
                 .ForMember(x => x.WorkoutType, x => x.MapFrom(y => y.ComplexType))
@@ -103,9 +114,10 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
 
             CreateMap<RoutineSimple, ExerciseViewModel>()
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.ExerciseId))
+                .ForMember(x => x.TempRoutineSimpleId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.ExerciseMeasures, opt => opt.Ignore())
                 .ForMember(x => x.Title, opt => opt.MapFrom(y => y.Exercise.Title))
-                .ForMember(x => x.AddedToMaxWeightString, opt => opt.MapFrom(y => y.AddedToMaxWeight.HasValue? $"+{y.AddedToMaxWeight.ToCustomString()}kg": null))
+//                .ForMember(x => x.AddedToMaxWeightString, opt => opt.MapFrom(y => y.AddedToMaxWeight.HasValue? $"+{y.AddedToMaxWeight.ToCustomString()}kg": null))
                 .ForMember(x => x.IsDoUnbroken, opt => opt.MapFrom(y => y.IsDoUnbroken))
                 .AfterMap((simple, dest) =>
                 {

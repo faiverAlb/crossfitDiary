@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using CrossfitDiaryCore.Model.TempModels;
 
 namespace CrossfitDiaryCore.Model
 {
@@ -82,5 +85,13 @@ namespace CrossfitDiaryCore.Model
         ///     Comment regarding workout from crossfitter
         /// </summary>
         public string Comment { get; set; }
+
+        /// <summary>
+        ///     
+        /// </summary>
+        [NotMapped]
+        public List<TempPersonMaximum> PersonalRecords { get; set; } = new List<TempPersonMaximum>();
+
+
     }
 }
