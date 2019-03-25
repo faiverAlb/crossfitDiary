@@ -216,72 +216,8 @@ namespace CrossfitDiaryCore.BL.Services
                     personMaximum.AddedToMaxWeight = personMaximum.MaximumWeight - previousMaximum.MaximumWeight;
                 }
                 crossfitterWorkout.PersonalRecords.Add(personMaximum);
-
             }
-            
         }
-
-
-//        /// <summary>
-//        ///     Find exercise maximums and mark crossfitter workout as having new maximum and exercise as new max
-//        /// </summary>
-//        /// <param name="crossfitterWorkouts"></param>
-//        private void UpdateWorkoutsWithRecords2(IEnumerable<CrossfitterWorkout> crossfitterWorkouts)
-//        {
-//            IEnumerable<IGrouping<ApplicationUser, CrossfitterWorkout>> groupedByuser = crossfitterWorkouts.GroupBy(x => x.Crossfitter);
-//
-//            foreach (IGrouping<ApplicationUser, CrossfitterWorkout> personWorkouts in groupedByuser)
-//            {
-//                List<Exercise> allDistinctExercisesFromWorkouts = personWorkouts
-//                                .SelectMany(x => x.RoutineComplex.RoutineSimple.Select(y => y.Exercise))
-//                                .Union(personWorkouts.SelectMany(x => x.RoutineComplex.Children.SelectMany(z => z.RoutineSimple)).Select(x => x.Exercise))
-//                                .Distinct()
-//                                .ToList();
-//                foreach (Exercise exercise in allDistinctExercisesFromWorkouts)
-//                {
-//                    var user = personWorkouts.Key;
-//                    PersonMaximum personMaximum =  GetPersonMaximumForExercise(user.Id, exercise.Id);
-//                    MarkWorkoutWithWeightRecord(personMaximum, crossfitterWorkouts);
-//                }
-//            }
-//        }
-
-//        /// <summary>
-//        ///     Implement inner logic for marking crossfit workout with record
-//        /// </summary>
-//        /// <param name="personMaximum"></param>
-//        /// <param name="crossfitterWorkouts"></param>
-//        private void MarkWorkoutWithWeightRecord(PersonMaximum personMaximum, IEnumerable<CrossfitterWorkout> crossfitterWorkouts)
-//        {
-//            if (personMaximum == null || personMaximum.MaximumWeight == null || personMaximum.MaximumWeight == 0)
-//            {
-//                return;
-//            }
-//
-//            CrossfitterWorkout workoutToAddMaximum = crossfitterWorkouts.SingleOrDefault(x => x.Id == personMaximum.CrossfitWorkoutId);
-//            if (workoutToAddMaximum == null)
-//            {
-//                return;
-//            }
-//
-//            if (workoutToAddMaximum.RoutineComplex.Children.Any())
-//            {
-//                foreach (RoutineComplex routineComplexChild in workoutToAddMaximum.RoutineComplex.Children.Where(z => z.RoutineSimple.Any(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight)))
-//                {
-//                    RoutineSimple routineSimple = routineComplexChild.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight);
-//                    routineSimple.IsNewWeightMaximum = true;
-//                    routineSimple.AddedToMaxWeight = personMaximum.PreviousMaximumWeight.HasValue?personMaximum.MaximumWeight - personMaximum.PreviousMaximumWeight:null;
-//                }
-//            }
-//            else
-//            {
-//                RoutineSimple routineSimple = workoutToAddMaximum.RoutineComplex.RoutineSimple.First(x => x.ExerciseId == personMaximum.ExerciseId && x.Weight == personMaximum.MaximumWeight);
-//                routineSimple.IsNewWeightMaximum = true;
-//                routineSimple.AddedToMaxWeight = personMaximum.PreviousMaximumWeight.HasValue?personMaximum.MaximumWeight - personMaximum.PreviousMaximumWeight:null;
-//            }
-//        }
-
-
 
         /// <summary>
         /// The get crossfitter workout.
