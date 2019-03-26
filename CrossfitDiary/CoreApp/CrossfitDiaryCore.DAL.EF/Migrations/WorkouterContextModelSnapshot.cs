@@ -163,6 +163,28 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.ToTable("ExerciseMeasure");
                 });
 
+            modelBuilder.Entity("CrossfitDiaryCore.Model.PlanningHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("getutcdate()");
+
+                    b.Property<DateTime>("PlanningDate");
+
+                    b.Property<int>("PlanningLevel");
+
+                    b.Property<int>("RoutineComplexId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoutineComplexId");
+
+                    b.ToTable("PlanningHistory");
+                });
+
             modelBuilder.Entity("CrossfitDiaryCore.Model.RoutineComplex", b =>
                 {
                     b.Property<int>("Id")
@@ -375,6 +397,14 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.HasOne("CrossfitDiaryCore.Model.Exercise", "Exercise")
                         .WithMany("ExerciseMeasures")
                         .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CrossfitDiaryCore.Model.PlanningHistory", b =>
+                {
+                    b.HasOne("CrossfitDiaryCore.Model.RoutineComplex", "RoutineComplex")
+                        .WithMany()
+                        .HasForeignKey("RoutineComplexId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
