@@ -202,10 +202,6 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.Property<int?>("ParentId");
 
-                    b.Property<DateTime?>("PlanDate");
-
-                    b.Property<int?>("PlanningLevel");
-
                     b.Property<int>("Position");
 
                     b.Property<TimeSpan?>("RestBetweenExercises");
