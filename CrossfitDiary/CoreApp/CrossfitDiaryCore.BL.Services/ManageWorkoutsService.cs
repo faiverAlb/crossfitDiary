@@ -110,7 +110,8 @@ namespace CrossfitDiaryCore.BL.Services
         {
             int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
 
-            List<RoutineComplex> sameDayPlanned = _context.PlanningHistories.Where(x => x.PlanningDate);
+            List<RoutineComplex> sameDayPlanned = _context.PlanningHistories.Where(x => x.PlanningDate.Date == workoutRoutine.PlanDate.Value.Date &&
+                x.PlanningLevel == workoutRoutine.PlanningLevel);
 
             List<RoutineComplex> sameDayPlanned = _context.ComplexRoutines.Where(x =>
                 x.PlanDate != null && x.PlanDate.Value.Date == workoutRoutine.PlanDate.Value.Date &&
