@@ -253,7 +253,8 @@ namespace CrossfitDiaryCore.BL.Services
 
         public List<RoutineComplex> GetPlannedWorkouts(DateTime today)
         {
-            return _context.ComplexRoutines.Where(x => x.PlanDate.HasValue && x.PlanDate.Value.Date == today.Date)
+            List<PlanningHistory> planned =  _context.PlanningHistories.Where(x => x.PlanningDate.Date == today.Date).ToList();
+            List<RoutineComplex> routines = _context.ComplexRoutines.Where(x => planned.SingleOrDefault(y => y.RoutineComplexId == x.Id)!= null)
                 .Include(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
                 .ThenInclude(x => x.ExerciseMeasures)
@@ -261,6 +262,12 @@ namespace CrossfitDiaryCore.BL.Services
                 .ThenInclude(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
                 .ThenInclude(x => x.ExerciseMeasures).ToList();
+            routines.ForEach(x =>
+                {
+                    x.PlanDate = planned.Single(p => p.RoutineComplexId == x.Id).PlanningDate;
+                    x.PlanningLevel = planned.Single(p => p.RoutineComplexId == x.Id).PlanningLevel;
+                });
+            return routines;
         }
 
         public List<TempPersonMaximum> GetPersonMaxumums(string userId)

@@ -55,6 +55,12 @@ namespace CrossfitDiaryCore.BL.Services
                 return;
             }
 
+            bool inPlannedWorkouts = _context.PlanningHistories.Any(x => x.RoutineComplexId == workoutIdToCheck);
+            if (inPlannedWorkouts)
+            {
+                return;
+            }
+
             foreach (RoutineComplex routineComplex in workoutToCheckAndDelete.Children)
             {
                 _context.ComplexRoutines.Remove(routineComplex);
@@ -110,16 +116,8 @@ namespace CrossfitDiaryCore.BL.Services
         {
             int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
 
-
-            List<RoutineComplex> sameDayPlanned = _context.ComplexRoutines.Where(x =>
-                x.PlanDate != null && x.PlanDate.Value.Date == workoutRoutine.PlanDate.Value.Date &&
-                x.PlanningLevel != null && x.PlanningLevel == workoutRoutine.PlanningLevel).ToList();
-            foreach (RoutineComplex routineComplex in sameDayPlanned)
-            {
-                routineComplex.PlanDate = null;
-                routineComplex.PlanningLevel = null;
-            }
-
+            IEnumerable<PlanningHistory> toDelete = _context.PlanningHistories.Where(x => x.PlanningDate.Date == workoutRoutine.PlanDate.Value.Date && x.PlanningLevel == workoutRoutine.PlanningLevel);
+            _context.PlanningHistories.RemoveRange(toDelete);
             if (workoutId == 0)
             {
                 if (workoutRoutine.Id != -1)
@@ -141,16 +139,23 @@ namespace CrossfitDiaryCore.BL.Services
                     routineSimple.Position = index++;
                 }
                 _context.ComplexRoutines.Add(workoutRoutine);
+                _context.PlanningHistories.Add(new PlanningHistory()
+                {
+                    RoutineComplex = workoutRoutine, PlanningLevel = workoutRoutine.PlanningLevel.Value,
+                    PlanningDate = workoutRoutine.PlanDate.Value
+                });
                 _context.SaveChanges();
             }
             else
             {
                 RoutineComplex complexToUpdate = _context.ComplexRoutines.Single(x => x.Id == workoutId);
-                complexToUpdate.PlanDate = workoutRoutine.PlanDate;
-                complexToUpdate.PlanningLevel = workoutRoutine.PlanningLevel;
                 _context.ComplexRoutines.Update(complexToUpdate);
+                _context.PlanningHistories.Add(new PlanningHistory()
+                {
+                    RoutineComplex = complexToUpdate, PlanningLevel = workoutRoutine.PlanningLevel.Value,
+                    PlanningDate = workoutRoutine.PlanDate.Value
+                });
                 _context.SaveChanges();
-
             }
         }
 
