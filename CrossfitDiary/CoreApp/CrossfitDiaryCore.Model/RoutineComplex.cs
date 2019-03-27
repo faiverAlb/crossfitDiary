@@ -96,17 +96,17 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public int Position { get; set; }
 
-        ///// <summary>
-        /////     Possible planning date
-        ///// </summary>
-        //[NotMapped]
-        //public DateTime? PlanDate { get; set; }
+        /// <summary>
+        ///     Possible planning date
+        /// </summary>
+        [NotMapped]
+        public DateTime? PlanDate { get; set; }
 
-        ///// <summary>
-        /////     Possible Planning Level
-        ///// </summary>
-        //[NotMapped]
-        //public PlanningLevel? PlanningLevel { get; set; }
+        /// <summary>
+        ///     Possible Planning Level
+        /// </summary>
+        [NotMapped]
+        public PlanningLevel? PlanningLevel { get; set; }
 
         /// <summary>
         ///     General comment regarding workout
