@@ -1,6 +1,7 @@
 ﻿using CrossfitDiaryCore.DAL.EF.CrossfitterWorkouts;
 using CrossfitDiaryCore.DAL.EF.ExerciseMeasures;
 using CrossfitDiaryCore.DAL.EF.Exercises;
+using CrossfitDiaryCore.DAL.EF.PlanningHistory;
 using CrossfitDiaryCore.DAL.EF.RoutinesComplex;
 using CrossfitDiaryCore.DAL.EF.RoutinesSimple;
 using CrossfitDiaryCore.Model;
@@ -22,6 +23,7 @@ namespace CrossfitDiaryCore.DAL.EF
         public DbSet<ExerciseMeasure> ExerciseMeasures { get; set; }
         public DbSet<RoutineSimple> SimpleRoutines { get; set; }
         public DbSet<RoutineComplex> ComplexRoutines { get; set; }
+        public DbSet<Model.PlanningHistory> PlanningHistories { get; set; }
 
         public DbSet<ApplicationUser> Users { get; set; }
 
@@ -36,6 +38,7 @@ namespace CrossfitDiaryCore.DAL.EF
             builder.ApplyConfiguration(new RoutineComplexConfiguration());
             builder.ApplyConfiguration(new ExerciseMeasureConfiguration());
             builder.ApplyConfiguration(new CrossfitterWorkoutConfiguration());
+            builder.ApplyConfiguration(new PlanningHistoryConfiguration());
 
 
         }
