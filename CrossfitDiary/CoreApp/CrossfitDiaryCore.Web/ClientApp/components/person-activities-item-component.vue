@@ -4,6 +4,18 @@
     class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded"
     v-if="model"
   >
+    <b-modal
+      ref="leaderboardModal"
+      title="Leaderboard"
+    >
+      <h2>Leaders</h2>
+      <div slot="modal-footer">
+        <b-button
+          data-dismiss="modal"
+          @click="()=>{this.$refs.leaderboardModal.hide();}"
+        >Close</b-button>
+      </div>
+    </b-modal>
     <div class="item-header d-flex flex-row justify-content-between  ">
       <div class="username">
         <span class="text-info">
@@ -57,12 +69,12 @@
       <div class="action-buttons">
         <a
           class="edit-workout-action pointer text-secondary float-left"
-          @click="showLeaderBoardModal"
+          @click="showLeaderBoardModal(model.workoutViewModel.id)"
         >
           <font-awesome-icon
             size="lg"
             :icon="['fas','medal']"
-          ></font-awesome-icon> Leaderboard
+          ></font-awesome-icon> Leaderboard (####)
         </a>
         <a
           v-if="model.canBeRemovedByCurrentUser"
@@ -95,26 +107,36 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit, faMedal);
 /**/
 
+/* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
-
-import WorkoutDisplayComponent from "./workout-display-component.vue";
+import bModal from "bootstrap-vue/es/components/modal/modal";
+import bButton from "bootstrap-vue/es/components/button/button";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+/* app components */
+import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
+import WorkoutDisplayComponent from "./workout-display-component.vue";
 
 @Component({
   components: {
     FontAwesomeIcon,
-    WorkoutDisplayComponent
+    WorkoutDisplayComponent,
+    bModal,
+    bButton
   }
 })
 export default class PersonsActivitesItemComponent extends Vue {
   @Prop() model: ToLogWorkoutViewModel;
 
+  $refs: {
+    leaderboardModal: HTMLFormElement;
+  };
+
   deleteWorkout(): void {
     this.$emit("deleteWorkout", this.model.crossfitterWorkoutId);
   }
-  showLeaderBoardModal() {
-    debugger;
+  showLeaderBoardModal(workoutViewModelId: number) {
+    this.$refs.leaderboardModal.show();
   }
 }
 </script>
