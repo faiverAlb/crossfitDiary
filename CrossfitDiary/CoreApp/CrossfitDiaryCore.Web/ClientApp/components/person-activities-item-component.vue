@@ -56,6 +56,15 @@
     <div class="item-footer text-right pt-1">
       <div class="action-buttons">
         <a
+          class="edit-workout-action pointer text-secondary  float-left"
+          v-bind:href="'Workout?crossfitterWorkoutId='+this.model.crossfitterWorkoutId"
+        >
+          <font-awesome-icon
+            size="lg"
+            :icon="['fas','medal']"
+          ></font-awesome-icon> Leaderboard
+        </a>
+        <a
           v-if="model.canBeRemovedByCurrentUser"
           class="edit-workout-action pointer text-info"
           v-bind:href="'Workout?crossfitterWorkoutId='+this.model.crossfitterWorkoutId"
@@ -81,9 +90,9 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
 import { faGrinBeam } from "@fortawesome/free-regular-svg-icons/faGrinBeam";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt";
-
+import { faMedal } from "@fortawesome/free-solid-svg-icons/faMedal";
 import { library } from "@fortawesome/fontawesome-svg-core";
-library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit);
+library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit, faMedal);
 /**/
 
 import { Vue, Component, Prop } from "vue-property-decorator";
