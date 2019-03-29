@@ -56,8 +56,8 @@
     <div class="item-footer text-right pt-1">
       <div class="action-buttons">
         <a
-          class="edit-workout-action pointer text-secondary  float-left"
-          v-bind:href="'Workout?crossfitterWorkoutId='+this.model.crossfitterWorkoutId"
+          class="edit-workout-action pointer text-secondary float-left"
+          @click="showLeaderBoardModal"
         >
           <font-awesome-icon
             size="lg"
@@ -112,6 +112,9 @@ export default class PersonsActivitesItemComponent extends Vue {
 
   deleteWorkout(): void {
     this.$emit("deleteWorkout", this.model.crossfitterWorkoutId);
+  }
+  showLeaderBoardModal() {
+    debugger;
   }
 }
 </script>
