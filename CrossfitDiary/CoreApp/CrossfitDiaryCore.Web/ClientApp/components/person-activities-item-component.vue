@@ -8,7 +8,9 @@
       ref="leaderboardModal"
       title="Leaderboard"
     >
-      <h2>Leaders</h2>
+      <div class="workouts-results">
+        <b-table :items="items"></b-table>
+      </div>
       <div slot="modal-footer">
         <b-button
           data-dismiss="modal"
@@ -111,6 +113,7 @@ library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit, faMedal);
 import { Vue, Component, Prop } from "vue-property-decorator";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import bButton from "bootstrap-vue/es/components/button/button";
+import BTable from "bootstrap-vue/es/components/table/table";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* app components */
@@ -122,11 +125,21 @@ import WorkoutDisplayComponent from "./workout-display-component.vue";
     FontAwesomeIcon,
     WorkoutDisplayComponent,
     bModal,
-    bButton
+    bButton,
+    BTable
   }
 })
 export default class PersonsActivitesItemComponent extends Vue {
   @Prop() model: ToLogWorkoutViewModel;
+
+  items = [
+    { Level: "Rx", name: "Cyndi", Result: "Cap + 27" },
+    { Level: "Rx+", name: "Havij", Result: "15:00" },
+    { Level: "Scaled", name: "Civik", Result: "09:39" },
+    { Level: "Rx", name: "Havij", Result: "Cap + 1" },
+    { Level: "Scaled", name: "Honda", Result: "05:00" },
+    { Level: "Rx+", name: "Ivar", Result: "09:58" }
+  ];
 
   $refs: {
     leaderboardModal: HTMLFormElement;
