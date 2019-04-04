@@ -4,20 +4,7 @@
     class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded"
     v-if="model"
   >
-    <b-modal
-      ref="leaderboardModal"
-      title="Leaderboard"
-    >
-      <div class="workouts-results">
-        <b-table :items="items"></b-table>
-      </div>
-      <div slot="modal-footer">
-        <b-button
-          data-dismiss="modal"
-          @click="()=>{this.$refs.leaderboardModal.hide();}"
-        >Close</b-button>
-      </div>
-    </b-modal>
+
     <div class="item-header d-flex flex-row justify-content-between  ">
       <div class="username">
         <span class="text-info">
@@ -111,9 +98,6 @@ library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit, faMedal);
 
 /* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import bModal from "bootstrap-vue/es/components/modal/modal";
-import bButton from "bootstrap-vue/es/components/button/button";
-import BTable from "bootstrap-vue/es/components/table/table";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* app components */
@@ -123,33 +107,17 @@ import WorkoutDisplayComponent from "./workout-display-component.vue";
 @Component({
   components: {
     FontAwesomeIcon,
-    WorkoutDisplayComponent,
-    bModal,
-    bButton,
-    BTable
+    WorkoutDisplayComponent
   }
 })
 export default class PersonsActivitesItemComponent extends Vue {
   @Prop() model: ToLogWorkoutViewModel;
-
-  items = [
-    { Level: "Rx", name: "Cyndi", Result: "Cap + 27" },
-    { Level: "Rx+", name: "Havij", Result: "15:00" },
-    { Level: "Scaled", name: "Civik", Result: "09:39" },
-    { Level: "Rx", name: "Havij", Result: "Cap + 1" },
-    { Level: "Scaled", name: "Honda", Result: "05:00" },
-    { Level: "Rx+", name: "Ivar", Result: "09:58" }
-  ];
-
-  $refs: {
-    leaderboardModal: HTMLFormElement;
-  };
-
   deleteWorkout(): void {
     this.$emit("deleteWorkout", this.model.crossfitterWorkoutId);
   }
+
   showLeaderBoardModal(workoutViewModelId: number) {
-    this.$refs.leaderboardModal.show();
+    this.$emit("showLeaderboard", workoutViewModelId);
   }
 }
 </script>
