@@ -6,7 +6,7 @@
         title="Leaderboard"
       >
         <div class="workouts-results text-center">
-          <b-table :items="items"></b-table>
+          <b-table :items="leaderboardItems"></b-table>
         </div>
         <div slot="modal-footer">
           <b-button
@@ -68,6 +68,7 @@ import PersonsActivitesItemComponent from "./person-activities-item-component.vu
 import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
 
 import CrossfitterService from "../CrossfitterService";
+import { LeaderboardItemViewModel } from "../models/viewModels/LeaderboardItemViewModel";
 
 @Component({
   components: {
@@ -86,14 +87,7 @@ export default class PersonsActivitesComponent extends Vue {
     leaderboardModal: HTMLFormElement;
   };
 
-  items = [
-    { Level: "Rx", name: "Cyndi", Result: "Cap + 27" },
-    { Level: "Rx+", name: "Havij", Result: "15:00" },
-    { Level: "Scaled", name: "Civik", Result: "09:39" },
-    { Level: "Rx", name: "Havij", Result: "Cap + 1" },
-    { Level: "Scaled", name: "Honda", Result: "05:00" },
-    { Level: "Rx+", name: "Ivar", Result: "09:58" }
-  ];
+  leaderboardItems: LeaderboardItemViewModel[];
 
   @Prop() activities: ToLogWorkoutViewModel[];
 
@@ -125,7 +119,10 @@ export default class PersonsActivitesComponent extends Vue {
   }
 
   showLeaderBoardModal(workoutViewModelId: number) {
-    this.$refs.leaderboardModal.show();
+    this._apiService.getLeaderboardByWorkout(workoutViewModelId).then(data => {
+      this.leaderboardItems = data;
+      this.$refs.leaderboardModal.show();
+    });
   }
 }
 </script>

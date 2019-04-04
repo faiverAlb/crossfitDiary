@@ -3,6 +3,7 @@ import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel
 import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
+import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
 
 export default class CrossfitterService {
   // tslint:disable-next-line:max-line-length
@@ -49,5 +50,11 @@ export default class CrossfitterService {
 
   public setShowOnlyUserWods = (showOnlyUserWods: boolean) => {
     return axios.post(`api/setShowOnlyUserWods?showOnlyUserWods=${showOnlyUserWods}`);
+  };
+
+  public getLeaderboardByWorkout = (workoutId): Promise<LeaderboardItemViewModel[]> => {
+    return axios.get<LeaderboardItemViewModel[]>("api/getLeaderboardByWorkout?workoutId=" + workoutId).then(jsonData => {
+      return jsonData.data.map(x => new LeaderboardItemViewModel().deserialize(x));
+    });
   };
 }
