@@ -133,9 +133,10 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts to do</returns>
         [HttpGet]
         [Route("api/getLeaderboardByWorkout")]
-        public List<LeaderboardItemViewModel> GetLeaderboardByWorkout(int workoutId)
+        public List<LeaderboardItemViewModel> GetLeaderboardByWorkout(int crossfitterWorkoutId)
         {
-            return new List<LeaderboardItemViewModel>();
+            List<LeaderboardItemModel> leaderboardItemModels = _readWorkoutsService.GetLeaderboardByWorkout(crossfitterWorkoutId);
+            return _mapper.Map<List<LeaderboardItemViewModel>>(leaderboardItemModels);
         }
 
 

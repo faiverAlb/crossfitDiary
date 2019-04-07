@@ -274,5 +274,10 @@ namespace CrossfitDiaryCore.BL.Services
         {
             return _dapperRepository.GetPersonMaxumums(userId).ToList();
         }
+
+        public List<LeaderboardItemModel> GetLeaderboardByWorkout(int crossfitterWorkoutId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -44,8 +44,9 @@ var CrossfitterService = /** @class */ (function () {
         this.setShowOnlyUserWods = function (showOnlyUserWods) {
             return axios.post("api/setShowOnlyUserWods?showOnlyUserWods=" + showOnlyUserWods);
         };
-        this.getLeaderboardByWorkout = function (workoutId) {
-            return axios.get("api/getLeaderboardByWorkout?workoutId=" + workoutId).then(function (jsonData) {
+        this.getLeaderboardByWorkout = function (crossfitterWorkoutId) {
+            // tslint:disable-next-line:max-line-length
+            return axios.get("api/getLeaderboardByWorkout?crossfitterWorkoutId=" + crossfitterWorkoutId).then(function (jsonData) {
                 return jsonData.data.map(function (x) { return new LeaderboardItemViewModel().deserialize(x); });
             });
         };

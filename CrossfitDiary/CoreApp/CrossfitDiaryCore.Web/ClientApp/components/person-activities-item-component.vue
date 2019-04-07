@@ -58,7 +58,7 @@
       <div class="action-buttons">
         <a
           class="edit-workout-action pointer text-secondary float-left"
-          @click="showLeaderBoardModal(model.workoutViewModel.id)"
+          @click="showLeaderBoardModal(model.crossfitterWorkoutId)"
         >
           <font-awesome-icon
             size="lg"
@@ -116,8 +116,8 @@ export default class PersonsActivitesItemComponent extends Vue {
     this.$emit("deleteWorkout", this.model.crossfitterWorkoutId);
   }
 
-  showLeaderBoardModal(workoutViewModelId: number) {
-    this.$emit("showLeaderboard", workoutViewModelId);
+  showLeaderBoardModal(crossfitterWorkoutId: number) {
+    this.$emit("showLeaderboard", crossfitterWorkoutId);
   }
 }
 </script>

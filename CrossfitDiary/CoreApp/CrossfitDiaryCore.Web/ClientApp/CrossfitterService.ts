@@ -52,8 +52,9 @@ export default class CrossfitterService {
     return axios.post(`api/setShowOnlyUserWods?showOnlyUserWods=${showOnlyUserWods}`);
   };
 
-  public getLeaderboardByWorkout = (workoutId): Promise<LeaderboardItemViewModel[]> => {
-    return axios.get<LeaderboardItemViewModel[]>("api/getLeaderboardByWorkout?workoutId=" + workoutId).then(jsonData => {
+  public getLeaderboardByWorkout = (crossfitterWorkoutId): Promise<LeaderboardItemViewModel[]> => {
+    // tslint:disable-next-line:max-line-length
+    return axios.get<LeaderboardItemViewModel[]>("api/getLeaderboardByWorkout?crossfitterWorkoutId=" + crossfitterWorkoutId).then(jsonData => {
       return jsonData.data.map(x => new LeaderboardItemViewModel().deserialize(x));
     });
   };

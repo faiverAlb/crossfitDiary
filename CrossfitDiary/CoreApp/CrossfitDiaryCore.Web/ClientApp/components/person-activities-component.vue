@@ -118,11 +118,13 @@ export default class PersonsActivitesComponent extends Vue {
     this.$refs.myModalRef.hide();
   }
 
-  showLeaderBoardModal(workoutViewModelId: number) {
-    this._apiService.getLeaderboardByWorkout(workoutViewModelId).then(data => {
-      this.leaderboardItems = data;
-      this.$refs.leaderboardModal.show();
-    });
+  showLeaderBoardModal(crossfitterWorkoutId: number) {
+    this._apiService
+      .getLeaderboardByWorkout(crossfitterWorkoutId)
+      .then(data => {
+        this.leaderboardItems = data;
+        this.$refs.leaderboardModal.show();
+      });
   }
 }
 </script>
