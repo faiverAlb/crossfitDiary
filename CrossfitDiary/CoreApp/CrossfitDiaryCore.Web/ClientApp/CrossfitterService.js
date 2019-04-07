@@ -3,6 +3,7 @@ import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel
 import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
+import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
 var CrossfitterService = /** @class */ (function () {
     function CrossfitterService() {
         // tslint:disable-next-line:max-line-length
@@ -42,6 +43,11 @@ var CrossfitterService = /** @class */ (function () {
         };
         this.setShowOnlyUserWods = function (showOnlyUserWods) {
             return axios.post("api/setShowOnlyUserWods?showOnlyUserWods=" + showOnlyUserWods);
+        };
+        this.getLeaderboardByWorkout = function (workoutId) {
+            return axios.get("api/getLeaderboardByWorkout?workoutId=" + workoutId).then(function (jsonData) {
+                return jsonData.data.map(function (x) { return new LeaderboardItemViewModel().deserialize(x); });
+            });
         };
     }
     return CrossfitterService;

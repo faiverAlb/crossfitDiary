@@ -87,7 +87,7 @@ export default class PersonsActivitesComponent extends Vue {
     leaderboardModal: HTMLFormElement;
   };
 
-  leaderboardItems: LeaderboardItemViewModel[];
+  leaderboardItems: LeaderboardItemViewModel[] = [];
 
   @Prop() activities: ToLogWorkoutViewModel[];
 
