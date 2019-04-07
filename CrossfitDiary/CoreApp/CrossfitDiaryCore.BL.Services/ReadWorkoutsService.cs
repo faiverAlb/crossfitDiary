@@ -279,9 +279,61 @@ namespace CrossfitDiaryCore.BL.Services
         {
             DateTime date = _context.CrossfitterWorkouts.Single(x => x.Id == crossfitterWorkoutId).Date;
             List<RoutineComplex> getWorkoutsOnDate = GetPlannedWorkouts(date);
-            List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts.Where(x => getWorkoutsOnDate.SingleOrDefault(y => y.Id == x.RoutineComplexId) != null).ToList();
-            
-            return new List<LeaderboardItemModel>();
+            List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts.Where(x => getWorkoutsOnDate.SingleOrDefault(y => y.Id == x.RoutineComplexId) != null).Include(x => x.Crossfitter).ToList();
+            var leaderboardResults = new List<LeaderboardItemModel>();
+            foreach (RoutineComplex plannedWorkout in getWorkoutsOnDate)
+            {
+                IEnumerable<CrossfitterWorkout> resultsByWorkout = crossfitterWorkouts.Where(x => x.RoutineComplexId == plannedWorkout.Id);
+                foreach (CrossfitterWorkout crossfitterWorkout in resultsByWorkout)
+                {
+                    leaderboardResults.Add(GetLeaderboardItemModel(plannedWorkout, crossfitterWorkout));
+                }
+            }
+
+            return leaderboardResults;
+        }
+
+        private static LeaderboardItemModel GetLeaderboardItemModel(RoutineComplex plannedWorkout, CrossfitterWorkout crossfitterWorkout)
+        {
+            string result = string.Empty;
+            switch (plannedWorkout.ComplexType)
+            {
+                case RoutineComplexType.ForTime:
+                case RoutineComplexType.ForTimeManyInners:
+                    if (crossfitterWorkout.RepsToFinishOnCapTime.HasValue)
+                    {
+                        result = $"cap + {crossfitterWorkout.RepsToFinishOnCapTime.Value}";
+                    }
+                    else
+                    {
+                        TimeSpan totalTime = crossfitterWorkout.TimePassed.Value;
+                        if (totalTime.TotalHours >= 1)
+                        {
+                            result =  totalTime.ToString();
+                        }
+                        else
+                        {
+                            result = $"{totalTime.Minutes:00}:{totalTime.Seconds:00}";
+                        }
+                    }
+                    break;
+                case RoutineComplexType.AMRAP:
+                    result = crossfitterWorkout.RoundsFinished.HasValue? $"{crossfitterWorkout.RoundsFinished.Value}": "0";
+                    if (crossfitterWorkout.PartialRepsFinished.HasValue)
+                    {
+                        result += $" + {crossfitterWorkout.PartialRepsFinished}";
+                    }
+                    break;
+                case RoutineComplexType.EMOM:
+                    break;
+                case RoutineComplexType.E2MOM:
+                    break;
+                case RoutineComplexType.NotForTime:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            return new LeaderboardItemModel(plannedWorkout.PlanningLevel.ToString(),crossfitterWorkout.Crossfitter.UserName, result);
         }
     }
 }

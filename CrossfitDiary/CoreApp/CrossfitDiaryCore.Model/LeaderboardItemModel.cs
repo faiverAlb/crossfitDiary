@@ -2,11 +2,17 @@
 {
     public class LeaderboardItemModel
     {
-        public string Level;
+        public readonly string Level;
 
-        public string UserName;
+        public readonly string UserName;
 
-        public string Result;
+        public readonly string Result;
 
+        public LeaderboardItemModel(string level, string userName, string result)
+        {
+            Level = level;
+            UserName = userName;
+            Result = result;
+        }
     }
 }
