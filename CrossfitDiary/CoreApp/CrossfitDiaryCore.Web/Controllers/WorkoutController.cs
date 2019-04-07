@@ -128,6 +128,18 @@ namespace CrossfitDiaryCore.Web.Controllers
         }
 
         /// <summary>
+        ///     Get planned workouts
+        /// </summary>
+        /// <returns>All available workouts to do</returns>
+        [HttpGet]
+        [Route("api/getLeaderboardByWorkout")]
+        public List<LeaderboardItemViewModel> GetLeaderboardByWorkout(int workoutId)
+        {
+            return new List<LeaderboardItemViewModel>();
+        }
+
+
+        /// <summary>
         /// Remove workout.
         /// </summary>
         /// <param name="crossfitterWorkoutId">
