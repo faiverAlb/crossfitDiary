@@ -277,7 +277,11 @@ namespace CrossfitDiaryCore.BL.Services
 
         public List<LeaderboardItemModel> GetLeaderboardByWorkout(int crossfitterWorkoutId)
         {
-            throw new NotImplementedException();
+            DateTime date = _context.CrossfitterWorkouts.Single(x => x.Id == crossfitterWorkoutId).Date;
+            List<RoutineComplex> getWorkoutsOnDate = GetPlannedWorkouts(date);
+            List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts.Where(x => getWorkoutsOnDate.SingleOrDefault(y => y.Id == x.RoutineComplexId) != null).ToList();
+            
+            return new List<LeaderboardItemModel>();
         }
     }
 }
