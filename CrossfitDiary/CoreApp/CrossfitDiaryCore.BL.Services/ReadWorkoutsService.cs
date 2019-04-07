@@ -277,11 +277,23 @@ namespace CrossfitDiaryCore.BL.Services
 
         public List<LeaderboardItemModel> GetLeaderboardByWorkout(int crossfitterWorkoutId)
         {
-            DateTime date = _context.CrossfitterWorkouts.Single(x => x.Id == crossfitterWorkoutId).Date;
-            List<RoutineComplex> getWorkoutsOnDate = GetPlannedWorkouts(date);
-            List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts.Where(x => getWorkoutsOnDate.SingleOrDefault(y => y.Id == x.RoutineComplexId) != null).Include(x => x.Crossfitter).ToList();
+            CrossfitterWorkout baseWorkout = _context.CrossfitterWorkouts
+                                                     .Include(x => x.RoutineComplex)
+                                                     .Include(x => x.Crossfitter)
+                                                     .Single(x => x.Id == crossfitterWorkoutId);
+            List<RoutineComplex> workouts = GetPlannedWorkouts(baseWorkout.Date);
+            if (workouts.SingleOrDefault(x => x.Id == crossfitterWorkoutId) == null)
+            {
+                workouts = new List<RoutineComplex>() {baseWorkout.RoutineComplex};
+            }
+
+            List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts
+                                                                    .Where(x => workouts.SingleOrDefault(y => y.Id == x.RoutineComplexId) != null)
+                                                                    .Include(x => x.Crossfitter)
+                                                                    .ToList();
+
             var leaderboardResults = new List<LeaderboardItemModel>();
-            foreach (RoutineComplex plannedWorkout in getWorkoutsOnDate)
+            foreach (RoutineComplex plannedWorkout in workouts)
             {
                 IEnumerable<CrossfitterWorkout> resultsByWorkout = crossfitterWorkouts.Where(x => x.RoutineComplexId == plannedWorkout.Id);
                 foreach (CrossfitterWorkout crossfitterWorkout in resultsByWorkout)
@@ -293,7 +305,8 @@ namespace CrossfitDiaryCore.BL.Services
             return leaderboardResults;
         }
 
-        private static LeaderboardItemModel GetLeaderboardItemModel(RoutineComplex plannedWorkout, CrossfitterWorkout crossfitterWorkout)
+
+        private LeaderboardItemModel GetLeaderboardItemModel(RoutineComplex plannedWorkout, CrossfitterWorkout crossfitterWorkout)
         {
             string result = string.Empty;
             switch (plannedWorkout.ComplexType)
