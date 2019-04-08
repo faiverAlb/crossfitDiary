@@ -132,7 +132,7 @@ namespace CrossfitDiaryCore.BL.Services
         /// <summary>
         ///     Returns all crossfitters workouts.
         /// </summary>
-        public List<CrossfitterWorkout> GetAllCrossfittersWorkoutsAsync(string userId, int page, int pageSize)
+        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int page, int pageSize)
         {
             List<int> ids = new List<int>();
             var showOnlyUserWods = _context.Users.Single(x => x.Id == userId).ShowOnlyUserWods;
@@ -346,7 +346,7 @@ namespace CrossfitDiaryCore.BL.Services
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            return new LeaderboardItemModel(plannedWorkout.PlanningLevel.ToString(),crossfitterWorkout.Crossfitter.UserName, result);
+            return new LeaderboardItemModel(plannedWorkout.PlanningLevel.ToString(),crossfitterWorkout.Crossfitter.FullName, result);
         }
     }
 }

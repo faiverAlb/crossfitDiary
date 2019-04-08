@@ -18,6 +18,8 @@ interface IWorkoutViewModel {
   planningWorkoutLevel: PlanningWorkoutLevel;
   isInnerWorkout: boolean;
   comment?: string;
+  resultsCount: number;
+  canSeeLeaderboard: boolean;
 }
 export enum PlanningWorkoutLevel {
   Scaled = 0,
@@ -40,6 +42,8 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
   planningWorkoutLevel: PlanningWorkoutLevel;
   displayPlanDate?: string; // default value for new model;
   comment?: string;
+  resultsCount: number;
+  canSeeLeaderboard: boolean;
 
   getDefaultDate = (): string => {
     let date = new Date();
@@ -82,6 +86,8 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
     this.planningWorkoutLevel = params.planningWorkoutLevel;
     this.displayPlanDate = params.displayPlanDate;
     this.comment = params.comment;
+    this.resultsCount = params.resultsCount;
+    this.canSeeLeaderboard = params.canSeeLeaderboard;
   }
 
   public deserialize(jsonInput: any): WorkoutViewModel {
@@ -103,7 +109,9 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
       isInnerWorkout: false,
       planningWorkoutLevel: jsonInput.planningWorkoutLevel,
       displayPlanDate: jsonInput.displayPlanDate,
-      comment: jsonInput.comment
+      comment: jsonInput.comment,
+      resultsCount: jsonInput.resultsCount,
+      canSeeLeaderboard: jsonInput.canSeeLeaderboard
     });
   }
 }

@@ -59,11 +59,12 @@
         <a
           class="edit-workout-action pointer text-secondary float-left"
           @click="showLeaderBoardModal(model.crossfitterWorkoutId)"
+          v-if="model.workoutViewModel.canSeeLeaderboard"
         >
           <font-awesome-icon
             size="lg"
             :icon="['fas','medal']"
-          ></font-awesome-icon> Leaderboard (####)
+          ></font-awesome-icon> Leaderboard ({{model.workoutViewModel.resultsCount}})
         </a>
         <a
           v-if="model.canBeRemovedByCurrentUser"

@@ -92,7 +92,7 @@ namespace CrossfitDiaryCore.Web.Controllers
              {
                  string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                  
-                 List<CrossfitterWorkout> crossfitterWorkouts = _readWorkoutsService.GetAllCrossfittersWorkoutsAsync(userId, page, pageSize);
+                 List<CrossfitterWorkout> crossfitterWorkouts = _readWorkoutsService.GetAllCrossfittersWorkouts(userId, page, pageSize);
                  List<ToLogWorkoutViewModel> allResults = crossfitterWorkouts
                      .Select(_mapper.Map<ToLogWorkoutViewModel>)
                      .ToList();
