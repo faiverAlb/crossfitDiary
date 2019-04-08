@@ -48,10 +48,12 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string sql = @"SELECT [x].*, [x.Crossfitter].*, [x.RoutineComplex].*
+                string sql = @"SELECT [x].*, [x.Crossfitter].*, [x.RoutineComplex].*, wodGrp.resultsCount
                     FROM [CrossfitterWorkout] AS [x]
                     INNER JOIN [AspNetUsers] AS [x.Crossfitter] ON [x].[CrossfitterId] = [x.Crossfitter].[Id]
                     INNER JOIN [RoutineComplex] AS [x.RoutineComplex] ON [x].[RoutineComplexId] = [x.RoutineComplex].[Id]
+					INNER JOIN 
+					(SELECT RoutineComplexId, COUNT(*) as resultsCount FROM CrossfitterWorkout GROUP BY RoutineComplexId) wodGrp ON [x].RoutineComplexId = wodGrp.RoutineComplexId
                     WHERE [x].[Id] IN @ids; 
 
                     SELECT [x.RoutineComplex.RoutineSimple].*, [r.Exercise].*
@@ -119,10 +121,12 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string sql = @"SELECT [x].*, [x.Crossfitter].*, [x.RoutineComplex].*
+                string sql = @"SELECT [x].*, [x.Crossfitter].*, [x.RoutineComplex].*, wodGrp.resultsCount
                     FROM [CrossfitterWorkout] AS [x]
                     INNER JOIN [AspNetUsers] AS [x.Crossfitter] ON [x].[CrossfitterId] = [x.Crossfitter].[Id]
                     INNER JOIN [RoutineComplex] AS [x.RoutineComplex] ON [x].[RoutineComplexId] = [x.RoutineComplex].[Id]
+                    INNER JOIN 
+					(SELECT RoutineComplexId, COUNT(*) as resultsCount FROM CrossfitterWorkout GROUP BY RoutineComplexId) wodGrp ON [x].RoutineComplexId = wodGrp.RoutineComplexId
                     WHERE [x].[CrossfitterId] = @userId; 
 
                     SELECT [x.RoutineComplex.RoutineSimple].*, [r.Exercise].*

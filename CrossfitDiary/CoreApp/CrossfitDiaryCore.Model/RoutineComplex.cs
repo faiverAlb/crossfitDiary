@@ -112,5 +112,9 @@ namespace CrossfitDiaryCore.Model
         ///     General comment regarding workout
         /// </summary>
         public string Comment { get; set; }
+
+
+        [NotMapped]
+        public int ResultsCount { get; set; }
     }
 }

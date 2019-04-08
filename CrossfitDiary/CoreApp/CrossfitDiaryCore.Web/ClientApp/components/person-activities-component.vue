@@ -2,6 +2,20 @@
   <div>
     <div>
       <b-modal
+        ref="leaderboardModal"
+        title="Leaderboard"
+      >
+        <div class="workouts-results text-center">
+          <b-table :items="leaderboardItems"></b-table>
+        </div>
+        <div slot="modal-footer">
+          <b-button
+            data-dismiss="modal"
+            @click="()=>{this.$refs.leaderboardModal.hide();}"
+          >Close</b-button>
+        </div>
+      </b-modal>
+      <b-modal
         ref="myModalRef"
         title="Sure to remove workout?"
       >
@@ -31,6 +45,7 @@
         <PersonsActivitesItemComponent
           :model="item"
           @deleteWorkout="deleteWorkoutClick"
+          @showLeaderboard="showLeaderBoardModal"
         ></PersonsActivitesItemComponent>
       </div>
     </div>
@@ -44,6 +59,8 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
 import BFormCheckbox from "bootstrap-vue/es/components/form-checkbox/form-checkbox";
+import bButton from "bootstrap-vue/es/components/button/button";
+import BTable from "bootstrap-vue/es/components/table/table";
 
 /* app components */
 import PersonsActivitesItemComponent from "./person-activities-item-component.vue";
@@ -51,20 +68,27 @@ import PersonsActivitesItemComponent from "./person-activities-item-component.vu
 import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
 
 import CrossfitterService from "../CrossfitterService";
+import { LeaderboardItemViewModel } from "../models/viewModels/LeaderboardItemViewModel";
 
 @Component({
   components: {
     PersonsActivitesItemComponent,
     bModal,
     BFormCheckbox,
-    Spinner
+    bButton,
+    Spinner,
+    BTable
   }
 })
 export default class PersonsActivitesComponent extends Vue {
   _apiService: CrossfitterService = new CrossfitterService();
   $refs: {
     myModalRef: HTMLFormElement;
+    leaderboardModal: HTMLFormElement;
   };
+
+  leaderboardItems: LeaderboardItemViewModel[] = [];
+
   @Prop() activities: ToLogWorkoutViewModel[];
 
   _toDeleteCrossfitWorkoutId: number = -1;
@@ -92,6 +116,15 @@ export default class PersonsActivitesComponent extends Vue {
 
   hideModal(): void {
     this.$refs.myModalRef.hide();
+  }
+
+  showLeaderBoardModal(crossfitterWorkoutId: number) {
+    this._apiService
+      .getLeaderboardByWorkout(crossfitterWorkoutId)
+      .then(data => {
+        this.leaderboardItems = data;
+        this.$refs.leaderboardModal.show();
+      });
   }
 }
 </script>
