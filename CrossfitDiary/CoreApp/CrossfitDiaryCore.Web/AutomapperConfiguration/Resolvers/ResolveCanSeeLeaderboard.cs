@@ -9,7 +9,17 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration.Resolvers
     {
         public bool Resolve(RoutineComplex source, WorkoutViewModel destination, bool destMember, ResolutionContext context)
         {
-            return false;
+            if (source.ComplexType ==  RoutineComplexType.E2MOM || source.ComplexType == RoutineComplexType.EMOM || source.ComplexType == RoutineComplexType.NotForTime)
+            {
+                return false;
+            }
+
+            if (source.ResultsCount < 2)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
