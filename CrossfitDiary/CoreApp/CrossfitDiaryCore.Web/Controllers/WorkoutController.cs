@@ -92,7 +92,7 @@ namespace CrossfitDiaryCore.Web.Controllers
              {
                  string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                  
-                 List<CrossfitterWorkout> crossfitterWorkouts = _readWorkoutsService.GetAllCrossfittersWorkoutsAsync(userId, page, pageSize);
+                 List<CrossfitterWorkout> crossfitterWorkouts = _readWorkoutsService.GetAllCrossfittersWorkouts(userId, page, pageSize);
                  List<ToLogWorkoutViewModel> allResults = crossfitterWorkouts
                      .Select(_mapper.Map<ToLogWorkoutViewModel>)
                      .ToList();
@@ -126,6 +126,19 @@ namespace CrossfitDiaryCore.Web.Controllers
 
 //            return workoutViewModels;
         }
+
+        /// <summary>
+        ///     Get planned workouts
+        /// </summary>
+        /// <returns>All available workouts to do</returns>
+        [HttpGet]
+        [Route("api/getLeaderboardByWorkout")]
+        public List<LeaderboardItemViewModel> GetLeaderboardByWorkout(int crossfitterWorkoutId)
+        {
+            List<LeaderboardItemModel> leaderboardItemModels = _readWorkoutsService.GetLeaderboardByWorkout(crossfitterWorkoutId);
+            return _mapper.Map<List<LeaderboardItemViewModel>>(leaderboardItemModels);
+        }
+
 
         /// <summary>
         /// Remove workout.

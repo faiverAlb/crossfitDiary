@@ -4,6 +4,7 @@
     class="done-item offset-lg-3 col col-lg-5 my-2 px-3 py-2 rounded"
     v-if="model"
   >
+
     <div class="item-header d-flex flex-row justify-content-between  ">
       <div class="username">
         <span class="text-info">
@@ -56,6 +57,16 @@
     <div class="item-footer text-right pt-1">
       <div class="action-buttons">
         <a
+          class="edit-workout-action pointer text-secondary float-left"
+          @click="showLeaderBoardModal(model.crossfitterWorkoutId)"
+          v-if="model.workoutViewModel.canSeeLeaderboard"
+        >
+          <font-awesome-icon
+            size="lg"
+            :icon="['fas','medal']"
+          ></font-awesome-icon> Leaderboard ({{model.workoutViewModel.resultsCount}})
+        </a>
+        <a
           v-if="model.canBeRemovedByCurrentUser"
           class="edit-workout-action pointer text-info"
           v-bind:href="'Workout?crossfitterWorkoutId='+this.model.crossfitterWorkoutId"
@@ -81,16 +92,18 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
 import { faGrinBeam } from "@fortawesome/free-regular-svg-icons/faGrinBeam";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons/faTrashAlt";
-
+import { faMedal } from "@fortawesome/free-solid-svg-icons/faMedal";
 import { library } from "@fortawesome/fontawesome-svg-core";
-library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit);
+library.add(faGrinBeam, faClock, faPlus, faTrashAlt, faEdit, faMedal);
 /**/
 
+/* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
-
-import WorkoutDisplayComponent from "./workout-display-component.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+/* app components */
+import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewModel";
+import WorkoutDisplayComponent from "./workout-display-component.vue";
 
 @Component({
   components: {
@@ -100,9 +113,12 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 })
 export default class PersonsActivitesItemComponent extends Vue {
   @Prop() model: ToLogWorkoutViewModel;
-
   deleteWorkout(): void {
     this.$emit("deleteWorkout", this.model.crossfitterWorkoutId);
+  }
+
+  showLeaderBoardModal(crossfitterWorkoutId: number) {
+    this.$emit("showLeaderboard", crossfitterWorkoutId);
   }
 }
 </script>

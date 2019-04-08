@@ -80,5 +80,10 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("comment")]
         public string Comment { get; set; }
 
+        [JsonProperty("resultsCount")]
+        public int ResultsCount { get; set; }
+
+        [JsonProperty("canSeeLeaderboard")]
+        public bool CanSeeLeaderboard { get; set; }
     }
 }

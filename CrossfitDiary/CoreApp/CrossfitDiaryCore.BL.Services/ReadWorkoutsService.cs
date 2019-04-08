@@ -55,84 +55,10 @@ namespace CrossfitDiaryCore.BL.Services
         }
 
 
-
-        /// <summary>
-        /// The get person maximum for exercise.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="exerciseId">
-        ///     The exercise id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="PersonMaximum"/>.
-        /// </returns>
-        private PersonMaximum GetPersonMaximumForExercise(string userId, int exerciseId)
-        {
-
-            List<CrossfitterWorkout> workoutsWithExericesOnly = _context.CrossfitterWorkouts.Where(x => x.Crossfitter.Id == userId
-                                      && (x.RoutineComplex.RoutineSimple.Any(y => y.ExerciseId == exerciseId)
-                                      || x.RoutineComplex.Children.Any(child => child.RoutineSimple.Any(chZ => chZ.ExerciseId == exerciseId)))
-                                      && x.RepsToFinishOnCapTime.HasValue == false).Include(x => x.RoutineComplex).ThenInclude(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures)
-
-                        .ToList();
-
-            
-            string exerciseAbbreviation = _context.Exercises.Single(x => x.Id == exerciseId).Abbreviation;
-
-            var routineDictionary = new Dictionary<int, List<RoutineSimple>>();
-            foreach (CrossfitterWorkout workout in workoutsWithExericesOnly)
-            {
-                if (routineDictionary.ContainsKey(workout.Id))
-                {
-                    routineDictionary[workout.Id].AddRange(workout.RoutineComplex.RoutineSimple);
-                }
-                else
-                {
-                    routineDictionary[workout.Id] = new List<RoutineSimple>((workout.RoutineComplex.RoutineSimple));
-                }
-                routineDictionary[workout.Id].AddRange(workout.RoutineComplex.Children.SelectMany(x => x.RoutineSimple));
-
-            }
-
-            PersonMaximum maximum = (from crossfitterWorkout in workoutsWithExericesOnly
-                select new PersonMaximum
-                {
-                    Date = crossfitterWorkout.Date,
-                    PersonName = crossfitterWorkout.Crossfitter.FullName,
-                    PersonId = crossfitterWorkout.Crossfitter.Id,
-                    WorkoutTitle = crossfitterWorkout.RoutineComplex.Title,
-                    CrossfitWorkoutId = crossfitterWorkout.Id,
-                    ExerciseDisplayName = exerciseAbbreviation,
-                    ExerciseId = exerciseId,
-                    MaximumWeight = (
-                        from exercise in routineDictionary.Where(x => x.Key == crossfitterWorkout.Id).SelectMany(x => x.Value)
-                        where exercise.ExerciseId == exerciseId
-                        select exercise.Weight
-                    ).Max()
-                }).OrderByDescending(x => x.MaximumWeight).ThenBy(x => x.Date).FirstOrDefault();
-
-            if (maximum?.MaximumWeight != null)
-            {
-                PersonMaximum secondMaximum = (from crossfitterWorkout in workoutsWithExericesOnly
-                    select new PersonMaximum
-                    {
-                        MaximumWeight = (
-                            from exercise in routineDictionary.Where(x => x.Key == crossfitterWorkout.Id).SelectMany(x => x.Value)
-                            where exercise.ExerciseId == exerciseId && exercise.Weight != maximum.MaximumWeight
-                            select exercise.Weight
-                        ).Max()
-                    }).OrderByDescending(x => x.MaximumWeight).ThenBy(x => x.Date).FirstOrDefault();
-
-                maximum.PreviousMaximumWeight = secondMaximum?.MaximumWeight;
-            }
-            return maximum;
-
-        }
- 
         /// <summary>
         ///     Returns all crossfitters workouts.
         /// </summary>
-        public List<CrossfitterWorkout> GetAllCrossfittersWorkoutsAsync(string userId, int page, int pageSize)
+        public List<CrossfitterWorkout> GetAllCrossfittersWorkouts(string userId, int page, int pageSize)
         {
             List<int> ids = new List<int>();
             var showOnlyUserWods = _context.Users.Single(x => x.Id == userId).ShowOnlyUserWods;
@@ -273,6 +199,80 @@ namespace CrossfitDiaryCore.BL.Services
         public List<TempPersonMaximum> GetPersonMaxumums(string userId)
         {
             return _dapperRepository.GetPersonMaxumums(userId).ToList();
+        }
+
+        public List<LeaderboardItemModel> GetLeaderboardByWorkout(int crossfitterWorkoutId)
+        {
+            CrossfitterWorkout baseWorkout = _context.CrossfitterWorkouts
+                                                     .Include(x => x.RoutineComplex)
+                                                     .Include(x => x.Crossfitter)
+                                                     .Single(x => x.Id == crossfitterWorkoutId);
+            List<RoutineComplex> workouts = GetPlannedWorkouts(baseWorkout.Date);
+            if (workouts.SingleOrDefault(x => x.Id == crossfitterWorkoutId) == null)
+            {
+                workouts = new List<RoutineComplex>() {baseWorkout.RoutineComplex};
+            }
+
+            List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts
+                                                                    .Where(x => workouts.SingleOrDefault(y => y.Id == x.RoutineComplexId) != null)
+                                                                    .Include(x => x.Crossfitter)
+                                                                    .ToList();
+
+            var leaderboardResults = new List<LeaderboardItemModel>();
+            foreach (RoutineComplex plannedWorkout in workouts)
+            {
+                IEnumerable<CrossfitterWorkout> resultsByWorkout = crossfitterWorkouts.Where(x => x.RoutineComplexId == plannedWorkout.Id);
+                foreach (CrossfitterWorkout crossfitterWorkout in resultsByWorkout)
+                {
+                    leaderboardResults.Add(GetLeaderboardItemModel(plannedWorkout, crossfitterWorkout));
+                }
+            }
+
+            return leaderboardResults;
+        }
+
+
+        private LeaderboardItemModel GetLeaderboardItemModel(RoutineComplex plannedWorkout, CrossfitterWorkout crossfitterWorkout)
+        {
+            string result = string.Empty;
+            switch (plannedWorkout.ComplexType)
+            {
+                case RoutineComplexType.ForTime:
+                case RoutineComplexType.ForTimeManyInners:
+                    if (crossfitterWorkout.RepsToFinishOnCapTime.HasValue)
+                    {
+                        result = $"cap + {crossfitterWorkout.RepsToFinishOnCapTime.Value}";
+                    }
+                    else
+                    {
+                        TimeSpan totalTime = crossfitterWorkout.TimePassed.Value;
+                        if (totalTime.TotalHours >= 1)
+                        {
+                            result =  totalTime.ToString();
+                        }
+                        else
+                        {
+                            result = $"{totalTime.Minutes:00}:{totalTime.Seconds:00}";
+                        }
+                    }
+                    break;
+                case RoutineComplexType.AMRAP:
+                    result = crossfitterWorkout.RoundsFinished.HasValue? $"{crossfitterWorkout.RoundsFinished.Value}": "0";
+                    if (crossfitterWorkout.PartialRepsFinished.HasValue)
+                    {
+                        result += $" + {crossfitterWorkout.PartialRepsFinished}";
+                    }
+                    break;
+                case RoutineComplexType.EMOM:
+                    break;
+                case RoutineComplexType.E2MOM:
+                    break;
+                case RoutineComplexType.NotForTime:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            return new LeaderboardItemModel(plannedWorkout.PlanningLevel.ToString(),crossfitterWorkout.Crossfitter.FullName, result);
         }
     }
 }
