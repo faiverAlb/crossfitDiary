@@ -208,7 +208,7 @@ namespace CrossfitDiaryCore.BL.Services
                                                      .Include(x => x.Crossfitter)
                                                      .Single(x => x.Id == crossfitterWorkoutId);
             List<RoutineComplex> workouts = GetPlannedWorkouts(baseWorkout.Date);
-            if (workouts.SingleOrDefault(x => x.Id == crossfitterWorkoutId) == null)
+            if (workouts.SingleOrDefault(x => x.Id == baseWorkout.RoutineComplexId) == null)
             {
                 workouts = new List<RoutineComplex>() {baseWorkout.RoutineComplex};
             }
