@@ -64,7 +64,7 @@
           <font-awesome-icon
             size="lg"
             :icon="['fas','medal']"
-          ></font-awesome-icon> Leaderboard ({{model.workoutViewModel.resultsCount}})
+          ></font-awesome-icon> Leaderboard
         </a>
         <a
           v-if="model.canBeRemovedByCurrentUser"
