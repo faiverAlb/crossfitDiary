@@ -54,6 +54,7 @@ import { WorkoutViewModel } from "../models/viewModels/WorkoutViewModel";
 import ExerciseDisplayComponent from "./exercise-display-component.vue";
 
 @Component({
+  name: "WorkoutDisplayComponent",
   components: { ExerciseDisplayComponent }
 })
 export default class WorkoutDisplayComponent extends Vue {
