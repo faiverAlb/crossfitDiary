@@ -14,10 +14,6 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration.Resolvers
                 return false;
             }
 
-            if (source.ResultsCount < 2)
-            {
-                return false;
-            }
 
             return true;
         }
