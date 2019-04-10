@@ -116,7 +116,7 @@ namespace CrossfitDiaryCore.BL.Services
         {
             int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
 
-            IEnumerable<PlanningHistory> toDelete = _context.PlanningHistories.Where(x => x.PlanningDate.Date == workoutRoutine.PlanDate.Value.Date && x.PlanningLevel == workoutRoutine.PlanningLevel);
+            IEnumerable<PlanningHistory> toDelete = _context.PlanningHistories.Where(x => x.PlanningDate.Date == workoutRoutine.PlanDate.Value.Date && (x.PlanningLevel == workoutRoutine.PlanningLevel || x.RoutineComplex.Id == workoutId));
             _context.PlanningHistories.RemoveRange(toDelete);
             if (workoutId == 0)
             {
