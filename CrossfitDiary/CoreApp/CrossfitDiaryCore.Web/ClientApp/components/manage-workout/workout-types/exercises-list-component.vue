@@ -25,18 +25,21 @@
       >
         <b-dropdown-form class="p-3">
           <b-form-group
-            label="Schema (ex.21-15-9)"
+            label="Schema (ex. 21-15-9)"
             label-for="dropdown-form-email"
           >
             <b-form-input
               id="dropdown-form-schema"
               size="sm"
+              v-model="schemaToGenerate"
               placeholder="21-15-9-3"
             ></b-form-input>
           </b-form-group>
           <b-button
             variant="warning"
             size="sm"
+            class="col"
+            v-on:click="tryGenerateSchema"
           >Generate</b-button>
         </b-dropdown-form>
         <b-dropdown-divider></b-dropdown-divider>
@@ -221,6 +224,12 @@ const namespace: string = "workoutEdit";
   }
 })
 export default class ExercisesListComponent extends Vue {
+  private schemaToGenerate: string = "";
+
+  $refs: {
+    dropdown: HTMLFormElement;
+  };
+
   @Prop()
   exercisesToDo: ExerciseViewModel[];
 
@@ -344,6 +353,12 @@ export default class ExercisesListComponent extends Vue {
     let returnValue = (parsed / max) * 100;
 
     return Math.round((returnValue + 0.00001) * 100) / 100;
+  }
+
+  private tryGenerateSchema() {
+    let toGenerateScheme = this.schemaToGenerate;
+    this.schemaToGenerate = "";
+    this.$refs.dropdown.hide(true);
   }
 }
 </script>
