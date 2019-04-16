@@ -39,7 +39,7 @@
             variant="warning"
             size="sm"
             class="col"
-            v-on:click="tryGenerateSchema"
+            v-on:click="generateSchema"
           >Generate</b-button>
         </b-dropdown-form>
         <b-dropdown-divider></b-dropdown-divider>
@@ -355,10 +355,25 @@ export default class ExercisesListComponent extends Vue {
     return Math.round((returnValue + 0.00001) * 100) / 100;
   }
 
-  private tryGenerateSchema() {
-    let toGenerateScheme = this.schemaToGenerate;
+  private generateSchema() {
+    let toGenerateSchema = this.schemaToGenerate;
+    let splittedItems: string[] = toGenerateSchema.split("-");
+
+    this.tryGenerateSchema(splittedItems);
+
     this.schemaToGenerate = "";
     this.$refs.dropdown.hide(true);
+  }
+  private tryGenerateSchema(splittedItems: string[]) {
+    let containsNumbersOnly = true;
+    for (let index = 0; index < splittedItems.length; index++) {
+      const element = splittedItems[index];
+      if (!Number.parseInt(element)) {
+        return;
+      }
+    }
+    let exercisesToUse = this.exercisesToDo;
+    debugger;
   }
 }
 </script>
