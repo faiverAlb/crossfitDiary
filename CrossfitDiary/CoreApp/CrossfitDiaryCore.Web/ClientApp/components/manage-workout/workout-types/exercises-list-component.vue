@@ -364,16 +364,44 @@ export default class ExercisesListComponent extends Vue {
     this.schemaToGenerate = "";
     this.$refs.dropdown.hide(true);
   }
-  private tryGenerateSchema(splittedItems: string[]) {
-    let containsNumbersOnly = true;
+
+  private canSchemaBeGenerated(splittedItems: string[]): boolean {
     for (let index = 0; index < splittedItems.length; index++) {
       const element = splittedItems[index];
       if (!Number.parseInt(element)) {
-        return;
+        return false;
       }
     }
-    let exercisesToUse = this.exercisesToDo;
-    debugger;
+    return true;
+  }
+  private tryGenerateSchema(splittedSchemaItems: string[]) {
+    if (this.canSchemaBeGenerated(splittedSchemaItems) == false) {
+      return;
+    }
+    let initialExercisesListLength = this.exercisesToDo.length;
+    for (let index = 0; index < splittedSchemaItems.length; index++) {
+      const schemaItem = splittedSchemaItems[index];
+      for (let j = 0; j < initialExercisesListLength; j++) {
+        const exerciseToUse = this.exercisesToDo[j];
+
+        let exerciseTemp = new ExerciseViewModel().deserialize(exerciseToUse);
+        if (index < initialExercisesListLength) {
+          exerciseTemp = this.exercisesToDo[index];
+        }
+        let indexOfCountMeasure = exerciseToUse.exerciseMeasures.findIndex(
+          x => x.measureType == ExerciseMeasureType.Count
+        );
+        if (indexOfCountMeasure != -1) {
+          exerciseTemp.exerciseMeasures[
+            indexOfCountMeasure
+          ].measureValue = schemaItem;
+        }
+        if (index < initialExercisesListLength) {
+          continue;
+        }
+        this.exercisesToDo.push(exerciseTemp);
+      }
+    }
   }
 }
 </script>
