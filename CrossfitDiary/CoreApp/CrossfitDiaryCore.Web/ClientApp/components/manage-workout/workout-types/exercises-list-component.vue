@@ -385,8 +385,8 @@ export default class ExercisesListComponent extends Vue {
         const exerciseToUse = this.exercisesToDo[j];
 
         let exerciseTemp = new ExerciseViewModel().deserialize(exerciseToUse);
-        if (index < initialExercisesListLength) {
-          exerciseTemp = this.exercisesToDo[index];
+        if (index === 0) {
+          exerciseTemp = this.exercisesToDo[j];
         }
         let indexOfCountMeasure = exerciseToUse.exerciseMeasures.findIndex(
           x => x.measureType == ExerciseMeasureType.Count
@@ -396,7 +396,7 @@ export default class ExercisesListComponent extends Vue {
             indexOfCountMeasure
           ].measureValue = schemaItem;
         }
-        if (index < initialExercisesListLength) {
+        if (index === 0) {
           continue;
         }
         this.exercisesToDo.push(exerciseTemp);
