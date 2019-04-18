@@ -40,6 +40,7 @@
             size="sm"
             class="col"
             v-on:click="generateSchema"
+            :disabled="canGenerateSchema() == false"
           >Generate</b-button>
         </b-dropdown-form>
         <b-dropdown-divider></b-dropdown-divider>
@@ -365,12 +366,21 @@ export default class ExercisesListComponent extends Vue {
     this.$refs.dropdown.hide(true);
   }
 
+  private canGenerateSchema(): boolean {
+    let toGenerateSchema = this.schemaToGenerate;
+    let splittedItems: string[] = toGenerateSchema.split("-");
+    return this.canSchemaBeGenerated(splittedItems);
+  }
+
   private canSchemaBeGenerated(splittedItems: string[]): boolean {
     for (let index = 0; index < splittedItems.length; index++) {
       const element = splittedItems[index];
       if (!Number.parseInt(element)) {
         return false;
       }
+    }
+    if (splittedItems.length === 0) {
+      return false;
     }
     return true;
   }
