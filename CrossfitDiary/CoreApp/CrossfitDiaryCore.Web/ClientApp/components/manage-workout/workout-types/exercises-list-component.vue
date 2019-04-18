@@ -43,7 +43,7 @@
           >Generate</b-button>
         </b-dropdown-form>
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item-button>
+        <b-dropdown-item-button v-on:click="clearAllExercises">
           <font-awesome-icon
             :icon="['fas','trash']"
             class="text-danger"
@@ -402,6 +402,10 @@ export default class ExercisesListComponent extends Vue {
         this.exercisesToDo.push(exerciseTemp);
       }
     }
+  }
+
+  private clearAllExercises() {
+    this.exercisesToDo.splice(0, this.exercisesToDo.length);
   }
 }
 </script>
