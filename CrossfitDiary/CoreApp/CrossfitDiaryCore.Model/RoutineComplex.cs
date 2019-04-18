@@ -100,7 +100,7 @@ namespace CrossfitDiaryCore.Model
         ///     Possible planning date
         /// </summary>
         [NotMapped]
-        public DateTime? PlanDate { get; set; }
+        public DateTime? PlanDate { get; set; } = DateTime.Now;
 
         /// <summary>
         ///     Possible Planning Level
