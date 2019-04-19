@@ -245,15 +245,19 @@ namespace CrossfitDiaryCore.BL.Services
                     }
                     else
                     {
-                        TimeSpan totalTime = crossfitterWorkout.TimePassed.Value;
-                        if (totalTime.TotalHours >= 1)
+                        if (crossfitterWorkout.TimePassed != null)
                         {
-                            result =  totalTime.ToString();
+                            TimeSpan totalTime = crossfitterWorkout.TimePassed.Value;
+                            if (totalTime.TotalHours >= 1)
+                            {
+                                result =  totalTime.ToString();
+                            }
+                            else
+                            {
+                                result = $"{totalTime.Minutes:00}:{totalTime.Seconds:00}";
+                            }
                         }
-                        else
-                        {
-                            result = $"{totalTime.Minutes:00}:{totalTime.Seconds:00}";
-                        }
+                        
                     }
                     break;
                 case RoutineComplexType.AMRAP:
