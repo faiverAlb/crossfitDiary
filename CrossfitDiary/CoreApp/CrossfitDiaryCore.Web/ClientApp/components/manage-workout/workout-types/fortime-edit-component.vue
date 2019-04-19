@@ -237,7 +237,7 @@
               v-model="toLogModel.comment"
               name="commentSection"
               placeholder="Note: ex. Holy sh*t! Will do it again!"
-              :maxlength="50"
+              :maxlength="200"
               type="text"
               rows="2"
               max-rows="2"
@@ -247,7 +247,7 @@
               id="passwordHelpBlock"
               class="form-text text-muted"
             >
-              Your thoughts on wod. Max length = 50
+              Your thoughts on wod. Max length = 200
             </small>
           </div>
           <div

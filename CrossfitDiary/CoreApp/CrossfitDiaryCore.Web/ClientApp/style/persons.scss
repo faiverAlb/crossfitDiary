@@ -153,3 +153,8 @@
     {
     opacity: 0;
 }
+
+.workout-display-container {
+    max-height: 205px;
+    overflow-y: auto;
+}

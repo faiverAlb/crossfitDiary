@@ -33,19 +33,7 @@ let vue = new Vue({
         </div>
       </div>
       <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts" @logWorkout="logWorkout"></PlannedWorkoutDisplayComponent>
-      <div class="row">
-        <div class="offset-5">
-          <spinner
-            :status="spinner.status"
-            :size="spinner.size"
-            :color="spinner.color"
-            :depth="spinner.depth"
-            :rotation="spinner.rotation"
-            :speed="spinner.speed">
-          </spinner>
-        </div>
-      </div>
-      <div class="container person-setting">
+        <div class="container person-setting">
       <div
         class="row"
         v-if="activities"
@@ -60,6 +48,19 @@ let vue = new Vue({
           </b-form-checkbox>
         </div>
       </div>
+      <div class="row">
+        <div class="offset-5">
+          <spinner
+            :status="spinner.status"
+            :size="spinner.size"
+            :color="spinner.color"
+            :depth="spinner.depth"
+            :rotation="spinner.rotation"
+            :speed="spinner.speed">
+          </spinner>
+        </div>
+      </div>
+    
     </div>
       <PersonsActivitiesComponent :activities="activities"/>
     </div>

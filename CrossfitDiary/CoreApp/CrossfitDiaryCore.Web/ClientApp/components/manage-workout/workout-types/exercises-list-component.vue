@@ -11,7 +11,49 @@
         v-model="selectedExercise"
       />
     </div>
-    <div class="routines-container pt-2">
+    <div
+      v-if="exercisesToDo.length > 0"
+      class="text-right actions-on-exercises"
+    >
+      <b-dropdown
+        id="dropdown-form"
+        text="Actions"
+        ref="dropdown"
+        class="m-0"
+        variant="link"
+        dropleft
+      >
+        <b-dropdown-form class="p-3">
+          <b-form-group
+            label="Schema (ex. 21-15-9)"
+            label-for="dropdown-form-email"
+          >
+            <b-form-input
+              id="dropdown-form-schema"
+              size="sm"
+              v-model="schemaToGenerate"
+              placeholder="21-15-9-3"
+            ></b-form-input>
+          </b-form-group>
+          <b-button
+            variant="warning"
+            size="sm"
+            class="col"
+            v-on:click="generateSchema"
+            :disabled="canGenerateSchema() == false"
+          >Generate</b-button>
+        </b-dropdown-form>
+        <b-dropdown-divider></b-dropdown-divider>
+        <b-dropdown-item-button v-on:click="clearAllExercises">
+          <font-awesome-icon
+            :icon="['fas','trash']"
+            class="text-danger"
+            size="sm"
+          ></font-awesome-icon> Clear all exercises
+        </b-dropdown-item-button>
+      </b-dropdown>
+    </div>
+    <div class="routines-container pt-0">
       <div
         class="simple-routine-item text-center no-selected-container"
         v-if="exercisesToDo.length == 0"
@@ -38,6 +80,7 @@
                 </b-input-group-prepend>
                 <b-dropdown
                   slot="append"
+                  class="actions-dropdown"
                   dropleft
                 >
                   <b-dropdown-item
@@ -139,25 +182,31 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(faLongArrowAltUp, faLongArrowAltDown, faPlus, faTrash);
 /**/
 
+/* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import {
-  ExerciseViewModel,
-  DefaultExerciseViewModel
-} from "../../../models/viewModels/ExerciseViewModel";
-import { ExerciseMeasureViewModel } from "../../../models/viewModels/ExerciseMeasureViewModel";
 import bFormSelect from "bootstrap-vue/es/components/form-select/form-select";
 import bDropdown from "bootstrap-vue/es/components/dropdown/dropdown";
 import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
 import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-item-button";
 import bDropdownDivider from "bootstrap-vue/es/components/dropdown/dropdown-divider";
+import BDropdownForm from "bootstrap-vue/es/components/dropdown/dropdown-form";
 import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
 import { InputGroup } from "bootstrap-vue/es/components";
 Vue.use(InputGroup);
-
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { State, Action, Getter } from "vuex-class";
+import bButton from "bootstrap-vue/es/components/button/button";
+import BFormGroup from "bootstrap-vue/es/components/form-group/form-group";
+
+/* app components */
+/* models and styles */
+import {
+  ExerciseViewModel,
+  DefaultExerciseViewModel
+} from "../../../models/viewModels/ExerciseViewModel";
+import { ExerciseMeasureViewModel } from "../../../models/viewModels/ExerciseMeasureViewModel";
 
 import { IWorkoutEditState } from "./../../../workout-edit-store/types";
-import { State, Action, Getter } from "vuex-class";
 import { ExerciseMeasureType } from "../../../models/viewModels/ExerciseMeasureType";
 const namespace: string = "workoutEdit";
 
@@ -168,11 +217,20 @@ const namespace: string = "workoutEdit";
     bDropdownItem,
     bDropdownItemButton,
     bDropdownDivider,
+    BDropdownForm,
     bFormInput,
+    bButton,
+    BFormGroup,
     FontAwesomeIcon
   }
 })
 export default class ExercisesListComponent extends Vue {
+  private schemaToGenerate: string = "";
+
+  $refs: {
+    dropdown: HTMLFormElement;
+  };
+
   @Prop()
   exercisesToDo: ExerciseViewModel[];
 
@@ -297,8 +355,69 @@ export default class ExercisesListComponent extends Vue {
 
     return Math.round((returnValue + 0.00001) * 100) / 100;
   }
+
+  private generateSchema() {
+    let toGenerateSchema = this.schemaToGenerate;
+    let splittedItems: string[] = toGenerateSchema.split("-");
+
+    this.tryGenerateSchema(splittedItems);
+
+    this.schemaToGenerate = "";
+    this.$refs.dropdown.hide(true);
+  }
+
+  private canGenerateSchema(): boolean {
+    let toGenerateSchema = this.schemaToGenerate;
+    let splittedItems: string[] = toGenerateSchema.split("-");
+    return this.canSchemaBeGenerated(splittedItems);
+  }
+
+  private canSchemaBeGenerated(splittedItems: string[]): boolean {
+    for (let index = 0; index < splittedItems.length; index++) {
+      const element = splittedItems[index];
+      if (!Number.parseInt(element)) {
+        return false;
+      }
+    }
+    if (splittedItems.length === 0) {
+      return false;
+    }
+    return true;
+  }
+  private tryGenerateSchema(splittedSchemaItems: string[]) {
+    if (this.canSchemaBeGenerated(splittedSchemaItems) == false) {
+      return;
+    }
+    let initialExercisesListLength = this.exercisesToDo.length;
+    for (let index = 0; index < splittedSchemaItems.length; index++) {
+      const schemaItem = splittedSchemaItems[index];
+      for (let j = 0; j < initialExercisesListLength; j++) {
+        const exerciseToUse = this.exercisesToDo[j];
+
+        let exerciseTemp = new ExerciseViewModel().deserialize(exerciseToUse);
+        if (index === 0) {
+          exerciseTemp = this.exercisesToDo[j];
+        }
+        let indexOfCountMeasure = exerciseToUse.exerciseMeasures.findIndex(
+          x => x.measureType == ExerciseMeasureType.Count
+        );
+        if (indexOfCountMeasure != -1) {
+          exerciseTemp.exerciseMeasures[
+            indexOfCountMeasure
+          ].measureValue = schemaItem;
+        }
+        if (index === 0) {
+          continue;
+        }
+        this.exercisesToDo.push(exerciseTemp);
+      }
+    }
+  }
+
+  private clearAllExercises() {
+    this.exercisesToDo.splice(0, this.exercisesToDo.length);
+  }
 }
 </script>
 
-<style>
-</style>
+<style></style>

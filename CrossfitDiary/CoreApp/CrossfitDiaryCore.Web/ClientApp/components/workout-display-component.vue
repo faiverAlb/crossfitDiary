@@ -1,5 +1,5 @@
 ﻿<template>
-  <div>
+  <div class="workout-display-container">
     <span class="workout-header d-flex justify-content-between">
       <span class="workout-title">
         <span>{{workoutViewModel.workoutTypeDisplay}}</span>:
@@ -11,7 +11,7 @@
         </span>
       </span>
       <span
-        class="cap-time-info"
+        class="cap-time-info mr-1"
         v-if="workoutViewModel.timeCap"
       >
         Cap: {{workoutViewModel.timeCap}}
