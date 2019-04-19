@@ -102,7 +102,7 @@
             v-model="toLogModel.comment"
             name="commentSection"
             placeholder="Note: ex. Holy sh*t! Will do it again! Never!"
-            :maxlength="50"
+            :maxlength="200"
             type="text"
             rows="2"
             max-rows="2"
@@ -112,7 +112,7 @@
             id="passwordHelpBlock"
             class="form-text text-muted"
           >
-            Your thoughts on workout. Max length = 50;
+            Your thoughts on workout. Max length = 200;
           </small>
         </div>
       </div>
@@ -148,7 +148,10 @@
         <div class="item-body pt-1">
           <WorkoutDisplayComponent :workoutViewModel="plannedScaled"></WorkoutDisplayComponent>
         </div>
-        <div class="item-footer text-right pt-2" v-if="plannedScaled">
+        <div
+          class="item-footer text-right pt-2"
+          v-if="plannedScaled"
+        >
           <div class="action-buttons">
             <a
               class="btn btn-secondary float-left"
@@ -183,7 +186,10 @@
         <div class="item-body pt-1">
           <WorkoutDisplayComponent :workoutViewModel="plannedRx"></WorkoutDisplayComponent>
         </div>
-        <div class="item-footer text-right pt-2" v-if="plannedRx">
+        <div
+          class="item-footer text-right pt-2"
+          v-if="plannedRx"
+        >
           <div class="action-buttons">
             <a
               class="btn btn-secondary float-left"
@@ -218,7 +224,10 @@
         <div class="item-body pt-1">
           <WorkoutDisplayComponent :workoutViewModel="plannedRxPlus"></WorkoutDisplayComponent>
         </div>
-        <div class="item-footer text-right pt-2" v-if="plannedRxPlus">
+        <div
+          class="item-footer text-right pt-2"
+          v-if="plannedRxPlus"
+        >
           <div class="action-buttons">
             <a
               class="btn btn-secondary float-left"
