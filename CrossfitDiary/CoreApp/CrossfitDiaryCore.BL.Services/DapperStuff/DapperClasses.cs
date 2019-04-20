@@ -241,14 +241,16 @@ WHERE rn = 1
 		                                  GROUP BY [RoutineSimple].ExerciseId
                                   )
                                     and [CrossfitterWorkout].Id NOT IN (
-                                    SELECT sub.CrossfitterWorkoutId 
-                                    FROM (
-                                    SELECT ROW_NUMBER() over (partition by RoutineSimple.RoutineComplexId order by Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.RoutineComplexId, RoutineSimple.ExerciseId, RoutineSimple.id,[CrossfitterWorkout].Id as CrossfitterWorkoutId
-                                    FROM [RoutineSimple]
-		                                    INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
-		                                    INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
-		                                    WHERE [CrossfitterWorkout].CrossfitterId = @userId 
-		                                    AND ([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS NULL) ) as sub WHERE rn = 1
+                                   SELECT sub.CrossfitterWorkoutId 
+                                        FROM (
+                                        SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id,[CrossfitterWorkout].Id as CrossfitterWorkoutId
+                                        FROM [RoutineSimple]
+                                          INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
+                                          INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+                                          WHERE [CrossfitterWorkout].CrossfitterId = @userId
+								          AND ([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS NULL) ) as sub
+									        WHERE rn = 1
+
                                     )
                                   GROUP BY rs.ExerciseId
                                   ORDER BY rs.ExerciseId";
