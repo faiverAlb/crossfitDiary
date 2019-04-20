@@ -155,6 +155,7 @@
 }
 
 .workout-display-container {
-    max-height: 205px;
-    overflow-y: auto;
+    max-height: 214px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
