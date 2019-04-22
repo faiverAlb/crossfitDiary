@@ -240,6 +240,7 @@ import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutVi
 import { WorkoutType } from "../../../models/viewModels/WorkoutType";
 import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
+import { WindowHelper } from "../../../helpers/WindowHelper";
 
 declare var workouter: {
   toLogWorkoutRawModel: ToLogWorkoutViewModel;
@@ -287,6 +288,11 @@ export default class E2momEditComponent extends Vue {
   planWorkoutAction(): void {
     this.$validator.validate();
 
+    let scrollToErrors = this.$el.querySelector("[aria-invalid=true]");
+    if (scrollToErrors) {
+      WindowHelper.scrollToTargetAdjusted(scrollToErrors);
+    }
+
     this.$validator.validate().then(isValid => {
       if (isValid) {
         let crossfitterService: CrossfitterService = new CrossfitterService();
@@ -332,6 +338,10 @@ export default class E2momEditComponent extends Vue {
   showLogWorkoutModal(): void {
     this.$validator.validate();
 
+    let scrollToErrors = this.$el.querySelector("[aria-invalid=true]");
+    if (scrollToErrors) {
+      WindowHelper.scrollToTargetAdjusted(scrollToErrors);
+    }
     this.$validator.validate().then(isValid => {
       if (isValid) {
         this.$refs.logWorkoutModal.show();
