@@ -4,8 +4,6 @@ namespace CrossfitDiaryCore.Model
 {
     public class PersonMaximum
     {
-        #region properties
-
         /// <summary>
         ///     Gets or sets the date.
         /// </summary>
@@ -60,7 +58,5 @@ namespace CrossfitDiaryCore.Model
         /// Gets or sets the workout id for found maximum in exercise
         /// </summary>
         public int CrossfitWorkoutId { get; set; }
-
-        #endregion
     }
 }

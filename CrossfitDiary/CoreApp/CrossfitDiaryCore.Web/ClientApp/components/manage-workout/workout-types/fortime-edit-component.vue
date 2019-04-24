@@ -206,7 +206,9 @@
                   </b-input-group-text>
                 </b-input-group-prepend>
                 <b-form-input
-                  type="number"
+                  pattern="[0-9]*"
+                  type="text"
+                  inputmode="numeric"
                   v-model="toLogModel.repsToFinishOnCapTime"
                   placeholder="Count"
                 >

@@ -32,6 +32,7 @@
               id="dropdown-form-schema"
               size="sm"
               v-model="schemaToGenerate"
+              type="number"
               placeholder="21-15-9-3"
             ></b-form-input>
           </b-form-group>
@@ -126,7 +127,19 @@
               ></label>
               <b-input-group class="mx-1 pr-1">
                 <b-form-input
+                  v-if="measure.measureType == 2"
                   v-model="measure.measureValue"
+                  pattern="[0-9]*"
+                  type="text"
+                  inputmode="numeric"
+                  class="measure-value-input"
+                  placeholder="Count"
+                  aria-describedby="prPercentHelpBlock"
+                ></b-form-input>
+                <b-form-input
+                  v-else
+                  v-model="measure.measureValue"
+                  type="number"
                   class="measure-value-input"
                   :placeholder="measure.description"
                   aria-describedby="prPercentHelpBlock"
