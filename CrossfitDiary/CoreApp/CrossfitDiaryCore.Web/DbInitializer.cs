@@ -51,6 +51,19 @@ namespace CrossfitDiaryCore.Web
                     new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Weight},
                     new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeWeight},
                 }, context);
+            AddExerciseIfPossible("SkiErg(cal)", "SkiErg(cal)",
+                new List<ExerciseMeasure>
+                {
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Calories},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeCalories}
+                }, context);
+
+            AddExerciseIfPossible("SkiErg", "SkiErg",
+                new List<ExerciseMeasure>
+                {
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Distance},
+                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeDistance}
+                }, context);
         }
 
         private static void AddExerciseIfPossible(string title, string abbreviation, List<ExerciseMeasure> exerciseMeasures, WorkouterContext context)
