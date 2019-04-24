@@ -155,7 +155,7 @@
                 </b-input-group-prepend>
                 <b-form-input
                   pattern="[0-9]*"
-                  type="text"
+                  type="tel"
                   inputmode="numeric"
                   v-model="toLogModel.roundsFinished"
                   v-mask="'####'"
@@ -173,7 +173,7 @@
                 </b-input-group-prepend>
                 <b-form-input
                   pattern="[0-9]*"
-                  type="text"
+                  type="tel"
                   inputmode="numeric"
                   v-model="toLogModel.partialRepsFinished"
                   v-mask="'####'"
