@@ -25,15 +25,15 @@
       >
         <b-dropdown-form class="p-3">
           <b-form-group
-            label="Schema (ex. 21-15-9)"
+            label="Schema (ex. 21 15 9)"
             label-for="dropdown-form-email"
           >
             <b-form-input
               id="dropdown-form-schema"
               size="sm"
               v-model="schemaToGenerate"
-              type="number"
-              placeholder="21-15-9-3"
+              type="tel"
+              placeholder="21 15 9 3"
             ></b-form-input>
           </b-form-group>
           <b-button
@@ -41,7 +41,6 @@
             size="sm"
             class="col"
             v-on:click="generateSchema"
-            :disabled="canGenerateSchema() == false"
           >Generate</b-button>
         </b-dropdown-form>
         <b-dropdown-divider></b-dropdown-divider>
@@ -371,36 +370,13 @@ export default class ExercisesListComponent extends Vue {
 
   private generateSchema() {
     let toGenerateSchema = this.schemaToGenerate;
-    let splittedItems: string[] = toGenerateSchema.split("-");
-
+    let splittedItems: string[] = toGenerateSchema.split(" ");
     this.tryGenerateSchema(splittedItems);
 
     this.schemaToGenerate = "";
     this.$refs.dropdown.hide(true);
   }
-
-  private canGenerateSchema(): boolean {
-    let toGenerateSchema = this.schemaToGenerate;
-    let splittedItems: string[] = toGenerateSchema.split("-");
-    return this.canSchemaBeGenerated(splittedItems);
-  }
-
-  private canSchemaBeGenerated(splittedItems: string[]): boolean {
-    for (let index = 0; index < splittedItems.length; index++) {
-      const element = splittedItems[index];
-      if (!Number.parseInt(element)) {
-        return false;
-      }
-    }
-    if (splittedItems.length === 0) {
-      return false;
-    }
-    return true;
-  }
   private tryGenerateSchema(splittedSchemaItems: string[]) {
-    if (this.canSchemaBeGenerated(splittedSchemaItems) == false) {
-      return;
-    }
     let initialExercisesListLength = this.exercisesToDo.length;
     for (let index = 0; index < splittedSchemaItems.length; index++) {
       const schemaItem = splittedSchemaItems[index];
@@ -411,13 +387,8 @@ export default class ExercisesListComponent extends Vue {
         if (index === 0) {
           exerciseTemp = this.exercisesToDo[j];
         }
-        let indexOfCountMeasure = exerciseToUse.exerciseMeasures.findIndex(
-          x => x.measureType == ExerciseMeasureType.Count
-        );
-        if (indexOfCountMeasure != -1) {
-          exerciseTemp.exerciseMeasures[
-            indexOfCountMeasure
-          ].measureValue = schemaItem;
+        if (exerciseToUse.exerciseMeasures.length > 0) {
+          exerciseTemp.exerciseMeasures[0].measureValue = schemaItem;
         }
         if (index === 0) {
           continue;
