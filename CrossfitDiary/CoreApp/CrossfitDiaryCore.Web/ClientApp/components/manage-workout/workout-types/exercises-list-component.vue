@@ -130,7 +130,7 @@
                   v-if="measure.measureType == 2"
                   v-model="measure.measureValue"
                   pattern="[0-9]*"
-                  type="text"
+                  type="tel"
                   inputmode="numeric"
                   class="measure-value-input"
                   placeholder="Count"
