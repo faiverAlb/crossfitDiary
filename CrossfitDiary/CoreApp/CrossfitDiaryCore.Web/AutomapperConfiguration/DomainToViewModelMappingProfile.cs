@@ -161,6 +161,12 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                                 exerviseMeasureVm.Description = "Calories";
                                 exerviseMeasureVm.ShortMeasureDescription = "cal";
                                 break;
+                            case MeasureType.AlternativeCalories:
+                                exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Calories;
+                                exerviseMeasureVm.MeasureValue = $"{simple.Calories:0}";
+                                exerviseMeasureVm.Description = "Alt Calories";
+                                exerviseMeasureVm.ShortMeasureDescription = "alt cal";
+                                break;
                             case MeasureType.Height:
                                 exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Height;
                                 exerviseMeasureVm.MeasureValue = $"{simple.Centimeters:0}";
