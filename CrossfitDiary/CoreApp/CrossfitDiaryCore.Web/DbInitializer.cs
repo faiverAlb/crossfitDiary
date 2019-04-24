@@ -55,14 +55,12 @@ namespace CrossfitDiaryCore.Web
                 new List<ExerciseMeasure>
                 {
                     new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Calories},
-                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeCalories}
                 }, context);
 
             AddExerciseIfPossible("SkiErg", "SkiErg",
                 new List<ExerciseMeasure>
                 {
                     new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.Distance},
-                    new ExerciseMeasure() {ExerciseMeasureTypeId = MeasureType.AlternativeDistance}
                 }, context);
         }
 
