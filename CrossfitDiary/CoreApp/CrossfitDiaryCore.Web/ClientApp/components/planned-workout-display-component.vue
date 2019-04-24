@@ -59,7 +59,9 @@
                     </b-input-group-text>
                   </b-input-group-prepend>
                   <b-form-input
-                    type="tel"
+                    pattern="[0-9]*"
+                    type="text"
+                    inputmode="numeric"
                     v-model="toLogModel.roundsFinished"
                     v-mask="'####'"
                     placeholder="Rounds finished"
@@ -78,7 +80,9 @@
                     </b-input-group-text>
                   </b-input-group-prepend>
                   <b-form-input
-                    type="tel"
+                    pattern="[0-9]*"
+                    type="text"
+                    inputmode="numeric"
                     v-model="toLogModel.partialRepsFinished"
                     v-mask="'####'"
                     placeholder="Partial repetitions"
