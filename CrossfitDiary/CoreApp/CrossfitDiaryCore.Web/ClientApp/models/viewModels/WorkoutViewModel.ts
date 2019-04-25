@@ -56,7 +56,7 @@ export class WorkoutViewModel implements Serializable<WorkoutViewModel> {
   };
 
   public IsAMRAP = () => {
-    return this.workoutType == WorkoutType.AMRAP;
+    return this.workoutType == WorkoutType.AMRAP || this.workoutType == WorkoutType.AMRAPN;
   };
   public IsEmoms = () => {
     return this.workoutType == WorkoutType.E2MOM || this.workoutType == WorkoutType.EMOM;

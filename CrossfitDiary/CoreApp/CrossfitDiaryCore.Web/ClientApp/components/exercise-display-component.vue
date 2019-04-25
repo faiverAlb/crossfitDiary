@@ -9,7 +9,9 @@
         :key="measure.measureType"
       ><span v-if="measure.measureValue">
           <span v-if="measure.measureType == 8">/{{measure.measureValue}} {{measure.shortMeasureDescription}}</span>
-          <span v-else><span v-if="index > 0"> - </span><span v-else>:</span> {{measure.measureValue}} {{measure.shortMeasureDescription}}</span></span>
+          <span v-else>
+            <span v-if="index > 0 && index < model.exerciseMeasures.length"> x </span><span v-else>:</span> {{measure.measureValue}} <span v-if="measure.measureType != 2">{{measure.shortMeasureDescription}}</span></span>
+        </span>
       </span>
       <span
         class="new-record"

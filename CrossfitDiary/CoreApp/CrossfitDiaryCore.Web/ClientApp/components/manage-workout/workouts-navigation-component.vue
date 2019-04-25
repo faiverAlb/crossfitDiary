@@ -65,19 +65,64 @@
           </template>
         </b-dropdown-item>
       </b-dropdown>
-
-      <router-link
-        active-class="btn-info"
-        to="/amrap"
-        class="btn btn-secondary text-light d-inline-block p-0"
+      <b-dropdown
+        variant="link"
+        size="lg"
+        no-caret
+        class="workouts-dropdown"
       >
-        <div class="small-action-link-button">
-          <div class="icon-container">
-            <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
-          </div>
-          <div class="text-container">AMRAP</div>
-        </div>
-      </router-link>
+        <template slot="button-content">
+          <a
+            class="btn btn-secondary text-light  d-inline-block p-0 "
+            href="#"
+            v-bind:class="{'btn-info':($route.path == `/amrap` ||  $route.path == `/amrapn`)}"
+          >
+            <div class="small-action-link-button amrap-icon">
+              <div class="icon-container">
+                <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+              </div>
+              <div class="text-container">
+                <span v-if="$route.path == `/amrap` || $route.path != `/amrapn`">AMRAP</span>
+                <span v-if="$route.path == `/amrapn`">AMRAP*n</span>
+                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
+              </div>
+            </div>
+          </a>
+        </template>
+        <b-dropdown-item>
+          <template>
+            <router-link
+              active-class="btn-info"
+              to="/amrap"
+              class="btn btn-secondary text-light d-inline-block p-0"
+            >
+              <div class="small-action-link-button amrap-icon">
+                <div class="icon-container">
+                  <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
+                </div>
+                <div class="text-container">AMRAP</div>
+              </div>
+            </router-link>
+          </template>
+        </b-dropdown-item>
+        <b-dropdown-item>
+          <template>
+            <router-link
+              to="/amrapn"
+              active-class="btn-info"
+              class="btn btn-secondary text-light  d-inline-block p-0"
+              href="#"
+            >
+              <div class="small-action-link-button">
+                <div class="icon-container">
+                  <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
+                </div>
+                <div class="text-container">AMRAP*n</div>
+              </div>
+            </router-link>
+          </template>
+        </b-dropdown-item>
+      </b-dropdown>
 
       <b-dropdown
         variant="link"
@@ -214,6 +259,7 @@ export default class WorkoutsNavigationComponent extends Vue {
     { workoutType: WorkoutType.ForTime, path: "/fortime" },
     { workoutType: WorkoutType.ForTimeManyInners, path: "/fortimen" },
     { workoutType: WorkoutType.AMRAP, path: "/amrap" },
+    { workoutType: WorkoutType.AMRAPN, path: "/amrapn" },
     { workoutType: WorkoutType.EMOM, path: "/emom" },
     { workoutType: WorkoutType.E2MOM, path: "/e2mom" },
     { workoutType: WorkoutType.NotForTime, path: "/nft" },

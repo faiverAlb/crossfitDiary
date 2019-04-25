@@ -85,6 +85,10 @@ table {
     padding: 0 8px;
     min-width: 40px;
 
+    &.amrap-icon {
+        min-width: 68px;
+    }
+
     .icon-container {
         padding-top: 3px;
     }

@@ -10,6 +10,7 @@
         EMOM = 2,
         E2MOM = 3,
         NotForTime = 4,
-        ForTimeManyInners = 5
+        ForTimeManyInners = 5,
+        AMRAPN = 6
     }
 }

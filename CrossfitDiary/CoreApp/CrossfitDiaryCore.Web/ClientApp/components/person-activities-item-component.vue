@@ -38,7 +38,7 @@
               <font-awesome-icon :icon="['far','clock']"></font-awesome-icon> Total time: {{model.timePassed}}
             </span>
           </span>
-          <span v-if="model.workoutViewModel.IsAMRAP()">
+          <span v-if="model.workoutViewModel.IsAMRAP() && model.roundsFinished">
             Rounds: {{model.roundsFinished}}
             <span v-if="model.partialRepsFinished"> + {{model.partialRepsFinished}} partials</span>
           </span>
