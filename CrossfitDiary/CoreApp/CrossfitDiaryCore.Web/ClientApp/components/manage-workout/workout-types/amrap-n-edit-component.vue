@@ -357,7 +357,7 @@ export default class AmrapNEditComponentComponent extends Vue {
     } else if (workouter != null && workouter.workoutViewModel != null) {
       this.model = workouter.workoutViewModel;
     } else {
-      this.model.workoutType = WorkoutType.AMRAP;
+      this.model.workoutType = WorkoutType.AMRAPN;
       this.addInnerWorkout();
     }
   }
