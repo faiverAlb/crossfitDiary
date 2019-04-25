@@ -18,7 +18,7 @@ var routes = [
     { path: "/fortime", component: ForTimeEditComponent /*, alias: "/"*/ },
     { path: "/fortimen", component: ForTimeNEditComponent /*, alias: "/"*/ },
     { path: "/amrap", component: AmrapEditComponent },
-    { path: "/amrapт", component: AmrapNEditComponent },
+    { path: "/amrapn", component: AmrapNEditComponent },
     { path: "/emom", component: EmomEditComponent },
     { path: "/e2mom", component: E2momEditComponent },
     { path: "/nft", component: NFTEditComponent },

@@ -77,7 +77,7 @@
             href="#"
             v-bind:class="{'btn-info':($route.path == `/amrap` ||  $route.path == `/amrapn`)}"
           >
-            <div class="small-action-link-button">
+            <div class="small-action-link-button amrap-icon">
               <div class="icon-container">
                 <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
               </div>
@@ -96,7 +96,7 @@
               to="/amrap"
               class="btn btn-secondary text-light d-inline-block p-0"
             >
-              <div class="small-action-link-button">
+              <div class="small-action-link-button amrap-icon">
                 <div class="icon-container">
                   <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
                 </div>

@@ -436,7 +436,7 @@ export default class AmrapNEditComponentComponent extends Vue {
       new WorkoutViewModel({
         id: 0,
         title: null,
-        workoutType: WorkoutType.ForTime,
+        workoutType: WorkoutType.AMRAP,
         exercisesToDoList: [],
         children: [],
         isInnerWorkout: true

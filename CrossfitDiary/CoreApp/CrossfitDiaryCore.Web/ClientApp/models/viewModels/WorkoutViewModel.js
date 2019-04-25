@@ -24,7 +24,7 @@ var WorkoutViewModel = /** @class */ (function () {
             return _this.workoutType == WorkoutType.ForTime;
         };
         this.IsAMRAP = function () {
-            return _this.workoutType == WorkoutType.AMRAP;
+            return _this.workoutType == WorkoutType.AMRAP || _this.workoutType == WorkoutType.AMRAPN;
         };
         this.IsEmoms = function () {
             return _this.workoutType == WorkoutType.E2MOM || _this.workoutType == WorkoutType.EMOM;
