@@ -69,6 +69,9 @@ namespace CrossfitDiaryCore.Web.ViewModels
                     case RoutineComplexType.ForTimeManyInners:
                         displayValue = "Complex for time";
                         break;
+                    case RoutineComplexType.AMRAPN:
+                        displayValue = "Complex amrap";
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

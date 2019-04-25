@@ -261,6 +261,7 @@ namespace CrossfitDiaryCore.BL.Services
                     }
                     break;
                 case RoutineComplexType.AMRAP:
+                case RoutineComplexType.AMRAPN:
                     result = crossfitterWorkout.RoundsFinished.HasValue? $"{crossfitterWorkout.RoundsFinished.Value}": "0";
                     if (crossfitterWorkout.PartialRepsFinished.HasValue)
                     {

@@ -6,5 +6,6 @@ export var WorkoutType;
     WorkoutType[WorkoutType["E2MOM"] = 3] = "E2MOM";
     WorkoutType[WorkoutType["NotForTime"] = 4] = "NotForTime";
     WorkoutType[WorkoutType["ForTimeManyInners"] = 5] = "ForTimeManyInners";
+    WorkoutType[WorkoutType["AMRAPN"] = 6] = "AMRAPN";
 })(WorkoutType || (WorkoutType = {}));
 //# sourceMappingURL=WorkoutType.js.map
