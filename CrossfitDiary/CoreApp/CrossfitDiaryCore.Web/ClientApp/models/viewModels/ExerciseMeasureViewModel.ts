@@ -1,24 +1,18 @@
-﻿import Serializable = General.Serializable;
-// import { ExerciseMeasureTypeViewModel } from "./ExerciseMeasureTypeViewModel";
+﻿import Deserializable = General.Deserializable;
 import { ExerciseMeasureType } from "./ExerciseMeasureType";
 
-export class ExerciseMeasureViewModel
-  implements Serializable<ExerciseMeasureViewModel> {
+export class ExerciseMeasureViewModel implements Deserializable {
   measureType: ExerciseMeasureType = ExerciseMeasureType.Weight;
   measureValue: string = "";
   description: string = "";
   shortMeasureDescription: string = "";
   isRequired: boolean = false;
 
-  constructor(params?:any) {
-    if (params == null) {
+  constructor(input?: any) {
+    if (input == null) {
       return;
     }
-    this.measureType = params.measureType;
-    this.measureValue = params.measureValue;
-    this.description = params.description;
-    this.shortMeasureDescription = params.shortMeasureDescription;
-    this.isRequired = params.isRequired;
+    Object.assign(this, input);
   }
 
   setDisplayByMeasureType = (measure: ExerciseMeasureType): string => {
@@ -38,16 +32,11 @@ export class ExerciseMeasureViewModel
     }
   };
 
-  deserialize(jsonInput: any): ExerciseMeasureViewModel {
-    if (jsonInput == null) {
-      return null as any;
+  public deserialize(input: any): this {
+    if (input == null) {
+      return;
     }
-    return new ExerciseMeasureViewModel({
-      measureType: <ExerciseMeasureType>jsonInput.measureType,
-      measureValue: jsonInput.measureValue,
-      description: jsonInput.description,
-      isRequired: jsonInput.isRequired,
-      shortMeasureDescription: jsonInput.shortMeasureDescription
-    });
+    Object.assign(this, input);
+    return this;
   }
 }

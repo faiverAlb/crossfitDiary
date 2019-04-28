@@ -1,5 +1,4 @@
-﻿import Serializable = General.Serializable;
-import { WorkoutType } from "./WorkoutType";
+﻿import { WorkoutType } from "./WorkoutType";
 import { ExerciseViewModel } from "./ExerciseViewModel";
 import Deserializable = General.Deserializable;
 

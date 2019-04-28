@@ -1,17 +1,7 @@
-﻿import Serializable = General.Serializable;
+﻿import Deserializable = General.Deserializable;
 import { ExerciseMeasureViewModel } from "./ExerciseMeasureViewModel";
 
-interface IExerciseViewModel {
-  id: number;
-  title: string;
-  exerciseMeasures: ExerciseMeasureViewModel[];
-  isAlternative: boolean;
-  isNewWeightMaximum?: boolean;
-  isDoUnbroken: boolean;
-  addedToMaxWeightString?: string;
-}
-
-export class ExerciseViewModel implements Serializable<ExerciseViewModel> {
+export class ExerciseViewModel implements Deserializable {
   id: number = 0;
   title?: string;
   exerciseMeasures: ExerciseMeasureViewModel[] = [];
@@ -20,33 +10,20 @@ export class ExerciseViewModel implements Serializable<ExerciseViewModel> {
   isDoUnbroken: boolean = false;
   addedToMaxWeightString?: string;
 
-  constructor(params?: IExerciseViewModel) {
-    if (params == null) {
+  constructor(input?: any) {
+    if (input == null) {
       return;
     }
-    this.id = params.id;
-    this.title = params.title;
-    this.exerciseMeasures = params.exerciseMeasures;
-    this.isAlternative = params.isAlternative;
-    this.isNewWeightMaximum = params.isNewWeightMaximum;
-    this.isDoUnbroken = params.isDoUnbroken;
-    this.addedToMaxWeightString = params.addedToMaxWeightString;
+    Object.assign(this, input);
   }
 
-  deserialize(input: any): ExerciseViewModel {
+  public deserialize(input: any): this {
     if (input == null) {
-      return null as any;
+      return;
     }
-
-    return new ExerciseViewModel({
-      id: input.id,
-      title: input.title,
-      exerciseMeasures: input.exerciseMeasures.map(x => new ExerciseMeasureViewModel().deserialize(x)),
-      isAlternative: input.isAlternative,
-      isNewWeightMaximum: input.isNewWeightMaximum,
-      isDoUnbroken: input.isDoUnbroken,
-      addedToMaxWeightString: input.addedToMaxWeightString
-    });
+    Object.assign(this, input);
+    this.exerciseMeasures = input.exerciseMeasures.map(x => new ExerciseMeasureViewModel().deserialize(x));
+    return this;
   }
 }
 
