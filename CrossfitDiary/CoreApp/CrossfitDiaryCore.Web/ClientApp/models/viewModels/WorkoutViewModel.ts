@@ -25,6 +25,8 @@ export class WorkoutViewModel implements Deserializable {
   comment?: string;
   resultsCount: number;
   canSeeLeaderboard: boolean;
+  haveCollapsedVersion: boolean = false;
+  groupedDictionary: {} = {};
 
   getDefaultDate = (): string => {
     let date: Date = new Date();
@@ -47,6 +49,62 @@ export class WorkoutViewModel implements Deserializable {
     return this.workoutType === WorkoutType.ForTime || this.workoutType === WorkoutType.ForTimeManyInners;
   };
 
+  private tryCollapseWorkout(): void {
+    let exercisedToUse: ExerciseViewModel[] = this.exercisesToDoList;
+    let distinctFirst: ExerciseViewModel[] = [];
+    for (let index = 0; index < exercisedToUse.length; index++) {
+      const element: ExerciseViewModel = exercisedToUse[index];
+      let foundInDistinct = distinctFirst.find(x => {
+        return x.id === element.id;
+      });
+      if (!foundInDistinct) {
+        distinctFirst.push(element);
+      } else {
+        break;
+      }
+    }
+
+    let canBeCollapsed: boolean = true;
+    if (distinctFirst.length === 0) {
+      return;
+    }
+    if (exercisedToUse.length === distinctFirst.length) {
+      // trivial case
+      return;
+    }
+    if (exercisedToUse.length % distinctFirst.length !== 0) {
+      return;
+    }
+
+    for (let i = 0; i < exercisedToUse.length; i++) {
+      if (canBeCollapsed === false) {
+        break;
+      }
+
+      for (let j = 0; j < distinctFirst.length; j++) {
+        const distinctItem: ExerciseViewModel = distinctFirst[j];
+        if (i + j < exercisedToUse.length && exercisedToUse[i + j].id !== distinctItem.id) {
+          canBeCollapsed = false;
+          break;
+        }
+      }
+      i = i + distinctFirst.length - 1;
+    }
+    this.haveCollapsedVersion = canBeCollapsed;
+    if (this.haveCollapsedVersion === false) {
+      return;
+    }
+    for (let i = 0; i < exercisedToUse.length; i++) {
+      const exercise: ExerciseViewModel = exercisedToUse[i];
+      if (this.groupedDictionary[exercise.id]) {
+        this.groupedDictionary[exercise.id].push(exercise);
+      } else {
+        this.groupedDictionary[exercise.id] = [];
+        this.groupedDictionary[exercise.id].push(exercise);
+      }
+    }
+  }
+
   constructor(input?: any) {
     if (input == null) {
       return;
@@ -61,6 +119,7 @@ export class WorkoutViewModel implements Deserializable {
     Object.assign(this, input);
     this.children = input.children.map((x): WorkoutViewModel => new WorkoutViewModel().deserialize(x));
     this.exercisesToDoList = input.exercisesToDoList.map((x): ExerciseViewModel => new ExerciseViewModel().deserialize(x));
+    this.tryCollapseWorkout();
     return this;
   }
 }

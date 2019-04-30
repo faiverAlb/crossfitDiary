@@ -17,7 +17,30 @@
         Cap: {{workoutViewModel.timeCap}}
       </span>
     </span>
+
     <div
+      class="workout-exercises pl-3 pt-1"
+      v-if="workoutViewModel.haveCollapsedVersion"
+    >
+      <div
+        v-for="group in workoutViewModel.groupedDictionary"
+        :key="`grp_${group[0].id}`"
+      >
+        {{group[0].title}}
+      </div>
+      <div
+        v-for="group in workoutViewModel.groupedDictionary"
+        :key="`${group[0].id}`"
+      >
+        <span
+          v-for="(exercise,index) in group"
+          :key="`grp_${group[0].id}_${exercise.id}_${index}`"
+        >{{exercise.count}}<span v-if="index + 1 < group.length">-</span></span>
+      </div>
+
+    </div>
+    <div
+      v-else
       class="workout-exercises pl-3 pt-1"
       v-for="(exercise,index) in workoutViewModel.exercisesToDoList"
       :key="`${workoutViewModel.id}-${exercise.id}-${index}`"

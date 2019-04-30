@@ -1,5 +1,6 @@
 ﻿import Deserializable = General.Deserializable;
 import { ExerciseMeasureViewModel } from "./ExerciseMeasureViewModel";
+import { ExerciseMeasureType } from "./ExerciseMeasureType";
 
 export class ExerciseViewModel implements Deserializable {
   id: number = 0;
@@ -9,6 +10,8 @@ export class ExerciseViewModel implements Deserializable {
   isNewWeightMaximum?: boolean = false;
   isDoUnbroken: boolean = false;
   addedToMaxWeightString?: string;
+
+  count?: string = null;
 
   constructor(input?: any) {
     if (input == null) {
@@ -23,6 +26,8 @@ export class ExerciseViewModel implements Deserializable {
     }
     Object.assign(this, input);
     this.exerciseMeasures = input.exerciseMeasures.map(x => new ExerciseMeasureViewModel().deserialize(x));
+    let foundCountMeasure: ExerciseMeasureViewModel = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Count);
+    this.count = foundCountMeasure ? foundCountMeasure.measureValue : null;
     return this;
   }
 }
