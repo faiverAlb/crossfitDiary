@@ -12,6 +12,7 @@ import { ExerciseMeasureViewModel } from "./ExerciseMeasureViewModel";
 import { ExerciseMeasureType } from "./ExerciseMeasureType";
 var ExerciseViewModel = /** @class */ (function () {
     function ExerciseViewModel(input) {
+        var _this = this;
         this.id = 0;
         this.exerciseMeasures = [];
         this.isAlternative = false;
@@ -20,6 +21,28 @@ var ExerciseViewModel = /** @class */ (function () {
         this.count = null;
         this.weight = null;
         this.calories = null;
+        this.haveSameCountAndCalories = function (toCompareExercise) {
+            if (_this.count == null && toCompareExercise.count == null) {
+                if (_this.calories == null && toCompareExercise.calories == null) {
+                    return false;
+                }
+                else {
+                    return _this.calories === toCompareExercise.calories;
+                }
+            }
+            else {
+                if (_this.calories == null && toCompareExercise.calories == null) {
+                    return _this.count === toCompareExercise.count;
+                }
+                else {
+                    var result = _this.count === toCompareExercise.count ||
+                        _this.count === toCompareExercise.calories ||
+                        _this.calories === toCompareExercise.count ||
+                        _this.calories === toCompareExercise.calories;
+                    return result;
+                }
+            }
+        };
         if (input == null) {
             return;
         }

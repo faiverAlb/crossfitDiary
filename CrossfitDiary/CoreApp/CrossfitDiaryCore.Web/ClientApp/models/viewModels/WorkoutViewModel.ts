@@ -29,7 +29,7 @@ export class WorkoutViewModel implements Deserializable {
   haveCollapsedVersion: boolean = false;
   canShowCountOnce: boolean = true;
   groupedDictionary: {} = {};
-  oneTimeSchema: { schemaString: string } = {};
+  oneTimeSchema: any = {};
 
   getDefaultDate = (): string => {
     let date: Date = new Date();

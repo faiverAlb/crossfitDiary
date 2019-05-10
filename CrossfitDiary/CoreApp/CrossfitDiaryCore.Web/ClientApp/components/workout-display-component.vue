@@ -30,7 +30,7 @@
           <span
             v-for="(exercise,index) in group"
             :key="`grp_c_${group[0].id}_${exercise.id}_${index}`"
-          >{{exercise.count}}<span v-if="exercise.weight">x{{exercise.weight}}kg</span><span v-if="exercise.calories">{{exercise.calories}}cal</span><span v-if="index + 1 < group.length">-</span></span>
+          >{{exercise.count}}<span v-if="exercise.weight"> x {{exercise.weight}}kg</span><span v-if="exercise.calories">{{exercise.calories}}cal</span><span v-if="index + 1 < group.length">-</span></span>
         </div>
         <div
           v-for="group in workoutViewModel.groupedDictionary"
