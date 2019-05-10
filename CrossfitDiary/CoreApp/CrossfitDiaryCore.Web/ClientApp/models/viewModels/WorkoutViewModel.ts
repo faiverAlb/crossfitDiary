@@ -25,8 +25,11 @@ export class WorkoutViewModel implements Deserializable {
   comment?: string;
   resultsCount: number;
   canSeeLeaderboard: boolean;
+
   haveCollapsedVersion: boolean = false;
+  canShowCountOnce: boolean = true;
   groupedDictionary: {} = {};
+  oneTimeSchema: { schemaString: string } = {};
 
   getDefaultDate = (): string => {
     let date: Date = new Date();
@@ -49,33 +52,8 @@ export class WorkoutViewModel implements Deserializable {
     return this.workoutType === WorkoutType.ForTime || this.workoutType === WorkoutType.ForTimeManyInners;
   };
 
-  private tryCollapseWorkout(): void {
-    let exercisedToUse: ExerciseViewModel[] = this.exercisesToDoList;
-    let distinctFirst: ExerciseViewModel[] = [];
-    for (let index = 0; index < exercisedToUse.length; index++) {
-      const element: ExerciseViewModel = exercisedToUse[index];
-      let foundInDistinct = distinctFirst.find(x => {
-        return x.id === element.id;
-      });
-      if (!foundInDistinct) {
-        distinctFirst.push(element);
-      } else {
-        break;
-      }
-    }
-
+  private getHaveCollapsedVersion = (exercisedToUse: ExerciseViewModel[], distinctFirst: ExerciseViewModel[]): boolean => {
     let canBeCollapsed: boolean = true;
-    if (distinctFirst.length === 0) {
-      return;
-    }
-    if (exercisedToUse.length === distinctFirst.length) {
-      // trivial case
-      return;
-    }
-    if (exercisedToUse.length % distinctFirst.length !== 0) {
-      return;
-    }
-
     for (let i = 0; i < exercisedToUse.length; i++) {
       if (canBeCollapsed === false) {
         break;
@@ -90,17 +68,95 @@ export class WorkoutViewModel implements Deserializable {
       }
       i = i + distinctFirst.length - 1;
     }
-    this.haveCollapsedVersion = canBeCollapsed;
+    return canBeCollapsed;
+  };
+
+  private getDistinctItems = (exercisedToUse: ExerciseViewModel[]): ExerciseViewModel[] => {
+    let distinctFirst: ExerciseViewModel[] = [];
+    for (let index: number = 0; index < exercisedToUse.length; index++) {
+      const element: ExerciseViewModel = exercisedToUse[index];
+      let foundInDistinct: ExerciseViewModel = distinctFirst.find(x => {
+        return x.id === element.id;
+      });
+      if (!foundInDistinct) {
+        distinctFirst.push(element);
+      } else {
+        break;
+      }
+    }
+    return distinctFirst;
+  };
+
+  private groupExercises = (exercisedToUse: ExerciseViewModel[]) => {
+    let groupedDictionary: {} = {};
+    for (let i: number = 0; i < exercisedToUse.length; i++) {
+      const exercise: ExerciseViewModel = exercisedToUse[i];
+      if (groupedDictionary[exercise.id]) {
+        groupedDictionary[exercise.id].push(exercise);
+      } else {
+        groupedDictionary[exercise.id] = [];
+        groupedDictionary[exercise.id].push(exercise);
+      }
+    }
+    return groupedDictionary;
+  };
+
+  private getCanShowCountOnce = (exercisedToUse: ExerciseViewModel[], distinctLength: number) => {
+    let canShowCountOnce: boolean = true;
+    for (let i: number = 0; i < exercisedToUse.length; i++) {
+      if (canShowCountOnce === false) {
+        break;
+      }
+      for (let j: number = 0; j < distinctLength; j++) {
+        if (i + j + 1 >= exercisedToUse.length || i + j + 1 >= distinctLength) {
+          break;
+        }
+        let currentExericseToUse = exercisedToUse[i + j];
+        let nextExericseToUse = exercisedToUse[i + j + 1];
+        if (currentExericseToUse.haveSameCountAndCalories(nextExericseToUse) === false) {
+          canShowCountOnce = false;
+          break;
+        }
+      }
+      i = i + distinctLength;
+    }
+    return canShowCountOnce;
+  };
+
+  private tryCollapseWorkout(): void {
+    let exercisedToUse: ExerciseViewModel[] = this.exercisesToDoList;
+    let distinctExercises: ExerciseViewModel[] = this.getDistinctItems(exercisedToUse);
+    if (distinctExercises.length === 0) {
+      return;
+    }
+    if (exercisedToUse.length === distinctExercises.length) {
+      return;
+    }
+    if (exercisedToUse.length % distinctExercises.length !== 0) {
+      return;
+    }
+    this.haveCollapsedVersion = this.getHaveCollapsedVersion(exercisedToUse, distinctExercises);
     if (this.haveCollapsedVersion === false) {
       return;
     }
-    for (let i = 0; i < exercisedToUse.length; i++) {
-      const exercise: ExerciseViewModel = exercisedToUse[i];
-      if (this.groupedDictionary[exercise.id]) {
-        this.groupedDictionary[exercise.id].push(exercise);
-      } else {
-        this.groupedDictionary[exercise.id] = [];
-        this.groupedDictionary[exercise.id].push(exercise);
+
+    this.groupedDictionary = this.groupExercises(exercisedToUse);
+    let distinctLength: number = distinctExercises.length;
+    this.canShowCountOnce = this.getCanShowCountOnce(exercisedToUse, distinctLength);
+    if (this.canShowCountOnce) {
+      this.oneTimeSchema.schemaString = "";
+      let firstExerciseArray: ExerciseViewModel[] = this.groupedDictionary[exercisedToUse[0].id];
+      for (let index: number = 0; index < firstExerciseArray.length; index++) {
+        const element: ExerciseViewModel = firstExerciseArray[index];
+        if (element.count) {
+          this.oneTimeSchema.schemaString += element.count;
+        }
+        if (element.calories) {
+          this.oneTimeSchema.schemaString += element.calories;
+        }
+        if (index + 1 < firstExerciseArray.length) {
+          this.oneTimeSchema.schemaString += "-";
+        }
       }
     }
   }

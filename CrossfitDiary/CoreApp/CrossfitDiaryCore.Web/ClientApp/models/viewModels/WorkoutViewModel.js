@@ -16,6 +16,8 @@ var WorkoutViewModel = /** @class */ (function () {
         this.children = [];
         this.isInnerWorkout = false;
         this.haveCollapsedVersion = false;
+        this.canShowCountOnce = true;
+        this.groupedDictionary = {};
         this.getDefaultDate = function () {
             var date = new Date();
             var result = ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
@@ -58,7 +60,6 @@ var WorkoutViewModel = /** @class */ (function () {
             if (state_1 === "break")
                 break;
         }
-        debugger;
         var canBeCollapsed = true;
         if (distinctFirst.length === 0) {
             return;
@@ -84,6 +85,36 @@ var WorkoutViewModel = /** @class */ (function () {
             i = i + distinctFirst.length - 1;
         }
         this.haveCollapsedVersion = canBeCollapsed;
+        if (this.haveCollapsedVersion === false) {
+            return;
+        }
+        for (var i = 0; i < exercisedToUse.length; i++) {
+            var exercise = exercisedToUse[i];
+            if (this.groupedDictionary[exercise.id]) {
+                this.groupedDictionary[exercise.id].push(exercise);
+            }
+            else {
+                this.groupedDictionary[exercise.id] = [];
+                this.groupedDictionary[exercise.id].push(exercise);
+            }
+        }
+        debugger;
+        var generalExercisesLength = this.groupedDictionary[exercisedToUse[0].id].length;
+        for (var index = 0; index < generalExercisesLength; index++) {
+            if (this.canShowCountOnce == false) {
+                break;
+            }
+            for (var key in this.groupedDictionary) {
+                var groupArray = this.groupedDictionary[key];
+                if (index + 1 >= generalExercisesLength) {
+                    break;
+                }
+                if (groupArray[index].count != groupArray[index + 1].count) {
+                    this.canShowCountOnce = false;
+                    break;
+                }
+            }
+        }
     };
     WorkoutViewModel.prototype.deserialize = function (input) {
         if (input == null) {

@@ -9,6 +9,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import { ExerciseMeasureViewModel } from "./ExerciseMeasureViewModel";
+import { ExerciseMeasureType } from "./ExerciseMeasureType";
 var ExerciseViewModel = /** @class */ (function () {
     function ExerciseViewModel(input) {
         this.id = 0;
@@ -16,6 +17,9 @@ var ExerciseViewModel = /** @class */ (function () {
         this.isAlternative = false;
         this.isNewWeightMaximum = false;
         this.isDoUnbroken = false;
+        this.count = null;
+        this.weight = null;
+        this.calories = null;
         if (input == null) {
             return;
         }
@@ -27,7 +31,15 @@ var ExerciseViewModel = /** @class */ (function () {
         }
         Object.assign(this, input);
         this.exerciseMeasures = input.exerciseMeasures.map(function (x) { return new ExerciseMeasureViewModel().deserialize(x); });
+        this.count = this.getMeasureValue(ExerciseMeasureType.Count);
+        this.weight = this.getMeasureValue(ExerciseMeasureType.Weight);
+        this.calories = this.getMeasureValue(ExerciseMeasureType.Calories);
         return this;
+    };
+    ExerciseViewModel.prototype.getMeasureValue = function (measureType) {
+        var foundCountMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === measureType; });
+        var result = foundCountMeasure ? foundCountMeasure.measureValue : null;
+        return result;
     };
     return ExerciseViewModel;
 }());

@@ -22,22 +22,44 @@
       class="workout-exercises pl-3 pt-1"
       v-if="workoutViewModel.haveCollapsedVersion"
     >
-      <div
-        v-for="group in workoutViewModel.groupedDictionary"
-        :key="`grp_${group[0].id}`"
-      >
-        {{group[0].title}}
-      </div>
-      <div
-        v-for="group in workoutViewModel.groupedDictionary"
-        :key="`${group[0].id}`"
-      >
-        <span
-          v-for="(exercise,index) in group"
-          :key="`grp_${group[0].id}_${exercise.id}_${index}`"
-        >{{exercise.count}}<span v-if="index + 1 < group.length">-</span></span>
-      </div>
+      <div v-if="workoutViewModel.canShowCountOnce == false">
+        <div
+          v-for="group in workoutViewModel.groupedDictionary"
+          :key="`${group[0].id}`"
+        >
+          <span
+            v-for="(exercise,index) in group"
+            :key="`grp_c_${group[0].id}_${exercise.id}_${index}`"
+          >{{exercise.count}}<span v-if="exercise.weight">x{{exercise.weight}}kg</span><span v-if="exercise.calories">{{exercise.calories}}cal</span><span v-if="index + 1 < group.length">-</span></span>
+        </div>
+        <div
+          v-for="group in workoutViewModel.groupedDictionary"
+          :key="`grp_${group[0].id}`"
+        >
+          {{group[0].title}}
+        </div>
 
+      </div>
+      <div v-else>
+        <div>
+          {{workoutViewModel.oneTimeSchema.schemaString}}
+        </div>
+        <div
+          v-for="group in workoutViewModel.groupedDictionary"
+          :key="`grp_${group[0].id}`"
+        >
+          {{group[0].title}}
+          <span v-if="group[0].weight">
+            (<span
+              v-for="(exercise,index) in group"
+              :key="`grp_c_${group[0].id}_${exercise.id}_${index}`"
+            >
+
+              <span v-if="exercise.weight">{{exercise.weight}}kg<span v-if="index + 1 < group.length"> - </span></span>
+            </span>)
+          </span>
+        </div>
+      </div>
     </div>
     <div
       v-else
