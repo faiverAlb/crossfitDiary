@@ -9,37 +9,37 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import { ExerciseMeasureViewModel } from "./ExerciseMeasureViewModel";
+import { ExerciseMeasureType } from "./ExerciseMeasureType";
 var ExerciseViewModel = /** @class */ (function () {
-    function ExerciseViewModel(params) {
+    function ExerciseViewModel(input) {
         this.id = 0;
         this.exerciseMeasures = [];
         this.isAlternative = false;
         this.isNewWeightMaximum = false;
         this.isDoUnbroken = false;
-        if (params == null) {
+        this.count = null;
+        this.weight = null;
+        this.calories = null;
+        if (input == null) {
             return;
         }
-        this.id = params.id;
-        this.title = params.title;
-        this.exerciseMeasures = params.exerciseMeasures;
-        this.isAlternative = params.isAlternative;
-        this.isNewWeightMaximum = params.isNewWeightMaximum;
-        this.isDoUnbroken = params.isDoUnbroken;
-        this.addedToMaxWeightString = params.addedToMaxWeightString;
+        Object.assign(this, input);
     }
     ExerciseViewModel.prototype.deserialize = function (input) {
         if (input == null) {
-            return null;
+            return;
         }
-        return new ExerciseViewModel({
-            id: input.id,
-            title: input.title,
-            exerciseMeasures: input.exerciseMeasures.map(function (x) { return new ExerciseMeasureViewModel().deserialize(x); }),
-            isAlternative: input.isAlternative,
-            isNewWeightMaximum: input.isNewWeightMaximum,
-            isDoUnbroken: input.isDoUnbroken,
-            addedToMaxWeightString: input.addedToMaxWeightString
-        });
+        Object.assign(this, input);
+        this.exerciseMeasures = input.exerciseMeasures.map(function (x) { return new ExerciseMeasureViewModel().deserialize(x); });
+        this.count = this.getMeasureValue(ExerciseMeasureType.Count);
+        this.weight = this.getMeasureValue(ExerciseMeasureType.Weight);
+        this.calories = this.getMeasureValue(ExerciseMeasureType.Calories);
+        return this;
+    };
+    ExerciseViewModel.prototype.getMeasureValue = function (measureType) {
+        var foundCountMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === measureType; });
+        var result = foundCountMeasure ? foundCountMeasure.measureValue : null;
+        return result;
     };
     return ExerciseViewModel;
 }());

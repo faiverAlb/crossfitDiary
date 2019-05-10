@@ -1,7 +1,6 @@
-// import { ExerciseMeasureTypeViewModel } from "./ExerciseMeasureTypeViewModel";
 import { ExerciseMeasureType } from "./ExerciseMeasureType";
 var ExerciseMeasureViewModel = /** @class */ (function () {
-    function ExerciseMeasureViewModel(params) {
+    function ExerciseMeasureViewModel(input) {
         this.measureType = ExerciseMeasureType.Weight;
         this.measureValue = "";
         this.description = "";
@@ -23,26 +22,17 @@ var ExerciseMeasureViewModel = /** @class */ (function () {
                     return "";
             }
         };
-        if (params == null) {
+        if (input == null) {
             return;
         }
-        this.measureType = params.measureType;
-        this.measureValue = params.measureValue;
-        this.description = params.description;
-        this.shortMeasureDescription = params.shortMeasureDescription;
-        this.isRequired = params.isRequired;
+        Object.assign(this, input);
     }
-    ExerciseMeasureViewModel.prototype.deserialize = function (jsonInput) {
-        if (jsonInput == null) {
-            return null;
+    ExerciseMeasureViewModel.prototype.deserialize = function (input) {
+        if (input == null) {
+            return;
         }
-        return new ExerciseMeasureViewModel({
-            measureType: jsonInput.measureType,
-            measureValue: jsonInput.measureValue,
-            description: jsonInput.description,
-            isRequired: jsonInput.isRequired,
-            shortMeasureDescription: jsonInput.shortMeasureDescription
-        });
+        Object.assign(this, input);
+        return this;
     };
     return ExerciseMeasureViewModel;
 }());
