@@ -162,6 +162,7 @@ export class WorkoutViewModel implements Deserializable {
   }
 
   constructor(input?: any) {
+    this.displayPlanDate = this.getDefaultDate();
     if (input == null) {
       return;
     }
