@@ -112,6 +112,8 @@ var WorkoutViewModel = /** @class */ (function () {
         if (input == null) {
             return;
         }
+        this.displayPlanDate = this.getDefaultDate();
+        debugger;
         Object.assign(this, input);
     }
     WorkoutViewModel.prototype.tryCollapseWorkout = function () {
