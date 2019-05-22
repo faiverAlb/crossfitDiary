@@ -1,5 +1,21 @@
 ﻿<template>
   <div>
+    <div>
+      <b-modal
+        ref="weightMaximumsModal"
+        title="Weight maximums"
+      >
+        <div class="weight-maximums">
+          <h3>results will be here</h3>
+        </div>
+        <div slot="modal-footer">
+          <b-button
+            data-dismiss="modal"
+            @click="()=>{this.$refs.weightMaximumsModal.hide();}"
+          >Close</b-button>
+        </div>
+      </b-modal>
+    </div>
     <a
       class="nav-link btn btn-info text-light d-inline-block d-md-none p-0"
       data-toggle="collapse"
@@ -7,6 +23,7 @@
       role="button"
       aria-expanded="false"
       aria-controls="collapseExample"
+      @click="showMaximums"
     >
       <div class="small-action-link-button">
         <div class="icon-container">
@@ -25,6 +42,7 @@
       role="button"
       aria-expanded="false"
       aria-controls="collapseExample"
+      @click="showMaximums"
     >
       <svg class="svg-inline w-18">
         <use xlink:href="#trophy-icon"></use>
@@ -36,10 +54,24 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+import bModal from "bootstrap-vue/es/components/modal/modal";
+import Spinner from "vue-spinner-component/src/Spinner.vue";
+import bButton from "bootstrap-vue/es/components/button/button";
 @Component({
-  components: {}
+  components: {
+    bModal,
+    bButton
+  }
 })
-export default class WeightMaximumNavComponent extends Vue {}
+export default class WeightMaximumNavComponent extends Vue {
+  $refs: {
+    weightMaximumsModal: HTMLFormElement;
+  };
+
+  showMaximums(): void {
+    this.$refs.weightMaximumsModal.show();
+  }
+}
 </script>
 
 <style>
