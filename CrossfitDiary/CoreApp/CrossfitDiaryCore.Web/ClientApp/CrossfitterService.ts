@@ -4,6 +4,7 @@ import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
 import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
+import { PersonWeightMaximum } from "./models/viewModels/PersonWeightMaximum";
 
 export default class CrossfitterService {
   // tslint:disable-next-line:max-line-length
@@ -40,6 +41,11 @@ export default class CrossfitterService {
     });
   };
 
+  public getWeightsMaximums = (): Promise<PersonWeightMaximum[]> => {
+    return axios.get<PersonWeightMaximum[]>("api/getWeightsMaximums").then(jsonData => {
+      return jsonData.data.map(x => new PersonWeightMaximum().deserialize(x));
+    });
+  };
   public removeWorkout = crossfitterWorkoutId => {
     return axios.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
   };

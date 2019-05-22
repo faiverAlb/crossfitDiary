@@ -4,6 +4,7 @@ import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
 import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
+import { PersonWeightMaximum } from "./models/viewModels/PersonWeightMaximum";
 var CrossfitterService = /** @class */ (function () {
     function CrossfitterService() {
         // tslint:disable-next-line:max-line-length
@@ -33,6 +34,11 @@ var CrossfitterService = /** @class */ (function () {
         this.getExerciseMaximums = function () {
             return axios.get("api/getExerciseMaximums").then(function (jsonData) {
                 return jsonData.data.map(function (x) { return new PersonMaximumViewModel().deserialize(x); });
+            });
+        };
+        this.getWeightsMaximums = function () {
+            return axios.get("api/getWeightsMaximums").then(function (jsonData) {
+                return jsonData.data.map(function (x) { return new PersonWeightMaximum().deserialize(x); });
             });
         };
         this.removeWorkout = function (crossfitterWorkoutId) {

@@ -33,7 +33,7 @@
         </div>
         <div class="text-container">MAX</div>
       </div>
-      <span class="d-none d-md-inline">Vue Weight maximums</span>
+      <span class="d-none d-md-inline">Weight maximums</span>
     </a>
     <a
       class="nav-link btn btn-info text-light d-none d-md-inline-block"
@@ -47,7 +47,7 @@
       <svg class="svg-inline w-18">
         <use xlink:href="#trophy-icon"></use>
       </svg>
-      <span class="d-none d-md-inline">Vue Weight maximums</span>
+      <span class="d-none d-md-inline">Weight maximums</span>
     </a>
   </div>
 </template>
@@ -57,6 +57,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
 import bButton from "bootstrap-vue/es/components/button/button";
+import CrossfitterService from "../../CrossfitterService";
 @Component({
   components: {
     bModal,
@@ -64,10 +65,15 @@ import bButton from "bootstrap-vue/es/components/button/button";
   }
 })
 export default class WeightMaximumNavComponent extends Vue {
+  _apiService: CrossfitterService = new CrossfitterService();
   $refs: {
     weightMaximumsModal: HTMLFormElement;
   };
 
+  mounted() {
+    this._apiService = new CrossfitterService();
+    this._apiService.getWeightsMaximums();
+  }
   showMaximums(): void {
     this.$refs.weightMaximumsModal.show();
   }
