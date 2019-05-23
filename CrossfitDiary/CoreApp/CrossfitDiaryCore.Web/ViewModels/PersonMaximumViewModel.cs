@@ -8,6 +8,9 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("exerciseId")]
         public int ExerciseId { get; set; }
 
+        [JsonProperty("exerciseTitle")]
+        public string ExerciseTitle { get; set; }
+
         [JsonProperty("maximumWeight")]
         public double? MaximumWeight { get; set; }
 

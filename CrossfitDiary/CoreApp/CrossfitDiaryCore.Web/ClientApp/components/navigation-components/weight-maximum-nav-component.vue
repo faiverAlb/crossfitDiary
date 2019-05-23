@@ -6,7 +6,10 @@
         title="Weight maximums"
       >
         <div class="weight-maximums">
-          <h3>results will be here</h3>
+          <b-table
+            :items="personMaximums"
+            :fields="['exerciseTitle','maximumWeight','maximumAlternativeWeight']"
+          ></b-table>
         </div>
         <div slot="modal-footer">
           <b-button
@@ -57,11 +60,14 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
 import bButton from "bootstrap-vue/es/components/button/button";
+import bTable from "bootstrap-vue/es/components/table/table";
 import CrossfitterService from "../../CrossfitterService";
+import { PersonMaximumViewModel } from "../../models/viewModels/PersonMaximumViewModel";
 @Component({
   components: {
     bModal,
-    bButton
+    bButton,
+    bTable
   }
 })
 export default class WeightMaximumNavComponent extends Vue {
@@ -70,9 +76,13 @@ export default class WeightMaximumNavComponent extends Vue {
     weightMaximumsModal: HTMLFormElement;
   };
 
+  personMaximums: PersonMaximumViewModel[] = [];
+
   mounted() {
     this._apiService = new CrossfitterService();
-    this._apiService.getWeightsMaximums();
+    this._apiService.getWeightsMaximums().then(data => {
+      this.personMaximums = data;
+    });
   }
   showMaximums(): void {
     this.$refs.weightMaximumsModal.show();
