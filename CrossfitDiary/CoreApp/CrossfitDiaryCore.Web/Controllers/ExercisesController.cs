@@ -74,7 +74,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         public List<PersonMaximumViewModel> GetWeightsMaximums()
         {
             string currentUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            List<TempPersonMaximum> personMaxumumsByExercise = _readWorkoutsService.GetPersonMaxumums(currentUserId);
+            List<TempPersonMaximum> personMaxumumsByExercise = _readWorkoutsService.GetPersonMaxumumsOneWeight(currentUserId);
             return _mapper.Map<List<PersonMaximumViewModel>>(personMaxumumsByExercise);
 
         }

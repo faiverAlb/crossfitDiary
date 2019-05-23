@@ -8,7 +8,7 @@
         <div class="weight-maximums">
           <b-table
             :items="personMaximums"
-            :fields="['exerciseTitle','maximumWeight','maximumAlternativeWeight']"
+            :fields="['exerciseTitle','maximumWeight']"
           ></b-table>
         </div>
         <div slot="modal-footer">
