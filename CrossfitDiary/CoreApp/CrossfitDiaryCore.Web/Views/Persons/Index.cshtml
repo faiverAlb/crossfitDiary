@@ -5,6 +5,28 @@
     workouter.showOnlyUserWods = @{@Html.Raw(JsonConvert.SerializeObject(ViewBag.showOnlyUserWods));};
 </script>
 
+
+@section maximumsNavbarItem {
+    <li class="nav-item mr-1 disabled" id="nav-bar-max-container">
+            <a class="nav-link btn btn-info text-light d-inline-block d-md-none p-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <div class="small-action-link-button">
+                    <div class="icon-container">
+                        <svg class="svg-inline w-18"><use xlink:href="#trophy-icon"></use></svg>
+                    </div>
+                    <div class="text-container">MAX</div>
+                </div>
+                <span class="d-none d-md-inline">Loading...</span>
+            </a>
+            <a class="nav-link btn btn-info text-light d-none d-md-inline-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <svg class="svg-inline w-18"><use xlink:href="#trophy-icon"></use></svg>
+                <span class="d-none d-md-inline">Loading...</span>
+            </a>
+        </li>
+    <script src="~/dist/generated/max-navbar-entry.js" asp-append-version="true"></script>
+
+}
+
+
 @section scripts {
     <script src="~/dist/generated/persons-entry.js" asp-append-version="true"></script>
 }

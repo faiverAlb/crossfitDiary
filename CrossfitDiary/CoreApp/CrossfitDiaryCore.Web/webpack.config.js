@@ -29,6 +29,7 @@ module.exports = (env) => {
       'persons-entry': './ClientApp/persons-entry.ts',
       'login': './ClientApp/login-page-entry',
       'workout-entry': './ClientApp/workout-entry.ts',
+      'max-navbar-entry': './ClientApp/max-navbar-entry.ts',
     },
     output: {
       path: path.join(__dirname, destinationFolder),
