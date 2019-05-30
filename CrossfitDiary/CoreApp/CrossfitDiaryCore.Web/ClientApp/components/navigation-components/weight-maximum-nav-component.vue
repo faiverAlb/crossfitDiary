@@ -9,6 +9,7 @@
           <b-table
             :items="personMaximums"
             :fields="['exerciseTitle','maximumWeight']"
+            :small="true"
           ></b-table>
         </div>
         <div slot="modal-footer">
