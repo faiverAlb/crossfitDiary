@@ -40,6 +40,11 @@ export default class CrossfitterService {
     });
   };
 
+  public getWeightsMaximums = (): Promise<PersonMaximumViewModel[]> => {
+    return axios.get<PersonMaximumViewModel[]>("api/getWeightsMaximums").then(jsonData => {
+      return jsonData.data.map(x => new PersonMaximumViewModel().deserialize(x));
+    });
+  };
   public removeWorkout = crossfitterWorkoutId => {
     return axios.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
   };

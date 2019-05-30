@@ -109,11 +109,10 @@ var WorkoutViewModel = /** @class */ (function () {
             }
             return canShowCountOnce;
         };
+        this.displayPlanDate = this.getDefaultDate();
         if (input == null) {
             return;
         }
-        this.displayPlanDate = this.getDefaultDate();
-        debugger;
         Object.assign(this, input);
     }
     WorkoutViewModel.prototype.tryCollapseWorkout = function () {

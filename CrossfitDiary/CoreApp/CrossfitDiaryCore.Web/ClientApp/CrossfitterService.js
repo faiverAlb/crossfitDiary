@@ -35,6 +35,11 @@ var CrossfitterService = /** @class */ (function () {
                 return jsonData.data.map(function (x) { return new PersonMaximumViewModel().deserialize(x); });
             });
         };
+        this.getWeightsMaximums = function () {
+            return axios.get("api/getWeightsMaximums").then(function (jsonData) {
+                return jsonData.data.map(function (x) { return new PersonMaximumViewModel().deserialize(x); });
+            });
+        };
         this.removeWorkout = function (crossfitterWorkoutId) {
             return axios.delete("api/removeWorkout/" + crossfitterWorkoutId);
         };

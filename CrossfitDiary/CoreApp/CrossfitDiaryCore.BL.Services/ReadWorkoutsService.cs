@@ -200,6 +200,10 @@ namespace CrossfitDiaryCore.BL.Services
         {
             return _dapperRepository.GetPersonMaxumums(userId).ToList();
         }
+        public List<TempPersonMaximum> GetPersonMaxumumsOneWeight(string userId)
+        {
+            return _dapperRepository.GetPersonMaxumumsOneWeight(userId).ToList();
+        }
 
         public List<LeaderboardItemModel> GetLeaderboardByWorkout(int crossfitterWorkoutId)
         {

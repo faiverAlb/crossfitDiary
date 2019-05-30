@@ -205,6 +205,24 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                 return db.Query<TempPersonMaximum>(sql, new {userId});
             }
         }
+        public IEnumerable<TempPersonMaximum> GetPersonMaxumumsOneWeight(string userId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = @"SELECT x.*,e.Title as ExerciseTitle FROM
+                                (SELECT [RoutineSimple].ExerciseId as ExerciseId, MAX([RoutineSimple].Weight) as MaximumWeight, Max([RoutineSimple].AlternativeWeight) as MaximumAlternativeWeight
+                                    FROM [RoutineSimple]
+                                    INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
+                                    INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+                                    WHERE [CrossfitterWorkout].CrossfitterId = @userId AND (([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS  NULL) 
+	                                OR ([RoutineSimple].AlternativeWeight IS NOT NULL AND [RoutineSimple].Weight IS NULL ))
+                                    GROUP BY [RoutineSimple].ExerciseId
+                                ) as x
+                                INNER JOIN [Exercise] e ON [x].ExerciseId = e.Id
+                                ORDER BY e.Title";
+                return db.Query<TempPersonMaximum>(sql, new {userId});
+            }
+        }
         public IEnumerable<TempPersonMaximum> GetPersonMainMaxumumsOnly(string userId)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))

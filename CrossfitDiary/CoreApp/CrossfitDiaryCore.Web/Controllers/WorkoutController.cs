@@ -214,24 +214,5 @@ namespace CrossfitDiaryCore.Web.Controllers
 //            _memoryCache.Remove(_plannedWorkouts);
         }
 
-
-        //
-        //        /// <summary>
-        //        /// Get person logging info by crossfit workout id
-        //        /// </summary>
-        //        /// <param name="preselectedCrossfitterWorkoutId">
-        //        /// The preselected crossfitter workout id.
-        //        /// </param>
-        //        /// <returns>
-        //        /// The <see cref="IHttpActionResult"/>.
-        //        /// </returns>
-        //        [HttpGet]
-        //        [Route("getPersonLoggingInfo/{preselectedCrossfitterWorkoutId}")]
-        //        public ToLogWorkoutViewModel GetPersonLoggingInfo(int preselectedCrossfitterWorkoutId)
-        //        {
-        //            CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(preselectedCrossfitterWorkoutId);
-        //            var toLogWorkoutViewModel = Mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout);
-        //            return toLogWorkoutViewModel;
-        //        }
     }
 }
