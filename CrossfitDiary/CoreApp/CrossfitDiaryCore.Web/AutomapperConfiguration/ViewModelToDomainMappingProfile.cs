@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using AutoMapper;
 using CrossfitDiaryCore.Model;
+using CrossfitDiaryCore.Web.AutomapperConfiguration.Resolvers;
 using CrossfitDiaryCore.Web.ViewModels;
 
 namespace CrossfitDiaryCore.Web.AutomapperConfiguration
@@ -51,7 +52,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
             CreateMap<ToLogWorkoutViewModel, CrossfitterWorkout>()
                 .ForMember(x => x.RoutineComplexId, x => x.MapFrom(y => y.SelectedWorkoutId))
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.CrossfitterWorkoutId))
-                .ForMember(x => x.Date, x => x.MapFrom(y => DateTime.Parse(y.DisplayDate)))
+                .ForMember(x => x.Date, x => x.ResolveUsing<DateTimeParser>())
                 .ForMember(x => x.IsModified, x => x.MapFrom(y => !y.IsRx))
                 .ForMember(x => x.TimePassed, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimePassed)));
         }
