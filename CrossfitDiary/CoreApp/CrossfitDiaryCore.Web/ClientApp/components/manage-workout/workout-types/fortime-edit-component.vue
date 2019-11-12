@@ -282,18 +282,18 @@ library.add(faClock, faHashtag, faCalendar);
 /* public components */
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Vue, Component, Prop } from "vue-property-decorator";
-import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
-import bAlert from "bootstrap-vue/es/components/alert/alert";
-import bButton from "bootstrap-vue/es/components/button/button";
-import bButtonGroup from "bootstrap-vue/es/components/button-group/button-group";
-import bModal from "bootstrap-vue/es/components/modal/modal";
+import {BFormInput} from "bootstrap-vue";
+import {BAlert} from "bootstrap-vue";
+import {BButton} from "bootstrap-vue";
+import {BButtonGroup} from "bootstrap-vue";
+import {BModal} from "bootstrap-vue";
 import datePicker from "vue-bootstrap-datetimepicker";
 import { mask } from "vue-the-mask";
-import { InputGroup } from "bootstrap-vue/es/components";
+import { InputGroupPlugin } from "bootstrap-vue";
 import VeeValidate from "vee-validate";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
-import BFormTextarea from "bootstrap-vue/es/components/form-textarea/form-textarea";
-Vue.use(InputGroup);
+import {BFormTextarea} from "bootstrap-vue";
+Vue.use(InputGroupPlugin);
 Vue.use(VeeValidate);
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 
@@ -328,12 +328,12 @@ declare var workouter: {
     FontAwesomeIcon,
     ExercisesListComponent,
     datePicker,
-    bFormInput,
+    BFormInput,
     BFormTextarea,
-    bAlert,
-    bButton,
-    bButtonGroup,
-    bModal,
+    BAlert,
+    BButton,
+    BButtonGroup,
+    BModal,
     Spinner,
     ErrorAlertComponent,
     EditPlannedWorkoutComponent

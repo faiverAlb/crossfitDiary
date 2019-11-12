@@ -56,11 +56,11 @@
 /* Font awesome icons */
 /* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import bModal from "bootstrap-vue/es/components/modal/modal";
+import {BModal} from "bootstrap-vue";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
-import BFormCheckbox from "bootstrap-vue/es/components/form-checkbox/form-checkbox";
-import bButton from "bootstrap-vue/es/components/button/button";
-import BTable from "bootstrap-vue/es/components/table/table";
+import {BFormCheckbox} from "bootstrap-vue";
+import {BButton} from "bootstrap-vue";
+import {TablePlugin} from "bootstrap-vue";
 
 /* app components */
 import PersonsActivitesItemComponent from "./person-activities-item-component.vue";
@@ -69,15 +69,15 @@ import { ToLogWorkoutViewModel } from "../models/viewModels/ToLogWorkoutViewMode
 
 import CrossfitterService from "../CrossfitterService";
 import { LeaderboardItemViewModel } from "../models/viewModels/LeaderboardItemViewModel";
+Vue.use(TablePlugin);
 
 @Component({
   components: {
     PersonsActivitesItemComponent,
-    bModal,
+    BModal,
     BFormCheckbox,
-    bButton,
-    Spinner,
-    BTable
+    BButton,
+    Spinner
   }
 })
 export default class PersonsActivitesComponent extends Vue {

@@ -58,17 +58,19 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import bModal from "bootstrap-vue/es/components/modal/modal";
+import {BModal} from "bootstrap-vue";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
-import bButton from "bootstrap-vue/es/components/button/button";
-import bTable from "bootstrap-vue/es/components/table/table";
+import {BButton} from "bootstrap-vue";
+import {TablePlugin}  from "bootstrap-vue";
 import CrossfitterService from "../../CrossfitterService";
 import { PersonMaximumViewModel } from "../../models/viewModels/PersonMaximumViewModel";
+Vue.use(TablePlugin);
+
 @Component({
   components: {
-    bModal,
-    bButton,
-    bTable
+    BModal,
+    BButton,
+    // TablePlugin
   }
 })
 export default class WeightMaximumNavComponent extends Vue {
