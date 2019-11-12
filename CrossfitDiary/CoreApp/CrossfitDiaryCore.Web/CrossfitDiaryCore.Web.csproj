@@ -71,6 +71,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
 
   <Target Name="BuildClientAssets" AfterTargets="ComputeFilesToPublish">
     <Exec Command="npm install" />
