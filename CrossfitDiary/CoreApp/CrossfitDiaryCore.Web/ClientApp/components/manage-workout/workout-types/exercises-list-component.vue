@@ -196,19 +196,19 @@ library.add(faLongArrowAltUp, faLongArrowAltDown, faPlus, faTrash);
 
 /* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import bFormSelect from "bootstrap-vue/es/components/form-select/form-select";
-import bDropdown from "bootstrap-vue/es/components/dropdown/dropdown";
-import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
-import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-item-button";
-import bDropdownDivider from "bootstrap-vue/es/components/dropdown/dropdown-divider";
-import BDropdownForm from "bootstrap-vue/es/components/dropdown/dropdown-form";
-import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
-import { InputGroup } from "bootstrap-vue/es/components";
-Vue.use(InputGroup);
+import {BFormSelect} from "bootstrap-vue";
+import {BDropdown} from "bootstrap-vue";
+import {BDropdownItem} from "bootstrap-vue";
+import {BDropdownItemButton} from "bootstrap-vue";
+import {BDropdownDivider} from "bootstrap-vue";
+import {BDropdownForm} from "bootstrap-vue";
+import {BFormInput} from "bootstrap-vue";
+import { InputGroupPlugin } from "bootstrap-vue";
+Vue.use(InputGroupPlugin);
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { State, Action, Getter } from "vuex-class";
-import bButton from "bootstrap-vue/es/components/button/button";
-import BFormGroup from "bootstrap-vue/es/components/form-group/form-group";
+import {BButton} from "bootstrap-vue";
+import {BFormGroup} from "bootstrap-vue";
 
 /* app components */
 /* models and styles */
@@ -224,14 +224,14 @@ const namespace: string = "workoutEdit";
 
 @Component({
   components: {
-    bFormSelect,
-    bDropdown,
-    bDropdownItem,
-    bDropdownItemButton,
-    bDropdownDivider,
+    BFormSelect,
+    BDropdown,
+    BDropdownItem,
+    BDropdownItemButton,
+    BDropdownDivider,
     BDropdownForm,
-    bFormInput,
-    bButton,
+    BFormInput,
+    BButton,
     BFormGroup,
     FontAwesomeIcon
   }

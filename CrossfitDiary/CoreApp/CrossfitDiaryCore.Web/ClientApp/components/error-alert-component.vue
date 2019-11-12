@@ -15,11 +15,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import bAlert from "bootstrap-vue/es/components/alert/alert";
+import { BAlert } from "bootstrap-vue";
 import { ErrorAlertModel } from "../models/viewModels/ErrorAlertModel";
 
 @Component({
-  components: { bAlert }
+  components: { BAlert }
 })
 export default class ErrorAlertComponent extends Vue {
   @Prop() errorAlertModel: ErrorAlertModel;

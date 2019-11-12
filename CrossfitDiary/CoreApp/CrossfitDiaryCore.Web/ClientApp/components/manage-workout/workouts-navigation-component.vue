@@ -239,9 +239,9 @@ library.add(
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { State, Action, Getter } from "vuex-class";
-import bDropdown from "bootstrap-vue/es/components/dropdown/dropdown";
-import bDropdownItem from "bootstrap-vue/es/components/dropdown/dropdown-item";
-import bDropdownItemButton from "bootstrap-vue/es/components/dropdown/dropdown-item-button";
+import {BDropdown} from "bootstrap-vue";
+import {BDropdownItem} from "bootstrap-vue";
+import {BDropdownItemButton} from "bootstrap-vue";
 
 const namespace: string = "workoutEdit";
 import { WorkoutType } from "../../models/viewModels/WorkoutType";
@@ -252,7 +252,7 @@ declare var workouter: {
 };
 
 @Component({
-  components: { FontAwesomeIcon, bDropdown, bDropdownItem }
+  components: { FontAwesomeIcon, BDropdown, BDropdownItem }
 })
 export default class WorkoutsNavigationComponent extends Vue {
   private routes = [

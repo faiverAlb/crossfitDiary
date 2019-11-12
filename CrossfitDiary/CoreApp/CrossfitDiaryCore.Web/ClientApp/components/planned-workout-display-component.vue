@@ -302,15 +302,15 @@ library.add(
 /* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import bButtonGroup from "bootstrap-vue/es/components/button-group/button-group";
-import bButton from "bootstrap-vue/es/components/button/button";
-import bModal from "bootstrap-vue/es/components/modal/modal";
-import bFormInput from "bootstrap-vue/es/components/form-input/form-input";
+import {BButtonGroup} from "bootstrap-vue";
+import {BButton} from "bootstrap-vue";
+import {BModal} from "bootstrap-vue";
+import {BFormInput} from "bootstrap-vue";
 import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
-import { InputGroup } from "bootstrap-vue/es/components";
-import BFormTextarea from "bootstrap-vue/es/components/form-textarea/form-textarea";
-Vue.use(InputGroup);
+import { InputGroupPlugin } from "bootstrap-vue";
+import {BFormTextarea} from "bootstrap-vue";
+Vue.use(InputGroupPlugin);
 import { mask } from "vue-the-mask";
 
 /* app components */
@@ -327,10 +327,10 @@ import {
   components: {
     FontAwesomeIcon,
     WorkoutDisplayComponent,
-    bButtonGroup,
-    bButton,
-    bModal,
-    bFormInput,
+    BButtonGroup,
+    BButton,
+    BModal,
+    BFormInput,
     datePicker,
     BFormTextarea
   },

@@ -4,7 +4,7 @@ dom.watch(); // This will kick of the initial replacement of i to svg tags and c
 /* public components */
 import Vue from "vue";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
-import BFormCheckbox from "bootstrap-vue/es/components/form-checkbox/form-checkbox";
+import { BFormCheckbox } from "bootstrap-vue";
 /* app components */
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 import PlannedWorkoutDisplayComponent from "./components/planned-workout-display-component.vue";

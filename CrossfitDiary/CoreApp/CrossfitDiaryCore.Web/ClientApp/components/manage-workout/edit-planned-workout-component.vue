@@ -76,11 +76,11 @@ library.add(faCalendar);
 
 /* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
-import bModal from "bootstrap-vue/es/components/modal/modal";
+import {BModal} from "bootstrap-vue";
 import datePicker from "vue-bootstrap-datetimepicker";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import bButtonGroup from "bootstrap-vue/es/components/button-group/button-group";
-import bButton from "bootstrap-vue/es/components/button/button";
+import {BButtonGroup} from "bootstrap-vue";
+import {BButton} from "bootstrap-vue";
 
 /* app components */
 /* models and styles */
@@ -90,7 +90,7 @@ import {
 } from "../../models/viewModels/WorkoutViewModel";
 
 @Component({
-  components: { bModal, datePicker, FontAwesomeIcon, bButtonGroup, bButton }
+  components: { BModal, datePicker, FontAwesomeIcon, BButtonGroup, BButton }
 })
 export default class EditPlannedWorkoutComponent extends Vue {
   @Prop() planningWorkout: WorkoutViewModel;
