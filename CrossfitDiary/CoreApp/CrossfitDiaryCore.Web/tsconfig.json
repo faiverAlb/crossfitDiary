@@ -8,10 +8,11 @@
     "noImplicitAny": false,
     "noImplicitReturns": false,
     "target": "es5",
-    "lib": ["es5", "es2015", "dom", "scripthost"],
+    "lib": [ "es5", "es2015", "dom", "scripthost" ],
     "sourceMap": true,
     "skipDefaultLibCheck": true,
-    "strict": false
+    "strict": false,
+    "skipLibCheck": true
     //,"types": [ "webpack-env" ]
   },
   "exclude": [
