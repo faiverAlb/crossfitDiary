@@ -7,7 +7,10 @@ import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemVie
 
 export default class CrossfitterService {
   // tslint:disable-next-line:max-line-length
-  public createAndLogWorkout = (model: { newWorkoutViewModel: WorkoutViewModel; logWorkoutViewModel: ToLogWorkoutViewModel }) => {
+  public createAndLogWorkout = (model: {
+    newWorkoutViewModel: WorkoutViewModel;
+    logWorkoutViewModel: ToLogWorkoutViewModel;
+  }) => {
     return axios.post("api/createAndLogNewWorkout", model);
   };
 
@@ -17,17 +20,28 @@ export default class CrossfitterService {
   };
 
   // tslint:disable-next-line:max-line-length
-  public getAllCrossfittersWorkouts = (page?: number, pageSize?: number): Promise<ToLogWorkoutViewModel[]> => {
-    return axios.get(`api/getAllCrossfittersWorkouts?page=${page}&pageSize=${pageSize}`).then(jsonData => {
-      return jsonData.data.map(x => new ToLogWorkoutViewModel().deserialize(x));
-    });
+  public getAllCrossfittersWorkouts = (
+    page?: number,
+    pageSize?: number
+  ): Promise<ToLogWorkoutViewModel[]> => {
+    return axios
+      .get(`api/getAllCrossfittersWorkouts?page=${page}&pageSize=${pageSize}`)
+      .then(jsonData => {
+        return jsonData.data.map(x =>
+          new ToLogWorkoutViewModel().deserialize(x)
+        );
+      });
   };
   public getPlannedWorkoutsForToday = (): Promise<WorkoutViewModel[]> => {
     return axios.get(`api/getPlannedWorkoutsForToday`).then(jsonData => {
       return jsonData.data.map(x => new WorkoutViewModel().deserialize(x));
     });
   };
-
+  public getWorkoutsList = (): Promise<WorkoutViewModel[]> => {
+    return axios.get(`api/getWorkoutsList`).then(jsonData => {
+      return jsonData.data.map(x => new WorkoutViewModel().deserialize(x));
+    });
+  };
   public getExercises = (): Promise<ExerciseViewModel[]> => {
     return axios.get<ExerciseViewModel[]>("api/getExercises").then(jsonData => {
       return jsonData.data.map(x => new ExerciseViewModel().deserialize(x));
@@ -35,15 +49,23 @@ export default class CrossfitterService {
   };
 
   public getExerciseMaximums = (): Promise<PersonMaximumViewModel[]> => {
-    return axios.get<PersonMaximumViewModel[]>("api/getExerciseMaximums").then(jsonData => {
-      return jsonData.data.map(x => new PersonMaximumViewModel().deserialize(x));
-    });
+    return axios
+      .get<PersonMaximumViewModel[]>("api/getExerciseMaximums")
+      .then(jsonData => {
+        return jsonData.data.map(x =>
+          new PersonMaximumViewModel().deserialize(x)
+        );
+      });
   };
 
   public getWeightsMaximums = (): Promise<PersonMaximumViewModel[]> => {
-    return axios.get<PersonMaximumViewModel[]>("api/getWeightsMaximums").then(jsonData => {
-      return jsonData.data.map(x => new PersonMaximumViewModel().deserialize(x));
-    });
+    return axios
+      .get<PersonMaximumViewModel[]>("api/getWeightsMaximums")
+      .then(jsonData => {
+        return jsonData.data.map(x =>
+          new PersonMaximumViewModel().deserialize(x)
+        );
+      });
   };
   public removeWorkout = crossfitterWorkoutId => {
     return axios.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
@@ -54,13 +76,24 @@ export default class CrossfitterService {
   };
 
   public setShowOnlyUserWods = (showOnlyUserWods: boolean) => {
-    return axios.post(`api/setShowOnlyUserWods?showOnlyUserWods=${showOnlyUserWods}`);
+    return axios.post(
+      `api/setShowOnlyUserWods?showOnlyUserWods=${showOnlyUserWods}`
+    );
   };
 
-  public getLeaderboardByWorkout = (crossfitterWorkoutId): Promise<LeaderboardItemViewModel[]> => {
+  public getLeaderboardByWorkout = (
+    crossfitterWorkoutId
+  ): Promise<LeaderboardItemViewModel[]> => {
     // tslint:disable-next-line:max-line-length
-    return axios.get<LeaderboardItemViewModel[]>("api/getLeaderboardByWorkout?crossfitterWorkoutId=" + crossfitterWorkoutId).then(jsonData => {
-      return jsonData.data.map(x => new LeaderboardItemViewModel().deserialize(x));
-    });
+    return axios
+      .get<LeaderboardItemViewModel[]>(
+        "api/getLeaderboardByWorkout?crossfitterWorkoutId=" +
+          crossfitterWorkoutId
+      )
+      .then(jsonData => {
+        return jsonData.data.map(x =>
+          new LeaderboardItemViewModel().deserialize(x)
+        );
+      });
   };
 }

@@ -36,16 +36,8 @@
 // C:\TestProjects\crossfitDiary\CrossfitDiary\CoreApp\CrossfitDiaryCore.Web\node_modules\bootstrap\scss\_variables.scss
 @import "./general.scss";
 
-.home-container {
-  .personal-maximums {
-    .item {
-      cursor: pointer;
-      text-decoration: none;
-    }
-  }
-
-  .activities-list,
-  .planned-workouts {
+.wods-library-container {
+  .workouts-list {
     .done-item {
       background: #f6f1ed;
       box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.05);

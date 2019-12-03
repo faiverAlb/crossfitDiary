@@ -127,6 +127,23 @@ namespace CrossfitDiaryCore.Web.Controllers
 //            return workoutViewModels;
         }
 
+
+        /// <summary>
+        ///     Get workouts list
+        /// </summary>
+        /// <returns>All available workouts to do</returns>
+        [HttpGet]
+        [Route("api/getWorkoutsList")]
+        public List<WorkoutViewModel> GetWorkoutsList()
+        {
+            List<RoutineComplex> workouts = _readWorkoutsService.GetWorkoutsList();
+            List<WorkoutViewModel> allResults = workouts
+                .Select(_mapper.Map<WorkoutViewModel>)
+                .ToList();
+
+            return allResults.OrderByDescending(x => x.Id).ToList();
+        }
+
         /// <summary>
         ///     Get planned workouts
         /// </summary>

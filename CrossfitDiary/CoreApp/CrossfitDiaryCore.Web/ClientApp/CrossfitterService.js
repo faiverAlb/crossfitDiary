@@ -25,6 +25,11 @@ var CrossfitterService = /** @class */ (function () {
                 return jsonData.data.map(function (x) { return new WorkoutViewModel().deserialize(x); });
             });
         };
+        this.getWorkoutsList = function () {
+            return axios.get("api/getWorkoutsList").then(function (jsonData) {
+                return jsonData.data.map(function (x) { return new WorkoutViewModel().deserialize(x); });
+            });
+        };
         this.getExercises = function () {
             return axios.get("api/getExercises").then(function (jsonData) {
                 return jsonData.data.map(function (x) { return new ExerciseViewModel().deserialize(x); });

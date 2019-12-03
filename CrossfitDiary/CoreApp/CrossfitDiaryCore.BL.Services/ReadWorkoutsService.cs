@@ -195,6 +195,18 @@ namespace CrossfitDiaryCore.BL.Services
                 });
             return routines;
         }
+        public List<RoutineComplex> GetWorkoutsList()
+        {
+            List<RoutineComplex> routines = _context.ComplexRoutines
+                .Include(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .Include(x => x.Children)
+                .ThenInclude(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures).ToList();
+            return routines;
+        }
 
         public List<TempPersonMaximum> GetPersonMaxumums(string userId)
         {
