@@ -14,18 +14,8 @@
       </div>
     </div>
     <div class="container workouts-list">
-      <div class="" v-for="item in workouts" :key="item.id">
-        <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
-          <div class="item-header d-flex flex-row justify-content-between  ">
-            <div class="username">
-              <span class="text-info">
-                Scaled
-              </span>
-            </div>
-            <div class="">
-              Today
-            </div>
-          </div>
+      <div class="py-2" v-for="item in workouts" :key="item.id">
+        <div class="wod-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
           <div class="item-body pt-1">
             <WorkoutDisplayComponent
               :workoutViewModel="item"
