@@ -22,7 +22,14 @@
             ></WorkoutDisplayComponent>
           </div>
           <div class="item-footer text-right pt-2">
-            <div class="action-buttons"></div>
+            <div class="action-buttons">
+              <a class="edit-workout-action pointer text-danger">
+                Plan it for today
+                <font-awesome-icon
+                  :icon="['fas', 'calendar']"
+                ></font-awesome-icon>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -31,8 +38,15 @@
 </template>
 
 <script lang="ts">
+/* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 /* Font awesome icons */
+import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
+import { library } from "@fortawesome/fontawesome-svg-core";
+library.add(faCalendar);
+
 import { dom } from "@fortawesome/fontawesome-svg-core";
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 
@@ -53,7 +67,12 @@ const apiService: CrossfitterService = new CrossfitterService();
 
 @Component({
   name: "WodsComponent",
-  components: { ErrorAlertComponent, WorkoutDisplayComponent, Spinner }
+  components: {
+    ErrorAlertComponent,
+    WorkoutDisplayComponent,
+    Spinner,
+    FontAwesomeIcon
+  }
 })
 export default class WodsComponent extends Vue {
   workouts: WorkoutViewModel[] = null;
