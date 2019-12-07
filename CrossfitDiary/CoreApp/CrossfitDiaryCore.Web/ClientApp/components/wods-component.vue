@@ -9,26 +9,34 @@
           :depth="spinner.depth"
           :rotation="spinner.rotation"
           :speed="spinner.speed"
-        >
-        </spinner>
+        ></spinner>
       </div>
     </div>
     <div class="container workouts-list">
       <div class="py-2" v-for="item in workouts" :key="item.id">
         <div class="wod-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
           <div class="item-body pt-1">
-            <WorkoutDisplayComponent
-              :workoutViewModel="item"
-            ></WorkoutDisplayComponent>
+            <WorkoutDisplayComponent :workoutViewModel="item"></WorkoutDisplayComponent>
           </div>
           <div class="item-footer text-right pt-2">
             <div class="action-buttons">
-              <a class="edit-workout-action pointer text-danger">
-                Plan it for today
-                <font-awesome-icon
-                  :icon="['fas', 'calendar']"
-                ></font-awesome-icon>
-              </a>
+              <b-button-group class="btn-group d-flex" size="sm">
+                <b-button
+                  class
+                  variant="success"
+                  v-on:click="planWodToday(item.id, 0)"
+                >Plan as Sc today</b-button>
+                <b-button
+                  class
+                  variant="warning"
+                  v-on:click="planWodToday(item.id, 1)"
+                >Plan as Rx today</b-button>
+                <b-button
+                  class
+                  variant="danger"
+                  v-on:click="planWodToday(item.id, 2)"
+                >Plan as Rx+ today</b-button>
+              </b-button-group>
             </div>
           </div>
         </div>
@@ -41,6 +49,8 @@
 /* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { BButtonGroup } from "bootstrap-vue";
+import { BButton } from "bootstrap-vue";
 
 /* Font awesome icons */
 import { faCalendar } from "@fortawesome/free-solid-svg-icons/faCalendar";
@@ -62,7 +72,10 @@ import WorkoutDisplayComponent from "./workout-display-component.vue";
 import "./../style/wods-list.scss";
 import { SpinnerModel } from "./../models/viewModels/SpinnerModel";
 import { ErrorAlertModel } from "./../models/viewModels/ErrorAlertModel";
-import { WorkoutViewModel } from "./../models/viewModels/WorkoutViewModel";
+import {
+  WorkoutViewModel,
+  PlanningWorkoutLevel
+} from "./../models/viewModels/WorkoutViewModel";
 const apiService: CrossfitterService = new CrossfitterService();
 
 @Component({
@@ -71,7 +84,9 @@ const apiService: CrossfitterService = new CrossfitterService();
     ErrorAlertComponent,
     WorkoutDisplayComponent,
     Spinner,
-    FontAwesomeIcon
+    FontAwesomeIcon,
+    BButtonGroup,
+    BButton
   }
 })
 export default class WodsComponent extends Vue {
@@ -91,6 +106,10 @@ export default class WodsComponent extends Vue {
         this.errorAlertModel.setError(data.response.statusText);
         this.spinner.disable();
       });
+  }
+
+  planWodToday(wodId: number, type: PlanningWorkoutLevel) {
+    debugger;
   }
 }
 </script>
