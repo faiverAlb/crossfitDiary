@@ -109,7 +109,16 @@ export default class WodsComponent extends Vue {
   }
 
   planWodToday(wodId: number, type: PlanningWorkoutLevel) {
-    debugger;
+    this.spinner.activate();
+    apiService
+      .planWorkoutToLevel(wodId, type)
+      .then(data => {
+        this.spinner.disable();
+      })
+      .catch(data => {
+        this.errorAlertModel.setError(data.response.statusText);
+        this.spinner.disable();
+      });
   }
 }
 </script>

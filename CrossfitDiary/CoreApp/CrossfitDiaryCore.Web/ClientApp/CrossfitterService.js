@@ -66,6 +66,9 @@ var CrossfitterService = /** @class */ (function () {
         this.setShowOnlyUserWods = function (showOnlyUserWods) {
             return axios.post("api/setShowOnlyUserWods?showOnlyUserWods=" + showOnlyUserWods);
         };
+        this.planWorkoutToLevel = function (wodId, type) {
+            return axios.post("api/planWorkoutToLevel?wodId=" + wodId + "&type=" + type);
+        };
         this.getLeaderboardByWorkout = function (crossfitterWorkoutId) {
             // tslint:disable-next-line:max-line-length
             return axios

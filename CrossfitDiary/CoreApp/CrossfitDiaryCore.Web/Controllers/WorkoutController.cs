@@ -231,5 +231,22 @@ namespace CrossfitDiaryCore.Web.Controllers
 //            _memoryCache.Remove(_plannedWorkouts);
         }
 
+        /// <summary>
+        ///     Plan existing workout by wod Id to planning level
+        /// </summary>
+        /// <param name="wodId"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("api/planWorkoutToLevel")]
+        public async Task PlanWorkoutToLevel([FromQuery] int wodId, [FromQuery] PlanningWorkoutLevel type)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+//            RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(workoutViewModel);
+//            newWorkoutRoutine.CreatedBy = user;
+//            _manageWorkoutsService.PlanWorkout(newWorkoutRoutine, user);
+            //            _memoryCache.Remove(_allMainpageResultsConst);
+            //            _memoryCache.Remove(_plannedWorkouts);
+        }
     }
 }

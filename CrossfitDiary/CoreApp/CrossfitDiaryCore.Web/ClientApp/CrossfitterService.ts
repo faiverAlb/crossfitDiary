@@ -1,7 +1,10 @@
 ﻿import axios, { AxiosResponse } from "axios";
 import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel";
 import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
-import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
+import {
+  WorkoutViewModel,
+  PlanningWorkoutLevel
+} from "./models/viewModels/WorkoutViewModel";
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
 import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
 
@@ -79,6 +82,10 @@ export default class CrossfitterService {
     return axios.post(
       `api/setShowOnlyUserWods?showOnlyUserWods=${showOnlyUserWods}`
     );
+  };
+
+  public planWorkoutToLevel = (wodId: number, type: PlanningWorkoutLevel) => {
+    return axios.post(`api/planWorkoutToLevel?wodId=${wodId}&type=${type}`);
   };
 
   public getLeaderboardByWorkout = (
