@@ -113,7 +113,7 @@ export default class WodsComponent extends Vue {
     apiService
       .planWorkoutToLevel(wodId, type)
       .then(data => {
-        this.spinner.disable();
+        window.location.href = "\\";
       })
       .catch(data => {
         this.errorAlertModel.setError(data.response.statusText);
