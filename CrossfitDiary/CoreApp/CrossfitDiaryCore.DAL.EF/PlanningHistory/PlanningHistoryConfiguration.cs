@@ -12,6 +12,7 @@ namespace CrossfitDiaryCore.DAL.EF.PlanningHistory
             builder.Property(x => x.RoutineComplexId).IsRequired();
             builder.Property(x => x.PlanningDate).IsRequired();
             builder.Property(x => x.CreatedUtc).HasDefaultValueSql("getutcdate()");
+            builder.HasOne(x => x.Crossfitter).WithMany(x => x.PlanningHistoryCollection);
 
         }
     }

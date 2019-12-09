@@ -172,6 +172,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasDefaultValueSql("getutcdate()");
 
+                    b.Property<string>("CrossfitterId");
+
                     b.Property<DateTime>("PlanningDate");
 
                     b.Property<int>("PlanningLevel");
@@ -179,6 +181,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<int>("RoutineComplexId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CrossfitterId");
 
                     b.HasIndex("RoutineComplexId");
 
@@ -398,6 +402,10 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
             modelBuilder.Entity("CrossfitDiaryCore.Model.PlanningHistory", b =>
                 {
+                    b.HasOne("CrossfitDiaryCore.Model.ApplicationUser", "Crossfitter")
+                        .WithMany("PlanningHistoryCollection")
+                        .HasForeignKey("CrossfitterId");
+
                     b.HasOne("CrossfitDiaryCore.Model.RoutineComplex", "RoutineComplex")
                         .WithMany()
                         .HasForeignKey("RoutineComplexId")

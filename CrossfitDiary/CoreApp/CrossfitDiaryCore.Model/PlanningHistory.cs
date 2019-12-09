@@ -33,5 +33,11 @@ namespace CrossfitDiaryCore.Model
         ///     Date when WOD should be done
         /// </summary>
         public DateTime PlanningDate { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the crossfitter.
+        /// </summary>
+        public virtual ApplicationUser Crossfitter { get; set; }
+
     }
 }
