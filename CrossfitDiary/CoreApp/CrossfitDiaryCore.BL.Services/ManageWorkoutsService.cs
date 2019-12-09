@@ -112,7 +112,7 @@ namespace CrossfitDiaryCore.BL.Services
             _context.SaveChanges();
         }
 
-        public void PlanWorkoutForDay(int workoutId, PlanningLevel planningLevel, DateTime date)
+        public void PlanWorkoutForDay(int workoutId, PlanningLevel planningLevel, DateTime date, ApplicationUser crossfitter)
         {
             CleanPreviousPlannedWodsForThisLevel(workoutId, planningLevel, date);
 
@@ -122,7 +122,8 @@ namespace CrossfitDiaryCore.BL.Services
             {
                 RoutineComplex = complexToUpdate,
                 PlanningLevel = planningLevel,
-                PlanningDate = date
+                PlanningDate = date,
+                Crossfitter = crossfitter
             });
             _context.SaveChanges();
         }
@@ -162,7 +163,7 @@ namespace CrossfitDiaryCore.BL.Services
             }
             else
             {
-                PlanWorkoutForDay(workoutId, workoutRoutine.PlanningLevel.Value, workoutRoutine.PlanDate.Value);
+                PlanWorkoutForDay(workoutId, workoutRoutine.PlanningLevel.Value, workoutRoutine.PlanDate.Value, user);
             }
         }
 
