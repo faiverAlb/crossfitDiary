@@ -112,12 +112,27 @@ namespace CrossfitDiaryCore.BL.Services
             _context.SaveChanges();
         }
 
+        public void PlanWorkoutForDay(int workoutId, PlanningLevel planningLevel, DateTime date, ApplicationUser crossfitter)
+        {
+            CleanPreviousPlannedWodsForThisLevel(workoutId, planningLevel, date);
+
+            RoutineComplex complexToUpdate = _context.ComplexRoutines.Single(x => x.Id == workoutId);
+            _context.ComplexRoutines.Update(complexToUpdate);
+            _context.PlanningHistories.Add(new PlanningHistory()
+            {
+                RoutineComplex = complexToUpdate,
+                PlanningLevel = planningLevel,
+                PlanningDate = date,
+                Crossfitter = crossfitter
+            });
+            _context.SaveChanges();
+        }
+
         public void PlanWorkout(RoutineComplex workoutRoutine, ApplicationUser user)
         {
             int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
-
-            IEnumerable<PlanningHistory> toDelete = _context.PlanningHistories.Where(x => x.PlanningDate.Date == workoutRoutine.PlanDate.Value.Date && (x.PlanningLevel == workoutRoutine.PlanningLevel || x.RoutineComplex.Id == workoutId));
-            _context.PlanningHistories.RemoveRange(toDelete);
+            CleanPreviousPlannedWodsForThisLevel(workoutId, workoutRoutine.PlanningLevel, workoutRoutine.PlanDate.Value.Date);
+            
             if (workoutId == 0)
             {
                 if (workoutRoutine.Id != -1)
@@ -148,15 +163,17 @@ namespace CrossfitDiaryCore.BL.Services
             }
             else
             {
-                RoutineComplex complexToUpdate = _context.ComplexRoutines.Single(x => x.Id == workoutId);
-                _context.ComplexRoutines.Update(complexToUpdate);
-                _context.PlanningHistories.Add(new PlanningHistory()
-                {
-                    RoutineComplex = complexToUpdate, PlanningLevel = workoutRoutine.PlanningLevel.Value,
-                    PlanningDate = workoutRoutine.PlanDate.Value
-                });
-                _context.SaveChanges();
+                PlanWorkoutForDay(workoutId, workoutRoutine.PlanningLevel.Value, workoutRoutine.PlanDate.Value, user);
             }
+        }
+
+        private void CleanPreviousPlannedWodsForThisLevel(int workoutId, PlanningLevel? planningLevel,
+            DateTime planDate)
+        {
+            IEnumerable<PlanningHistory> toDelete = _context.PlanningHistories
+                .Where(x => x.PlanningDate.Date == planDate &&
+                            (x.PlanningLevel == planningLevel || x.RoutineComplex.Id == workoutId));
+            _context.PlanningHistories.RemoveRange(toDelete);
         }
 
         public void LogNewWorkout(CrossfitterWorkout crossfitterWorkout)
@@ -165,5 +182,6 @@ namespace CrossfitDiaryCore.BL.Services
             _context.CrossfitterWorkouts.Add(crossfitterWorkout);
             _context.SaveChanges();
         }
+
     }
 }

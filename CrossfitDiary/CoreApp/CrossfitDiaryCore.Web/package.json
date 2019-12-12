@@ -56,6 +56,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --config webpack.config.js --watch --progress --profile --mode development",
     "start-p": "webpack --config webpack.config.js --watch --progress --profile --mode development --env.ENTRY=persons-entry",
     "start-w": "webpack --config webpack.config.js --watch --progress --profile --mode development --env.ENTRY=workout-entry",
     "build-local": "webpack --config webpack.config.js --progress --profile --mode development",

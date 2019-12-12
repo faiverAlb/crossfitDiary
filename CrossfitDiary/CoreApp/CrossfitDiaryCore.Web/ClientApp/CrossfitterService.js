@@ -16,12 +16,21 @@ var CrossfitterService = /** @class */ (function () {
         };
         // tslint:disable-next-line:max-line-length
         this.getAllCrossfittersWorkouts = function (page, pageSize) {
-            return axios.get("api/getAllCrossfittersWorkouts?page=" + page + "&pageSize=" + pageSize).then(function (jsonData) {
-                return jsonData.data.map(function (x) { return new ToLogWorkoutViewModel().deserialize(x); });
+            return axios
+                .get("api/getAllCrossfittersWorkouts?page=" + page + "&pageSize=" + pageSize)
+                .then(function (jsonData) {
+                return jsonData.data.map(function (x) {
+                    return new ToLogWorkoutViewModel().deserialize(x);
+                });
             });
         };
         this.getPlannedWorkoutsForToday = function () {
             return axios.get("api/getPlannedWorkoutsForToday").then(function (jsonData) {
+                return jsonData.data.map(function (x) { return new WorkoutViewModel().deserialize(x); });
+            });
+        };
+        this.getWorkoutsList = function () {
+            return axios.get("api/getWorkoutsList").then(function (jsonData) {
                 return jsonData.data.map(function (x) { return new WorkoutViewModel().deserialize(x); });
             });
         };
@@ -31,13 +40,21 @@ var CrossfitterService = /** @class */ (function () {
             });
         };
         this.getExerciseMaximums = function () {
-            return axios.get("api/getExerciseMaximums").then(function (jsonData) {
-                return jsonData.data.map(function (x) { return new PersonMaximumViewModel().deserialize(x); });
+            return axios
+                .get("api/getExerciseMaximums")
+                .then(function (jsonData) {
+                return jsonData.data.map(function (x) {
+                    return new PersonMaximumViewModel().deserialize(x);
+                });
             });
         };
         this.getWeightsMaximums = function () {
-            return axios.get("api/getWeightsMaximums").then(function (jsonData) {
-                return jsonData.data.map(function (x) { return new PersonMaximumViewModel().deserialize(x); });
+            return axios
+                .get("api/getWeightsMaximums")
+                .then(function (jsonData) {
+                return jsonData.data.map(function (x) {
+                    return new PersonMaximumViewModel().deserialize(x);
+                });
             });
         };
         this.removeWorkout = function (crossfitterWorkoutId) {
@@ -49,10 +66,18 @@ var CrossfitterService = /** @class */ (function () {
         this.setShowOnlyUserWods = function (showOnlyUserWods) {
             return axios.post("api/setShowOnlyUserWods?showOnlyUserWods=" + showOnlyUserWods);
         };
+        this.planWorkoutToLevel = function (wodId, type) {
+            return axios.post("api/planWorkoutToLevel?wodId=" + wodId + "&type=" + type);
+        };
         this.getLeaderboardByWorkout = function (crossfitterWorkoutId) {
             // tslint:disable-next-line:max-line-length
-            return axios.get("api/getLeaderboardByWorkout?crossfitterWorkoutId=" + crossfitterWorkoutId).then(function (jsonData) {
-                return jsonData.data.map(function (x) { return new LeaderboardItemViewModel().deserialize(x); });
+            return axios
+                .get("api/getLeaderboardByWorkout?crossfitterWorkoutId=" +
+                crossfitterWorkoutId)
+                .then(function (jsonData) {
+                return jsonData.data.map(function (x) {
+                    return new LeaderboardItemViewModel().deserialize(x);
+                });
             });
         };
     }
