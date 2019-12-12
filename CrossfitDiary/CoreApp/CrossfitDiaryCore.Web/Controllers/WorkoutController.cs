@@ -110,11 +110,13 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts to do</returns>
         [HttpGet]
         [Route("api/getPlannedWorkoutsForToday")]
-        public List<WorkoutViewModel> GetPlannedWorkoutsForToday()
+        public async Task<List<WorkoutViewModel>> GetPlannedWorkoutsForToday()
         {
-//            List<WorkoutViewModel> workoutViewModels = _memoryCache.GetOrCreate(_plannedWorkouts,  entry =>
-//                {
-                    List<RoutineComplex> workouts =  _readWorkoutsService.GetPlannedWorkouts(DateTime.Today);
+            //            List<WorkoutViewModel> workoutViewModels = _memoryCache.GetOrCreate(_plannedWorkouts,  entry =>
+            //                {
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+
+            List<RoutineComplex> workouts =  _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
                     List<WorkoutViewModel> allResults = workouts
                         .Select(_mapper.Map<WorkoutViewModel>)
                         .ToList();
@@ -150,9 +152,11 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts to do</returns>
         [HttpGet]
         [Route("api/getLeaderboardByWorkout")]
-        public List<LeaderboardItemViewModel> GetLeaderboardByWorkout(int crossfitterWorkoutId)
+        public async Task<List<LeaderboardItemViewModel>> GetLeaderboardByWorkout(int crossfitterWorkoutId)
         {
-            List<LeaderboardItemModel> leaderboardItemModels = _readWorkoutsService.GetLeaderboardByWorkout(crossfitterWorkoutId);
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+
+            List<LeaderboardItemModel> leaderboardItemModels = _readWorkoutsService.GetLeaderboardByWorkout(crossfitterWorkoutId, user);
             return _mapper.Map<List<LeaderboardItemViewModel>>(leaderboardItemModels);
         }
 

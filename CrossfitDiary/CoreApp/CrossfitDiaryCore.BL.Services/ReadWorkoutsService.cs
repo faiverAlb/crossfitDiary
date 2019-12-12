@@ -15,12 +15,17 @@ namespace CrossfitDiaryCore.BL.Services
     public class ReadWorkoutsService
     {
         private readonly WorkouterContext _context;
+        private readonly ReadUsersService _readUsersService;
         private readonly WorkoutsMatchDispatcher _workoutsMatchDispatcher;
         private readonly DapperRepository _dapperRepository;
 
-        public ReadWorkoutsService(WorkouterContext  context, WorkoutsMatchDispatcher workoutsMatchDispatcher, DapperRepository dapperRepository)
+        public ReadWorkoutsService(WorkouterContext  context
+            , ReadUsersService readUsersService
+            , WorkoutsMatchDispatcher workoutsMatchDispatcher
+            , DapperRepository dapperRepository)
         {
             _context = context;
+            _readUsersService = readUsersService;
             _workoutsMatchDispatcher = workoutsMatchDispatcher;
             _dapperRepository = dapperRepository;
         }
@@ -177,9 +182,15 @@ namespace CrossfitDiaryCore.BL.Services
                 .SingleOrDefault(x => x.Id == workoutId);
         }
 
-        public List<RoutineComplex> GetPlannedWorkouts(DateTime today)
+        public List<RoutineComplex> GetPlannedWorkouts(DateTime today, ApplicationUser currentUser)
         {
             List<PlanningHistory> planned =  _context.PlanningHistories.Where(x => x.PlanningDate.Date == today.Date).ToList();
+            if (planned.Any(x => x.Crossfitter == currentUser))
+            {
+                planned = planned.Where(x => x.Crossfitter == currentUser).ToList();
+            }
+            
+            
             List<RoutineComplex> routines = _context.ComplexRoutines.Where(x => planned.SingleOrDefault(y => y.RoutineComplexId == x.Id)!= null)
                 .Include(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
@@ -217,13 +228,13 @@ namespace CrossfitDiaryCore.BL.Services
             return _dapperRepository.GetPersonMaxumumsOneWeight(userId).ToList();
         }
 
-        public List<LeaderboardItemModel> GetLeaderboardByWorkout(int crossfitterWorkoutId)
+        public List<LeaderboardItemModel> GetLeaderboardByWorkout(int crossfitterWorkoutId, ApplicationUser user)
         {
             CrossfitterWorkout baseWorkout = _context.CrossfitterWorkouts
                                                      .Include(x => x.RoutineComplex)
                                                      .Include(x => x.Crossfitter)
                                                      .Single(x => x.Id == crossfitterWorkoutId);
-            List<RoutineComplex> workouts = GetPlannedWorkouts(baseWorkout.Date);
+            List<RoutineComplex> workouts = GetPlannedWorkouts(baseWorkout.Date, user);
             if (workouts.SingleOrDefault(x => x.Id == baseWorkout.RoutineComplexId) == null)
             {
                 workouts = new List<RoutineComplex>() {baseWorkout.RoutineComplex};
