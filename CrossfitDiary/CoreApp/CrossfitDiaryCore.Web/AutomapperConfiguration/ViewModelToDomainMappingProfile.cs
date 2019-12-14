@@ -29,7 +29,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                             exerciseViewModel.Position = index++;
                         }
                     })
-                .ForMember(x => x.PlanDate, x => x.MapFrom(y => DateTime.Parse(y.DisplayPlanDate)))
+                .ForMember(x => x.PlanDate, x => x.ResolveUsing<DateTimeParser>())
                 .ForMember(x => x.RoundCount, x => x.MapFrom(y => y.RoundsCount))
                 .ForMember(x => x.TimeToWork, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeToWork)))
                 .ForMember(x => x.TimeCap, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeCap)))
