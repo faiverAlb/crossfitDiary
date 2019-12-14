@@ -7,14 +7,25 @@ using CrossfitDiaryCore.Web.ViewModels;
 
 namespace CrossfitDiaryCore.Web.AutomapperConfiguration.Resolvers
 {
-    public class DateTimeParser : IValueResolver<ToLogWorkoutViewModel, CrossfitterWorkout, DateTime>
+    public class DateTimeParser : IValueResolver<ToLogWorkoutViewModel, CrossfitterWorkout, DateTime>, IValueResolver<WorkoutViewModel, RoutineComplex, DateTime?>
     {
         public DateTime Resolve(ToLogWorkoutViewModel source, CrossfitterWorkout destination, DateTime destMember,ResolutionContext context)
         {
-            var ci = new CultureInfo("en-US");
-            var formats = new[] { "M-d-yyyy", "dd-MM-yyyy", "MM-dd-yyyy", "M.d.yyyy", "dd.MM.yyyy", "MM.dd.yyyy" }.Union(ci.DateTimeFormat.GetAllDateTimePatterns()).ToArray();
+            return ParseDate(source.DisplayDate);
+            
+        }
 
-            var dateTime = DateTime.ParseExact(source.DisplayDate, formats, ci, DateTimeStyles.AssumeLocal);
+        public DateTime? Resolve(WorkoutViewModel source, RoutineComplex destination, DateTime? destMember, ResolutionContext context)
+        {
+            return ParseDate(source.DisplayPlanDate);
+        }
+
+        private DateTime ParseDate(string dateToParse)
+        {
+            var ci = new CultureInfo("ru-RU");
+            var formats = new[] { "dd.MM.yyyy"}.Union(ci.DateTimeFormat.GetAllDateTimePatterns()).ToArray();
+
+            var dateTime = DateTime.ParseExact(dateToParse, formats, ci, DateTimeStyles.AssumeLocal);
             return dateTime;
         }
     }
