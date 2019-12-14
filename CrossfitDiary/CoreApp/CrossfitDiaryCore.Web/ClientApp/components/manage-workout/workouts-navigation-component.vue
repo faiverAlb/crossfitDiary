@@ -1,30 +1,30 @@
 ﻿<template>
   <div class="d-flex justify-content-between">
-    <div v-if="isEditMode">{{workoutTypeDisplay}}</div>
-    <div
-      class="d-inline-block"
-      v-else
-    >
-      <b-dropdown
-        variant="link"
-        size="lg"
-        no-caret
-        class="workouts-dropdown"
-      >
+    <div v-if="isEditMode">{{ workoutTypeDisplay }}</div>
+    <div class="d-inline-block" v-else>
+      <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
         <template slot="button-content">
           <a
             class="btn btn-secondary text-light  d-inline-block p-0 "
             href="#"
-            v-bind:class="{'btn-info':($route.path == `/fortime` ||  $route.path == `/fortimen`)}"
+            v-bind:class="{
+              'btn-info':
+                $route.path == `/fortime` || $route.path == `/fortimen`
+            }"
           >
             <div class="small-action-link-button">
               <div class="icon-container">
-                <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                <font-awesome-icon :icon="['fas', 'clock']"></font-awesome-icon>
               </div>
               <div class="text-container">
-                <span v-if="$route.path == `/fortime` || $route.path != `/fortimen`">FT</span>
+                <span
+                  v-if="$route.path == `/fortime` || $route.path != `/fortimen`"
+                  >FT</span
+                >
                 <span v-if="$route.path == `/fortimen`">FT*n</span>
-                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
+                <font-awesome-icon
+                  :icon="['fas', 'caret-down']"
+                ></font-awesome-icon>
               </div>
             </div>
           </a>
@@ -38,7 +38,9 @@
             >
               <div class="small-action-link-button">
                 <div class="icon-container">
-                  <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                  <font-awesome-icon
+                    :icon="['fas', 'clock']"
+                  ></font-awesome-icon>
                 </div>
                 <div class="text-container">
                   <span>FT</span>
@@ -57,7 +59,9 @@
             >
               <div class="small-action-link-button">
                 <div class="icon-container">
-                  <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                  <font-awesome-icon
+                    :icon="['fas', 'clock']"
+                  ></font-awesome-icon>
                 </div>
                 <div class="text-container">FT*n</div>
               </div>
@@ -65,26 +69,27 @@
           </template>
         </b-dropdown-item>
       </b-dropdown>
-      <b-dropdown
-        variant="link"
-        size="lg"
-        no-caret
-        class="workouts-dropdown"
-      >
+      <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
         <template slot="button-content">
           <a
             class="btn btn-secondary text-light  d-inline-block p-0 "
             href="#"
-            v-bind:class="{'btn-info':($route.path == `/amrap` ||  $route.path == `/amrapn`)}"
+            v-bind:class="{
+              'btn-info': $route.path == `/amrap` || $route.path == `/amrapn`
+            }"
           >
             <div class="small-action-link-button amrap-icon">
               <div class="icon-container">
-                <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                <font-awesome-icon :icon="['fas', 'clock']"></font-awesome-icon>
               </div>
               <div class="text-container">
-                <span v-if="$route.path == `/amrap` || $route.path != `/amrapn`">AMRAP</span>
+                <span v-if="$route.path == `/amrap` || $route.path != `/amrapn`"
+                  >AMRAP</span
+                >
                 <span v-if="$route.path == `/amrapn`">AMRAP*n</span>
-                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
+                <font-awesome-icon
+                  :icon="['fas', 'caret-down']"
+                ></font-awesome-icon>
               </div>
             </div>
           </a>
@@ -98,7 +103,9 @@
             >
               <div class="small-action-link-button amrap-icon">
                 <div class="icon-container">
-                  <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
+                  <font-awesome-icon
+                    :icon="['fas', 'list-ol']"
+                  ></font-awesome-icon>
                 </div>
                 <div class="text-container">AMRAP</div>
               </div>
@@ -115,7 +122,9 @@
             >
               <div class="small-action-link-button">
                 <div class="icon-container">
-                  <font-awesome-icon :icon="['fas','list-ol']"></font-awesome-icon>
+                  <font-awesome-icon
+                    :icon="['fas', 'list-ol']"
+                  ></font-awesome-icon>
                 </div>
                 <div class="text-container">AMRAP*n</div>
               </div>
@@ -124,26 +133,29 @@
         </b-dropdown-item>
       </b-dropdown>
 
-      <b-dropdown
-        variant="link"
-        size="lg"
-        no-caret
-        class="workouts-dropdown"
-      >
+      <b-dropdown variant="link" size="lg" no-caret class="workouts-dropdown">
         <template slot="button-content">
           <a
             class="btn btn-secondary text-light  d-inline-block p-0 "
             href="#"
-            v-bind:class="{'btn-info':($route.path == `/emom` ||  $route.path == `/e2mom`)}"
+            v-bind:class="{
+              'btn-info': $route.path == `/emom` || $route.path == `/e2mom`
+            }"
           >
             <div class="small-action-link-button">
               <div class="icon-container">
-                <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
+                <font-awesome-icon
+                  :icon="['fas', 'retweet']"
+                ></font-awesome-icon>
               </div>
               <div class="text-container">
-                <span v-if="$route.path == `/emom` || $route.path != `/e2mom`">EMOM</span>
+                <span v-if="$route.path == `/emom` || $route.path != `/e2mom`"
+                  >EMOM</span
+                >
                 <span v-if="$route.path == `/e2mom`">E2MOM</span>
-                <font-awesome-icon :icon="['fas','caret-down']"></font-awesome-icon>
+                <font-awesome-icon
+                  :icon="['fas', 'caret-down']"
+                ></font-awesome-icon>
               </div>
             </div>
           </a>
@@ -157,7 +169,9 @@
             >
               <div class="small-action-link-button">
                 <div class="icon-container">
-                  <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
+                  <font-awesome-icon
+                    :icon="['fas', 'retweet']"
+                  ></font-awesome-icon>
                 </div>
                 <div class="text-container">
                   <span>EMOM</span>
@@ -175,7 +189,9 @@
             >
               <div class="small-action-link-button">
                 <div class="icon-container">
-                  <font-awesome-icon :icon="['fas','retweet']"></font-awesome-icon>
+                  <font-awesome-icon
+                    :icon="['fas', 'retweet']"
+                  ></font-awesome-icon>
                 </div>
                 <div class="text-container">E2MOM</div>
               </div>
@@ -190,13 +206,15 @@
       >
         <div class="small-action-link-button">
           <div class="icon-container">
-            <font-awesome-icon :icon="['far','pause-circle']"></font-awesome-icon>
+            <font-awesome-icon
+              :icon="['far', 'pause-circle']"
+            ></font-awesome-icon>
           </div>
           <div class="text-container">NFT</div>
         </div>
       </router-link>
     </div>
-    <div v-if="canUserPlanWorkouts">
+    <div>
       <a
         class="btn btn-warning text-light  d-inline-block p-0 "
         href="#"
@@ -204,7 +222,7 @@
       >
         <div class="small-action-link-button">
           <div class="icon-container">
-            <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
+            <font-awesome-icon :icon="['fas', 'calendar']"></font-awesome-icon>
           </div>
           <div class="text-container">
             <span v-if="!canUserSeePlanWorkouts">Plan</span>
@@ -239,16 +257,15 @@ library.add(
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { State, Action, Getter } from "vuex-class";
-import {BDropdown} from "bootstrap-vue";
-import {BDropdownItem} from "bootstrap-vue";
-import {BDropdownItemButton} from "bootstrap-vue";
+import { BDropdown } from "bootstrap-vue";
+import { BDropdownItem } from "bootstrap-vue";
+import { BDropdownItemButton } from "bootstrap-vue";
 
 const namespace: string = "workoutEdit";
 import { WorkoutType } from "../../models/viewModels/WorkoutType";
 declare var workouter: {
   toLogWorkoutRawModel: any;
   workoutViewModel: any;
-  canUserPlanWorkouts: boolean;
 };
 
 @Component({
@@ -276,13 +293,12 @@ export default class WorkoutsNavigationComponent extends Vue {
   setCanUserSeePlanWorkouts: any;
 
   isEditMode: boolean = false;
-  canUserPlanWorkouts: boolean = false;
+
   canUserSeePlanWorkouts: boolean = false;
   workoutTypeDisplay: string = "";
 
   mounted() {
     // fetching data as soon as the component's been mounted
-    this.canUserPlanWorkouts = workouter.canUserPlanWorkouts;
     this.setCanUserSeePlanWorkouts(this.canUserSeePlanWorkouts);
     this.fetchExercises();
     this.fetchUserMaximums();
@@ -323,5 +339,4 @@ export default class WorkoutsNavigationComponent extends Vue {
 }
 </script>
 
-<style>
-</style>
+<style></style>
