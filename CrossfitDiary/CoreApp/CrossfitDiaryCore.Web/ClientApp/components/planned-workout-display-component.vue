@@ -217,6 +217,13 @@
           </div>
           <div class="">
             Today
+            <a
+              class="remove-workout pl-1 text-secondary pointer"
+              title="Remove workout planned"
+              @click="showDeleteWorkoutConfirmation(plannedRx.id)"
+            >
+              <i class="fa fa-trash-alt" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
         <div class="item-body pt-1">
@@ -253,6 +260,13 @@
           </div>
           <div class="">
             Today
+            <a
+              class="remove-workout pl-1 text-secondary pointer"
+              title="Remove workout planned"
+              @click="showDeleteWorkoutConfirmation(plannedRxPlus.id)"
+            >
+              <i class="fa fa-trash-alt" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
         <div class="item-body pt-1">
