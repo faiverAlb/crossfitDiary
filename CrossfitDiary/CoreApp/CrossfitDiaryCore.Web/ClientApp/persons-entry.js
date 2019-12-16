@@ -78,7 +78,6 @@ var vue = new Vue({
         deletePlannedWorkout: function (toRemovePlannedId) {
             var _this = this;
             this.spinner.activate();
-            debugger;
             apiService
                 .deletePlannedWorkout(toRemovePlannedId)
                 .then(function () { return apiService.getPlannedWorkoutsForToday(); })
