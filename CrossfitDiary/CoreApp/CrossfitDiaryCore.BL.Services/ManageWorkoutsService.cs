@@ -11,11 +11,13 @@ namespace CrossfitDiaryCore.BL.Services
     {
         private readonly WorkouterContext _context;
         private readonly ReadWorkoutsService _readWorkoutsService;
+        private readonly ReadUsersService _readUsersService;
 
-        public ManageWorkoutsService(WorkouterContext context, ReadWorkoutsService readWorkoutsService)
+        public ManageWorkoutsService(WorkouterContext context, ReadWorkoutsService readWorkoutsService, ReadUsersService readUsersService)
         {
             _context = context;
             _readWorkoutsService = readWorkoutsService;
+            _readUsersService = readUsersService;
         }
 
         public void RemoveWorkoutResult(int crossfitterWorkoutId, string userId)
@@ -178,10 +180,30 @@ namespace CrossfitDiaryCore.BL.Services
 
         public void LogNewWorkout(CrossfitterWorkout crossfitterWorkout)
         {
-
             _context.CrossfitterWorkouts.Add(crossfitterWorkout);
             _context.SaveChanges();
         }
 
+        public void RemovePlannedWod(int plannedWodId, string userId, DateTime date)
+        {
+            bool canUserPlanPublicWods = _readUsersService.CanUserPlanWorkouts(userId);
+            PlanningHistory foundPlannedWodForDate = _context.PlanningHistories.Single(x => x.PlanningDate.Date == date && x.RoutineComplex.Id == plannedWodId);
+            if (foundPlannedWodForDate.Crossfitter == null && canUserPlanPublicWods == false)
+            {
+                return;
+            }
+            if (foundPlannedWodForDate.Crossfitter == null && canUserPlanPublicWods)
+            {
+                _context.PlanningHistories.Remove(foundPlannedWodForDate);
+                _context.SaveChanges();
+            }
+
+            if (foundPlannedWodForDate.Crossfitter != null && foundPlannedWodForDate.Crossfitter.Id == userId)
+            {
+                _context.PlanningHistories.Remove(foundPlannedWodForDate);
+                _context.SaveChanges();
+            }
+
+        }
     }
 }

@@ -60,6 +60,9 @@ var CrossfitterService = /** @class */ (function () {
         this.removeWorkout = function (crossfitterWorkoutId) {
             return axios.delete("api/removeWorkout/" + crossfitterWorkoutId);
         };
+        this.deletePlannedWorkout = function (toRemovePlannedId) {
+            return axios.delete("api/removePlannedWod/" + toRemovePlannedId);
+        };
         this.quickLogWorkout = function (logModel) {
             return axios.post("api/quickLogWorkout", logModel);
         };

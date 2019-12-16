@@ -404,6 +404,9 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
 
   deletePlannedWorkout() {
     this.$refs.removeFromPlannedModal.hide();
+    this.isScaledSelected = false;
+    this.isRxSelected = false;
+    this.isRxPlusSelected = false;
     this.$emit("deletePlannedWorkout", this.toRemovePlannedId);
   }
   showDeleteWorkoutConfirmation(wodId) {

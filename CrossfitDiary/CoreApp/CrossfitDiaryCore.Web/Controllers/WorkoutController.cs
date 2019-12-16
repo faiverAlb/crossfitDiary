@@ -178,6 +178,21 @@ namespace CrossfitDiaryCore.Web.Controllers
             _manageWorkoutsService.RemoveWorkoutResult(crossfitterWorkoutId, userId);
         }
 
+        /// <summary>
+        /// Remove workout.
+        /// </summary>
+        [HttpDelete]
+        [Route("api/removePlannedWod/{plannedWodId}")]
+        public void RemovePlannedWod(int plannedWodId)
+        {
+            string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
+//            _memoryCache.Remove(_allMainpageResultsConst);
+            //TODO: Add check rights!
+            DateTime date = DateTime.Today;
+            _manageWorkoutsService.RemovePlannedWod(plannedWodId, userId, date);
+        }
+
 
         /// <summary>
         ///     Create and log workout

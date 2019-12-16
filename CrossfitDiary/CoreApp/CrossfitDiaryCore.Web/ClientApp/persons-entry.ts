@@ -119,18 +119,17 @@ let vue = new Vue({
     },
     deletePlannedWorkout(toRemovePlannedId: number): void {
       this.spinner.activate();
-      debugger;
-      // apiService
-      //   .quickLogWorkout(logModel)
-      //   .then(() => apiService.getAllCrossfittersWorkouts())
-      //   .then(data => {
-      //     this.activities = data;
-      //     this.spinner.disable();
-      //   })
-      //   .catch(data => {
-      //     this.spinner.disable();
-      //     this.errorAlertModel.setError(data.response.statusText);
-      //   });
+      apiService
+        .deletePlannedWorkout(toRemovePlannedId)
+        .then(() => apiService.getPlannedWorkoutsForToday())
+        .then(data => {
+          this.plannedWorkouts = data;
+          this.spinner.disable();
+        })
+        .catch(data => {
+          this.spinner.disable();
+          this.errorAlertModel.setError(data.response.statusText);
+        });
     },
     changeShowUserWods(showOnlyUserWods: boolean): void {
       this.spinner.activate();
