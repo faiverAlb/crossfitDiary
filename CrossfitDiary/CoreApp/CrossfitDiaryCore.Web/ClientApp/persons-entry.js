@@ -20,7 +20,7 @@ var apiService = new CrossfitterService();
 Vue.component("b-form-checkbox", BFormCheckbox);
 var vue = new Vue({
     el: "#home-page-container",
-    template: "\n    <div class=\"home-container\">\n      <div class=\"row\">\n        <div class=\"col\">\n          <ErrorAlertComponent :errorAlertModel=\"errorAlertModel\"></ErrorAlertComponent>\n        </div>\n      </div>\n      <PlannedWorkoutDisplayComponent :plannedWorkouts=\"plannedWorkouts\" @logWorkout=\"logWorkout\"></PlannedWorkoutDisplayComponent>\n        <div class=\"container person-setting\">\n      <div\n        class=\"row\"\n        v-if=\"activities\"\n      >\n        <div class=\"offset-lg-3 col col-lg-5 pl-0\">\n          <b-form-checkbox\n            id=\"showOnlyUserWods\"\n            name=\"shouShowOnlyUserWods\"\n            v-model=\"showOnlyUserWods\"\n            @change=\"changeShowUserWods\">\n            Show only my wods\n          </b-form-checkbox>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"offset-5\">\n          <spinner\n            :status=\"spinner.status\"\n            :size=\"spinner.size\"\n            :color=\"spinner.color\"\n            :depth=\"spinner.depth\"\n            :rotation=\"spinner.rotation\"\n            :speed=\"spinner.speed\">\n          </spinner>\n        </div>\n      </div>\n    \n    </div>\n      <PersonsActivitiesComponent :activities=\"activities\"/>\n    </div>\n    ",
+    template: "\n    <div class=\"home-container\">\n      <div class=\"row\">\n        <div class=\"col\">\n          <ErrorAlertComponent :errorAlertModel=\"errorAlertModel\"></ErrorAlertComponent>\n        </div>\n      </div>\n      <PlannedWorkoutDisplayComponent :plannedWorkouts=\"plannedWorkouts\" @deletePlannedWorkout=\"deletePlannedWorkout\" @logWorkout=\"logWorkout\"></PlannedWorkoutDisplayComponent>\n        <div class=\"container person-setting\">\n      <div\n        class=\"row\"\n        v-if=\"activities\"\n      >\n        <div class=\"offset-lg-3 col col-lg-5 pl-0\">\n          <b-form-checkbox\n            id=\"showOnlyUserWods\"\n            name=\"shouShowOnlyUserWods\"\n            v-model=\"showOnlyUserWods\"\n            @change=\"changeShowUserWods\">\n            Show only my wods\n          </b-form-checkbox>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"offset-5\">\n          <spinner\n            :status=\"spinner.status\"\n            :size=\"spinner.size\"\n            :color=\"spinner.color\"\n            :depth=\"spinner.depth\"\n            :rotation=\"spinner.rotation\"\n            :speed=\"spinner.speed\">\n          </spinner>\n        </div>\n      </div>\n    \n    </div>\n      <PersonsActivitiesComponent :activities=\"activities\"/>\n    </div>\n    ",
     components: {
         PersonsActivitiesComponent: PersonsActivitiesComponent,
         PlannedWorkoutDisplayComponent: PlannedWorkoutDisplayComponent,
@@ -68,6 +68,22 @@ var vue = new Vue({
                 .then(function () { return apiService.getAllCrossfittersWorkouts(); })
                 .then(function (data) {
                 _this.activities = data;
+                _this.spinner.disable();
+            })
+                .catch(function (data) {
+                _this.spinner.disable();
+                _this.errorAlertModel.setError(data.response.statusText);
+            });
+        },
+        deletePlannedWorkout: function (toRemovePlannedId) {
+            var _this = this;
+            this.spinner.activate();
+            debugger;
+            apiService
+                .deletePlannedWorkout(toRemovePlannedId)
+                .then(function () { return apiService.getPlannedWorkoutsForToday(); })
+                .then(function (data) {
+                _this.plannedWorkouts = data;
                 _this.spinner.disable();
             })
                 .catch(function (data) {

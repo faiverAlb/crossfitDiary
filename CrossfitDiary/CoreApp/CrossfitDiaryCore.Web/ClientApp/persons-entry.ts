@@ -5,7 +5,7 @@ dom.watch(); // This will kick of the initial replacement of i to svg tags and c
 /* public components */
 import Vue from "vue";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
-import {BFormCheckbox} from "bootstrap-vue";
+import { BFormCheckbox } from "bootstrap-vue";
 /* app components */
 import PersonsActivitiesComponent from "./components/person-activities-component.vue";
 import PlannedWorkoutDisplayComponent from "./components/planned-workout-display-component.vue";
@@ -32,7 +32,7 @@ let vue = new Vue({
           <ErrorAlertComponent :errorAlertModel="errorAlertModel"></ErrorAlertComponent>
         </div>
       </div>
-      <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts" @logWorkout="logWorkout"></PlannedWorkoutDisplayComponent>
+      <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts" @deletePlannedWorkout="deletePlannedWorkout" @logWorkout="logWorkout"></PlannedWorkoutDisplayComponent>
         <div class="container person-setting">
       <div
         class="row"
@@ -110,6 +110,20 @@ let vue = new Vue({
         .then(() => apiService.getAllCrossfittersWorkouts())
         .then(data => {
           this.activities = data;
+          this.spinner.disable();
+        })
+        .catch(data => {
+          this.spinner.disable();
+          this.errorAlertModel.setError(data.response.statusText);
+        });
+    },
+    deletePlannedWorkout(toRemovePlannedId: number): void {
+      this.spinner.activate();
+      apiService
+        .deletePlannedWorkout(toRemovePlannedId)
+        .then(() => apiService.getPlannedWorkoutsForToday())
+        .then(data => {
+          this.plannedWorkouts = data;
           this.spinner.disable();
         })
         .catch(data => {

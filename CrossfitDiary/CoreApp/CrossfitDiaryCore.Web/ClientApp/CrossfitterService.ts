@@ -73,7 +73,9 @@ export default class CrossfitterService {
   public removeWorkout = crossfitterWorkoutId => {
     return axios.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
   };
-
+  public deletePlannedWorkout = (toRemovePlannedId: number) => {
+    return axios.delete(`api/removePlannedWod/${toRemovePlannedId}`);
+  };
   public quickLogWorkout = (logModel: ToLogWorkoutViewModel) => {
     return axios.post("api/quickLogWorkout", logModel);
   };

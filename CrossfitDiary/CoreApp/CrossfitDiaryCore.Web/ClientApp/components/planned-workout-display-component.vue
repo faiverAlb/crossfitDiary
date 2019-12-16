@@ -1,13 +1,35 @@
 ﻿<template>
   <div class="planned-workouts container">
     <b-modal
-      ref="logWorkoutModal"
-      title="Log workout"
+      ref="removeFromPlannedModal"
+      title="Sure to remove workout from planning?"
     >
-      <div
-        class="log-workout"
-        v-if="selectedWorkout"
-      >
+      Are you sure to remove workout from planning?
+      <div slot="modal-footer">
+        <button
+          type="button"
+          data-dismiss="modal"
+          class="btn btn-default"
+          @click="
+            () => {
+              this.$refs.removeFromPlannedModal.hide();
+            }
+          "
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          data-dismiss="modal"
+          class="btn btn-primary btn-danger"
+          @click="deletePlannedWorkout"
+        >
+          Delete
+        </button>
+      </div>
+    </b-modal>
+    <b-modal ref="logWorkoutModal" title="Log workout">
+      <div class="log-workout" v-if="selectedWorkout">
         <div class="log-workout-container">
           <div v-if="selectedWorkout.IsHaveCapTime()">
             <div class="row">
@@ -15,7 +37,9 @@
                 <b-input-group class="mb-2">
                   <b-input-group-prepend>
                     <b-input-group-text tag="span">
-                      <font-awesome-icon :icon="['far','clock']"></font-awesome-icon>
+                      <font-awesome-icon
+                        :icon="['far', 'clock']"
+                      ></font-awesome-icon>
                     </b-input-group-text>
                   </b-input-group-prepend>
                   <b-form-input
@@ -55,7 +79,9 @@
                 <b-input-group class="mb-2">
                   <b-input-group-prepend>
                     <b-input-group-text tag="span">
-                      <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
+                      <font-awesome-icon
+                        :icon="['fas', 'hashtag']"
+                      ></font-awesome-icon>
                     </b-input-group-text>
                   </b-input-group-prepend>
                   <b-form-input
@@ -71,12 +97,13 @@
               </div>
             </div>
             <div class="row">
-
               <div class="col-sm-12">
                 <b-input-group class="mb-2">
                   <b-input-group-prepend>
                     <b-input-group-text tag="span">
-                      <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
+                      <font-awesome-icon
+                        :icon="['fas', 'hashtag']"
+                      ></font-awesome-icon>
                     </b-input-group-text>
                   </b-input-group-prepend>
                   <b-form-input
@@ -92,7 +119,11 @@
               </div>
             </div>
           </div>
-          <div v-if="!selectedWorkout.IsAMRAP() && !selectedWorkout.IsHaveCapTime()">
+          <div
+            v-if="
+              !selectedWorkout.IsAMRAP() && !selectedWorkout.IsHaveCapTime()
+            "
+          >
             Just log workout
           </div>
         </div>
@@ -112,32 +143,28 @@
             max-rows="2"
             no-resize
           />
-          <small
-            id="passwordHelpBlock"
-            class="form-text text-muted"
-          >
+          <small id="passwordHelpBlock" class="form-text text-muted">
             Your thoughts on workout. Max length = 200;
           </small>
         </div>
       </div>
       <div slot="modal-footer">
-
-        <b-button
-          variant="warning"
-          data-dismiss="modal"
-          @click="logWorkout"
-        >Log workout</b-button>
+        <b-button variant="warning" data-dismiss="modal" @click="logWorkout"
+          >Log workout</b-button
+        >
         <b-button
           data-dismiss="modal"
-          @click="()=>{this.$refs.logWorkoutModal.hide();}"
-        >Close</b-button>
+          @click="
+            () => {
+              this.$refs.logWorkoutModal.hide();
+            }
+          "
+          >Close</b-button
+        >
       </div>
     </b-modal>
 
-    <div
-      class="row"
-      v-if="isScaledSelected"
-    >
+    <div class="row" v-if="isScaledSelected">
       <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
         <div class="item-header d-flex flex-row justify-content-between  ">
           <div class="username">
@@ -147,35 +174,40 @@
           </div>
           <div class="">
             Today
+            <a
+              class="remove-workout pl-1 text-secondary pointer"
+              title="Remove workout planned"
+              @click="showDeleteWorkoutConfirmation(plannedScaled.id)"
+            >
+              <i class="fa fa-trash-alt" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
         <div class="item-body pt-1">
-          <WorkoutDisplayComponent :workoutViewModel="plannedScaled"></WorkoutDisplayComponent>
+          <WorkoutDisplayComponent
+            :workoutViewModel="plannedScaled"
+          ></WorkoutDisplayComponent>
         </div>
-        <div
-          class="item-footer text-right pt-2"
-          v-if="plannedScaled"
-        >
+        <div class="item-footer text-right pt-2" v-if="plannedScaled">
           <div class="action-buttons">
             <a
               class="btn btn-secondary float-left"
               role="button"
-              v-bind:href="'Workout?workoutId='+this.plannedScaled.id"
+              v-bind:href="'Workout?workoutId=' + this.plannedScaled.id"
             >
-              <span class="do-it-text">Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon></span>
+              <span class="do-it-text"
+                >Edit
+                <font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
+              ></span>
             </a>
-            <b-button
-              variant="warning"
-              @click="showLogWorkout(plannedScaled)"
-            >Log workout</b-button>
+            <b-button variant="warning" @click="showLogWorkout(plannedScaled)"
+              >Log workout</b-button
+            >
           </div>
         </div>
       </div>
     </div>
-    <div
-      class="row"
-      v-if="isRxSelected"
-    >
+    <div class="row" v-if="isRxSelected">
       <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
         <div class="item-header d-flex flex-row justify-content-between  ">
           <div class="username">
@@ -185,35 +217,40 @@
           </div>
           <div class="">
             Today
+            <a
+              class="remove-workout pl-1 text-secondary pointer"
+              title="Remove workout planned"
+              @click="showDeleteWorkoutConfirmation(plannedRx.id)"
+            >
+              <i class="fa fa-trash-alt" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
         <div class="item-body pt-1">
-          <WorkoutDisplayComponent :workoutViewModel="plannedRx"></WorkoutDisplayComponent>
+          <WorkoutDisplayComponent
+            :workoutViewModel="plannedRx"
+          ></WorkoutDisplayComponent>
         </div>
-        <div
-          class="item-footer text-right pt-2"
-          v-if="plannedRx"
-        >
+        <div class="item-footer text-right pt-2" v-if="plannedRx">
           <div class="action-buttons">
             <a
               class="btn btn-secondary float-left"
               role="button"
-              v-bind:href="'Workout?workoutId='+this.plannedRx.id"
+              v-bind:href="'Workout?workoutId=' + this.plannedRx.id"
             >
-              <span class="do-it-text">Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon></span>
+              <span class="do-it-text"
+                >Edit
+                <font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
+              ></span>
             </a>
-            <b-button
-              variant="warning"
-              @click="showLogWorkout(plannedRx)"
-            >Log workout</b-button>
+            <b-button variant="warning" @click="showLogWorkout(plannedRx)"
+              >Log workout</b-button
+            >
           </div>
         </div>
       </div>
     </div>
-    <div
-      class="row"
-      v-if="isRxPlusSelected"
-    >
+    <div class="row" v-if="isRxPlusSelected">
       <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
         <div class="item-header d-flex flex-row justify-content-between  ">
           <div class="username">
@@ -223,27 +260,35 @@
           </div>
           <div class="">
             Today
+            <a
+              class="remove-workout pl-1 text-secondary pointer"
+              title="Remove workout planned"
+              @click="showDeleteWorkoutConfirmation(plannedRxPlus.id)"
+            >
+              <i class="fa fa-trash-alt" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
         <div class="item-body pt-1">
-          <WorkoutDisplayComponent :workoutViewModel="plannedRxPlus"></WorkoutDisplayComponent>
+          <WorkoutDisplayComponent
+            :workoutViewModel="plannedRxPlus"
+          ></WorkoutDisplayComponent>
         </div>
-        <div
-          class="item-footer text-right pt-2"
-          v-if="plannedRxPlus"
-        >
+        <div class="item-footer text-right pt-2" v-if="plannedRxPlus">
           <div class="action-buttons">
             <a
               class="btn btn-secondary float-left"
               role="button"
-              v-bind:href="'Workout?workoutId='+this.plannedRxPlus.id"
+              v-bind:href="'Workout?workoutId=' + this.plannedRxPlus.id"
             >
-              <span class="do-it-text">Edit <font-awesome-icon :icon="['fas','edit']"></font-awesome-icon></span>
+              <span class="do-it-text"
+                >Edit
+                <font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
+              ></span>
             </a>
-            <b-button
-              variant="warning"
-              @click="showLogWorkout(plannedRxPlus)"
-            >Log workout</b-button>
+            <b-button variant="warning" @click="showLogWorkout(plannedRxPlus)"
+              >Log workout</b-button
+            >
           </div>
         </div>
       </div>
@@ -254,24 +299,27 @@
           <b-button
             v-if="plannedScaled"
             v-on:click="setSelectedPlanned(0)"
-            v-bind:class="{focus:isScaledSelected}"
+            v-bind:class="{ focus: isScaledSelected }"
             class="w-100 "
             variant="success"
-          >Scaled</b-button>
+            >Scaled</b-button
+          >
           <b-button
             v-if="plannedRx"
             v-on:click="setSelectedPlanned(1)"
-            v-bind:class="{focus:isRxSelected}"
+            v-bind:class="{ focus: isRxSelected }"
             class="w-100"
             variant="warning"
-          >Rx</b-button>
+            >Rx</b-button
+          >
           <b-button
             v-if="plannedRxPlus"
             v-on:click="setSelectedPlanned(2)"
-            v-bind:class="{focus:isRxPlusSelected}"
+            v-bind:class="{ focus: isRxPlusSelected }"
             class="w-100"
             variant="danger"
-          >Rx+</b-button>
+            >Rx+</b-button
+          >
         </b-button-group>
       </div>
     </div>
@@ -302,14 +350,14 @@ library.add(
 /* public components */
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import {BButtonGroup} from "bootstrap-vue";
-import {BButton} from "bootstrap-vue";
-import {BModal} from "bootstrap-vue";
-import {BFormInput} from "bootstrap-vue";
+import { BButtonGroup } from "bootstrap-vue";
+import { BButton } from "bootstrap-vue";
+import { BModal } from "bootstrap-vue";
+import { BFormInput } from "bootstrap-vue";
 import datePicker from "vue-bootstrap-datetimepicker";
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 import { InputGroupPlugin } from "bootstrap-vue";
-import {BFormTextarea} from "bootstrap-vue";
+import { BFormTextarea } from "bootstrap-vue";
 Vue.use(InputGroupPlugin);
 import { mask } from "vue-the-mask";
 
@@ -347,9 +395,24 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
   toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
   isForTimesWorkouts: boolean = false;
 
+  toRemovePlannedId: number = 0;
+
   $refs: {
     logWorkoutModal: HTMLFormElement;
+    removeFromPlannedModal: HTMLFormElement;
   };
+
+  deletePlannedWorkout() {
+    this.$refs.removeFromPlannedModal.hide();
+    this.isScaledSelected = false;
+    this.isRxSelected = false;
+    this.isRxPlusSelected = false;
+    this.$emit("deletePlannedWorkout", this.toRemovePlannedId);
+  }
+  showDeleteWorkoutConfirmation(wodId) {
+    this.toRemovePlannedId = wodId;
+    this.$refs.removeFromPlannedModal.show();
+  }
 
   showLogWorkout(workoutViewModel: WorkoutViewModel) {
     this.selectedWorkout = workoutViewModel;
@@ -415,5 +478,4 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
 }
 </script>
 
-<style>
-</style>
+<style></style>
