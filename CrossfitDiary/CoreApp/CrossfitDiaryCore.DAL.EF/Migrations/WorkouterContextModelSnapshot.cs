@@ -114,6 +114,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.Property<bool>("WasFinished");
 
+                    b.Property<int>("WodSubType");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CrossfitterId");
@@ -179,6 +181,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<int>("PlanningLevel");
 
                     b.Property<int>("RoutineComplexId");
+
+                    b.Property<int>("WodSubType");
 
                     b.HasKey("Id");
 
