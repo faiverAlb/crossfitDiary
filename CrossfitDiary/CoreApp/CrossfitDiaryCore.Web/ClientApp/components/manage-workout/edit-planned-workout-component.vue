@@ -24,12 +24,12 @@
       <div class="form-group">
         <b-input-group>
           <date-picker
-            v-model="planningWorkout.displayPlanDate"
-            :config="{ format: 'DD.MM.YYYY'}"
-            placeholder="Select date"
-            name="toPlanModelDate"
-            :wrap="true"
-          ></date-picker>
+                  v-model="planningWorkout.displayPlanDate"
+                  :config="{ format: 'DD.MM.YYYY'}"
+                  placeholder="Select date"
+                  name="toPlanModelDate"
+                  :wrap="true"
+          />
           <b-input-group-append>
             <button
               class="btn btn-secondary datepickerbutton"

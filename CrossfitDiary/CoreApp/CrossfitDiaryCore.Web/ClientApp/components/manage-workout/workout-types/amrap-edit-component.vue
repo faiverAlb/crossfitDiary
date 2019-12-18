@@ -98,7 +98,7 @@
             no-resize
           />
           <small
-            id="passwordHelpBlock"
+            id="workoutHelpBlock"
             class="form-text text-muted text-right"
           >
             Workout note
@@ -107,10 +107,10 @@
       </div>
     </div>
     <EditPlannedWorkoutComponent
-      :planningWorkout="model"
-      @planWorkoutAction="planWorkoutAction"
-      v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
-    ></EditPlannedWorkoutComponent>
+            :planningWorkout="model"
+            @planWorkoutAction="planWorkoutAction"
+            v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
+    />
 
     <div
       class="want-to-log-container my-3"
@@ -126,21 +126,21 @@
               <div class="form-group">
                 <b-input-group>
                   <date-picker
-                    v-model="toLogModel.displayDate"
-                    :config="{ format: 'DD.MM.YYYY'}"
-                    placeholder="Select date"
-                    name="toLogModelDate"
-                    :state="fields.toLogModelDate && fields.toLogModelDate.valid"
-                    v-validate.initial="'required'"
-                    :wrap="true"
-                  ></date-picker>
+                          v-model="toLogModel.displayDate"
+                          :config="{ format: 'DD.MM.YYYY'}"
+                          placeholder="Select date"
+                          name="toLogModelDate"
+                          :state="fields.toLogModelDate && fields.toLogModelDate.valid"
+                          v-validate.initial="'required'"
+                          :wrap="true"
+                  />
                   <b-input-group-append>
                     <button
                       class="btn btn-secondary datepickerbutton"
                       type="button"
                       title="Toggle"
                     >
-                      <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
+                      <font-awesome-icon :icon="['fas','calendar']"/>
                     </button>
                   </b-input-group-append>
                 </b-input-group>
@@ -150,18 +150,18 @@
               <b-input-group class="mb-2">
                 <b-input-group-prepend>
                   <b-input-group-text tag="span">
-                    <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
+                    <font-awesome-icon :icon="['fas','hashtag']"/>
                   </b-input-group-text>
                 </b-input-group-prepend>
                 <b-form-input
-                  pattern="[0-9]*"
-                  type="tel"
-                  inputmode="numeric"
-                  v-model="toLogModel.roundsFinished"
-                  v-mask="'####'"
-                  placeholder="Rounds finished"
-                  aria-describedby="prPercentHelpBlock"
-                ></b-form-input>
+                        pattern="[0-9]*"
+                        type="tel"
+                        inputmode="numeric"
+                        v-model="toLogModel.roundsFinished"
+                        v-mask="'####'"
+                        placeholder="Rounds finished"
+                        aria-describedby="prPercentHelpBlock"
+                />
               </b-input-group>
             </div>
             <div class="col-lg-3 col-sm ">
@@ -213,7 +213,7 @@
               no-resize
             />
             <small
-              id="passwordHelpBlock"
+              id="wodThoughtsHelpBlock"
               class="form-text text-muted"
             >
               Your thoughts on wod. Max length = 200

@@ -6,13 +6,13 @@
         title="Leaderboard"
       >
         <div class="workouts-results text-center">
-          <b-table :items="leaderboardItems"></b-table>
+          <b-table :items="leaderboardItems"/>
         </div>
         <div slot="modal-footer">
           <b-button
             data-dismiss="modal"
             @click="()=>{this.$refs.leaderboardModal.hide();}"
-          >Close</b-button>
+          >Close</b-button> 
         </div>
       </b-modal>
       <b-modal

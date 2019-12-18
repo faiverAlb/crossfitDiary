@@ -42,7 +42,7 @@ namespace CrossfitDiaryCore.Model
         /// <summary>
         ///     Gets or sets Workout Sub type
         /// </summary>
-        public WodSubType WodSubType { get; set; } = WodSubType.Wod;
+        public WodSubType WodSubType { get; set; }
 
     }
 }
