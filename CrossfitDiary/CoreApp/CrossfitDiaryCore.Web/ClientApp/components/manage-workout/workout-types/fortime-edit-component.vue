@@ -39,7 +39,8 @@
                     v-bind:class="{saving:spinner.status}"
             >
                 <div class="dashed-container-description border-info text-center">
-                    <b-badge variant="info">1</b-badge>  Create your workout:
+                    <b-badge variant="info">1</b-badge>
+                    Create workout:
                 </div>
                 <div class="row">
                     <div class="col-lg-3 time-cap-container pb-2">
@@ -48,7 +49,7 @@
                                 for="timeCapInput"
                         >Time cap:</label>
                         <b-input-group class="input-group" size="sm">
-                            <b-input-group-prepend >
+                            <b-input-group-prepend>
                                 <b-input-group-text tag="span">
                                     <font-awesome-icon
                                             :icon="['fas','clock']"
@@ -107,9 +108,9 @@
                                 for="timeInput"
                         >Rest after</label>
                         <b-input-group
-                                size="sm"
                                 class="py-2"
                                 prepend="Rest after round:"
+                                size="sm"
                         >
                             <b-form-input
                                     aria-describedby="prPercentHelpBlock"
@@ -128,10 +129,10 @@
                             id="workoutCommentSection"
                             max-rows="3"
                             name="commentSection"
-                            size="sm"
                             no-resize
                             placeholder="Note: ex. girls do max 30kg"
                             rows="2"
+                            size="sm"
                             type="text"
                             v-model="model.comment"
                     />
@@ -159,7 +160,8 @@
 
                 <div class="col-md-12 text-right">
                     <div class="dashed-container-description border-success text-center">
-                        <b-badge variant="success">2</b-badge>  Write your results:
+                        <b-badge variant="success">2</b-badge>
+                        Write results:
                     </div>
                     <div
                             class="row justify-content-end"
@@ -253,8 +255,8 @@
                                 no-resize
                                 placeholder="Note: ex. Holy sh*t! Will do it again!"
                                 rows="2"
-                                type="text"
                                 size="sm"
+                                type="text"
                                 v-model="toLogModel.comment"
                         />
                         <small
