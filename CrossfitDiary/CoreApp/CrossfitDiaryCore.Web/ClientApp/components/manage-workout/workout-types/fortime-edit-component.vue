@@ -47,7 +47,7 @@
                                 class="sr-only"
                                 for="timeCapInput"
                         >Time cap:</label>
-                        <b-input-group class="input-group">
+                        <b-input-group class="input-group" size="sm">
                             <b-input-group-prepend>
                                 <b-input-group-text tag="span">
                                     <font-awesome-icon
@@ -75,7 +75,7 @@
                                 class="sr-only"
                                 for="roundsInput"
                         >Rounds count:</label>
-                        <b-input-group>
+                        <b-input-group size="sm">
                             <b-input-group-prepend>
                                 <b-input-group-text tag="span">
                                     <font-awesome-icon :icon="['fas','hashtag']"/>
@@ -107,6 +107,7 @@
                                 for="timeInput"
                         >Rest after</label>
                         <b-input-group
+                                size="sm"
                                 class="py-2"
                                 prepend="Rest after round:"
                         >
@@ -127,9 +128,10 @@
                             id="workoutCommentSection"
                             max-rows="3"
                             name="commentSection"
+                            size="sm"
                             no-resize
                             placeholder="Note: ex. girls do max 30kg"
-                            rows="3"
+                            rows="2"
                             type="text"
                             v-model="model.comment"
                     />
