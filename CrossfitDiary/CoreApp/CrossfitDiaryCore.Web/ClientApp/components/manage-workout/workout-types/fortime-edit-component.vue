@@ -48,7 +48,7 @@
                                 for="timeCapInput"
                         >Time cap:</label>
                         <b-input-group class="input-group" size="sm">
-                            <b-input-group-prepend>
+                            <b-input-group-prepend >
                                 <b-input-group-text tag="span">
                                     <font-awesome-icon
                                             :icon="['fas','clock']"
@@ -155,19 +155,19 @@
                 class="want-to-log-container my-3"
                 v-if="!workoutEdit.canUserSeePlanWorkouts"
         >
-            <div class="log-workout-container">
-                <div class="dashed-container-description border-success text-center">
-                    <b-badge variant="success">2</b-badge>  Write your results:
-                </div>
+            <div class="log-workout-container row">
 
                 <div class="col-md-12 text-right">
+                    <div class="dashed-container-description border-success text-center">
+                        <b-badge variant="success">2</b-badge>  Write your results:
+                    </div>
                     <div
                             class="row justify-content-end"
                             v-bind:class="{saving:spinner.status}"
                     >
                         <div class="col-lg-4 col-sm data-selector-container">
                             <div class="form-group">
-                                <b-input-group>
+                                <b-input-group size="sm">
                                     <date-picker
                                             :config="{ format: 'DD.MM.YYYY'}"
                                             :state="fields.toLogModelDate && fields.toLogModelDate.valid"
@@ -190,7 +190,7 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm pr-lg-2 total-time-log-container">
-                            <b-input-group class="mb-2">
+                            <b-input-group class="mb-2" size="sm">
                                 <b-input-group-prepend>
                                     <b-input-group-text tag="span">
                                         <font-awesome-icon :icon="['fas','clock']"/>
@@ -210,7 +210,7 @@
                             <hr/>
                         </div>
                         <div class="col-lg-3 col-sm  pl-lg-2 cap-reps-log-container">
-                            <b-input-group class="mb-2">
+                            <b-input-group class="mb-2" size="sm">
                                 <b-input-group-prepend>
                                     <b-input-group-text tag="span">
                                         Cap +
@@ -254,6 +254,7 @@
                                 placeholder="Note: ex. Holy sh*t! Will do it again!"
                                 rows="2"
                                 type="text"
+                                size="sm"
                                 v-model="toLogModel.comment"
                         />
                         <small
