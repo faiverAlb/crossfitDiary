@@ -38,6 +38,9 @@
                     class="pt-2 general-info-container"
                     v-bind:class="{saving:spinner.status}"
             >
+                <div class="dashed-container-description border-info text-center">
+                    <b-badge variant="info">1</b-badge>  Create your workout:
+                </div>
                 <div class="row">
                     <div class="col-lg-3 time-cap-container pb-2">
                         <label
@@ -150,22 +153,10 @@
                 class="want-to-log-container my-3"
                 v-if="!workoutEdit.canUserSeePlanWorkouts"
         >
-            <div class="row justify-content-end mt-3">
-
-                <div class="col-lg-4 col-sm mb-1">
-                    <b-form-group >
-                        <b-form-radio-group
-                                id="btn-radios-2"
-                                v-model="selected"
-                                :options="options"
-                                buttons
-                                button-variant="outline-primary"
-                                size="sm"
-                                name="radio-btn-outline"
-                        />
-                    </b-form-group>                </div>
-            </div>
             <div class="log-workout-container">
+                <div class="dashed-container-description border-success text-center">
+                    <b-badge variant="success">2</b-badge>  Write your results:
+                </div>
 
                 <div class="col-md-12 text-right">
                     <div
@@ -270,11 +261,25 @@
                             Your thoughts on wod. Max length = 200
                         </small>
                     </div>
+                    <div class="d-flex justify-content-end mt-3">
+                        <b-form-group>
+                            <b-form-radio-group
+                                    :options="options"
+                                    button-variant="outline-primary"
+                                    buttons
+                                    id="btn-radios-2"
+                                    name="radio-btn-outline"
+                                    size="sm"
+                                    v-model="selected"
+                            />
+                        </b-form-group>
+
+                    </div>
                     <div
                             class="row justify-content-end mt-3"
                             v-if="spinner.status == false"
                     >
-                            <span class="col-md-2 col-sm px-md-1">
+                            <span class="col-md-2 col-sm px-md-1 mx-md-2">
                               <button
                                       class=" btn btn-success btn-block"
                                       v-on:click="showLogWorkoutModal"
@@ -307,8 +312,8 @@
     import {BButtonGroup} from "bootstrap-vue";
     import {BModal} from "bootstrap-vue";
     import {BBadge} from "bootstrap-vue";
-    import {BFormRadioGroup}  from "bootstrap-vue";
-    import {BFormGroup }  from "bootstrap-vue";
+    import {BFormRadioGroup} from "bootstrap-vue";
+    import {BFormGroup} from "bootstrap-vue";
     import {BFormTextarea} from "bootstrap-vue";
 
     import datePicker from "vue-bootstrap-datetimepicker";
@@ -360,7 +365,7 @@
             BModal,
             BBadge,
             BFormRadioGroup,
-            BFormGroup ,
+            BFormGroup,
             Spinner,
             ErrorAlertComponent,
             EditPlannedWorkoutComponent
@@ -375,10 +380,10 @@
         $refs: {
             logWorkoutModal: HTMLFormElement;
         };
-        options=[
-            { text: 'Skill', value: 'Skill' },
-            { text: 'Workout', value: 'Workout' },
-            { text: 'Accessory', value: 'Accessory' }
+        options = [
+            {text: 'Skill', value: 'Skill'},
+            {text: 'Workout', value: 'Workout'},
+            {text: 'Accessory', value: 'Accessory'}
         ];
         selected = 'Workout';
 
