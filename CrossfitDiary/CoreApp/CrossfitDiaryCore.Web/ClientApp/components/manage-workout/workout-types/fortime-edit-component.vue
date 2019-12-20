@@ -1,29 +1,10 @@
 ﻿<template>
     <div>
-        <div>
-            <b-modal
-                    ref="logWorkoutModal"
-                    title="Sure to log this workout?"
-            >
-                Are you sure you want to log this workout?
-                <div slot="modal-footer">
-                    <button
-                            @click="hideLogModal"
-                            class="btn btn-default"
-                            data-dismiss="modal"
-                            type="button"
-                    >Close
-                    </button>
-                    <button
-                            @click="logWorkout"
-                            class="btn btn-primary btn-success"
-                            data-dismiss="modal"
-                            type="button"
-                    >Confirm
-                    </button>
-                </div>
-            </b-modal>
-        </div>
+        <b-modal @ok="logWorkout" id="test123" okTitle="Log workout" okVariant="success" ref="logWorkoutModalFT"
+                 title="Write your results">
+            Are you sure you want to log this workout?
+        </b-modal>
+
         <div class="routine-complex-info">
             <div class="row">
                 <div class="col">
@@ -33,7 +14,6 @@
                     />
                 </div>
             </div>
-
             <div
                     class="pt-2 general-info-container"
                     v-bind:class="{saving:spinner.status}"
@@ -305,52 +285,49 @@
     import {faCalendar} from "@fortawesome/free-solid-svg-icons/faCalendar";
     import {faHashtag} from "@fortawesome/free-solid-svg-icons/faHashtag";
     import {library} from "@fortawesome/fontawesome-svg-core";
-
-    library.add(faClock, faHashtag, faCalendar);
-
     /* public components */
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-    import {Vue, Component, Prop} from "vue-property-decorator";
-    import {BFormInput} from "bootstrap-vue";
-    import {BAlert} from "bootstrap-vue";
-    import {BButton} from "bootstrap-vue";
-    import {BButtonGroup} from "bootstrap-vue";
-    import {BModal} from "bootstrap-vue";
-    import {BBadge} from "bootstrap-vue";
-    import {BFormRadioGroup} from "bootstrap-vue";
-    import {BFormGroup} from "bootstrap-vue";
-    import {BFormTextarea} from "bootstrap-vue";
+    import {Component, Vue} from "vue-property-decorator";
+    import {
+        BAlert,
+        BBadge,
+        BButton,
+        BButtonGroup,
+        BFormGroup,
+        BFormInput,
+        BFormRadioGroup,
+        BFormTextarea,
+        BModal,
+        InputGroupPlugin
+    } from "bootstrap-vue";
 
     import datePicker from "vue-bootstrap-datetimepicker";
     import {mask} from "vue-the-mask";
-    import {InputGroupPlugin} from "bootstrap-vue";
     import VeeValidate from "vee-validate";
     import Spinner from "vue-spinner-component/src/Spinner.vue";
-
-    Vue.use(InputGroupPlugin);
-    Vue.use(VeeValidate);
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
 
     import {IWorkoutEditState} from "../../../workout-edit-store/types";
-    import {State, Action, Getter} from "vuex-class";
-
-    const namespace: string = "workoutEdit";
-
+    import {State} from "vuex-class";
     /* app components */
     import CrossfitterService from "../../../CrossfitterService";
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";
     import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
     /* models and styles */
-    import {
-        WorkoutViewModel,
-        PlanningWorkoutLevel
-    } from "../../../models/viewModels/WorkoutViewModel";
+    import {WorkoutViewModel} from "../../../models/viewModels/WorkoutViewModel";
     import {ToLogWorkoutViewModel} from "../../../models/viewModels/ToLogWorkoutViewModel";
     import {WorkoutType} from "../../../models/viewModels/WorkoutType";
     import {ErrorAlertModel} from "../../../models/viewModels/ErrorAlertModel";
     import {SpinnerModel} from "../../../models/viewModels/SpinnerModel";
     import {WindowHelper} from "../../../helpers/WindowHelper";
+
+    library.add(faClock, faHashtag, faCalendar);
+
+    Vue.use(InputGroupPlugin);
+    Vue.use(VeeValidate);
+
+    const namespace: string = "workoutEdit";
 
     declare var workouter: {
         toLogWorkoutRawModel: ToLogWorkoutViewModel;
@@ -373,7 +350,7 @@
             BFormGroup,
             Spinner,
             ErrorAlertComponent,
-            EditPlannedWorkoutComponent
+            EditPlannedWorkoutComponent,
         },
         directives: {mask}
     })
@@ -383,7 +360,7 @@
         errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
         spinner: SpinnerModel = new SpinnerModel(false);
         $refs: {
-            logWorkoutModal: HTMLFormElement;
+            logWorkoutModalFT: HTMLFormElement;
         };
         options = [
             {text: 'Skill', value: 'Skill'},
@@ -420,7 +397,6 @@
                         logWorkoutViewModel: this.toLogModel
                     };
                     let crossfitterService: CrossfitterService = new CrossfitterService();
-                    this.hideLogModal();
                     this.spinner.activate();
 
                     crossfitterService
@@ -469,14 +445,11 @@
             }
             this.$validator.validate().then(isValid => {
                 if (isValid) {
-                    this.$refs.logWorkoutModal.show();
+                    this.$refs.logWorkoutModalFT.show();
                 }
             });
         }
 
-        hideLogModal(): void {
-            this.$refs.logWorkoutModal.hide();
-        }
     }
 </script>
 
