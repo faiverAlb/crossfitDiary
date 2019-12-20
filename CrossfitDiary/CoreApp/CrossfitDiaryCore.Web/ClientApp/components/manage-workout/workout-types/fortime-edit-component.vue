@@ -258,10 +258,12 @@
                             v-if="spinner.status == false"
                     >
                             <span class="col-md-2 col-sm px-md-1 mx-md-2">
-                              <button
-                                      class=" btn btn-success btn-block btn-sm"
+                              <b-button
+                                      size="sm"
+                                      variant="success"
+                                      class=" btn-block "
                                       v-on:click="showLogWorkoutModal"
-                              >Log workout</button>
+                              >Log workout</b-button>
                             </span>
                     </div>
 
@@ -302,14 +304,15 @@
     import VeeValidate from "vee-validate";
     import Spinner from "vue-spinner-component/src/Spinner.vue";
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
-
-    import {IWorkoutEditState} from "../../../workout-edit-store/types";
     import {State} from "vuex-class";
+    import {IWorkoutEditState} from "../../../workout-edit-store/types";
+    
     /* app components */
     import CrossfitterService from "../../../CrossfitterService";
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";
     import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
+    
     /* models and styles */
     import {WorkoutViewModel} from "../../../models/viewModels/WorkoutViewModel";
     import {ToLogWorkoutViewModel} from "../../../models/viewModels/ToLogWorkoutViewModel";
