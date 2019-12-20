@@ -1,10 +1,5 @@
 ﻿<template>
     <div>
-        <b-modal @ok="logWorkout" id="test123" okTitle="Log workout" okVariant="success" ref="logWorkoutModalFT"
-                 title="Write your results">
-            Are you sure you want to log this workout?
-        </b-modal>
-
         <div class="routine-complex-info">
             <div class="row">
                 <div class="col">
@@ -273,7 +268,10 @@
                 </div>
             </div>
         </div>
-
+        <b-modal @ok="logWorkout" id="test123" okTitle="Log workout" okVariant="success" ref="logWorkoutModal"
+                 title="Write your results">
+            Are you sure you want to log this workout?
+        </b-modal>
     </div>
 </template>
 
@@ -358,7 +356,7 @@
         errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
         spinner: SpinnerModel = new SpinnerModel(false);
         $refs: {
-            logWorkoutModalFT: HTMLFormElement;
+            logWorkoutModal: HTMLFormElement;
         };
         options = [
             {text: 'Skill', value: 'Skill'},
@@ -443,7 +441,7 @@
             }
             this.$validator.validate().then(isValid => {
                 if (isValid) {
-                    this.$refs.logWorkoutModalFT.show();
+                    this.$refs.logWorkoutModal.show();
                 }
             });
         }

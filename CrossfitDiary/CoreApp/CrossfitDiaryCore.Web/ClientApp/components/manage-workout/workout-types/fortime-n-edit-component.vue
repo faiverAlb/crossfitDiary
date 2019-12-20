@@ -1,51 +1,36 @@
 ﻿<template>
   <div>
-    <b-modal
-      ref="logWorkoutModal"
-      title="Sure to log this workout?"
-    >
-      Are you sure you want to log this workout?
-      <div slot="modal-footer">
-        <button
-          type="button"
-          data-dismiss="modal"
-          class="btn btn-default"
-          @click="hideLogModal"
-        >Close</button>
-        <button
-          type="button"
-          data-dismiss="modal"
-          class="btn btn-primary btn-success"
-          @click="logWorkout"
-        >Confirm</button>
-      </div>
-    </b-modal>
     <div class="routine-complex-info">
       <div class="row">
         <div class="col">
           <ErrorAlertComponent
-            class="my-1 mx-0"
-            :errorAlertModel="errorAlertModel"
-          ></ErrorAlertComponent>
+                  class="my-1 mx-0"
+                  :errorAlertModel="errorAlertModel"
+          />
         </div>
       </div>
       <div
         class="pt-2 general-info-container"
         v-bind:class="{saving:spinner.status}"
       >
+        <div class="dashed-container-description border-info text-center">
+          <b-badge variant="info">1</b-badge>
+          Create workout:
+        </div>
+        
         <div class="row">
           <div class="col-lg-3 time-cap-container pb-2">
             <label
               for="timeCapInput"
               class="sr-only"
             >Time cap:</label>
-            <b-input-group class="input-group">
+            <b-input-group class="input-group" size="sm">
               <b-input-group-prepend>
                 <b-input-group-text tag="span">
                   <font-awesome-icon
-                    :icon="['fas','clock']"
-                    class="fa-lg time-cap-icon"
-                  ></font-awesome-icon>
+                          :icon="['fas','clock']"
+                          class="fa-lg time-cap-icon"
+                  />
                 </b-input-group-text>
               </b-input-group-prepend>
               <b-form-input
@@ -82,9 +67,9 @@
                   data-bind="click:function(){ $parent.removeInnerWorkout($index())}"
                 >
                   <font-awesome-icon
-                    :icon="['fas','times']"
-                    class="fa-sm text-secondary"
-                  ></font-awesome-icon>
+                          :icon="['fas','times']"
+                          class="fa-sm text-secondary"
+                  />
                 </a>
                 <!-- /ko -->
               </h5>
@@ -98,10 +83,10 @@
                       v-bind:for="'roundsCount'+index"
                       class="sr-only"
                     >Rounds count:</label>
-                    <b-input-group>
+                    <b-input-group size="sm">
                       <b-input-group-prepend>
                         <b-input-group-text tag="span">
-                          <font-awesome-icon :icon="['fas','hashtag']"></font-awesome-icon>
+                          <font-awesome-icon :icon="['fas','hashtag']"/>
                         </b-input-group-text>
                       </b-input-group-prepend>
                       <b-form-input
@@ -119,27 +104,29 @@
                     </b-input-group>
                   </div>
                 </div>
-                <ExercisesListComponent :exercisesToDo="childWorkout.exercisesToDoList"></ExercisesListComponent>
+                <ExercisesListComponent :exercisesToDo="childWorkout.exercisesToDoList"/>
                 <div
                   class="row py-1"
                   v-if="childWorkout.exercisesToDoList.length > 0"
                 >
                   <div class="col-lg-4">
                     <label
-                      for="timeInput"
+                      for="restInput"
                       class="sr-only"
                     >Rest after</label>
                     <b-input-group
                       class="py-2"
+                      size="sm"
                       prepend="Rest after round:"
                     >
                       <b-form-input
-                        type="tel"
-                        v-mask="'##:##'"
-                        v-model="childWorkout.restBetweenRounds"
-                        placeholder="Time"
-                        aria-describedby="prPercentHelpBlock"
-                      ></b-form-input>
+                              type="tel"
+                              id="restInput"
+                              v-mask="'##:##'"
+                              v-model="childWorkout.restBetweenRounds"
+                              placeholder="Time"
+                              aria-describedby="prPercentHelpBlock"
+                      />
                     </b-input-group>
                   </div>
                 </div>
@@ -158,17 +145,18 @@
         <b-form-textarea
           id="commentSection"
           class="mt-2"
+          size="sm"
           v-model="model.comment"
           name="commentSection"
           placeholder="Note: ex. girls do max 30kg"
           :maxlength="150"
           type="text"
-          rows="3"
+          rows="2"
           max-rows="3"
           no-resize
         />
         <small
-          id="passwordHelpBlock"
+          id="mutedWorkoutNote"
           class="form-text text-muted text-right"
         >
           Workout note
@@ -176,58 +164,63 @@
       </div>
     </div>
     <EditPlannedWorkoutComponent
-      :planningWorkout="model"
-      @planWorkoutAction="planWorkoutAction"
-      v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
-    ></EditPlannedWorkoutComponent>
+            :planningWorkout="model"
+            @planWorkoutAction="planWorkoutAction"
+            v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
+    />
     <div
       class="want-to-log-container my-3"
       v-if="!workoutEdit.canUserSeePlanWorkouts"
     >
-      <div class="log-workout-container">
+      <div class="log-workout-container row">
         <div class="col-md-12 text-right">
+          <div class="dashed-container-description border-success text-center">
+            <b-badge variant="success">2</b-badge>
+            Write results:
+          </div>
           <div
             class="row justify-content-end"
             v-bind:class="{saving:spinner.status}"
           >
             <div class="col-lg-3 col-sm data-selector-container pr-lg-3">
               <div class="form-group">
-                <b-input-group>
+                <b-input-group size="sm">
                   <date-picker
-                    v-model="toLogModel.displayDate"
-                    :config="{ format: 'DD.MM.YYYY'}"
-                    placeholder="Select date"
-                    name="toLogModelDate"
-                    :state="fields.toLogModelDate && fields.toLogModelDate.valid"
-                    v-validate.initial="'required'"
-                    :wrap="true"
-                  ></date-picker>
+                          
+                          v-model="toLogModel.displayDate"
+                          :config="{ format: 'DD.MM.YYYY'}"
+                          placeholder="Select date"
+                          name="toLogModelDate"
+                          :state="fields.toLogModelDate && fields.toLogModelDate.valid"
+                          v-validate.initial="'required'"
+                          :wrap="true"
+                  />
                   <b-input-group-append>
                     <button
                       class="btn btn-secondary datepickerbutton"
                       type="button"
                       title="Toggle"
                     >
-                      <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
+                      <font-awesome-icon :icon="['fas','calendar']"/>
                     </button>
                   </b-input-group-append>
                 </b-input-group>
               </div>
             </div>
             <div class="col-lg-3 col-sm pr-lg-2 total-time-log-container">
-              <b-input-group class="mb-2">
+              <b-input-group class="mb-2" size="sm">
                 <b-input-group-prepend>
                   <b-input-group-text tag="span">
-                    <font-awesome-icon :icon="['fas','clock']"></font-awesome-icon>
+                    <font-awesome-icon :icon="['fas','clock']"/>
                   </b-input-group-text>
                 </b-input-group-prepend>
                 <b-form-input
-                  type="tel"
-                  v-model="toLogModel.timePassed"
-                  v-mask="'##:##'"
-                  placeholder="Time"
-                  aria-describedby="prPercentHelpBlock"
-                ></b-form-input>
+                        type="tel"
+                        v-model="toLogModel.timePassed"
+                        v-mask="'##:##'"
+                        placeholder="Time"
+                        aria-describedby="prPercentHelpBlock"
+                />
               </b-input-group>
             </div>
             <div class="vertical-divider d-none d-sm-block"></div>
@@ -235,7 +228,7 @@
               <hr />
             </div>
             <div class="col-lg-3 col-sm  pl-lg-2 cap-reps-log-container">
-              <b-input-group class="mb-2">
+              <b-input-group class="mb-2" size="sm">
                 <b-input-group-prepend>
                   <b-input-group-text tag="span">
                     Cap +
@@ -275,6 +268,7 @@
               placeholder="Note: ex. Holy sh*t! Will do it again!"
               :maxlength="200"
               type="text"
+              size="sm"
               rows="2"
               max-rows="2"
               no-resize
@@ -300,7 +294,10 @@
         </div>
       </div>
     </div>
-
+    <b-modal @ok="logWorkout" id="test123" okTitle="Log workout" okVariant="success" ref="logWorkoutModal"
+             title="Write your results">
+      Are you sure you want to log this workout?
+    </b-modal>
   </div>
 </template>
 
@@ -325,10 +322,12 @@ import VeeValidate from "vee-validate";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
 import {BFormTextarea} from "bootstrap-vue";
 import {BModal} from "bootstrap-vue";
+import {BBadge} from "bootstrap-vue";
+
 Vue.use(InputGroupPlugin);
 Vue.use(VeeValidate);
 import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
-import { IWorkoutEditState } from "./../../../workout-edit-store/types";
+import { IWorkoutEditState } from "../../../workout-edit-store/types";
 import { State, Action, Getter } from "vuex-class";
 const namespace: string = "workoutEdit";
 
@@ -361,6 +360,7 @@ declare var workouter: {
     BFormTextarea,
     BModal,
     BAlert,
+    BBadge,
     Spinner,
     ErrorAlertComponent,
     EditPlannedWorkoutComponent
