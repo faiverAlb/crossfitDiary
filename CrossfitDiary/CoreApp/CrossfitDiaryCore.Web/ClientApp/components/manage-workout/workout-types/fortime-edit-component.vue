@@ -14,10 +14,7 @@
                     />
                 </div>
             </div>
-            <div
-                    class="pt-2 general-info-container"
-                    v-bind:class="{saving:spinner.status}"
-            >
+            <div class="pt-2 general-info-container" v-bind:class="{saving:spinner.status}">
                 <div class="dashed-container-description border-info text-center">
                     <b-badge variant="info">1</b-badge>
                     Create workout:
@@ -85,7 +82,7 @@
                     <div class="col-lg-4">
                         <label
                                 class="sr-only"
-                                for="timeInput"
+                                for="timeRestInput"
                         >Rest after</label>
                         <b-input-group
                                 class="py-2"
@@ -95,6 +92,7 @@
                             <b-form-input
                                     aria-describedby="prPercentHelpBlock"
                                     placeholder="Time"
+                                    id="timeRestInput"
                                     type="tel"
                                     v-mask="'##:##'"
                                     v-model="model.restBetweenRounds"
