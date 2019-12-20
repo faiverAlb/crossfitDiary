@@ -238,6 +238,7 @@
     import {faCalendar} from "@fortawesome/free-solid-svg-icons/faCalendar";
     import {faHashtag} from "@fortawesome/free-solid-svg-icons/faHashtag";
     import {library} from "@fortawesome/fontawesome-svg-core";
+    
     /* public components */
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     import {Component, Vue} from "vue-property-decorator";
@@ -249,11 +250,13 @@
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
     import {IWorkoutEditState} from "../../../workout-edit-store/types";
     import {State} from "vuex-class";
+    
     /* app components */
     import CrossfitterService from "../../../CrossfitterService";
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";
     import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
+    
     /* models and styles */
     import {WorkoutViewModel} from "../../../models/viewModels/WorkoutViewModel";
     import {ToLogWorkoutViewModel} from "../../../models/viewModels/ToLogWorkoutViewModel";
