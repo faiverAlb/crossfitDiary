@@ -63,6 +63,7 @@
                                     aria-describedby="prPercentHelpBlock"
                                     placeholder="Time"
                                     type="tel"
+                                    id="timeInput"
                                     v-mask="'##:##'"
                                     v-model="model.restBetweenRounds"
                             />
