@@ -379,9 +379,6 @@
             });
         }
 
-        hideLogModal(): void {
-            this.$refs.logWorkoutModal.hide();
-        }
     }
 </script>
 

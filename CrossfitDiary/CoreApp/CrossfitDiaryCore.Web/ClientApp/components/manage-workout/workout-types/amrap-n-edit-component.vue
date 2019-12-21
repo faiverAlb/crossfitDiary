@@ -256,9 +256,7 @@
                     >
                         <span class="col-md-2 col-sm px-md-1">
                           <b-button
-                                  class=" btn-block "
-                                  size="sm"
-                                  v-on:click="showLogWorkoutModal"
+                ~                   v-on:click="showLogWorkoutModal"
                                   variant="success"
                           >Log workout</b-button>
                         </span>
@@ -397,10 +395,6 @@
                     this.$refs.logWorkoutModal.show();
                 }
             });
-        }
-
-        hideLogModal(): void {
-            this.$refs.logWorkoutModal.hide();
         }
 
         logWorkout() {

@@ -1,32 +1,12 @@
 ﻿<template>
   <div>
-    <b-modal
-      ref="logWorkoutModal"
-      title="Sure to log this workout?"
-    >
-      Are you sure you want to log this workout?
-      <div slot="modal-footer">
-        <button
-          type="button"
-          data-dismiss="modal"
-          class="btn btn-default"
-          @click="hideLogModal"
-        >Close</button>
-        <button
-          type="button"
-          data-dismiss="modal"
-          class="btn btn-primary btn-success"
-          @click="logWorkout"
-        >Confirm</button>
-      </div>
-    </b-modal>
     <div class="routine-complex-info">
       <div class="row">
         <div class="col">
           <ErrorAlertComponent
-            class="my-1 mx-0"
-            :errorAlertModel="errorAlertModel"
-          ></ErrorAlertComponent>
+                  class="my-1 mx-0"
+                  :errorAlertModel="errorAlertModel"
+          />
         </div>
       </div>
       <div
@@ -36,13 +16,13 @@
         <div class="row">
           <div class="col-lg-3 pb-2">
             <label
-              for="timeInput"
+              for="timeToWork"
               class="sr-only"
             >Time to work:</label>
             <b-input-group>
               <b-input-group-prepend>
                 <b-input-group-text tag="span">
-                  <font-awesome-icon :icon="['far','clock']"></font-awesome-icon>
+                  <font-awesome-icon :icon="['far','clock']"/>
                 </b-input-group-text>
               </b-input-group-prepend>
               <b-form-input
@@ -60,14 +40,14 @@
 
         </div>
 
-        <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"></ExercisesListComponent>
+        <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"/>
         <div
           class="row py-1"
           v-if="model.exercisesToDoList.length > 0"
         >
           <div class="col-lg-4">
             <label
-              for="timeInput"
+              for="restInput"
               class="sr-only"
             >Rest after</label>
             <b-input-group
@@ -75,12 +55,13 @@
               prepend="Rest after round:"
             >
               <b-form-input
-                type="tel"
-                v-mask="'##:##'"
-                v-model="model.restBetweenRounds"
-                placeholder="Time"
-                aria-describedby="prPercentHelpBlock"
-              ></b-form-input>
+                      type="tel"
+                      v-mask="'##:##'"
+                      v-model="model.restBetweenRounds"
+                      placeholder="Time"
+                      id="restInput"
+                      aria-describedby="prPercentHelpBlock"
+              />
             </b-input-group>
           </div>
         </div>
@@ -98,7 +79,7 @@
             no-resize
           />
           <small
-            id="passwordHelpBlock"
+            id="wodnote"
             class="form-text text-muted text-right"
           >
             Workout note
@@ -107,10 +88,10 @@
       </div>
     </div>
     <EditPlannedWorkoutComponent
-      :planningWorkout="model"
-      @planWorkoutAction="planWorkoutAction"
-      v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
-    ></EditPlannedWorkoutComponent>
+            :planningWorkout="model"
+            @planWorkoutAction="planWorkoutAction"
+            v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
+    />
     <div
       class="want-to-log-container my-3"
       v-if="!workoutEdit.canUserSeePlanWorkouts"
@@ -125,21 +106,21 @@
               <div class="form-group">
                 <b-input-group>
                   <date-picker
-                    v-model="toLogModel.displayDate"
-                    :config="{ format: 'DD.MM.YYYY'}"
-                    placeholder="Select date"
-                    name="toLogModelDate"
-                    :state="fields.toLogModelDate && fields.toLogModelDate.valid"
-                    v-validate.initial="'required'"
-                    :wrap="true"
-                  ></date-picker>
+                          v-model="toLogModel.displayDate"
+                          :config="{ format: 'DD.MM.YYYY'}"
+                          placeholder="Select date"
+                          name="toLogModelDate"
+                          :state="fields.toLogModelDate && fields.toLogModelDate.valid"
+                          v-validate.initial="'required'"
+                          :wrap="true"
+                  />
                   <b-input-group-append>
                     <button
                       class="btn btn-secondary datepickerbutton"
                       type="button"
                       title="Toggle"
                     >
-                      <font-awesome-icon :icon="['fas','calendar']"></font-awesome-icon>
+                      <font-awesome-icon :icon="['fas','calendar']"/>
                     </button>
                   </b-input-group-append>
                 </b-input-group>
@@ -196,6 +177,10 @@
         </div>
       </div>
     </div>
+    <b-modal @ok="logWorkout" id="test123" okTitle="Log workout" okVariant="success" ref="logWorkoutModal"
+             title="Write your results">
+      Are you sure you want to log this workout?
+    </b-modal>
   </div>
 </template>
 
@@ -219,6 +204,8 @@ import { mask } from "vue-the-mask";
 import VeeValidate from "vee-validate";
 import {BFormTextarea} from "bootstrap-vue";
 import {BModal} from "bootstrap-vue";
+import {BBadge} from "bootstrap-vue";
+import {BButton} from "bootstrap-vue";
 
 Vue.use(InputGroupPlugin);
 Vue.use(VeeValidate);
@@ -235,11 +222,10 @@ import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
 
 /* models and styles */
 import { WorkoutViewModel } from "../../../models/viewModels/WorkoutViewModel";
-import { ExerciseViewModel } from "../../../models/viewModels/ExerciseViewModel";
 import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutViewModel";
 import { WorkoutType } from "../../../models/viewModels/WorkoutType";
 import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
-import { SpinnerModel } from "./../../../models/viewModels/SpinnerModel";
+import { SpinnerModel } from "../../../models/viewModels/SpinnerModel";
 import { WindowHelper } from "../../../helpers/WindowHelper";
 
 declare var workouter: {
@@ -256,6 +242,8 @@ declare var workouter: {
     BFormTextarea,
     BModal,
     BAlert,
+    BButton,
+    BBadge,
     Spinner,
     ErrorAlertComponent,
     EditPlannedWorkoutComponent
@@ -309,7 +297,6 @@ export default class EmomEditComponent extends Vue {
       this.model.workoutType = WorkoutType.EMOM;
     }
   }
-  mutateData(): void {}
 
   logWorkout() {
     this.$validator.validate();
@@ -350,9 +337,6 @@ export default class EmomEditComponent extends Vue {
     });
   }
 
-  hideLogModal(): void {
-    this.$refs.logWorkoutModal.hide();
-  }
 }
 </script>
 
