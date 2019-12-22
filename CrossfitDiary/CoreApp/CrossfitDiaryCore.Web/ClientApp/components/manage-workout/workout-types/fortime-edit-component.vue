@@ -86,8 +86,8 @@
                         >
                             <b-form-input
                                     aria-describedby="prPercentHelpBlock"
-                                    placeholder="Time"
                                     id="timeRestInput"
+                                    placeholder="Time"
                                     type="tel"
                                     v-mask="'##:##'"
                                     v-model="model.restBetweenRounds"
@@ -242,13 +242,12 @@
                     <div class="d-flex justify-content-end mt-3">
                         <b-form-group>
                             <b-form-radio-group
-                                    :options="options"
+                                    :options="wodSubTypes"
                                     button-variant="outline-primary"
                                     buttons
-                                    id="btn-radios-2"
                                     name="radio-btn-outline"
                                     size="sm"
-                                    v-model="selected"
+                                    v-model="selectedSubType"
                             />
                         </b-form-group>
 
@@ -259,10 +258,10 @@
                     >
                             <span class="col-md-2 col-sm px-md-1 mx-md-2">
                               <b-button
-                                      size="sm"
-                                      variant="success"
                                       class=" btn-block "
+                                      size="sm"
                                       v-on:click="showLogWorkoutModal"
+                                      variant="success"
                               >Log workout</b-button>
                             </span>
                     </div>
@@ -306,17 +305,16 @@
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
     import {State} from "vuex-class";
     import {IWorkoutEditState} from "../../../workout-edit-store/types";
-    
     /* app components */
     import CrossfitterService from "../../../CrossfitterService";
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";
     import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
-    
     /* models and styles */
     import {WorkoutViewModel} from "../../../models/viewModels/WorkoutViewModel";
     import {ToLogWorkoutViewModel} from "../../../models/viewModels/ToLogWorkoutViewModel";
     import {WorkoutType} from "../../../models/viewModels/WorkoutType";
+    import {WodSubType} from "../../../models/viewModels/WodSubType";
     import {ErrorAlertModel} from "../../../models/viewModels/ErrorAlertModel";
     import {SpinnerModel} from "../../../models/viewModels/SpinnerModel";
     import {WindowHelper} from "../../../helpers/WindowHelper";
@@ -361,12 +359,12 @@
         $refs: {
             logWorkoutModal: HTMLFormElement;
         };
-        options = [
-            {text: 'Skill', value: 'Skill'},
-            {text: 'Workout', value: 'Workout'},
-            {text: 'Accessory', value: 'Accessory'}
+        wodSubTypes = [
+            {text: 'Skill', value: WodSubType.Skill},
+            {text: 'Workout', value: WodSubType.Wod},
+            {text: 'Accessory', value: WodSubType.AccessoryWork}
         ];
-        selected = 'Workout';
+        selectedSubType = WodSubType.Skill;
 
         @State("workoutEdit")
         workoutEdit: IWorkoutEditState;
@@ -375,6 +373,7 @@
             if (workouter != null && workouter.toLogWorkoutRawModel != null) {
                 this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
                 this.toLogModel = workouter.toLogWorkoutRawModel;
+                this.selectedSubType = workouter.toLogWorkoutRawModel.wodSubType;
             } else if (workouter != null && workouter.workoutViewModel != null) {
                 this.model = workouter.workoutViewModel;
             } else {
