@@ -29,10 +29,11 @@ let vue = new Vue({
     <div class="home-container">
       <div class="row">
         <div class="col">
-          <ErrorAlertComponent :errorAlertModel="errorAlertModel"></ErrorAlertComponent>
+          <ErrorAlertComponent :errorAlertModel="errorAlertModel"/>
         </div>
       </div>
-      <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts" @deletePlannedWorkout="deletePlannedWorkout" @logWorkout="logWorkout"></PlannedWorkoutDisplayComponent>
+      <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts" @deletePlannedWorkout="deletePlannedWorkout"
+                                      @logWorkout="logWorkout"/>
         <div class="container person-setting">
       <div
         class="row"

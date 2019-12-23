@@ -47,6 +47,7 @@ export class ToLogWorkoutViewModel implements Serializable<ToLogWorkoutViewModel
     constructor(params?: IToLogWorkoutViewModel) {
         this.displayDate = this.getDefaultDate();
         this.date = this.getDefaultDate();
+        this.wodSubType = WodSubType.Skill;
 
         if (params == null) {
             return;

@@ -247,7 +247,7 @@
                                     buttons
                                     name="radio-btn-outline"
                                     size="sm"
-                                    v-model="selectedSubType"
+                                    v-model="toLogModel.wodSubType"
                             />
                         </b-form-group>
 
@@ -364,8 +364,7 @@
             {text: 'Workout', value: WodSubType.Wod},
             {text: 'Accessory', value: WodSubType.AccessoryWork}
         ];
-        selectedSubType = WodSubType.Skill;
-
+        
         @State("workoutEdit")
         workoutEdit: IWorkoutEditState;
 
@@ -373,7 +372,6 @@
             if (workouter != null && workouter.toLogWorkoutRawModel != null) {
                 this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
                 this.toLogModel = workouter.toLogWorkoutRawModel;
-                this.selectedSubType = workouter.toLogWorkoutRawModel.wodSubType;
             } else if (workouter != null && workouter.workoutViewModel != null) {
                 this.model = workouter.workoutViewModel;
             } else {

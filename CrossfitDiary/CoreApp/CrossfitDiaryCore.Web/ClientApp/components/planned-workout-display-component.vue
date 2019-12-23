@@ -478,4 +478,4 @@ export default class PlannedWorkoutDisplayComponent extends Vue {
 }
 </script>
 
-<style></style>
+<style/>

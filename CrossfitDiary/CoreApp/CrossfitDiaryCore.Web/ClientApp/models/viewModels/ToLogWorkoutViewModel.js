@@ -1,4 +1,5 @@
 import { WorkoutViewModel } from "./WorkoutViewModel";
+import { WodSubType } from "./WodSubType";
 var ToLogWorkoutViewModel = /** @class */ (function () {
     function ToLogWorkoutViewModel(params) {
         this.id = 0;
@@ -16,9 +17,11 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
         };
         this.displayDate = this.getDefaultDate();
         this.date = this.getDefaultDate();
+        this.wodSubType = WodSubType.Skill;
         if (params == null) {
             return;
         }
+        // seems that it doesn't used
         this.id = params.id;
         this.crossfitterWorkoutId = params.crossfitterWorkoutId;
         this.date = params.date;
@@ -34,7 +37,6 @@ var ToLogWorkoutViewModel = /** @class */ (function () {
         this.displayDate = params.displayDate;
         this.workoutViewModel = params.workoutViewModel;
         this.comment = params.comment;
-        debugger;
         this.wodSubType = params.wodSubType;
     }
     ToLogWorkoutViewModel.prototype.deserialize = function (jsonInput) {
