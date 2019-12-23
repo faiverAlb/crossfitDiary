@@ -61,23 +61,11 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("workoutViewModel")]
         public WorkoutViewModel WorkoutViewModel { get; set; }
 
-
         [JsonProperty("comment")]
         public string Comment { get; set; }
-
-
+        
         [JsonProperty("wodSubType")]
         public WodSubType WodSubType { get; set; }
 
-    }
-
-    /// <summary>
-    ///     Describes Workout subtype: Skill, Workout and Accessory work
-    /// </summary>
-    public enum WodSubType
-    {
-        Skill,
-        Wod,
-        AccessoryWork
     }
 }

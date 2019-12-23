@@ -203,6 +203,7 @@ namespace CrossfitDiaryCore.BL.Services
                 {
                     x.PlanDate = planned.Single(p => p.RoutineComplexId == x.Id).PlanningDate;
                     x.PlanningLevel = planned.Single(p => p.RoutineComplexId == x.Id).PlanningLevel;
+                    x.WodSubType = planned.Single(p => p.RoutineComplexId == x.Id).WodSubType;
                 });
             return routines;
         }

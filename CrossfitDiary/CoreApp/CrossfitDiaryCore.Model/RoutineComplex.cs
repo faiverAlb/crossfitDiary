@@ -108,6 +108,14 @@ namespace CrossfitDiaryCore.Model
         [NotMapped]
         public PlanningLevel? PlanningLevel { get; set; }
 
+
+        /// <summary>
+        ///     Gets or sets Workout Sub type
+        /// </summary>
+        [NotMapped]
+        public WodSubType WodSubType { get; set; }
+
+
         /// <summary>
         ///     General comment regarding workout
         /// </summary>
