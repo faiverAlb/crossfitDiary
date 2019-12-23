@@ -87,11 +87,6 @@
                     this.activities.splice(indexOfWorkout, 1);
                 });
         }
-
-        hideModal(): void {
-            this.$refs.removeWodModalRef.hide();
-        }
-
         showLeaderBoardModal(crossfitterWorkoutId: number) {
             this._apiService
                 .getLeaderboardByWorkout(crossfitterWorkoutId)

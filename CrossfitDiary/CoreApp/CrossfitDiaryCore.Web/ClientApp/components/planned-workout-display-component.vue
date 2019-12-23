@@ -1,33 +1,166 @@
 ﻿<template>
     <div class="planned-workouts container">
-        <b-modal
-                ref="removeFromPlannedModal"
-                title="Sure to remove workout from planning?"
-        >
-            Are you sure to remove workout from planning?
-            <div slot="modal-footer">
-                <button
-                        @click="
-            () => {
-              this.$refs.removeFromPlannedModal.hide();
-            }
-          "
-                        class="btn btn-default"
-                        data-dismiss="modal"
-                        type="button"
-                >
-                    Close
-                </button>
-                <button
-                        @click="deletePlannedWorkout"
-                        class="btn btn-primary btn-danger"
-                        data-dismiss="modal"
-                        type="button"
-                >
-                    Delete
-                </button>
+
+
+        <div class="row" v-if="isScaledSelected">
+            <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
+                <div class="item-header d-flex flex-row justify-content-between  ">
+                    <div class="username">
+            <span class="text-info">
+              Scaled
+            </span>
+                    </div>
+                    <div class="">
+                        Today
+                        <a
+                                @click="showDeleteWorkoutConfirmation(plannedScaled.id)"
+                                class="remove-workout pl-1 text-secondary pointer"
+                                title="Remove workout planned"
+                        >
+                            <i aria-hidden="true" class="fa fa-trash-alt"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="item-body pt-1">
+                    <WorkoutDisplayComponent
+                            :workoutViewModel="plannedScaled"
+                    />
+                </div>
+                <div class="item-footer text-right pt-2" v-if="plannedScaled">
+                    <div class="action-buttons">
+                        <a
+                                class="btn btn-secondary float-left"
+                                role="button"
+                                v-bind:href="'Workout?workoutId=' + this.plannedScaled.id"
+                        >
+              <span class="do-it-text"
+              >Edit
+                <font-awesome-icon :icon="['fas', 'edit']"/></span>
+                        </a>
+                        <b-button @click="showLogWorkout(plannedScaled)" variant="warning"
+                        >Log workout
+                        </b-button
+                        >
+                    </div>
+                </div>
             </div>
-        </b-modal>
+        </div>
+        <div class="row" v-if="isRxSelected">
+            <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
+                <div class="item-header d-flex flex-row justify-content-between  ">
+                    <div class="username">
+            <span class="text-info">
+              Rx
+            </span>
+                    </div>
+                    <div class="">
+                        Today
+                        <a
+                                @click="showDeleteWorkoutConfirmation(plannedRx.id)"
+                                class="remove-workout pl-1 text-secondary pointer"
+                                title="Remove workout planned"
+                        >
+                            <i aria-hidden="true" class="fa fa-trash-alt"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="item-body pt-1">
+                    <WorkoutDisplayComponent :workoutViewModel="plannedRx"/>
+                </div>
+                <div class="item-footer text-right pt-2" v-if="plannedRx">
+                    <div class="action-buttons">
+                        <a
+                                class="btn btn-secondary float-left"
+                                role="button"
+                                v-bind:href="'Workout?workoutId=' + this.plannedRx.id"
+                        >
+              <span class="do-it-text"
+              >Edit
+                <font-awesome-icon :icon="['fas', 'edit']"/></span>
+                        </a>
+                        <b-button @click="showLogWorkout(plannedRx)" variant="warning"
+                        >Log workout
+                        </b-button
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" v-if="isRxPlusSelected">
+            <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
+                <div class="item-header d-flex flex-row justify-content-between  ">
+                    <div class="username">
+            <span class="text-info">
+              Rx Plus
+            </span>
+                    </div>
+                    <div class="">
+                        Today
+                        <a
+                                @click="showDeleteWorkoutConfirmation(plannedRxPlus.id)"
+                                class="remove-workout pl-1 text-secondary pointer"
+                                title="Remove workout planned"
+                        >
+                            <i aria-hidden="true" class="fa fa-trash-alt"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="item-body pt-1">
+                    <WorkoutDisplayComponent :workoutViewModel="plannedRxPlus"/>
+                </div>
+                <div class="item-footer text-right pt-2" v-if="plannedRxPlus">
+                    <div class="action-buttons">
+                        <a
+                                class="btn btn-secondary float-left"
+                                role="button"
+                                v-bind:href="'Workout?workoutId=' + this.plannedRxPlus.id"
+                        >
+              <span class="do-it-text"
+              >Edit <font-awesome-icon :icon="['fas', 'edit']"/></span>
+                        </a>
+                        <b-button @click="showLogWorkout(plannedRxPlus)" variant="warning"
+                        >Log workout
+                        </b-button
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-3 py-2">
+                <b-button-group class="btn-group d-flex">
+                    <b-button
+                            class="w-100 "
+                            v-bind:class="{ focus: isScaledSelected }"
+                            v-if="plannedScaled"
+                            v-on:click="setSelectedPlanned(0)"
+                            variant="success"
+                    >Scaled
+                    </b-button
+                    >
+                    <b-button
+                            class="w-100"
+                            v-bind:class="{ focus: isRxSelected }"
+                            v-if="plannedRx"
+                            v-on:click="setSelectedPlanned(1)"
+                            variant="warning"
+                    >Rx
+                    </b-button
+                    >
+                    <b-button
+                            class="w-100"
+                            v-bind:class="{ focus: isRxPlusSelected }"
+                            v-if="plannedRxPlus"
+                            v-on:click="setSelectedPlanned(2)"
+                            variant="danger"
+                    >Rx+
+                    </b-button
+                    >
+                </b-button-group>
+            </div>
+        </div>
+
+        
         <b-modal ref="logWorkoutModal" title="Log workout">
             <div class="log-workout" v-if="selectedWorkout">
                 <div class="log-workout-container">
@@ -39,7 +172,7 @@
                                         <b-input-group-text tag="span">
                                             <font-awesome-icon
                                                     :icon="['far', 'clock']"
-                                            ></font-awesome-icon>
+                                            />
                                         </b-input-group-text>
                                     </b-input-group-prepend>
                                     <b-form-input
@@ -48,7 +181,7 @@
                                             type="tel"
                                             v-mask="'##:##'"
                                             v-model="toLogModel.timePassed"
-                                    ></b-form-input>
+                                    />
                                 </b-input-group>
                             </div>
                         </div>
@@ -81,7 +214,7 @@
                                         <b-input-group-text tag="span">
                                             <font-awesome-icon
                                                     :icon="['fas', 'hashtag']"
-                                            ></font-awesome-icon>
+                                            />
                                         </b-input-group-text>
                                     </b-input-group-prepend>
                                     <b-form-input
@@ -92,7 +225,7 @@
                                             type="text"
                                             v-mask="'####'"
                                             v-model="toLogModel.roundsFinished"
-                                    ></b-form-input>
+                                    />
                                 </b-input-group>
                             </div>
                         </div>
@@ -103,7 +236,7 @@
                                         <b-input-group-text tag="span">
                                             <font-awesome-icon
                                                     :icon="['fas', 'hashtag']"
-                                            ></font-awesome-icon>
+                                            />
                                         </b-input-group-text>
                                     </b-input-group-prepend>
                                     <b-form-input
@@ -114,7 +247,7 @@
                                             type="text"
                                             v-mask="'####'"
                                             v-model="toLogModel.partialRepsFinished"
-                                    ></b-form-input>
+                                    />
                                 </b-input-group>
                             </div>
                         </div>
@@ -165,172 +298,10 @@
                 >
             </div>
         </b-modal>
-
-        <div class="row" v-if="isScaledSelected">
-            <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
-                <div class="item-header d-flex flex-row justify-content-between  ">
-                    <div class="username">
-            <span class="text-info">
-              Scaled
-            </span>
-                    </div>
-                    <div class="">
-                        Today
-                        <a
-                                @click="showDeleteWorkoutConfirmation(plannedScaled.id)"
-                                class="remove-workout pl-1 text-secondary pointer"
-                                title="Remove workout planned"
-                        >
-                            <i aria-hidden="true" class="fa fa-trash-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="item-body pt-1">
-                    <WorkoutDisplayComponent
-                            :workoutViewModel="plannedScaled"
-                    ></WorkoutDisplayComponent>
-                </div>
-                <div class="item-footer text-right pt-2" v-if="plannedScaled">
-                    <div class="action-buttons">
-                        <a
-                                class="btn btn-secondary float-left"
-                                role="button"
-                                v-bind:href="'Workout?workoutId=' + this.plannedScaled.id"
-                        >
-              <span class="do-it-text"
-              >Edit
-                <font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
-                ></span>
-                        </a>
-                        <b-button @click="showLogWorkout(plannedScaled)" variant="warning"
-                        >Log workout
-                        </b-button
-                        >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" v-if="isRxSelected">
-            <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
-                <div class="item-header d-flex flex-row justify-content-between  ">
-                    <div class="username">
-            <span class="text-info">
-              Rx
-            </span>
-                    </div>
-                    <div class="">
-                        Today
-                        <a
-                                @click="showDeleteWorkoutConfirmation(plannedRx.id)"
-                                class="remove-workout pl-1 text-secondary pointer"
-                                title="Remove workout planned"
-                        >
-                            <i aria-hidden="true" class="fa fa-trash-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="item-body pt-1">
-                    <WorkoutDisplayComponent
-                            :workoutViewModel="plannedRx"
-                    ></WorkoutDisplayComponent>
-                </div>
-                <div class="item-footer text-right pt-2" v-if="plannedRx">
-                    <div class="action-buttons">
-                        <a
-                                class="btn btn-secondary float-left"
-                                role="button"
-                                v-bind:href="'Workout?workoutId=' + this.plannedRx.id"
-                        >
-              <span class="do-it-text"
-              >Edit
-                <font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
-                ></span>
-                        </a>
-                        <b-button @click="showLogWorkout(plannedRx)" variant="warning"
-                        >Log workout
-                        </b-button
-                        >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" v-if="isRxPlusSelected">
-            <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
-                <div class="item-header d-flex flex-row justify-content-between  ">
-                    <div class="username">
-            <span class="text-info">
-              Rx Plus
-            </span>
-                    </div>
-                    <div class="">
-                        Today
-                        <a
-                                @click="showDeleteWorkoutConfirmation(plannedRxPlus.id)"
-                                class="remove-workout pl-1 text-secondary pointer"
-                                title="Remove workout planned"
-                        >
-                            <i aria-hidden="true" class="fa fa-trash-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="item-body pt-1">
-                    <WorkoutDisplayComponent
-                            :workoutViewModel="plannedRxPlus"
-                    ></WorkoutDisplayComponent>
-                </div>
-                <div class="item-footer text-right pt-2" v-if="plannedRxPlus">
-                    <div class="action-buttons">
-                        <a
-                                class="btn btn-secondary float-left"
-                                role="button"
-                                v-bind:href="'Workout?workoutId=' + this.plannedRxPlus.id"
-                        >
-              <span class="do-it-text"
-              >Edit
-                <font-awesome-icon :icon="['fas', 'edit']"></font-awesome-icon
-                ></span>
-                        </a>
-                        <b-button @click="showLogWorkout(plannedRxPlus)" variant="warning"
-                        >Log workout
-                        </b-button
-                        >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-1">
-            <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-3 py-2">
-                <b-button-group class="btn-group d-flex">
-                    <b-button
-                            class="w-100 "
-                            v-bind:class="{ focus: isScaledSelected }"
-                            v-if="plannedScaled"
-                            v-on:click="setSelectedPlanned(0)"
-                            variant="success"
-                    >Scaled
-                    </b-button
-                    >
-                    <b-button
-                            class="w-100"
-                            v-bind:class="{ focus: isRxSelected }"
-                            v-if="plannedRx"
-                            v-on:click="setSelectedPlanned(1)"
-                            variant="warning"
-                    >Rx
-                    </b-button
-                    >
-                    <b-button
-                            class="w-100"
-                            v-bind:class="{ focus: isRxPlusSelected }"
-                            v-if="plannedRxPlus"
-                            v-on:click="setSelectedPlanned(2)"
-                            variant="danger"
-                    >Rx+
-                    </b-button
-                    >
-                </b-button-group>
-            </div>
-        </div>
+        <b-modal @ok="deletePlannedWorkout" okTitle="Delete" okVariant="danger" ref="removeFromPlannedModal"
+                 title="Sure to remove workout from planning?">
+            Are you sure to remove workout from planning?
+        </b-modal>
     </div>
 </template>
 
