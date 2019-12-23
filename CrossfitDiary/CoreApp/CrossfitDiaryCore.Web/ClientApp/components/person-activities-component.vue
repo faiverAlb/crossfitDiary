@@ -41,13 +41,11 @@
       v-for="item in activities"
       :key="item.id"
     >
-      <div class="row">
         <PersonsActivitesItemComponent
-          :model="item"
-          @deleteWorkout="deleteWorkoutClick"
-          @showLeaderboard="showLeaderBoardModal"
-        ></PersonsActivitesItemComponent>
-      </div>
+                :model="item"
+                @deleteWorkout="deleteWorkoutClick"
+                @showLeaderboard="showLeaderBoardModal"
+        />
     </div>
   </div>
 </template>
