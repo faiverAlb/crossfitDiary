@@ -1,5 +1,9 @@
 ﻿<template>
     <div>
+        <div class="dashed-container-description border-warning text-center">
+            <b-badge variant="warning">2</b-badge>
+            Plan workout:
+        </div>
         <div class="d-flex justify-content-end mt-3">
             <b-form-group>
                 <b-form-radio-group
@@ -79,7 +83,7 @@
     import {library} from "@fortawesome/fontawesome-svg-core";
     /* public components */
     import {Component, Prop, Vue} from "vue-property-decorator";
-    import {BButton, BButtonGroup, BModal,BFormGroup,BFormRadioGroup} from "bootstrap-vue";
+    import {BButton, BButtonGroup, BModal,BFormGroup,BFormRadioGroup, BBadge} from "bootstrap-vue";
     import datePicker from "vue-bootstrap-datetimepicker";
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     /* app components */
@@ -90,7 +94,7 @@
     library.add(faCalendar);
 
     @Component({
-        components: {BModal, datePicker, FontAwesomeIcon, BButtonGroup, BButton,BFormGroup,BFormRadioGroup}
+        components: {BModal, datePicker, FontAwesomeIcon, BButtonGroup, BButton,BFormGroup,BFormRadioGroup,BBadge}
     })
     export default class EditPlannedWorkoutComponent extends Vue {
         @Prop() planningWorkout: WorkoutViewModel;
