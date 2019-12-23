@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using WodSubType = CrossfitDiaryCore.Model.WodSubType;
 
 namespace CrossfitDiaryCore.Web.Controllers
 {
@@ -261,7 +262,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         public async Task PlanWorkoutToLevel([FromQuery] int wodId, [FromQuery] PlanningLevel type)
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            _manageWorkoutsService.PlanWorkoutForDay(wodId, type, DateTime.Today, user);
+            _manageWorkoutsService.PlanWorkoutForDay(wodId, type, DateTime.Today, user, WodSubType.Wod);
         }
     }
 }

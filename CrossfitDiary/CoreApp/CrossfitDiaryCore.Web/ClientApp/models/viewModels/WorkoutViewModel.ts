@@ -24,7 +24,7 @@ export class WorkoutViewModel implements Deserializable {
   planningWorkoutLevel: PlanningWorkoutLevel;
   displayPlanDate?: string; // default value for new model;
   comment?: string;
-  resultsCount: number;
+  resultsCount: number; 
   canSeeLeaderboard: boolean;
 
   haveCollapsedVersion: boolean = false;
