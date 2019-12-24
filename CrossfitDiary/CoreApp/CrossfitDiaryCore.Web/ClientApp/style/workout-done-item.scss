@@ -1,5 +1,17 @@
 ﻿@import "_custom.scss";
+
+
 .done-item {
+
+  .workout-sub-type-display {
+    writing-mode: vertical-lr;
+    text-orientation: sideways;
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.8;
+    font-weight: bold;
+  }
+
   background: #f6f1ed;
   box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.05);
   font-size: 14px;
