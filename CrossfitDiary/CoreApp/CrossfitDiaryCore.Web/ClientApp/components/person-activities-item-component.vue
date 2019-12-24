@@ -150,11 +150,11 @@
         subTypeClass(){
             switch (this.model.wodSubType) {
                 case WodSubType.Skill:
-                    return 'bg-primary text-white';
+                    return 'bg-info text-white';
                 case WodSubType.Wod:
                     return 'bg-danger text-white';
                 case WodSubType.AccessoryWork:
-                    return 'bg-info text-white';
+                    return 'bg-warning text-white';
 
             }
 
