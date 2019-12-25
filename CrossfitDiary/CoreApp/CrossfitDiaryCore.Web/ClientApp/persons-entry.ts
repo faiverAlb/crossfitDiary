@@ -32,9 +32,12 @@ let vue = new Vue({
                     <ErrorAlertComponent :errorAlertModel="errorAlertModel"/>
                 </div>
             </div>
-            <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts"
-                                            @deletePlannedWorkout="deletePlannedWorkout"
-                                            @logWorkout="logWorkout"/>
+            <div v-if="isPlannedWodsLoaded">
+                <PlannedWorkoutDisplayComponent  :plannedWorkouts="plannedWorkouts"
+                                                 @deletePlannedWorkout="deletePlannedWorkout"
+                                                 @logWorkout="logWorkout"/>
+            </div>
+            
             <div class="container person-setting">
                 <div
                         class="row"
@@ -79,7 +82,8 @@ let vue = new Vue({
             plannedWorkouts: WorkoutViewModel,
             spinner: new SpinnerModel(true),
             errorAlertModel: new ErrorAlertModel(),
-            showOnlyUserWods: false
+            showOnlyUserWods: false,
+            isPlannedWodsLoaded: false
         };
     },
     mounted() {
@@ -89,6 +93,7 @@ let vue = new Vue({
             .getPlannedWorkoutsForToday()
             .then(data => {
                 this.plannedWorkouts = data;
+                this.isPlannedWodsLoaded = true;
             })
             .catch(data => {
                 this.errorAlertModel.setError(data.response.statusText);

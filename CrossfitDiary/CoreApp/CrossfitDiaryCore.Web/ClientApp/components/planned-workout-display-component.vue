@@ -1,19 +1,18 @@
-﻿<template>
-    <div class="planned-workouts container">
-
-
-        <div class="row" v-if="isScaledSelected">
+﻿import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
+<template>
+    <div class="planned-workouts container" v-if="selectedPlannedWorkout != null">
+        <div class="row">
             <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
                 <div class="item-header d-flex flex-row justify-content-between  ">
                     <div class="username">
             <span class="text-info">
-              Scaled
+              {{planningLevelDisplayValue}}
             </span>
                     </div>
                     <div class="">
                         Today
                         <a
-                                @click="showDeleteWorkoutConfirmation(plannedScaled.id)"
+                                @click="showDeleteWorkoutConfirmation(selectedPlannedWorkout.id)"
                                 class="remove-workout pl-1 text-secondary pointer"
                                 title="Remove workout planned"
                         >
@@ -22,103 +21,20 @@
                     </div>
                 </div>
                 <div class="item-body pt-1">
-                    <WorkoutDisplayComponent
-                            :workoutViewModel="plannedScaled"
-                    />
+                    <WorkoutDisplayComponent :workoutViewModel="selectedPlannedWorkout"/>
                 </div>
-                <div class="item-footer text-right pt-2" v-if="plannedScaled">
+                <div class="item-footer text-right pt-2" v-if="selectedPlannedWorkout">
                     <div class="action-buttons">
                         <a
-                                class="btn btn-secondary float-left"
+                                class="btn btn-secondary float-left btn-sm"
                                 role="button"
-                                v-bind:href="'Workout?workoutId=' + this.plannedScaled.id"
+                                v-bind:href="'Workout?workoutId=' + this.selectedPlannedWorkout.id"
                         >
               <span class="do-it-text"
               >Edit
                 <font-awesome-icon :icon="['fas', 'edit']"/></span>
                         </a>
-                        <b-button @click="showLogWorkout(plannedScaled)" variant="warning"
-                        >Log workout
-                        </b-button
-                        >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" v-if="isRxSelected">
-            <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
-                <div class="item-header d-flex flex-row justify-content-between  ">
-                    <div class="username">
-            <span class="text-info">
-              Rx
-            </span>
-                    </div>
-                    <div class="">
-                        Today
-                        <a
-                                @click="showDeleteWorkoutConfirmation(plannedRx.id)"
-                                class="remove-workout pl-1 text-secondary pointer"
-                                title="Remove workout planned"
-                        >
-                            <i aria-hidden="true" class="fa fa-trash-alt"/>
-                        </a>
-                    </div>
-                </div>
-                <div class="item-body pt-1">
-                    <WorkoutDisplayComponent :workoutViewModel="plannedRx"/>
-                </div>
-                <div class="item-footer text-right pt-2" v-if="plannedRx">
-                    <div class="action-buttons">
-                        <a
-                                class="btn btn-secondary float-left"
-                                role="button"
-                                v-bind:href="'Workout?workoutId=' + this.plannedRx.id"
-                        >
-              <span class="do-it-text"
-              >Edit
-                <font-awesome-icon :icon="['fas', 'edit']"/></span>
-                        </a>
-                        <b-button @click="showLogWorkout(plannedRx)" variant="warning"
-                        >Log workout
-                        </b-button
-                        >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" v-if="isRxPlusSelected">
-            <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
-                <div class="item-header d-flex flex-row justify-content-between  ">
-                    <div class="username">
-            <span class="text-info">
-              Rx Plus
-            </span>
-                    </div>
-                    <div class="">
-                        Today
-                        <a
-                                @click="showDeleteWorkoutConfirmation(plannedRxPlus.id)"
-                                class="remove-workout pl-1 text-secondary pointer"
-                                title="Remove workout planned"
-                        >
-                            <i aria-hidden="true" class="fa fa-trash-alt"/>
-                        </a>
-                    </div>
-                </div>
-                <div class="item-body pt-1">
-                    <WorkoutDisplayComponent :workoutViewModel="plannedRxPlus"/>
-                </div>
-                <div class="item-footer text-right pt-2" v-if="plannedRxPlus">
-                    <div class="action-buttons">
-                        <a
-                                class="btn btn-secondary float-left"
-                                role="button"
-                                v-bind:href="'Workout?workoutId=' + this.plannedRxPlus.id"
-                        >
-              <span class="do-it-text"
-              >Edit <font-awesome-icon :icon="['fas', 'edit']"/></span>
-                        </a>
-                        <b-button @click="showLogWorkout(plannedRxPlus)" variant="warning"
+                        <b-button @click="showLogWorkout(selectedPlannedWorkout)" variant="warning" size="sm"
                         >Log workout
                         </b-button
                         >
@@ -128,11 +44,11 @@
         </div>
         <div class="row mt-1">
             <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-3 py-2">
-                <b-button-group class="btn-group d-flex">
+                <b-button-group class="btn-group d-flex" size="sm">
                     <b-button
                             class="w-100 "
                             v-bind:class="{ focus: isScaledSelected }"
-                            v-if="plannedScaled"
+                            v-if="hasPlannedForLevel(0)"
                             v-on:click="setSelectedPlanned(0)"
                             variant="success"
                     >Scaled
@@ -141,7 +57,7 @@
                     <b-button
                             class="w-100"
                             v-bind:class="{ focus: isRxSelected }"
-                            v-if="plannedRx"
+                            v-if="hasPlannedForLevel(1)"
                             v-on:click="setSelectedPlanned(1)"
                             variant="warning"
                     >Rx
@@ -150,7 +66,7 @@
                     <b-button
                             class="w-100"
                             v-bind:class="{ focus: isRxPlusSelected }"
-                            v-if="plannedRxPlus"
+                            v-if="hasPlannedForLevel(2)"
                             v-on:click="setSelectedPlanned(2)"
                             variant="danger"
                     >Rx+
@@ -160,7 +76,7 @@
             </div>
         </div>
 
-        
+
         <b-modal ref="logWorkoutModal" title="Log workout">
             <div class="log-workout" v-if="selectedWorkout">
                 <div class="log-workout-container">
@@ -284,16 +200,9 @@
             <div slot="modal-footer">
                 <b-button @click="logWorkout" data-dismiss="modal" variant="warning"
                 >Log workout
-                </b-button
-                >
-                <b-button
-                        @click="
-            () => {
-              this.$refs.logWorkoutModal.hide();
-            }
-          "
-                        data-dismiss="modal"
-                >Close
+                </b-button>
+                <b-button @click="() => {this.$refs.logWorkoutModal.hide();}" data-dismiss="modal">
+                    Close
                 </b-button
                 >
             </div>
@@ -327,8 +236,10 @@
     import WorkoutDisplayComponent from "./workout-display-component.vue";
     /* models and styles */
     import {ToLogWorkoutViewModel} from "../models/viewModels/ToLogWorkoutViewModel";
+    import "./../style/workout-done-item.scss";
 
     import {PlanningWorkoutLevel, WorkoutViewModel} from "../models/viewModels/WorkoutViewModel";
+    import {WodSubType} from "../models/viewModels/WodSubType";
 
     library.add(
         faGrinBeam,
@@ -357,50 +268,70 @@
     })
     export default class PlannedWorkoutDisplayComponent extends Vue {
         @Prop() plannedWorkouts: WorkoutViewModel[];
-
         show: boolean = true;
         isScaledSelected: boolean = false;
         isRxSelected: boolean = false;
         isRxPlusSelected: boolean = false;
         selectedWorkout: WorkoutViewModel = null;
+        selectedPlannedWorkout: WorkoutViewModel = null;
         toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
-        isForTimesWorkouts: boolean = false;
+        // isForTimesWorkouts: boolean = false;
+        selectedPlanningLevel:PlanningWorkoutLevel = PlanningWorkoutLevel.Scaled;
 
         toRemovePlannedId: number = 0;
+        subTypeClass: string = "";
 
         $refs: {
             logWorkoutModal: HTMLFormElement;
             removeFromPlannedModal: HTMLFormElement;
         };
 
-        get plannedScaled() {
-            if (this.plannedWorkouts[0]) {
-                //isScaledSelected
-                let foundScaled = this.plannedWorkouts.find(
-                    x => x.planningWorkoutLevel == PlanningWorkoutLevel.Scaled
-                );
-                this.setSelectedPlanned(this.plannedWorkouts[0].planningWorkoutLevel);
-                return foundScaled;
+        mounted() {
+            this.selectedPlannedWorkout = this.plannedWorkouts[0];
+            if (this.selectedPlannedWorkout == null) {
+                return;
             }
-            return null;
+            this.setVisibilityByLevel(this.selectedPlannedWorkout.planningWorkoutLevel);
         }
 
-        get plannedRx() {
-            if (this.plannedWorkouts[0]) {
-                return this.plannedWorkouts.find(
-                    x => x.planningWorkoutLevel == PlanningWorkoutLevel.Rx
-                );
+        get workoutSubTypeDisplayValue() {
+            if (this.selectedPlannedWorkout == null) {
+                return;
             }
-            return null;
+            switch (this.selectedPlannedWorkout.wodSubType) {
+                case WodSubType.Skill:
+                    return "Skill";
+                case WodSubType.Wod:
+                    return "WOD";
+                case WodSubType.AccessoryWork:
+                    return "Accessory";
+            }
+            this.subTypeClass = this.getSubTypeClass();
+        }
+        get planningLevelDisplayValue() {
+            if (this.selectedPlannedWorkout == null) {
+                return;
+            }
+            switch (this.selectedPlannedWorkout.planningWorkoutLevel) {
+                case PlanningWorkoutLevel.Scaled:
+                    return "Scaled";
+                case PlanningWorkoutLevel.Rx:
+                    return "Rx";
+                case PlanningWorkoutLevel.RxPlus:
+                    return "Rx+";
+            }
         }
 
-        get plannedRxPlus() {
-            if (this.plannedWorkouts[0]) {
-                return this.plannedWorkouts.find(
-                    x => x.planningWorkoutLevel == PlanningWorkoutLevel.RxPlus
-                );
+        getSubTypeClass() {
+            switch (this.selectedPlannedWorkout.wodSubType) {
+                case WodSubType.Skill:
+                    return 'bg-info text-white';
+                case WodSubType.Wod:
+                    return 'bg-danger text-white';
+                case WodSubType.AccessoryWork:
+                    return 'bg-warning text-white';
             }
-            return null;
+
         }
 
         deletePlannedWorkout() {
@@ -432,10 +363,7 @@
             this.$emit("logWorkout", toLogWorkoutModel);
         }
 
-        setSelectedPlanned(planningWorkoutLevel: PlanningWorkoutLevel) {
-            this.isScaledSelected = false;
-            this.isRxSelected = false;
-            this.isRxPlusSelected = false;
+        setVisibilityByLevel(planningWorkoutLevel: PlanningWorkoutLevel) {
             switch (planningWorkoutLevel) {
                 case PlanningWorkoutLevel.Scaled:
                     this.isScaledSelected = true;
@@ -447,6 +375,24 @@
                     this.isRxPlusSelected = true;
                     break;
             }
+
+        }
+        hasPlannedForLevel(planningWorkoutLevel: PlanningWorkoutLevel){
+            let found = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
+            return found != null;
+        }
+        setSelectedPlanned(planningWorkoutLevel: PlanningWorkoutLevel) {
+            debugger;
+            this.selectedPlanningLevel = planningWorkoutLevel;
+            let found = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
+            this.selectedPlannedWorkout =found; 
+            this.setVisibilityByLevel(planningWorkoutLevel);
+            // this.isScaledSelected = false;
+            // this.isRxSelected = false;
+            // this.isRxPlusSelected = false;
+
+
+            this.setVisibilityByLevel(planningWorkoutLevel);
         }
     }
 </script>

@@ -48,7 +48,7 @@ namespace CrossfitDiaryCore.Web.ViewModels
         {
             get
             {
-                var displayValue = string.Empty;
+                string displayValue;
                 switch (WorkoutType)
                 {
                     case RoutineComplexType.ForTime:
