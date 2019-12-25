@@ -2,42 +2,45 @@
 <template>
     <div class="planned-workouts container" v-if="selectedPlannedWorkout != null">
         <div class="row">
-            <div class="done-item offset-lg-3 col col-lg-5 px-3 py-2 rounded">
-                <div class="item-header d-flex flex-row justify-content-between  ">
-                    <div class="username">
-            <span class="text-info">
-              {{planningLevelDisplayValue}}
-            </span>
-                    </div>
-                    <div class="">
-                        Today
-                        <a
-                                @click="showDeleteWorkoutConfirmation(selectedPlannedWorkout.id)"
-                                class="remove-workout pl-1 text-secondary pointer"
-                                title="Remove workout planned"
-                        >
-                            <i aria-hidden="true" class="fa fa-trash-alt"/>
-                        </a>
-                    </div>
+            <div class="done-item offset-lg-3 col col-lg-5 my-2 p-0 rounded row no-gutters">
+                <div class="workout-sub-type-display mr-2 py-1 rounded-left" v-bind:class="subTypeClass">
+                    {{workoutSubTypeDisplayValue}}
                 </div>
-                <div class="item-body pt-1">
-                    <WorkoutDisplayComponent :workoutViewModel="selectedPlannedWorkout"/>
-                </div>
-                <div class="item-footer text-right pt-2" v-if="selectedPlannedWorkout">
-                    <div class="action-buttons">
-                        <a
-                                class="btn btn-secondary float-left btn-sm"
-                                role="button"
-                                v-bind:href="'Workout?workoutId=' + this.selectedPlannedWorkout.id"
-                        >
+                <div class="col-11 p-1">
+                    <div class="item-header d-flex flex-row justify-content-between  ">
+                        <div class="username">
+                    <span class="text-info">
+                      {{planningLevelDisplayValue}}
+                    </span>
+                        </div>
+                        <div class="">
+                            Today
+                            <a
+                                    @click="showDeleteWorkoutConfirmation(selectedPlannedWorkout.id)"
+                                    class="remove-workout pl-1 text-secondary pointer"
+                                    title="Remove workout planned"
+                            >
+                                <i aria-hidden="true" class="fa fa-trash-alt"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item-body pt-1">
+                        <WorkoutDisplayComponent :workoutViewModel="selectedPlannedWorkout"/>
+                    </div>
+                    <div class="item-footer text-right pt-2" v-if="selectedPlannedWorkout">
+                        <div class="action-buttons">
+                            <a
+                                    class="btn btn-secondary float-left btn-sm"
+                                    role="button"
+                                    v-bind:href="'Workout?workoutId=' + this.selectedPlannedWorkout.id"
+                            >
               <span class="do-it-text"
-              >Edit
-                <font-awesome-icon :icon="['fas', 'edit']"/></span>
-                        </a>
-                        <b-button @click="showLogWorkout(selectedPlannedWorkout)" variant="warning" size="sm"
-                        >Log workout
-                        </b-button
-                        >
+              >Edit <font-awesome-icon :icon="['fas', 'edit']"/></span> </a>
+                            <b-button @click="showLogWorkout(selectedPlannedWorkout)" size="sm" variant="warning"
+                            >Log workout
+                            </b-button
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -276,7 +279,7 @@
         selectedPlannedWorkout: WorkoutViewModel = null;
         toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
         // isForTimesWorkouts: boolean = false;
-        selectedPlanningLevel:PlanningWorkoutLevel = PlanningWorkoutLevel.Scaled;
+        selectedPlanningLevel: PlanningWorkoutLevel = PlanningWorkoutLevel.Scaled;
 
         toRemovePlannedId: number = 0;
         subTypeClass: string = "";
@@ -286,18 +289,11 @@
             removeFromPlannedModal: HTMLFormElement;
         };
 
-        mounted() {
-            this.selectedPlannedWorkout = this.plannedWorkouts[0];
-            if (this.selectedPlannedWorkout == null) {
-                return;
-            }
-            this.setVisibilityByLevel(this.selectedPlannedWorkout.planningWorkoutLevel);
-        }
-
         get workoutSubTypeDisplayValue() {
             if (this.selectedPlannedWorkout == null) {
                 return;
             }
+            this.subTypeClass = this.getSubTypeClass();
             switch (this.selectedPlannedWorkout.wodSubType) {
                 case WodSubType.Skill:
                     return "Skill";
@@ -306,8 +302,9 @@
                 case WodSubType.AccessoryWork:
                     return "Accessory";
             }
-            this.subTypeClass = this.getSubTypeClass();
+            
         }
+
         get planningLevelDisplayValue() {
             if (this.selectedPlannedWorkout == null) {
                 return;
@@ -320,6 +317,14 @@
                 case PlanningWorkoutLevel.RxPlus:
                     return "Rx+";
             }
+        }
+
+        mounted() {
+            this.selectedPlannedWorkout = this.plannedWorkouts[0];
+            if (this.selectedPlannedWorkout == null) {
+                return;
+            }
+            this.setVisibilityByLevel(this.selectedPlannedWorkout.planningWorkoutLevel);
         }
 
         getSubTypeClass() {
@@ -377,21 +382,18 @@
             }
 
         }
-        hasPlannedForLevel(planningWorkoutLevel: PlanningWorkoutLevel){
+
+        hasPlannedForLevel(planningWorkoutLevel: PlanningWorkoutLevel) {
             let found = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
             return found != null;
         }
+
         setSelectedPlanned(planningWorkoutLevel: PlanningWorkoutLevel) {
             debugger;
             this.selectedPlanningLevel = planningWorkoutLevel;
             let found = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
-            this.selectedPlannedWorkout =found; 
+            this.selectedPlannedWorkout = found;
             this.setVisibilityByLevel(planningWorkoutLevel);
-            // this.isScaledSelected = false;
-            // this.isRxSelected = false;
-            // this.isRxPlusSelected = false;
-
-
             this.setVisibilityByLevel(planningWorkoutLevel);
         }
     }
