@@ -365,6 +365,7 @@
         logWorkout() {
             this.$refs.logWorkoutModal.hide();
             let toLogWorkoutModel = this.toLogModel;
+            toLogWorkoutModel.wodSubType = this.selectedPlannedWorkout.wodSubType;
             this.$emit("logWorkout", toLogWorkoutModel);
         }
 
@@ -389,7 +390,6 @@
         }
 
         setSelectedPlanned(planningWorkoutLevel: PlanningWorkoutLevel) {
-            debugger;
             this.selectedPlanningLevel = planningWorkoutLevel;
             let found = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
             this.selectedPlannedWorkout = found;
