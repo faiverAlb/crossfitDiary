@@ -379,6 +379,7 @@
             if (this.model.children.length != 0) {
                 return;
             }
+            this.model.workoutType = WorkoutType.ForTimeManyInners;
             this.addInnerWorkout();
         }
 

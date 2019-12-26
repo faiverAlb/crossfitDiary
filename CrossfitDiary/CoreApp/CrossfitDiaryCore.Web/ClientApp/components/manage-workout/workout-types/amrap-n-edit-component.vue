@@ -89,9 +89,9 @@
                                         >
                                             <b-form-input
                                                     aria-describedby="prPercentHelpBlock"
+                                                    id="restInput"
                                                     placeholder="Time"
                                                     type="tel"
-                                                    id="restInput"
                                                     v-mask="'##:##'"
                                                     v-model="childWorkout.restBetweenRounds"
                                             />
@@ -104,16 +104,15 @@
                 </div>
                 <div class="mt-3">
                     <b-button
-                            variant="warning"
                             size="sm"
                             v-on:click="addInnerWorkout"
+                            variant="warning"
                     >Add workout after
                     </b-button>
                 </div>
             </div>
             <div class="comments-section">
                 <b-form-textarea
-                        size="sm"
                         :maxlength="150"
                         class="mt-2"
                         id="commentSection"
@@ -122,6 +121,7 @@
                         no-resize
                         placeholder="Note: ex. girls do max 30kg"
                         rows="2"
+                        size="sm"
                         type="text"
                         v-model="model.comment"
                 />
@@ -183,15 +183,15 @@
                                         <font-awesome-icon :icon="['fas','hashtag']"/>
                                     </b-input-group-text>
                                 </b-input-group-prepend>
-                              <b-form-input
-                                      aria-describedby="prPercentHelpBlock"
-                                      inputmode="numeric"
-                                      pattern="[0-9]*"
-                                      placeholder="Rounds finished"
-                                      type="tel"
-                                      v-mask="'####'"
-                                      v-model="toLogModel.roundsFinished"
-                              />
+                                <b-form-input
+                                        aria-describedby="prPercentHelpBlock"
+                                        inputmode="numeric"
+                                        pattern="[0-9]*"
+                                        placeholder="Rounds finished"
+                                        type="tel"
+                                        v-mask="'####'"
+                                        v-model="toLogModel.roundsFinished"
+                                />
                             </b-input-group>
                         </div>
                         <div class="col-lg-3 col-sm ">
@@ -201,15 +201,15 @@
                                         <font-awesome-icon :icon="['fas','hashtag']"/>
                                     </b-input-group-text>
                                 </b-input-group-prepend>
-                              <b-form-input
-                                      aria-describedby="prPercentHelpBlock"
-                                      inputmode="numeric"
-                                      pattern="[0-9]*"
-                                      placeholder="Partial repetitions"
-                                      type="tel"
-                                      v-mask="'####'"
-                                      v-model="toLogModel.partialRepsFinished"
-                              />
+                                <b-form-input
+                                        aria-describedby="prPercentHelpBlock"
+                                        inputmode="numeric"
+                                        pattern="[0-9]*"
+                                        placeholder="Partial repetitions"
+                                        type="tel"
+                                        v-mask="'####'"
+                                        v-model="toLogModel.partialRepsFinished"
+                                />
                             </b-input-group>
                         </div>
                     </div>
@@ -231,7 +231,6 @@
                             v-bind:class="{saving:spinner.status}"
                     >
                         <b-form-textarea
-                                size="sm"
                                 :maxlength="200"
                                 class="mt-2"
                                 id="logWorkoutCommentSection"
@@ -240,6 +239,7 @@
                                 no-resize
                                 placeholder="Note: ex. Holy sh*t! Will do it again!"
                                 rows="2"
+                                size="sm"
                                 type="text"
                                 v-model="toLogModel.comment"
                         />
@@ -256,7 +256,7 @@
                     >
                         <span class="col-md-2 col-sm px-md-1">
                           <b-button
-                                   v-on:click="showLogWorkoutModal"
+                                  v-on:click="showLogWorkoutModal"
                                   variant="success"
                           >Log workout</b-button>
                         </span>
@@ -279,40 +279,24 @@
     import {library} from "@fortawesome/fontawesome-svg-core";
     /* public components */
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-    import {Component, Vue} from "vue-property-decorator";
-    import {BAlert, BFormInput, BFormTextarea, BModal,BButton, BBadge, InputGroupPlugin} from "bootstrap-vue";
+    import {Component, Mixins, Vue} from "vue-property-decorator";
+    import {BAlert, BBadge, BButton, BFormInput, BFormTextarea, BModal, InputGroupPlugin} from "bootstrap-vue";
     import datePicker from "vue-bootstrap-datetimepicker";
     import {mask} from "vue-the-mask";
-    import VeeValidate from "vee-validate";
     import Spinner from "vue-spinner-component/src/Spinner.vue";
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
-    import {IWorkoutEditState} from "../../../workout-edit-store/types";
-    import {State} from "vuex-class";
-    
     /* app components */
-    import CrossfitterService from "../../../CrossfitterService";
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";
     import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
-    
     /* models and styles */
     import {WorkoutViewModel} from "../../../models/viewModels/WorkoutViewModel";
-    import {ToLogWorkoutViewModel} from "../../../models/viewModels/ToLogWorkoutViewModel";
     import {WorkoutType} from "../../../models/viewModels/WorkoutType";
-    import {ErrorAlertModel} from "../../../models/viewModels/ErrorAlertModel";
-    import {SpinnerModel} from "../../../models/viewModels/SpinnerModel";
-    import {WindowHelper} from "../../../helpers/WindowHelper";
+    import {WorkoutTypeComponent} from "./workoutTypeMixin";
 
     library.add(faClock, faHashtag, faCalendar);
 
     Vue.use(InputGroupPlugin);
-    Vue.use(VeeValidate);
-    const namespace: string = "workoutEdit";
-
-    declare var workouter: {
-        toLogWorkoutRawModel: ToLogWorkoutViewModel;
-        workoutViewModel: WorkoutViewModel;
-    };
 
     @Component({
         components: {
@@ -331,95 +315,14 @@
         },
         directives: {mask}
     })
-    export default class AmrapNEditComponentComponent extends Vue {
-        model: WorkoutViewModel = new WorkoutViewModel();
-        toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
-        errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
-        spinner: SpinnerModel = new SpinnerModel(false);
-        $refs: {
-            logWorkoutModal: HTMLFormElement;
-        };
-
-        @State("workoutEdit")
-        workoutEdit: IWorkoutEditState;
-
+    export default class AmrapNEditComponentComponent extends Mixins(WorkoutTypeComponent) {
         mounted() {
-            if (workouter != null && workouter.toLogWorkoutRawModel != null) {
-                this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
-                this.toLogModel = workouter.toLogWorkoutRawModel;
-            } else if (workouter != null && workouter.workoutViewModel != null) {
-                this.model = workouter.workoutViewModel;
-            } else {
-                this.model.workoutType = WorkoutType.AMRAPN;
-                this.addInnerWorkout();
+            if (this.model.children.length != 0) {
+                return;
             }
-        }
+            this.model.workoutType = WorkoutType.AMRAPN;
+            this.addInnerWorkout();
 
-        mutateData(): void {
-        }
-
-        planWorkoutAction(): void {
-            this.$validator.validate();
-
-            let scrollToErrors = this.$el.querySelector("[aria-invalid=true]");
-            if (scrollToErrors) {
-                WindowHelper.scrollToTargetAdjusted(scrollToErrors);
-            }
-            this.$validator.validate().then(isValid => {
-                if (isValid) {
-                    let crossfitterService: CrossfitterService = new CrossfitterService();
-                    this.spinner.activate();
-                    crossfitterService
-                        .createAndPlanWorkout(this.model)
-                        .then(data => {
-                            window.location.href = "\\";
-                        })
-                        .catch(data => {
-                            this.spinner.disable();
-                            this.errorAlertModel.setError(data.response.statusText);
-                        });
-                }
-            });
-        }
-
-        showLogWorkoutModal(): void {
-            this.$validator.validate();
-
-            let scrollToErrors = this.$el.querySelector("[aria-invalid=true]");
-            if (scrollToErrors) {
-                WindowHelper.scrollToTargetAdjusted(scrollToErrors);
-            }
-
-            this.$validator.validate().then(isValid => {
-                if (isValid) {
-                    this.$refs.logWorkoutModal.show();
-                }
-            });
-        }
-
-        logWorkout() {
-            this.$validator.validate();
-
-            this.$validator.validate().then(isValid => {
-                if (isValid) {
-                    let workoutModel = this.model;
-                    const model = {
-                        newWorkoutViewModel: workoutModel,
-                        logWorkoutViewModel: this.toLogModel
-                    };
-                    let crossfitterService: CrossfitterService = new CrossfitterService();
-                    this.spinner.activate();
-                    crossfitterService
-                        .createAndLogWorkout(model)
-                        .then(data => {
-                            window.location.href = "\\";
-                        })
-                        .catch(data => {
-                            this.spinner.disable();
-                            this.errorAlertModel.setError(data.response.statusText);
-                        });
-                }
-            });
         }
 
         addInnerWorkout() {
@@ -440,6 +343,3 @@
         }
     }
 </script>
-
-<style>
-</style>
