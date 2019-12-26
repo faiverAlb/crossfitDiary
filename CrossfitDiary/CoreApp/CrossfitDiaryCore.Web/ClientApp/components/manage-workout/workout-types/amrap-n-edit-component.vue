@@ -256,7 +256,7 @@
                     >
                         <span class="col-md-2 col-sm px-md-1">
                           <b-button
-                ~                   v-on:click="showLogWorkoutModal"
+                                   v-on:click="showLogWorkoutModal"
                                   variant="success"
                           >Log workout</b-button>
                         </span>
