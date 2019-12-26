@@ -55,15 +55,15 @@
                                 for="timeInput"
                         >Rest after</label>
                         <b-input-group
-                                size="sm"
                                 class="py-2"
                                 prepend="Rest after round:"
+                                size="sm"
                         >
                             <b-form-input
                                     aria-describedby="prPercentHelpBlock"
+                                    id="timeInput"
                                     placeholder="Time"
                                     type="tel"
-                                    id="timeInput"
                                     v-mask="'##:##'"
                                     v-model="model.restBetweenRounds"
                             />
@@ -72,7 +72,6 @@
                 </div>
                 <div class="comments-section">
                     <b-form-textarea
-                            size="sm"
                             :maxlength="150"
                             class="mt-2"
                             id="commentSection"
@@ -81,6 +80,7 @@
                             no-resize
                             placeholder="Note: ex. girls do max 30kg"
                             rows="2"
+                            size="sm"
                             type="text"
                             v-model="model.comment"
                     />
@@ -155,7 +155,6 @@
                             v-bind:class="{saving:spinner.status}"
                     >
                         <b-form-textarea
-                                size="sm"
                                 :maxlength="200"
                                 class="mt-2"
                                 id="logWorkoutCommentSection"
@@ -164,6 +163,7 @@
                                 no-resize
                                 placeholder="Note: ex. Holy sh*t! Will do it again!"
                                 rows="2"
+                                size="sm"
                                 type="text"
                                 v-model="toLogModel.comment"
                         />
@@ -203,12 +203,11 @@
     import {faCalendar} from "@fortawesome/free-solid-svg-icons/faCalendar";
     import {faHashtag} from "@fortawesome/free-solid-svg-icons/faHashtag";
     import {library} from "@fortawesome/fontawesome-svg-core";
-    
     /* public components */
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     import {Component, Vue} from "vue-property-decorator";
     import datePicker from "vue-bootstrap-datetimepicker";
-    import {BAlert, BFormInput, BFormTextarea, BModal, InputGroupPlugin,BButton,BBadge} from "bootstrap-vue";
+    import {BAlert, BBadge, BButton, BFormInput, BFormTextarea, BModal, InputGroupPlugin} from "bootstrap-vue";
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
     import {mask} from "vue-the-mask";
     import VeeValidate from "vee-validate";
