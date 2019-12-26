@@ -174,6 +174,19 @@
                             Your thoughts on workout. Max length = 200
                         </small>
                     </div>
+                    <div class="d-flex justify-content-end mt-3">
+                        <b-form-group>
+                            <b-form-radio-group
+                                    :options="wodSubTypes"
+                                    button-variant="outline-primary"
+                                    buttons
+                                    name="radio-btn-outline"
+                                    size="sm"
+                                    v-model="toLogModel.wodSubType"
+                            />
+                        </b-form-group>
+
+                    </div>
                     <div
                             class="row justify-content-end mt-3"
                             v-if="spinner.status == false"
@@ -207,7 +220,17 @@
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     import {Component, Mixins, Vue} from "vue-property-decorator";
     import datePicker from "vue-bootstrap-datetimepicker";
-    import {BAlert, BBadge, BButton, BFormInput, BFormTextarea, BModal, InputGroupPlugin} from "bootstrap-vue";
+    import {
+        BAlert,
+        BBadge,
+        BButton,
+        BFormGroup,
+        BFormInput,
+        BFormRadioGroup,
+        BFormTextarea,
+        BModal,
+        InputGroupPlugin
+    } from "bootstrap-vue";
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
     import {mask} from "vue-the-mask";
 
@@ -235,6 +258,8 @@
             BFormTextarea,
             BButton,
             BBadge,
+            BFormGroup,
+            BFormRadioGroup,
             Spinner,
             ErrorAlertComponent,
             EditPlannedWorkoutComponent

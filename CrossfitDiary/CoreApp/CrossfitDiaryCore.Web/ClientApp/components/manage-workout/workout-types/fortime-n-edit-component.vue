@@ -331,8 +331,8 @@
         BBadge,
         BButton,
         BFormGroup,
-        BFormRadioGroup,
         BFormInput,
+        BFormRadioGroup,
         BFormTextarea,
         BModal,
         InputGroupPlugin
@@ -341,16 +341,15 @@
     import {mask} from "vue-the-mask";
     import Spinner from "vue-spinner-component/src/Spinner.vue";
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
-
     /* app components */
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";
     import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
-    
     /* models and styles */
     import {WorkoutViewModel} from "../../../models/viewModels/WorkoutViewModel";
     import {WorkoutType} from "../../../models/viewModels/WorkoutType";
     import {WorkoutTypeComponent} from "./workoutTypeMixin";
+
     library.add(faClock, faHashtag, faCalendar, faTimes);
     Vue.use(InputGroupPlugin);
 

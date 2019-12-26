@@ -125,7 +125,7 @@
                             </b-input-group>
                         </div>
                         <div
-                                :key="measure.measureType + index"
+                                :key="`${measure.measureType}-${index}`"
                                 class="form-group my-1 col-lg-2"
                                 v-for="(measure,index) in exercise.exerciseMeasures"
                         >
