@@ -251,10 +251,7 @@
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";
     import EditPlannedWorkoutComponent from "../edit-planned-workout-component.vue";
-    
     /* models and styles */
-    import {WorkoutViewModel} from "../../../models/viewModels/WorkoutViewModel";
-    import {ToLogWorkoutViewModel} from "../../../models/viewModels/ToLogWorkoutViewModel";
     import {WorkoutType} from "../../../models/viewModels/WorkoutType";
     import {WorkoutTypeComponent} from "./workoutTypeMixin";
 
@@ -262,12 +259,7 @@
 
     Vue.use(InputGroupPlugin);
     Vue.use(VeeValidate);
-    const namespace: string = "workoutEdit";
 
-    declare var workouter: {
-        toLogWorkoutRawModel: ToLogWorkoutViewModel;
-        workoutViewModel: WorkoutViewModel;
-    };
 
     @Component({
         components: {
