@@ -26,7 +26,7 @@ const routes = [
     {path: "/emom", component: EmomEditComponent},
     {path: "/e2mom", component: E2momEditComponent},
     {path: "/nft", component: NFTEditComponent},
-    {path: "/", component: ForTimeEditComponent, redirect: "/fortime"}
+    {path: "/", component: ForTimeEditComponent, redirect: "/nft"}
 ];
 
 let vue = new Vue({
