@@ -205,6 +205,9 @@
 
     .dropdown-item {
       padding: 0;
+      a.btn{
+        width: 100%;
+      }
     }
 
     .dropdown-item:not(:last-child) {
