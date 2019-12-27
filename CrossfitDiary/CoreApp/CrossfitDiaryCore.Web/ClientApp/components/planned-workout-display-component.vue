@@ -2,7 +2,7 @@
 <template>
     <div class="planned-workouts container" v-if="selectedPlannedWorkout != null">
         <div class="row">
-            <div class="done-item offset-lg-3 col col-lg-5 my-2 p-0 rounded row no-gutters">
+            <div class="done-item offset-lg-3 col col-lg-5 mt-2 p-0 rounded row no-gutters">
                 <div class="workout-sub-type-display mr-2 py-1 rounded-left" v-bind:class="subTypeClass">
                     {{workoutSubTypeDisplayValue}}
                 </div>
@@ -45,34 +45,44 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-1">
-            <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-3 py-2">
+        <div class="row">
+            <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-0 ">
                 <b-button-group class="btn-group d-flex" size="sm">
                     <b-button
-                            class="w-100 "
-                            v-bind:class="{ focus: isScaledSelected }"
+                            class=" "
+                            v-bind:class="{active:isScaledSelected}"
+                            variant="outline-info"
                             v-if="hasPlannedForLevel(0)"
                             v-on:click="setSelectedPlanned(0)"
-                            variant="success"
-                    >Scaled
+                    >
+                        <font-awesome-icon class=""  :icon="['fas', 'cat']" size="lg"/>
+                        Scaled
                     </b-button
                     >
                     <b-button
-                            class="w-100"
-                            v-bind:class="{ focus: isRxSelected }"
+                            class=""
+                            v-bind:class="{  active:isRxSelected  }"
                             v-if="hasPlannedForLevel(1)"
                             v-on:click="setSelectedPlanned(1)"
-                            variant="warning"
-                    >Rx
+                            variant="outline-info"
+                    >
+                        <font-awesome-icon  :icon="['fas', 'horse']" size="lg"/>
+                        Rx
                     </b-button
                     >
                     <b-button
-                            class="w-100"
-                            v-bind:class="{ focus: isRxPlusSelected }"
+                            class=""
+                            v-bind:class="{    active:isRxPlusSelected   }"
                             v-if="hasPlannedForLevel(2)"
                             v-on:click="setSelectedPlanned(2)"
-                            variant="danger"
-                    >Rx+
+                            variant="outline-info"
+                    >
+                        <span class="text-left">
+                            <font-awesome-icon class="mr-1" :icon="['fas', 'dog']" size="lg"/>  
+                        </span>
+                        <span>
+                            Rx+
+                        </span>
                     </b-button
                     >
                 </b-button-group>
@@ -226,6 +236,9 @@
     import {faTrashAlt} from "@fortawesome/free-solid-svg-icons/faTrashAlt";
     import {faCalendar} from "@fortawesome/free-solid-svg-icons/faCalendar";
     import {faHashtag} from "@fortawesome/free-solid-svg-icons/faHashtag";
+    import {faCat} from "@fortawesome/free-solid-svg-icons/faCat";
+    import {faHorse} from "@fortawesome/free-solid-svg-icons/faHorse";
+    import {faDog} from "@fortawesome/free-solid-svg-icons/faDog";
 
     import {library} from "@fortawesome/fontawesome-svg-core";
     /* public components */
@@ -251,7 +264,10 @@
         faTrashAlt,
         faEdit,
         faCalendar,
-        faHashtag
+        faHashtag,
+        faCat,
+        faHorse,
+        faDog
     );
 
     Vue.use(InputGroupPlugin);
@@ -302,7 +318,7 @@
                 case WodSubType.AccessoryWork:
                     return "Accessory";
             }
-            
+
         }
 
         get planningLevelDisplayValue() {
@@ -370,6 +386,7 @@
         }
 
         setVisibilityByLevel(planningWorkoutLevel: PlanningWorkoutLevel) {
+            this.isScaledSelected = this.isRxSelected = this.isRxPlusSelected = false;
             switch (planningWorkoutLevel) {
                 case PlanningWorkoutLevel.Scaled:
                     this.isScaledSelected = true;
@@ -391,9 +408,7 @@
 
         setSelectedPlanned(planningWorkoutLevel: PlanningWorkoutLevel) {
             this.selectedPlanningLevel = planningWorkoutLevel;
-            let found = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
-            this.selectedPlannedWorkout = found;
-            this.setVisibilityByLevel(planningWorkoutLevel);
+            this.selectedPlannedWorkout = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
             this.setVisibilityByLevel(planningWorkoutLevel);
         }
     }
