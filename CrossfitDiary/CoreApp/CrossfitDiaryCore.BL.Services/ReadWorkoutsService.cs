@@ -182,30 +182,40 @@ namespace CrossfitDiaryCore.BL.Services
                 .SingleOrDefault(x => x.Id == workoutId);
         }
 
-        public List<RoutineComplex> GetPlannedWorkouts(DateTime today, ApplicationUser currentUser)
+        public List<KeyValuePair<WodSubType, List<RoutineComplex>>> GetPlannedWorkouts(DateTime today, ApplicationUser currentUser)
         {
             List<PlanningHistory> planned =  _context.PlanningHistories.Where(x => x.PlanningDate.Date == today.Date).ToList();
             if (planned.Any(x => x.Crossfitter == currentUser))
             {
                 planned = planned.Where(x => x.Crossfitter == currentUser).ToList();
             }
-            
-            
-            List<RoutineComplex> routines = _context.ComplexRoutines.Where(x => planned.SingleOrDefault(y => y.RoutineComplexId == x.Id)!= null)
-                .Include(x => x.RoutineSimple)
-                .ThenInclude(x => x.Exercise)
-                .ThenInclude(x => x.ExerciseMeasures)
-                .Include(x => x.Children)
-                .ThenInclude(x => x.RoutineSimple)
-                .ThenInclude(x => x.Exercise)
-                .ThenInclude(x => x.ExerciseMeasures).ToList();
-            routines.ForEach(x =>
+
+            var resultComplexes = new List<KeyValuePair<WodSubType, List<RoutineComplex>>>();
+            IEnumerable<IGrouping<WodSubType, PlanningHistory>> groupedByWodSubType = planned.GroupBy(x => x.WodSubType);
+            foreach (IGrouping<WodSubType, PlanningHistory> grouping in groupedByWodSubType)
+            {
+                var subTypeWods = new List<RoutineComplex>();
+                foreach (PlanningHistory planningHistory in grouping)
                 {
-                    x.PlanDate = planned.Single(p => p.RoutineComplexId == x.Id).PlanningDate;
-                    x.PlanningLevel = planned.Single(p => p.RoutineComplexId == x.Id).PlanningLevel;
-                    x.WodSubType = planned.Single(p => p.RoutineComplexId == x.Id).WodSubType;
-                });
-            return routines;
+                    RoutineComplex routine = _context.ComplexRoutines
+                        .Include(x => x.RoutineSimple)
+                        .ThenInclude(x => x.Exercise)
+                        .ThenInclude(x => x.ExerciseMeasures)
+                        .Include(x => x.Children)
+                        .ThenInclude(x => x.RoutineSimple)
+                        .ThenInclude(x => x.Exercise)
+                        .ThenInclude(x => x.ExerciseMeasures)
+                        .Single(x => x.Id == planningHistory.RoutineComplexId);
+
+                    routine.PlanDate = planningHistory.PlanningDate;
+                    routine.PlanningLevel = planningHistory.PlanningLevel;
+                    routine.WodSubType = planningHistory.WodSubType;
+                    subTypeWods.Add(routine);
+                }
+
+                resultComplexes.Add(new KeyValuePair<WodSubType, List<RoutineComplex>>(grouping.Key, subTypeWods));
+            }
+            return resultComplexes;
         }
         public List<RoutineComplex> GetWorkoutsList()
         {
@@ -231,30 +241,31 @@ namespace CrossfitDiaryCore.BL.Services
 
         public List<LeaderboardItemModel> GetLeaderboardByWorkout(int crossfitterWorkoutId, ApplicationUser user)
         {
-            CrossfitterWorkout baseWorkout = _context.CrossfitterWorkouts
-                                                     .Include(x => x.RoutineComplex)
-                                                     .Include(x => x.Crossfitter)
-                                                     .Single(x => x.Id == crossfitterWorkoutId);
-            List<RoutineComplex> workouts = GetPlannedWorkouts(baseWorkout.Date, user);
-            if (workouts.SingleOrDefault(x => x.Id == baseWorkout.RoutineComplexId) == null)
-            {
-                workouts = new List<RoutineComplex>() {baseWorkout.RoutineComplex};
-            }
-
-            List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts
-                                                                    .Where(x => workouts.SingleOrDefault(y => y.Id == x.RoutineComplexId) != null)
-                                                                    .Include(x => x.Crossfitter)
-                                                                    .ToList();
+            //ToDo: Refactoring or remove this
+        //     CrossfitterWorkout baseWorkout = _context.CrossfitterWorkouts
+        //                                              .Include(x => x.RoutineComplex)
+        //                                              .Include(x => x.Crossfitter)
+        //                                              .Single(x => x.Id == crossfitterWorkoutId);
+        //     List<RoutineComplex> workouts = GetPlannedWorkouts(baseWorkout.Date, user);
+        //     if (workouts.SingleOrDefault(x => x.Id == baseWorkout.RoutineComplexId) == null)
+        //     {
+        //         workouts = new List<RoutineComplex>() {baseWorkout.RoutineComplex};
+        //     }
+        //
+        //     List<CrossfitterWorkout> crossfitterWorkouts = _context.CrossfitterWorkouts
+        //                                                             .Where(x => workouts.SingleOrDefault(y => y.Id == x.RoutineComplexId) != null)
+        //                                                             .Include(x => x.Crossfitter)
+        //                                                             .ToList();
 
             var leaderboardResults = new List<LeaderboardItemModel>();
-            foreach (RoutineComplex plannedWorkout in workouts)
-            {
-                IEnumerable<CrossfitterWorkout> resultsByWorkout = crossfitterWorkouts.Where(x => x.RoutineComplexId == plannedWorkout.Id);
-                foreach (CrossfitterWorkout crossfitterWorkout in resultsByWorkout)
-                {
-                    leaderboardResults.Add(GetLeaderboardItemModel(plannedWorkout, crossfitterWorkout));
-                }
-            }
+            // foreach (RoutineComplex plannedWorkout in workouts)
+            // {
+            //     IEnumerable<CrossfitterWorkout> resultsByWorkout = crossfitterWorkouts.Where(x => x.RoutineComplexId == plannedWorkout.Id);
+            //     foreach (CrossfitterWorkout crossfitterWorkout in resultsByWorkout)
+            //     {
+            //         leaderboardResults.Add(GetLeaderboardItemModel(plannedWorkout, crossfitterWorkout));
+            //     }
+            // }
 
             return leaderboardResults;
         }

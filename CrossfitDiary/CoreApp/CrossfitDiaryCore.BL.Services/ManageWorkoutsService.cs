@@ -116,7 +116,7 @@ namespace CrossfitDiaryCore.BL.Services
 
         public void PlanWorkoutForDay(int workoutId, PlanningLevel planningLevel, DateTime date, ApplicationUser crossfitter, WodSubType wodSubType)
         {
-            CleanPreviousPlannedWodsForThisLevel(workoutId, planningLevel, date);
+            // CleanPreviousPlannedWodsForThisLevel(workoutId, planningLevel, date);
 
             RoutineComplex complexToUpdate = _context.ComplexRoutines.Single(x => x.Id == workoutId);
             _context.ComplexRoutines.Update(complexToUpdate);
@@ -134,7 +134,7 @@ namespace CrossfitDiaryCore.BL.Services
         public void PlanWorkout(RoutineComplex workoutRoutine, ApplicationUser user)
         {
             int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
-            CleanPreviousPlannedWodsForThisLevel(workoutId, workoutRoutine.PlanningLevel, workoutRoutine.PlanDate.Value.Date);
+            // CleanPreviousPlannedWodsForThisLevel(workoutId, workoutRoutine.PlanningLevel, workoutRoutine.PlanDate.Value.Date);
             
             if (workoutId == 0)
             {
@@ -171,14 +171,14 @@ namespace CrossfitDiaryCore.BL.Services
             }
         }
 
-        private void CleanPreviousPlannedWodsForThisLevel(int workoutId, PlanningLevel? planningLevel,
-            DateTime planDate)
-        {
-            IEnumerable<PlanningHistory> toDelete = _context.PlanningHistories
-                .Where(x => x.PlanningDate.Date == planDate &&
-                            (x.PlanningLevel == planningLevel || x.RoutineComplex.Id == workoutId));
-            _context.PlanningHistories.RemoveRange(toDelete);
-        }
+        // private void CleanPreviousPlannedWodsForThisLevel(int workoutId, PlanningLevel? planningLevel,
+        //     DateTime planDate)
+        // {
+        //     IEnumerable<PlanningHistory> toDelete = _context.PlanningHistories
+        //         .Where(x => x.PlanningDate.Date == planDate &&
+        //                     (x.PlanningLevel == planningLevel || x.RoutineComplex.Id == workoutId));
+        //     _context.PlanningHistories.RemoveRange(toDelete);
+        // }
 
         public void LogNewWorkout(CrossfitterWorkout crossfitterWorkout)
         {
