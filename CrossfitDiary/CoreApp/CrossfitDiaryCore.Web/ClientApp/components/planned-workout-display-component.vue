@@ -51,11 +51,11 @@
                     <b-button
                             class=" "
                             v-bind:class="{active:isScaledSelected}"
-                            variant="outline-info"
                             v-if="hasPlannedForLevel(0)"
                             v-on:click="setSelectedPlanned(0)"
+                            variant="outline-info"
                     >
-                        <font-awesome-icon class=""  :icon="['fas', 'cat']" size="lg"/>
+                        <font-awesome-icon :icon="['fas', 'cat']" class="" size="lg"/>
                         Scaled
                     </b-button
                     >
@@ -66,7 +66,7 @@
                             v-on:click="setSelectedPlanned(1)"
                             variant="outline-info"
                     >
-                        <font-awesome-icon  :icon="['fas', 'horse']" size="lg"/>
+                        <font-awesome-icon :icon="['fas', 'horse']" size="lg"/>
                         Rx
                     </b-button
                     >
@@ -78,7 +78,7 @@
                             variant="outline-info"
                     >
                         <span class="text-left">
-                            <font-awesome-icon class="mr-1" :icon="['fas', 'dog']" size="lg"/>  
+                            <font-awesome-icon :icon="['fas', 'dog']" class="mr-1" size="lg"/>  
                         </span>
                         <span>
                             Rx+
@@ -242,7 +242,7 @@
 
     import {library} from "@fortawesome/fontawesome-svg-core";
     /* public components */
-    import {Component, Prop, Vue} from "vue-property-decorator";
+    import {Component, Prop, Vue, Watch} from "vue-property-decorator";
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     import {BButton, BButtonGroup, BFormInput, BFormTextarea, BModal, InputGroupPlugin} from "bootstrap-vue";
     import datePicker from "vue-bootstrap-datetimepicker";
@@ -286,7 +286,12 @@
         directives: {mask}
     })
     export default class PlannedWorkoutDisplayComponent extends Vue {
-        @Prop() plannedWorkouts: WorkoutViewModel[];
+        @Prop()
+        plannedWorkouts: WorkoutViewModel[];
+        @Watch('plannedWorkouts')
+        onPlannedWorkoutsUpdate(oldVal, newVal){
+            this.selectedFirstWod();
+        }
         show: boolean = true;
         isScaledSelected: boolean = false;
         isRxSelected: boolean = false;
@@ -294,7 +299,6 @@
         selectedWorkout: WorkoutViewModel = null;
         selectedPlannedWorkout: WorkoutViewModel = null;
         toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
-        // isForTimesWorkouts: boolean = false;
         selectedPlanningLevel: PlanningWorkoutLevel = PlanningWorkoutLevel.Scaled;
 
         toRemovePlannedId: number = 0;
@@ -335,12 +339,15 @@
             }
         }
 
-        mounted() {
+        selectedFirstWod(){
             this.selectedPlannedWorkout = this.plannedWorkouts[0];
             if (this.selectedPlannedWorkout == null) {
                 return;
             }
             this.setVisibilityByLevel(this.selectedPlannedWorkout.planningWorkoutLevel);
+        }
+        mounted() {
+            this.selectedFirstWod();
         }
 
         getSubTypeClass() {
