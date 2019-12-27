@@ -1,5 +1,6 @@
 import { WorkoutType } from "./WorkoutType";
 import { ExerciseViewModel } from "./ExerciseViewModel";
+import { WodSubType } from "./WodSubType";
 export var PlanningWorkoutLevel;
 (function (PlanningWorkoutLevel) {
     PlanningWorkoutLevel[PlanningWorkoutLevel["Scaled"] = 0] = "Scaled";
@@ -110,6 +111,7 @@ var WorkoutViewModel = /** @class */ (function () {
             return canShowCountOnce;
         };
         this.displayPlanDate = this.getDefaultDate();
+        this.wodSubType = WodSubType.Skill;
         if (input == null) {
             return;
         }

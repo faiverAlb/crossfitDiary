@@ -39,5 +39,10 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public virtual ApplicationUser Crossfitter { get; set; }
 
+        /// <summary>
+        ///     Gets or sets Workout Sub type
+        /// </summary>
+        public WodSubType WodSubType { get; set; }
+
     }
 }

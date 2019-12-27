@@ -1,6 +1,7 @@
 ﻿import { WorkoutType } from "./WorkoutType";
 import { ExerciseViewModel } from "./ExerciseViewModel";
 import Deserializable = General.Deserializable;
+import {WodSubType} from "./WodSubType";
 
 export enum PlanningWorkoutLevel {
   Scaled = 0,
@@ -23,13 +24,15 @@ export class WorkoutViewModel implements Deserializable {
   planningWorkoutLevel: PlanningWorkoutLevel;
   displayPlanDate?: string; // default value for new model;
   comment?: string;
-  resultsCount: number;
+  resultsCount: number; 
   canSeeLeaderboard: boolean;
 
   haveCollapsedVersion: boolean = false;
   canShowCountOnce: boolean = true;
   groupedDictionary: {} = {};
   oneTimeSchema: any = {};
+
+  wodSubType: WodSubType;
 
   getDefaultDate = (): string => {
     let date: Date = new Date();
@@ -163,6 +166,8 @@ export class WorkoutViewModel implements Deserializable {
 
   constructor(input?: any) {
     this.displayPlanDate = this.getDefaultDate();
+    this.wodSubType = WodSubType.Skill;
+
     if (input == null) {
       return;
     }

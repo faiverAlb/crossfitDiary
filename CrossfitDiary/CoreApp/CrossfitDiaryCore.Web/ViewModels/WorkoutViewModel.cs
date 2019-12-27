@@ -48,7 +48,7 @@ namespace CrossfitDiaryCore.Web.ViewModels
         {
             get
             {
-                var displayValue = string.Empty;
+                string displayValue;
                 switch (WorkoutType)
                 {
                     case RoutineComplexType.ForTime:
@@ -88,5 +88,13 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
         [JsonProperty("canSeeLeaderboard")]
         public bool CanSeeLeaderboard { get; set; }
+
+
+        /// <summary>
+        ///     Used for planning
+        /// </summary>
+        [JsonProperty("wodSubType")]
+        public WodSubType WodSubType { get; set; }
+
     }
 }

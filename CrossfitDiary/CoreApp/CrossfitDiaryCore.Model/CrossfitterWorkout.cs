@@ -86,6 +86,13 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public string Comment { get; set; }
 
+
+        /// <summary>
+        ///     Gets or sets Workout Sub type
+        /// </summary>
+        public WodSubType WodSubType { get; set; }
+
+
         /// <summary>
         ///     
         /// </summary>
