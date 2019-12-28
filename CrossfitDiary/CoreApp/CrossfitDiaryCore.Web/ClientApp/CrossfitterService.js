@@ -26,7 +26,11 @@ var CrossfitterService = /** @class */ (function () {
         };
         this.getPlannedWorkoutsForToday = function () {
             return axios.get("api/getPlannedWorkoutsForToday").then(function (jsonData) {
-                return jsonData.data.map(function (x) { return new WorkoutViewModel().deserialize(x); });
+                var res = {};
+                for (var i = 0; i < jsonData.data.length; i++) {
+                    res[jsonData.data[i].key] = jsonData.data[i].value.map(function (x) { return new WorkoutViewModel().deserialize(x); });
+                }
+                return res;
             });
         };
         this.getWorkoutsList = function () {

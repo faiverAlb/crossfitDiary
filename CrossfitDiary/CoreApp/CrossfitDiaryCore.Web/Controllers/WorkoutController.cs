@@ -111,11 +111,11 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts to do</returns>
         [HttpGet]
         [Route("api/getPlannedWorkoutsForToday")]
-        public async Task<List<KeyValuePair<ViewModels.WodSubType, List<WorkoutViewModel>>>> GetPlannedWorkoutsForToday()
+        public async Task<List<KeyValuePair<PlanningWorkoutLevel, List<WorkoutViewModel>>>> GetPlannedWorkoutsForToday()
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            List<KeyValuePair<WodSubType, List<RoutineComplex>>> workouts = _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
-            List<KeyValuePair<ViewModels.WodSubType, List<WorkoutViewModel>>> allResults = _mapper.Map<List<KeyValuePair<ViewModels.WodSubType, List<WorkoutViewModel>>>>(workouts);
+            List<KeyValuePair<PlanningLevel, List<RoutineComplex>>> workouts = _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
+            List<KeyValuePair<PlanningWorkoutLevel, List<WorkoutViewModel>>> allResults = _mapper.Map<List<KeyValuePair<PlanningWorkoutLevel, List<WorkoutViewModel>>>>(workouts);
 
             return allResults;
         }

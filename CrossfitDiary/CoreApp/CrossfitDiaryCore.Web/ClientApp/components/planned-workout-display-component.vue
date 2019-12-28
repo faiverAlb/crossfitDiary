@@ -287,11 +287,7 @@
     })
     export default class PlannedWorkoutDisplayComponent extends Vue {
         @Prop()
-        plannedWorkouts: WorkoutViewModel[];
-        @Watch('plannedWorkouts')
-        onPlannedWorkoutsUpdate(oldVal, newVal){
-            this.selectedFirstWod();
-        }
+        plannedWorkouts: { planningWorkoutLevel: PlanningWorkoutLevel, workouts: WorkoutViewModel[] };
         show: boolean = true;
         isScaledSelected: boolean = false;
         isRxSelected: boolean = false;
@@ -300,10 +296,8 @@
         selectedPlannedWorkout: WorkoutViewModel = null;
         toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
         selectedPlanningLevel: PlanningWorkoutLevel = PlanningWorkoutLevel.Scaled;
-
         toRemovePlannedId: number = 0;
         subTypeClass: string = "";
-
         $refs: {
             logWorkoutModal: HTMLFormElement;
             removeFromPlannedModal: HTMLFormElement;
@@ -339,14 +333,25 @@
             }
         }
 
-        selectedFirstWod(){
-            this.selectedPlannedWorkout = this.plannedWorkouts[0];
-            if (this.selectedPlannedWorkout == null) {
-                return;
-            }
-            this.setVisibilityByLevel(this.selectedPlannedWorkout.planningWorkoutLevel);
+        @Watch('plannedWorkouts')
+        onPlannedWorkoutsUpdate(oldVal, newVal) {
+            this.selectedFirstWod();
         }
+
+        selectedFirstWod() {
+
+            let scaledWods = this.plannedWorkouts[PlanningWorkoutLevel.Scaled];
+            let rxWods = this.plannedWorkouts[PlanningWorkoutLevel.Rx];
+            let rxPlusWods = this.plannedWorkouts[PlanningWorkoutLevel.RxPlus];
+            // this.selectedPlannedWorkout = this.plannedWorkouts[0];
+            // if (this.selectedPlannedWorkout == null) {
+            //     return;
+            // }
+            // this.setVisibilityByLevel(this.selectedPlannedWorkout.planningWorkoutLevel);
+        }
+
         mounted() {
+           
             this.selectedFirstWod();
         }
 
@@ -409,14 +414,16 @@
         }
 
         hasPlannedForLevel(planningWorkoutLevel: PlanningWorkoutLevel) {
-            let found = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
+            // return true;
+            debugger;
+            let found = this.plannedWorkouts[planningWorkoutLevel];
             return found != null;
         }
 
         setSelectedPlanned(planningWorkoutLevel: PlanningWorkoutLevel) {
-            this.selectedPlanningLevel = planningWorkoutLevel;
-            this.selectedPlannedWorkout = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
-            this.setVisibilityByLevel(planningWorkoutLevel);
+            // this.selectedPlanningLevel = planningWorkoutLevel;
+            // this.selectedPlannedWorkout = this.plannedWorkouts.find(x => x.planningWorkoutLevel == planningWorkoutLevel);
+            // this.setVisibilityByLevel(planningWorkoutLevel);
         }
     }
 </script>

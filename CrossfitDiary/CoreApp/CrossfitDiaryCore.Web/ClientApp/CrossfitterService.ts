@@ -7,6 +7,7 @@ import {
 } from "./models/viewModels/WorkoutViewModel";
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
 import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
+import {WodSubType} from "./models/viewModels/WodSubType";
 
 export default class CrossfitterService {
   // tslint:disable-next-line:max-line-length
@@ -34,10 +35,14 @@ export default class CrossfitterService {
           new ToLogWorkoutViewModel().deserialize(x)
         );
       });
-  };
-  public getPlannedWorkoutsForToday = (): Promise<WorkoutViewModel[]> => {
+  }; 
+  public getPlannedWorkoutsForToday = (): Promise<{PlanningWorkoutLevel:[WorkoutViewModel]}> => {
     return axios.get(`api/getPlannedWorkoutsForToday`).then(jsonData => {
-      return jsonData.data.map(x => new WorkoutViewModel().deserialize(x));
+      let res: any  =  {};
+      for (let i = 0; i < jsonData.data.length;i++) {
+        res[jsonData.data[i].key] = jsonData.data[i].value.map(x => new WorkoutViewModel().deserialize(x));
+      }
+      return res;
     });
   };
   public getWorkoutsList = (): Promise<WorkoutViewModel[]> => {

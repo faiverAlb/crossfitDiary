@@ -182,7 +182,7 @@ namespace CrossfitDiaryCore.BL.Services
                 .SingleOrDefault(x => x.Id == workoutId);
         }
 
-        public List<KeyValuePair<WodSubType, List<RoutineComplex>>> GetPlannedWorkouts(DateTime today, ApplicationUser currentUser)
+        public List<KeyValuePair<PlanningLevel, List<RoutineComplex>>> GetPlannedWorkouts(DateTime today, ApplicationUser currentUser)
         {
             List<PlanningHistory> planned =  _context.PlanningHistories.Where(x => x.PlanningDate.Date == today.Date).ToList();
             if (planned.Any(x => x.Crossfitter == currentUser))
@@ -190,9 +190,9 @@ namespace CrossfitDiaryCore.BL.Services
                 planned = planned.Where(x => x.Crossfitter == currentUser).ToList();
             }
 
-            var resultComplexes = new List<KeyValuePair<WodSubType, List<RoutineComplex>>>();
-            IEnumerable<IGrouping<WodSubType, PlanningHistory>> groupedByWodSubType = planned.GroupBy(x => x.WodSubType);
-            foreach (IGrouping<WodSubType, PlanningHistory> grouping in groupedByWodSubType)
+            var resultComplexes = new List<KeyValuePair<PlanningLevel, List<RoutineComplex>>>();
+            IEnumerable<IGrouping<PlanningLevel, PlanningHistory>> groupedByWodSubType = planned.GroupBy(x => x.PlanningLevel);
+            foreach (IGrouping<PlanningLevel, PlanningHistory> grouping in groupedByWodSubType)
             {
                 var subTypeWods = new List<RoutineComplex>();
                 foreach (PlanningHistory planningHistory in grouping)
@@ -213,7 +213,7 @@ namespace CrossfitDiaryCore.BL.Services
                     subTypeWods.Add(routine);
                 }
 
-                resultComplexes.Add(new KeyValuePair<WodSubType, List<RoutineComplex>>(grouping.Key, subTypeWods));
+                resultComplexes.Add(new KeyValuePair<PlanningLevel, List<RoutineComplex>>(grouping.Key, subTypeWods));
             }
             return resultComplexes;
         }
