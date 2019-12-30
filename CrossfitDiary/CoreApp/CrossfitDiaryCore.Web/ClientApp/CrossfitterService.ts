@@ -8,6 +8,7 @@ import {
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
 import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
 import {WodSubType} from "./models/viewModels/WodSubType";
+import {PlanningWorkoutViewModel} from "./models/viewModels/PlanningWorkoutViewModel";
 
 export default class CrossfitterService {
   // tslint:disable-next-line:max-line-length
@@ -40,7 +41,7 @@ export default class CrossfitterService {
     return axios.get(`api/getPlannedWorkoutsForToday`).then(jsonData => {
       let res: any  =  {};
       for (let i = 0; i < jsonData.data.length;i++) {
-        res[jsonData.data[i].key] = jsonData.data[i].value.map(x => new WorkoutViewModel().deserialize(x));
+        res[jsonData.data[i].key] = jsonData.data[i].value.map(x => new PlanningWorkoutViewModel().deserialize(x));
       }
       return res;
     });

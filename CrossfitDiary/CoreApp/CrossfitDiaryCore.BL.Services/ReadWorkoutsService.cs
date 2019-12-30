@@ -182,40 +182,58 @@ namespace CrossfitDiaryCore.BL.Services
                 .SingleOrDefault(x => x.Id == workoutId);
         }
 
-        public List<KeyValuePair<PlanningLevel, List<RoutineComplex>>> GetPlannedWorkouts(DateTime today, ApplicationUser currentUser)
+        public IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> GetPlannedWorkouts(DateTime today, ApplicationUser currentUser)
         {
-            List<PlanningHistory> planned =  _context.PlanningHistories.Where(x => x.PlanningDate.Date == today.Date).ToList();
+            List<PlanningHistory> planned =  _context
+                .PlanningHistories
+                .Include(x => x.RoutineComplex)
+                .ThenInclude(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .Include(x => x.RoutineComplex)
+                .ThenInclude(x => x.Children)
+                .ThenInclude(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .AsNoTracking()
+                .Where(x => x.PlanningDate.Date == today.Date)
+                .ToList();
             if (planned.Any(x => x.Crossfitter == currentUser))
             {
                 planned = planned.Where(x => x.Crossfitter == currentUser).ToList();
             }
 
-            var resultComplexes = new List<KeyValuePair<PlanningLevel, List<RoutineComplex>>>();
-            IEnumerable<IGrouping<PlanningLevel, PlanningHistory>> groupedByWodSubType = planned.GroupBy(x => x.PlanningLevel);
-            foreach (IGrouping<PlanningLevel, PlanningHistory> grouping in groupedByWodSubType)
-            {
-                var subTypeWods = new List<RoutineComplex>();
-                foreach (PlanningHistory planningHistory in grouping)
-                {
-                    RoutineComplex routine = _context.ComplexRoutines
-                        .Include(x => x.RoutineSimple)
-                        .ThenInclude(x => x.Exercise)
-                        .ThenInclude(x => x.ExerciseMeasures)
-                        .Include(x => x.Children)
-                        .ThenInclude(x => x.RoutineSimple)
-                        .ThenInclude(x => x.Exercise)
-                        .ThenInclude(x => x.ExerciseMeasures)
-                        .Single(x => x.Id == planningHistory.RoutineComplexId);
-
-                    routine.PlanDate = planningHistory.PlanningDate;
-                    routine.PlanningLevel = planningHistory.PlanningLevel;
-                    routine.WodSubType = planningHistory.WodSubType;
-                    subTypeWods.Add(routine);
-                }
-
-                resultComplexes.Add(new KeyValuePair<PlanningLevel, List<RoutineComplex>>(grouping.Key, subTypeWods));
-            }
-            return resultComplexes;
+            // var resultComplexes = new List<KeyValuePair<PlanningLevel, List<RoutineComplex>>>();
+            IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> groupedByWodSubType = planned
+                .GroupBy(x => x.PlanningLevel)
+                .Select(x => new KeyValuePair<PlanningLevel, List<PlanningHistory>>(x.Key,x.ToList()));
+            return groupedByWodSubType;
+            // foreach (IGrouping<PlanningLevel, PlanningHistory> grouping in groupedByWodSubType)
+            // {
+            //     var subTypeWods = new List<RoutineComplex>();
+            //     foreach (PlanningHistory planningHistory in grouping)
+            //     {
+            //         RoutineComplex routine = _context.ComplexRoutines
+            //             .Include(x => x.RoutineSimple)
+            //             .ThenInclude(x => x.Exercise)
+            //             .ThenInclude(x => x.ExerciseMeasures)
+            //             .Include(x => x.Children)
+            //             .ThenInclude(x => x.RoutineSimple)
+            //             .ThenInclude(x => x.Exercise)
+            //             .ThenInclude(x => x.ExerciseMeasures)
+            //             .AsNoTracking()
+            //             .Single(x => x.Id == planningHistory.RoutineComplexId);
+            //
+            //         
+            //         routine.PlanDate = planningHistory.PlanningDate;
+            //         routine.PlanningLevel = planningHistory.PlanningLevel;
+            //         routine.WodSubType = planningHistory.WodSubType;
+            //         subTypeWods.Add(routine);
+            //     }
+            //
+            //     resultComplexes.Add(new KeyValuePair<PlanningLevel, List<RoutineComplex>>(grouping.Key, subTypeWods));
+            // }
+            // return resultComplexes;
         }
         public List<RoutineComplex> GetWorkoutsList()
         {
@@ -273,50 +291,51 @@ namespace CrossfitDiaryCore.BL.Services
 
         private LeaderboardItemModel GetLeaderboardItemModel(RoutineComplex plannedWorkout, CrossfitterWorkout crossfitterWorkout)
         {
-            string result = string.Empty;
-            switch (plannedWorkout.ComplexType)
-            {
-                case RoutineComplexType.ForTime:
-                case RoutineComplexType.ForTimeManyInners:
-                    if (crossfitterWorkout.RepsToFinishOnCapTime.HasValue)
-                    {
-                        result = $"cap + {crossfitterWorkout.RepsToFinishOnCapTime.Value}";
-                    }
-                    else
-                    {
-                        if (crossfitterWorkout.TimePassed != null)
-                        {
-                            TimeSpan totalTime = crossfitterWorkout.TimePassed.Value;
-                            if (totalTime.TotalHours >= 1)
-                            {
-                                result =  totalTime.ToString();
-                            }
-                            else
-                            {
-                                result = $"{totalTime.Minutes:00}:{totalTime.Seconds:00}";
-                            }
-                        }
-                        
-                    }
-                    break;
-                case RoutineComplexType.AMRAP:
-                case RoutineComplexType.AMRAPN:
-                    result = crossfitterWorkout.RoundsFinished.HasValue? $"{crossfitterWorkout.RoundsFinished.Value}": "0";
-                    if (crossfitterWorkout.PartialRepsFinished.HasValue)
-                    {
-                        result += $" + {crossfitterWorkout.PartialRepsFinished}";
-                    }
-                    break;
-                case RoutineComplexType.EMOM:
-                    break;
-                case RoutineComplexType.E2MOM:
-                    break;
-                case RoutineComplexType.NotForTime:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            return new LeaderboardItemModel(plannedWorkout.PlanningLevel.ToString(),crossfitterWorkout.Crossfitter.FullName, result);
+            throw new NotImplementedException();
+            // string result = string.Empty;
+            // switch (plannedWorkout.ComplexType)
+            // {
+            //     case RoutineComplexType.ForTime:
+            //     case RoutineComplexType.ForTimeManyInners:
+            //         if (crossfitterWorkout.RepsToFinishOnCapTime.HasValue)
+            //         {
+            //             result = $"cap + {crossfitterWorkout.RepsToFinishOnCapTime.Value}";
+            //         }
+            //         else
+            //         {
+            //             if (crossfitterWorkout.TimePassed != null)
+            //             {
+            //                 TimeSpan totalTime = crossfitterWorkout.TimePassed.Value;
+            //                 if (totalTime.TotalHours >= 1)
+            //                 {
+            //                     result =  totalTime.ToString();
+            //                 }
+            //                 else
+            //                 {
+            //                     result = $"{totalTime.Minutes:00}:{totalTime.Seconds:00}";
+            //                 }
+            //             }
+            //             
+            //         }
+            //         break;
+            //     case RoutineComplexType.AMRAP:
+            //     case RoutineComplexType.AMRAPN:
+            //         result = crossfitterWorkout.RoundsFinished.HasValue? $"{crossfitterWorkout.RoundsFinished.Value}": "0";
+            //         if (crossfitterWorkout.PartialRepsFinished.HasValue)
+            //         {
+            //             result += $" + {crossfitterWorkout.PartialRepsFinished}";
+            //         }
+            //         break;
+            //     case RoutineComplexType.EMOM:
+            //         break;
+            //     case RoutineComplexType.E2MOM:
+            //         break;
+            //     case RoutineComplexType.NotForTime:
+            //         break;
+            //     default:
+            //         throw new ArgumentOutOfRangeException();
+            // }
+            // return new LeaderboardItemModel(plannedWorkout.PlanningLevel.ToString(),crossfitterWorkout.Crossfitter.FullName, result);
         }
     }
 }

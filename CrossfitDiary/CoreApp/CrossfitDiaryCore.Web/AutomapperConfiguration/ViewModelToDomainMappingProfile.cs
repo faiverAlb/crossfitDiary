@@ -15,6 +15,9 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<MeasureTypeViewModel, MeasureType>();
+            CreateMap<PlanningWorkoutViewModel, PlanningHistory>()
+                .ForMember(x => x.PlanningDate, x => x.ResolveUsing<DateTimeParser>())
+                .ForMember(x => x.PlanningLevel, x => x.MapFrom(y => y.PlanningWorkoutLevel));
             //CreateMap<ExerciseMeasureTypeViewModel, ExerciseMeasureType>();
             CreateMap<ExerciseMeasureViewModel, ExerciseMeasure>();
 
@@ -29,12 +32,10 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                             exerciseViewModel.Position = index++;
                         }
                     })
-                .ForMember(x => x.PlanDate, x => x.ResolveUsing<DateTimeParser>())
                 .ForMember(x => x.RoundCount, x => x.MapFrom(y => y.RoundsCount))
                 .ForMember(x => x.TimeToWork, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeToWork)))
                 .ForMember(x => x.TimeCap, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeCap)))
                 .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => ParseTimeSpanFromString(y.RestBetweenRounds)))
-                .ForMember(x => x.PlanningLevel, x => x.MapFrom(y => y.PlanningWorkoutLevel))
                 .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => ParseTimeSpanFromString(y.RestBetweenExercises)));
 
             

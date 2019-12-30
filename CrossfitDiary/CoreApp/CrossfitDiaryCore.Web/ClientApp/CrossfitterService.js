@@ -4,6 +4,7 @@ import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
 import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
+import { PlanningWorkoutViewModel } from "./models/viewModels/PlanningWorkoutViewModel";
 var CrossfitterService = /** @class */ (function () {
     function CrossfitterService() {
         // tslint:disable-next-line:max-line-length
@@ -28,7 +29,7 @@ var CrossfitterService = /** @class */ (function () {
             return axios.get("api/getPlannedWorkoutsForToday").then(function (jsonData) {
                 var res = {};
                 for (var i = 0; i < jsonData.data.length; i++) {
-                    res[jsonData.data[i].key] = jsonData.data[i].value.map(function (x) { return new WorkoutViewModel().deserialize(x); });
+                    res[jsonData.data[i].key] = jsonData.data[i].value.map(function (x) { return new PlanningWorkoutViewModel().deserialize(x); });
                 }
                 return res;
             });

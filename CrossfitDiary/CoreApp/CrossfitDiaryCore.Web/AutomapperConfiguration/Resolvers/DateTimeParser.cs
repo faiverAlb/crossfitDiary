@@ -7,7 +7,7 @@ using CrossfitDiaryCore.Web.ViewModels;
 
 namespace CrossfitDiaryCore.Web.AutomapperConfiguration.Resolvers
 {
-    public class DateTimeParser : IValueResolver<ToLogWorkoutViewModel, CrossfitterWorkout, DateTime>, IValueResolver<WorkoutViewModel, RoutineComplex, DateTime?>
+    public class DateTimeParser : IValueResolver<ToLogWorkoutViewModel, CrossfitterWorkout, DateTime>, IValueResolver<PlanningWorkoutViewModel, PlanningHistory, DateTime>
     {
         public DateTime Resolve(ToLogWorkoutViewModel source, CrossfitterWorkout destination, DateTime destMember,ResolutionContext context)
         {
@@ -15,7 +15,9 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration.Resolvers
             
         }
 
-        public DateTime? Resolve(WorkoutViewModel source, RoutineComplex destination, DateTime? destMember, ResolutionContext context)
+
+        public DateTime Resolve(PlanningWorkoutViewModel source, PlanningHistory destination, DateTime destMember,
+            ResolutionContext context)
         {
             return ParseDate(source.DisplayPlanDate);
         }
