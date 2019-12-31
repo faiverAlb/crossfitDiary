@@ -114,31 +114,29 @@ namespace CrossfitDiaryCore.BL.Services
             _context.SaveChanges();
         }
 
-        public void PlanWorkoutForDay(int workoutId, PlanningHistory newHistoryPlanning)
-        {
-            // CleanPreviousPlannedWodsForThisLevel(workoutId, planningLevel, date);
 
-            RoutineComplex complexToUpdate = _context.ComplexRoutines.Single(x => x.Id == workoutId);
-            _context.ComplexRoutines.Update(complexToUpdate);
-            IEnumerable<PlanningHistory> planningHistories = _context.PlanningHistories.Where(x => x.Crossfitter == newHistoryPlanning.Crossfitter
-                                                                                                   && x.RoutineComplexId == complexToUpdate.Id
-                                                                                                   && x.PlanningLevel == newHistoryPlanning.PlanningLevel
-                                                                                                   && x.PlanningDate.Date == newHistoryPlanning.PlanningDate.Date
-                                                                                                   // && x.WodSubType == wodSubType
-                                                                                                   ).ToList();
-            _context.PlanningHistories.RemoveRange(
-                planningHistories);
+        public void PlanWorkoutForDay(int workoutId, PlanningLevel planningLevel, DateTime date, ApplicationUser user, WodSubType wodSubType)
+        {
+            var historyItem = new PlanningHistory()
+            {
+                WodSubType = wodSubType,
+                RoutineComplexId = workoutId,
+                Crossfitter = user,
+                PlanningLevel = planningLevel,
+                PlanningDate = date
+            };
+            PlanWorkoutForDay(historyItem);
+        }
+
+        private void PlanWorkoutForDay(PlanningHistory newHistoryPlanning)
+        {
+            IEnumerable<PlanningHistory> planningHistories =  _context.PlanningHistories.Where(x => x.Id == newHistoryPlanning.Id);
+            _context.PlanningHistories.RemoveRange(planningHistories);
             _context.PlanningHistories.Add(newHistoryPlanning);
-            // _context.PlanningHistories.Add(new PlanningHistory()
-            // {
-            //     RoutineComplex = complexToUpdate,
-            //     PlanningLevel = planningLevel,
-            //     PlanningDate = date,
-            //     Crossfitter = crossfitter,
-            //     WodSubType = wodSubType
-            // });
             _context.SaveChanges();
         }
+
+
 
         public void PlanWorkout(PlanningHistory newHistoryPlanning, ApplicationUser user)
         {
@@ -168,17 +166,11 @@ namespace CrossfitDiaryCore.BL.Services
                 }
                 _context.ComplexRoutines.Add(workoutRoutine);
                 _context.PlanningHistories.Add(newHistoryPlanning);
-                // _context.PlanningHistories.Add(new PlanningHistory()
-                // {
-                //     RoutineComplex = workoutRoutine, PlanningLevel = workoutRoutine.PlanningLevel.Value,
-                //     PlanningDate = workoutRoutine.PlanDate.Value,
-                //     WodSubType = workoutRoutine.WodSubType
-                // });
                 _context.SaveChanges();
             }
             else
             {
-                PlanWorkoutForDay(workoutId, newHistoryPlanning);
+                PlanWorkoutForDay(newHistoryPlanning);
             }
         }
 
@@ -191,7 +183,7 @@ namespace CrossfitDiaryCore.BL.Services
         public void RemovePlannedWod(int plannedWodId, string userId, DateTime date)
         {
             bool canUserPlanPublicWods = _readUsersService.CanUserPlanWorkouts(userId);
-            PlanningHistory foundPlannedWodForDate = _context.PlanningHistories.Single(x => x.PlanningDate.Date == date && x.RoutineComplex.Id == plannedWodId);
+            PlanningHistory foundPlannedWodForDate = _context.PlanningHistories.Single(x => x.Id == plannedWodId);
             if (foundPlannedWodForDate.Crossfitter == null && canUserPlanPublicWods == false)
             {
                 return;
@@ -209,5 +201,6 @@ namespace CrossfitDiaryCore.BL.Services
             }
 
         }
+
     }
 }

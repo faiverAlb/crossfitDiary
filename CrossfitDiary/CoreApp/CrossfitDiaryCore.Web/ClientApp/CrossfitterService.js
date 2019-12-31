@@ -12,8 +12,8 @@ var CrossfitterService = /** @class */ (function () {
             return axios.post("api/createAndLogNewWorkout", model);
         };
         // tslint:disable-next-line:max-line-length
-        this.createAndPlanWorkout = function (workoutViewModel) {
-            return axios.post("api/createAndPlanWorkout", workoutViewModel);
+        this.createAndPlanWorkout = function (planWorkoutModel) {
+            return axios.post("api/createAndPlanWorkout", planWorkoutModel);
         };
         // tslint:disable-next-line:max-line-length
         this.getAllCrossfittersWorkouts = function (page, pageSize) {

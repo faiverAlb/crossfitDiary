@@ -16,6 +16,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
         {
             CreateMap<MeasureTypeViewModel, MeasureType>();
             CreateMap<PlanningWorkoutViewModel, PlanningHistory>()
+                .ForMember(x => x.RoutineComplex, x => x.MapFrom(y => y.WorkoutViewModel))
                 .ForMember(x => x.PlanningDate, x => x.ResolveUsing<DateTimeParser>())
                 .ForMember(x => x.PlanningLevel, x => x.MapFrom(y => y.PlanningWorkoutLevel));
             //CreateMap<ExerciseMeasureTypeViewModel, ExerciseMeasureType>();

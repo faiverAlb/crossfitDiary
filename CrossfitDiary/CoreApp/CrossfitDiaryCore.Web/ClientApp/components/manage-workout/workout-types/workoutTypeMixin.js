@@ -25,6 +25,7 @@ import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import { WindowHelper } from "../../../helpers/WindowHelper";
 import VeeValidate from "vee-validate";
 import { State } from "vuex-class";
+import { PlanningWorkoutViewModel } from "../../../models/viewModels/PlanningWorkoutViewModel";
 Vue.use(VeeValidate);
 var namespace = "workoutEdit";
 var WorkoutTypeComponent = /** @class */ (function (_super) {
@@ -35,6 +36,7 @@ var WorkoutTypeComponent = /** @class */ (function (_super) {
         _this.model = new WorkoutViewModel();
         _this.toLogModel = new ToLogWorkoutViewModel();
         _this.errorAlertModel = new ErrorAlertModel();
+        _this.planWorkoutModel = new PlanningWorkoutViewModel();
         _this.wodSubTypes = [
             { text: 'Skill', value: WodSubType.Skill },
             { text: 'Workout', value: WodSubType.Wod },
@@ -50,6 +52,8 @@ var WorkoutTypeComponent = /** @class */ (function (_super) {
         else if (workouter != null && workouter.workoutViewModel != null) {
             this.model = workouter.workoutViewModel;
         }
+        this.planWorkoutModel = new PlanningWorkoutViewModel();
+        this.planWorkoutModel.workoutViewModel = this.model;
     };
     WorkoutTypeComponent.prototype.logWorkout = function () {
         var _this = this;
@@ -99,7 +103,7 @@ var WorkoutTypeComponent = /** @class */ (function (_super) {
                 var crossfitterService = new CrossfitterService();
                 _this.spinner.activate();
                 crossfitterService
-                    .createAndPlanWorkout(_this.model)
+                    .createAndPlanWorkout(_this.planWorkoutModel)
                     .then(function (data) {
                     window.location.href = "\\";
                 })

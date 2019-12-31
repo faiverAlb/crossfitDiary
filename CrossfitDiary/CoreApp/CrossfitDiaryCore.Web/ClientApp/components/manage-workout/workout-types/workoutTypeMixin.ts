@@ -10,6 +10,7 @@ import {WindowHelper} from "../../../helpers/WindowHelper";
 import VeeValidate from "vee-validate";
 import {State} from "vuex-class";
 import {IWorkoutEditState} from "../../../workout-edit-store/types";
+import {PlanningWorkoutViewModel} from "../../../models/viewModels/PlanningWorkoutViewModel";
 
 Vue.use(VeeValidate);
 
@@ -27,7 +28,7 @@ export class WorkoutTypeComponent extends Vue {
     model: WorkoutViewModel = new WorkoutViewModel();
     toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
     errorAlertModel: ErrorAlertModel = new ErrorAlertModel();
-
+    planWorkoutModel: PlanningWorkoutViewModel = new PlanningWorkoutViewModel();
     $refs: {
         logWorkoutModal: HTMLFormElement;
     };
@@ -49,6 +50,8 @@ export class WorkoutTypeComponent extends Vue {
         } else if (workouter != null && workouter.workoutViewModel != null) {
             this.model = workouter.workoutViewModel;
         }
+        this.planWorkoutModel = new PlanningWorkoutViewModel();
+        this.planWorkoutModel.workoutViewModel = this.model;
     }
 
     logWorkout() {
@@ -89,6 +92,7 @@ export class WorkoutTypeComponent extends Vue {
     }
 
     planWorkoutAction(): void {
+        
         this.$validator.validate();
 
         let scrollToErrors = this.$el.querySelector("[aria-invalid=true]");
@@ -100,7 +104,7 @@ export class WorkoutTypeComponent extends Vue {
                 let crossfitterService: CrossfitterService = new CrossfitterService();
                 this.spinner.activate();
                 crossfitterService
-                    .createAndPlanWorkout(this.model)
+                    .createAndPlanWorkout(this.planWorkoutModel)
                     .then(data => {
                         window.location.href = "\\";
                     })

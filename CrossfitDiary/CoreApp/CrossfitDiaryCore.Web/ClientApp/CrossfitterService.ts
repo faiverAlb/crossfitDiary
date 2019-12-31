@@ -20,8 +20,8 @@ export default class CrossfitterService {
   };
 
   // tslint:disable-next-line:max-line-length
-  public createAndPlanWorkout = (workoutViewModel: WorkoutViewModel) => {
-    return axios.post("api/createAndPlanWorkout", workoutViewModel);
+  public createAndPlanWorkout = (planWorkoutModel: PlanningWorkoutViewModel) => {
+    return axios.post("api/createAndPlanWorkout", planWorkoutModel);
   };
 
   // tslint:disable-next-line:max-line-length

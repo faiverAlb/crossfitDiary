@@ -1,6 +1,5 @@
 import { WorkoutType } from "./WorkoutType";
 import { ExerciseViewModel } from "./ExerciseViewModel";
-import { WodSubType } from "./WodSubType";
 export var PlanningWorkoutLevel;
 (function (PlanningWorkoutLevel) {
     PlanningWorkoutLevel[PlanningWorkoutLevel["Scaled"] = 0] = "Scaled";
@@ -9,6 +8,8 @@ export var PlanningWorkoutLevel;
 })(PlanningWorkoutLevel || (PlanningWorkoutLevel = {}));
 var WorkoutViewModel = /** @class */ (function () {
     function WorkoutViewModel(input) {
+        // this.displayPlanDate = this.getDefaultDate();
+        // this.wodSubType = WodSubType.Skill;
         var _this = this;
         this.id = 0;
         this.title = "";
@@ -20,12 +21,14 @@ var WorkoutViewModel = /** @class */ (function () {
         this.canShowCountOnce = true;
         this.groupedDictionary = {};
         this.oneTimeSchema = {};
-        this.subTypeClass = "";
-        this.getDefaultDate = function () {
-            var date = new Date();
-            var result = ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
-            return result;
-        };
+        // subTypeClass: string = "";
+        // wodSubType: WodSubType;
+        // getDefaultDate = (): string => {
+        //     let date: Date = new Date();
+        //     let result: string = ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
+        //
+        //     return result;
+        // };
         this.IsForTime = function () {
             return _this.workoutType === WorkoutType.ForTime;
         };
@@ -111,52 +114,11 @@ var WorkoutViewModel = /** @class */ (function () {
             }
             return canShowCountOnce;
         };
-        this.displayPlanDate = this.getDefaultDate();
-        this.wodSubType = WodSubType.Skill;
         if (input == null) {
             return;
         }
         Object.assign(this, input);
     }
-    Object.defineProperty(WorkoutViewModel.prototype, "workoutSubTypeDisplayValue", {
-        get: function () {
-            this.subTypeClass = this.getSubTypeClass();
-            switch (this.wodSubType) {
-                case WodSubType.Skill:
-                    return "Skill";
-                case WodSubType.Wod:
-                    return "WOD";
-                case WodSubType.AccessoryWork:
-                    return "Accessory";
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    WorkoutViewModel.prototype.getSubTypeClass = function () {
-        switch (this.wodSubType) {
-            case WodSubType.Skill:
-                return 'bg-info text-white';
-            case WodSubType.Wod:
-                return 'bg-danger text-white';
-            case WodSubType.AccessoryWork:
-                return 'bg-warning text-white';
-        }
-    };
-    Object.defineProperty(WorkoutViewModel.prototype, "planningLevelDisplayValue", {
-        get: function () {
-            switch (this.planningWorkoutLevel) {
-                case PlanningWorkoutLevel.Scaled:
-                    return "Scaled";
-                case PlanningWorkoutLevel.Rx:
-                    return "Rx";
-                case PlanningWorkoutLevel.RxPlus:
-                    return "Rx+";
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
     WorkoutViewModel.prototype.tryCollapseWorkout = function () {
         var exercisedToUse = this.exercisesToDoList;
         var distinctExercises = this.getDistinctItems(exercisedToUse);
