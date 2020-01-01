@@ -329,6 +329,8 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 this.setVisibilityByLevel(PlanningWorkoutLevel.RxPlus);
                 return;
             }
+            this.selectedLevelPlanningWorkouts = [];
+            this.setVisibilityByLevel(null);
         }
 
         mounted() {
