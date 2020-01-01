@@ -35,7 +35,7 @@
                                 id="dropdown-form-schema"
                                 placeholder="21 15 9 3"
                                 size="sm"
-                                type="tel"
+                                type="text"
                                 v-model="schemaToGenerate"
                         />
                     </b-form-group>
