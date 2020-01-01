@@ -164,7 +164,7 @@
             </div>
         </div>
         <EditPlannedWorkoutComponent
-                :planningWorkout="model"
+                :planningWorkout="planWorkoutModel"
                 @planWorkoutAction="planWorkoutAction"
                 v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
         />
