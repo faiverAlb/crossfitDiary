@@ -87,8 +87,8 @@
                                 <b-dropdown
                                         class="actions-dropdown"
                                         dropleft
-                                        slot="append"
                                         size="sm"
+                                        slot="append"
                                 >
                                     <b-dropdown-item
                                             :disabled="canMoveExerciseUp(index)"
@@ -141,7 +141,7 @@
                                         pattern="[0-9]*"
                                         placeholder="Count"
                                         type="tel"
-                                        
+
                                         v-if="measure.measureType == 2"
                                         v-model="measure.measureValue"
                                 />
@@ -153,16 +153,13 @@
                                         v-else
                                         v-model="measure.measureValue"
                                 />
-                                <b-input-group-append >
+                                <b-input-group-append>
                                     <b-input-group-text tag="span">
                                         {{measure.shortMeasureDescription}}
                                     </b-input-group-text>
                                 </b-input-group-append>
                                 <!-- TODO: Problem with border radious because of it -->
-                                <span
-                                        class="w-100"
-                                        v-if="canSeeMaximumHelper(exercise,measure)"
-                                />
+
                             </b-input-group>
                         </div>
                     </div>
@@ -181,37 +178,32 @@
     import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
     import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
     import {library} from "@fortawesome/fontawesome-svg-core";
+    /* public components */
+    import {Component, Prop, Vue} from "vue-property-decorator";
+    import {
+        BButton,
+        BDropdown,
+        BDropdownDivider,
+        BDropdownForm,
+        BDropdownItem,
+        BDropdownItemButton,
+        BFormGroup,
+        BFormInput,
+        BFormSelect,
+        InputGroupPlugin
+    } from "bootstrap-vue";
+    import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+    import {State} from "vuex-class";
+    /* app components */
+    /* models and styles */
+    import {DefaultExerciseViewModel, ExerciseViewModel} from "../../../models/viewModels/ExerciseViewModel";
+
+    import {IWorkoutEditState} from "../../../workout-edit-store/types";
 
     library.add(faLongArrowAltUp, faLongArrowAltDown, faPlus, faTrash);
     /**/
 
-    /* public components */
-    import {Vue, Component, Prop} from "vue-property-decorator";
-    import {BFormSelect} from "bootstrap-vue";
-    import {BDropdown} from "bootstrap-vue";
-    import {BDropdownItem} from "bootstrap-vue";
-    import {BDropdownItemButton} from "bootstrap-vue";
-    import {BDropdownDivider} from "bootstrap-vue";
-    import {BDropdownForm} from "bootstrap-vue";
-    import {BFormInput} from "bootstrap-vue";
-    import {InputGroupPlugin} from "bootstrap-vue";
-
     Vue.use(InputGroupPlugin);
-    import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-    import {State, Action, Getter} from "vuex-class";
-    import {BButton} from "bootstrap-vue";
-    import {BFormGroup} from "bootstrap-vue";
-
-    /* app components */
-    /* models and styles */
-    import {
-        ExerciseViewModel,
-        DefaultExerciseViewModel
-    } from "../../../models/viewModels/ExerciseViewModel";
-    import {ExerciseMeasureViewModel} from "../../../models/viewModels/ExerciseMeasureViewModel";
-
-    import {IWorkoutEditState} from "../../../workout-edit-store/types";
-    import {ExerciseMeasureType} from "../../../models/viewModels/ExerciseMeasureType";
 
     const namespace: string = "workoutEdit";
 
@@ -299,6 +291,7 @@
         private deleteFromList(index: number) {
             this.exercisesToDo.splice(index, 1);
         }
+
         private generateSchema() {
             let toGenerateSchema = this.schemaToGenerate;
             let splittedItems: string[] = toGenerateSchema.split(" ");
