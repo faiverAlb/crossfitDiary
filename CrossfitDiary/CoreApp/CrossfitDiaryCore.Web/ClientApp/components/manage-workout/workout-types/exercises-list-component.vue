@@ -1,16 +1,8 @@
 ﻿<template>
     <div class="py-2">
         <div class="form-group">
-            <b-form-select
-                    :options="exercisesOptions"
-                    :plain="true"
-                    class="form-control"
-                    size="sm"
-                    text-field="title"
-                    v-model="selectedExercise"
-                    v-on:change="exerciseChange"
-                    value-field="id"
-            />
+            <v-select :options="exercisesOptions" :value="selectedExercise" @input="exerciseChange"
+                      label="title" placeholder="Select exercise"/>
         </div>
         <div
                 class="text-right actions-on-exercises"
@@ -180,6 +172,7 @@
     import {library} from "@fortawesome/fontawesome-svg-core";
     /* public components */
     import {Component, Prop, Vue} from "vue-property-decorator";
+    import vSelect from 'vue-select';
     import {
         BButton,
         BDropdown,
@@ -189,27 +182,26 @@
         BDropdownItemButton,
         BFormGroup,
         BFormInput,
-        BFormSelect,
         InputGroupPlugin
     } from "bootstrap-vue";
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     import {State} from "vuex-class";
     /* app components */
     /* models and styles */
-    import {DefaultExerciseViewModel, ExerciseViewModel} from "../../../models/viewModels/ExerciseViewModel";
-
+    import {ExerciseViewModel} from "../../../models/viewModels/ExerciseViewModel";
     import {IWorkoutEditState} from "../../../workout-edit-store/types";
+    import "vue-select/src/scss/vue-select.scss";
 
     library.add(faLongArrowAltUp, faLongArrowAltDown, faPlus, faTrash);
     /**/
 
     Vue.use(InputGroupPlugin);
+    Vue.component('v-select', vSelect);
 
     const namespace: string = "workoutEdit";
 
     @Component({
         components: {
-            BFormSelect,
             BDropdown,
             BDropdownItem,
             BDropdownItemButton,
@@ -229,16 +221,16 @@
         exercisesToDo: ExerciseViewModel[];
         @State("workoutEdit")
         workoutEdit: IWorkoutEditState;
-        selectedExercise: number = -1;
+        selectedExercise: ExerciseViewModel = null;
         private schemaToGenerate: string = "";
 
         get exercisesOptions() {
-            var exercisesOptions = this.workoutEdit.exercises.slice();
-            exercisesOptions.push(new DefaultExerciseViewModel());
-            return exercisesOptions;
+            // exercisesOptions.push(new DefaultExerciseViewModel());
+            return this.workoutEdit.exercises.slice();
         }
 
-        exerciseChange(selectedExerciseId: number) {
+        exerciseChange(exerciseModel: ExerciseViewModel) {
+            let selectedExerciseId = exerciseModel.id;
             let workoutToAdd = this.workoutEdit.exercises.find(
                 x => x.id == selectedExerciseId
             );

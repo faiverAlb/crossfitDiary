@@ -62,14 +62,3 @@ export class ExerciseViewModel implements Deserializable {
   }
 }
 
-export class DefaultExerciseViewModel extends ExerciseViewModel {
-  constructor() {
-    super({
-      id: -1,
-      title: "Select exercise",
-      exerciseMeasures: [],
-      isAlternative: false,
-      isDoUnbroken: false
-    });
-  }
-}
