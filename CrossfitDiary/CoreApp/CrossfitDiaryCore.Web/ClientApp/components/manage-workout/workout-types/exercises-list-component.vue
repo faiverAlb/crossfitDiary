@@ -163,25 +163,6 @@
                                         class="w-100"
                                         v-if="canSeeMaximumHelper(exercise,measure)"
                                 />
-                                <small
-                                        class="form-text text-muted"
-                                        id="maxPercentHelpBlock"
-                                        v-if="canSeeMaximumHelper(exercise,measure)"
-                                >
-                                    {{calculatePersentForMainWeight(exercise,measure.measureValue)}}% of PM
-                                </small>
-
-                                <span
-                                        class="w-100"
-                                        v-if="canSeeAltMaximumHelper(exercise,measure)"
-                                />
-                                <small
-                                        class="form-text text-muted"
-                                        id="prPercentHelpBlock"
-                                        v-if="canSeeAltMaximumHelper(exercise,measure)"
-                                >
-                                    {{calculatePersentForMainWeight(exercise,measure.measureValue)}}% of PM
-                                </small>
                             </b-input-group>
                         </div>
                     </div>
@@ -229,7 +210,7 @@
     } from "../../../models/viewModels/ExerciseViewModel";
     import {ExerciseMeasureViewModel} from "../../../models/viewModels/ExerciseMeasureViewModel";
 
-    import {IWorkoutEditState} from "./../../../workout-edit-store/types";
+    import {IWorkoutEditState} from "../../../workout-edit-store/types";
     import {ExerciseMeasureType} from "../../../models/viewModels/ExerciseMeasureType";
 
     const namespace: string = "workoutEdit";
@@ -318,68 +299,6 @@
         private deleteFromList(index: number) {
             this.exercisesToDo.splice(index, 1);
         }
-
-        private getUserMaximumByExerciseId(exerciseId: number) {
-            let maximum = this.workoutEdit.userMaximums.find(
-                x => x.exerciseId == exerciseId
-            );
-            return maximum;
-        }
-
-        private canSeeMaximumHelper(
-            exercise: ExerciseViewModel,
-            measure: ExerciseMeasureViewModel
-        ): boolean {
-            if (
-                measure.measureType != ExerciseMeasureType.Weight ||
-                measure.measureValue == null
-            )
-                return;
-            let foundMaximum = this.getUserMaximumByExerciseId(exercise.id);
-            if (foundMaximum && foundMaximum.maximumWeight != null) {
-                return true;
-            }
-            return false;
-        }
-
-        private canSeeAltMaximumHelper(
-            exercise: ExerciseViewModel,
-            measure: ExerciseMeasureViewModel
-        ): boolean {
-            if (
-                measure.measureType != ExerciseMeasureType.AlternativeWeight ||
-                measure.measureValue == null
-            )
-                return;
-            let foundMaximum = this.getUserMaximumByExerciseId(exercise.id);
-            if (foundMaximum && foundMaximum.maximumAlternativeWeight != null) {
-                return true;
-            }
-            return false;
-        }
-
-        private calculatePersentForMainWeight(
-            exercise: ExerciseViewModel,
-            measureValue: string
-        ) {
-            if (this.isFloat(measureValue) == false) return "";
-            let maxValue = this.getUserMaximumByExerciseId(exercise.id);
-            if (
-                (maxValue.maximumWeight == null || maxValue.maximumWeight == 0) &&
-                (maxValue.maximumAlternativeWeight == null ||
-                    maxValue.maximumAlternativeWeight == 0)
-            )
-                return "";
-            let max = Math.max(
-                maxValue.maximumWeight,
-                maxValue.maximumAlternativeWeight
-            );
-            let parsed = parseFloat(measureValue);
-            let returnValue = (parsed / max) * 100;
-
-            return Math.round((returnValue + 0.00001) * 100) / 100;
-        }
-
         private generateSchema() {
             let toGenerateSchema = this.schemaToGenerate;
             let splittedItems: string[] = toGenerateSchema.split(" ");
@@ -417,4 +336,4 @@
     }
 </script>
 
-<style></style>
+<style/>
