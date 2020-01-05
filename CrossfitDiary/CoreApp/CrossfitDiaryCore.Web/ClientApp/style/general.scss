@@ -1,59 +1,59 @@
 ﻿nav {
-    .navbar-brand {
-        border-bottom: 1px dashed #545b62;
+  .navbar-brand {
+    border-bottom: 1px dashed #545b62;
+  }
+
+  .svg-inline {
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+
+    &.w-18 {
+      width: 1.125em;
     }
 
-    .svg-inline {
-        display: inline-block;
-        font-size: inherit;
-        height: 1em;
-        overflow: visible;
-        vertical-align: -.125em;
-
-        &.w-18 {
-            width: 1.125em;
-        }
-
-        &.w-16 {
-            width: 1em;
-        }
+    &.w-16 {
+      width: 1em;
     }
+  }
 }
 
 table {
-    >thead>tr>th {
-        &.sorting_initial:before {
-            font-family: 'Font Awesome 5 Free';
-            content: ' \f0dc';
-            font-weight: 900;
-            /* Fix version 5.0.9 */
-            padding-right: $base-sorting-padding;
-        }
-
-        &.sorting_asc:before {
-            font-family: 'Font Awesome 5 Free';
-            content: ' \f0de';
-            font-weight: 900;
-            /* Fix version 5.0.9 */
-            padding-right: $base-sorting-padding;
-        }
-
-        &.sorting_desc:before {
-            font-family: 'Font Awesome 5 Free';
-            content: ' \f0dd';
-            font-weight: 900;
-            /* Fix version 5.0.9 */
-            padding-right: $base-sorting-padding;
-        }
+  > thead > tr > th {
+    &.sorting_initial:before {
+      font-family: 'Font Awesome 5 Free';
+      content: ' \f0dc';
+      font-weight: 900;
+      /* Fix version 5.0.9 */
+      padding-right: $base-sorting-padding;
     }
 
-    >tbody {
-        >tr {
-            &.empty-data {
-                background: $gray-lighter;
-            }
-        }
+    &.sorting_asc:before {
+      font-family: 'Font Awesome 5 Free';
+      content: ' \f0de';
+      font-weight: 900;
+      /* Fix version 5.0.9 */
+      padding-right: $base-sorting-padding;
     }
+
+    &.sorting_desc:before {
+      font-family: 'Font Awesome 5 Free';
+      content: ' \f0dd';
+      font-weight: 900;
+      /* Fix version 5.0.9 */
+      padding-right: $base-sorting-padding;
+    }
+  }
+
+  > tbody {
+    > tr {
+      &.empty-data {
+        background: $gray-lighter;
+      }
+    }
+  }
 }
 
 .table-borderless tbody tr td,
@@ -62,45 +62,56 @@ table {
 .table-borderless thead tr td,
 .table-borderless tfoot tr th,
 .table-borderless tfoot tr td {
-    border: none;
+  border: none;
 }
 
 /* Spinner */
 
 .spinner-container {
-    position: fixed;
-    top: 25%;
-    left: 50%;
-    margin-left: -50px;
-    margin-top: -75px;
-    z-index: 1000;
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -75px;
+  z-index: 1000;
 }
 
 .disabledContent {
-    opacity: 0.4;
-    pointer-events: none;
+  opacity: 0.4;
+  pointer-events: none;
 }
+
 
 .small-action-link-button {
-    padding: 0 8px;
-    min-width: 40px;
+  padding: 0 8px;
+  min-width: 40px;
 
-    &.amrap-icon {
-        min-width: 68px;
-    }
+  &.amrap-icon {
+    min-width: 68px;
+  }
 
-    .icon-container {
-        padding-top: 3px;
-    }
+  .icon-container {
+    padding-top: 3px;
+  }
 
-    .text-container {
-        font-size: 0.65em;
-        font-weight: 900;
-        margin-top: -3px;
-    }
+  .text-container {
+    font-size: 0.65em;
+    font-weight: 900;
+    margin-top: -3px;
+  }
 }
 
+
 div.saving {
-    pointer-events: none;
-    opacity: 0.5;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.badge-pink {
+  color: #fff;
+  background-color: $pink;
+}
+
+.bg-pink{
+  background-color: $pink;
 }
