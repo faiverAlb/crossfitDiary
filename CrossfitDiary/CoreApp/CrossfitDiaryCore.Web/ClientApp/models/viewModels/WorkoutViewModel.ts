@@ -181,8 +181,6 @@ export class WorkoutViewModel implements Deserializable {
             return;
         }
         Object.assign(this, input);
-        debugger;
-        var test = this.asNonBreakingSet;
         this.children = input.children.map((x): WorkoutViewModel => new WorkoutViewModel().deserialize(x));
         this.exercisesToDoList = input.exercisesToDoList.map((x): ExerciseViewModel => new ExerciseViewModel().deserialize(x));
         this.tryCollapseWorkout();

@@ -18,7 +18,7 @@ import {PlanningWorkoutLevel, WorkoutViewModel} from "./models/viewModels/Workou
 import {WodSubType} from "./models/viewModels/WodSubType";
 import {PlanningWorkoutViewModel} from "./models/viewModels/PlanningWorkoutViewModel";
 
-dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver 
 const apiService: CrossfitterService = new CrossfitterService();
 declare var workouter: {
     showOnlyUserWods: boolean;

@@ -106,7 +106,7 @@
     import {BBadge} from "bootstrap-vue";
     /* app components */
     import {ToLogWorkoutViewModel} from "../models/viewModels/ToLogWorkoutViewModel";
-    import WorkoutDisplayComponent from "./workout-display-component.vue";
+    import WorkoutDisplayComponent from "./workout-display-components/workout-display-component.vue";
     /* models and styles */
     import "./../style/workout-done-item.scss";
     import {WodSubType} from "../models/viewModels/WodSubType";

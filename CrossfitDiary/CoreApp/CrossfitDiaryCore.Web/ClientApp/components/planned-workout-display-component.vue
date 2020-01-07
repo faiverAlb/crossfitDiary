@@ -255,7 +255,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
     import {mask} from "vue-the-mask";
     /* app components */
-    import WorkoutDisplayComponent from "./workout-display-component.vue";
+    import WorkoutDisplayComponent from "./workout-display-components/workout-display-component.vue";
     /* models and styles */
     import {ToLogWorkoutViewModel} from "../models/viewModels/ToLogWorkoutViewModel";
     import "./../style/workout-done-item.scss";

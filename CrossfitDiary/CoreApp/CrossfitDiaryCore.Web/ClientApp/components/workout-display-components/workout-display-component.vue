@@ -95,8 +95,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { WorkoutViewModel } from "../models/viewModels/WorkoutViewModel";
-import ExerciseDisplayComponent from "./exercise-display-component.vue";
+import { WorkoutViewModel } from "../../models/viewModels/WorkoutViewModel";
+import ExerciseDisplayComponent from "./../exercise-display-component.vue";
 
 @Component({
   name: "WorkoutDisplayComponent",
