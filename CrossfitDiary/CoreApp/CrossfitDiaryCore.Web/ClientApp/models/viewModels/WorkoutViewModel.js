@@ -8,8 +8,6 @@ export var PlanningWorkoutLevel;
 })(PlanningWorkoutLevel || (PlanningWorkoutLevel = {}));
 var WorkoutViewModel = /** @class */ (function () {
     function WorkoutViewModel(input) {
-        // this.displayPlanDate = this.getDefaultDate();
-        // this.wodSubType = WodSubType.Skill;
         var _this = this;
         this.id = 0;
         this.title = "";
@@ -19,6 +17,7 @@ var WorkoutViewModel = /** @class */ (function () {
         this.isInnerWorkout = false;
         this.haveCollapsedVersion = false;
         this.canShowCountOnce = true;
+        this.asNonBreakingSet = false;
         this.groupedDictionary = {};
         this.oneTimeSchema = {};
         // subTypeClass: string = "";
@@ -160,6 +159,8 @@ var WorkoutViewModel = /** @class */ (function () {
             return;
         }
         Object.assign(this, input);
+        debugger;
+        var test = this.asNonBreakingSet;
         this.children = input.children.map(function (x) { return new WorkoutViewModel().deserialize(x); });
         this.exercisesToDoList = input.exercisesToDoList.map(function (x) { return new ExerciseViewModel().deserialize(x); });
         this.tryCollapseWorkout();

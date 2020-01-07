@@ -12,6 +12,7 @@
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0",
     "precss": "^3.1.2",
+    "pretty-checkbox-vue": "^1.1.9",
     "tslint": "^5.20.1",
     "vee-validate": "^2.2.15",
     "vue": "^2.6.10",

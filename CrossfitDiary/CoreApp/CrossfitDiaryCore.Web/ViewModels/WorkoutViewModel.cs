@@ -86,6 +86,9 @@ namespace CrossfitDiaryCore.Web.ViewModels
         public bool CanSeeLeaderboard { get; set; }
 
 
+        [JsonProperty("asNonBreakingSet")] public bool AsNonBreakingSet { get; set; }
+
+
 
     }
 }

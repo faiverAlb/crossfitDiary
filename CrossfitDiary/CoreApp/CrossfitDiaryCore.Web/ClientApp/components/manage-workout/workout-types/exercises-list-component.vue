@@ -4,52 +4,62 @@
             <v-select :options="exercisesOptions" :value="selectedExercise" @input="exerciseChange"
                       label="title" placeholder="Select exercise"/>
         </div>
-        <div
-                class="text-right actions-on-exercises"
-                v-if="exercisesToDo.length > 0"
-        >
-            <b-dropdown
-                    class="m-0"
-                    dropleft
-                    id="dropdown-form"
-                    ref="dropdown"
-                    size="sm"
-                    text="Actions"
-                    variant="link"
+        <div class=" d-flex flex-row justify-content-between  exercises-actions-panel">
+            <div
+                    class="text-right actions-on-exercises"
+                    v-if="exercisesToDo.length > 0"
             >
-                <b-dropdown-form class="p-3" size="sm">
-                    <b-form-group
-                            label="Schema (ex. 21 15 9)"
-                            label-for="dropdown-form-email"
-                            size="sm"
-                    >
-                        <b-form-input
-                                id="dropdown-form-schema"
-                                placeholder="21 15 9 3"
+                <b-dropdown
+                        class="m-0"
+                        dropleft
+                        id="dropdown-form"
+                        ref="dropdown"
+                        size="sm"
+                        text="Actions"
+                        variant="link"
+                >
+                    <b-dropdown-form class="p-3" size="sm">
+                        <b-form-group
+                                label="Schema (ex. 21 15 9)"
+                                label-for="dropdown-form-email"
                                 size="sm"
-                                type="text"
-                                v-model="schemaToGenerate"
+                        >
+                            <b-form-input
+                                    id="dropdown-form-schema"
+                                    placeholder="21 15 9 3"
+                                    size="sm"
+                                    type="text"
+                                    v-model="schemaToGenerate"
+                            />
+                        </b-form-group>
+                        <b-button
+                                class="col"
+                                size="sm"
+                                v-on:click="generateSchema"
+                                variant="warning"
+                        >Generate
+                        </b-button>
+                    </b-dropdown-form>
+                    <b-dropdown-divider/>
+                    <b-dropdown-item-button v-on:click="clearAllExercises">
+                        <font-awesome-icon
+                                :icon="['fas','trash']"
+                                class="text-danger"
+                                size="sm"
                         />
-                    </b-form-group>
-                    <b-button
-                            class="col"
-                            size="sm"
-                            v-on:click="generateSchema"
-                            variant="warning"
-                    >Generate
-                    </b-button>
-                </b-dropdown-form>
-                <b-dropdown-divider/>
-                <b-dropdown-item-button v-on:click="clearAllExercises">
-                    <font-awesome-icon
-                            :icon="['fas','trash']"
-                            class="text-danger"
-                            size="sm"
-                    />
-                    Clear all exercises
-                </b-dropdown-item-button>
-            </b-dropdown>
+                        Clear all exercises
+                    </b-dropdown-item-button>
+                </b-dropdown>
+            </div>
+            <div class="additional-exercise-settings-container">
+                <slot name="additional-exercise-settings">
+
+                </slot>
+
+            </div>
+
         </div>
+
         <div class="routines-container pt-0">
             <div
                     class="simple-routine-item text-center no-selected-container"
@@ -165,7 +175,7 @@
                                                         v-else-if="measure.measureType == 3">
                                         <span class="badge badge-primary">
                                                     {{measure.shortMeasureDescription}}
-                                            <font-awesome-icon :icon="['fas','male']" size="lg" />
+                                            <font-awesome-icon :icon="['fas','male']" size="lg"/>
                                         </span>
                                     </b-input-group-text>
                                     <b-input-group-text class="bg-warning p-0" tag="span"
@@ -181,7 +191,7 @@
                                         <span class="badge badge-pink">
                                                     {{measure.shortMeasureDescription}}
                                         <font-awesome-icon :icon="['fas','female']" size="lg"
-                                                           />
+                                        />
                                         </span>
                                     </b-input-group-text>
 
@@ -216,6 +226,7 @@
     import {faMale} from "@fortawesome/free-solid-svg-icons/faMale";
     import {faFemale} from "@fortawesome/free-solid-svg-icons/faFemale";
     import {library} from "@fortawesome/fontawesome-svg-core";
+
     /* public components */
     import {Component, Prop, Vue} from "vue-property-decorator";
     import vSelect from 'vue-select';
@@ -237,6 +248,7 @@
     import {ExerciseViewModel} from "../../../models/viewModels/ExerciseViewModel";
     import {IWorkoutEditState} from "../../../workout-edit-store/types";
     import "vue-select/src/scss/vue-select.scss";
+
 
     library.add(faLongArrowAltUp, faLongArrowAltDown, faPlus, faTrash, faBurn, faListOl, faWalking, faMale, faFemale);
     /**/
@@ -265,6 +277,8 @@
         };
         @Prop()
         exercisesToDo: ExerciseViewModel[];
+
+
         @State("workoutEdit")
         workoutEdit: IWorkoutEditState;
         selectedExercise: ExerciseViewModel = null;
@@ -273,6 +287,9 @@
         get exercisesOptions() {
             // exercisesOptions.push(new DefaultExerciseViewModel());
             return this.workoutEdit.exercises.slice();
+        }
+
+        mounted() {
         }
 
         exerciseChange(exerciseModel: ExerciseViewModel) {

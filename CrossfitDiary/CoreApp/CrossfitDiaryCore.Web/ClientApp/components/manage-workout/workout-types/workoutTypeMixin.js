@@ -26,6 +26,10 @@ import { WindowHelper } from "../../../helpers/WindowHelper";
 import VeeValidate from "vee-validate";
 import { State } from "vuex-class";
 import { PlanningWorkoutViewModel } from "../../../models/viewModels/PlanningWorkoutViewModel";
+import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+library.add(faCheck);
 Vue.use(VeeValidate);
 var namespace = "workoutEdit";
 var WorkoutTypeComponent = /** @class */ (function (_super) {
@@ -118,7 +122,11 @@ var WorkoutTypeComponent = /** @class */ (function (_super) {
         State("workoutEdit")
     ], WorkoutTypeComponent.prototype, "workoutEdit", void 0);
     WorkoutTypeComponent = __decorate([
-        Component
+        Component({
+            components: {
+                FontAwesomeIcon: FontAwesomeIcon
+            }
+        })
     ], WorkoutTypeComponent);
     return WorkoutTypeComponent;
 }(Vue));

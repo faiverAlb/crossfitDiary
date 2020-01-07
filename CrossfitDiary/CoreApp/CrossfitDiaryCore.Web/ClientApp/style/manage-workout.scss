@@ -144,8 +144,8 @@
     .exercise-title {
       font-weight: bold;
       background: $gray-lighter;
-
       .input-group-text {
+        font-weight: bold;
 
         border: 0;
       }
@@ -228,7 +228,6 @@
   padding-bottom: 0.25rem;
   padding-top: 0.25rem;
   margin-bottom: 1.5rem;
-  margin-top: 1.5rem;
 }
 
 .dropdown-toggle-no-caret {

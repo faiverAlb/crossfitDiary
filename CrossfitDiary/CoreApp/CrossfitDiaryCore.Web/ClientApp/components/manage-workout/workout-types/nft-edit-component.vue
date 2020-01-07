@@ -14,7 +14,14 @@
                     <b-badge variant="info">1</b-badge>
                     Create workout:
                 </div>
-                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"/>
+                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList" >
+                    <template v-slot:additional-exercise-settings>
+                        <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
+                            <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
+                            As a non-breaking set
+                        </p-check>
+                    </template>
+                </ExercisesListComponent>
 
                 <div class="comments-section">
                     <b-form-textarea
@@ -181,6 +188,8 @@
     import {mask} from "vue-the-mask";
     import VeeValidate from "vee-validate";
     import Spinner from "vue-spinner-component/src/Spinner.vue";
+    import PrettyCheckbox from 'pretty-checkbox-vue';
+
     /* app components */
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";
@@ -193,6 +202,7 @@
 
     library.add(faClock, faHashtag, faCalendar);
 
+    Vue.use(PrettyCheckbox);
     Vue.use(InputGroupPlugin);
     Vue.use(VeeValidate);
     const namespace: string = "workoutEdit";

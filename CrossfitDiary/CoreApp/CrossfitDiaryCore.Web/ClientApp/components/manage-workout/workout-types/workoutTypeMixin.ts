@@ -12,6 +12,12 @@ import {State} from "vuex-class";
 import {IWorkoutEditState} from "../../../workout-edit-store/types";
 import {PlanningWorkoutViewModel} from "../../../models/viewModels/PlanningWorkoutViewModel";
 
+import {faCheck} from "@fortawesome/free-solid-svg-icons/faCheck";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+
+library.add(faCheck);
+
 Vue.use(VeeValidate);
 
 const namespace: string = "workoutEdit";
@@ -22,7 +28,12 @@ declare var workouter: {
 
 };
 
-@Component
+@Component({
+    components: {
+         FontAwesomeIcon
+    }
+})
+
 export class WorkoutTypeComponent extends Vue {
     spinner: SpinnerModel = new SpinnerModel(false);
     model: WorkoutViewModel = new WorkoutViewModel();
