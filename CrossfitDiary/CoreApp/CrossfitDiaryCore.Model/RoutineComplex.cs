@@ -124,5 +124,8 @@ namespace CrossfitDiaryCore.Model
 
         [NotMapped]
         public int ResultsCount { get; set; }
+
+
+        public bool AsNonBreakingSet { get; set; }
     }
 }
