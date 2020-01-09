@@ -29,7 +29,7 @@ export class WorkoutViewModel implements Deserializable {
     haveCollapsedVersion: boolean = false;
     canShowCountOnce: boolean = true;
     asNonBreakingSet: boolean = false;
-    
+
     groupedDictionary: {} = {};
     oneTimeSchema: any = {};
     // subTypeClass: string = "";
@@ -105,9 +105,6 @@ export class WorkoutViewModel implements Deserializable {
         return groupedDictionary;
     };
 
-   
-
-
 
     private getCanShowCountOnce = (exercisedToUse: ExerciseViewModel[], distinctLength: number) => {
         let canShowCountOnce: boolean = true;
@@ -153,7 +150,7 @@ export class WorkoutViewModel implements Deserializable {
         this.canShowCountOnce = this.getCanShowCountOnce(exercisedToUse, distinctLength);
         if (this.canShowCountOnce) {
             this.oneTimeSchema.schemaString = "";
-            let firstExerciseArray: ExerciseViewModel[] = this.groupedDictionary[exercisedToUse[0].id];
+            let firstExerciseArray: ExerciseViewModel[] = this.groupedDictionary[exercisedToUse[0].id]
             for (let index: number = 0; index < firstExerciseArray.length; index++) {
                 const element: ExerciseViewModel = firstExerciseArray[index];
                 if (element.count) {

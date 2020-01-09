@@ -106,7 +106,7 @@
                                         <font-awesome-icon :icon="['fas','long-arrow-alt-down']"/>
                                         Move down
                                     </b-dropdown-item>
-                                    <b-dropdown-item v-on:click="exerciseChange(exercise.id)">
+                                    <b-dropdown-item v-on:click="exerciseChange(exercise)">
                                         <font-awesome-icon
                                                 :icon="['fas','plus']"
                                                 class="text-success"

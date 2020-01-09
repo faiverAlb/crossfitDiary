@@ -69,7 +69,7 @@
                         </b-input-group>
                     </div>
                 </div>
-                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList" >
+                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList">
                     <template v-slot:additional-exercise-settings>
                         <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>

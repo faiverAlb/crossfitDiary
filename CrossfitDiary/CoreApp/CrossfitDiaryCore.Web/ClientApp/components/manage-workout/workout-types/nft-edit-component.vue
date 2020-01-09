@@ -14,6 +14,33 @@
                     <b-badge variant="info">1</b-badge>
                     Create workout:
                 </div>
+                <div class="row">
+                    <div class="col-lg-3 pb-2">
+                        <label
+                                class="sr-only"
+                                for="roundsInput"
+                        >Rounds count:</label>
+                        <b-input-group size="sm">
+                            <b-input-group-prepend>
+                                <b-input-group-text tag="span">
+                                    <font-awesome-icon :icon="['fas','hashtag']"/>
+                                </b-input-group-text>
+                            </b-input-group-prepend>
+                            <b-form-input
+                                    :state="fields.roundsCount && fields.roundsCount.valid"
+                                    id="roundsInput"
+                                    inputmode="numeric"
+                                    min="1"
+                                    name="roundsCount"
+                                    placeholder="Rounds count"
+                                    type="text"
+                                    v-mask="'#####'"
+                                    v-model="model.roundsCount"
+                                    v-validate.initial="'required'"
+                            />
+                        </b-input-group>
+                    </div>
+                </div>
                 <ExercisesListComponent :exercisesToDo="model.exercisesToDoList" >
                     <template v-slot:additional-exercise-settings>
                         <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
