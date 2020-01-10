@@ -22,11 +22,11 @@ var routes = [
     { path: "/emom", component: EmomEditComponent },
     { path: "/e2mom", component: E2momEditComponent },
     { path: "/nft", component: NFTEditComponent },
-    { path: "/", component: ForTimeEditComponent, redirect: "/fortime" }
+    { path: "/", component: ForTimeEditComponent, redirect: "/nft" }
 ];
 var vue = new Vue({
     el: "#manage-workout-page-container",
-    template: "\n   <div class=\"manage-workout-container my-2\">\n      <div>\n        <div class=\"crossfitter-edit-workout-container\">\n                <div class=\"col-md-12 add-new-workout-container workout-container\">\n                  <div class=\"card\">\n                    <div class=\"card-header\">\n                        <workouts-navigation-component></workouts-navigation-component>\n                    </div>\n                    <div class=\"card-body pt-0\">\n                      <router-view></router-view>\n                    </div>\n                  </div>\n                </div>\n        </div>\n      </div>\n  </div>\n    ",
+    template: "\n        <div class=\"manage-workout-container my-2\">\n            <div>\n                <div class=\"crossfitter-edit-workout-container\">\n                    <div class=\"col-md-12 add-new-workout-container workout-container\">\n                        <div class=\"card\">\n                            <div class=\"card-header\">\n                                <workouts-navigation-component></workouts-navigation-component>\n                            </div>\n                            <div class=\"card-body pt-0\">\n                                <router-view></router-view>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ",
     store: store,
     router: new VueRouter({ routes: routes }),
     components: {
@@ -40,6 +40,7 @@ var vue = new Vue({
             errorAlertModel: new ErrorAlertModel()
         };
     },
-    mounted: function () { }
+    mounted: function () {
+    }
 });
 //# sourceMappingURL=workout-entry.js.map

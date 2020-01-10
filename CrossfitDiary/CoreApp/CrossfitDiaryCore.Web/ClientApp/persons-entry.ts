@@ -14,9 +14,11 @@ import "./style/persons.scss";
 import {ToLogWorkoutViewModel} from "./models/viewModels/ToLogWorkoutViewModel";
 import {SpinnerModel} from "./models/viewModels/SpinnerModel";
 import {ErrorAlertModel} from "./models/viewModels/ErrorAlertModel";
-import {WorkoutViewModel} from "./models/viewModels/WorkoutViewModel";
+import {PlanningWorkoutLevel, WorkoutViewModel} from "./models/viewModels/WorkoutViewModel";
+import {WodSubType} from "./models/viewModels/WodSubType";
+import {PlanningWorkoutViewModel} from "./models/viewModels/PlanningWorkoutViewModel";
 
-dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver 
 const apiService: CrossfitterService = new CrossfitterService();
 declare var workouter: {
     showOnlyUserWods: boolean;
@@ -79,7 +81,7 @@ let vue = new Vue({
     data() {
         return {
             activities: ToLogWorkoutViewModel[0],
-            plannedWorkouts: WorkoutViewModel,
+            plannedWorkouts: {PlanningWorkoutLevel:[PlanningWorkoutViewModel]},
             spinner: new SpinnerModel(true),
             errorAlertModel: new ErrorAlertModel(),
             showOnlyUserWods: false,
@@ -92,8 +94,8 @@ let vue = new Vue({
         apiService
             .getPlannedWorkoutsForToday()
             .then(data => {
-                this.plannedWorkouts = data;
                 this.isPlannedWodsLoaded = true;
+                this.plannedWorkouts = data;
             })
             .catch(data => {
                 this.errorAlertModel.setError(data.response.statusText);

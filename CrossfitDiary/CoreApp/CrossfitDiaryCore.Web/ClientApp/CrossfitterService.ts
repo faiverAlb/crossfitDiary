@@ -7,6 +7,8 @@ import {
 } from "./models/viewModels/WorkoutViewModel";
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
 import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
+import {WodSubType} from "./models/viewModels/WodSubType";
+import {PlanningWorkoutViewModel} from "./models/viewModels/PlanningWorkoutViewModel";
 
 export default class CrossfitterService {
   // tslint:disable-next-line:max-line-length
@@ -18,8 +20,8 @@ export default class CrossfitterService {
   };
 
   // tslint:disable-next-line:max-line-length
-  public createAndPlanWorkout = (workoutViewModel: WorkoutViewModel) => {
-    return axios.post("api/createAndPlanWorkout", workoutViewModel);
+  public createAndPlanWorkout = (planWorkoutModel: PlanningWorkoutViewModel) => {
+    return axios.post("api/createAndPlanWorkout", planWorkoutModel);
   };
 
   // tslint:disable-next-line:max-line-length
@@ -34,10 +36,14 @@ export default class CrossfitterService {
           new ToLogWorkoutViewModel().deserialize(x)
         );
       });
-  };
-  public getPlannedWorkoutsForToday = (): Promise<WorkoutViewModel[]> => {
+  }; 
+  public getPlannedWorkoutsForToday = (): Promise<{PlanningWorkoutLevel:[WorkoutViewModel]}> => {
     return axios.get(`api/getPlannedWorkoutsForToday`).then(jsonData => {
-      return jsonData.data.map(x => new WorkoutViewModel().deserialize(x));
+      let res: any  =  {};
+      for (let i = 0; i < jsonData.data.length;i++) {
+        res[jsonData.data[i].key] = jsonData.data[i].value.map(x => new PlanningWorkoutViewModel().deserialize(x));
+      }
+      return res;
     });
   };
   public getWorkoutsList = (): Promise<WorkoutViewModel[]> => {
@@ -73,7 +79,7 @@ export default class CrossfitterService {
   public removeWorkout = crossfitterWorkoutId => {
     return axios.delete(`api/removeWorkout/${crossfitterWorkoutId}`);
   };
-  public deletePlannedWorkout = (toRemovePlannedId: number) => {
+  public  deletePlannedWorkout = (toRemovePlannedId: number) => {
     return axios.delete(`api/removePlannedWod/${toRemovePlannedId}`);
   };
   public quickLogWorkout = (logModel: ToLogWorkoutViewModel) => {

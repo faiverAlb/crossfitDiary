@@ -60,6 +60,7 @@
     <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseMeasureViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\models\viewModels\ExerciseViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\models\viewModels\PersonExerciseRecord.ts" />
+    <TypeScriptCompile Include="ClientApp\models\viewModels\PlanningWorkoutViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\models\viewModels\ToLogWorkoutViewModel.ts" />
     <TypeScriptCompile Include="ClientApp\models\viewModels\WodSubType.ts" />
     <TypeScriptCompile Include="ClientApp\models\viewModels\WorkoutType.ts" />

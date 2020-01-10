@@ -14,8 +14,8 @@ import "./style/persons.scss";
 import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel";
 import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 import { ErrorAlertModel } from "./models/viewModels/ErrorAlertModel";
-import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
-dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+import { PlanningWorkoutViewModel } from "./models/viewModels/PlanningWorkoutViewModel";
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver 
 var apiService = new CrossfitterService();
 Vue.component("b-form-checkbox", BFormCheckbox);
 var vue = new Vue({
@@ -30,7 +30,7 @@ var vue = new Vue({
     data: function () {
         return {
             activities: ToLogWorkoutViewModel[0],
-            plannedWorkouts: WorkoutViewModel,
+            plannedWorkouts: { PlanningWorkoutLevel: [PlanningWorkoutViewModel] },
             spinner: new SpinnerModel(true),
             errorAlertModel: new ErrorAlertModel(),
             showOnlyUserWods: false,
@@ -44,8 +44,8 @@ var vue = new Vue({
         apiService
             .getPlannedWorkoutsForToday()
             .then(function (data) {
-            _this.plannedWorkouts = data;
             _this.isPlannedWodsLoaded = true;
+            _this.plannedWorkouts = data;
         })
             .catch(function (data) {
             _this.errorAlertModel.setError(data.response.statusText);

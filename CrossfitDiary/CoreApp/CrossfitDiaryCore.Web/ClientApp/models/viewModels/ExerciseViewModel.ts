@@ -5,6 +5,7 @@ import { ExerciseMeasureType } from "./ExerciseMeasureType";
 export class ExerciseViewModel implements Deserializable {
   id: number = 0;
   title?: string;
+  abbreviation?: string;
   exerciseMeasures: ExerciseMeasureViewModel[] = [];
   isAlternative: boolean = false;
   isNewWeightMaximum?: boolean = false;
@@ -60,16 +61,7 @@ export class ExerciseViewModel implements Deserializable {
     let result: string = foundCountMeasure ? foundCountMeasure.measureValue : null;
     return result;
   }
+  
+  
 }
 
-export class DefaultExerciseViewModel extends ExerciseViewModel {
-  constructor() {
-    super({
-      id: -1,
-      title: "Select exercise",
-      exerciseMeasures: [],
-      isAlternative: false,
-      isDoUnbroken: false
-    });
-  }
-}

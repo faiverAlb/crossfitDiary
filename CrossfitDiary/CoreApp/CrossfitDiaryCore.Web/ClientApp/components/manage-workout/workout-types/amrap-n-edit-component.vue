@@ -73,7 +73,14 @@
                                     </div>
 
                                 </div>
-                                <ExercisesListComponent :exercisesToDo="childWorkout.exercisesToDoList"/>
+                                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList" >
+                                    <template v-slot:additional-exercise-settings>
+                                        <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
+                                            <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
+                                            As a non-breaking set
+                                        </p-check>
+                                    </template>
+                                </ExercisesListComponent>
                                 <div
                                         class="row py-1"
                                         v-if="childWorkout.exercisesToDoList.length > 0"
@@ -134,7 +141,7 @@
             </div>
         </div>
         <EditPlannedWorkoutComponent
-                :planningWorkout="model"
+                :planningWorkout="planWorkoutModel"
                 @planWorkoutAction="planWorkoutAction"
                 v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
         />

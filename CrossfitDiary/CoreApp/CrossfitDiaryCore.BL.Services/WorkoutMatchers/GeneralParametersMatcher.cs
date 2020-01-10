@@ -42,6 +42,10 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
             {
                 return false;
             }
+            if (firstRoutineComplex.AsNonBreakingSet != secondRoutineComplex.AsNonBreakingSet)
+            {
+                return false;
+            }
 
             return true;
 

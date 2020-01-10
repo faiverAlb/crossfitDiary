@@ -90,6 +90,7 @@
     import {WodSubType} from "../../models/viewModels/WodSubType";
     /* models and styles */
     import {PlanningWorkoutLevel, WorkoutViewModel} from "../../models/viewModels/WorkoutViewModel";
+    import {PlanningWorkoutViewModel} from "../../models/viewModels/PlanningWorkoutViewModel";
 
     library.add(faCalendar);
 
@@ -97,7 +98,7 @@
         components: {BModal, datePicker, FontAwesomeIcon, BButtonGroup, BButton,BFormGroup,BFormRadioGroup,BBadge}
     })
     export default class EditPlannedWorkoutComponent extends Vue {
-        @Prop() planningWorkout: WorkoutViewModel;
+        @Prop() planningWorkout: PlanningWorkoutViewModel;
         selectedWorkoutDispayLevel: string = "";
         selectedPlanningLevel?: PlanningWorkoutLevel = null;
         $refs: {

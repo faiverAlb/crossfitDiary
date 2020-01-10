@@ -95,25 +95,25 @@ namespace CrossfitDiaryCore.Model
         ///     Specify order which is important in Children collection
         /// </summary>
         public int Position { get; set; }
+        //
+        // /// <summary>
+        // ///     Possible planning date
+        // /// </summary>
+        // [NotMapped]
+        // public DateTime? PlanDate { get; set; } = DateTime.Now;
 
-        /// <summary>
-        ///     Possible planning date
-        /// </summary>
-        [NotMapped]
-        public DateTime? PlanDate { get; set; } = DateTime.Now;
-
-        /// <summary>
-        ///     Possible Planning Level
-        /// </summary>
-        [NotMapped]
-        public PlanningLevel? PlanningLevel { get; set; }
+        // /// <summary>
+        // ///     Possible Planning Level
+        // /// </summary>
+        // [NotMapped]
+        // public PlanningLevel? PlanningLevel { get; set; }
 
 
-        /// <summary>
-        ///     Gets or sets Workout Sub type
-        /// </summary>
-        [NotMapped]
-        public WodSubType WodSubType { get; set; }
+        // /// <summary>
+        // ///     Gets or sets Workout Sub type
+        // /// </summary>
+        // [NotMapped]
+        // public WodSubType WodSubType { get; set; }
 
 
         /// <summary>
@@ -124,5 +124,8 @@ namespace CrossfitDiaryCore.Model
 
         [NotMapped]
         public int ResultsCount { get; set; }
+
+
+        public bool AsNonBreakingSet { get; set; }
     }
 }
