@@ -109,6 +109,11 @@
                                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                                             As a non-breaking set
                                         </p-check>
+                                        <p-check class="p-icon p-smooth" color="warning" name="check" v-model="model.findMaxWeight">
+                                            <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
+                                            Find max weight
+                                        </p-check>
+
                                     </template>
                                 </ExercisesListComponent>
                                 <div
