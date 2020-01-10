@@ -159,8 +159,6 @@ var WorkoutViewModel = /** @class */ (function () {
             return;
         }
         Object.assign(this, input);
-        debugger;
-        var test = this.asNonBreakingSet;
         this.children = input.children.map(function (x) { return new WorkoutViewModel().deserialize(x); });
         this.exercisesToDoList = input.exercisesToDoList.map(function (x) { return new ExerciseViewModel().deserialize(x); });
         this.tryCollapseWorkout();

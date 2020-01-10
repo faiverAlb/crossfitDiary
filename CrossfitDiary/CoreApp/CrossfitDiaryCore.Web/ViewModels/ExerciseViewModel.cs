@@ -9,7 +9,10 @@ namespace CrossfitDiaryCore.Web.ViewModels
         public int Id { get; set; }
 
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; set; } 
+        
+        [JsonProperty("abbreviation")]
+        public string Abbreviation { get; set; }
 
         [JsonProperty("exerciseMeasures")]
         public IEnumerable<ExerciseMeasureViewModel> ExerciseMeasures { get; set; }

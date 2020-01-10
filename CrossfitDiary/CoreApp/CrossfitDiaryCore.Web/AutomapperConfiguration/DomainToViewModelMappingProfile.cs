@@ -122,6 +122,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.TempRoutineSimpleId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.ExerciseMeasures, opt => opt.Ignore())
                 .ForMember(x => x.Title, opt => opt.MapFrom(y => y.Exercise.Title))
+                .ForMember(x => x.Abbreviation, opt => opt.MapFrom(y => y.Exercise.Abbreviation))
 //                .ForMember(x => x.AddedToMaxWeightString, opt => opt.MapFrom(y => y.AddedToMaxWeight.HasValue? $"+{y.AddedToMaxWeight.ToCustomString()}kg": null))
                 .ForMember(x => x.IsDoUnbroken, opt => opt.MapFrom(y => y.IsDoUnbroken))
                 .AfterMap((simple, dest) =>

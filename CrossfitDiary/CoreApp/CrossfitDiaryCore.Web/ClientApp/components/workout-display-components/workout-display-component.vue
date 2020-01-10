@@ -26,7 +26,7 @@
             <CollapsedSchemaViewComponent :workoutViewModel="workoutViewModel"/>
         </div>
         <template v-else>
-            <div class="mt-1" v-if="workoutViewModel.roundsCount">{{workoutViewModel.roundsCount}} round(s) of:</div>
+            <div class="mt-1" v-if="workoutViewModel.roundsCount && workoutViewModel.workoutType == 4">{{workoutViewModel.roundsCount}} round(s) of:</div>
             <div
                     :key="`${workoutViewModel.id}-${exercise.id}-${index}`"
                     class="workout-exercises pl-3 pt-1"

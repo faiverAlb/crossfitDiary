@@ -15,7 +15,7 @@ import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel
 import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 import { ErrorAlertModel } from "./models/viewModels/ErrorAlertModel";
 import { PlanningWorkoutViewModel } from "./models/viewModels/PlanningWorkoutViewModel";
-dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver 
 var apiService = new CrossfitterService();
 Vue.component("b-form-checkbox", BFormCheckbox);
 var vue = new Vue({
