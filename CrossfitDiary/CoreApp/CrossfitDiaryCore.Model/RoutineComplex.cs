@@ -127,5 +127,7 @@ namespace CrossfitDiaryCore.Model
 
 
         public bool AsNonBreakingSet { get; set; }
+        
+        public bool FindMaxWeight { get; set; }
     }
 }

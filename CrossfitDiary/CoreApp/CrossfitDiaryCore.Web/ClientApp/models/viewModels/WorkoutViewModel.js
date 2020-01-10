@@ -18,6 +18,7 @@ var WorkoutViewModel = /** @class */ (function () {
         this.haveCollapsedVersion = false;
         this.canShowCountOnce = true;
         this.asNonBreakingSet = false;
+        this.findMaxWeight = false;
         this.groupedDictionary = {};
         this.oneTimeSchema = {};
         // subTypeClass: string = "";

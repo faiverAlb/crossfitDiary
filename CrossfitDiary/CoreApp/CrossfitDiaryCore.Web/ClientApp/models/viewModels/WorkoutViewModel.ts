@@ -29,6 +29,7 @@ export class WorkoutViewModel implements Deserializable {
     haveCollapsedVersion: boolean = false;
     canShowCountOnce: boolean = true;
     asNonBreakingSet: boolean = false;
+    findMaxWeight: boolean = false;
 
     groupedDictionary: {} = {};
     oneTimeSchema: any = {};

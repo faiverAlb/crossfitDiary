@@ -41,11 +41,15 @@
                         </b-input-group>
                     </div>
                 </div>
-                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList" >
+                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList">
                     <template v-slot:additional-exercise-settings>
                         <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                             As a non-breaking set
+                        </p-check>
+                        <p-check class="p-icon p-smooth" color="warning" name="check" v-model="model.findMaxWeight">
+                            <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
+                            Find max weight
                         </p-check>
                     </template>
                 </ExercisesListComponent>
@@ -216,7 +220,6 @@
     import VeeValidate from "vee-validate";
     import Spinner from "vue-spinner-component/src/Spinner.vue";
     import PrettyCheckbox from 'pretty-checkbox-vue';
-
     /* app components */
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";

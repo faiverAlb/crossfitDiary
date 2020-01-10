@@ -88,6 +88,10 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
         [JsonProperty("asNonBreakingSet")] 
         public bool AsNonBreakingSet { get; set; }
+        
+        
+        [JsonProperty("findMaxWeight")] 
+        public bool FindMaxWeight { get; set; }
 
 
 

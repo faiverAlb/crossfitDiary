@@ -210,6 +210,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasDefaultValueSql("getutcdate()");
 
+                    b.Property<bool>("FindMaxWeight");
+
                     b.Property<int?>("ParentId");
 
                     b.Property<int>("Position");
