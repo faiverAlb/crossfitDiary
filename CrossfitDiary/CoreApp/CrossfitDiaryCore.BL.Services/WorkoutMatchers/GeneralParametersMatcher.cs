@@ -46,6 +46,10 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
             {
                 return false;
             }
+            if (firstRoutineComplex.FindMaxWeight != secondRoutineComplex.FindMaxWeight)
+            {
+                return false;
+            }
 
             return true;
 
