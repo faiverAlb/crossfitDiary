@@ -58,17 +58,17 @@
                 </div>
                 <div class="item-footer text-right pt-1">
                     <div class="action-buttons">
-                        <a
-                                @click="showLeaderBoardModal(model.crossfitterWorkoutId)"
-                                class="edit-workout-action pointer text-secondary float-left"
-                                v-if="model.workoutViewModel.canSeeLeaderboard"
-                        >
-                            <font-awesome-icon
-                                    :icon="['fas','medal']"
-                                    size="lg"
-                            />
-                            Leaderboard
-                        </a>
+<!--                        <a-->
+<!--                                @click="showLeaderBoardModal(model.crossfitterWorkoutId)"-->
+<!--                                class="edit-workout-action pointer text-secondary float-left"-->
+<!--                                v-if="model.workoutViewModel.canSeeLeaderboard"-->
+<!--                        >-->
+<!--                            <font-awesome-icon-->
+<!--                                    :icon="['fas','medal']"-->
+<!--                                    size="lg"-->
+<!--                            />-->
+<!--                            Leaderboard-->
+<!--                        </a>-->
                         <a
                                 class="edit-workout-action pointer text-info"
                                 v-bind:href="'Workout?crossfitterWorkoutId='+this.model.crossfitterWorkoutId"
@@ -106,7 +106,7 @@
     import {BBadge} from "bootstrap-vue";
     /* app components */
     import {ToLogWorkoutViewModel} from "../models/viewModels/ToLogWorkoutViewModel";
-    import WorkoutDisplayComponent from "./workout-display-component.vue";
+    import WorkoutDisplayComponent from "./workout-display-components/workout-display-component.vue";
     /* models and styles */
     import "./../style/workout-done-item.scss";
     import {WodSubType} from "../models/viewModels/WodSubType";

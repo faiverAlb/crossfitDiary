@@ -66,8 +66,8 @@ import Spinner from "vue-spinner-component/src/Spinner.vue";
 /* app components */
 import CrossfitterService from "./../CrossfitterService";
 import ErrorAlertComponent from "./error-alert-component.vue";
-import WorkoutDisplayComponent from "./workout-display-component.vue";
-
+import WorkoutDisplayComponent from "./workout-display-components/workout-display-component.vue";
+ 
 /* models and styles */
 import "./../style/wods-list.scss";
 import { SpinnerModel } from "./../models/viewModels/SpinnerModel";

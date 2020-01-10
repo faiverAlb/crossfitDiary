@@ -96,6 +96,11 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                     
                 });
 
+            CreateMap<PlanningHistory, PlanningWorkoutViewModel>()
+                .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex))
+                .ForMember(x => x.PlanningWorkoutLevel, x => x.MapFrom(y => y.PlanningLevel))
+                .ForMember(x => x.DisplayPlanDate, x => x.MapFrom(y => y.PlanningDate));
+
             CreateMap<RoutineComplex, WorkoutViewModel>()
                 .ForMember(x => x.WorkoutType, x => x.MapFrom(y => y.ComplexType))
                 .ForMember(x => x.Children, x => x.MapFrom(y => y.OrderedChildren))
@@ -105,9 +110,8 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.TimeCap, x => x.MapFrom(y => ResolveTimeSpan(y.TimeCap)))
                 .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => ResolveTimeSpan(y.RestBetweenExercises)))
                 .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => ResolveTimeSpan(y.RestBetweenRounds)))
-                .ForMember(x => x.PlanningWorkoutLevel, x => x.MapFrom(y => y.PlanningLevel))
                 .ForMember(x => x.CanSeeLeaderboard, x => x.ResolveUsing<ResolveCanSeeLeaderboard>())
-                .ForMember(x => x.DisplayPlanDate, x => x.MapFrom(y => y.PlanDate.HasValue? y.PlanDate.Value.ToString("dd.MM.yyyy"): null))
+               
                 .AfterMap((routineComplex, workoutViewModel) =>
                     {
                         workoutViewModel.ExercisesToDoList = workoutViewModel.ExercisesToDoList.OrderBy(x => x.Position).ToList();
@@ -118,6 +122,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.TempRoutineSimpleId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.ExerciseMeasures, opt => opt.Ignore())
                 .ForMember(x => x.Title, opt => opt.MapFrom(y => y.Exercise.Title))
+                .ForMember(x => x.Abbreviation, opt => opt.MapFrom(y => y.Exercise.Abbreviation))
 //                .ForMember(x => x.AddedToMaxWeightString, opt => opt.MapFrom(y => y.AddedToMaxWeight.HasValue? $"+{y.AddedToMaxWeight.ToCustomString()}kg": null))
                 .ForMember(x => x.IsDoUnbroken, opt => opt.MapFrom(y => y.IsDoUnbroken))
                 .AfterMap((simple, dest) =>

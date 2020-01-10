@@ -14,7 +14,41 @@
                     <b-badge variant="info">1</b-badge>
                     Create workout:
                 </div>
-                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList"/>
+                <div class="row">
+                    <div class="col-lg-3 pb-2">
+                        <label
+                                class="sr-only"
+                                for="roundsInput"
+                        >Rounds count:</label>
+                        <b-input-group size="sm">
+                            <b-input-group-prepend>
+                                <b-input-group-text tag="span">
+                                    <font-awesome-icon :icon="['fas','hashtag']"/>
+                                </b-input-group-text>
+                            </b-input-group-prepend>
+                            <b-form-input
+                                    :state="fields.roundsCount && fields.roundsCount.valid"
+                                    id="roundsInput"
+                                    inputmode="numeric"
+                                    min="1"
+                                    name="roundsCount"
+                                    placeholder="Rounds count"
+                                    type="text"
+                                    v-mask="'#####'"
+                                    v-model="model.roundsCount"
+                                    v-validate.initial="'required'"
+                            />
+                        </b-input-group>
+                    </div>
+                </div>
+                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList" >
+                    <template v-slot:additional-exercise-settings>
+                        <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
+                            <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
+                            As a non-breaking set
+                        </p-check>
+                    </template>
+                </ExercisesListComponent>
 
                 <div class="comments-section">
                     <b-form-textarea
@@ -41,7 +75,7 @@
 
         </div>
         <EditPlannedWorkoutComponent
-                :planningWorkout="model"
+                :planningWorkout="planWorkoutModel"
                 @planWorkoutAction="planWorkoutAction"
                 v-if="workoutEdit.canUserSeePlanWorkouts && spinner.status == false"
         />
@@ -181,6 +215,8 @@
     import {mask} from "vue-the-mask";
     import VeeValidate from "vee-validate";
     import Spinner from "vue-spinner-component/src/Spinner.vue";
+    import PrettyCheckbox from 'pretty-checkbox-vue';
+
     /* app components */
     import ExercisesListComponent from "./exercises-list-component.vue";
     import ErrorAlertComponent from "../../error-alert-component.vue";
@@ -193,6 +229,7 @@
 
     library.add(faClock, faHashtag, faCalendar);
 
+    Vue.use(PrettyCheckbox);
     Vue.use(InputGroupPlugin);
     Vue.use(VeeValidate);
     const namespace: string = "workoutEdit";

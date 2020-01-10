@@ -1,8 +1,8 @@
 ﻿<template>
     <div>
         <div
-                :key="item.id"
                 class="activities-list container"
+                :key="item.id"
                 v-for="item in activities"
         >
             <PersonsActivitesItemComponent

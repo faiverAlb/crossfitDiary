@@ -1,63 +1,65 @@
 ﻿<template>
     <div class="py-2">
         <div class="form-group">
-            <b-form-select
-                    :options="exercisesOptions"
-                    :plain="true"
-                    class="form-control"
-                    size="sm"
-                    text-field="title"
-                    v-model="selectedExercise"
-                    v-on:change="exerciseChange"
-                    value-field="id"
-            />
+            <v-select :options="exercisesOptions" :value="selectedExercise" @input="exerciseChange"
+                      label="title" placeholder="Select exercise"/>
         </div>
-        <div
-                class="text-right actions-on-exercises"
-                v-if="exercisesToDo.length > 0"
-        >
-            <b-dropdown
-                    class="m-0"
-                    dropleft
-                    id="dropdown-form"
-                    ref="dropdown"
-                    size="sm"
-                    text="Actions"
-                    variant="link"
+        <div class=" d-flex flex-row justify-content-between  exercises-actions-panel">
+            <div
+                    class="text-right actions-on-exercises"
+                    v-if="exercisesToDo.length > 0"
             >
-                <b-dropdown-form class="p-3" size="sm">
-                    <b-form-group
-                            label="Schema (ex. 21 15 9)"
-                            label-for="dropdown-form-email"
-                            size="sm"
-                    >
-                        <b-form-input
-                                id="dropdown-form-schema"
-                                placeholder="21 15 9 3"
+                <b-dropdown
+                        class="m-0"
+                        dropleft
+                        id="dropdown-form"
+                        ref="dropdown"
+                        size="sm"
+                        text="Actions"
+                        variant="link"
+                >
+                    <b-dropdown-form class="p-3" size="sm">
+                        <b-form-group
+                                label="Schema (ex. 21 15 9)"
+                                label-for="dropdown-form-email"
                                 size="sm"
-                                type="tel"
-                                v-model="schemaToGenerate"
+                        >
+                            <b-form-input
+                                    id="dropdown-form-schema"
+                                    placeholder="21 15 9 3"
+                                    size="sm"
+                                    type="text"
+                                    v-model="schemaToGenerate"
+                            />
+                        </b-form-group>
+                        <b-button
+                                class="col"
+                                size="sm"
+                                v-on:click="generateSchema"
+                                variant="warning"
+                        >Generate
+                        </b-button>
+                    </b-dropdown-form>
+                    <b-dropdown-divider/>
+                    <b-dropdown-item-button v-on:click="clearAllExercises">
+                        <font-awesome-icon
+                                :icon="['fas','trash']"
+                                class="text-danger"
+                                size="sm"
                         />
-                    </b-form-group>
-                    <b-button
-                            class="col"
-                            size="sm"
-                            v-on:click="generateSchema"
-                            variant="warning"
-                    >Generate
-                    </b-button>
-                </b-dropdown-form>
-                <b-dropdown-divider/>
-                <b-dropdown-item-button v-on:click="clearAllExercises">
-                    <font-awesome-icon
-                            :icon="['fas','trash']"
-                            class="text-danger"
-                            size="sm"
-                    />
-                    Clear all exercises
-                </b-dropdown-item-button>
-            </b-dropdown>
+                        Clear all exercises
+                    </b-dropdown-item-button>
+                </b-dropdown>
+            </div>
+            <div class="additional-exercise-settings-container">
+                <slot name="additional-exercise-settings">
+
+                </slot>
+
+            </div>
+
         </div>
+
         <div class="routines-container pt-0">
             <div
                     class="simple-routine-item text-center no-selected-container"
@@ -87,8 +89,8 @@
                                 <b-dropdown
                                         class="actions-dropdown"
                                         dropleft
-                                        slot="append"
                                         size="sm"
+                                        slot="append"
                                 >
                                     <b-dropdown-item
                                             :disabled="canMoveExerciseUp(index)"
@@ -104,7 +106,7 @@
                                         <font-awesome-icon :icon="['fas','long-arrow-alt-down']"/>
                                         Move down
                                     </b-dropdown-item>
-                                    <b-dropdown-item v-on:click="exerciseChange(exercise.id)">
+                                    <b-dropdown-item v-on:click="exerciseChange(exercise)">
                                         <font-awesome-icon
                                                 :icon="['fas','plus']"
                                                 class="text-success"
@@ -141,7 +143,7 @@
                                         pattern="[0-9]*"
                                         placeholder="Count"
                                         type="tel"
-                                        
+
                                         v-if="measure.measureType == 2"
                                         v-model="measure.measureValue"
                                 />
@@ -153,35 +155,54 @@
                                         v-else
                                         v-model="measure.measureValue"
                                 />
-                                <b-input-group-append >
-                                    <b-input-group-text tag="span">
+                                <b-input-group-append>
+                                    <b-input-group-text class="bg-secondary p-0" tag="span"
+                                                        v-if="measure.measureType == 1">
+                                        <span class="badge badge-secondary">
+                                                    {{measure.shortMeasureDescription}}
+                                        <font-awesome-icon :icon="['fas','walking']"
+                                                           size="lg"/>
+                                        </span>
+                                    </b-input-group-text>
+                                    <b-input-group-text class="bg-info p-0" tag="span"
+                                                        v-else-if="measure.measureType == 2">
+                                        <span class="badge badge-info">
+                                                    {{measure.shortMeasureDescription}}
+                                        <span>#</span>
+                                        </span>
+                                    </b-input-group-text>
+                                    <b-input-group-text class="bg-primary p-0" tag="span"
+                                                        v-else-if="measure.measureType == 3">
+                                        <span class="badge badge-primary">
+                                                    {{measure.shortMeasureDescription}}
+                                            <font-awesome-icon :icon="['fas','male']" size="lg"/>
+                                        </span>
+                                    </b-input-group-text>
+                                    <b-input-group-text class="bg-warning p-0" tag="span"
+                                                        v-else-if="measure.measureType == 4">
+                                        <span class="badge badge-warning">
+                                        
+                                            cal's
+                                        <font-awesome-icon :icon="['fas','burn']"/>
+                                        </span>
+                                    </b-input-group-text>
+                                    <b-input-group-text class="bg-pink p-0" tag="span"
+                                                        v-else-if="measure.measureType == 8">
+                                        <span class="badge badge-pink">
+                                                    {{measure.shortMeasureDescription}}
+                                        <font-awesome-icon :icon="['fas','female']" size="lg"
+                                        />
+                                        </span>
+                                    </b-input-group-text>
+
+                                    <b-input-group-text tag="span" v-else>
+
+
                                         {{measure.shortMeasureDescription}}
                                     </b-input-group-text>
                                 </b-input-group-append>
                                 <!-- TODO: Problem with border radious because of it -->
-                                <span
-                                        class="w-100"
-                                        v-if="canSeeMaximumHelper(exercise,measure)"
-                                />
-                                <small
-                                        class="form-text text-muted"
-                                        id="maxPercentHelpBlock"
-                                        v-if="canSeeMaximumHelper(exercise,measure)"
-                                >
-                                    {{calculatePersentForMainWeight(exercise,measure.measureValue)}}% of PM
-                                </small>
 
-                                <span
-                                        class="w-100"
-                                        v-if="canSeeAltMaximumHelper(exercise,measure)"
-                                />
-                                <small
-                                        class="form-text text-muted"
-                                        id="prPercentHelpBlock"
-                                        v-if="canSeeAltMaximumHelper(exercise,measure)"
-                                >
-                                    {{calculatePersentForMainWeight(exercise,measure.measureValue)}}% of PM
-                                </small>
                             </b-input-group>
                         </div>
                     </div>
@@ -199,44 +220,46 @@
     import {faLongArrowAltDown} from "@fortawesome/free-solid-svg-icons/faLongArrowAltDown";
     import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
     import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
+    import {faBurn} from "@fortawesome/free-solid-svg-icons/faBurn";
+    import {faListOl} from "@fortawesome/free-solid-svg-icons/faListOl";
+    import {faWalking} from "@fortawesome/free-solid-svg-icons/faWalking";
+    import {faMale} from "@fortawesome/free-solid-svg-icons/faMale";
+    import {faFemale} from "@fortawesome/free-solid-svg-icons/faFemale";
     import {library} from "@fortawesome/fontawesome-svg-core";
 
-    library.add(faLongArrowAltUp, faLongArrowAltDown, faPlus, faTrash);
-    /**/
-
     /* public components */
-    import {Vue, Component, Prop} from "vue-property-decorator";
-    import {BFormSelect} from "bootstrap-vue";
-    import {BDropdown} from "bootstrap-vue";
-    import {BDropdownItem} from "bootstrap-vue";
-    import {BDropdownItemButton} from "bootstrap-vue";
-    import {BDropdownDivider} from "bootstrap-vue";
-    import {BDropdownForm} from "bootstrap-vue";
-    import {BFormInput} from "bootstrap-vue";
-    import {InputGroupPlugin} from "bootstrap-vue";
-
-    Vue.use(InputGroupPlugin);
+    import {Component, Prop, Vue} from "vue-property-decorator";
+    import vSelect from 'vue-select';
+    import {
+        BButton,
+        BDropdown,
+        BDropdownDivider,
+        BDropdownForm,
+        BDropdownItem,
+        BDropdownItemButton,
+        BFormGroup,
+        BFormInput,
+        InputGroupPlugin
+    } from "bootstrap-vue";
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-    import {State, Action, Getter} from "vuex-class";
-    import {BButton} from "bootstrap-vue";
-    import {BFormGroup} from "bootstrap-vue";
-
+    import {State} from "vuex-class";
     /* app components */
     /* models and styles */
-    import {
-        ExerciseViewModel,
-        DefaultExerciseViewModel
-    } from "../../../models/viewModels/ExerciseViewModel";
-    import {ExerciseMeasureViewModel} from "../../../models/viewModels/ExerciseMeasureViewModel";
+    import {ExerciseViewModel} from "../../../models/viewModels/ExerciseViewModel";
+    import {IWorkoutEditState} from "../../../workout-edit-store/types";
+    import "vue-select/src/scss/vue-select.scss";
 
-    import {IWorkoutEditState} from "./../../../workout-edit-store/types";
-    import {ExerciseMeasureType} from "../../../models/viewModels/ExerciseMeasureType";
+
+    library.add(faLongArrowAltUp, faLongArrowAltDown, faPlus, faTrash, faBurn, faListOl, faWalking, faMale, faFemale);
+    /**/
+
+    Vue.use(InputGroupPlugin);
+    Vue.component('v-select', vSelect);
 
     const namespace: string = "workoutEdit";
 
     @Component({
         components: {
-            BFormSelect,
             BDropdown,
             BDropdownItem,
             BDropdownItemButton,
@@ -254,18 +277,23 @@
         };
         @Prop()
         exercisesToDo: ExerciseViewModel[];
+
+
         @State("workoutEdit")
         workoutEdit: IWorkoutEditState;
-        selectedExercise: number = -1;
+        selectedExercise: ExerciseViewModel = null;
         private schemaToGenerate: string = "";
 
         get exercisesOptions() {
-            var exercisesOptions = this.workoutEdit.exercises.slice();
-            exercisesOptions.push(new DefaultExerciseViewModel());
-            return exercisesOptions;
+            // exercisesOptions.push(new DefaultExerciseViewModel());
+            return this.workoutEdit.exercises.slice();
         }
 
-        exerciseChange(selectedExerciseId: number) {
+        mounted() {
+        }
+
+        exerciseChange(exerciseModel: ExerciseViewModel) {
+            let selectedExerciseId = exerciseModel.id;
             let workoutToAdd = this.workoutEdit.exercises.find(
                 x => x.id == selectedExerciseId
             );
@@ -319,67 +347,6 @@
             this.exercisesToDo.splice(index, 1);
         }
 
-        private getUserMaximumByExerciseId(exerciseId: number) {
-            let maximum = this.workoutEdit.userMaximums.find(
-                x => x.exerciseId == exerciseId
-            );
-            return maximum;
-        }
-
-        private canSeeMaximumHelper(
-            exercise: ExerciseViewModel,
-            measure: ExerciseMeasureViewModel
-        ): boolean {
-            if (
-                measure.measureType != ExerciseMeasureType.Weight ||
-                measure.measureValue == null
-            )
-                return;
-            let foundMaximum = this.getUserMaximumByExerciseId(exercise.id);
-            if (foundMaximum && foundMaximum.maximumWeight != null) {
-                return true;
-            }
-            return false;
-        }
-
-        private canSeeAltMaximumHelper(
-            exercise: ExerciseViewModel,
-            measure: ExerciseMeasureViewModel
-        ): boolean {
-            if (
-                measure.measureType != ExerciseMeasureType.AlternativeWeight ||
-                measure.measureValue == null
-            )
-                return;
-            let foundMaximum = this.getUserMaximumByExerciseId(exercise.id);
-            if (foundMaximum && foundMaximum.maximumAlternativeWeight != null) {
-                return true;
-            }
-            return false;
-        }
-
-        private calculatePersentForMainWeight(
-            exercise: ExerciseViewModel,
-            measureValue: string
-        ) {
-            if (this.isFloat(measureValue) == false) return "";
-            let maxValue = this.getUserMaximumByExerciseId(exercise.id);
-            if (
-                (maxValue.maximumWeight == null || maxValue.maximumWeight == 0) &&
-                (maxValue.maximumAlternativeWeight == null ||
-                    maxValue.maximumAlternativeWeight == 0)
-            )
-                return "";
-            let max = Math.max(
-                maxValue.maximumWeight,
-                maxValue.maximumAlternativeWeight
-            );
-            let parsed = parseFloat(measureValue);
-            let returnValue = (parsed / max) * 100;
-
-            return Math.round((returnValue + 0.00001) * 100) / 100;
-        }
-
         private generateSchema() {
             let toGenerateSchema = this.schemaToGenerate;
             let splittedItems: string[] = toGenerateSchema.split(" ");
@@ -417,4 +384,4 @@
     }
 </script>
 
-<style></style>
+<style/>

@@ -37,11 +37,7 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("workoutType")]
         public RoutineComplexType WorkoutType { get; set; }
 
-        [JsonProperty("planningWorkoutLevel")]
-        public PlanningWorkoutLevel? PlanningWorkoutLevel { get; set; }
 
-        [JsonProperty("displayPlanDate")]
-        public string DisplayPlanDate { get; set; }
 
         [JsonProperty("workoutTypeDisplay")]
         public string WorkoutTypeDisplay
@@ -90,11 +86,10 @@ namespace CrossfitDiaryCore.Web.ViewModels
         public bool CanSeeLeaderboard { get; set; }
 
 
-        /// <summary>
-        ///     Used for planning
-        /// </summary>
-        [JsonProperty("wodSubType")]
-        public WodSubType WodSubType { get; set; }
+        [JsonProperty("asNonBreakingSet")] 
+        public bool AsNonBreakingSet { get; set; }
+
+
 
     }
 }

@@ -198,6 +198,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("AsNonBreakingSet");
+
                     b.Property<string>("Comment");
 
                     b.Property<int>("ComplexType");
