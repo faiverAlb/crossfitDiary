@@ -9,7 +9,8 @@
                     v-for="(exercise,index) in workoutViewModel.exercisesToDoList">            
                 
                 <template>
-                    {{exercise.getMeasureValue(2)}} {{exercise.abbreviation}} ({{exercise.getMeasureValue(3)}}kg/{{exercise.getMeasureValue(8)}}kg)
+                    {{exercise.getMeasureValue(2)}} {{exercise.abbreviation}} ({{exercise.getMeasureValue(3)}}kg<template
+                        v-if="exercise.getMeasureValue(8)">/{{exercise.getMeasureValue(8)}}kg</template>)
                 </template>
                 <template v-if="index != workoutViewModel.exercisesToDoList.length - 1">
                     +
