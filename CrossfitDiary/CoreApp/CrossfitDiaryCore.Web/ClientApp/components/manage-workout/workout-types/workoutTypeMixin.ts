@@ -8,7 +8,7 @@ import {ToLogWorkoutViewModel} from "../../../models/viewModels/ToLogWorkoutView
 import {ErrorAlertModel} from "../../../models/viewModels/ErrorAlertModel";
 import {WindowHelper} from "../../../helpers/WindowHelper";
 import VeeValidate from "vee-validate";
-import {State} from "vuex-class";
+import {Action, Getter, State} from "vuex-class";
 import {IWorkoutEditState} from "../../../workout-edit-store/types";
 import {PlanningWorkoutViewModel} from "../../../models/viewModels/PlanningWorkoutViewModel";
 
@@ -44,6 +44,11 @@ export class WorkoutTypeComponent extends Vue {
         logWorkoutModal: HTMLFormElement;
     };
 
+    @Action("setIsFindMaxWeight", {namespace})
+    setIsFindMaxWeight: any;
+    
+    @Getter('isFindMaxWeightGetter', {namespace})
+    isFindMaxWeight:boolean;
 
     @State("workoutEdit")
     workoutEdit: IWorkoutEditState;
@@ -125,6 +130,14 @@ export class WorkoutTypeComponent extends Vue {
                     });
             }
         });
+    }
+    onChange(){
+        let test = this.isFindMaxWeight;
+        debugger;
+
+        this.setIsFindMaxWeight(this.model.findMaxWeight);
+        
+        debugger;
     }
 
 

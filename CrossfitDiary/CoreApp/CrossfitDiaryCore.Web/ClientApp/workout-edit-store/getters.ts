@@ -10,5 +10,9 @@ export const getters: GetterTree<IWorkoutEditState, RootState> = {
     // const firstName = (user && user.firstName) || "";
     // const lastName = (user && user.lastName) || "";
     // return `${firstName} ${lastName}`;
-  }
+  },
+
+  isFindMaxWeightGetter(state: IWorkoutEditState): boolean {
+    return state.isFindMaxWeight;
+  },
 };

@@ -9,9 +9,10 @@ export const state: IWorkoutEditState = {
   exercises: [],
   userMaximums:[],
   error: false,
-  canUserSeePlanWorkouts: false
+  canUserSeePlanWorkouts: false,
+  isFindMaxWeight:false
 };
-
+ 
 const namespaced: boolean = true;
 
 export const workoutEdit: Module<IWorkoutEditState, RootState> = {

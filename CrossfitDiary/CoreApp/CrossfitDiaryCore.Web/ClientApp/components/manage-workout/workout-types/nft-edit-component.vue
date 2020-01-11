@@ -43,11 +43,11 @@
                 </div>
                 <ExercisesListComponent :exercisesToDo="model.exercisesToDoList">
                     <template v-slot:additional-exercise-settings>
-                        <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
+                        <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet" >
                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                             As non-breaking set
                         </p-check>
-                        <p-check class="p-icon p-smooth" color="warning" name="check" v-model="model.findMaxWeight">
+                        <p-check class="p-icon p-smooth" color="warning" name="check" v-model="model.findMaxWeight" @change="onChange">
                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                             Find max weight
                         </p-check>
@@ -175,14 +175,14 @@
                             class="row justify-content-end mt-3"
                             v-if="spinner.status == false"
                     >
-            <span class="col-md-2 col-sm px-md-1">
-              <b-button
-                      class=" btn-block "
-                      size="sm"
-                      v-on:click="showLogWorkoutModal"
-                      variant="success"
-              >Log workout</b-button>
-            </span>
+                        <span class="col-md-2 col-sm px-md-1">
+                          <b-button
+                                  class=" btn-block "
+                                  size="sm"
+                                  v-on:click="showLogWorkoutModal"
+                                  variant="success"
+                          >Log workout</b-button>
+                        </span>
                     </div>
                 </div>
             </div>
