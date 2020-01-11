@@ -77,13 +77,12 @@
                                     <template v-slot:additional-exercise-settings>
                                         <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
                                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
-                                            As a non-breaking set
+                                            As non-breaking set
                                         </p-check>
                                         <p-check class="p-icon p-smooth" color="warning" name="check" v-model="model.findMaxWeight">
                                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                                             Find max weight
                                         </p-check>
-
                                     </template>
                                 </ExercisesListComponent>
                                 <div
@@ -128,7 +127,7 @@
                         :maxlength="150"
                         class="mt-2"
                         id="commentSection"
-                        max-rows="3"
+                        max-rows="2"
                         name="commentSection"
                         no-resize
                         placeholder="Note: ex. girls do max 30kg"
