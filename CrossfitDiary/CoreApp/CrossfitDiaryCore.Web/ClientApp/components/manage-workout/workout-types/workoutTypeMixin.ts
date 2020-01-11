@@ -30,7 +30,7 @@ declare var workouter: {
 
 @Component({
     components: {
-         FontAwesomeIcon
+        FontAwesomeIcon
     }
 })
 
@@ -46,9 +46,9 @@ export class WorkoutTypeComponent extends Vue {
 
     @Action("setIsFindMaxWeight", {namespace})
     setIsFindMaxWeight: any;
-    
+
     @Getter('isFindMaxWeightGetter', {namespace})
-    isFindMaxWeight:boolean;
+    isFindMaxWeight: boolean;
 
     @State("workoutEdit")
     workoutEdit: IWorkoutEditState;
@@ -108,7 +108,7 @@ export class WorkoutTypeComponent extends Vue {
     }
 
     planWorkoutAction(): void {
-        
+
         this.$validator.validate();
 
         let scrollToErrors = this.$el.querySelector("[aria-invalid=true]");
@@ -131,13 +131,9 @@ export class WorkoutTypeComponent extends Vue {
             }
         });
     }
-    onChange(){
-        let test = this.isFindMaxWeight;
-        debugger;
 
+    onIsFindMaxWeightChange() {
         this.setIsFindMaxWeight(this.model.findMaxWeight);
-        
-        debugger;
     }
 
 

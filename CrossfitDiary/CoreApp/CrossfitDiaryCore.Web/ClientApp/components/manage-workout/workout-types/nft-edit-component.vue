@@ -47,7 +47,7 @@
                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                             As non-breaking set
                         </p-check>
-                        <p-check class="p-icon p-smooth" color="warning" name="check" v-model="model.findMaxWeight" @change="onChange">
+                        <p-check class="p-icon p-smooth" color="warning" name="check" v-model="model.findMaxWeight" @change="onIsFindMaxWeightChange">
                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                             Find max weight
                         </p-check>
