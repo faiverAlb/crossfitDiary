@@ -6,6 +6,8 @@ export var getters = {
         // const lastName = (user && user.lastName) || "";
         // return `${firstName} ${lastName}`;
     },
-    
+    isFindMaxWeightGetter: function (state) {
+        return state.isFindMaxWeight;
+    },
 };
 //# sourceMappingURL=getters.js.map

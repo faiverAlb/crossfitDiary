@@ -24,7 +24,7 @@ import { ToLogWorkoutViewModel } from "../../../models/viewModels/ToLogWorkoutVi
 import { ErrorAlertModel } from "../../../models/viewModels/ErrorAlertModel";
 import { WindowHelper } from "../../../helpers/WindowHelper";
 import VeeValidate from "vee-validate";
-import { State } from "vuex-class";
+import { Action, Getter, State } from "vuex-class";
 import { PlanningWorkoutViewModel } from "../../../models/viewModels/PlanningWorkoutViewModel";
 import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -118,6 +118,15 @@ var WorkoutTypeComponent = /** @class */ (function (_super) {
             }
         });
     };
+    WorkoutTypeComponent.prototype.onIsFindMaxWeightChange = function () {
+        this.setIsFindMaxWeight(this.model.findMaxWeight);
+    };
+    __decorate([
+        Action("setIsFindMaxWeight", { namespace: namespace })
+    ], WorkoutTypeComponent.prototype, "setIsFindMaxWeight", void 0);
+    __decorate([
+        Getter('isFindMaxWeightGetter', { namespace: namespace })
+    ], WorkoutTypeComponent.prototype, "isFindMaxWeight", void 0);
     __decorate([
         State("workoutEdit")
     ], WorkoutTypeComponent.prototype, "workoutEdit", void 0);

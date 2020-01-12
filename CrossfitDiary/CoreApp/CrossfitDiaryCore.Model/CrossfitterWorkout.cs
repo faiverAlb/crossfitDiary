@@ -99,6 +99,10 @@ namespace CrossfitDiaryCore.Model
         [NotMapped]
         public List<TempPersonMaximum> PersonalRecords { get; set; } = new List<TempPersonMaximum>();
 
+        /// <summary>
+        ///     Possible max weight done during the workouts
+        /// </summary>
+        public decimal? Weight { get; set; }
 
     }
 }

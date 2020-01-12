@@ -67,5 +67,8 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("wodSubType")]
         public WodSubType WodSubType { get; set; }
 
+        [JsonProperty("weight")]
+        public decimal? Weight { get; set; }
+
     }
 }

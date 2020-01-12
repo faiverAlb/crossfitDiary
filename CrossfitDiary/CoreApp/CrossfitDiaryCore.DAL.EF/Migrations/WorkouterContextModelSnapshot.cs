@@ -114,6 +114,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.Property<bool>("WasFinished");
 
+                    b.Property<decimal?>("Weight");
+
                     b.Property<int>("WodSubType");
 
                     b.HasKey("Id");

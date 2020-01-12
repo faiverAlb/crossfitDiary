@@ -5,7 +5,8 @@ export var state = {
     exercises: [],
     userMaximums: [],
     error: false,
-    canUserSeePlanWorkouts: false
+    canUserSeePlanWorkouts: false,
+    isFindMaxWeight: false
 };
 var namespaced = true;
 export var workoutEdit = {
