@@ -16,7 +16,9 @@
       >
         Cap: {{workoutViewModel.timeCap}}
       </span>
+        <span  v-if="workoutViewModel.findMaxWeight"><b-badge variant="warning" >Find weight maximum</b-badge></span>
     </span>
+        
         <div class="workout-exercises pl-3 pt-1"
              v-if="workoutViewModel.asNonBreakingSet">
             <NonBreakingSetViewComponent :workoutViewModel="workoutViewModel"/>
@@ -26,11 +28,13 @@
             <CollapsedSchemaViewComponent :workoutViewModel="workoutViewModel"/>
         </div>
         <template v-else>
-            <div class="mt-1" v-if="workoutViewModel.roundsCount && workoutViewModel.workoutType == 4">{{workoutViewModel.roundsCount}} round(s) of:</div>
+            <div class="mt-1" v-if="workoutViewModel.roundsCount && workoutViewModel.workoutType == 4">
+                {{workoutViewModel.roundsCount}} round(s) of:
+            </div>
             <div
                     :key="`${workoutViewModel.id}-${exercise.id}-${index}`"
                     class="workout-exercises pl-3 pt-1"
-                    
+
                     v-for="(exercise,index) in workoutViewModel.exercisesToDoList"
             >
                 <ExerciseDisplayComponent :model="exercise"/>
@@ -66,9 +70,10 @@
     import ExerciseDisplayComponent from "./../exercise-display-component.vue";
     import CollapsedSchemaViewComponent from "./collapsed-schema-view-component.vue";
     import NonBreakingSetViewComponent from "./non-breaking-set-view-component.vue";
+    import {BBadge} from 'bootstrap-vue';
 
     @Component({
-        components: {ExerciseDisplayComponent, CollapsedSchemaViewComponent, NonBreakingSetViewComponent}
+        components: {ExerciseDisplayComponent, CollapsedSchemaViewComponent, NonBreakingSetViewComponent, BBadge}
     })
     export default class WorkoutDisplayComponent extends Vue {
         @Prop()
