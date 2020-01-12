@@ -212,7 +212,7 @@
                 </div>
             </div>
         </div>
-        <b-modal @ok="logWorkout" id="test123" okTitle="Log workout" okVariant="success" ref="logWorkoutModal"
+        <b-modal @ok="logWorkout" okTitle="Log workout" okVariant="success" ref="logWorkoutModal"
                  title="Write your results">
             Are you sure you want to log this workout?
         </b-modal>

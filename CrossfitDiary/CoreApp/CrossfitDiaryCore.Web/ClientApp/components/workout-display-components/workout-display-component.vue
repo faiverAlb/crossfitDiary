@@ -16,9 +16,9 @@
       >
         Cap: {{workoutViewModel.timeCap}}
       </span>
-        <span  v-if="workoutViewModel.findMaxWeight"><b-badge variant="warning" >Find weight maximum</b-badge></span>
+        <span v-if="workoutViewModel.findMaxWeight"><b-badge variant="warning">Find weight maximum</b-badge></span>
     </span>
-        
+
         <div class="workout-exercises pl-3 pt-1"
              v-if="workoutViewModel.asNonBreakingSet">
             <NonBreakingSetViewComponent :workoutViewModel="workoutViewModel"/>

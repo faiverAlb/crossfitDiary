@@ -32,7 +32,7 @@
                 <div class="item-body pt-1">
                     <WorkoutDisplayComponent :workoutViewModel="model.workoutViewModel"/>
                     <div class="text-right">
-                    <span class="workout-result">
+                        <div class="workout-result">
                       <span v-if="model.workoutViewModel.IsHaveCapTime()">
                         <span v-if="model.repsToFinishOnCapTime">
                           <font-awesome-icon :icon="['far','grin-beam']"/> Cap + {{model.repsToFinishOnCapTime}}
@@ -41,34 +41,37 @@
                           <font-awesome-icon :icon="['far','clock']"/> Total time: {{model.timePassed}}
                         </span>
                       </span>
-                      <span v-if="model.workoutViewModel.IsAMRAP() && model.roundsFinished">
+                            <span v-if="model.workoutViewModel.IsAMRAP() && model.roundsFinished">
                         Rounds: {{model.roundsFinished}}
                         <span v-if="model.partialRepsFinished"> + {{model.partialRepsFinished}} partials</span>
                       </span>
-                      <span v-if="model.workoutViewModel.IsEmoms()">
+                            <span v-if="model.workoutViewModel.IsEmoms()">
                         <font-awesome-icon :icon="['far','clock']"/>: {{model.workoutViewModel.timeToWork}}
                       </span>
-                      <div
-                              class="result-comment"
-                              v-if="model.comment"
-                      >{{model.comment}}</div>
-                    </span>
+                            <div v-if="model.workoutViewModel.findMaxWeight" class="found-maximum">
+                                <span>Result weight: </span>{{model.weight}}kg
+                            </div>
+                            <div
+                                    class="result-comment"
+                                    v-if="model.comment"
+                            >{{model.comment}}</div>
+                        </div>
 
                     </div>
                 </div>
                 <div class="item-footer text-right pt-1">
                     <div class="action-buttons">
-<!--                        <a-->
-<!--                                @click="showLeaderBoardModal(model.crossfitterWorkoutId)"-->
-<!--                                class="edit-workout-action pointer text-secondary float-left"-->
-<!--                                v-if="model.workoutViewModel.canSeeLeaderboard"-->
-<!--                        >-->
-<!--                            <font-awesome-icon-->
-<!--                                    :icon="['fas','medal']"-->
-<!--                                    size="lg"-->
-<!--                            />-->
-<!--                            Leaderboard-->
-<!--                        </a>-->
+                        <!--                        <a-->
+                        <!--                                @click="showLeaderBoardModal(model.crossfitterWorkoutId)"-->
+                        <!--                                class="edit-workout-action pointer text-secondary float-left"-->
+                        <!--                                v-if="model.workoutViewModel.canSeeLeaderboard"-->
+                        <!--                        >-->
+                        <!--                            <font-awesome-icon-->
+                        <!--                                    :icon="['fas','medal']"-->
+                        <!--                                    size="lg"-->
+                        <!--                            />-->
+                        <!--                            Leaderboard-->
+                        <!--                        </a>-->
                         <a
                                 class="edit-workout-action pointer text-info"
                                 v-bind:href="'Workout?crossfitterWorkoutId='+this.model.crossfitterWorkoutId"
@@ -147,7 +150,7 @@
             this.$emit("showLeaderboard", crossfitterWorkoutId);
         }
 
-        subTypeClass(){
+        subTypeClass() {
             switch (this.model.wodSubType) {
                 case WodSubType.Skill:
                     return 'bg-info text-white';
