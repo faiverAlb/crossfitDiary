@@ -95,16 +95,16 @@
                         <b-badge variant="success">2</b-badge>
                         Write results:
                     </div>
-                    <div class="row" v-if="isFindMaxWeight">
+                    <div class="row d-flex justify-content-end mt-3" v-if="isFindMaxWeight">
                         <div class="col-lg-3 pb-2">
                             <label
                                     class="sr-only"
                                     for="maxWeightInput"
-                            >Rounds count:</label>
+                            >Found max weight</label>
                             <b-input-group size="sm">
                                 <b-input-group-prepend>
                                     <b-input-group-text tag="span">
-                                        <font-awesome-icon :icon="['fas','hashtag']"/>
+                                        Max weight (kg):
                                     </b-input-group-text>
                                 </b-input-group-prepend>
                                 <b-form-input
