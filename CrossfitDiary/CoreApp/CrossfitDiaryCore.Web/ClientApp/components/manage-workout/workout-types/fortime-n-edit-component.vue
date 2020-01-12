@@ -157,7 +157,7 @@
             <div class="comments-section">
                 <b-form-textarea
                         :maxlength="150"
-                        class="mt-2"
+                        class="mt-2"t
                         id="commentSection"
                         max-rows="2"
                         name="commentSection"

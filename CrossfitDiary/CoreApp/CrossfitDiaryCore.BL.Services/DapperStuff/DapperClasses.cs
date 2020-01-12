@@ -229,7 +229,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
             {
                 string sql = @"SELECT sub.ExerciseId,sub.Weight as MaximumWeight,sub.Id as RoutineSimpleId,sub.CrossfitterWorkoutId 
                                 FROM (
-                                SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id,[CrossfitterWorkout].Id as CrossfitterWorkoutId
+                                SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by RoutineSimple.Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id,[CrossfitterWorkout].Id as CrossfitterWorkoutId
                                 FROM [RoutineSimple]
                                   INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
                                   INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
@@ -261,7 +261,7 @@ WHERE rn = 1
                                     and [CrossfitterWorkout].Id NOT IN (
                                    SELECT sub.CrossfitterWorkoutId 
                                         FROM (
-                                        SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id,[CrossfitterWorkout].Id as CrossfitterWorkoutId
+                                        SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by RoutineSimple.Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id,[CrossfitterWorkout].Id as CrossfitterWorkoutId
                                         FROM [RoutineSimple]
                                           INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
                                           INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id

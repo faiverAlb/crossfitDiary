@@ -43,11 +43,12 @@
                 </div>
                 <ExercisesListComponent :exercisesToDo="model.exercisesToDoList">
                     <template v-slot:additional-exercise-settings>
-                        <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet" >
+                        <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                             As non-breaking set
                         </p-check>
-                        <p-check class="p-icon p-smooth" color="warning" name="check" v-model="model.findMaxWeight" @change="onIsFindMaxWeightChange">
+                        <p-check @change="onIsFindMaxWeightChange" class="p-icon p-smooth" color="warning" name="check"
+                                 v-model="model.findMaxWeight">
                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                             Find max weight
                         </p-check>
@@ -93,6 +94,30 @@
                     <div class="dashed-container-description border-success text-center">
                         <b-badge variant="success">2</b-badge>
                         Write results:
+                    </div>
+                    <div class="row" v-if="isFindMaxWeight">
+                        <div class="col-lg-3 pb-2">
+                            <label
+                                    class="sr-only"
+                                    for="maxWeightInput"
+                            >Rounds count:</label>
+                            <b-input-group size="sm">
+                                <b-input-group-prepend>
+                                    <b-input-group-text tag="span">
+                                        <font-awesome-icon :icon="['fas','hashtag']"/>
+                                    </b-input-group-text>
+                                </b-input-group-prepend>
+                                <b-form-input
+                                        :state="fields.weight && fields.weight.valid"
+                                        id="maxWeightInput"
+                                        name="weight"
+                                        placeholder="Weight"
+                                        type="number"
+                                        v-model="toLogModel.weight"
+                                        v-validate.initial="'required'"
+                                />
+                            </b-input-group>
+                        </div>
                     </div>
                     <div
                             class="row justify-content-end"

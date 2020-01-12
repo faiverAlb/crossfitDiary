@@ -68,6 +68,8 @@ export class WorkoutTypeComponent extends Vue {
         }
         this.planWorkoutModel = new PlanningWorkoutViewModel();
         this.planWorkoutModel.workoutViewModel = this.model;
+        this.setIsFindMaxWeight(this.model.findMaxWeight);
+
     }
 
     logWorkout() {

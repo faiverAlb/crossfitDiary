@@ -21,6 +21,7 @@ export class ToLogWorkoutViewModel implements Deserializable {
     workoutViewModel?: WorkoutViewModel;
     comment?: string;
     wodSubType: WodSubType;
+    weight?:string;
 
 
     constructor(input?: any) {
