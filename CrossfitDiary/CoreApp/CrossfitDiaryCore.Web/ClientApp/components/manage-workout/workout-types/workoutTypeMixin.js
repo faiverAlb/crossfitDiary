@@ -58,6 +58,7 @@ var WorkoutTypeComponent = /** @class */ (function (_super) {
         }
         this.planWorkoutModel = new PlanningWorkoutViewModel();
         this.planWorkoutModel.workoutViewModel = this.model;
+        this.setIsFindMaxWeight(this.model.findMaxWeight);
     };
     WorkoutTypeComponent.prototype.logWorkout = function () {
         var _this = this;

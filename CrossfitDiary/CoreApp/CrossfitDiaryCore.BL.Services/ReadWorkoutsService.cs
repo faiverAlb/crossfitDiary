@@ -121,7 +121,6 @@ namespace CrossfitDiaryCore.BL.Services
             List<string> distinctUsers = crossfitterWorkouts.GroupBy(x => x.Crossfitter.Id).Select(x => x.Key).ToList();
             foreach (string userId in distinctUsers)
             {
-                //TODO: Add also Weight from CrossfitterWorkout -> Weight columnd
                 List<TempPersonMaximum> personMainMaxumumsOnly =  _dapperRepository.GetPersonMainMaxumumsOnly(userId).ToList();
                 List<TempPersonMaximum> previousMaximumsList =  _dapperRepository.GetPersonPreviousMainMaxumumsOnly(userId).ToList();
                 UpdateRoutinesWithMaximums(crossfitterWorkouts, personMainMaxumumsOnly, previousMaximumsList);

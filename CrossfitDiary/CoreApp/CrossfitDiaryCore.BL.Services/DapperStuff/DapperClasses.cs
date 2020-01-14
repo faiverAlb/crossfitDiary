@@ -227,16 +227,37 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string sql = @"SELECT sub.ExerciseId,sub.Weight as MaximumWeight,sub.Id as RoutineSimpleId,sub.CrossfitterWorkoutId 
-                                FROM (
-                                SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by RoutineSimple.Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id,[CrossfitterWorkout].Id as CrossfitterWorkoutId
-                                FROM [RoutineSimple]
-                                  INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
-                                  INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
-                                  WHERE [CrossfitterWorkout].CrossfitterId = @userId 
-								  AND ([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS NULL) ) as sub
-WHERE rn = 1
-";
+                string sql = @"SELECT sub.ExerciseId
+	                                    ,sub.Weight AS MaximumWeight
+	                                    ,sub.Id AS RoutineSimpleId
+	                                    ,sub.CrossfitterWorkoutId
+                                    FROM (
+	                                    SELECT ROW_NUMBER() OVER (
+			                                    PARTITION BY RoutineSimple.ExerciseId ORDER BY RoutineSimple.Weight DESC
+			                                    ) AS rn
+		                                    ,(
+			                                    SELECT MAX(Weight)
+			                                    FROM (
+				                                    VALUES (RoutineSimple.Weight)
+					                                    ,([CrossfitterWorkout].Weight)
+				                                    ) AS AllWeights(Weight)
+			                                    ) AS Weight
+		                                    ,RoutineSimple.ExerciseId
+		                                    ,RoutineSimple.id
+		                                    ,[CrossfitterWorkout].Id AS CrossfitterWorkoutId
+	                                    FROM [RoutineSimple]
+	                                    INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
+	                                    INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+	                                    WHERE [CrossfitterWorkout].CrossfitterId = @userId
+		                                    AND (
+			                                    (
+				                                    [RoutineSimple].Weight IS NOT NULL
+				                                    OR [CrossfitterWorkout].Weight IS NOT NULL
+				                                    )
+			                                    AND [RoutineSimple].AlternativeWeight IS NULL
+			                                    )
+	                                    ) AS sub
+                                    WHERE rn = 1";
                 return db.Query<TempPersonMaximum>(sql, new {userId});
             }
         }
@@ -244,34 +265,42 @@ WHERE rn = 1
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                string sql = @"SELECT rs.ExerciseId, MAX(rs.Weight) as MaximumWeight
-                                  FROM [RoutineSimple] rs
-                                  INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = rs.RoutineComplexId
-                                  INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
-                                  WHERE [CrossfitterWorkout].CrossfitterId = @userId AND (rs.Weight IS NOT NULL AND rs.AlternativeWeight IS NULL)
-                                  AND rs.Weight < (
-			                                SELECT MAX([RoutineSimple].Weight) as MaxWeight
-		                                  FROM [RoutineSimple]
-		                                  INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
-		                                  INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
-		                                  WHERE [CrossfitterWorkout].CrossfitterId = @userId AND ([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS NULL)
-		                                  AND [RoutineSimple].ExerciseId = rs.ExerciseId
-		                                  GROUP BY [RoutineSimple].ExerciseId
-                                  )
-                                    and [CrossfitterWorkout].Id NOT IN (
-                                   SELECT sub.CrossfitterWorkoutId 
-                                        FROM (
-                                        SELECT ROW_NUMBER() over (partition by RoutineSimple.ExerciseId order by RoutineSimple.Weight DESC) as rn, RoutineSimple.Weight, RoutineSimple.ExerciseId, RoutineSimple.id,[CrossfitterWorkout].Id as CrossfitterWorkoutId
-                                        FROM [RoutineSimple]
-                                          INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
-                                          INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
-                                          WHERE [CrossfitterWorkout].CrossfitterId = @userId
-								          AND ([RoutineSimple].Weight IS NOT NULL AND [RoutineSimple].AlternativeWeight IS NULL) ) as sub
-									        WHERE rn = 1
-
-                                    )
-                                  GROUP BY rs.ExerciseId
-                                  ORDER BY rs.ExerciseId";
+                string sql = @"SELECT sub.ExerciseId
+	                                    ,sub.Weight AS MaximumWeight
+	                                    ,sub.Id AS RoutineSimpleId
+	                                    ,sub.CrossfitterWorkoutId
+                                    FROM (
+	                                    SELECT ROW_NUMBER() OVER (
+			                                    PARTITION BY RoutineSimple.ExerciseId ORDER BY [CrossfitterWorkout].weight DESC
+				                                    ,RoutineSimple.Weight DESC
+			                                    ) AS rn
+		                                    ,dense_rank() OVER (
+			                                    PARTITION BY RoutineSimple.ExerciseId ORDER BY [CrossfitterWorkout].weight DESC
+				                                    ,RoutineSimple.Weight DESC
+			                                    ) AS drn
+		                                    ,(
+			                                    SELECT MAX(Weight)
+			                                    FROM (
+				                                    VALUES (RoutineSimple.Weight)
+					                                    ,([CrossfitterWorkout].Weight)
+				                                    ) AS AllWeights(Weight)
+			                                    ) AS Weight
+		                                    ,RoutineSimple.ExerciseId
+		                                    ,RoutineSimple.id
+		                                    ,[CrossfitterWorkout].Id AS CrossfitterWorkoutId
+	                                    FROM [RoutineSimple]
+	                                    INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
+	                                    INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+	                                    WHERE [CrossfitterWorkout].CrossfitterId = @userId
+		                                    AND (
+			                                    (
+				                                    [RoutineSimple].Weight IS NOT NULL
+				                                    OR [CrossfitterWorkout].Weight IS NOT NULL
+				                                    )
+			                                    AND [RoutineSimple].AlternativeWeight IS NULL
+			                                    )
+	                                    ) AS sub
+                                    WHERE rn = 2 AND drn = 2";
                 return db.Query<TempPersonMaximum>(sql, new {userId});
             }
         }
