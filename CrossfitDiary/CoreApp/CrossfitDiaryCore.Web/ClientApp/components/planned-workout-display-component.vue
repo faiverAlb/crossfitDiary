@@ -41,11 +41,10 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                             >
                               <span class="do-it-text"
                               >Edit <font-awesome-icon :icon="['fas', 'edit']"/></span> </a>
-                            <b-button @click="showLogWorkout(levelPlanningWod.workoutViewModel)" size="sm"
-                                      variant="warning"
-                            >Log workout
-                            </b-button
-                            >
+                            <b-button @click="showLogWorkout(levelPlanningWod)" size="sm"
+                                      variant="warning">
+                                Log workout
+                            </b-button>
                         </div>
                     </div>
                 </div>
@@ -186,11 +185,11 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                                 </b-input-group>
                             </div>
                         </div>
-                    </div >
-                    <div v-if="selectedWorkout.IsNotForTime()" class="row d-flex justify-content-end mt-3">
+                    </div>
+                    <div class="row d-flex justify-content-end mt-3" v-if="selectedWorkout.IsNotForTime()">
                         <div class="col-sm-12">
                             <label class="sr-only"
-                                    for="maxWeightInput"
+                                   for="maxWeightInput"
                             >Found max weight</label>
                             <b-input-group size="sm">
                                 <b-input-group-prepend>
@@ -210,7 +209,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                             </b-input-group>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -280,6 +279,9 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 
     import {PlanningWorkoutLevel, WorkoutViewModel} from "../models/viewModels/WorkoutViewModel";
     import {PlanningWorkoutViewModel} from "../models/viewModels/PlanningWorkoutViewModel";
+    import {WorkoutType} from "../models/viewModels/WorkoutType";
+    import {WodSubType} from "../models/viewModels/WodSubType";
+    import CrossfitterService from "../CrossfitterService";
 
     library.add(
         faGrinBeam,
@@ -296,7 +298,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 
     Vue.use(InputGroupPlugin);
     Vue.use(VeeValidate);
-    
+
     @Component({
         components: {
             FontAwesomeIcon,
@@ -318,6 +320,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
         isRxSelected: boolean = false;
         isRxPlusSelected: boolean = false;
         selectedWorkout: WorkoutViewModel = null;
+        selectedPlannedWorkoutLevel: WodSubType;
         selectedLevelPlanningWorkouts: PlanningWorkoutViewModel[] = [];
         toLogModel: ToLogWorkoutViewModel = new ToLogWorkoutViewModel();
         selectedPlanningLevel: PlanningWorkoutLevel = PlanningWorkoutLevel.Scaled;
@@ -370,8 +373,9 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
             this.$refs.removeFromPlannedModal.show();
         }
 
-        showLogWorkout(workoutViewModel: WorkoutViewModel) {
-            this.selectedWorkout = workoutViewModel;
+        showLogWorkout(planningWorkoutViewModel: PlanningWorkoutViewModel) {
+            this.selectedWorkout = planningWorkoutViewModel.workoutViewModel;
+            this.selectedPlannedWorkoutLevel = planningWorkoutViewModel.wodSubType;
 
             this.toLogModel = new ToLogWorkoutViewModel();
             this.toLogModel.selectedWorkoutId = this.selectedWorkout.id;
@@ -381,10 +385,16 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
         }
 
         logWorkout() {
-            this.$refs.logWorkoutModal.hide();
-            // let toLogWorkoutModel = this.toLogModel;
-            // toLogWorkoutModel.wodSubType = this.selectedPlannedWorkout.wodSubType;
-            // this.$emit("logWorkout", toLogWorkoutModel);
+            this.$validator.validate().then(isValid => {
+                debugger;
+                if (isValid) {
+                    let toLogWorkoutModel = this.toLogModel;
+                    toLogWorkoutModel.wodSubType = this.selectedPlannedWorkoutLevel;
+                    this.$emit("logWorkout", toLogWorkoutModel);
+                    this.$refs.logWorkoutModal.hide();
+                }
+            });
+           
         }
 
         setVisibilityByLevel(planningWorkoutLevel: PlanningWorkoutLevel) {

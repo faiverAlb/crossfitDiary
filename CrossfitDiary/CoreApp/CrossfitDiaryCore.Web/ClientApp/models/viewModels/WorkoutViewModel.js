@@ -41,6 +41,9 @@ var WorkoutViewModel = /** @class */ (function () {
         this.IsHaveCapTime = function () {
             return _this.workoutType === WorkoutType.ForTime || _this.workoutType === WorkoutType.ForTimeManyInners;
         };
+        this.IsNotForTime = function () {
+            return _this.workoutType === WorkoutType.NotForTime;
+        };
         this.getHaveCollapsedVersion = function (exercisedToUse, distinctFirst) {
             var canBeCollapsed = true;
             for (var i = 0; i < exercisedToUse.length; i++) {
