@@ -56,6 +56,9 @@ export class WorkoutViewModel implements Deserializable {
     public IsHaveCapTime = () => {
         return this.workoutType === WorkoutType.ForTime || this.workoutType === WorkoutType.ForTimeManyInners;
     };
+    public IsNotForTime = () => {
+        return this.workoutType === WorkoutType.NotForTime;
+    };
 
     private getHaveCollapsedVersion = (exercisedToUse: ExerciseViewModel[], distinctFirst: ExerciseViewModel[]): boolean => {
         let canBeCollapsed: boolean = true;

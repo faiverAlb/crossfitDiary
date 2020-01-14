@@ -186,14 +186,31 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                                 </b-input-group>
                             </div>
                         </div>
+                    </div >
+                    <div v-if="selectedWorkout.IsNotForTime()" class="row d-flex justify-content-end mt-3">
+                        <div class="col-sm-12">
+                            <label class="sr-only"
+                                    for="maxWeightInput"
+                            >Found max weight</label>
+                            <b-input-group size="sm">
+                                <b-input-group-prepend>
+                                    <b-input-group-text tag="span">
+                                        Max weight (kg):
+                                    </b-input-group-text>
+                                </b-input-group-prepend>
+                                <b-form-input
+                                        :state="fields.weight && fields.weight.valid"
+                                        id="maxWeightInput"
+                                        name="weight"
+                                        placeholder="Weight"
+                                        type="number"
+                                        v-model="toLogModel.weight"
+                                        v-validate.initial="'required'"
+                                />
+                            </b-input-group>
+                        </div>
                     </div>
-                    <div
-                            v-if="
-              !selectedWorkout.IsAMRAP() && !selectedWorkout.IsHaveCapTime()
-            "
-                    >
-                        Just log workout
-                    </div>
+                    
                 </div>
             </div>
 
@@ -254,6 +271,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
     import datePicker from "vue-bootstrap-datetimepicker";
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
     import {mask} from "vue-the-mask";
+    import VeeValidate from "vee-validate";
     /* app components */
     import WorkoutDisplayComponent from "./workout-display-components/workout-display-component.vue";
     /* models and styles */
@@ -277,7 +295,8 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
     );
 
     Vue.use(InputGroupPlugin);
-
+    Vue.use(VeeValidate);
+    
     @Component({
         components: {
             FontAwesomeIcon,
