@@ -48,8 +48,8 @@
                             <span v-if="model.workoutViewModel.IsEmoms()">
                         <font-awesome-icon :icon="['far','clock']"/>: {{model.workoutViewModel.timeToWork}}
                       </span>
-                            <div v-if="model.workoutViewModel.findMaxWeight" class="found-maximum">
-                                <span>Result weight: </span>{{model.weight}}kg
+                            <div v-if="model.workoutViewModel.findMaxWeight" >
+                                <span class="found-maximum">Result weight: {{model.weight}}kg</span>
                             </div>
                             <div
                                     class="result-comment"

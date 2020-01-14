@@ -233,7 +233,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
 	                                    ,sub.CrossfitterWorkoutId
                                     FROM (
 	                                    SELECT ROW_NUMBER() OVER (
-			                                    PARTITION BY RoutineSimple.ExerciseId ORDER BY RoutineSimple.Weight DESC
+			                                    PARTITION BY RoutineSimple.ExerciseId order by [CrossfitterWorkout].weight DESC, RoutineSimple.Weight DESC
 			                                    ) AS rn
 		                                    ,(
 			                                    SELECT MAX(Weight)

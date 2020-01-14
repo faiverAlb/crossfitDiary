@@ -19,9 +19,9 @@
                     title="Person new weight maximum!"
                     v-if="model.isNewWeightMaximum"
             >
-        <span class="badge badge-success">new!</span>
-        <span class="badge badge-warning">{{model.addedToMaxWeightString}}</span>
-      </span>
+                <span class="badge badge-success">new!</span>
+                <span class="badge badge-warning">{{model.addedToMaxWeightString}}</span>
+              </span>
         </div>
     </div>
 </template>
