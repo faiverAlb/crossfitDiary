@@ -16,7 +16,7 @@
                             v-if="exercise.isNewWeightMaximum"
                     >
                         
-                        (<b-badge variant="warning" class="px-0">{{exercise.addedToMaxWeightString}}</b-badge>
+                        (<b-badge variant="info" class="pl-0">{{exercise.addedToMaxWeightString}}</b-badge>
                         <b-badge variant="success" >new!</b-badge>)
 
                   </span>
