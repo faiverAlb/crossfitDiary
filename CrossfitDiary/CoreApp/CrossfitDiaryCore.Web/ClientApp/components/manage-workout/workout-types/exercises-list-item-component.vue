@@ -151,7 +151,7 @@
     /* Font awesome icons */
 
     /* public components */
-    import {Component, Prop, Vue} from "vue-property-decorator";
+    import {Component, Prop, Vue, Watch} from "vue-property-decorator";
     import {
         BButton,
         BDropdown,
@@ -187,18 +187,19 @@
     export default class ExercisesListItemComponent extends Vue {
         @Prop()
         exercise: ExerciseViewModel;
-
         @Prop()
         index: number;
-
         @Prop()
         canMoveExerciseDown: boolean;
-
         @Prop()
         canMoveExerciseUp: boolean;
-
         @Getter('isFindMaxWeightGetter', {namespace})
         isFindMaxWeight: boolean;
+
+        @Watch('exercise', {deep: true})
+        onOnPropChanged(val: ExerciseViewModel, oldVal: ExerciseViewModel) {
+            debugger;
+        }
 
         private moveExerciseUp(index: number) {
             this.$emit("moveExerciseUp", index);

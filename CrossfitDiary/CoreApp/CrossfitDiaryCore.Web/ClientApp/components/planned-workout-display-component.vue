@@ -386,7 +386,6 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 
         logWorkout() {
             this.$validator.validate().then(isValid => {
-                debugger;
                 if (isValid) {
                     let toLogWorkoutModel = this.toLogModel;
                     toLogWorkoutModel.wodSubType = this.selectedPlannedWorkoutLevel;
