@@ -81,10 +81,10 @@
                                         size="sm"
                                 >
                                     <span>{{exercise.title}}</span>
-                                    <span
-                                            class="do-unbroken-info badge badge-warning"
-                                            v-if="exercise._isDoUnbroken"
-                                    >do unbroken</span>
+                                    <!--                                    <span-->
+                                    <!--                                            class="do-unbroken-info badge badge-warning"-->
+                                    <!--                                            v-if="exercise._isDoUnbroken"-->
+                                    <!--                                    >do unbroken</span>-->
                                 </b-input-group-prepend>
                                 <b-dropdown
                                         class="actions-dropdown"
@@ -92,6 +92,19 @@
                                         size="sm"
                                         slot="append"
                                 >
+                                    <b-dropdown-form class="p-3" size="sm">
+                                        <p-check class="p-default " color="primary-o"
+                                                 name="percentOfPrevPM"
+                                                 v-model="exercise.isUseWeightPersentPreviousPM">Use
+                                            weight % of previous PM
+                                        </p-check>
+                                        <p-check  class="p-default " color="primary-o"
+                                                 name="percentOfMaxPM"
+                                                 v-model="exercise.isUseWeightPersentMaxPM">Use weight % of
+                                            max PM
+                                        </p-check>
+                                    </b-dropdown-form>
+                                    <b-dropdown-divider/>
                                     <b-dropdown-item
                                             :disabled="canMoveExerciseUp(index)"
                                             v-on:click="moveExerciseUp(index)"
@@ -232,7 +245,9 @@
     import {faFemale} from "@fortawesome/free-solid-svg-icons/faFemale";
     import {library} from "@fortawesome/fontawesome-svg-core";
     /* public components */
-    import {Component, Prop, Vue} from "vue-property-decorator";
+    import {Component, Prop, Vue, Watch} from "vue-property-decorator";
+    import PrettyCheckbox from 'pretty-checkbox-vue';
+
     import vSelect from 'vue-select';
     import {
         BButton,
@@ -247,11 +262,11 @@
     } from "bootstrap-vue";
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     import {Getter, State} from "vuex-class";
-    /* app components */
     /* models and styles */
     import {ExerciseViewModel} from "../../../models/viewModels/ExerciseViewModel";
     import {IWorkoutEditState} from "../../../workout-edit-store/types";
     import "vue-select/src/scss/vue-select.scss";
+    /* app components */
 
 
     library.add(faLongArrowAltUp, faLongArrowAltDown, faPlus, faTrash, faBurn, faListOl, faWalking, faMale, faFemale);
@@ -259,6 +274,8 @@
 
     Vue.use(InputGroupPlugin);
     Vue.component('v-select', vSelect);
+    Vue.use(PrettyCheckbox);
+    
 
     const namespace: string = "workoutEdit";
 
@@ -286,7 +303,7 @@
         @State("workoutEdit")
         workoutEdit: IWorkoutEditState;
 
-        @Getter('isFindMaxWeightGetter',{namespace})
+        @Getter('isFindMaxWeightGetter', {namespace})
         isFindMaxWeight: boolean;
 
 
@@ -297,17 +314,13 @@
             return this.workoutEdit.exercises.slice();
         }
 
-
         exerciseChange(exerciseModel: ExerciseViewModel) {
             let selectedExerciseId = exerciseModel.id;
-            let workoutToAdd = this.workoutEdit.exercises.find(
+            let exerciseToAdd = this.workoutEdit.exercises.find(
                 x => x.id == selectedExerciseId
             );
-            if (workoutToAdd.id != -1) {
-                let copy = JSON.parse(JSON.stringify(workoutToAdd));
-                this.exercisesToDo.push(copy);
-            }
-        }
+            let newModel = new ExerciseViewModel().deserialize(exerciseToAdd);
+            this.exercisesToDo.push(newModel);        }
 
         canMoveExerciseDown(index: number) {
             return this.exercisesToDo.length - 1 == index;
@@ -387,6 +400,7 @@
         private clearAllExercises() {
             this.exercisesToDo.splice(0, this.exercisesToDo.length);
         }
+       
     }
 </script>
 
