@@ -1,4 +1,5 @@
 ﻿import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
+import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
 <template>
     <div class="simple-routine-item">
         <div class="form-row">
@@ -150,20 +151,18 @@
                 </div>
             </template>
             <template v-else>
-                <div class="form-group my-1 col-lg-2">
-                    <label class="sr-only" />
+                <div class="form-group my-1 col-lg-3">
                     <b-input-group class="mx-1 pr-1" size="sm">
                         <b-form-input
-                                aria-describedby="prPercentHelpBlock"
                                 class="measure-value-input"
                                 inputmode="numeric"
                                 pattern="[0-9]*"
-                                placeholder="Count"
+                                placeholder="% value"
                                 type="tel"
                                 v-model="exercise.weightPercentValue"/>
                         <b-input-group-append>
-                            <b-input-group-text class="bg-secondary p-0" tag="span">
-                                <span class="badge badge-secondary">% of prev weight PM</span>
+                            <b-input-group-text class=" p-0" :class="weightTypeBadgeClass" tag="span">
+                                <span class="badge " :class="weightTypeBadgeClass">{{weightTypeDescription}}</span>
                             </b-input-group-text>
                         </b-input-group-append>
                     </b-input-group>
@@ -223,6 +222,26 @@
         canMoveExerciseUp: boolean;
         @Getter('isFindMaxWeightGetter', {namespace})
         isFindMaxWeight: boolean;
+
+        get weightTypeDescription() {
+            if (this.exercise.weightDisplayType == WeightDisplayType.PercentMaxPM) {
+                return "% of max weight PM";
+            } 
+            if (this.exercise.weightDisplayType == WeightDisplayType.PercentPreviousPM) {
+                return "% of previous weight PM";
+            } 
+            return "";
+        }
+        
+        get weightTypeBadgeClass() {
+            if (this.exercise.weightDisplayType == WeightDisplayType.PercentMaxPM) {
+                return "badge-success";
+            } 
+            if (this.exercise.weightDisplayType == WeightDisplayType.PercentPreviousPM) {
+                return "badge-info";
+            } 
+            return "";
+        }
 
         getWeightDisplayType(weightDisplayType: WeightDisplayType) {
             return weightDisplayType;
