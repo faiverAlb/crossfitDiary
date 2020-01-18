@@ -13,6 +13,7 @@ var ExerciseViewModel = /** @class */ (function () {
         this.count = null;
         this.weight = null;
         this.calories = null;
+        this.weightPercentValue = null;
         this.haveSameCountAndCalories = function (toCompareExercise) {
             if (_this.count == null && toCompareExercise.count == null) {
                 if (_this.calories == null && toCompareExercise.calories == null) {

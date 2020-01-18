@@ -13,11 +13,11 @@ export class ExerciseViewModel implements Deserializable {
     isDoUnbroken: boolean = false;
     addedToMaxWeightString?: string;
     weightDisplayType: WeightDisplayType = WeightDisplayType.Default;
-
-
     count?: string = null;
     weight?: string = null;
     calories?: string = null;
+
+    weightPercentValue?: number = null;
 
     constructor(input?: any) {
         if (input == null) {
