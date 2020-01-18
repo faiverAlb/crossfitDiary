@@ -50,11 +50,12 @@ var WorkoutTypeComponent = /** @class */ (function (_super) {
     }
     WorkoutTypeComponent.prototype.mounted = function () {
         if (workouter != null && workouter.toLogWorkoutRawModel != null) {
+            workouter.toLogWorkoutRawModel = new ToLogWorkoutViewModel().deserialize(workouter.toLogWorkoutRawModel);
             this.model = workouter.toLogWorkoutRawModel.workoutViewModel;
             this.toLogModel = workouter.toLogWorkoutRawModel;
         }
         else if (workouter != null && workouter.workoutViewModel != null) {
-            this.model = workouter.workoutViewModel;
+            this.model = new WorkoutViewModel().deserialize(workouter.workoutViewModel);
         }
         this.planWorkoutModel = new PlanningWorkoutViewModel();
         this.planWorkoutModel.workoutViewModel = this.model;

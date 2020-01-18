@@ -1,5 +1,6 @@
 import { ExerciseMeasureViewModel } from "./ExerciseMeasureViewModel";
 import { ExerciseMeasureType } from "./ExerciseMeasureType";
+import { WeightDisplayType } from "./WeightDisplayType";
 var ExerciseViewModel = /** @class */ (function () {
     function ExerciseViewModel(input) {
         var _this = this;
@@ -8,6 +9,7 @@ var ExerciseViewModel = /** @class */ (function () {
         this.isAlternative = false;
         this.isNewWeightMaximum = false;
         this.isDoUnbroken = false;
+        this.weightDisplayType = WeightDisplayType.Default;
         this.count = null;
         this.weight = null;
         this.calories = null;

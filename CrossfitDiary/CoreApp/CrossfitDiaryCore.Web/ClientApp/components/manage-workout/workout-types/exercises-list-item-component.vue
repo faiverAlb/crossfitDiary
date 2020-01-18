@@ -13,16 +13,22 @@
                             slot="append"
                     >
                         <b-dropdown-form class="p-3" size="sm">
-                            <p-check class="p-default " color="primary-o"
-                                     name="percentOfPrevPM"
-                                     v-model="exercise.isUseWeightPersentPreviousPM">Use
-                                weight % of previous PM
-                            </p-check>
-                            <p-check class="p-default " color="primary-o"
-                                     name="percentOfMaxPM"
-                                     v-model="exercise.isUseWeightPersentMaxPM">Use weight % of
+
+                            <p-radio
+                                    class="p-default p-curve"
+                                    color="primary-o"
+                                    name="color" v-model="exercise.weightDisplayType"
+                                    :value="getEnum(0)">Weight in Kgs
+                            </p-radio>
+                            <p-radio class="p-default p-curve" color="info-o" name="color"
+                                     v-model="exercise.weightDisplayType"
+                                     :value="getEnum(1)">Weight % of previous PM
+                            </p-radio>
+                            <p-radio class="p-default p-curve" color="success-o" name="color"
+                                     v-model="exercise.weightDisplayType"
+                                     :value="getEnum(2)">Weight % of
                                 max PM
-                            </p-check>
+                            </p-radio>
                         </b-dropdown-form>
                         <b-dropdown-divider/>
                         <b-dropdown-item
@@ -166,6 +172,7 @@
     import {ExerciseViewModel} from "../../../models/viewModels/ExerciseViewModel";
     import {Getter} from "vuex-class";
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+    import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
     /* app components */
     const namespace: string = "workoutEdit";
 
@@ -196,9 +203,21 @@
         @Getter('isFindMaxWeightGetter', {namespace})
         isFindMaxWeight: boolean;
 
-        @Watch('exercise', {deep: true})
-        onOnPropChanged(val: ExerciseViewModel, oldVal: ExerciseViewModel) {
+        getEnum(weightDisplayType:WeightDisplayType){
+            return weightDisplayType;
+        }
+
+        @Watch('exercise.weightDisplayType')
+        onsomethingChanged(newValue: ExerciseViewModel, oldValue: ExerciseViewModel) {
+            // let test = this.isUseDefaultWeight;
+            // let test2 = newValue.isUseWeightPercentPreviousPM;
+            // let test3 = newValue.isUseWeightPercentMaxPM;
+            let test = newValue.weightDisplayType;
             debugger;
+        }
+
+        exerciseChange(exerciseModel: ExerciseViewModel) {
+            this.$emit("exerciseChange", exerciseModel);
         }
 
         private moveExerciseUp(index: number) {
@@ -212,6 +231,7 @@
         private deleteFromList(index: number) {
             this.$emit("deleteFromList", index);
         }
+
     }
 </script>
 

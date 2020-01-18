@@ -33,6 +33,10 @@ namespace CrossfitDiaryCore.Web.ViewModels
         public int Position { get; set; }
 
         public int? TempRoutineSimpleId { get; set; }
+
+        [JsonProperty("weightDisplayType")]
+        public WeightDisplayType WeightDisplayType { get; set; } = WeightDisplayType.PercentMaxPM;
+
     }
 
 
@@ -52,8 +56,17 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
         [JsonProperty("isRequired")]
         public bool IsRequired { get; set; } = true;
+
+
     }
-    
+
+    public enum WeightDisplayType
+    {
+        Default = 0,
+        PercentPreviousPM,
+        PercentMaxPM = 2
+    }
+
 
     public enum MeasureTypeViewModel
     {

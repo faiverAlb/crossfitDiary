@@ -1,6 +1,7 @@
 ﻿import Deserializable = General.Deserializable;
 import {ExerciseMeasureViewModel} from "./ExerciseMeasureViewModel";
 import {ExerciseMeasureType} from "./ExerciseMeasureType";
+import {WeightDisplayType} from "./WeightDisplayType";
 
 export class ExerciseViewModel implements Deserializable {
     id: number = 0;
@@ -11,8 +12,8 @@ export class ExerciseViewModel implements Deserializable {
     isNewWeightMaximum?: boolean = false;
     isDoUnbroken: boolean = false;
     addedToMaxWeightString?: string;
-    isUseWeightPersentPreviousPM: boolean = false;
-    isUseWeightPersentMaxPM: boolean = false;
+    weightDisplayType: WeightDisplayType = WeightDisplayType.Default;
+
 
     count?: string = null;
     weight?: string = null;
@@ -30,6 +31,7 @@ export class ExerciseViewModel implements Deserializable {
             return;
         }
         Object.assign(this, input);
+
         this.exerciseMeasures = input.exerciseMeasures.map(x => new ExerciseMeasureViewModel().deserialize(x));
 
         this.count = this.getMeasureValue(ExerciseMeasureType.Count);

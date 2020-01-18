@@ -70,6 +70,7 @@
                         :exercise="exercise"
                         :index="index"
                         @deleteFromList="deleteFromList"
+                        @exerciseChange="exerciseChange"
                         @moveExerciseDown="moveExerciseDown"
                         @moveExerciseUp="moveExerciseUp"/>
             </div>
