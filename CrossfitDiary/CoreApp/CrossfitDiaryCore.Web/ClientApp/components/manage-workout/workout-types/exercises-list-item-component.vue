@@ -15,18 +15,18 @@
                         <b-dropdown-form class="p-3" size="sm">
 
                             <p-radio
-                                    class="p-default p-curve"
+                                    class="p-default  p-round"
                                     color="primary-o"
                                     name="color" v-model="exercise.weightDisplayType"
-                                    :value="getEnum(0)">Weight in Kgs
+                                    :value="getWeightDisplayType(0)">Weight in Kgs
                             </p-radio>
-                            <p-radio class="p-default p-curve" color="info-o" name="color"
+                            <p-radio class="p-default  p-round" color="info-o" name="color"
                                      v-model="exercise.weightDisplayType"
-                                     :value="getEnum(1)">Weight % of previous PM
+                                     :value="getWeightDisplayType(1)">Weight % of previous PM
                             </p-radio>
-                            <p-radio class="p-default p-curve" color="success-o" name="color"
+                            <p-radio class="p-default  p-round" color="success-o" name="color"
                                      v-model="exercise.weightDisplayType"
-                                     :value="getEnum(2)">Weight % of
+                                     :value="getWeightDisplayType(2)">Weight % of
                                 max PM
                             </p-radio>
                         </b-dropdown-form>
@@ -203,17 +203,8 @@
         @Getter('isFindMaxWeightGetter', {namespace})
         isFindMaxWeight: boolean;
 
-        getEnum(weightDisplayType:WeightDisplayType){
+        getWeightDisplayType(weightDisplayType:WeightDisplayType){
             return weightDisplayType;
-        }
-
-        @Watch('exercise.weightDisplayType')
-        onsomethingChanged(newValue: ExerciseViewModel, oldValue: ExerciseViewModel) {
-            // let test = this.isUseDefaultWeight;
-            // let test2 = newValue.isUseWeightPercentPreviousPM;
-            // let test3 = newValue.isUseWeightPercentMaxPM;
-            let test = newValue.weightDisplayType;
-            debugger;
         }
 
         exerciseChange(exerciseModel: ExerciseViewModel) {
