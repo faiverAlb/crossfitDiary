@@ -12,7 +12,7 @@
                             size="sm"
                             slot="append"
                     >
-                        <b-dropdown-form class="p-3" size="sm">
+                        <b-dropdown-form class="p-3" size="sm" v-if="isFindMaxWeight === false">
 
                             <p-radio
                                     :value="getWeightDisplayType(0)"
@@ -30,7 +30,7 @@
                                 max PM
                             </p-radio>
                         </b-dropdown-form>
-                        <b-dropdown-divider/>
+                        <b-dropdown-divider v-if="isFindMaxWeight === false"/>
                         <b-dropdown-item
                                 :disabled="canMoveExerciseUp"
                                 v-on:click="moveExerciseUp(index)"
