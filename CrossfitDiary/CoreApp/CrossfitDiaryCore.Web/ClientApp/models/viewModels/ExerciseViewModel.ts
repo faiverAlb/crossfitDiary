@@ -16,8 +16,14 @@ export class ExerciseViewModel implements Deserializable {
     count?: string = null;
     weight?: string = null;
     calories?: string = null;
-
     weightPercentValue?: number = null;
+    
+    countMeasure: ExerciseMeasureViewModel;
+    weightMeasure: ExerciseMeasureViewModel;
+    altWeightMeasure: ExerciseMeasureViewModel;
+    caloriesMeasure: ExerciseMeasureViewModel;
+    distanceMeasure: ExerciseMeasureViewModel;
+    heightMeasure: ExerciseMeasureViewModel;
 
     constructor(input?: any) {
         if (input == null) {
@@ -37,6 +43,14 @@ export class ExerciseViewModel implements Deserializable {
         this.count = this.getMeasureValue(ExerciseMeasureType.Count);
         this.weight = this.getMeasureValue(ExerciseMeasureType.Weight);
         this.calories = this.getMeasureValue(ExerciseMeasureType.Calories);
+        
+        this.countMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Count);
+        this.weightMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Weight);
+        this.altWeightMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.AlternativeWeight);
+        this.caloriesMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Calories);
+        this.distanceMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Distance);
+        this.heightMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Height);
+        
         return this;
     }
 
@@ -66,7 +80,5 @@ export class ExerciseViewModel implements Deserializable {
         let result: string = foundCountMeasure ? foundCountMeasure.measureValue : null;
         return result;
     }
-
-
 }
 

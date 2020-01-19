@@ -1,6 +1,4 @@
-﻿import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
-import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
-<template>
+﻿<template>
     <div class="simple-routine-item">
         <div class="form-row">
             <div class="form-group my-1 col-lg-auto">
@@ -68,87 +66,12 @@ import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
                 </b-input-group>
             </div>
             <template v-if="shouldShowDefaultMeasures()">
-                <div
-                        :key="`${measure.measureType}-${index}`"
-                        class="form-group my-1 col-lg-2"
-                        v-for="(measure,index) in exercise.exerciseMeasures"
-
-                >
-                    <template
-                            v-if="measure.measureType == 2 || (measure.measureType != 2 && isFindMaxWeight == false)">
-
-                        <label
-                                class="sr-only"
-                                v-bind:for="`measure_input_id_` + index"
-                        />
-                        <b-input-group class="mx-1 pr-1" size="sm">
-                            <b-form-input
-                                    aria-describedby="prPercentHelpBlock"
-                                    class="measure-value-input"
-                                    inputmode="numeric"
-                                    pattern="[0-9]*"
-                                    placeholder="Count"
-                                    type="tel"
-
-                                    v-if="measure.measureType == 2"
-                                    v-model="measure.measureValue"
-                            />
-                            <b-form-input
-                                    :placeholder="measure.description"
-                                    aria-describedby="prPercentHelpBlock"
-                                    class="measure-value-input"
-                                    type="number"
-                                    v-else
-                                    v-model="measure.measureValue"
-                            />
-                            <b-input-group-append>
-                                <b-input-group-text class="bg-secondary p-0" tag="span"
-                                                    v-if="measure.measureType == 1">
-                                        <span class="badge badge-secondary">
-                                                    {{measure.shortMeasureDescription}}
-                                        <font-awesome-icon :icon="['fas','walking']"
-                                                           size="lg"/>
-                                        </span>
-                                </b-input-group-text>
-                                <b-input-group-text class="bg-info p-0" tag="span"
-                                                    v-else-if="measure.measureType == 2">
-                                        <span class="badge badge-info">
-                                                    {{measure.shortMeasureDescription}}
-                                        <span>#</span>
-                                        </span>
-                                </b-input-group-text>
-                                <b-input-group-text class="bg-primary p-0" tag="span"
-                                                    v-else-if="measure.measureType == 3">
-                                        <span class="badge badge-primary">
-                                                    {{measure.shortMeasureDescription}}
-                                            <font-awesome-icon :icon="['fas','male']" size="lg"/>
-                                        </span>
-                                </b-input-group-text>
-                                <b-input-group-text class="bg-warning p-0" tag="span"
-                                                    v-else-if="measure.measureType == 4">
-                                        <span class="badge badge-warning">
-                                        
-                                            cal's
-                                        <font-awesome-icon :icon="['fas','burn']"/>
-                                        </span>
-                                </b-input-group-text>
-                                <b-input-group-text class="bg-pink p-0" tag="span"
-                                                    v-else-if="measure.measureType == 8">
-                                        <span class="badge badge-pink">
-                                                    {{measure.shortMeasureDescription}}
-                                        <font-awesome-icon :icon="['fas','female']" size="lg"
-                                        />
-                                        </span>
-                                </b-input-group-text>
-
-                                <b-input-group-text tag="span" v-else>
-                                    {{measure.shortMeasureDescription}}
-                                </b-input-group-text>
-                            </b-input-group-append>
-                        </b-input-group>
-
-                    </template>
-                </div>
+                <ExerciseMeasureEditComponent :measure="exercise.distanceMeasure"  v-if="exercise.distanceMeasure"/>
+                <ExerciseMeasureEditComponent :measure="exercise.countMeasure"  v-if="exercise.countMeasure"/>
+                <ExerciseMeasureEditComponent :measure="exercise.weightMeasure"  v-if="exercise.weightMeasure"/>
+                <ExerciseMeasureEditComponent :measure="exercise.heightMeasure"  v-if="exercise.heightMeasure"/>
+                <ExerciseMeasureEditComponent :measure="exercise.altWeightMeasure"  v-if="exercise.altWeightMeasure"/>
+                <ExerciseMeasureEditComponent :measure="exercise.caloriesMeasure"  v-if="exercise.caloriesMeasure"/>
             </template>
             <template v-else>
                 <div class="form-group my-1 col-lg-3">
@@ -161,8 +84,8 @@ import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
                                 type="tel"
                                 v-model="exercise.weightPercentValue"/>
                         <b-input-group-append>
-                            <b-input-group-text class=" p-0" :class="weightTypeBadgeClass" tag="span">
-                                <span class="badge " :class="weightTypeBadgeClass">{{weightTypeDescription}}</span>
+                            <b-input-group-text :class="weightTypeBadgeClass" class=" p-0" tag="span">
+                                <span :class="weightTypeBadgeClass" class="badge ">{{weightTypeDescription}}</span>
                             </b-input-group-text>
                         </b-input-group-append>
                     </b-input-group>
@@ -193,11 +116,13 @@ import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
     import {Getter} from "vuex-class";
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
+    import ExerciseMeasureEditComponent from "./exercise-measure-edit-component.vue";
     /* app components */
     const namespace: string = "workoutEdit";
     Vue.use(InputGroupPlugin);
     @Component({
         components: {
+            ExerciseMeasureEditComponent,
             ExercisesListItemComponent,
             BDropdown,
             BDropdownItem,
@@ -226,20 +151,20 @@ import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
         get weightTypeDescription() {
             if (this.exercise.weightDisplayType == WeightDisplayType.PercentMaxPM) {
                 return "% of max weight PM";
-            } 
+            }
             if (this.exercise.weightDisplayType == WeightDisplayType.PercentPreviousPM) {
                 return "% of previous weight PM";
-            } 
+            }
             return "";
         }
-        
+
         get weightTypeBadgeClass() {
             if (this.exercise.weightDisplayType == WeightDisplayType.PercentMaxPM) {
                 return "badge-success";
-            } 
+            }
             if (this.exercise.weightDisplayType == WeightDisplayType.PercentPreviousPM) {
                 return "badge-info";
-            } 
+            }
             return "";
         }
 
