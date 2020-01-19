@@ -1,4 +1,5 @@
-﻿<template>
+﻿import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
+<template>
     <div class="simple-routine-item">
         <div class="form-row">
             <div class="form-group my-1 col-lg-auto">
@@ -33,19 +34,19 @@
                         <b-dropdown-divider v-if="isFindMaxWeight === false"/>
                         <b-dropdown-item
                                 :disabled="canMoveExerciseUp"
-                                v-on:click="moveExerciseUp(index)"
+                                v-on:click="$emit('moveExerciseUp',index)"
                         >
                             <font-awesome-icon :icon="['fas','long-arrow-alt-up']"/>
                             Move up
                         </b-dropdown-item>
                         <b-dropdown-item
                                 :disabled="canMoveExerciseDown"
-                                v-on:click="moveExerciseDown(index)"
+                                v-on:click="$emit('moveExerciseDown',index)"
                         >
                             <font-awesome-icon :icon="['fas','long-arrow-alt-down']"/>
                             Move down
                         </b-dropdown-item>
-                        <b-dropdown-item v-on:click="exerciseChange(exercise)">
+                        <b-dropdown-item v-on:click="$emit('exerciseChange',exercise)">
                             <font-awesome-icon
                                     :icon="['fas','plus']"
                                     class="text-success"
@@ -54,7 +55,7 @@
                             Repeat
                         </b-dropdown-item>
                         <b-dropdown-divider/>
-                        <b-dropdown-item v-on:click="deleteFromList(index)">
+                        <b-dropdown-item v-on:click="$emit('deleteFromList',index)">
                             <font-awesome-icon
                                     :icon="['fas','trash']"
                                     class="text-danger"
@@ -65,17 +66,11 @@
                     </b-dropdown>
                 </b-input-group>
             </div>
-            <template v-if="shouldShowDefaultMeasures()">
-                <ExerciseMeasureEditComponent :measure="exercise.distanceMeasure" v-if="exercise.distanceMeasure "/>
-                <ExerciseMeasureEditComponent :measure="exercise.countMeasure" v-if="exercise.countMeasure "/>
-                <ExerciseMeasureEditComponent :measure="exercise.weightMeasure"
-                                              v-if="exercise.weightMeasure  && isFindMaxWeight === false"/>
-                <ExerciseMeasureEditComponent :measure="exercise.altWeightMeasure"
-                                              v-if="exercise.altWeightMeasure  && isFindMaxWeight === false"/>
-                <ExerciseMeasureEditComponent :measure="exercise.heightMeasure" v-if="exercise.heightMeasure"/>
-                <ExerciseMeasureEditComponent :measure="exercise.caloriesMeasure" v-if="exercise.caloriesMeasure"/>
-            </template>
-            <template v-else>
+            <ExerciseMeasureEditComponent :measure="exercise.distanceMeasure" v-if="exercise.distanceMeasure "/>
+            <ExerciseMeasureEditComponent :measure="exercise.countMeasure" v-if="exercise.countMeasure "/>
+            <ExerciseMeasureEditComponent :measure="exercise.weightMeasure" v-if="canSeeWeightsMeasures"/>
+            <ExerciseMeasureEditComponent :measure="exercise.altWeightMeasure" v-if="canSeeWeightsMeasures"/>
+            <template v-if="shouldShowPercentWeightsMeasures()">
                 <div class="form-group my-1 col-lg-3">
                     <b-input-group class="mx-1 pr-1" size="sm">
                         <b-form-input
@@ -93,6 +88,10 @@
                     </b-input-group>
                 </div>
             </template>
+            <ExerciseMeasureEditComponent :measure="exercise.heightMeasure" v-if="exercise.heightMeasure"/>
+            <ExerciseMeasureEditComponent :measure="exercise.caloriesMeasure" v-if="exercise.caloriesMeasure"/>
+
+
         </div>
     </div>
 </template>
@@ -170,28 +169,16 @@
             return "";
         }
 
+        get canSeeWeightsMeasures() {
+            return this.exercise.weightMeasure && this.isFindMaxWeight === false && this.exercise.weightDisplayType == WeightDisplayType.Default;
+        }
+
         getWeightDisplayType(weightDisplayType: WeightDisplayType) {
             return weightDisplayType;
         }
 
-        exerciseChange(exerciseModel: ExerciseViewModel) {
-            this.$emit("exerciseChange", exerciseModel);
-        }
-
-        private moveExerciseUp(index: number) {
-            this.$emit("moveExerciseUp", index);
-        }
-
-        private moveExerciseDown(index: number) {
-            this.$emit("moveExerciseDown", index);
-        }
-
-        private deleteFromList(index: number) {
-            this.$emit("deleteFromList", index);
-        }
-
-        private shouldShowDefaultMeasures(): boolean {
-            return this.exercise.weightDisplayType == WeightDisplayType.Default;
+        private shouldShowPercentWeightsMeasures(): boolean {
+            return this.exercise.weightDisplayType != WeightDisplayType.Default && this.isFindMaxWeight === false;
         }
 
     }
