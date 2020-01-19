@@ -66,12 +66,14 @@
                 </b-input-group>
             </div>
             <template v-if="shouldShowDefaultMeasures()">
-                <ExerciseMeasureEditComponent :measure="exercise.distanceMeasure"  v-if="exercise.distanceMeasure"/>
-                <ExerciseMeasureEditComponent :measure="exercise.countMeasure"  v-if="exercise.countMeasure"/>
-                <ExerciseMeasureEditComponent :measure="exercise.weightMeasure"  v-if="exercise.weightMeasure"/>
-                <ExerciseMeasureEditComponent :measure="exercise.heightMeasure"  v-if="exercise.heightMeasure"/>
-                <ExerciseMeasureEditComponent :measure="exercise.altWeightMeasure"  v-if="exercise.altWeightMeasure"/>
-                <ExerciseMeasureEditComponent :measure="exercise.caloriesMeasure"  v-if="exercise.caloriesMeasure"/>
+                <ExerciseMeasureEditComponent :measure="exercise.distanceMeasure" v-if="exercise.distanceMeasure "/>
+                <ExerciseMeasureEditComponent :measure="exercise.countMeasure" v-if="exercise.countMeasure "/>
+                <ExerciseMeasureEditComponent :measure="exercise.weightMeasure"
+                                              v-if="exercise.weightMeasure  && isFindMaxWeight === false"/>
+                <ExerciseMeasureEditComponent :measure="exercise.altWeightMeasure"
+                                              v-if="exercise.altWeightMeasure  && isFindMaxWeight === false"/>
+                <ExerciseMeasureEditComponent :measure="exercise.heightMeasure" v-if="exercise.heightMeasure"/>
+                <ExerciseMeasureEditComponent :measure="exercise.caloriesMeasure" v-if="exercise.caloriesMeasure"/>
             </template>
             <template v-else>
                 <div class="form-group my-1 col-lg-3">
