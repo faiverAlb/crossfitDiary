@@ -50,6 +50,12 @@ var ExerciseViewModel = /** @class */ (function () {
         this.count = this.getMeasureValue(ExerciseMeasureType.Count);
         this.weight = this.getMeasureValue(ExerciseMeasureType.Weight);
         this.calories = this.getMeasureValue(ExerciseMeasureType.Calories);
+        this.countMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Count; });
+        this.weightMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Weight; });
+        this.altWeightMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.AlternativeWeight; });
+        this.caloriesMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Calories; });
+        this.distanceMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Distance; });
+        this.heightMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Height; });
         return this;
     };
     ExerciseViewModel.prototype.getMeasureValue = function (measureType) {

@@ -272,6 +272,10 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.Property<decimal?>("Weight");
 
+                    b.Property<int>("WeightDisplayType");
+
+                    b.Property<double?>("WeightPercentValue");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ExerciseId");

@@ -72,20 +72,7 @@ namespace CrossfitDiaryCore.Model
         /// Specify does this exercise is alternative exercise (primarily used in EMOM/E2MOM)
         /// </summary>
         public bool IsAlternative { get; set; }
-
-
-//        /// <summary>
-//        ///     Calculated property from service to identify as new maximum
-//        /// </summary>
-//        [NotMapped]
-//        public bool IsNewWeightMaximum { get; set; }
-//        
-//        /// <summary>
-//        ///     Substraction between maximum and previous maximum weights
-//        /// </summary>
-//        [NotMapped]
-//        public decimal? AddedToMaxWeight { get; set; }
-
+        
         /// <summary>
         ///     Should be done without break
         /// </summary>
@@ -97,5 +84,16 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public int Position { get; set; }
 
+        public WeightDisplayType WeightDisplayType { get; set; } = WeightDisplayType.Default;
+
+        public double? WeightPercentValue { get; set; }
     }
+
+    public enum WeightDisplayType
+    {
+        Default = 0,
+        PercentPreviousPM,
+        PercentMaxPM = 2
+    }
+
 }
