@@ -25,6 +25,9 @@ export class ExerciseViewModel implements Deserializable {
     distanceMeasure: ExerciseMeasureViewModel;
     heightMeasure: ExerciseMeasureViewModel;
 
+
+    calculatedWeight?: number = null;
+
     constructor(input?: any) {
         if (input == null) {
             return;

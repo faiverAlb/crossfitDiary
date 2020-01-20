@@ -35,7 +35,7 @@
 <script lang="ts">
     import {Component, Prop, Vue} from "vue-property-decorator";
     import {WorkoutViewModel} from "../../models/viewModels/WorkoutViewModel";
-    import ExerciseDisplayComponent from "./../exercise-display-component.vue";
+    import ExerciseDisplayComponent from "./exercise-display-component.vue";
     import {BBadge} from 'bootstrap-vue';
     
 
