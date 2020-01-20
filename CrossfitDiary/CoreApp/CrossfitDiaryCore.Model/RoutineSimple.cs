@@ -12,11 +12,11 @@ namespace CrossfitDiaryCore.Model
     /// </example>
     public class RoutineSimple : BaseModel
     {
-
         /// <summary>
         /// Foreign Key to Exercise
         /// </summary>
         public int ExerciseId { get; set; }
+
         /// <summary>
         /// Exercise is a part of the simple routine
         /// </summary>
@@ -26,7 +26,7 @@ namespace CrossfitDiaryCore.Model
         /// Foreign Key to Routine Complex
         /// </summary>
         public int RoutineComplexId { get; set; }
-        
+
         /// <summary>
         /// Link to Routine Complex
         /// </summary>
@@ -72,7 +72,7 @@ namespace CrossfitDiaryCore.Model
         /// Specify does this exercise is alternative exercise (primarily used in EMOM/E2MOM)
         /// </summary>
         public bool IsAlternative { get; set; }
-        
+
         /// <summary>
         ///     Should be done without break
         /// </summary>
@@ -84,9 +84,35 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public int Position { get; set; }
 
+        /// <summary>
+        ///     Describes how which weight we should display - fixed or calculated based on person's maximums in exercise
+        /// </summary>
         public WeightDisplayType WeightDisplayType { get; set; } = WeightDisplayType.Default;
 
+
+        /// <summary>
+        ///     % of weight to calculate
+        /// </summary>
         public double? WeightPercentValue { get; set; }
+
+        [NotMapped]
+        public decimal? CalculatedWeight { get; private set; }
+
+        public void CalculateWeight(decimal? maxWeight)
+        {
+            switch (WeightPercentValue)
+            {
+                case null:
+                    break;
+                case 0:
+                    CalculatedWeight = 0;
+                    break;
+                default:
+                    CalculatedWeight = (maxWeight / 100 * (decimal?) WeightPercentValue);
+                    break;
+            }
+
+        }
     }
 
     public enum WeightDisplayType
@@ -95,5 +121,4 @@ namespace CrossfitDiaryCore.Model
         PercentPreviousPM,
         PercentMaxPM = 2
     }
-
 }

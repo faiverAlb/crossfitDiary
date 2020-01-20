@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using CrossfitDiaryCore.BL.Services.DapperStuff;
 using CrossfitDiaryCore.BL.Services.WorkoutMatchers;
@@ -124,7 +125,40 @@ namespace CrossfitDiaryCore.BL.Services
                 List<TempPersonMaximum> personMainMaxumumsOnly =  _dapperRepository.GetPersonMainMaxumumsOnly(userId).ToList();
                 List<TempPersonMaximum> previousMaximumsList =  _dapperRepository.GetPersonPreviousMainMaxumumsOnly(userId).ToList();
                 UpdateRoutinesWithMaximums(crossfitterWorkouts, personMainMaxumumsOnly, previousMaximumsList);
+                List<CrossfitterWorkout> personWods = crossfitterWorkouts.Where(x => x.Crossfitter.Id == userId).ToList();
+                UpdateRoutinesWithMaximumsForPercentWeights(personWods, personMainMaxumumsOnly);
             }
+        }
+
+        private void UpdateRoutinesWithMaximumsForPercentWeights(List<CrossfitterWorkout> crossfitterWorkouts, List<TempPersonMaximum> personMainMaxumumsOnly)
+        {
+            IEnumerable<RoutineSimple> percentMaxPm = crossfitterWorkouts
+                    .SelectMany(x => x.RoutineComplex.RoutineSimple
+                    .Where(y => y.WeightDisplayType == WeightDisplayType.PercentMaxPM));
+            foreach (RoutineSimple routineSimple in percentMaxPm)
+            {
+                routineSimple.CalculateWeight(personMainMaxumumsOnly.SingleOrDefault(x => x.ExerciseId == routineSimple.ExerciseId)?.MaximumWeight);
+            }
+
+            IEnumerable<RoutineSimple> previousPm = crossfitterWorkouts
+                    .SelectMany(x => x.RoutineComplex.RoutineSimple
+                    .Where(y => y.WeightDisplayType == WeightDisplayType.PercentPreviousPM));
+
+            foreach (RoutineSimple routineSimple in previousPm)
+            {
+                RoutineComplex lastFindMaxWithExercideWod = _context.ComplexRoutines.Last(x => x.FindMaxWeight && x.RoutineSimple.Any(y => y.ExerciseId == routineSimple.ExerciseId));
+                if (lastFindMaxWithExercideWod == null)
+                {
+                    // routineSimple.Weight = null;
+                    break;
+                }
+                decimal? maxWeight = lastFindMaxWithExercideWod.RoutineSimple
+                    .Where(x => x.ExerciseId == routineSimple.ExerciseId)
+                    .Max(x => x.Weight);
+
+                routineSimple.CalculateWeight(maxWeight);
+            }
+
         }
 
         private void UpdateRoutinesWithMaximums(List<CrossfitterWorkout> crossfitterWorkouts, List<TempPersonMaximum> personMainMaxumumsOnly, List<TempPersonMaximum> previousMaximumsList)

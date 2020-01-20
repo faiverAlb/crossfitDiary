@@ -40,6 +40,10 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("weightPercentValue")]
         public double? WeightPercentValue { get; set; }
 
+        [JsonProperty("calculatedWeight")]
+        public decimal? CalculatedWeight { get; private set; }
+
+
     }
 
 
