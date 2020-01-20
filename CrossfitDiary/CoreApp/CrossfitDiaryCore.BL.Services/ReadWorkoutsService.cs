@@ -146,10 +146,11 @@ namespace CrossfitDiaryCore.BL.Services
 
             foreach (RoutineSimple routineSimple in previousPm)
             {
-                RoutineComplex lastFindMaxWithExercideWod = _context.ComplexRoutines.Last(x => x.FindMaxWeight && x.RoutineSimple.Any(y => y.ExerciseId == routineSimple.ExerciseId));
+                RoutineComplex lastFindMaxWithExercideWod = _context.ComplexRoutines.LastOrDefault(x => x.FindMaxWeight && x.RoutineSimple.Any(y => y.ExerciseId == routineSimple.ExerciseId));
                 if (lastFindMaxWithExercideWod == null)
                 {
-                    // routineSimple.Weight = null;
+                    decimal? foundInMaximums = personMainMaxumumsOnly.SingleOrDefault(x => x.ExerciseId == routineSimple.ExerciseId)?.MaximumWeight;
+                    routineSimple.CalculateWeight(foundInMaximums);
                     break;
                 }
                 decimal? maxWeight = lastFindMaxWithExercideWod.RoutineSimple
