@@ -306,5 +306,45 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
         }
 
 
+        public IEnumerable<TempPersonMaximum> GetPersonMainMaxumumsOnly(string userId, DateTime beforeDate)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = @"SELECT sub.ExerciseId
+	                                    ,sub.Weight AS MaximumWeight
+	                                    ,sub.Id AS RoutineSimpleId
+	                                    ,sub.CrossfitterWorkoutId
+                                    FROM (
+	                                    SELECT ROW_NUMBER() OVER (
+			                                    PARTITION BY RoutineSimple.ExerciseId order by [CrossfitterWorkout].weight DESC, RoutineSimple.Weight DESC
+			                                    ) AS rn
+		                                    ,(
+			                                    SELECT MAX(Weight)
+			                                    FROM (
+				                                    VALUES (RoutineSimple.Weight)
+					                                    ,([CrossfitterWorkout].Weight)
+				                                    ) AS AllWeights(Weight)
+			                                    ) AS Weight
+		                                    ,RoutineSimple.ExerciseId
+		                                    ,RoutineSimple.id
+		                                    ,[CrossfitterWorkout].Id AS CrossfitterWorkoutId
+	                                    FROM [RoutineSimple]
+	                                    INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
+	                                    INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+	                                    WHERE [CrossfitterWorkout].CrossfitterId = @userId
+		                                    AND (
+			                                    (
+				                                    [RoutineSimple].Weight IS NOT NULL
+				                                    OR [CrossfitterWorkout].Weight IS NOT NULL
+				                                    )
+			                                    AND [RoutineSimple].AlternativeWeight IS NULL
+			                                    )
+                                            AND [CrossfitterWorkout].CreatedUtc <= @date
+	                                    ) AS sub
+                                    WHERE rn = 1";
+                return db.Query<TempPersonMaximum>(sql, new { userId = userId, date = beforeDate });
+            }
+
+        }
     }
 }

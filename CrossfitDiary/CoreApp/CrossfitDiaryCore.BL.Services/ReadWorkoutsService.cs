@@ -119,12 +119,14 @@ namespace CrossfitDiaryCore.BL.Services
 
         private void UpdateWorkoutsWithRecords(List<CrossfitterWorkout> crossfitterWorkouts)
         {
-            List<string> distinctUsers = crossfitterWorkouts.GroupBy(x => x.Crossfitter.Id).Select(x => x.Key).ToList();
+            List<string> distinctUsers = crossfitterWorkouts
+                .GroupBy(x => x.Crossfitter.Id).Select(x => x.Key).ToList();
             foreach (string userId in distinctUsers)
             {
                 List<TempPersonMaximum> personMainMaxumumsOnly =  _dapperRepository.GetPersonMainMaxumumsOnly(userId).ToList();
                 List<TempPersonMaximum> previousMaximumsList =  _dapperRepository.GetPersonPreviousMainMaxumumsOnly(userId).ToList();
                 UpdateRoutinesWithMaximums(crossfitterWorkouts, personMainMaxumumsOnly, previousMaximumsList);
+
                 List<CrossfitterWorkout> personWods = crossfitterWorkouts.Where(x => x.Crossfitter.Id == userId).ToList();
                 UpdateRoutinesWithMaximumsForPercentWeights(personWods, personMainMaxumumsOnly);
             }
@@ -132,13 +134,7 @@ namespace CrossfitDiaryCore.BL.Services
 
         private void UpdateRoutinesWithMaximumsForPercentWeights(List<CrossfitterWorkout> crossfitterWorkouts, List<TempPersonMaximum> personMainMaxumumsOnly)
         {
-            IEnumerable<RoutineSimple> percentMaxPm = crossfitterWorkouts
-                    .SelectMany(x => x.RoutineComplex.RoutineSimple
-                    .Where(y => y.WeightDisplayType == WeightDisplayType.PercentMaxPM));
-            foreach (RoutineSimple routineSimple in percentMaxPm)
-            {
-                routineSimple.CalculateWeight(personMainMaxumumsOnly.SingleOrDefault(x => x.ExerciseId == routineSimple.ExerciseId)?.MaximumWeight);
-            }
+            UpdateRoutinesByTotalPreviousMaximum(crossfitterWorkouts);
 
             IEnumerable<RoutineSimple> previousPm = crossfitterWorkouts
                     .SelectMany(x => x.RoutineComplex.RoutineSimple
@@ -159,6 +155,35 @@ namespace CrossfitDiaryCore.BL.Services
 
                 routineSimple.CalculateWeight(maxWeight);
             }
+
+        }
+
+        private void UpdateRoutinesByTotalPreviousMaximum(List<CrossfitterWorkout> crossfitterWorkouts)
+        {
+            if (crossfitterWorkouts.Count == 0)
+            {
+                return;
+            }
+
+
+            string userId = crossfitterWorkouts.First().Crossfitter.Id;
+            IEnumerable<RoutineSimple> percentMaxPm = crossfitterWorkouts
+                .SelectMany(x => x.RoutineComplex.RoutineSimple
+                    .Where(y => y.WeightDisplayType == WeightDisplayType.PercentMaxPM));
+
+            IEnumerable<CrossfitterWorkout> wodsWithFindMaxExercises = crossfitterWorkouts
+                .Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType == WeightDisplayType.PercentMaxPM));
+
+            foreach (CrossfitterWorkout wod in wodsWithFindMaxExercises)
+            {
+                IEnumerable<TempPersonMaximum> maximumsBeforeDate = _dapperRepository.GetPersonMainMaxumumsOnly(userId, wod.Date);
+                IEnumerable<RoutineSimple> wodExercises = wod.RoutineComplex.RoutineSimple.Where(y => y.WeightDisplayType == WeightDisplayType.PercentMaxPM);
+                foreach (RoutineSimple routineSimple in wodExercises)
+                {
+                    routineSimple.CalculateWeight(maximumsBeforeDate.SingleOrDefault(x => x.ExerciseId == routineSimple.ExerciseId)?.MaximumWeight);
+                }
+            }
+           
 
         }
 
