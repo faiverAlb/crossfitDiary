@@ -24,13 +24,14 @@ namespace CrossfitDiaryCore.BL.Services
         public ReadWorkoutsService(WorkouterContext  context
             , ReadUsersService readUsersService
             , WorkoutsMatchDispatcher workoutsMatchDispatcher
-            , DapperRepository dapperRepository)
+            , DapperRepository dapperRepository
+            , MaximumsUpdater maximumsUpdater)
         {
             _context = context;
             _readUsersService = readUsersService;
             _workoutsMatchDispatcher = workoutsMatchDispatcher;
             _dapperRepository = dapperRepository;
-            _maximumsUpdater = new MaximumsUpdater(dapperRepository);
+            _maximumsUpdater = maximumsUpdater;
         }
 
 
@@ -109,6 +110,7 @@ namespace CrossfitDiaryCore.BL.Services
             }
 
             _maximumsUpdater.UpdateWorkoutsWithRecords(crossfitterWorkouts);
+            _maximumsUpdater.UpdateWorkoutsWithPercentWeightCalculations(crossfitterWorkouts);
 
             List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();//.Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
             foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)

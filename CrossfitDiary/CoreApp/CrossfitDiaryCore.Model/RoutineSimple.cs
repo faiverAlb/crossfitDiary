@@ -100,6 +100,10 @@ namespace CrossfitDiaryCore.Model
 
         public void CalculateWeight(decimal? maxWeight)
         {
+            if (maxWeight == null)
+            {
+                CalculatedWeight = 0;
+            }
             switch (WeightPercentValue)
             {
                 case null:

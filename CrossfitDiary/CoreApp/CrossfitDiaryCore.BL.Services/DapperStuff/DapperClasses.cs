@@ -214,5 +214,26 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
             }
 
         }
+
+        public CrossfitterWorkout GetCrossfiterWodWithFindMaxWeight(string userId, DateTime date, int exerciseId)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string sql = @"SELECT [x].*
+                                FROM [CrossfitterWorkout] AS [x]
+                                INNER JOIN [RoutineComplex] AS [x.RoutineComplex] ON [x].[RoutineComplexId] = [x.RoutineComplex].[Id]
+                                WHERE (((([x.RoutineComplex].[FindMaxWeight] = 1) AND ([x].[Date] < @date)) 
+                                AND ([x].[CrossfitterId] = @userId)) AND 
+                                EXISTS (
+		                                SELECT 1
+		                                FROM [RoutineSimple] AS [y]
+		                                WHERE [y].[ExerciseId] = @exerciseId 	AND ([x.RoutineComplex].[Id] = [y].[RoutineComplexId]))
+	                                ) 
+	                                AND [x].[Weight] IS NOT NULL
+                                ORDER BY x.Date";
+                return db.QueryFirstOrDefault<CrossfitterWorkout>(sql, new { userId = userId, date = date, exerciseId = exerciseId });
+            }
+
+        }
     }
 }
