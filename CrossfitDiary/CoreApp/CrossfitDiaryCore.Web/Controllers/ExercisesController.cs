@@ -57,24 +57,12 @@ namespace CrossfitDiaryCore.Web.Controllers
         ///     The get exercises maximums.
         /// </summary>
         [HttpGet]
-        [Route("api/getExerciseMaximums")]
-        public List<PersonMaximumViewModel> GetExerciseMaximums()
-        {
-
-            string currentUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            List<TempPersonMaximum> personMaxumumsByExercise = _readWorkoutsService.GetPersonMaxumums(currentUserId);
-            return _mapper.Map<List<PersonMaximumViewModel>>(personMaxumumsByExercise);
-
-        }
-        /// <summary>
-        ///     The get exercises maximums.
-        /// </summary>
-        [HttpGet]
         [Route("api/getWeightsMaximums")]
         public List<PersonMaximumViewModel> GetWeightsMaximums()
         {
             string currentUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            List<TempPersonMaximum> personMaxumumsByExercise = _readWorkoutsService.GetPersonMaxumumsOneWeight(currentUserId);
+            List<TempPersonMaximum> personMaxumumsByExercise = new List<TempPersonMaximum>();
+            // List<TempPersonMaximum> personMaxumumsByExercise = _readWorkoutsService.GetPersonMaxumumsOneWeight(currentUserId);
             return _mapper.Map<List<PersonMaximumViewModel>>(personMaxumumsByExercise);
 
         }

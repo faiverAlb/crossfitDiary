@@ -57,16 +57,6 @@ export default class CrossfitterService {
     });
   };
 
-  public getExerciseMaximums = (): Promise<PersonMaximumViewModel[]> => {
-    return axios
-      .get<PersonMaximumViewModel[]>("api/getExerciseMaximums")
-      .then(jsonData => {
-        return jsonData.data.map(x =>
-          new PersonMaximumViewModel().deserialize(x)
-        );
-      });
-  };
-
   public getWeightsMaximums = (): Promise<PersonMaximumViewModel[]> => {
     return axios
       .get<PersonMaximumViewModel[]>("api/getWeightsMaximums")

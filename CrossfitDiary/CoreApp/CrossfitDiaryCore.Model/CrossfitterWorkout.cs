@@ -104,5 +104,9 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public decimal? Weight { get; set; }
 
+        public void AddToPersonRecord(TempPersonMaximum newMax)
+        {
+            PersonalRecords.Add(newMax);
+        }
     }
 }

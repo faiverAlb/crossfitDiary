@@ -15,13 +15,6 @@ export const actions: ActionTree<IWorkoutEditState, RootState> = {
             commit("exercisesLoaded", exercises);
         });
     },
-    fetchUserMaximums({commit}): any {
-        let crossfitterService: CrossfitterService = new CrossfitterService();
-        crossfitterService.getExerciseMaximums().then(data => {
-            const userMaximums: PersonMaximumViewModel[] = data;
-            commit("userMaximumsLoaded", userMaximums);
-        });
-    },
     setCanUserSeePlanWorkouts({commit}, newValue): any {
         commit("canUserSeePlanWorkoutsConfigured", newValue);
     },

@@ -268,8 +268,6 @@
     export default class WorkoutsNavigationComponent extends Vue {
         @Action("fetchExercises", {namespace})
         fetchExercises: any;
-        @Action("fetchUserMaximums", {namespace})
-        fetchUserMaximums: any;
         @Action("setCanUserSeePlanWorkouts", {namespace})
         setCanUserSeePlanWorkouts: any;
         isEditMode: boolean = false;
@@ -290,7 +288,6 @@
             // fetching data as soon as the component's been mounted
             this.setCanUserSeePlanWorkouts(this.canUserSeePlanWorkouts);
             this.fetchExercises();
-            this.fetchUserMaximums();
             this.isEditMode =
                 workouter != null &&
                 (workouter.toLogWorkoutRawModel != null ||
