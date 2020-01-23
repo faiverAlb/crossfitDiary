@@ -110,7 +110,7 @@ namespace CrossfitDiaryCore.BL.Services
             }
 
             _maximumsUpdater.UpdateWorkoutsWithRecords(crossfitterWorkouts);
-            _maximumsUpdater.UpdateWorkoutsWithPercentWeightCalculations(crossfitterWorkouts);
+            // _maximumsUpdater.UpdateWorkoutsWithPercentWeightCalculations(crossfitterWorkouts);
 
             List<CrossfitterWorkout> allCrossfittersWorkouts = crossfitterWorkouts.OrderByDescending(x => x.Date).ThenByDescending(x => x.CreatedUtc).ToList();//.Skip(((page - 1) * pageSize)).Take(pageSize).ToList();
             foreach (CrossfitterWorkout allCrossfittersWorkout in allCrossfittersWorkouts)
@@ -180,32 +180,6 @@ namespace CrossfitDiaryCore.BL.Services
                 .GroupBy(x => x.PlanningLevel)
                 .Select(x => new KeyValuePair<PlanningLevel, List<PlanningHistory>>(x.Key,x.ToList()));
             return groupedByWodSubType;
-            // foreach (IGrouping<PlanningLevel, PlanningHistory> grouping in groupedByWodSubType)
-            // {
-            //     var subTypeWods = new List<RoutineComplex>();
-            //     foreach (PlanningHistory planningHistory in grouping)
-            //     {
-            //         RoutineComplex routine = _context.ComplexRoutines
-            //             .Include(x => x.RoutineSimple)
-            //             .ThenInclude(x => x.Exercise)
-            //             .ThenInclude(x => x.ExerciseMeasures)
-            //             .Include(x => x.Children)
-            //             .ThenInclude(x => x.RoutineSimple)
-            //             .ThenInclude(x => x.Exercise)
-            //             .ThenInclude(x => x.ExerciseMeasures)
-            //             .AsNoTracking()
-            //             .Single(x => x.Id == planningHistory.RoutineComplexId);
-            //
-            //         
-            //         routine.PlanDate = planningHistory.PlanningDate;
-            //         routine.PlanningLevel = planningHistory.PlanningLevel;
-            //         routine.WodSubType = planningHistory.WodSubType;
-            //         subTypeWods.Add(routine);
-            //     }
-            //
-            //     resultComplexes.Add(new KeyValuePair<PlanningLevel, List<RoutineComplex>>(grouping.Key, subTypeWods));
-            // }
-            // return resultComplexes;
         }
         public List<RoutineComplex> GetWorkoutsList()
         {

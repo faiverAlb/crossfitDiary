@@ -100,19 +100,23 @@ namespace CrossfitDiaryCore.Model
 
         public void CalculateWeight(decimal? maxWeight)
         {
+            if (Weight.HasValue)
+            {
+                return;
+            }
             if (maxWeight == null)
             {
-                CalculatedWeight = 0;
+                Weight = 0;
             }
             switch (WeightPercentValue)
             {
                 case null:
                     break;
                 case 0:
-                    CalculatedWeight = 0;
+                    Weight = 0;
                     break;
                 default:
-                    CalculatedWeight = (maxWeight / 100 * (decimal?) WeightPercentValue);
+                    Weight = (maxWeight / 100 * (decimal?) WeightPercentValue);
                     break;
             }
 

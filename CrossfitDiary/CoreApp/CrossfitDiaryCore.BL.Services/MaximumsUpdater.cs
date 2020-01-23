@@ -41,59 +41,59 @@ namespace CrossfitDiaryCore.BL.Services
             }
         }
 
-        public void UpdateWorkoutsWithPercentWeightCalculations(List<CrossfitterWorkout> crossfitterWorkouts)
-        {
-            var wodsWithCalculationNeeded = crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType != WeightDisplayType.Default)).ToList();
-            List<string> distinctUsers = wodsWithCalculationNeeded.GroupBy(x => x.Crossfitter.Id).Select(x => x.Key).ToList();
-            foreach (string userId in distinctUsers)
-            {
-                IEnumerable<TempPersonMaximum> allExercisesMaximums = _dapperRepository.GetAllMaximums(userId, DateTime.Now);
-                List<CrossfitterWorkout> personWods = wodsWithCalculationNeeded.Where(x => x.Crossfitter.Id == userId).ToList();
-                IEnumerable<CrossfitterWorkout> wodsWithFindMaxPM =  personWods.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType ==WeightDisplayType.PercentMaxPM));
-                foreach (CrossfitterWorkout workout in wodsWithFindMaxPM)
-                {
-                    IEnumerable<RoutineSimple> exercisesWithPercentMaxPM = workout.RoutineComplex.RoutineSimple.Where(x => x.WeightDisplayType == WeightDisplayType.PercentMaxPM);
-                    foreach (RoutineSimple routineSimple in exercisesWithPercentMaxPM)
-                    {
+        // public void UpdateWorkoutsWithPercentWeightCalculations(List<CrossfitterWorkout> crossfitterWorkouts)
+        // {
+        //     var wodsWithCalculationNeeded = crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType != WeightDisplayType.Default)).ToList();
+        //     List<string> distinctUsers = wodsWithCalculationNeeded.GroupBy(x => x.Crossfitter.Id).Select(x => x.Key).ToList();
+        //     foreach (string userId in distinctUsers)
+        //     {
+        //         IEnumerable<TempPersonMaximum> allExercisesMaximums = _dapperRepository.GetAllMaximums(userId, DateTime.Now);
+        //         List<CrossfitterWorkout> personWods = wodsWithCalculationNeeded.Where(x => x.Crossfitter.Id == userId).ToList();
+        //         IEnumerable<CrossfitterWorkout> wodsWithFindMaxPM =  personWods.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType ==WeightDisplayType.PercentMaxPM));
+        //         foreach (CrossfitterWorkout workout in wodsWithFindMaxPM)
+        //         {
+        //             IEnumerable<RoutineSimple> exercisesWithPercentMaxPM = workout.RoutineComplex.RoutineSimple.Where(x => x.WeightDisplayType == WeightDisplayType.PercentMaxPM);
+        //             foreach (RoutineSimple routineSimple in exercisesWithPercentMaxPM)
+        //             {
+        //
+        //                 decimal? calculatedMaximumWeight = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, workout.Date);
+        //                 routineSimple.CalculateWeight(calculatedMaximumWeight);
+        //             }
+        //         }
+        //
+        //         IEnumerable<CrossfitterWorkout> wodsWithFindPrevPM = personWods.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType == WeightDisplayType.PercentPreviousPM));
+        //         foreach (CrossfitterWorkout workout in wodsWithFindPrevPM)
+        //         {
+        //             IEnumerable<RoutineSimple> exercisesWithPercentPreviousPM = workout.RoutineComplex.RoutineSimple.Where(x => x.WeightDisplayType == WeightDisplayType.PercentPreviousPM);
+        //
+        //             foreach (RoutineSimple routineSimple in exercisesWithPercentPreviousPM)
+        //             {
+        //                 CrossfitterWorkout wod = _dapperRepository.GetCrossfiterWodWithFindMaxWeight(userId, workout.Date, routineSimple.ExerciseId);
+        //
+        //                 if (wod == null)
+        //                 {
+        //                     decimal? calculatedMaximumWeight = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, workout.Date);
+        //                     routineSimple.CalculateWeight(calculatedMaximumWeight);
+        //                 }
+        //                 else
+        //                 {
+        //                     routineSimple.CalculateWeight(wod.Weight);
+        //                 }
+        //
+        //             }
+        //         }
+        //     }
+        //
+        // }
 
-                        decimal? calculatedMaximumWeight = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, workout.Date);
-                        routineSimple.CalculateWeight(calculatedMaximumWeight);
-                    }
-                }
-
-                IEnumerable<CrossfitterWorkout> wodsWithFindPrevPM = personWods.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType == WeightDisplayType.PercentPreviousPM));
-                foreach (CrossfitterWorkout workout in wodsWithFindPrevPM)
-                {
-                    IEnumerable<RoutineSimple> exercisesWithPercentPreviousPM = workout.RoutineComplex.RoutineSimple.Where(x => x.WeightDisplayType == WeightDisplayType.PercentPreviousPM);
-
-                    foreach (RoutineSimple routineSimple in exercisesWithPercentPreviousPM)
-                    {
-                        CrossfitterWorkout wod = _dapperRepository.GetCrossfiterWodWithFindMaxWeight(userId, workout.Date, routineSimple.ExerciseId);
-
-                        if (wod == null)
-                        {
-                            decimal? calculatedMaximumWeight = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, workout.Date);
-                            routineSimple.CalculateWeight(calculatedMaximumWeight);
-                        }
-                        else
-                        {
-                            routineSimple.CalculateWeight(wod.Weight);
-                        }
-
-                    }
-                }
-            }
-
-        }
-
-        private decimal? GetMaxValue(IEnumerable<TempPersonMaximum> allExercisesMaximums, int exerciseId,
-            DateTime workoutDate)
-        {
-            IEnumerable<TempPersonMaximum> foundAllExerciseMaximums = allExercisesMaximums
-                .Where(x => x.ExerciseId == exerciseId && x.Date <= workoutDate)
-                .OrderByDescending(x => x.CalculatedMaximumWeight)
-                .ThenBy(x => x.Date);
-            return foundAllExerciseMaximums.FirstOrDefault()?.CalculatedMaximumWeight;
-        }
+        // private decimal? GetMaxValue(IEnumerable<TempPersonMaximum> allExercisesMaximums, int exerciseId,
+        //     DateTime workoutDate)
+        // {
+        //     IEnumerable<TempPersonMaximum> foundAllExerciseMaximums = allExercisesMaximums
+        //         .Where(x => x.ExerciseId == exerciseId && x.Date <= workoutDate)
+        //         .OrderByDescending(x => x.CalculatedMaximumWeight)
+        //         .ThenBy(x => x.Date);
+        //     return foundAllExerciseMaximums.FirstOrDefault()?.CalculatedMaximumWeight;
+        // }
     }
 }

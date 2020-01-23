@@ -6,7 +6,7 @@
             <span v-if="model.countMeasure">{{model.countMeasure.measureValue}}</span>
             <span v-if="canSeeWeightsMeasures"> x {{model.weightMeasure.measureValue}} kgs</span>
             <span v-if="canSeeWeightsMeasures && model.altWeightMeasure && model.altWeightMeasure.measureValue">/{{model.altWeightMeasure.measureValue}} kgs</span>
-            <span v-if="canSeeWeightsMeasures === false "> x {{model.calculatedWeight}} kgs 
+            <span v-if="model.weightPercentValue "> 
                 <span class="badge badge-info">{{model.weightPercentValue}}{{weightTypeDescription}}</span>
             </span>
             <span v-if="model.caloriesMeasure && model.caloriesMeasure.measureValue"> {{model.caloriesMeasure.measureValue}} cals</span>
@@ -36,7 +36,7 @@
         model: ExerciseViewModel;
 
         get canSeeWeightsMeasures() {
-            return this.model.weightMeasure && this.model.weightMeasure.measureValue &&  this.model.weightDisplayType == WeightDisplayType.Default;
+            return this.model.weightMeasure && this.model.weightMeasure.measureValue;
         }
 
         get weightTypeDescription() {
