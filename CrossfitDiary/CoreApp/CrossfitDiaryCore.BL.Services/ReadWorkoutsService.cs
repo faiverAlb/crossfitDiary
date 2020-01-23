@@ -19,7 +19,7 @@ namespace CrossfitDiaryCore.BL.Services
         private readonly ReadUsersService _readUsersService;
         private readonly WorkoutsMatchDispatcher _workoutsMatchDispatcher;
         private readonly DapperRepository _dapperRepository;
-        private MaximumsUpdater _maximumsUpdater;
+        private readonly MaximumsUpdater _maximumsUpdater;
 
         public ReadWorkoutsService(WorkouterContext  context
             , ReadUsersService readUsersService
@@ -50,7 +50,7 @@ namespace CrossfitDiaryCore.BL.Services
         public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
         {
 
-            List<RoutineComplex> workoutsToCheck = _context.ComplexRoutines.Include(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ToList();
+            List<RoutineComplex> workoutsToCheck = _context.ComplexRoutines.AsNoTracking().Include(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ToList();
             foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
             {
                 if (_workoutsMatchDispatcher.IsWorkoutsMatch(existingRoutineComplex, routineComplexToSave) == false)
@@ -173,6 +173,12 @@ namespace CrossfitDiaryCore.BL.Services
             if (planned.Any(x => x.Crossfitter == currentUser))
             {
                 planned = planned.Where(x => x.Crossfitter == currentUser).ToList();
+            }
+
+            foreach (PlanningHistory planningHistory in planned)
+            {
+                _maximumsUpdater.UpdateWorkoutsWithRecords(planningHistory.RoutineComplex, planningHistory.PlanningDate, currentUser.Id);
+                
             }
 
             // var resultComplexes = new List<KeyValuePair<PlanningLevel, List<RoutineComplex>>>();

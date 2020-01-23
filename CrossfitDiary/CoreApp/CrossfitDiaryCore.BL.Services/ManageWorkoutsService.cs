@@ -15,13 +15,15 @@ namespace CrossfitDiaryCore.BL.Services
         private readonly ReadWorkoutsService _readWorkoutsService;
         private readonly ReadUsersService _readUsersService;
         private readonly DapperRepository _dapperRepository;
+        private readonly MaximumsUpdater _maximumsUpdater;
 
-        public ManageWorkoutsService(WorkouterContext context, ReadWorkoutsService readWorkoutsService, ReadUsersService readUsersService, DapperRepository dapperRepository)
+        public ManageWorkoutsService(WorkouterContext context, ReadWorkoutsService readWorkoutsService, ReadUsersService readUsersService, DapperRepository dapperRepository, MaximumsUpdater maximumsUpdater)
         {
             _context = context;
             _readWorkoutsService = readWorkoutsService;
             _readUsersService = readUsersService;
             _dapperRepository = dapperRepository;
+            _maximumsUpdater = maximumsUpdater;
         }
 
         public void RemoveWorkoutResult(int crossfitterWorkoutId, string userId)
@@ -77,67 +79,10 @@ namespace CrossfitDiaryCore.BL.Services
         }
 
 
-
-        public void UpdateWorkoutsWithPercentWeightCalculations(List<CrossfitterWorkout> crossfitterWorkouts)
-        {
-            var wodsWithCalculationNeeded = crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType != WeightDisplayType.Default)).ToList();
-            List<string> distinctUsers = wodsWithCalculationNeeded.GroupBy(x => x.Crossfitter.Id).Select(x => x.Key).ToList();
-            foreach (string userId in distinctUsers)
-            {
-                IEnumerable<TempPersonMaximum> allExercisesMaximums = _dapperRepository.GetAllMaximums(userId, DateTime.Now);
-                List<CrossfitterWorkout> personWods = wodsWithCalculationNeeded.Where(x => x.Crossfitter.Id == userId).ToList();
-                IEnumerable<CrossfitterWorkout> wodsWithFindMaxPM = personWods.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType == WeightDisplayType.PercentMaxPM));
-                foreach (CrossfitterWorkout workout in wodsWithFindMaxPM)
-                {
-                    IEnumerable<RoutineSimple> exercisesWithPercentMaxPM = workout.RoutineComplex.RoutineSimple.Where(x => x.WeightDisplayType == WeightDisplayType.PercentMaxPM);
-                    foreach (RoutineSimple routineSimple in exercisesWithPercentMaxPM)
-                    {
-
-                        decimal? calculatedMaximumWeight = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, workout.Date);
-                        routineSimple.CalculateWeight(calculatedMaximumWeight);
-                    }
-                }
-
-                IEnumerable<CrossfitterWorkout> wodsWithFindPrevPM = personWods.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType == WeightDisplayType.PercentPreviousPM));
-                foreach (CrossfitterWorkout workout in wodsWithFindPrevPM)
-                {
-                    IEnumerable<RoutineSimple> exercisesWithPercentPreviousPM = workout.RoutineComplex.RoutineSimple.Where(x => x.WeightDisplayType == WeightDisplayType.PercentPreviousPM);
-
-                    foreach (RoutineSimple routineSimple in exercisesWithPercentPreviousPM)
-                    {
-                        CrossfitterWorkout wod = _dapperRepository.GetCrossfiterWodWithFindMaxWeight(userId, workout.Date, routineSimple.ExerciseId);
-
-                        if (wod == null)
-                        {
-                            decimal? calculatedMaximumWeight = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, workout.Date);
-                            routineSimple.CalculateWeight(calculatedMaximumWeight);
-                        }
-                        else
-                        {
-                            routineSimple.CalculateWeight(wod.Weight);
-                        }
-
-                    }
-                }
-            }
-
-        }
-
-        private decimal? GetMaxValue(IEnumerable<TempPersonMaximum> allExercisesMaximums, int exerciseId,  DateTime workoutDate)
-        {
-            IEnumerable<TempPersonMaximum> foundAllExerciseMaximums = allExercisesMaximums
-                .Where(x => x.ExerciseId == exerciseId && x.Date <= workoutDate)
-                .OrderByDescending(x => x.CalculatedMaximumWeight)
-                .ThenBy(x => x.Date);
-            return foundAllExerciseMaximums.FirstOrDefault()?.CalculatedMaximumWeight;
-        }
-
-
-
         public void CreateAndLogNewWorkout(RoutineComplex workoutRoutine, CrossfitterWorkout logWorkoutModel, ApplicationUser user)
         {
             //todo: precheck rights for workout + log
-            CalculateWeightBasedOnWeightsPercent(workoutRoutine, user.Id, logWorkoutModel.Date);
+            _maximumsUpdater.CalculateWeightBasedOnWeightsPercent(workoutRoutine, user.Id, logWorkoutModel.Date);
 
             int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
 
@@ -177,39 +122,9 @@ namespace CrossfitDiaryCore.BL.Services
             logWorkoutModel.Id = 0;
             _context.CrossfitterWorkouts.Add(logWorkoutModel);
             _context.SaveChanges();
+        
         }
 
-        private void CalculateWeightBasedOnWeightsPercent(RoutineComplex workoutRoutine, string userId, DateTime date)
-        {
-            IEnumerable<TempPersonMaximum> allExercisesMaximums = _dapperRepository.GetAllMaximums(userId, DateTime.Now);
-            foreach (RoutineSimple routineSimple in workoutRoutine.RoutineSimple)
-            {
-                switch (routineSimple.WeightDisplayType)
-                {
-                    case WeightDisplayType.Default:
-                        break;
-                    case WeightDisplayType.PercentPreviousPM:
-                        CrossfitterWorkout wod = _dapperRepository.GetCrossfiterWodWithFindMaxWeight(userId, date, routineSimple.ExerciseId);
-                        if (wod == null)
-                        {
-                            decimal? calculatedMaximumWeight = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, date);
-                            routineSimple.CalculateWeight(calculatedMaximumWeight);
-                        }
-                        else
-                        {
-                            routineSimple.CalculateWeight(wod.Weight);
-                        }
-                        break;
-                    case WeightDisplayType.PercentMaxPM:
-                        decimal? findPrevMaxWeightInFindMaxWods = GetMaxValue(allExercisesMaximums,routineSimple.ExerciseId, date);
-                        routineSimple.CalculateWeight(findPrevMaxWeightInFindMaxWods);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-            }
-        }
 
 
         public void PlanWorkoutForDay(int workoutId, PlanningLevel planningLevel, DateTime date, ApplicationUser user, WodSubType wodSubType)
@@ -271,10 +186,12 @@ namespace CrossfitDiaryCore.BL.Services
             }
         }
 
-        public void LogNewWorkout(CrossfitterWorkout crossfitterWorkout)
+        public void LogNewWorkout(CrossfitterWorkout crossfitterWorkout, ApplicationUser user)
         {
-            _context.CrossfitterWorkouts.Add(crossfitterWorkout);
-            _context.SaveChanges();
+            RoutineComplex routineComplex = _readWorkoutsService.GetWorkout(crossfitterWorkout.RoutineComplexId);
+            CreateAndLogNewWorkout(routineComplex, crossfitterWorkout, user);
+            // _context.CrossfitterWorkouts.Add(crossfitterWorkout);
+            // _context.SaveChanges();
         }
 
         public void RemovePlannedWod(int plannedWodId, string userId, DateTime date)

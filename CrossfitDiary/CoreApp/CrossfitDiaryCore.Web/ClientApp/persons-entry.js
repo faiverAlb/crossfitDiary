@@ -62,11 +62,16 @@ var vue = new Vue({
         });
     },
     methods: {
-        logWorkout: function (logModel) {
+        logWorkout: function (logModel, workoutModel) {
             var _this = this;
             this.spinner.activate();
+            debugger;
+            var model = {
+                newWorkoutViewModel: workoutModel,
+                logWorkoutViewModel: logModel
+            };
             apiService
-                .quickLogWorkout(logModel)
+                .createAndLogWorkout(model)
                 .then(function () { return apiService.getAllCrossfittersWorkouts(); })
                 .then(function (data) {
                 _this.activities = data;

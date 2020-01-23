@@ -41,6 +41,82 @@ namespace CrossfitDiaryCore.BL.Services
             }
         }
 
+        public void UpdateWorkoutsWithRecords(RoutineComplex routineComplex, DateTime date, string userId)
+        {
+            IEnumerable<TempPersonMaximum> allExercisesMaximums = _dapperRepository.GetAllMaximums(userId, DateTime.Now);
+            foreach (RoutineSimple routineSimple in routineComplex.RoutineSimple)
+            {
+                switch (routineSimple.WeightDisplayType)
+                {
+                    case WeightDisplayType.Default:
+                        break;
+                    case WeightDisplayType.PercentPreviousPM:
+                        CrossfitterWorkout wod = _dapperRepository.GetCrossfiterWodWithFindMaxWeight(userId, date, routineSimple.ExerciseId);
+                        if (wod == null)
+                        {
+                            decimal? calculatedMaximumWeight = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, date);
+                            routineSimple.CalculateWeight(calculatedMaximumWeight);
+                        }
+                        else
+                        {
+                            routineSimple.CalculateWeight(wod.Weight);
+                        }
+                        break;
+                    case WeightDisplayType.PercentMaxPM:
+                        decimal? findPrevMaxWeightInFindMaxWods = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, date);
+                        routineSimple.CalculateWeight(findPrevMaxWeightInFindMaxWods);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+            }
+        }
+
+        private decimal? GetMaxValue(IEnumerable<TempPersonMaximum> allExercisesMaximums, int exerciseId, DateTime workoutDate)
+        {
+            IEnumerable<TempPersonMaximum> foundAllExerciseMaximums = allExercisesMaximums
+                .Where(x => x.ExerciseId == exerciseId && x.Date <= workoutDate)
+                .OrderByDescending(x => x.CalculatedMaximumWeight)
+                .ThenBy(x => x.Date);
+            return foundAllExerciseMaximums.FirstOrDefault()?.CalculatedMaximumWeight;
+        }
+
+        public void CalculateWeightBasedOnWeightsPercent(RoutineComplex workoutRoutine, string userId, DateTime date)
+        {
+            IEnumerable<TempPersonMaximum> allExercisesMaximums = _dapperRepository.GetAllMaximums(userId, DateTime.Now);
+            foreach (RoutineSimple routineSimple in workoutRoutine.RoutineSimple)
+            {
+                switch (routineSimple.WeightDisplayType)
+                {
+                    case WeightDisplayType.Default:
+                        break;
+                    case WeightDisplayType.PercentPreviousPM:
+                        CrossfitterWorkout wod = _dapperRepository.GetCrossfiterWodWithFindMaxWeight(userId, date, routineSimple.ExerciseId);
+                        if (wod == null)
+                        {
+                            decimal? calculatedMaximumWeight = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, date);
+                            routineSimple.CalculateWeight(calculatedMaximumWeight);
+                        }
+                        else
+                        {
+                            routineSimple.CalculateWeight(wod.Weight);
+                        }
+                        break;
+                    case WeightDisplayType.PercentMaxPM:
+                        decimal? findPrevMaxWeightInFindMaxWods = GetMaxValue(allExercisesMaximums, routineSimple.ExerciseId, date);
+                        routineSimple.CalculateWeight(findPrevMaxWeightInFindMaxWods);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+            }
+        }
+
+
+
+
         // public void UpdateWorkoutsWithPercentWeightCalculations(List<CrossfitterWorkout> crossfitterWorkouts)
         // {
         //     var wodsWithCalculationNeeded = crossfitterWorkouts.Where(x => x.RoutineComplex.RoutineSimple.Any(y => y.WeightDisplayType != WeightDisplayType.Default)).ToList();

@@ -41,8 +41,8 @@ var WorkoutViewModel = /** @class */ (function () {
         this.IsHaveCapTime = function () {
             return _this.workoutType === WorkoutType.ForTime || _this.workoutType === WorkoutType.ForTimeManyInners;
         };
-        this.IsNotForTime = function () {
-            return _this.workoutType === WorkoutType.NotForTime;
+        this.IsFindMaxWeight = function () {
+            return _this.workoutType === WorkoutType.NotForTime && _this.findMaxWeight == true;
         };
         this.getHaveCollapsedVersion = function (exercisedToUse, distinctFirst) {
             var canBeCollapsed = true;

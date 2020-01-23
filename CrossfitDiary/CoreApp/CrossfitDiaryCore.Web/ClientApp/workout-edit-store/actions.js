@@ -9,6 +9,13 @@ export var actions = {
             commit("exercisesLoaded", exercises);
         });
     },
+    // fetchUserMaximums({commit}): any {
+    //     let crossfitterService: CrossfitterService = new CrossfitterService();
+    //     crossfitterService.getExerciseMaximums().then(data => {
+    //         const userMaximums: PersonMaximumViewModel[] = data;
+    //         commit("userMaximumsLoaded", userMaximums);
+    //     });
+    // },
     setCanUserSeePlanWorkouts: function (_a, newValue) {
         var commit = _a.commit;
         commit("canUserSeePlanWorkoutsConfigured", newValue);

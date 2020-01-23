@@ -186,7 +186,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                             </div>
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-end mt-3" v-if="selectedWorkout.IsNotForTime()">
+                    <div class="row d-flex justify-content-end mt-3" v-if="selectedWorkout.IsFindMaxWeight()">
                         <div class="col-sm-12">
                             <label class="sr-only"
                                    for="maxWeightInput"
@@ -389,7 +389,8 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 if (isValid) {
                     let toLogWorkoutModel = this.toLogModel;
                     toLogWorkoutModel.wodSubType = this.selectedPlannedWorkoutLevel;
-                    this.$emit("logWorkout", toLogWorkoutModel);
+                    
+                    this.$emit("logWorkout", toLogWorkoutModel,this.selectedWorkout);
                     this.$refs.logWorkoutModal.hide();
                 }
             });

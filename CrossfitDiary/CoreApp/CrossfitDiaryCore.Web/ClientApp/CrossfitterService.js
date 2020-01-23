@@ -44,6 +44,15 @@ var CrossfitterService = /** @class */ (function () {
                 return jsonData.data.map(function (x) { return new ExerciseViewModel().deserialize(x); });
             });
         };
+        // public getExerciseMaximums = (): Promise<PersonMaximumViewModel[]> => {
+        //   return axios
+        //     .get<PersonMaximumViewModel[]>("api/getExerciseMaximums")
+        //     .then(jsonData => {
+        //       return jsonData.data.map(x =>
+        //         new PersonMaximumViewModel().deserialize(x)
+        //       );
+        //     });
+        // };
         this.getWeightsMaximums = function () {
             return axios
                 .get("api/getWeightsMaximums")

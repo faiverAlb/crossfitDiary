@@ -112,10 +112,14 @@ let vue = new Vue({
             });
     },
     methods: {
-        logWorkout(logModel: ToLogWorkoutViewModel): void {
+        logWorkout(logModel: ToLogWorkoutViewModel,workoutModel:WorkoutViewModel): void {
             this.spinner.activate();
+            const model = {
+                newWorkoutViewModel: workoutModel,
+                logWorkoutViewModel: logModel
+            };
             apiService
-                .quickLogWorkout(logModel)
+                .createAndLogWorkout(model)
                 .then(() => apiService.getAllCrossfittersWorkouts())
                 .then(data => {
                     this.activities = data;
