@@ -84,7 +84,7 @@ namespace CrossfitDiaryCore.BL.Services
             //todo: precheck rights for workout + log
             _maximumsUpdater.CalculateWeightBasedOnWeightsPercent(workoutRoutine, user.Id, logWorkoutModel.Date);
 
-            int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkout(workoutRoutine);
+            int workoutId = _readWorkoutsService.FindDefaultOrExistingWorkoutNonTracking(workoutRoutine);
 
             int currentWorkoutIdFromUI = -1;
             if (workoutId == 0)
@@ -142,7 +142,7 @@ namespace CrossfitDiaryCore.BL.Services
 
         private void PlanWorkoutForDay(PlanningHistory newHistoryPlanning)
         {
-            IEnumerable<PlanningHistory> planningHistories =  _context.PlanningHistories.Where(x => x.Id == newHistoryPlanning.Id);
+            IEnumerable<PlanningHistory> planningHistories = _context.PlanningHistories.Where(x => x.Id == newHistoryPlanning.Id);
             _context.PlanningHistories.RemoveRange(planningHistories);
             _context.PlanningHistories.Add(newHistoryPlanning);
             _context.SaveChanges();
@@ -186,13 +186,6 @@ namespace CrossfitDiaryCore.BL.Services
             }
         }
 
-        public void LogNewWorkout(CrossfitterWorkout crossfitterWorkout, ApplicationUser user)
-        {
-            RoutineComplex routineComplex = _readWorkoutsService.GetWorkout(crossfitterWorkout.RoutineComplexId);
-            CreateAndLogNewWorkout(routineComplex, crossfitterWorkout, user);
-            // _context.CrossfitterWorkouts.Add(crossfitterWorkout);
-            // _context.SaveChanges();
-        }
 
         public void RemovePlannedWod(int plannedWodId, string userId, DateTime date)
         {

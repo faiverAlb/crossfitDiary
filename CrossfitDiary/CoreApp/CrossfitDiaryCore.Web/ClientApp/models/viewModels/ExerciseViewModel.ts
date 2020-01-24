@@ -83,5 +83,12 @@ export class ExerciseViewModel implements Deserializable {
         let result: string = foundCountMeasure ? foundCountMeasure.measureValue : null;
         return result;
     }
+
+    resetWeightMeasures() {
+        this.weightMeasure.measureValue = null;
+        this.altWeightMeasure.measureValue = null;
+        this.weightDisplayType = WeightDisplayType.Default;
+        this.weightPercentValue = null;
+    }
 }
 

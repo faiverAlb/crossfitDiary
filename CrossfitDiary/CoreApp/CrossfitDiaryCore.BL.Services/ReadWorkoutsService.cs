@@ -49,8 +49,28 @@ namespace CrossfitDiaryCore.BL.Services
         /// </returns>
         public virtual int FindDefaultOrExistingWorkout(RoutineComplex routineComplexToSave)
         {
+            List<RoutineComplex> workoutsToCheck = _context
+                .ComplexRoutines
+                .Include(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .ToList();
+            return CheckWodOnExistingOne(workoutsToCheck, routineComplexToSave);
+        }
 
-            List<RoutineComplex> workoutsToCheck = _context.ComplexRoutines.AsNoTracking().Include(x => x.RoutineSimple).ThenInclude(x => x.Exercise).ThenInclude(x => x.ExerciseMeasures).ToList();
+        public virtual int FindDefaultOrExistingWorkoutNonTracking(RoutineComplex routineComplexToSave)
+        {
+            List<RoutineComplex> workoutsToCheck = _context
+                .ComplexRoutines
+                .AsNoTracking()
+                .Include(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures).ToList();
+            return CheckWodOnExistingOne(workoutsToCheck, routineComplexToSave);
+        }
+
+        private int CheckWodOnExistingOne(List<RoutineComplex> workoutsToCheck, RoutineComplex routineComplexToSave)
+        {
             foreach (RoutineComplex existingRoutineComplex in workoutsToCheck)
             {
                 if (_workoutsMatchDispatcher.IsWorkoutsMatch(existingRoutineComplex, routineComplexToSave) == false)

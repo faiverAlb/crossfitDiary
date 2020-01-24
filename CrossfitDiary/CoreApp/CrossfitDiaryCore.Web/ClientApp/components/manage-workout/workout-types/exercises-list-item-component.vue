@@ -100,7 +100,7 @@
     /* Font awesome icons */
 
     /* public components */
-    import {Component, Prop, Vue} from "vue-property-decorator";
+    import {Component, Prop, Vue, Watch} from "vue-property-decorator";
     import {
         BButton,
         BDropdown,
@@ -171,6 +171,14 @@
 
         get canSeeWeightsMeasures() {
             return this.exercise.weightMeasure && this.isFindMaxWeight === false && this.exercise.weightDisplayType == WeightDisplayType.Default;
+        }
+
+        @Watch('isFindMaxWeight')
+        onisFindMaxWeightChange(newVal: boolean, oldVal: boolean) {
+            if (newVal)
+            {
+                this.exercise.resetWeightMeasures();
+            }
         }
 
         getWeightDisplayType(weightDisplayType: WeightDisplayType) {

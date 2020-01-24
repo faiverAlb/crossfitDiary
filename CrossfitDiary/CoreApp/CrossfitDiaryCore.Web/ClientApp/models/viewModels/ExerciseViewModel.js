@@ -64,6 +64,12 @@ var ExerciseViewModel = /** @class */ (function () {
         var result = foundCountMeasure ? foundCountMeasure.measureValue : null;
         return result;
     };
+    ExerciseViewModel.prototype.resetWeightMeasures = function () {
+        this.weightMeasure.measureValue = null;
+        this.altWeightMeasure.measureValue = null;
+        this.weightDisplayType = WeightDisplayType.Default;
+        this.weightPercentValue = null;
+    };
     return ExerciseViewModel;
 }());
 export { ExerciseViewModel };

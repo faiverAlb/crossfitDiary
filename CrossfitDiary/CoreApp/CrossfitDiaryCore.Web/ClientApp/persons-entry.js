@@ -65,7 +65,6 @@ var vue = new Vue({
         logWorkout: function (logModel, workoutModel) {
             var _this = this;
             this.spinner.activate();
-            debugger;
             var model = {
                 newWorkoutViewModel: workoutModel,
                 logWorkoutViewModel: logModel
