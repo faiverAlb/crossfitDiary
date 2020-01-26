@@ -220,6 +220,39 @@ namespace CrossfitDiaryCore.BL.Services
             return routines;
         }
 
+        public List<TempPersonMaximum> GetPersonMaxumumsOneWeight(string currentUserId)
+        {
+            List<Exercise> allExercises = _context.Exercises
+                .Include(x => x.ExerciseMeasures)
+                .Where(x => x.ExerciseMeasures.Any(y => y.ExerciseMeasureTypeId == MeasureType.Weight))
+                .ToList();
+            var allMaximums = _dapperRepository.GetAllMaximums(currentUserId, DateTime.Now).GroupBy(x => x.ExerciseId);
+            var resultMaximums = new List<TempPersonMaximum>();
+            foreach (Exercise exercise in allExercises)
+            {
+                var founMaximum = allMaximums.SingleOrDefault(x => x.Key == exercise.Id);
+                if (founMaximum != null)
+                {
+                    TempPersonMaximum tempPersonMaximum = founMaximum.OrderByDescending(x => x.CalculatedMaximumWeight).First();
+                    resultMaximums.Add(tempPersonMaximum);
+                }
+                else
+                {
+                    resultMaximums.Add(new TempPersonMaximum()
+                    {
+                        ExerciseId = exercise.Id,
+                        ExerciseTitle = exercise.Title,
+                        RoutineSimpleWeight = 0,
+                        
+                    });
+
+                }
+            }
+
+            return resultMaximums;
+        }
+
+
         public List<LeaderboardItemModel> GetLeaderboardByWorkout(int crossfitterWorkoutId, ApplicationUser user)
         {
             //ToDo: Refactoring or remove this
@@ -300,5 +333,6 @@ namespace CrossfitDiaryCore.BL.Services
             // }
             // return new LeaderboardItemModel(plannedWorkout.PlanningLevel.ToString(),crossfitterWorkout.Crossfitter.FullName, result);
         }
+
     }
 }

@@ -9,6 +9,8 @@ namespace CrossfitDiaryCore.Model.TempModels
     {
         public int ExerciseId { get; set; }
 
+        public string ExerciseTitle { get; set; }
+
         public int RoutineSimpleId { get; set; }
 
         public int CrossfitterWorkoutId { get; set; }

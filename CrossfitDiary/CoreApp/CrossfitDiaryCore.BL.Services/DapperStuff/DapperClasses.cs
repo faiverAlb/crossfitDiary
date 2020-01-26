@@ -197,6 +197,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string sql = @"SELECT DISTINCT ExerciseId,
+                                [Exercise].Title as ExerciseTitle,
                                 RoutineSimple.Weight as RoutineSimpleWeight,
                                 [CrossfitterWorkout].Weight as CrossfitWodWeight,
                                 RoutineSimple.Id As RoutineSimpleId,
@@ -206,6 +207,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                                 FROM [RoutineSimple]
 	                                INNER JOIN [RoutineComplex] ON [RoutineComplex].Id = RoutineSimple.RoutineComplexId
 	                                INNER JOIN [CrossfitterWorkout] ON CrossfitterWorkout.RoutineComplexId = RoutineComplex.Id
+                                    INNER JOIN [Exercise] ON [Exercise].Id = [RoutineSimple].ExerciseId
                                 WHERE [CrossfitterWorkout].CrossfitterId = @userId
                                 AND (RoutineSimple.Weight IS NOT NULL OR CrossfitterWorkout.Weight IS NOT NULL)
                                 AND CrossfitterWorkout.Date <= @date
