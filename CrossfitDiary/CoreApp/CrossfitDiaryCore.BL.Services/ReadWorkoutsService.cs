@@ -204,7 +204,7 @@ namespace CrossfitDiaryCore.BL.Services
             // var resultComplexes = new List<KeyValuePair<PlanningLevel, List<RoutineComplex>>>();
             IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> groupedByWodSubType = planned
                 .GroupBy(x => x.PlanningLevel)
-                .Select(x => new KeyValuePair<PlanningLevel, List<PlanningHistory>>(x.Key,x.ToList()));
+                .Select(x => new KeyValuePair<PlanningLevel, List<PlanningHistory>>(x.Key,x.OrderBy(y => y.WodSubType).ToList()));
             return groupedByWodSubType;
         }
         public List<RoutineComplex> GetWorkoutsList()
