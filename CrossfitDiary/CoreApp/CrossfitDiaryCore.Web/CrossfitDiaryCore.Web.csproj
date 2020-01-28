@@ -78,6 +78,12 @@
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="robots.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
   <Target Name="BuildClientAssets" AfterTargets="ComputeFilesToPublish">
     <Exec Command="npm install" />
