@@ -95,8 +95,8 @@ namespace CrossfitDiaryCore.Web
             services.AddTransient<ReadExercisesService>();
             services.AddTransient<ManageWorkoutsService>();
             services.AddTransient<ManagerUsersService>();
-
             services.AddTransient<WorkoutsMatchDispatcher>();
+            services.AddTransient<MaximumsUpdater>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

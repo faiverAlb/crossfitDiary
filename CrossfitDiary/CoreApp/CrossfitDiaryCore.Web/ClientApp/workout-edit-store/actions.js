@@ -1,7 +1,6 @@
 // profile/actions.ts
 import CrossfitterService from "../CrossfitterService";
 export var actions = {
-    // tslint:disable-next-line:typedef
     fetchExercises: function (_a) {
         var commit = _a.commit;
         var crossfitterService = new CrossfitterService();
@@ -10,19 +9,20 @@ export var actions = {
             commit("exercisesLoaded", exercises);
         });
     },
-    // tslint:disable-next-line:typedef
-    fetchUserMaximums: function (_a) {
-        var commit = _a.commit;
-        var crossfitterService = new CrossfitterService();
-        crossfitterService.getExerciseMaximums().then(function (data) {
-            var userMaximums = data;
-            commit("userMaximumsLoaded", userMaximums);
-        });
-    },
-    // tslint:disable-next-line:typedef
+    // fetchUserMaximums({commit}): any {
+    //     let crossfitterService: CrossfitterService = new CrossfitterService();
+    //     crossfitterService.getExerciseMaximums().then(data => {
+    //         const userMaximums: PersonMaximumViewModel[] = data;
+    //         commit("userMaximumsLoaded", userMaximums);
+    //     });
+    // },
     setCanUserSeePlanWorkouts: function (_a, newValue) {
         var commit = _a.commit;
         commit("canUserSeePlanWorkoutsConfigured", newValue);
+    },
+    setIsFindMaxWeight: function (_a, newValue) {
+        var commit = _a.commit;
+        commit("isFindMaxWeightConfigured", newValue);
     }
 };
 // }

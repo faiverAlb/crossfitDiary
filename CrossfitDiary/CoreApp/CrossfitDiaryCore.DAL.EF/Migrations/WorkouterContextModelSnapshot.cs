@@ -114,6 +114,10 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.Property<bool>("WasFinished");
 
+                    b.Property<decimal?>("Weight");
+
+                    b.Property<int>("WodSubType");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CrossfitterId");
@@ -180,6 +184,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.Property<int>("RoutineComplexId");
 
+                    b.Property<int>("WodSubType");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CrossfitterId");
@@ -194,6 +200,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("AsNonBreakingSet");
+
                     b.Property<string>("Comment");
 
                     b.Property<int>("ComplexType");
@@ -203,6 +211,8 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<DateTime>("CreatedUtc")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasDefaultValueSql("getutcdate()");
+
+                    b.Property<bool>("FindMaxWeight");
 
                     b.Property<int?>("ParentId");
 
@@ -261,6 +271,10 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<TimeSpan?>("TimeToWork");
 
                     b.Property<decimal?>("Weight");
+
+                    b.Property<int>("WeightDisplayType");
+
+                    b.Property<double?>("WeightPercentValue");
 
                     b.HasKey("Id");
 

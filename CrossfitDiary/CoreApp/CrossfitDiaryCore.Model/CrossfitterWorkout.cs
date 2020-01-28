@@ -86,12 +86,27 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public string Comment { get; set; }
 
+
+        /// <summary>
+        ///     Gets or sets Workout Sub type
+        /// </summary>
+        public WodSubType WodSubType { get; set; }
+
+
         /// <summary>
         ///     
         /// </summary>
         [NotMapped]
         public List<TempPersonMaximum> PersonalRecords { get; set; } = new List<TempPersonMaximum>();
 
+        /// <summary>
+        ///     Possible max weight done during the workouts
+        /// </summary>
+        public decimal? Weight { get; set; }
 
+        public void AddToPersonRecord(TempPersonMaximum newMax)
+        {
+            PersonalRecords.Add(newMax);
+        }
     }
 }

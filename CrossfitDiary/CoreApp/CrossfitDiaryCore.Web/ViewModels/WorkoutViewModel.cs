@@ -37,18 +37,14 @@ namespace CrossfitDiaryCore.Web.ViewModels
         [JsonProperty("workoutType")]
         public RoutineComplexType WorkoutType { get; set; }
 
-        [JsonProperty("planningWorkoutLevel")]
-        public PlanningWorkoutLevel? PlanningWorkoutLevel { get; set; }
 
-        [JsonProperty("displayPlanDate")]
-        public string DisplayPlanDate { get; set; }
 
         [JsonProperty("workoutTypeDisplay")]
         public string WorkoutTypeDisplay
         {
             get
             {
-                var displayValue = string.Empty;
+                string displayValue;
                 switch (WorkoutType)
                 {
                     case RoutineComplexType.ForTime:
@@ -88,5 +84,16 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
         [JsonProperty("canSeeLeaderboard")]
         public bool CanSeeLeaderboard { get; set; }
+
+
+        [JsonProperty("asNonBreakingSet")] 
+        public bool AsNonBreakingSet { get; set; }
+        
+        
+        [JsonProperty("findMaxWeight")] 
+        public bool FindMaxWeight { get; set; }
+
+
+
     }
 }

@@ -30,7 +30,10 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
                     || routineSimpleToSave.Centimeters != existingSimpleRoutine.Centimeters
                     || routineSimpleToSave.IsDoUnbroken != existingSimpleRoutine.IsDoUnbroken
                     || routineSimpleToSave.TimeToWork != existingSimpleRoutine.TimeToWork
-                    || routineSimpleToSave.IsAlternative != existingSimpleRoutine.IsAlternative)
+                    || routineSimpleToSave.IsAlternative != existingSimpleRoutine.IsAlternative
+                    || routineSimpleToSave.WeightDisplayType != existingSimpleRoutine.WeightDisplayType
+                    || routineSimpleToSave.WeightPercentValue != existingSimpleRoutine.WeightPercentValue)
+
                 {
                     return false;
                 }

@@ -1,5 +1,8 @@
 ﻿namespace CrossfitDiaryCore.Model
 {
+    /// <summary>
+    ///     Describes level for planning: Scaled, Rx, Rx+
+    /// </summary>
     public enum PlanningLevel
     {
         Scaled = 0,

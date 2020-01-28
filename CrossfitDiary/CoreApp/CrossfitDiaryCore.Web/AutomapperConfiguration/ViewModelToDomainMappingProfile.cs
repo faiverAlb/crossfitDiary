@@ -15,6 +15,10 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<MeasureTypeViewModel, MeasureType>();
+            CreateMap<PlanningWorkoutViewModel, PlanningHistory>()
+                .ForMember(x => x.RoutineComplex, x => x.MapFrom(y => y.WorkoutViewModel))
+                .ForMember(x => x.PlanningDate, x => x.ResolveUsing<DateTimeParser>())
+                .ForMember(x => x.PlanningLevel, x => x.MapFrom(y => y.PlanningWorkoutLevel));
             //CreateMap<ExerciseMeasureTypeViewModel, ExerciseMeasureType>();
             CreateMap<ExerciseMeasureViewModel, ExerciseMeasure>();
 
@@ -29,18 +33,18 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                             exerciseViewModel.Position = index++;
                         }
                     })
-                .ForMember(x => x.PlanDate, x => x.ResolveUsing<DateTimeParser>())
                 .ForMember(x => x.RoundCount, x => x.MapFrom(y => y.RoundsCount))
                 .ForMember(x => x.TimeToWork, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeToWork)))
                 .ForMember(x => x.TimeCap, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimeCap)))
                 .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => ParseTimeSpanFromString(y.RestBetweenRounds)))
-                .ForMember(x => x.PlanningLevel, x => x.MapFrom(y => y.PlanningWorkoutLevel))
                 .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => ParseTimeSpanFromString(y.RestBetweenExercises)));
 
             
             CreateMap<ExerciseViewModel, RoutineSimple>()
                 .ForMember(x => x.ExerciseId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.Id, x => x.Ignore())
+                .ForMember(x => x.WeightDisplayType, x => x.MapFrom(y => y.WeightDisplayType))
+                .ForMember(x => x.WeightPercentValue, x => x.MapFrom(y => y.WeightPercentValue))
                 .ForMember(x => x.IsDoUnbroken, x => x.MapFrom(y => y.IsDoUnbroken))
                 .ForMember(x => x.Count, opt => opt.ResolveUsing<CountResolver>())
                 .ForMember(x => x.Distance, opt => opt.ResolveUsing<DistanceResolver>())

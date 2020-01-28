@@ -7,10 +7,11 @@
       >
         <div class="weight-maximums">
           <b-table
-            :items="personMaximums"
-            :fields="['exerciseTitle','maximumWeight']"
-            :small="true"
-          ></b-table>
+                  sort-by="exerciseTitle"
+                  :items="personMaximums"
+                  :fields="['exerciseTitle','calculatedMaximumWeight']"
+                  :small="true"
+          />
         </div>
         <div slot="modal-footer">
           <b-button

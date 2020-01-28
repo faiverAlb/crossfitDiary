@@ -4,6 +4,7 @@ import { ExerciseViewModel } from "./models/viewModels/ExerciseViewModel";
 import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
 import { PersonMaximumViewModel } from "./models/viewModels/PersonMaximumViewModel";
 import { LeaderboardItemViewModel } from "./models/viewModels/LeaderboardItemViewModel";
+import { PlanningWorkoutViewModel } from "./models/viewModels/PlanningWorkoutViewModel";
 var CrossfitterService = /** @class */ (function () {
     function CrossfitterService() {
         // tslint:disable-next-line:max-line-length
@@ -11,8 +12,8 @@ var CrossfitterService = /** @class */ (function () {
             return axios.post("api/createAndLogNewWorkout", model);
         };
         // tslint:disable-next-line:max-line-length
-        this.createAndPlanWorkout = function (workoutViewModel) {
-            return axios.post("api/createAndPlanWorkout", workoutViewModel);
+        this.createAndPlanWorkout = function (planWorkoutModel) {
+            return axios.post("api/createAndPlanWorkout", planWorkoutModel);
         };
         // tslint:disable-next-line:max-line-length
         this.getAllCrossfittersWorkouts = function (page, pageSize) {
@@ -26,7 +27,11 @@ var CrossfitterService = /** @class */ (function () {
         };
         this.getPlannedWorkoutsForToday = function () {
             return axios.get("api/getPlannedWorkoutsForToday").then(function (jsonData) {
-                return jsonData.data.map(function (x) { return new WorkoutViewModel().deserialize(x); });
+                var res = {};
+                for (var i = 0; i < jsonData.data.length; i++) {
+                    res[jsonData.data[i].key] = jsonData.data[i].value.map(function (x) { return new PlanningWorkoutViewModel().deserialize(x); });
+                }
+                return res;
             });
         };
         this.getWorkoutsList = function () {
@@ -39,15 +44,15 @@ var CrossfitterService = /** @class */ (function () {
                 return jsonData.data.map(function (x) { return new ExerciseViewModel().deserialize(x); });
             });
         };
-        this.getExerciseMaximums = function () {
-            return axios
-                .get("api/getExerciseMaximums")
-                .then(function (jsonData) {
-                return jsonData.data.map(function (x) {
-                    return new PersonMaximumViewModel().deserialize(x);
-                });
-            });
-        };
+        // public getExerciseMaximums = (): Promise<PersonMaximumViewModel[]> => {
+        //   return axios
+        //     .get<PersonMaximumViewModel[]>("api/getExerciseMaximums")
+        //     .then(jsonData => {
+        //       return jsonData.data.map(x =>
+        //         new PersonMaximumViewModel().deserialize(x)
+        //       );
+        //     });
+        // };
         this.getWeightsMaximums = function () {
             return axios
                 .get("api/getWeightsMaximums")

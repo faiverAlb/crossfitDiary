@@ -1,6 +1,5 @@
 /* Font awesome icons */
 import { dom } from "@fortawesome/fontawesome-svg-core";
-dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver
 /* public components */
 import Vue from "vue";
 import Spinner from "vue-spinner-component/src/Spinner.vue";
@@ -15,12 +14,13 @@ import "./style/persons.scss";
 import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel";
 import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 import { ErrorAlertModel } from "./models/viewModels/ErrorAlertModel";
-import { WorkoutViewModel } from "./models/viewModels/WorkoutViewModel";
+import { PlanningWorkoutViewModel } from "./models/viewModels/PlanningWorkoutViewModel";
+dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver 
 var apiService = new CrossfitterService();
 Vue.component("b-form-checkbox", BFormCheckbox);
 var vue = new Vue({
     el: "#home-page-container",
-    template: "\n    <div class=\"home-container\">\n      <div class=\"row\">\n        <div class=\"col\">\n          <ErrorAlertComponent :errorAlertModel=\"errorAlertModel\"></ErrorAlertComponent>\n        </div>\n      </div>\n      <PlannedWorkoutDisplayComponent :plannedWorkouts=\"plannedWorkouts\" @deletePlannedWorkout=\"deletePlannedWorkout\" @logWorkout=\"logWorkout\"></PlannedWorkoutDisplayComponent>\n        <div class=\"container person-setting\">\n      <div\n        class=\"row\"\n        v-if=\"activities\"\n      >\n        <div class=\"offset-lg-3 col col-lg-5 pl-0\">\n          <b-form-checkbox\n            id=\"showOnlyUserWods\"\n            name=\"shouShowOnlyUserWods\"\n            v-model=\"showOnlyUserWods\"\n            @change=\"changeShowUserWods\">\n            Show only my wods\n          </b-form-checkbox>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"offset-5\">\n          <spinner\n            :status=\"spinner.status\"\n            :size=\"spinner.size\"\n            :color=\"spinner.color\"\n            :depth=\"spinner.depth\"\n            :rotation=\"spinner.rotation\"\n            :speed=\"spinner.speed\">\n          </spinner>\n        </div>\n      </div>\n    \n    </div>\n      <PersonsActivitiesComponent :activities=\"activities\"/>\n    </div>\n    ",
+    template: "\n        <div class=\"home-container\">\n            <div class=\"row\">\n                <div class=\"col\">\n                    <ErrorAlertComponent :errorAlertModel=\"errorAlertModel\"/>\n                </div>\n            </div>\n            <div v-if=\"isPlannedWodsLoaded\">\n                <PlannedWorkoutDisplayComponent  :plannedWorkouts=\"plannedWorkouts\"\n                                                 @deletePlannedWorkout=\"deletePlannedWorkout\"\n                                                 @logWorkout=\"logWorkout\"/>\n            </div>\n            \n            <div class=\"container person-setting\">\n                <div\n                        class=\"row\"\n                        v-if=\"activities\"\n                >\n                    <div class=\"offset-lg-3 col col-lg-5 pl-0\">\n                        <b-form-checkbox\n                                id=\"showOnlyUserWods\"\n                                name=\"shouShowOnlyUserWods\"\n                                v-model=\"showOnlyUserWods\"\n                                @change=\"changeShowUserWods\">\n                            Show only my wods\n                        </b-form-checkbox>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"offset-5\">\n                        <spinner\n                                :status=\"spinner.status\"\n                                :size=\"spinner.size\"\n                                :color=\"spinner.color\"\n                                :depth=\"spinner.depth\"\n                                :rotation=\"spinner.rotation\"\n                                :speed=\"spinner.speed\">\n                        </spinner>\n                    </div>\n                </div>\n\n            </div>\n            <PersonsActivitiesComponent :activities=\"activities\"/>\n        </div>\n    ",
     components: {
         PersonsActivitiesComponent: PersonsActivitiesComponent,
         PlannedWorkoutDisplayComponent: PlannedWorkoutDisplayComponent,
@@ -30,10 +30,11 @@ var vue = new Vue({
     data: function () {
         return {
             activities: ToLogWorkoutViewModel[0],
-            plannedWorkouts: WorkoutViewModel,
+            plannedWorkouts: { PlanningWorkoutLevel: [PlanningWorkoutViewModel] },
             spinner: new SpinnerModel(true),
             errorAlertModel: new ErrorAlertModel(),
-            showOnlyUserWods: false
+            showOnlyUserWods: false,
+            isPlannedWodsLoaded: false
         };
     },
     mounted: function () {
@@ -43,6 +44,7 @@ var vue = new Vue({
         apiService
             .getPlannedWorkoutsForToday()
             .then(function (data) {
+            _this.isPlannedWodsLoaded = true;
             _this.plannedWorkouts = data;
         })
             .catch(function (data) {
@@ -60,11 +62,15 @@ var vue = new Vue({
         });
     },
     methods: {
-        logWorkout: function (logModel) {
+        logWorkout: function (logModel, workoutModel) {
             var _this = this;
             this.spinner.activate();
+            var model = {
+                newWorkoutViewModel: workoutModel,
+                logWorkoutViewModel: logModel
+            };
             apiService
-                .quickLogWorkout(logModel)
+                .createAndLogWorkout(model)
                 .then(function () { return apiService.getAllCrossfittersWorkouts(); })
                 .then(function (data) {
                 _this.activities = data;
@@ -78,7 +84,6 @@ var vue = new Vue({
         deletePlannedWorkout: function (toRemovePlannedId) {
             var _this = this;
             this.spinner.activate();
-            debugger;
             apiService
                 .deletePlannedWorkout(toRemovePlannedId)
                 .then(function () { return apiService.getPlannedWorkoutsForToday(); })

@@ -1,15 +1,6 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 import { ExerciseMeasureViewModel } from "./ExerciseMeasureViewModel";
 import { ExerciseMeasureType } from "./ExerciseMeasureType";
+import { WeightDisplayType } from "./WeightDisplayType";
 var ExerciseViewModel = /** @class */ (function () {
     function ExerciseViewModel(input) {
         var _this = this;
@@ -18,9 +9,12 @@ var ExerciseViewModel = /** @class */ (function () {
         this.isAlternative = false;
         this.isNewWeightMaximum = false;
         this.isDoUnbroken = false;
+        this.weightDisplayType = WeightDisplayType.Default;
         this.count = null;
         this.weight = null;
         this.calories = null;
+        this.weightPercentValue = null;
+        this.calculatedWeight = null;
         this.haveSameCountAndCalories = function (toCompareExercise) {
             if (_this.count == null && toCompareExercise.count == null) {
                 if (_this.calories == null && toCompareExercise.calories == null) {
@@ -57,6 +51,12 @@ var ExerciseViewModel = /** @class */ (function () {
         this.count = this.getMeasureValue(ExerciseMeasureType.Count);
         this.weight = this.getMeasureValue(ExerciseMeasureType.Weight);
         this.calories = this.getMeasureValue(ExerciseMeasureType.Calories);
+        this.countMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Count; });
+        this.weightMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Weight; });
+        this.altWeightMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.AlternativeWeight; });
+        this.caloriesMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Calories; });
+        this.distanceMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Distance; });
+        this.heightMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Height; });
         return this;
     };
     ExerciseViewModel.prototype.getMeasureValue = function (measureType) {
@@ -64,21 +64,13 @@ var ExerciseViewModel = /** @class */ (function () {
         var result = foundCountMeasure ? foundCountMeasure.measureValue : null;
         return result;
     };
+    ExerciseViewModel.prototype.resetWeightMeasures = function () {
+        this.weightMeasure.measureValue = null;
+        this.altWeightMeasure.measureValue = null;
+        this.weightDisplayType = WeightDisplayType.Default;
+        this.weightPercentValue = null;
+    };
     return ExerciseViewModel;
 }());
 export { ExerciseViewModel };
-var DefaultExerciseViewModel = /** @class */ (function (_super) {
-    __extends(DefaultExerciseViewModel, _super);
-    function DefaultExerciseViewModel() {
-        return _super.call(this, {
-            id: -1,
-            title: "Select exercise",
-            exerciseMeasures: [],
-            isAlternative: false,
-            isDoUnbroken: false
-        }) || this;
-    }
-    return DefaultExerciseViewModel;
-}(ExerciseViewModel));
-export { DefaultExerciseViewModel };
 //# sourceMappingURL=ExerciseViewModel.js.map

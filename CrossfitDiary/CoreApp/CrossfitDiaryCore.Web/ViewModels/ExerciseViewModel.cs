@@ -9,7 +9,10 @@ namespace CrossfitDiaryCore.Web.ViewModels
         public int Id { get; set; }
 
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; set; } 
+        
+        [JsonProperty("abbreviation")]
+        public string Abbreviation { get; set; }
 
         [JsonProperty("exerciseMeasures")]
         public IEnumerable<ExerciseMeasureViewModel> ExerciseMeasures { get; set; }
@@ -30,6 +33,17 @@ namespace CrossfitDiaryCore.Web.ViewModels
         public int Position { get; set; }
 
         public int? TempRoutineSimpleId { get; set; }
+
+        [JsonProperty("weightDisplayType")]
+        public WeightDisplayType WeightDisplayType { get; set; }
+
+        [JsonProperty("weightPercentValue")]
+        public double? WeightPercentValue { get; set; }
+
+        [JsonProperty("calculatedWeight")]
+        public decimal? CalculatedWeight { get; private set; }
+
+
     }
 
 
@@ -49,8 +63,17 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
         [JsonProperty("isRequired")]
         public bool IsRequired { get; set; } = true;
+
+
     }
-    
+
+    public enum WeightDisplayType
+    {
+        Default = 0,
+        PercentPreviousPM,
+        PercentMaxPM = 2
+    }
+
 
     public enum MeasureTypeViewModel
     {

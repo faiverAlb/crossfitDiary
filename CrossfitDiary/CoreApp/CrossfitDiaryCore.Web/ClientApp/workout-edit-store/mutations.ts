@@ -15,5 +15,9 @@ export const mutations: MutationTree<IWorkoutEditState> = {
   },
   canUserSeePlanWorkoutsConfigured(state: IWorkoutEditState, payload: boolean) {
     state.canUserSeePlanWorkouts = payload;
+  },
+  isFindMaxWeightConfigured(state: IWorkoutEditState, payload: boolean) {
+    state.isFindMaxWeight = payload;
   }
+  
 };

@@ -12,11 +12,11 @@ namespace CrossfitDiaryCore.Model
     /// </example>
     public class RoutineSimple : BaseModel
     {
-
         /// <summary>
         /// Foreign Key to Exercise
         /// </summary>
         public int ExerciseId { get; set; }
+
         /// <summary>
         /// Exercise is a part of the simple routine
         /// </summary>
@@ -26,7 +26,7 @@ namespace CrossfitDiaryCore.Model
         /// Foreign Key to Routine Complex
         /// </summary>
         public int RoutineComplexId { get; set; }
-        
+
         /// <summary>
         /// Link to Routine Complex
         /// </summary>
@@ -73,19 +73,6 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public bool IsAlternative { get; set; }
 
-
-//        /// <summary>
-//        ///     Calculated property from service to identify as new maximum
-//        /// </summary>
-//        [NotMapped]
-//        public bool IsNewWeightMaximum { get; set; }
-//        
-//        /// <summary>
-//        ///     Substraction between maximum and previous maximum weights
-//        /// </summary>
-//        [NotMapped]
-//        public decimal? AddedToMaxWeight { get; set; }
-
         /// <summary>
         ///     Should be done without break
         /// </summary>
@@ -97,5 +84,49 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public int Position { get; set; }
 
+        /// <summary>
+        ///     Describes how which weight we should display - fixed or calculated based on person's maximums in exercise
+        /// </summary>
+        public WeightDisplayType WeightDisplayType { get; set; } = WeightDisplayType.Default;
+
+
+        /// <summary>
+        ///     % of weight to calculate
+        /// </summary>
+        public double? WeightPercentValue { get; set; }
+
+        [NotMapped]
+        public decimal? CalculatedWeight { get; private set; }
+
+        public void CalculateWeight(decimal? maxWeight)
+        {
+            if (Weight.HasValue)
+            {
+                return;
+            }
+            if (maxWeight == null)
+            {
+                Weight = 0;
+            }
+            switch (WeightPercentValue)
+            {
+                case null:
+                    break;
+                case 0:
+                    Weight = 0;
+                    break;
+                default:
+                    Weight = (maxWeight / 100 * (decimal?) WeightPercentValue);
+                    break;
+            }
+
+        }
+    }
+
+    public enum WeightDisplayType
+    {
+        Default = 0,
+        PercentPreviousPM,
+        PercentMaxPM = 2
     }
 }

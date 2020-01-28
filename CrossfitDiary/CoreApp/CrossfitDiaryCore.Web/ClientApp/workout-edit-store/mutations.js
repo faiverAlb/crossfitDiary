@@ -9,6 +9,9 @@ export var mutations = {
     },
     canUserSeePlanWorkoutsConfigured: function (state, payload) {
         state.canUserSeePlanWorkouts = payload;
+    },
+    isFindMaxWeightConfigured: function (state, payload) {
+        state.isFindMaxWeight = payload;
     }
 };
 //# sourceMappingURL=mutations.js.map

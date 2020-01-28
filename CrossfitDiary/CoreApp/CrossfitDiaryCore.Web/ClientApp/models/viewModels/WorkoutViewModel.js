@@ -17,13 +17,18 @@ var WorkoutViewModel = /** @class */ (function () {
         this.isInnerWorkout = false;
         this.haveCollapsedVersion = false;
         this.canShowCountOnce = true;
+        this.asNonBreakingSet = false;
+        this.findMaxWeight = false;
         this.groupedDictionary = {};
         this.oneTimeSchema = {};
-        this.getDefaultDate = function () {
-            var date = new Date();
-            var result = ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
-            return result;
-        };
+        // subTypeClass: string = "";
+        // wodSubType: WodSubType;
+        // getDefaultDate = (): string => {
+        //     let date: Date = new Date();
+        //     let result: string = ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();
+        //
+        //     return result;
+        // };
         this.IsForTime = function () {
             return _this.workoutType === WorkoutType.ForTime;
         };
@@ -35,6 +40,9 @@ var WorkoutViewModel = /** @class */ (function () {
         };
         this.IsHaveCapTime = function () {
             return _this.workoutType === WorkoutType.ForTime || _this.workoutType === WorkoutType.ForTimeManyInners;
+        };
+        this.IsFindMaxWeight = function () {
+            return _this.workoutType === WorkoutType.NotForTime && _this.findMaxWeight == true;
         };
         this.getHaveCollapsedVersion = function (exercisedToUse, distinctFirst) {
             var canBeCollapsed = true;
@@ -109,7 +117,6 @@ var WorkoutViewModel = /** @class */ (function () {
             }
             return canShowCountOnce;
         };
-        this.displayPlanDate = this.getDefaultDate();
         if (input == null) {
             return;
         }

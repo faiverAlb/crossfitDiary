@@ -16,5 +16,8 @@ namespace CrossfitDiaryCore.Web.ViewModels
 
         [JsonProperty("maximumAlternativeWeight")]
         public double? MaximumAlternativeWeight { get; set; }
+
+        [JsonProperty("calculatedMaximumWeight")]
+        public double? CalculatedMaximumWeight { get; set; }
     }
 }

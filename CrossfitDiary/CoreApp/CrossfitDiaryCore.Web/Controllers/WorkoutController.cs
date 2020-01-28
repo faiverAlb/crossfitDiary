@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using WodSubType = CrossfitDiaryCore.Model.WodSubType;
 
 namespace CrossfitDiaryCore.Web.Controllers
 {
@@ -110,23 +111,12 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts to do</returns>
         [HttpGet]
         [Route("api/getPlannedWorkoutsForToday")]
-        public async Task<List<WorkoutViewModel>> GetPlannedWorkoutsForToday()
+        public async Task<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>> GetPlannedWorkoutsForToday()
         {
-            //            List<WorkoutViewModel> workoutViewModels = _memoryCache.GetOrCreate(_plannedWorkouts,  entry =>
-            //                {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-
-            List<RoutineComplex> workouts =  _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
-                    List<WorkoutViewModel> allResults = workouts
-                        .Select(_mapper.Map<WorkoutViewModel>)
-                        .ToList();
-
-                    return allResults.OrderBy(x => x.PlanningWorkoutLevel).ToList();
-//                }
-//            );
-
-
-//            return workoutViewModels;
+            IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> workouts = _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
+            IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> allResults = _mapper.Map<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>>(workouts);
+            return allResults;
         }
 
 
@@ -202,49 +192,40 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/createAndLogNewWorkout")]
         public async Task CreateAndLogNewWorkout([FromBody] ToCreateAndLogNewWorkoutViewModel model)
         {
-            try
-            {
-                ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-                CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
-                crossfitterWorkout.Crossfitter = user;
-                RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
-                newWorkoutRoutine.CreatedBy = user;
-                _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
-//                _memoryCache.Remove(_allMainpageResultsConst);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw;
-            }
-        }
-
-        /// <summary>
-        ///     Log workout from main page
-        /// </summary>
-        /// <param name="logWorkoutViewModel">To log workout view model</param>
-        [HttpPost]
-        [Route("api/quickLogWorkout")]
-        public async Task QuickLogWorkout([FromBody] ToLogWorkoutViewModel logWorkoutViewModel)
-        {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(logWorkoutViewModel);
+            CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
             crossfitterWorkout.Crossfitter = user;
-            _manageWorkoutsService.LogNewWorkout(crossfitterWorkout);
-//            _memoryCache.Remove(_allMainpageResultsConst);
+            RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
+            newWorkoutRoutine.CreatedBy = user;
+            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
+//                _memoryCache.Remove(_allMainpageResultsConst);
+            
         }
 
-        /// <summary>
-        ///     Create and log workout
-        /// </summary>
-        /// <param name="workoutViewModel">Complex model with two properties: new workout and log workout models</param>
+//         /// <summary>
+//         ///     Log workout from main page
+//         /// </summary>
+//         /// <param name="logWorkoutViewModel">To log workout view model</param>
+//         [HttpPost]
+//         [Route("api/quickLogWorkout")]
+//         public async Task QuickLogWorkout([FromBody] ToCreateAndLogNewWorkoutViewModel logWorkoutViewModel)
+//         {
+//             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+//             CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(logWorkoutViewModel);
+//             crossfitterWorkout.Crossfitter = user;
+//             _manageWorkoutsService.LogNewWorkout(crossfitterWorkout, user);
+// //            _memoryCache.Remove(_allMainpageResultsConst);
+//         }
+
+        
         [HttpPost]
         [Route("api/createAndPlanWorkout")]
-        public async Task CreateAndPlanWorkout([FromBody] WorkoutViewModel workoutViewModel)
+        public async Task CreateAndPlanWorkout([FromBody] PlanningWorkoutViewModel planningWorkoutView)
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(workoutViewModel);
-            newWorkoutRoutine.CreatedBy = user;
+            PlanningHistory newWorkoutRoutine = _mapper.Map<PlanningHistory>(planningWorkoutView);
+            newWorkoutRoutine.Crossfitter = user;
+            newWorkoutRoutine.RoutineComplex.CreatedBy = user;
             _manageWorkoutsService.PlanWorkout(newWorkoutRoutine, user);
 //            _memoryCache.Remove(_allMainpageResultsConst);
 //            _memoryCache.Remove(_plannedWorkouts);
@@ -260,8 +241,9 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/planWorkoutToLevel")]
         public async Task PlanWorkoutToLevel([FromQuery] int wodId, [FromQuery] PlanningLevel type)
         {
+            //TODO: implement
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            _manageWorkoutsService.PlanWorkoutForDay(wodId, type, DateTime.Today, user);
+            _manageWorkoutsService.PlanWorkoutForDay(wodId, type, DateTime.Today, user, WodSubType.Wod);
         }
     }
 }
