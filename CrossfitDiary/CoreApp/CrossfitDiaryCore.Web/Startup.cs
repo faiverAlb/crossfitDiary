@@ -46,17 +46,33 @@ namespace CrossfitDiaryCore.Web
                 .AddDefaultTokenProviders();
             //
             services.AddAuthentication()
-            .AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = Configuration["oAuthConfiguration:google:clientId"];
-                googleOptions.ClientSecret = Configuration["oAuthConfiguration:google:clientSecret"];
-            })
-            .AddVkontakte(options =>
-            {
-                options.ClientId = Configuration["oAuthConfiguration:vkontakte:clientId"];
-                options.ClientSecret = Configuration["oAuthConfiguration:vkontakte:clientSecret"];
-                options.Scope.Add("email");
-            });
+                // .AddGoogle(googleOptions =>
+                // {
+                //     googleOptions.ClientId = Configuration["oAuthConfiguration:google:clientId"];
+                //     googleOptions.ClientSecret = Configuration["oAuthConfiguration:google:clientSecret"];
+                // })
+                .AddOpenIdConnect(
+                    authenticationScheme: "Google",
+                    displayName: "Google",
+                    options =>
+                    {
+                        options.Authority = "https://accounts.google.com/";
+                        options.ClientId = Configuration["oAuthConfiguration:google:clientId"];
+
+                        options.CallbackPath = "/signin-google";
+                        options.SignedOutCallbackPath = "/signout-callback-google";
+                        options.RemoteSignOutPath = "/signout-google";
+
+                        options.Scope.Add("email");
+
+                    })
+                .AddVkontakte(options =>
+                {
+                    options.ClientId = Configuration["oAuthConfiguration:vkontakte:clientId"];
+                    options.ClientSecret = Configuration["oAuthConfiguration:vkontakte:clientSecret"];
+                    options.Scope.Add("email");
+                });
+
 
             services.Configure<IdentityOptions>(
                 options =>
@@ -84,9 +100,12 @@ namespace CrossfitDiaryCore.Web
                     // Cookie settings
                     options.Cookie.HttpOnly = true;
                     options.Cookie.Expiration = TimeSpan.FromDays(150);
-                    options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
-                    options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
-                    options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
+                    options.LoginPath =
+                        "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
+                    options.LogoutPath =
+                        "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
+                    options.AccessDeniedPath =
+                        "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
                     options.SlidingExpiration = true;
                 });
 
