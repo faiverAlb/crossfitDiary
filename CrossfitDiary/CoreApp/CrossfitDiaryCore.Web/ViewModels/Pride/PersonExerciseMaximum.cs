@@ -7,8 +7,6 @@ namespace CrossfitDiaryCore.Web.ViewModels.Pride
     /// </summary>
     public class PersonExerciseMaximumViewModel
     {
-        #region properties
-
         /// <summary>
         ///     Gets or sets the date.
         /// </summary>
@@ -69,7 +67,5 @@ namespace CrossfitDiaryCore.Web.ViewModels.Pride
         /// </summary>
         [JsonProperty("workoutTitle")]
         public string WorkoutTitle { get; set; }
-
-        #endregion
     }
 }
