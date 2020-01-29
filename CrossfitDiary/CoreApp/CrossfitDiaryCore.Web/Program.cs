@@ -16,12 +16,17 @@ namespace CrossfitDiaryCore.Web
     {
         public static void Main(string[] args)
         {
+            CreateWebHostBuilder(args).Build().Run();
             var host = BuildWebHost(args);
 
 
             SeedData(host);
             host.Run();
         }
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
 
         private static void SeedData(IWebHost host)
         {
