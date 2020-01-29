@@ -43,7 +43,7 @@ namespace CrossfitDiaryCore.Web
             services.AddAutoMapper();
             services.AddMemoryCache();
 
-            services.AddMvc().AddControllersAsServices().SetCompatibilityVersion(CompatibilityVersion.Version_2_1); ;
+            services.AddMvc().AddControllersAsServices().SetCompatibilityVersion(CompatibilityVersion.Version_2_2); ;
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 //            services.AddA(_serviceProvider.GetService<IHttpContextAccessor>());
