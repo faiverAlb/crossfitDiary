@@ -113,18 +113,10 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/getPlannedWorkoutsForToday")]
         public async Task<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>> GetPlannedWorkoutsForToday()
         {
-            try
-            {
-                ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-                IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> workouts = _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
-                IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> allResults = _mapper.Map<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>>(workouts);
-                return allResults;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> workouts = _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
+            IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> allResults = _mapper.Map<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>>(workouts);
+            return allResults;
         }
 
 
@@ -200,21 +192,13 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/createAndLogNewWorkout")]
         public async Task CreateAndLogNewWorkout([FromBody] ToCreateAndLogNewWorkoutViewModel model)
         {
-            try
-            {
-                ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-                CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
-                crossfitterWorkout.Crossfitter = user;
-                RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
-                newWorkoutRoutine.CreatedBy = user;
-                _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            CrossfitterWorkout crossfitterWorkout = _mapper.Map<CrossfitterWorkout>(model.LogWorkoutViewModel);
+            crossfitterWorkout.Crossfitter = user;
+            RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
+            newWorkoutRoutine.CreatedBy = user;
+            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
 //                _memoryCache.Remove(_allMainpageResultsConst);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
             
         }
 
