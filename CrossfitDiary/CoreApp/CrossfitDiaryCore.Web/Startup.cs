@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
@@ -40,10 +41,12 @@ namespace CrossfitDiaryCore.Web
             string connectionString = Configuration.GetConnectionString("CrossfitDiaryDB_Core");
             services.AddTransient(provider => new DapperRepository(connectionString));
 
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(Startup));
             services.AddMemoryCache();
 
-            services.AddMvc().AddControllersAsServices().SetCompatibilityVersion(CompatibilityVersion.Version_2_2); ;
+            services.AddMvc()
+                .AddControllersAsServices()
+                .AddNewtonsoftJson();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 //            services.AddA(_serviceProvider.GetService<IHttpContextAccessor>());
@@ -91,8 +94,9 @@ namespace CrossfitDiaryCore.Web
                 options =>
                 {
                     // Cookie settings
-                    options.Cookie.HttpOnly = true;
-                    options.Cookie.Expiration = TimeSpan.FromDays(150);
+
+                    // options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromDays(150);
                     options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
                     options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
                     options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
@@ -109,11 +113,10 @@ namespace CrossfitDiaryCore.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -125,13 +128,16 @@ namespace CrossfitDiaryCore.Web
             app.UseCookiePolicy();
 
             app.UseStaticFiles();
+            app.UseRouting();
+
             app.UseAuthentication();
-//            app.UseStatusCodePagesWithRedirects("/Error");
-            app.UseMvc(routes =>
+            app.UseAuthorization();
+
+
+            //            app.UseStatusCodePagesWithRedirects("/Error");
+            app.UseEndpoints(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Persons}/{action=Index}/{id?}");
+                routes.MapControllerRoute(name: "default", "{controller=Persons}/{action=Index}/{id?}");
             });
         }
     }
