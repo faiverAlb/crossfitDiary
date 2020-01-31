@@ -17,7 +17,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
             CreateMap<MeasureTypeViewModel, MeasureType>();
             CreateMap<PlanningWorkoutViewModel, PlanningHistory>()
                 .ForMember(x => x.RoutineComplex, x => x.MapFrom(y => y.WorkoutViewModel))
-                .ForMember(x => x.PlanningDate, x => x.ResolveUsing<DateTimeParser>())
+                .ForMember(x => x.PlanningDate, x => x.MapFrom<DateTimeParser>())
                 .ForMember(x => x.PlanningLevel, x => x.MapFrom(y => y.PlanningWorkoutLevel));
             //CreateMap<ExerciseMeasureTypeViewModel, ExerciseMeasureType>();
             CreateMap<ExerciseMeasureViewModel, ExerciseMeasure>();
@@ -46,17 +46,17 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.WeightDisplayType, x => x.MapFrom(y => y.WeightDisplayType))
                 .ForMember(x => x.WeightPercentValue, x => x.MapFrom(y => y.WeightPercentValue))
                 .ForMember(x => x.IsDoUnbroken, x => x.MapFrom(y => y.IsDoUnbroken))
-                .ForMember(x => x.Count, opt => opt.ResolveUsing<CountResolver>())
-                .ForMember(x => x.Distance, opt => opt.ResolveUsing<DistanceResolver>())
-                .ForMember(x => x.Weight, opt => opt.ResolveUsing<WeightResolver>())
-                .ForMember(x => x.AlternativeWeight, opt => opt.ResolveUsing<AlternativeWeightResolver>())
-                .ForMember(x => x.Calories, opt => opt.ResolveUsing<CaloriesResolver>())
-                .ForMember(x => x.Centimeters, opt => opt.ResolveUsing<CentimetersResolver>());
+                .ForMember(x => x.Count, opt => opt.MapFrom<CountResolver>())
+                .ForMember(x => x.Distance, opt => opt.MapFrom<DistanceResolver>())
+                .ForMember(x => x.Weight, opt => opt.MapFrom<WeightResolver>())
+                .ForMember(x => x.AlternativeWeight, opt => opt.MapFrom<AlternativeWeightResolver>())
+                .ForMember(x => x.Calories, opt => opt.MapFrom<CaloriesResolver>())
+                .ForMember(x => x.Centimeters, opt => opt.MapFrom<CentimetersResolver>());
 
             CreateMap<ToLogWorkoutViewModel, CrossfitterWorkout>()
                 .ForMember(x => x.RoutineComplexId, x => x.MapFrom(y => y.SelectedWorkoutId))
                 .ForMember(x => x.Id, x => x.MapFrom(y => y.CrossfitterWorkoutId))
-                .ForMember(x => x.Date, x => x.ResolveUsing<DateTimeParser>())
+                .ForMember(x => x.Date, x => x.MapFrom<DateTimeParser>())
                 .ForMember(x => x.IsModified, x => x.MapFrom(y => !y.IsRx))
                 .ForMember(x => x.TimePassed, x => x.MapFrom(y => ParseTimeSpanFromString(y.TimePassed)));
         }

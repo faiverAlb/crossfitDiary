@@ -1,10 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <RuntimeFrameworkVersion>2.2.0</RuntimeFrameworkVersion>
 
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
@@ -30,16 +29,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" PrivateAssets="All" />
+    <PackageReference Include="AspNet.Security.OAuth.Vkontakte" Version="3.0.0" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspNet.Security.OAuth.Vkontakte" Version="2.0.1" />
-    <PackageReference Include="AutoMapper" Version="7.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
-    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
-    <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
