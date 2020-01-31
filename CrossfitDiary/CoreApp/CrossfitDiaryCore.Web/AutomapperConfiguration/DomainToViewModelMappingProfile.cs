@@ -69,7 +69,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
             CreateMap<PersonMaximum, PersonExerciseMaximumViewModel>()
                 .ForMember(x => x.Date, x => x.MapFrom(y => y.Date.ToString("d")))
                 .ForMember(x => x.MaximumWeightValue, x => x.MapFrom(y => y.MaximumWeight))
-                .ForMember(x => x.AddedToPreviousMaximum, x => x.ResolveUsing<WeightImprovementResolver>())
+                .ForMember(x => x.AddedToPreviousMaximum, x => x.MapFrom<WeightImprovementResolver>())
                 .ForMember(x => x.MaximumWeight, x => x.MapFrom(y => y.MaximumWeight.HasValue == false? "-": $"{y.MaximumWeight.ToCustomString()} kg"));
 
 
@@ -79,11 +79,11 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.CrossfitterWorkoutId, x => x.MapFrom(y => y.Id))
                 .ForMember(x => x.DisplayDate, x => x.MapFrom(y => y.Date.ToString("dd.MM.yyyy")))
                 //TODO: Fix
-                .ForMember(x => x.CanBeRemovedByCurrentUser, x => x.ResolveUsing<CanBeRemovedResolver>())
+                .ForMember(x => x.CanBeRemovedByCurrentUser, x => x.MapFrom<CanBeRemovedResolver>())
                 .ForMember(x => x.WorkouterName, x => x.MapFrom(y => y.Crossfitter.FullName))
                 .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex))
                 .ForMember(x => x.WorkouterId, x => x.MapFrom(y => y.Crossfitter.Id))
-                .ForMember(x => x.TimePassed, x => x.ResolveUsing<TimePassedResolver>())
+                .ForMember(x => x.TimePassed, x => x.MapFrom<TimePassedResolver>())
                 .AfterMap((crossfitterWorkout, toLogWorkoutViewModel) =>
                 {
                     foreach (TempPersonMaximum personalRecord in crossfitterWorkout.PersonalRecords)
@@ -96,6 +96,9 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                     
                 });
 
+
+            // CreateMap<PlanningLevel, PlanningWorkoutLevel>();
+            CreateMap<KeyValuePair<PlanningLevel, List<PlanningHistory>>, KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>();
             CreateMap<PlanningHistory, PlanningWorkoutViewModel>()
                 .ForMember(x => x.WorkoutViewModel, x => x.MapFrom(y => y.RoutineComplex))
                 .ForMember(x => x.PlanningWorkoutLevel, x => x.MapFrom(y => y.PlanningLevel))
@@ -110,7 +113,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.TimeCap, x => x.MapFrom(y => ResolveTimeSpan(y.TimeCap)))
                 .ForMember(x => x.RestBetweenExercises, x => x.MapFrom(y => ResolveTimeSpan(y.RestBetweenExercises)))
                 .ForMember(x => x.RestBetweenRounds, x => x.MapFrom(y => ResolveTimeSpan(y.RestBetweenRounds)))
-                .ForMember(x => x.CanSeeLeaderboard, x => x.ResolveUsing<ResolveCanSeeLeaderboard>())
+                .ForMember(x => x.CanSeeLeaderboard, x => x.MapFrom<ResolveCanSeeLeaderboard>())
                
                 .AfterMap((routineComplex, workoutViewModel) =>
                     {
