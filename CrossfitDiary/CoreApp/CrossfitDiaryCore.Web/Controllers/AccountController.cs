@@ -59,7 +59,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             }
 
             TempData["error-login-reason"] = status;
-            return RedirectToAction("ErrorLogin");
+            return RedirectToAction("ErrorLogin", new {status = status});
         }
 
         private async Task<CreateUserStatus> CreateUser(ExternalLoginInfo info)
@@ -94,16 +94,9 @@ namespace CrossfitDiaryCore.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult ErrorLogin()
+        public IActionResult ErrorLogin(CreateUserStatus status)
         {
-            if (TempData["error-login-reason"] != null)
-            {
-                CreateUserStatus createUserStatus = (CreateUserStatus)TempData["error-login-reason"];
-                return View(createUserStatus);
-            }
-            return View(CreateUserStatus.DontKnow);
-
-
+            return View(status);
         }
 
         public async Task<IActionResult> Logout()
