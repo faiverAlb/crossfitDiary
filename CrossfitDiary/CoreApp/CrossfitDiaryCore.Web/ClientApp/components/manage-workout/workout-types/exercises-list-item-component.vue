@@ -31,6 +31,13 @@
                                 max PM
                             </p-radio>
                         </b-dropdown-form>
+                        <b-dropdown-divider/>
+                        <b-dropdown-form class="p-3" size="sm" >
+                            <p-check class="p-icon p-smooth" color="info" name="check" v-model="exercise.isDoUnbroken">
+                            <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
+                            Unbroken
+                        </p-check>
+                        </b-dropdown-form>
                         <b-dropdown-divider v-if="isFindMaxWeight === false"/>
                         <b-dropdown-item
                                 :disabled="canMoveExerciseUp"
