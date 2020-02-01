@@ -1,11 +1,11 @@
-﻿import {WeightDisplayType} from "../../../models/viewModels/WeightDisplayType";
-<template>
+﻿<template>
     <div class="simple-routine-item">
         <div class="form-row">
             <div class="form-group my-1 col-lg-auto">
                 <b-input-group size="sm">
                     <b-input-group-prepend class="form-control exercise-title" is-text size="sm">
                         <span>{{exercise.title}}</span>
+                        <span class="ml-1" v-if="exercise.isDoUnbroken"><b-badge variant="warning">unbroken</b-badge></span>
                     </b-input-group-prepend>
                     <b-dropdown
                             class="actions-dropdown"
@@ -33,7 +33,7 @@
                         </b-dropdown-form>
                         <b-dropdown-divider/>
                         <b-dropdown-form class="p-3" size="sm" >
-                            <p-check class="p-icon p-smooth" color="info" name="check" v-model="exercise.isDoUnbroken">
+                            <p-check class="p-icon p-smooth" color="warning" name="check" v-model="exercise.isDoUnbroken">
                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                             Unbroken
                         </p-check>
@@ -117,6 +117,7 @@
         BDropdownItemButton,
         BFormGroup,
         BFormInput,
+        BBadge,
         InputGroupPlugin,
     } from "bootstrap-vue";
     /* models and styles */
@@ -140,6 +141,7 @@
             BFormInput,
             BButton,
             BFormGroup,
+            BBadge,
             FontAwesomeIcon
         }
 
