@@ -97,6 +97,7 @@
             </template>
             <ExerciseMeasureEditComponent :measure="exercise.heightMeasure" v-if="exercise.heightMeasure"/>
             <ExerciseMeasureEditComponent :measure="exercise.caloriesMeasure" v-if="exercise.caloriesMeasure"/>
+            <ExerciseMeasureEditComponent :measure="exercise.timeMeasure" v-if="exercise.timeMeasure"/>
 
 
         </div>

@@ -10,5 +10,6 @@ export var ExerciseMeasureType;
     ExerciseMeasureType[ExerciseMeasureType["AlternativeWeight"] = 8] = "AlternativeWeight";
     ExerciseMeasureType[ExerciseMeasureType["AlternativeCalories"] = 9] = "AlternativeCalories";
     ExerciseMeasureType[ExerciseMeasureType["AlternativeHeight"] = 10] = "AlternativeHeight";
+    ExerciseMeasureType[ExerciseMeasureType["Time"] = 11] = "Time";
 })(ExerciseMeasureType || (ExerciseMeasureType = {}));
 //# sourceMappingURL=ExerciseMeasureType.js.map
