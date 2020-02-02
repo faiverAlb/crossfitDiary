@@ -142,8 +142,11 @@ namespace CrossfitDiaryCore.BL.Services
 
         private void PlanWorkoutForDay(PlanningHistory newHistoryPlanning)
         {
-            IEnumerable<PlanningHistory> planningHistories = _context.PlanningHistories.Where(x => x.Id == newHistoryPlanning.Id);
-            _context.PlanningHistories.RemoveRange(planningHistories);
+            // IEnumerable<PlanningHistory> planningHistories = _context.PlanningHistories.Where(x => x.Id == newHistoryPlanning.Id);
+            // if (planningHistories.Any())
+            // {
+                // _context.PlanningHistories.RemoveRange(planningHistories);
+            // }
             _context.PlanningHistories.Add(newHistoryPlanning);
             _context.SaveChanges();
         }
@@ -182,6 +185,8 @@ namespace CrossfitDiaryCore.BL.Services
             }
             else
             {
+                newHistoryPlanning.RoutineComplexId = workoutId;
+                newHistoryPlanning.RoutineComplex = _readWorkoutsService.GetWorkout(workoutId);
                 PlanWorkoutForDay(newHistoryPlanning);
             }
         }
