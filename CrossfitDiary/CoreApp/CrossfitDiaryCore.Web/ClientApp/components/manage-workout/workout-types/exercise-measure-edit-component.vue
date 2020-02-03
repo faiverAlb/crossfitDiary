@@ -58,7 +58,7 @@
                                         />
                                         </span>
                 </b-input-group-text>
-                <b-input-group-text class="bg-pink p-0" tag="span"
+                <b-input-group-text class="bg-green p-0" tag="span"
                                     v-else-if="measure.measureType == 11">
                                         <span class="badge badge-green">
                                                     {{measure.shortMeasureDescription}}

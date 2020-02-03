@@ -54,6 +54,10 @@ export class ExerciseViewModel implements Deserializable {
         this.caloriesMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Calories);
         this.distanceMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Distance);
         this.heightMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Height);
+        if (input.id == 133)
+        {
+            debugger;
+        }
         this.timeMeasure = this.exerciseMeasures.find(x => x.measureType === ExerciseMeasureType.Time);
         
         return this;

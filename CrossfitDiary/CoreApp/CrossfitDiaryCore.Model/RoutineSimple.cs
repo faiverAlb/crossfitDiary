@@ -42,6 +42,7 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public decimal? Count { get; set; }
 
+
         /// <summary>
         /// Possible distance (meters) to pass
         /// </summary>
@@ -67,6 +68,12 @@ namespace CrossfitDiaryCore.Model
         /// Centimeters to jump
         /// </summary>
         public decimal? Centimeters { get; set; }
+
+        /// <summary>
+        /// Possible seconds to hold for this routine
+        /// </summary>
+        public int? Seconds { get; set; }
+
 
         /// <summary>
         /// Specify does this exercise is alternative exercise (primarily used in EMOM/E2MOM)

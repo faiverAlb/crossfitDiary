@@ -543,6 +543,9 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<int>("RoutineComplexId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Seconds")
+                        .HasColumnType("int");
+
                     b.Property<TimeSpan?>("TimeToWork")
                         .HasColumnType("time");
 

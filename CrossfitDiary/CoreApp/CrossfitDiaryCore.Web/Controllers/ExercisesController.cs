@@ -43,13 +43,13 @@ namespace CrossfitDiaryCore.Web.Controllers
         [Route("api/getExercises")]
         public List<ExerciseViewModel> GetExercises()
         {
-            List<Exercise> cachedExercises = _memoryCache.GetOrCreate(_allExercisesCacheConst, entry =>
-            {
+            // List<Exercise> cachedExercises = _memoryCache.GetOrCreate(_allExercisesCacheConst, entry =>
+            // {
                 List<Exercise> exercises = _readExercisesService.GetExercises();
-                return exercises;
-            });
+                // return exercises;
+            // });
 
-            List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(cachedExercises.OrderBy(x => x.Title));
+            List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(exercises);
             return exerciseViewModels;
         }
         

@@ -28,6 +28,7 @@ namespace CrossfitDiaryCore.BL.Services.WorkoutMatchers
                     || routineSimpleToSave.AlternativeWeight != existingSimpleRoutine.AlternativeWeight
                     || routineSimpleToSave.Calories != existingSimpleRoutine.Calories
                     || routineSimpleToSave.Centimeters != existingSimpleRoutine.Centimeters
+                    || routineSimpleToSave.Seconds != existingSimpleRoutine.Seconds
                     || routineSimpleToSave.IsDoUnbroken != existingSimpleRoutine.IsDoUnbroken
                     || routineSimpleToSave.TimeToWork != existingSimpleRoutine.TimeToWork
                     || routineSimpleToSave.IsAlternative != existingSimpleRoutine.IsAlternative
