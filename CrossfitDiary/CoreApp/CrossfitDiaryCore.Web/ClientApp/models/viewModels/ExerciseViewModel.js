@@ -57,9 +57,6 @@ var ExerciseViewModel = /** @class */ (function () {
         this.caloriesMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Calories; });
         this.distanceMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Distance; });
         this.heightMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Height; });
-        if (input.id == 133) {
-            debugger;
-        }
         this.timeMeasure = this.exerciseMeasures.find(function (x) { return x.measureType === ExerciseMeasureType.Time; });
         return this;
     };
