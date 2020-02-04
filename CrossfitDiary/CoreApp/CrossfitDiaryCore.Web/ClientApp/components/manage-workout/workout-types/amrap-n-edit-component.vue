@@ -73,9 +73,9 @@
                                     </div>
 
                                 </div>
-                                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList" >
+                                <ExercisesListComponent :exercisesToDo="childWorkout.exercisesToDoList" >
                                     <template v-slot:additional-exercise-settings>
-                                        <p-check class="p-icon p-smooth" color="info" name="check" v-model="model.asNonBreakingSet">
+                                        <p-check class="p-icon p-smooth" color="info" name="check" v-model="childWorkout.asNonBreakingSet">
                                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                                             As non-breaking set
                                         </p-check>

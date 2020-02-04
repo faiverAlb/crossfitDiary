@@ -103,10 +103,10 @@
                                         </b-input-group>
                                     </div>
                                 </div>
-                                <ExercisesListComponent :exercisesToDo="model.exercisesToDoList">
+                                <ExercisesListComponent :exercisesToDo="childWorkout.exercisesToDoList">
                                     <template v-slot:additional-exercise-settings>
                                         <p-check class="p-icon p-smooth" color="info" name="check"
-                                                 v-model="model.asNonBreakingSet">
+                                                 v-model="childWorkout.asNonBreakingSet">
                                             <font-awesome-icon :icon="['fas','check']" class="icon" slot="extra"/>
                                             As non-breaking set
                                         </p-check>
@@ -152,14 +152,14 @@
             <div class="comments-section">
                 <b-form-textarea
                         :maxlength="150"
-                        class="mt-2"t
-                        id="commentSection"
+                        class="mt-2" id="commentSection"
                         max-rows="2"
                         name="commentSection"
                         no-resize
                         placeholder="Note: ex. girls do max 30kg"
                         rows="2"
                         size="sm"
+                        t
                         type="text"
                         v-model="model.comment"
                 />
@@ -391,6 +391,9 @@
         }
 
         addInnerWorkout() {
+
+            debugger;
+
             this.model.children.push(
                 new WorkoutViewModel({
                     id: 0,
