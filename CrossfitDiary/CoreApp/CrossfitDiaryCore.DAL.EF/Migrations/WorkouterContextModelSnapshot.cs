@@ -542,6 +542,27 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExerciseId = 38,
                             ExerciseMeasureTypeId = 11
+                        },
+                        new
+                        {
+                            Id = 345,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 114,
+                            ExerciseMeasureTypeId = 11
+                        },
+                        new
+                        {
+                            Id = 346,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 46,
+                            ExerciseMeasureTypeId = 11
+                        },
+                        new
+                        {
+                            Id = 347,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 47,
+                            ExerciseMeasureTypeId = 11
                         });
                 });
 
