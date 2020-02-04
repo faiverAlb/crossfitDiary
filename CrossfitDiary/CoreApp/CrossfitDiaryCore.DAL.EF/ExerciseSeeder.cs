@@ -24,6 +24,10 @@ namespace CrossfitDiaryCore.DAL.EF
             new Exercise {Id = 142, Abbreviation = "Bottom up OHS", Title = "Bottom up overhead squat"},
             new Exercise {Id = 143, Abbreviation = "Paused BS", Title = "Paused Back Squat"},
             new Exercise {Id = 144, Abbreviation = "Single leg step-up on box", Title = "Single leg step-up on box"},
+            new Exercise {Id = 145, Abbreviation = "Jump to hollow", Title = "Jump to hollow"},
+            new Exercise {Id = 146, Abbreviation = "Kipping PU", Title = "Kipping pull-up"},
+            new Exercise {Id = 147, Abbreviation = "Butterfly PU", Title = "Butterfly pull-up"},
+            new Exercise {Id = 148, Abbreviation = "Butterfly PU rhythm drill", Title = "Butterfly pull-up rhythm drill"},
         };
 
         private static readonly List<ExerciseMeasure[]> _measures = new List<ExerciseMeasure[]>()
@@ -117,7 +121,22 @@ namespace CrossfitDiaryCore.DAL.EF
                 new ExerciseMeasure {Id = 353, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 144},
                 new ExerciseMeasure {Id = 354, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 144}
             },
-
+            new[]
+            {
+                new ExerciseMeasure {Id = 355, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 145},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 356, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 146},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 357, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 147},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 358, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 148},
+            },
         };
 
 
