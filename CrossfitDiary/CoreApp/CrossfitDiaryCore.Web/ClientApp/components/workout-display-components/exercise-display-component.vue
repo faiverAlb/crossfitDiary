@@ -11,8 +11,8 @@
             </span>
             <span v-if="model.caloriesMeasure && model.caloriesMeasure.measureValue"> {{model.caloriesMeasure.measureValue}} cals</span>
             <span v-if="model.distanceMeasure && model.distanceMeasure.measureValue"> {{model.distanceMeasure.measureValue}} m</span>
+            <span v-if="model.timeMeasure && model.timeMeasure.measureValue">{{model.timeMeasure.measureValue}} sec</span>
             <span v-if="model.heightMeasure && model.heightMeasure.measureValue">({{model.heightMeasure.measureValue}} cm)</span>
-
             <span   class="new-record"
                     title="Person new weight maximum!"
                     v-if="model.isNewWeightMaximum">

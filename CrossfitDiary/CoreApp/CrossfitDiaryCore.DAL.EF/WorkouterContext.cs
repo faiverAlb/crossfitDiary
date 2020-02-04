@@ -1,4 +1,5 @@
-﻿using CrossfitDiaryCore.DAL.EF.CrossfitterWorkouts;
+﻿using System.Collections.Generic;
+using CrossfitDiaryCore.DAL.EF.CrossfitterWorkouts;
 using CrossfitDiaryCore.DAL.EF.ExerciseMeasures;
 using CrossfitDiaryCore.DAL.EF.Exercises;
 using CrossfitDiaryCore.DAL.EF.PlanningHistory;
@@ -9,12 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CrossfitDiaryCore.DAL.EF
 {
-    public class WorkouterContext: IdentityDbContext
+    public class WorkouterContext : IdentityDbContext
     {
         public WorkouterContext()
         {
-
         }
+
         public WorkouterContext(DbContextOptions options) : base(options)
         {
         }
@@ -39,8 +40,10 @@ namespace CrossfitDiaryCore.DAL.EF
             builder.ApplyConfiguration(new ExerciseMeasureConfiguration());
             builder.ApplyConfiguration(new CrossfitterWorkoutConfiguration());
             builder.ApplyConfiguration(new PlanningHistoryConfiguration());
-
-
+            ExerciseSeeder.SeedData(builder);
         }
+
+
+
     }
 }

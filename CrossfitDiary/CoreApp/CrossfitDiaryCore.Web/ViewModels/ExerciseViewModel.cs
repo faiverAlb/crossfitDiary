@@ -87,5 +87,6 @@ namespace CrossfitDiaryCore.Web.ViewModels
         AlternativeWeight = 8,
         AlternativeCalories = 9,
         AlternativeHeight = 10,
+        Time = 11,
     }
 }

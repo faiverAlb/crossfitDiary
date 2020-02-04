@@ -51,7 +51,8 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                 .ForMember(x => x.Weight, opt => opt.MapFrom<WeightResolver>())
                 .ForMember(x => x.AlternativeWeight, opt => opt.MapFrom<AlternativeWeightResolver>())
                 .ForMember(x => x.Calories, opt => opt.MapFrom<CaloriesResolver>())
-                .ForMember(x => x.Centimeters, opt => opt.MapFrom<CentimetersResolver>());
+                .ForMember(x => x.Centimeters, opt => opt.MapFrom<CentimetersResolver>())
+                .ForMember(x => x.Seconds, opt => opt.MapFrom<SecondsResolver>());
 
             CreateMap<ToLogWorkoutViewModel, CrossfitterWorkout>()
                 .ForMember(x => x.RoutineComplexId, x => x.MapFrom(y => y.SelectedWorkoutId))
@@ -164,6 +165,24 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
             }
 
             return DecimalParse.ParseDecimal(measure.MeasureValue);
+        }
+    }
+    public class SecondsResolver : IValueResolver<ExerciseViewModel, RoutineSimple, int?>
+    {
+        public int? Resolve(ExerciseViewModel source, RoutineSimple destination, int? destMember, ResolutionContext context)
+        {
+            ExerciseMeasureViewModel measure = source.ExerciseMeasures.SingleOrDefault(x => x.MeasureType == MeasureTypeViewModel.Time);
+            if (string.IsNullOrEmpty(measure?.MeasureValue))
+            {
+                return null;
+            }
+
+            if (int.TryParse(measure.MeasureValue, out var res))
+            {
+                return res;
+            }
+            return null;
+
         }
     }
 }

@@ -49,7 +49,7 @@ namespace CrossfitDiaryCore.Web.Controllers
                 return exercises;
             });
 
-            List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(cachedExercises.OrderBy(x => x.Title));
+            List<ExerciseViewModel> exerciseViewModels = _mapper.Map<List<ExerciseViewModel>>(cachedExercises);
             return exerciseViewModels;
         }
         
