@@ -28,6 +28,7 @@ namespace CrossfitDiaryCore.DAL.EF
             new Exercise {Id = 146, Abbreviation = "Kipping PU", Title = "Kipping pull-up"},
             new Exercise {Id = 147, Abbreviation = "Butterfly PU", Title = "Butterfly pull-up"},
             new Exercise {Id = 148, Abbreviation = "Butterfly PU rhythm drill", Title = "Butterfly pull-up rhythm drill"},
+            new Exercise {Id = 149, Abbreviation = "Glute ham raises", Title = "Glute ham raises"},
         };
 
         private static readonly List<ExerciseMeasure[]> _measures = new List<ExerciseMeasure[]>()
@@ -136,6 +137,12 @@ namespace CrossfitDiaryCore.DAL.EF
             new[]
             {
                 new ExerciseMeasure {Id = 358, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 148},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 359, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 149},
+                new ExerciseMeasure {Id = 360, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 149},
+                new ExerciseMeasure {Id = 361, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 149}
             },
         };
 

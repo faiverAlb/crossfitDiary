@@ -319,6 +319,13 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             Abbreviation = "Butterfly PU rhythm drill",
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Butterfly pull-up rhythm drill"
+                        },
+                        new
+                        {
+                            Id = 149,
+                            Abbreviation = "Glute ham raises",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Glute ham raises"
                         });
                 });
 
@@ -682,6 +689,27 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExerciseId = 148,
                             ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 359,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 149,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 360,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 149,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 361,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 149,
+                            ExerciseMeasureTypeId = 8
                         });
                 });
 
