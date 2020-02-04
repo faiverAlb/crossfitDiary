@@ -8,5 +8,6 @@
   AlternativeCount = 7,
   AlternativeWeight = 8,
   AlternativeCalories = 9,
-  AlternativeHeight = 10
+  AlternativeHeight = 10,
+  Time = 11
 }

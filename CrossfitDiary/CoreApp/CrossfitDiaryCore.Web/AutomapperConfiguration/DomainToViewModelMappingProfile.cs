@@ -17,7 +17,7 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Exercise, ExerciseViewModel>()
-                .ForMember(x =>x.ExerciseMeasures, x => x.MapFrom(y => y.OrderedExerciseMeasures))
+                .ForMember(x =>x.ExerciseMeasures, x => x.MapFrom(y => y.ExerciseMeasures))
                 .AfterMap((exercise, model) =>
                 {
                     foreach (var exerciseMeasureViewModel in model.ExerciseMeasures)
@@ -62,8 +62,12 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                         viewModel.ShortMeasureDescription = "kgs";
                         viewModel.Description = "Alt weight";
                         break;
+                    case MeasureType.Time:
+                        viewModel.ShortMeasureDescription = "sec";
+                        viewModel.Description = "Seconds";
+                        break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        break;
                 }
             });
             CreateMap<PersonMaximum, PersonExerciseMaximumViewModel>()
@@ -180,6 +184,12 @@ namespace CrossfitDiaryCore.Web.AutomapperConfiguration
                                 exerviseMeasureVm.MeasureValue = $"{simple.Centimeters:0}";
                                 exerviseMeasureVm.Description = "Height";
                                 exerviseMeasureVm.ShortMeasureDescription = "cm";
+                                break;
+                            case MeasureType.Time:
+                                exerviseMeasureVm.MeasureType = MeasureTypeViewModel.Time;
+                                exerviseMeasureVm.MeasureValue = $"{simple.Seconds:0}";
+                                exerviseMeasureVm.Description = "Seconds";
+                                exerviseMeasureVm.ShortMeasureDescription = "sec";
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();

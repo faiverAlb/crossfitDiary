@@ -12,5 +12,6 @@ namespace CrossfitDiaryCore.Model
         AlternativeWeight = 8,
         AlternativeCalories = 9,
         AlternativeHeight = 10,
+        Time = 11
     }
 }
