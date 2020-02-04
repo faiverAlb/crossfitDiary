@@ -349,10 +349,10 @@
     })
     export default class AmrapNEditComponentComponent extends Mixins(WorkoutTypeComponent) {
         mounted() {
+            this.model.workoutType = WorkoutType.AMRAPN;
             if (this.model.children.length != 0) {
                 return;
             }
-            this.model.workoutType = WorkoutType.AMRAPN;
             this.addInnerWorkout();
 
         }

@@ -383,17 +383,14 @@
     })
     export default class ForTimeEdiForTimeNEditComponenttComponent extends Mixins(WorkoutTypeComponent) {
         mounted() {
+            this.model.workoutType = WorkoutType.ForTimeManyInners;
             if (this.model.children.length != 0) {
                 return;
             }
-            this.model.workoutType = WorkoutType.ForTimeManyInners;
             this.addInnerWorkout();
         }
 
         addInnerWorkout() {
-
-            debugger;
-
             this.model.children.push(
                 new WorkoutViewModel({
                     id: 0,
