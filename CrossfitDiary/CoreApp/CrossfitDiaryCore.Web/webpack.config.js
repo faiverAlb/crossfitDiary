@@ -141,10 +141,10 @@ module.exports = (env) => {
 
   // Alter config for prod environment
   if (isProd) {
-    config.devtool = 'source-map'; //It causes issues
+    //config.devtool = 'source-map'; //It causes issues with Complex for time/amrap types but without it generated filesizes ~ 7MB
     config.plugins = config.plugins.concat([
       new UglifyJsPlugin({
-        cache: true,
+        cache: false,
         parallel: true,
         uglifyOptions: {
           compress: true,
