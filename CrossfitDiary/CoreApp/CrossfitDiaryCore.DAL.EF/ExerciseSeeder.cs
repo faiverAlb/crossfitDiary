@@ -29,6 +29,12 @@ namespace CrossfitDiaryCore.DAL.EF
             new Exercise {Id = 147, Abbreviation = "Butterfly PU", Title = "Butterfly pull-up"},
             new Exercise {Id = 148, Abbreviation = "Butterfly PU rhythm drill", Title = "Butterfly pull-up rhythm drill"},
             new Exercise {Id = 149, Abbreviation = "Glute ham raises", Title = "Glute ham raises"},
+            new Exercise {Id = 150, Abbreviation = "Straight legs D-Ball clean", Title = "Straight leg D-Ball clean"},
+            new Exercise {Id = 151, Abbreviation = "D-ball Squat", Title = "D-ball Squat"},
+            new Exercise {Id = 152, Abbreviation = "D-ball Front hold good morning", Title = "D-ball Front hold good morning"},
+            new Exercise {Id = 153, Abbreviation = "Straight legs sumo deadlift", Title = "Straight leg sumo deadlift"},
+            new Exercise {Id = 154, Abbreviation = "Hip thrust", Title = "Hip thrust"},
+            new Exercise {Id = 155, Abbreviation = "Straight legs romanian deadlift", Title = "Straight leg romanian deadlift"},
         };
 
         private static readonly List<ExerciseMeasure[]> _measures = new List<ExerciseMeasure[]>()
@@ -143,6 +149,42 @@ namespace CrossfitDiaryCore.DAL.EF
                 new ExerciseMeasure {Id = 359, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 149},
                 new ExerciseMeasure {Id = 360, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 149},
                 new ExerciseMeasure {Id = 361, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 149}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 362, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 150},
+                new ExerciseMeasure {Id = 363, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 150},
+                new ExerciseMeasure {Id = 364, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 150}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 365, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 151},
+                new ExerciseMeasure {Id = 366, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 151},
+                new ExerciseMeasure {Id = 367, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 151}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 368, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 152},
+                new ExerciseMeasure {Id = 369, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 152},
+                new ExerciseMeasure {Id = 370, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 152}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 371, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 153},
+                new ExerciseMeasure {Id = 372, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 153},
+                new ExerciseMeasure {Id = 373, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 153}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 374, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 154},
+                new ExerciseMeasure {Id = 375, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 154},
+                new ExerciseMeasure {Id = 376, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 154}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 377, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 155},
+                new ExerciseMeasure {Id = 378, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 155},
+                new ExerciseMeasure {Id = 379, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 155}
             },
         };
 
