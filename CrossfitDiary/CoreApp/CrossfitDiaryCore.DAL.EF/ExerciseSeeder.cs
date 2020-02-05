@@ -35,6 +35,7 @@ namespace CrossfitDiaryCore.DAL.EF
             new Exercise {Id = 153, Abbreviation = "Straight legs sumo deadlift", Title = "Straight leg sumo deadlift"},
             new Exercise {Id = 154, Abbreviation = "Hip thrust", Title = "Hip thrust"},
             new Exercise {Id = 155, Abbreviation = "Straight legs romanian deadlift", Title = "Straight leg romanian deadlift"},
+            new Exercise {Id = 156, Abbreviation = "Jumping BS", Title = "Jumping back squat"},
         };
 
         private static readonly List<ExerciseMeasure[]> _measures = new List<ExerciseMeasure[]>()
@@ -185,6 +186,12 @@ namespace CrossfitDiaryCore.DAL.EF
                 new ExerciseMeasure {Id = 377, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 155},
                 new ExerciseMeasure {Id = 378, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 155},
                 new ExerciseMeasure {Id = 379, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 155}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 380, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 156},
+                new ExerciseMeasure {Id = 381, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 156},
+                new ExerciseMeasure {Id = 382, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 156}
             },
         };
 
