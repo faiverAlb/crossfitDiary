@@ -1,4 +1,4 @@
-﻿import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
+﻿planned-workouts containerimport {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 <template>
     <div class="planned-workouts container">
@@ -6,7 +6,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 :key="levelPlanningWod.id"
                 class="row"
                 v-for="levelPlanningWod in selectedLevelPlanningWorkouts">
-            <div class="done-item offset-lg-3 col col-lg-5 mt-2 p-0 rounded row no-gutters">
+            <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters">
                 <div class="workout-sub-type-display mr-2 py-1 rounded-left"
                      v-bind:class="levelPlanningWod.subTypeClass">
                     {{levelPlanningWod.workoutSubTypeDisplayValue}}
@@ -50,7 +50,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 </div>
             </div>
         </div>
-        <div class="row mt-2">
+        <div class="row">
             <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-0 ">
                 <b-button-group class="btn-group d-flex" size="sm">
                     <b-button

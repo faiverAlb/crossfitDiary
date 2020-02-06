@@ -63,3 +63,12 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+.dashed-container-description {
+  font-size: 19px;
+  border-bottom: 1px dashed $success;
+  border-top: 1px dashed $success;
+  color: #6c757d;
+  text-align: center;
+  padding-bottom: 0.25rem;
+  padding-top: 0.25rem;
+}
