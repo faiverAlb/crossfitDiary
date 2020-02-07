@@ -114,9 +114,14 @@ namespace CrossfitDiaryCore.Web.Controllers
         public async Task<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>> GetPlannedWorkoutsForToday()
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> workouts = _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
-            IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> allResults = _mapper.Map<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>>(workouts);
-            return allResults;
+            IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> crossfitersWorkouts = await _memoryCache.GetOrCreate(_plannedWorkouts,
+                async entry =>
+                {
+                    IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> workouts = _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
+                    IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> allResults = _mapper.Map<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>>(workouts);
+                    return allResults;
+                });
+            return crossfitersWorkouts;
         }
 
 
@@ -181,6 +186,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             //TODO: Add check rights!
             DateTime date = DateTime.Today;
             _manageWorkoutsService.RemovePlannedWod(plannedWodId, userId, date);
+            _memoryCache.Remove(_plannedWorkouts);
         }
 
 
@@ -228,7 +234,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             newWorkoutRoutine.RoutineComplex.CreatedBy = user;
             _manageWorkoutsService.PlanWorkout(newWorkoutRoutine, user);
 //            _memoryCache.Remove(_allMainpageResultsConst);
-//            _memoryCache.Remove(_plannedWorkouts);
+            _memoryCache.Remove(_plannedWorkouts);
         }
 
         /// <summary>
@@ -244,6 +250,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             //TODO: implement
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
             _manageWorkoutsService.PlanWorkoutForDay(wodId, type, DateTime.Today, user, WodSubType.Wod);
+            _memoryCache.Remove(_plannedWorkouts);
         }
     }
 }

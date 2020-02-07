@@ -2,11 +2,20 @@
 import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 <template>
     <div class="planned-workouts container">
+
+        <div class="row my-2">
+            <div class="offset-lg-3 col col-lg-5 px-0">
+                <div class="dashed-container-description border-danger text-left">
+                    Workouts of the day:
+                </div>
+            </div>
+        </div>
         <div
                 :key="levelPlanningWod.id"
                 class="row"
                 v-for="levelPlanningWod in selectedLevelPlanningWorkouts">
             <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters">
+
                 <div class="workout-sub-type-display mr-2 py-1 rounded-left"
                      v-bind:class="levelPlanningWod.subTypeClass">
                     {{levelPlanningWod.workoutSubTypeDisplayValue}}
@@ -51,48 +60,64 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
             </div>
         </div>
         <div class="row">
-            <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-0 ">
-                <b-button-group class="btn-group d-flex" size="sm">
-                    <b-button
-                            class=" "
-                            v-bind:class="{active:isScaledSelected}"
-                            v-if="hasPlannedForLevel(0)"
-                            v-on:click="setSelectedPlanned(0)"
-                            variant="outline-info"
-                    >
-                        <font-awesome-icon :icon="['fas', 'cat']" class="" size="lg"/>
-                        Scaled
-                    </b-button
-                    >
-                    <b-button
-                            class=""
-                            v-bind:class="{  active:isRxSelected  }"
-                            v-if="hasPlannedForLevel(1)"
-                            v-on:click="setSelectedPlanned(1)"
-                            variant="outline-info"
-                    >
-                        <font-awesome-icon :icon="['fas', 'horse']" size="lg"/>
-                        Rx
-                    </b-button
-                    >
-                    <b-button
-                            class=""
-                            v-bind:class="{    active:isRxPlusSelected   }"
-                            v-if="hasPlannedForLevel(2)"
-                            v-on:click="setSelectedPlanned(2)"
-                            variant="outline-info"
-                    >
-                        <span class="text-left">
-                            <font-awesome-icon :icon="['fas', 'dog']" class="mr-1" size="lg"/>  
-                        </span>
-                        <span>
-                            Rx+
-                        </span>
-                    </b-button
-                    >
-                </b-button-group>
+            <div class="offset-lg-3 col ">
+                <span class="tab rounded" v-bind:class="{active:isScaledSelected}" v-if="hasPlannedForLevel(0)"
+                      v-on:click="setSelectedPlanned(0)">Scaled <font-awesome-icon
+                        :icon="['fas', 'cat']" class="text-success"/></span>
+                <span class="tab  rounded" v-bind:class="{active:isRxSelected}" v-if="hasPlannedForLevel(1)"
+                      v-on:click="setSelectedPlanned(1)">Rx  <font-awesome-icon
+                        :icon="['fas', 'horse']"
+                        class="text-warning"/></span>
+                <span class="tab rounded" v-bind:class="{active:isRxPlusSelected}" v-if="hasPlannedForLevel(2)"
+                      v-on:click="setSelectedPlanned(2)">Rx+ <font-awesome-icon :icon="['fas', 'dog']"
+                                                                                class="text-danger"
+                /></span>
             </div>
         </div>
+
+        <!--        <div class="row">-->
+        <!--            <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-0 ">-->
+        <!--                <b-button-group class="btn-group d-flex" size="sm">-->
+        <!--                    <b-button-->
+        <!--                            class=" "-->
+        <!--                            v-bind:class="{active:isScaledSelected}"-->
+        <!--                            v-if="hasPlannedForLevel(0)"-->
+        <!--                            v-on:click="setSelectedPlanned(0)"-->
+        <!--                            variant="outline-info"-->
+        <!--                    >-->
+        <!--                        <font-awesome-icon :icon="['fas', 'cat']" class="" size="lg"/>-->
+        <!--                        Scaled-->
+        <!--                    </b-button-->
+        <!--                    >-->
+        <!--                    <b-button-->
+        <!--                            class=""-->
+        <!--                            v-bind:class="{  active:isRxSelected  }"-->
+        <!--                            v-if="hasPlannedForLevel(1)"-->
+        <!--                            v-on:click="setSelectedPlanned(1)"-->
+        <!--                            variant="outline-info"-->
+        <!--                    >-->
+        <!--                        <font-awesome-icon :icon="['fas', 'horse']" size="lg"/>-->
+        <!--                        Rx-->
+        <!--                    </b-button-->
+        <!--                    >-->
+        <!--                    <b-button-->
+        <!--                            class=""-->
+        <!--                            v-bind:class="{    active:isRxPlusSelected   }"-->
+        <!--                            v-if="hasPlannedForLevel(2)"-->
+        <!--                            v-on:click="setSelectedPlanned(2)"-->
+        <!--                            variant="outline-info"-->
+        <!--                    >-->
+        <!--                        <span class="text-left">-->
+        <!--                            <font-awesome-icon :icon="['fas', 'dog']" class="mr-1" size="lg"/>  -->
+        <!--                        </span>-->
+        <!--                        <span>-->
+        <!--                            Rx+-->
+        <!--                        </span>-->
+        <!--                    </b-button-->
+        <!--                    >-->
+        <!--                </b-button-group>-->
+        <!--            </div>-->
+        <!--        </div>-->
 
 
         <b-modal ref="logWorkoutModal" title="Log workout">
@@ -279,9 +304,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 
     import {PlanningWorkoutLevel, WorkoutViewModel} from "../models/viewModels/WorkoutViewModel";
     import {PlanningWorkoutViewModel} from "../models/viewModels/PlanningWorkoutViewModel";
-    import {WorkoutType} from "../models/viewModels/WorkoutType";
     import {WodSubType} from "../models/viewModels/WodSubType";
-    import CrossfitterService from "../CrossfitterService";
 
     library.add(
         faGrinBeam,
@@ -389,12 +412,12 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 if (isValid) {
                     let toLogWorkoutModel = this.toLogModel;
                     toLogWorkoutModel.wodSubType = this.selectedPlannedWorkoutLevel;
-                    
-                    this.$emit("logWorkout", toLogWorkoutModel,this.selectedWorkout);
+
+                    this.$emit("logWorkout", toLogWorkoutModel, this.selectedWorkout);
                     this.$refs.logWorkoutModal.hide();
                 }
             });
-           
+
         }
 
         setVisibilityByLevel(planningWorkoutLevel: PlanningWorkoutLevel) {

@@ -33,13 +33,7 @@ let vue = new Vue({
                     <ErrorAlertComponent :errorAlertModel="errorAlertModel"/>
                 </div>
             </div>
-            <div class="row my-2" >
-                <div class="offset-lg-3 col col-lg-5 px-0">
-                    <div class="dashed-container-description border-danger text-center">
-                        Workouts of the day:
-                    </div>
-                </div>
-            </div>
+            
             <div v-if="isPlannedWodsLoaded">
                 
                 <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts"
@@ -47,13 +41,7 @@ let vue = new Vue({
                                                 @logWorkout="logWorkout"/>
             </div>
 
-            <div class="row" v-if="activities">
-                <div class="offset-lg-3 col col-lg-5 px-0">
-                    <div class="dashed-container-description border-info text-center">
-                        History:
-                    </div>
-                </div>
-            </div>
+            
             
             <div class="container person-setting">
                 <div
@@ -72,7 +60,13 @@ let vue = new Vue({
                     </div>
 
                 </div>
-                
+                <div class="row mt-2" v-if="activities">
+                    <div class="offset-lg-3 col col-lg-5 px-0">
+                        <div class="dashed-container-description border-info text-left">
+                            History:
+                        </div>
+                    </div>
+                </div>
 
 
 
