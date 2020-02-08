@@ -368,6 +368,13 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             Abbreviation = "Straight legs romanian deadlift",
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Straight leg romanian deadlift"
+                        },
+                        new
+                        {
+                            Id = 156,
+                            Abbreviation = "Jumping BS",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Jumping back squat"
                         });
                 });
 
@@ -877,6 +884,27 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             Id = 379,
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExerciseId = 155,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 380,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 156,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 381,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 156,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 382,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 156,
                             ExerciseMeasureTypeId = 8
                         });
                 });
