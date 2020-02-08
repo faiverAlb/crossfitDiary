@@ -14,8 +14,7 @@ import "./style/persons.scss";
 import {ToLogWorkoutViewModel} from "./models/viewModels/ToLogWorkoutViewModel";
 import {SpinnerModel} from "./models/viewModels/SpinnerModel";
 import {ErrorAlertModel} from "./models/viewModels/ErrorAlertModel";
-import {PlanningWorkoutLevel, WorkoutViewModel} from "./models/viewModels/WorkoutViewModel";
-import {WodSubType} from "./models/viewModels/WodSubType";
+import {WorkoutViewModel} from "./models/viewModels/WorkoutViewModel";
 import {PlanningWorkoutViewModel} from "./models/viewModels/PlanningWorkoutViewModel";
 
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver 
@@ -34,18 +33,23 @@ let vue = new Vue({
                     <ErrorAlertComponent :errorAlertModel="errorAlertModel"/>
                 </div>
             </div>
+            
             <div v-if="isPlannedWodsLoaded">
-                <PlannedWorkoutDisplayComponent  :plannedWorkouts="plannedWorkouts"
-                                                 @deletePlannedWorkout="deletePlannedWorkout"
-                                                 @logWorkout="logWorkout"/>
+                
+                <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts"
+                                                @deletePlannedWorkout="deletePlannedWorkout"
+                                                @logWorkout="logWorkout"/>
             </div>
+
+            
             
             <div class="container person-setting">
                 <div
                         class="row"
                         v-if="activities"
                 >
-                    <div class="offset-lg-3 col col-lg-5 pl-0">
+
+                    <div class="offset-lg-3 col col-lg-5 pl-0" v-if="false">
                         <b-form-checkbox
                                 id="showOnlyUserWods"
                                 name="shouShowOnlyUserWods"
@@ -54,7 +58,18 @@ let vue = new Vue({
                             Show only my wods
                         </b-form-checkbox>
                     </div>
+
                 </div>
+                <div class="row mt-2" v-if="activities">
+                    <div class="offset-lg-3 col col-lg-5 px-0">
+                        <div class="dashed-container-description border-info text-left">
+                            History:
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <div class="row">
                     <div class="offset-5">
                         <spinner
@@ -81,7 +96,7 @@ let vue = new Vue({
     data() {
         return {
             activities: ToLogWorkoutViewModel[0],
-            plannedWorkouts: {PlanningWorkoutLevel:[PlanningWorkoutViewModel]},
+            plannedWorkouts: {PlanningWorkoutLevel: [PlanningWorkoutViewModel]},
             spinner: new SpinnerModel(true),
             errorAlertModel: new ErrorAlertModel(),
             showOnlyUserWods: false,
@@ -112,7 +127,7 @@ let vue = new Vue({
             });
     },
     methods: {
-        logWorkout(logModel: ToLogWorkoutViewModel,workoutModel:WorkoutViewModel): void {
+        logWorkout(logModel: ToLogWorkoutViewModel, workoutModel: WorkoutViewModel): void {
             this.spinner.activate();
             const model = {
                 newWorkoutViewModel: workoutModel,
