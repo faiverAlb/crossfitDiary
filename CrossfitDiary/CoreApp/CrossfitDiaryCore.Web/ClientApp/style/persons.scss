@@ -75,8 +75,8 @@
 
 .tab {
   cursor: pointer;
-  padding:6px 15px;
-  width: 100px;
+  padding:5px 0;
+  width: 90px;
   text-align: center;
   display:inline-block;
   border-bottom: 1px solid $gray-200;
@@ -84,6 +84,7 @@
   border-right: 1px solid $gray-200;
   background: #f6f1ed;
   color: black;
+  font-size:14px;
   margin-left: 3px;
   &.active{
     border-bottom: 1px dashed $gray-600;
