@@ -59,8 +59,8 @@
 
                     </div>
                 </div>
-                <div class="item-footer text-right pt-1">
-                    <div class="action-buttons">
+                <div class="item-footer pt-1  d-flex">
+<!--                    <div class="action-buttons">-->
                         <!--                        <a-->
                         <!--                                @click="showLeaderBoardModal(model.crossfitterWorkoutId)"-->
                         <!--                                class="edit-workout-action pointer text-secondary float-left"-->
@@ -73,7 +73,7 @@
                         <!--                            Leaderboard-->
                         <!--                        </a>-->
                         <a
-                                class="edit-workout-action pointer text-info"
+                                class="btn btn-secondary btn-sm "
                                 v-bind:href="'Workout?crossfitterWorkoutId='+this.model.crossfitterWorkoutId"
                                 v-if="model.canBeRemovedByCurrentUser"
                         >
@@ -81,13 +81,14 @@
                             <font-awesome-icon :icon="['fas','edit']"/>
                         </a>
                         <a
-                                class="repeat-workout-action pointer text-success pl-1"
+                                class=" pl-1 btn btn-success btn-sm ml-auto"
                                 v-bind:href="'Workout?workoutId='+this.model.workoutViewModel.id"
                         >
-                            <font-awesome-icon :icon="['fas','plus']"/>
                             <span class="do-it-text">Do it</span>
+                            <font-awesome-icon :icon="['fas','plus']"/>
+
                         </a>
-                    </div>
+<!--                    </div>-->
                 </div>
             </div>
         </div>

@@ -63,3 +63,31 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+.dashed-container-description {
+  font-size: 17px;
+  border-bottom: 1px dashed $success;
+  border-top: 1px dashed $success;
+  color: #6c757d;
+  text-align: center;
+  padding-bottom: 0.25rem;
+  padding-top: 0.25rem;
+}
+
+.tab {
+  cursor: pointer;
+  padding:6px 15px;
+  width: 100px;
+  text-align: center;
+  display:inline-block;
+  border-bottom: 1px solid $gray-200;
+  border-left: 1px solid $gray-200;
+  border-right: 1px solid $gray-200;
+  background: #f6f1ed;
+  color: black;
+  margin-left: 3px;
+  &.active{
+    border-bottom: 1px dashed $gray-600;
+    border-left: 1px dashed $gray-600;
+    border-right: 1px dashed $gray-600;
+  }
+}
