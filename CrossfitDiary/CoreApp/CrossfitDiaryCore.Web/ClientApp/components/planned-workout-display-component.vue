@@ -3,7 +3,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 <template>
     <div class="planned-workouts container">
 
-        <div class="row my-2">
+        <div class="row my-2" v-if="selectedLevelPlanningWorkouts.length > 0">
             <div class="offset-lg-3 col col-lg-5 px-0">
                 <div class="dashed-container-description border-danger text-left">
                     Workouts of the day:
@@ -12,7 +12,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
         </div>
         <div
                 :key="levelPlanningWod.id"
-                class="row"
+                class="row mt-1"
                 v-for="levelPlanningWod in selectedLevelPlanningWorkouts">
             <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters">
 
@@ -59,16 +59,16 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row ">
             <div class="offset-lg-3 col ">
-                <span class="tab rounded" v-bind:class="{active:isScaledSelected}" v-if="hasPlannedForLevel(0)"
+                <span class="tab rounded-bottom" v-bind:class="{active:isScaledSelected}" v-if="hasPlannedForLevel(0)"
                       v-on:click="setSelectedPlanned(0)">Scaled <font-awesome-icon
                         :icon="['fas', 'cat']" class="text-success"/></span>
-                <span class="tab  rounded" v-bind:class="{active:isRxSelected}" v-if="hasPlannedForLevel(1)"
+                <span class="tab  rounded-bottom" v-bind:class="{active:isRxSelected}" v-if="hasPlannedForLevel(1)"
                       v-on:click="setSelectedPlanned(1)">Rx  <font-awesome-icon
                         :icon="['fas', 'horse']"
                         class="text-warning"/></span>
-                <span class="tab rounded" v-bind:class="{active:isRxPlusSelected}" v-if="hasPlannedForLevel(2)"
+                <span class="tab rounded-bottom" v-bind:class="{active:isRxPlusSelected}" v-if="hasPlannedForLevel(2)"
                       v-on:click="setSelectedPlanned(2)">Rx+ <font-awesome-icon :icon="['fas', 'dog']"
                                                                                 class="text-danger"
                 /></span>
