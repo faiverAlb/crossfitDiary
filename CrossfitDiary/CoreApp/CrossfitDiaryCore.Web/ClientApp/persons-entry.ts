@@ -49,21 +49,29 @@ let vue = new Vue({
                         v-if="activities"
                 >
 
-                    <div class="offset-lg-3 col col-lg-5 pl-0" v-if="false">
-                        <b-form-checkbox
-                                id="showOnlyUserWods"
-                                name="shouShowOnlyUserWods"
-                                v-model="showOnlyUserWods"
-                                @change="changeShowUserWods">
-                            Show only my wods
-                        </b-form-checkbox>
-                    </div>
+<!--                    <div class="offset-lg-3 col col-lg-5 pl-0" v-if="false">-->
+<!--                        <b-form-checkbox-->
+<!--                                id="showOnlyUserWods"-->
+<!--                                name="shouShowOnlyUserWods"-->
+<!--                                v-model="showOnlyUserWods"-->
+<!--                                @change="changeShowUserWods">-->
+<!--                            Show only my wods-->
+<!--                        </b-form-checkbox>-->
+<!--                    </div>-->
 
                 </div>
-                <div class="row mt-2" v-if="activities">
+                <div class="row mt-4 mb-2" v-if="activities">
                     <div class="offset-lg-3 col col-lg-5 px-0">
-                        <div class="dashed-container-description border-info text-left">
-                            History:
+                        <div class="dashed-container-description border-info text-left d-flex justify-content-between">
+                            <span class="label">History:</span>
+                            <b-form-checkbox
+                                    class="my-auto"
+                                    id="showOnlyUserWods"
+                                    name="shouShowOnlyUserWods"
+                                    v-model="showOnlyUserWods"
+                                    @change="changeShowUserWods">
+                                Show only my wods
+                            </b-form-checkbox>
                         </div>
                     </div>
                 </div>
