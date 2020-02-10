@@ -7,14 +7,14 @@
     writing-mode: vertical-lr;
     text-orientation: sideways;
     text-align: center;
-    font-size: 13px;
+    font-size: 11px;
     opacity: 0.8;
     font-weight: bold;
   }
 
   background: #f6f1ed;
   box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.05);
-  font-size: 14px;
+  font-size: 12px;
 
   &.person-workout {
     border: 1px dashed #17a2b8;
@@ -22,7 +22,7 @@
 
   .item-header {
     border-bottom: 1px dashed #a6a6a6;
-    font-size: 14px;
+    font-size: 12px;
     padding-bottom: 5px;
 
     .username {
@@ -88,6 +88,10 @@
     margin-top: 4px;
     margin-bottom: 6px;
     border-top: 1px dashed #a6a6a6;
+
+    a.btn,button.btn {
+      font-size: 12px;
+    }
 
     .edit-workout-action {
       cursor: pointer;

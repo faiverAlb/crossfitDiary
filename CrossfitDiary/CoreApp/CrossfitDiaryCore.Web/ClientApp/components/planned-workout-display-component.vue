@@ -59,7 +59,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 </div>
             </div>
         </div>
-        <div class="row ">
+        <div class="row planning-tabs-headers">
             <div class="offset-lg-3 col ">
                 <span class="tab rounded-bottom" v-bind:class="{active:isScaledSelected}" v-if="hasPlannedForLevel(0)"
                       v-on:click="setSelectedPlanned(0)">Scaled <font-awesome-icon
