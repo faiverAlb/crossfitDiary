@@ -47,14 +47,14 @@ namespace CrossfitDiaryCore.Web.Controllers
             _memoryCache = memoryCache;
         }
 
-        public string PlannedWorkoutsCacheConstant
-        {
-            get
-            {
-                return $"planned-workouts_{DateTime.Now.Date.ToShortDateString()}"; 
-
-            }
-        }
+        // public string PlannedWorkoutsCacheConstant
+        // {
+        //     get
+        //     {
+        //         return $"planned-workouts_{DateTime.Now.Date.ToShortDateString()}"; 
+        //
+        //     }
+        // }
 
         public IActionResult Index(int? crossfitterWorkoutId, int? workoutId)
         {
@@ -123,14 +123,14 @@ namespace CrossfitDiaryCore.Web.Controllers
         public async Task<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>> GetPlannedWorkoutsForToday()
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> crossfitersWorkouts = await _memoryCache.GetOrCreate(PlannedWorkoutsCacheConstant,
-                async entry =>
-                {
+            // IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> crossfitersWorkouts = await _memoryCache.GetOrCreate(PlannedWorkoutsCacheConstant,
+                // async entry =>
+                // {
                     IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> workouts = _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
                     IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> allResults = _mapper.Map<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>>(workouts);
                     return allResults;
-                });
-            return crossfitersWorkouts;
+                // });
+            // return crossfitersWorkouts;
         }
 
 
@@ -179,7 +179,7 @@ namespace CrossfitDiaryCore.Web.Controllers
 
             //            _memoryCache.Remove(_allMainpageResultsConst);
             //TODO: Add check rights!
-            _memoryCache.Remove(PlannedWorkoutsCacheConstant);
+            // _memoryCache.Remove(PlannedWorkoutsCacheConstant);
             _manageWorkoutsService.RemoveWorkoutResult(crossfitterWorkoutId, userId);
         }
 
@@ -196,7 +196,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             //TODO: Add check rights!
             DateTime date = DateTime.Today;
             _manageWorkoutsService.RemovePlannedWod(plannedWodId, userId, date);
-            _memoryCache.Remove(PlannedWorkoutsCacheConstant);
+            // _memoryCache.Remove(PlannedWorkoutsCacheConstant);
         }
 
 
@@ -213,7 +213,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             crossfitterWorkout.Crossfitter = user;
             RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
             newWorkoutRoutine.CreatedBy = user;
-            _memoryCache.Remove(PlannedWorkoutsCacheConstant);
+            // _memoryCache.Remove(PlannedWorkoutsCacheConstant);
             _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
 //                _memoryCache.Remove(_allMainpageResultsConst);
             
@@ -245,7 +245,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             newWorkoutRoutine.RoutineComplex.CreatedBy = user;
             _manageWorkoutsService.PlanWorkout(newWorkoutRoutine, user);
 //            _memoryCache.Remove(_allMainpageResultsConst);
-            _memoryCache.Remove(PlannedWorkoutsCacheConstant);
+            // _memoryCache.Remove(PlannedWorkoutsCacheConstant);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             //TODO: implement
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
             _manageWorkoutsService.PlanWorkoutForDay(wodId, type, DateTime.Today, user, WodSubType.Wod);
-            _memoryCache.Remove(PlannedWorkoutsCacheConstant);
+            // _memoryCache.Remove(PlannedWorkoutsCacheConstant);
         }
     }
 }
