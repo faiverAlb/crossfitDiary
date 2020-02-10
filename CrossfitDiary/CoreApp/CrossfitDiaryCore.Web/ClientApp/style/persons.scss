@@ -38,6 +38,7 @@
 
 .home-container {
   .personal-maximums {
+
     .item {
       cursor: pointer;
       text-decoration: none;
@@ -53,8 +54,8 @@
 .fade-enter,
 .fade-leave-to
 
-/* .fade-leave-active до версии 2.1.8 */
- {
+  /* .fade-leave-active до версии 2.1.8 */
+{
   opacity: 0;
 }
 
@@ -63,6 +64,7 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+
 .dashed-container-description {
   font-size: 17px;
   border-bottom: 1px dashed $success;
@@ -73,22 +75,30 @@
   padding-top: 0.25rem;
 }
 
-.tab {
-  cursor: pointer;
-  padding:5px 0;
-  width: 90px;
-  text-align: center;
-  display:inline-block;
-  border-bottom: 1px solid $gray-200;
-  border-left: 1px solid $gray-200;
-  border-right: 1px solid $gray-200;
-  background: #f6f1ed;
-  color: black;
-  font-size:14px;
-  margin-left: 3px;
-  &.active{
-    border-bottom: 1px dashed $gray-600;
-    border-left: 1px dashed $gray-600;
-    border-right: 1px dashed $gray-600;
+
+.planning-tabs-headers {
+  font-size: 12px;
+
+  .tab {
+    cursor: pointer;
+    padding: 6px 15px;
+    width: 85px;
+    text-align: center;
+    display: inline-block;
+    border-bottom: 1px solid $gray-200;
+    border-left: 1px solid $gray-200;
+    border-right: 1px solid $gray-200;
+    background: #f6f1ed;
+    color: black;
+    margin-left: 3px;
+
+    &.active {
+      border-bottom: 1px dashed $gray-600;
+      border-left: 1px dashed $gray-600;
+      border-right: 1px dashed $gray-600;
+    }
   }
+}
+.log-workout-container{
+  font-size:12px;
 }

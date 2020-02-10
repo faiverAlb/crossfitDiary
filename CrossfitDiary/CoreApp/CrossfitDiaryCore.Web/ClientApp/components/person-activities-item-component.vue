@@ -2,7 +2,7 @@
     <div class="row">
         <div
                 :class="{'person-workout': model.canBeRemovedByCurrentUser}"
-                class="done-item offset-lg-3 col col-lg-5 my-2 p-0 rounded row no-gutters"
+                class="done-item offset-lg-3 col col-lg-5 my-1 p-0 rounded row no-gutters"
                 v-if="model"
         >
             <div class="workout-sub-type-display mr-2 py-1" v-bind:class="subTypeClass()">{{workoutSubTypeDisplayValue}}
