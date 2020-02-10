@@ -389,6 +389,13 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             Abbreviation = "TU",
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Tuck Ups"
+                        },
+                        new
+                        {
+                            Id = 159,
+                            Abbreviation = "BTN Split Jerk",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Behind the Neck Split Jerk"
                         });
                 });
 
@@ -948,6 +955,27 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExerciseId = 158,
                             ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 387,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 159,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 388,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 159,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 389,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 159,
+                            ExerciseMeasureTypeId = 8
                         });
                 });
 
