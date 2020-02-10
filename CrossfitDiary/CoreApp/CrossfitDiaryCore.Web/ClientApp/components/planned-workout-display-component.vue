@@ -6,7 +6,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
         <div class="row my-2" v-if="selectedLevelPlanningWorkouts.length > 0">
             <div class="offset-lg-3 col col-lg-5 px-0">
                 <div class="dashed-container-description border-danger text-left">
-                    Workouts of the day:
+                    <span class="label">Workouts of the day:</span>
                 </div>
             </div>
         </div>

@@ -66,7 +66,10 @@
 }
 
 .dashed-container-description {
-  font-size: 17px;
+  .label{
+    font-size: 22px;
+    
+  }
   border-bottom: 1px dashed $success;
   border-top: 1px dashed $success;
   color: #6c757d;
@@ -99,6 +102,13 @@
     }
   }
 }
-.log-workout-container{
-  font-size:12px;
+
+.log-workout-container {
+  font-size: 12px;
+}
+
+.planned-workouts {
+  .done-item {
+    background: #fffaf6;
+  }
 }
