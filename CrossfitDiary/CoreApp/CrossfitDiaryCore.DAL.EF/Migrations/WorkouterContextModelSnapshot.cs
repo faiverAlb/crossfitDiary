@@ -375,6 +375,20 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             Abbreviation = "Jumping BS",
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Jumping back squat"
+                        },
+                        new
+                        {
+                            Id = 157,
+                            Abbreviation = "BTN Jerk",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Behind the Neck Jerk"
+                        },
+                        new
+                        {
+                            Id = 158,
+                            Abbreviation = "TU",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Tuck Ups"
                         });
                 });
 
@@ -906,6 +920,34 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExerciseId = 156,
                             ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 383,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 157,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 384,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 157,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 385,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 157,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 386,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 158,
+                            ExerciseMeasureTypeId = 2
                         });
                 });
 
