@@ -176,9 +176,10 @@ namespace CrossfitDiaryCore.Web.Controllers
         public void RemoveWorkout(int crossfitterWorkoutId)
         {
             string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            
-//            _memoryCache.Remove(_allMainpageResultsConst);
+
+            //            _memoryCache.Remove(_allMainpageResultsConst);
             //TODO: Add check rights!
+            _memoryCache.Remove(PlannedWorkoutsCacheConstant);
             _manageWorkoutsService.RemoveWorkoutResult(crossfitterWorkoutId, userId);
         }
 
@@ -212,6 +213,7 @@ namespace CrossfitDiaryCore.Web.Controllers
             crossfitterWorkout.Crossfitter = user;
             RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
             newWorkoutRoutine.CreatedBy = user;
+            _memoryCache.Remove(PlannedWorkoutsCacheConstant);
             _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
 //                _memoryCache.Remove(_allMainpageResultsConst);
             
