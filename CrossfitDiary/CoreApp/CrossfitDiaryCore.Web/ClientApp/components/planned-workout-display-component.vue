@@ -14,13 +14,13 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 :key="levelPlanningWod.id"
                 class="row mt-1"
                 v-for="levelPlanningWod in selectedLevelPlanningWorkouts">
-            <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters">
-
+            <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters justify-content-between">
+                
                 <div class="workout-sub-type-display mr-2 py-1 rounded-left"
                      v-bind:class="levelPlanningWod.subTypeClass">
                     {{levelPlanningWod.workoutSubTypeDisplayValue}}
                 </div>
-                <div class="col-11 p-1">
+                <div class="col-10 p-1">
                     <div class="item-header d-flex flex-row justify-content-between">
                         <div class="username">
                             <span class="text-info">
@@ -56,6 +56,9 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                             </b-button>
                         </div>
                     </div>
+                </div>
+                <div class="workout-sub-type-display py-1 rounded-left bg-secondary text-white">
+                    Planned
                 </div>
             </div>
         </div>
