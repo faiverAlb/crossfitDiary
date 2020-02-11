@@ -39,6 +39,10 @@ namespace CrossfitDiaryCore.DAL.EF
             new Exercise {Id = 157, Abbreviation = "BTN Jerk", Title = "Behind the Neck Jerk"},
             new Exercise {Id = 158, Abbreviation = "TU", Title = "Tuck Ups"},
             new Exercise {Id = 159, Abbreviation = "BTN Split Jerk", Title = "Behind the Neck Split Jerk"},
+            new Exercise {Id = 160, Abbreviation = "Single leg DL(2xDB)", Title = "Single leg Deadlift(2xDB)"},
+            new Exercise {Id = 161, Abbreviation = "Bulgarian split squat(2xDB)", Title = "Bulgarian split squat(2xDB)"},
+            new Exercise {Id = 162, Abbreviation = "Banded hamstring curls", Title = "Banded hamstring curls"},
+            new Exercise {Id = 163, Abbreviation = "Arch rock", Title = "Arch rock"},
         };
 
         private static readonly List<ExerciseMeasure[]> _measures = new List<ExerciseMeasure[]>()
@@ -211,6 +215,28 @@ namespace CrossfitDiaryCore.DAL.EF
                 new ExerciseMeasure {Id = 387, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 159},
                 new ExerciseMeasure {Id = 388, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 159},
                 new ExerciseMeasure {Id = 389, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 159}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 390, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 160},
+                new ExerciseMeasure {Id = 391, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 160},
+                new ExerciseMeasure {Id = 392, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 160}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 393, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 161},
+                new ExerciseMeasure {Id = 394, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 161},
+                new ExerciseMeasure {Id = 395, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 161}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 396, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 162},
+                new ExerciseMeasure {Id = 397, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 162},
+                new ExerciseMeasure {Id = 398, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 162}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 399, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 163},
             },
         };
 

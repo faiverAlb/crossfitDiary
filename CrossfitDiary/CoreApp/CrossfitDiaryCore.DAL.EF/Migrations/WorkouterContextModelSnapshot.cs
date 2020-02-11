@@ -396,6 +396,34 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             Abbreviation = "BTN Split Jerk",
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Behind the Neck Split Jerk"
+                        },
+                        new
+                        {
+                            Id = 160,
+                            Abbreviation = "Single leg DL(2xDB)",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Single leg Deadlift(2xDB)"
+                        },
+                        new
+                        {
+                            Id = 161,
+                            Abbreviation = "Bulgarian split squat(2xDB)",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Bulgarian split squat(2xDB)"
+                        },
+                        new
+                        {
+                            Id = 162,
+                            Abbreviation = "Banded hamstring curls",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Banded hamstring curls"
+                        },
+                        new
+                        {
+                            Id = 163,
+                            Abbreviation = "Arch rock",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Arch rock"
                         });
                 });
 
@@ -976,6 +1004,76 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExerciseId = 159,
                             ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 390,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 160,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 391,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 160,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 392,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 160,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 393,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 161,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 394,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 161,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 395,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 161,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 396,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 162,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 397,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 162,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 398,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 162,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 399,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 163,
+                            ExerciseMeasureTypeId = 2
                         });
                 });
 

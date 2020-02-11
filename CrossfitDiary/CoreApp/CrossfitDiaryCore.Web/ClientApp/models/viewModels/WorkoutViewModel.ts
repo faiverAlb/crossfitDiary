@@ -145,10 +145,10 @@ export class WorkoutViewModel implements Deserializable {
             return;
         }
         this.haveCollapsedVersion = this.getHaveCollapsedVersion(exercisedToUse, distinctExercises);
+        this.haveCollapsedVersion =  false; //todo: investigate and fix
         if (this.haveCollapsedVersion === false) {
             return;
         }
-
         this.groupedDictionary = this.groupExercises(exercisedToUse);
         let distinctLength: number = distinctExercises.length;
         this.canShowCountOnce = this.getCanShowCountOnce(exercisedToUse, distinctLength);
