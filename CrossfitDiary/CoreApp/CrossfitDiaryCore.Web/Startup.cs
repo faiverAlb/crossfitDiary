@@ -107,12 +107,12 @@ namespace CrossfitDiaryCore.Web
             //
             services.AddDbContext<WorkouterContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddDefaultIdentity<ApplicationUser>()
-                .AddEntityFrameworkStores<WorkouterContext>();
+            // services.AddDefaultIdentity<ApplicationUser>()
+                // .AddEntityFrameworkStores<WorkouterContext>();
 
-            // services.AddIdentity<ApplicationUser, IdentityRole>()
-            // .AddEntityFrameworkStores<WorkouterContext>()
-            // .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<WorkouterContext>()
+            .AddDefaultTokenProviders();
             //
             services.AddAuthentication()
                 .AddGoogle(googleOptions =>
