@@ -4,6 +4,7 @@ var PlanningWorkoutViewModel = /** @class */ (function () {
     function PlanningWorkoutViewModel(input) {
         this.id = 0;
         this.subTypeClass = "";
+        this.isPrivatePlanning = false;
         this.getDefaultDate = function () {
             var date = new Date();
             var result = ("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth() + 1)).slice(-2) + "." + date.getFullYear();

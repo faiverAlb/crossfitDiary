@@ -17,7 +17,15 @@
             </b-form-group>
 
         </div>
-
+        <div class="d-flex justify-content-end">
+            <b-form-checkbox
+                    class=""
+                    id="isPrivatePlanning"
+                    name="isPrivatePlanning"
+                    v-model="planningWorkout.isPrivatePlanning">
+                Plan as private session
+            </b-form-checkbox>
+        </div>
         <div class="row justify-content-end mt-3">
             <div class="col-lg-4 col-sm data-selector-container">
                 <div class="form-group">
@@ -83,19 +91,20 @@
     import {library} from "@fortawesome/fontawesome-svg-core";
     /* public components */
     import {Component, Prop, Vue} from "vue-property-decorator";
-    import {BButton, BButtonGroup, BModal,BFormGroup,BFormRadioGroup, BBadge} from "bootstrap-vue";
+    import {BBadge, BButton, BButtonGroup, BFormCheckbox, BFormGroup, BFormRadioGroup, BModal} from "bootstrap-vue";
     import datePicker from "vue-bootstrap-datetimepicker";
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     /* app components */
     import {WodSubType} from "../../models/viewModels/WodSubType";
     /* models and styles */
-    import {PlanningWorkoutLevel, WorkoutViewModel} from "../../models/viewModels/WorkoutViewModel";
+    import {PlanningWorkoutLevel} from "../../models/viewModels/WorkoutViewModel";
     import {PlanningWorkoutViewModel} from "../../models/viewModels/PlanningWorkoutViewModel";
 
     library.add(faCalendar);
-
+    Vue.component("b-form-checkbox", BFormCheckbox);
+    
     @Component({
-        components: {BModal, datePicker, FontAwesomeIcon, BButtonGroup, BButton,BFormGroup,BFormRadioGroup,BBadge}
+        components: {BModal, datePicker, FontAwesomeIcon, BButtonGroup, BButton, BFormGroup, BFormRadioGroup, BBadge}
     })
     export default class EditPlannedWorkoutComponent extends Vue {
         @Prop() planningWorkout: PlanningWorkoutViewModel;

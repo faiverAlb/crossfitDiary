@@ -44,5 +44,11 @@ namespace CrossfitDiaryCore.Model
         /// </summary>
         public WodSubType WodSubType { get; set; }
 
+
+        /// <summary>
+        ///     Is WOD for private planning
+        /// </summary>
+        public bool IsPrivatePlanning { get; set; }
+
     }
 }

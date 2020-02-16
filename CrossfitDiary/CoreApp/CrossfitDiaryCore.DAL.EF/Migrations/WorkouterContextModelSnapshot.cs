@@ -1260,6 +1260,9 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                     b.Property<string>("CrossfitterId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsPrivatePlanning")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("PlanningDate")
                         .HasColumnType("datetime2");
 

@@ -180,6 +180,7 @@ namespace CrossfitDiaryCore.BL.Services
                 .PlanningHistories
                 .AsNoTracking()
                 .Where(x => x.PlanningDate.Date == today.Date)
+                .Include(x => x.Crossfitter)
                 .Include(x => x.RoutineComplex)
                 .ThenInclude(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
