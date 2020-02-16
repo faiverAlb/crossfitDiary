@@ -19,9 +19,9 @@
         </div>
         <div class="d-flex justify-content-end">
             <b-form-checkbox
-                    class=""
                     id="isPrivatePlanning"
                     name="isPrivatePlanning"
+                    disabled="workouter.canUserPlanWorkouts == false"
                     v-model="planningWorkout.isPrivatePlanning">
                 Plan as private session
             </b-form-checkbox>
@@ -102,7 +102,10 @@
 
     library.add(faCalendar);
     Vue.component("b-form-checkbox", BFormCheckbox);
-    
+    declare var workouter: {
+        canUserPlanWorkouts: boolean;
+    };
+
     @Component({
         components: {BModal, datePicker, FontAwesomeIcon, BButtonGroup, BButton, BFormGroup, BFormRadioGroup, BBadge}
     })
@@ -113,6 +116,13 @@
         $refs: {
             planWorkoutModal: HTMLFormElement;
         };
+
+        mounted(){
+            if (workouter.canUserPlanWorkouts == false)
+            {
+                this.planningWorkout.isPrivatePlanning = true;
+            }
+        }
 
         wodSubTypes = [
             {text: 'Skill', value: WodSubType.Skill},
