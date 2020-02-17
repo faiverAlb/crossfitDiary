@@ -21,7 +21,7 @@
             <b-form-checkbox
                     id="isPrivatePlanning"
                     name="isPrivatePlanning"
-                    disabled="workouter.canUserPlanWorkouts == false"
+                    :disabled="isPrivatePlanningFixed"
                     v-model="planningWorkout.isPrivatePlanning">
                 Plan as private session
             </b-form-checkbox>
@@ -113,11 +113,14 @@
         @Prop() planningWorkout: PlanningWorkoutViewModel;
         selectedWorkoutDispayLevel: string = "";
         selectedPlanningLevel?: PlanningWorkoutLevel = null;
+        isPrivatePlanningFixed: boolean = true;
         $refs: {
             planWorkoutModal: HTMLFormElement;
         };
 
         mounted(){
+            debugger;
+            this.isPrivatePlanningFixed = workouter.canUserPlanWorkouts == false;
             if (workouter.canUserPlanWorkouts == false)
             {
                 this.planningWorkout.isPrivatePlanning = true;

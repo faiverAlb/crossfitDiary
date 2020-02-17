@@ -7,9 +7,12 @@
     writing-mode: vertical-lr;
     text-orientation: sideways;
     text-align: center;
-    font-size: 11px;
+    font-size: 12px;
     opacity: 0.8;
     font-weight: bold;
+    &.planning-label{
+      width: 17px;
+    }
   }
 
   background: #f6f1ed;

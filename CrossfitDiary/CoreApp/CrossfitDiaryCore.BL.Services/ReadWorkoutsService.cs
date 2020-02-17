@@ -191,9 +191,10 @@ namespace CrossfitDiaryCore.BL.Services
                 .ThenInclude(x => x.Exercise)
                 .ThenInclude(x => x.ExerciseMeasures)
                 .ToList();
-            if (planned.Any(x => x.Crossfitter == currentUser))
+
+            if (planned.Any(x => x.IsPrivatePlanning && x.Crossfitter.Id != currentUser.Id))
             {
-                planned = planned.Where(x => x.Crossfitter == currentUser).ToList();
+                planned.RemoveAll(x => x.IsPrivatePlanning && x.Crossfitter.Id != currentUser.Id);
             }
 
             foreach (PlanningHistory planningHistory in planned)
