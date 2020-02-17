@@ -57,8 +57,8 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                         </div>
                     </div>
                 </div>
-                <div class="workout-sub-type-display py-1 rounded-left bg-secondary text-white">
-                    Planned
+                <div class="workout-sub-type-display py-1 rounded-left text-white planning-label" v-bind:class="[levelPlanningWod.isPrivatePlanning?'bg-primary':'bg-secondary']">
+                    {{levelPlanningWod.isPrivatePlanning == true? "Private planning":"Public planning"}}
                 </div>
             </div>
         </div>
