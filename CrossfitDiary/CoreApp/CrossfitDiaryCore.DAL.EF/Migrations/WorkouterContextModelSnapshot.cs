@@ -424,6 +424,104 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             Abbreviation = "Arch rock",
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Arch rock"
+                        },
+                        new
+                        {
+                            Id = 164,
+                            Abbreviation = "BTN Push press",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "BTN Push press"
+                        },
+                        new
+                        {
+                            Id = 165,
+                            Abbreviation = "DB hang squat clean",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "DB hang squat clean"
+                        },
+                        new
+                        {
+                            Id = 166,
+                            Abbreviation = "Burpee pull-up",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Burpee pull-up"
+                        },
+                        new
+                        {
+                            Id = 167,
+                            Abbreviation = "Deficit push-up",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Deficit push-up"
+                        },
+                        new
+                        {
+                            Id = 168,
+                            Abbreviation = "Sumo deadlift",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Sumo deadlift"
+                        },
+                        new
+                        {
+                            Id = 169,
+                            Abbreviation = "Single arm overhead walking (DB/KB)",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Single arm overhead walking (DB/KB)"
+                        },
+                        new
+                        {
+                            Id = 170,
+                            Abbreviation = "GHD barbell back ext",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "GHD barbell back extension"
+                        },
+                        new
+                        {
+                            Id = 171,
+                            Abbreviation = "Pegboard alt PU",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Pegboard alt pull-up"
+                        },
+                        new
+                        {
+                            Id = 172,
+                            Abbreviation = "Pegboard toes to peg",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Pegboard toes to peg"
+                        },
+                        new
+                        {
+                            Id = 173,
+                            Abbreviation = "Rope anchors",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Rope anchors"
+                        },
+                        new
+                        {
+                            Id = 174,
+                            Abbreviation = "Clapping push-ups",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Clapping push-ups"
+                        },
+                        new
+                        {
+                            Id = 175,
+                            Abbreviation = "Barbell cuban rotation",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Barbell cuban rotation"
+                        },
+                        new
+                        {
+                            Id = 176,
+                            Abbreviation = "German hang",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "German hang"
+                        },
+                        new
+                        {
+                            Id = 177,
+                            Abbreviation = "Prowler push",
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Prowler push"
                         });
                 });
 
@@ -1074,6 +1172,202 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
                             CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExerciseId = 163,
                             ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 400,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 164,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 401,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 164,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 402,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 164,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 403,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 165,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 404,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 165,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 405,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 165,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 406,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 166,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 407,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 167,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 408,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 168,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 409,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 168,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 410,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 168,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 411,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 169,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 412,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 169,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 413,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 169,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 414,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 170,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 415,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 170,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 416,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 170,
+                            ExerciseMeasureTypeId = 8
+                        },
+                        new
+                        {
+                            Id = 417,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 171,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 418,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 172,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 419,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 173,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 420,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 174,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 421,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 175,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 422,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 176,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 423,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 176,
+                            ExerciseMeasureTypeId = 11
+                        },
+                        new
+                        {
+                            Id = 424,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 177,
+                            ExerciseMeasureTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 425,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 177,
+                            ExerciseMeasureTypeId = 11
+                        },
+                        new
+                        {
+                            Id = 426,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 177,
+                            ExerciseMeasureTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 427,
+                            CreatedUtc = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExerciseId = 177,
+                            ExerciseMeasureTypeId = 8
                         });
                 });
 
@@ -1091,6 +1385,9 @@ namespace CrossfitDiaryCore.DAL.EF.Migrations
 
                     b.Property<string>("CrossfitterId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsPrivatePlanning")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("PlanningDate")
                         .HasColumnType("datetime2");

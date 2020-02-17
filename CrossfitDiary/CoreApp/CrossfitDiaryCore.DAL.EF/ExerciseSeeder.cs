@@ -43,6 +43,20 @@ namespace CrossfitDiaryCore.DAL.EF
             new Exercise {Id = 161, Abbreviation = "Bulgarian split squat(2xDB)", Title = "Bulgarian split squat(2xDB)"},
             new Exercise {Id = 162, Abbreviation = "Banded hamstring curls", Title = "Banded hamstring curls"},
             new Exercise {Id = 163, Abbreviation = "Arch rock", Title = "Arch rock"},
+            new Exercise {Id = 164, Abbreviation = "BTN Push press", Title = "BTN Push press"},
+            new Exercise {Id = 165, Abbreviation = "DB hang squat clean", Title = "DB hang squat clean"},
+            new Exercise {Id = 166, Abbreviation = "Burpee pull-up", Title = "Burpee pull-up"},
+            new Exercise {Id = 167, Abbreviation = "Deficit push-up", Title = "Deficit push-up"},
+            new Exercise {Id = 168, Abbreviation = "Sumo deadlift", Title = "Sumo deadlift"},
+            new Exercise {Id = 169, Abbreviation = "Single arm overhead walking (DB/KB)", Title = "Single arm overhead walking (DB/KB)"},
+            new Exercise {Id = 170, Abbreviation = "GHD barbell back ext", Title = "GHD barbell back extension"},
+            new Exercise {Id = 171, Abbreviation = "Pegboard alt PU", Title = "Pegboard alt pull-up"},
+            new Exercise {Id = 172, Abbreviation = "Pegboard toes to peg", Title = "Pegboard toes to peg"},
+            new Exercise {Id = 173, Abbreviation = "Rope anchors", Title = "Rope anchors"},
+            new Exercise {Id = 174, Abbreviation = "Clapping push-ups", Title = "Clapping push-ups"},
+            new Exercise {Id = 175, Abbreviation = "Barbell cuban rotation", Title = "Barbell cuban rotation"},
+            new Exercise {Id = 176, Abbreviation = "German hang", Title = "German hang"},
+            new Exercise {Id = 177, Abbreviation = "Prowler push", Title = "Prowler push"},
         };
 
         private static readonly List<ExerciseMeasure[]> _measures = new List<ExerciseMeasure[]>()
@@ -238,6 +252,77 @@ namespace CrossfitDiaryCore.DAL.EF
             {
                 new ExerciseMeasure {Id = 399, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 163},
             },
+            new[]
+            {
+                new ExerciseMeasure {Id = 400, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 164},
+                new ExerciseMeasure {Id = 401, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 164},
+                new ExerciseMeasure {Id = 402, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 164}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 403, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 165},
+                new ExerciseMeasure {Id = 404, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 165},
+                new ExerciseMeasure {Id = 405, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 165}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 406, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 166},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 407, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 167},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 408, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 168},
+                new ExerciseMeasure {Id = 409, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 168},
+                new ExerciseMeasure {Id = 410, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 168}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 411, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 169},
+                new ExerciseMeasure {Id = 412, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 169},
+                new ExerciseMeasure {Id = 413, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 169}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 414, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 170},
+                new ExerciseMeasure {Id = 415, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 170},
+                new ExerciseMeasure {Id = 416, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 170}
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 417, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 171},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 418, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 172},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 419, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 173},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 420, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 174},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 421, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 175},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 422, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 176},
+                new ExerciseMeasure {Id = 423, ExerciseMeasureTypeId = MeasureType.Time, ExerciseId = 176},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 424, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 177},
+                new ExerciseMeasure {Id = 425, ExerciseMeasureTypeId = MeasureType.Time, ExerciseId = 177},
+                new ExerciseMeasure {Id = 426, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 177},
+                new ExerciseMeasure {Id = 427, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 177},
+            },
+
         };
 
 

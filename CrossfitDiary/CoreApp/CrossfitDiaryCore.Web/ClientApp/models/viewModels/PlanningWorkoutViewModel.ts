@@ -9,6 +9,7 @@ export class PlanningWorkoutViewModel implements Deserializable {
     displayPlanDate?: string; // default value for new model;
     workoutViewModel: WorkoutViewModel;
     subTypeClass: string = "";
+    isPrivatePlanning:boolean = false;
 
     get workoutSubTypeDisplayValue() {
         this.subTypeClass = this.getSubTypeClass();

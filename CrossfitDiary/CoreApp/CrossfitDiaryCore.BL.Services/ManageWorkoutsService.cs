@@ -137,16 +137,16 @@ namespace CrossfitDiaryCore.BL.Services
                 PlanningLevel = planningLevel,
                 PlanningDate = date
             };
-            PlanWorkoutForDay(historyItem);
+            PlanWorkoutForDay(historyItem, user);
         }
 
-        private void PlanWorkoutForDay(PlanningHistory newHistoryPlanning)
+        private void PlanWorkoutForDay(PlanningHistory newHistoryPlanning, ApplicationUser applicationUser)
         {
-            // IEnumerable<PlanningHistory> planningHistories = _context.PlanningHistories.Where(x => x.Id == newHistoryPlanning.Id);
-            // if (planningHistories.Any())
-            // {
-                // _context.PlanningHistories.RemoveRange(planningHistories);
-            // }
+            if (newHistoryPlanning.IsPrivatePlanning == false && applicationUser.CanPlanWorkouts == false)
+            {
+                newHistoryPlanning.IsPrivatePlanning = true;
+            }
+
             _context.PlanningHistories.Add(newHistoryPlanning);
             _context.SaveChanges();
         }
@@ -187,7 +187,7 @@ namespace CrossfitDiaryCore.BL.Services
             {
                 newHistoryPlanning.RoutineComplexId = workoutId;
                 newHistoryPlanning.RoutineComplex = _readWorkoutsService.GetWorkout(workoutId);
-                PlanWorkoutForDay(newHistoryPlanning);
+                PlanWorkoutForDay(newHistoryPlanning, user);
             }
         }
 

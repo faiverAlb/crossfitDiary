@@ -18,5 +18,9 @@ namespace CrossfitDiaryCore.Web.ViewModels
         
         [JsonProperty("workoutViewModel")]
         public WorkoutViewModel WorkoutViewModel { get; set; }
+
+        [JsonProperty("isPrivatePlanning")]
+        public bool IsPrivatePlanning { get; set; }
+
     }
 }

@@ -135,6 +135,7 @@ var WorkoutViewModel = /** @class */ (function () {
             return;
         }
         this.haveCollapsedVersion = this.getHaveCollapsedVersion(exercisedToUse, distinctExercises);
+        this.haveCollapsedVersion = false; //todo: investigate and fix
         if (this.haveCollapsedVersion === false) {
             return;
         }

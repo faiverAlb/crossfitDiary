@@ -180,6 +180,7 @@ namespace CrossfitDiaryCore.BL.Services
                 .PlanningHistories
                 .AsNoTracking()
                 .Where(x => x.PlanningDate.Date == today.Date)
+                .Include(x => x.Crossfitter)
                 .Include(x => x.RoutineComplex)
                 .ThenInclude(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
@@ -190,9 +191,10 @@ namespace CrossfitDiaryCore.BL.Services
                 .ThenInclude(x => x.Exercise)
                 .ThenInclude(x => x.ExerciseMeasures)
                 .ToList();
-            if (planned.Any(x => x.Crossfitter == currentUser))
+
+            if (planned.Any(x => x.IsPrivatePlanning && x.Crossfitter.Id != currentUser.Id))
             {
-                planned = planned.Where(x => x.Crossfitter == currentUser).ToList();
+                planned.RemoveAll(x => x.IsPrivatePlanning && x.Crossfitter.Id != currentUser.Id);
             }
 
             foreach (PlanningHistory planningHistory in planned)
