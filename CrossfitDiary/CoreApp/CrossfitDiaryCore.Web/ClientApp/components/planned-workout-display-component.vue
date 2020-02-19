@@ -15,7 +15,6 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 class="row mt-1"
                 v-for="levelPlanningWod in selectedLevelPlanningWorkouts">
             <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters justify-content-between">
-                
                 <div class="workout-sub-type-display mr-2 py-1 rounded-left"
                      v-bind:class="levelPlanningWod.subTypeClass">
                     {{levelPlanningWod.workoutSubTypeDisplayValue}}
@@ -25,6 +24,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                         <div class="username">
                             <span class="text-info">
                               {{levelPlanningWod.planningLevelDisplayValue}}
+                                <span v-if="isWodDone(levelPlanningWod.workoutViewModel.id)">DONE!</span>
                             </span>
                         </div>
                         <div class="">
@@ -57,7 +57,8 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                         </div>
                     </div>
                 </div>
-                <div class="workout-sub-type-display py-1 rounded-left text-white planning-label" v-bind:class="[levelPlanningWod.isPrivatePlanning?'bg-primary':'bg-secondary']">
+                <div class="workout-sub-type-display py-1 rounded-left text-white planning-label"
+                     v-bind:class="[levelPlanningWod.isPrivatePlanning?'bg-primary':'bg-secondary']">
                     {{levelPlanningWod.isPrivatePlanning == true? "Private planning":"Public planning"}}
                 </div>
             </div>
@@ -295,6 +296,9 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
     export default class PlannedWorkoutDisplayComponent extends Vue {
         @Prop()
         plannedWorkouts: { planningWorkoutLevel: PlanningWorkoutLevel, planningWodItem: PlanningWorkoutViewModel[] };
+
+        @Prop()
+        doneWodsIds: [number];
         show: boolean = true;
         isScaledSelected: boolean = false;
         isRxSelected: boolean = false;
@@ -401,6 +405,13 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
         setSelectedPlanned(planningWorkoutLevel: PlanningWorkoutLevel) {
             this.selectedLevelPlanningWorkouts = this.plannedWorkouts[planningWorkoutLevel];
             this.setVisibilityByLevel(planningWorkoutLevel);
+        }
+
+        isWodDone(id: number) {
+            if (this.doneWodsIds.indexOf(id) != -1){
+                return true;
+            }
+            return false;
         }
     }
 </script>

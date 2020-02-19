@@ -37,7 +37,7 @@ let vue = new Vue({
             <div v-if="isPlannedWodsLoaded">
 
                 <PlannedWorkoutDisplayComponent :planned-workouts="plannedWorkouts"
-                                                
+                                                :done-wods-ids="doneWodsToday"
                                                 @deletePlannedWorkout="deletePlannedWorkout"
                                                 @logWorkout="logWorkout"/>
             </div>
@@ -110,17 +110,16 @@ let vue = new Vue({
                 this.isPlannedWodsLoaded = true;
                 this.plannedWorkouts = data;
             })
-            .then(() =>apiService.getDoneWodsForToday())
+            .then(() => apiService.getDoneWodsForToday())
             .then(data => {
                 this.doneWodsToday = data;
-                debugger;
                 this.spinner.disable();
             })
             .catch(data => {
                 this.errorAlertModel.setError(data.response.statusText);
                 this.spinner.disable();
             });
-            apiService.getAllCrossfittersWorkouts()
+        apiService.getAllCrossfittersWorkouts()
             .then(data => {
                 this.activities = data;
                 this.spinner.disable();
@@ -131,11 +130,6 @@ let vue = new Vue({
             });
     },
     methods: {
-
-        calculateDoneWods(allWods: ToLogWorkoutViewModel[]){
-            debugger;
-            
-        },
         logWorkout(logModel: ToLogWorkoutViewModel, workoutModel: WorkoutViewModel): void {
             this.spinner.activate();
             const model = {
@@ -149,29 +143,15 @@ let vue = new Vue({
                     this.activities = data;
                     this.spinner.disable();
                 })
-                .then(() =>apiService.getDoneWodsForToday())
+                .then(() => apiService.getDoneWodsForToday())
                 .then(data => {
                     this.doneWodsToday = data;
-                    debugger;
                     this.spinner.disable();
                 })
                 .catch(data => {
                     this.spinner.disable();
                     this.errorAlertModel.setError(data.response.statusText);
                 });
-/*
-            apiService.getDoneWodsForToday()
-                .then(data => {
-                    this.doneWodsToday = data;
-                    debugger;
-                    this.spinner.disable();
-                })
-                .catch(data => {
-                    this.errorAlertModel.setError(data.response.statusText);
-                    this.spinner.disable();
-                });
-*/
-
         },
         deletePlannedWorkout(toRemovePlannedId: number): void {
             this.spinner.activate();

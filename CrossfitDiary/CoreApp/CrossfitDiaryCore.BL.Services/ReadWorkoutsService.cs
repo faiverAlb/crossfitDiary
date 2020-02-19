@@ -65,7 +65,12 @@ namespace CrossfitDiaryCore.BL.Services
                 .AsNoTracking()
                 .Include(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
-                .ThenInclude(x => x.ExerciseMeasures).ToList();
+                .ThenInclude(x => x.ExerciseMeasures)
+                .Include(x => x.Children)
+                .ThenInclude(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .ToList();
             return CheckWodOnExistingOne(workoutsToCheck, routineComplexToSave);
         }
 
