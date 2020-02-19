@@ -343,6 +343,7 @@ namespace CrossfitDiaryCore.BL.Services
                     .Include(x => x.Crossfitter)
                     .Where(x => x.Crossfitter.Id == userId && x.Date.Date == DateTime.Today)
                     .Select(x => x.RoutineComplexId)
+                    .Distinct()
                     .ToList();
 
             return workoutsIds;
