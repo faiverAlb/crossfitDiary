@@ -115,6 +115,19 @@ namespace CrossfitDiaryCore.Web.Controllers
         }
 
         /// <summary>
+        ///     Get available crossfitter's workouts
+        /// </summary>
+        /// <returns>All available workouts</returns>
+        [HttpGet]
+        [Route("api/getDoneWodsForToday")]
+        public  List<int> GetDoneWodsForToday()
+        {
+            string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            List<int> crossfitterWorkoutsIds = _readWorkoutsService.GetDoneWodsForToday(userId);
+            return crossfitterWorkoutsIds;
+        }
+
+        /// <summary>
         ///     Get planned workouts
         /// </summary>
         /// <returns>All available workouts to do</returns>

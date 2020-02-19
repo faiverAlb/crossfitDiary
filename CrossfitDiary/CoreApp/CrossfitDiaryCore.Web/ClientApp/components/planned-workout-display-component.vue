@@ -77,52 +77,6 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 /></span>
             </div>
         </div>
-
-        <!--        <div class="row">-->
-        <!--            <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-0 ">-->
-        <!--                <b-button-group class="btn-group d-flex" size="sm">-->
-        <!--                    <b-button-->
-        <!--                            class=" "-->
-        <!--                            v-bind:class="{active:isScaledSelected}"-->
-        <!--                            v-if="hasPlannedForLevel(0)"-->
-        <!--                            v-on:click="setSelectedPlanned(0)"-->
-        <!--                            variant="outline-info"-->
-        <!--                    >-->
-        <!--                        <font-awesome-icon :icon="['fas', 'cat']" class="" size="lg"/>-->
-        <!--                        Scaled-->
-        <!--                    </b-button-->
-        <!--                    >-->
-        <!--                    <b-button-->
-        <!--                            class=""-->
-        <!--                            v-bind:class="{  active:isRxSelected  }"-->
-        <!--                            v-if="hasPlannedForLevel(1)"-->
-        <!--                            v-on:click="setSelectedPlanned(1)"-->
-        <!--                            variant="outline-info"-->
-        <!--                    >-->
-        <!--                        <font-awesome-icon :icon="['fas', 'horse']" size="lg"/>-->
-        <!--                        Rx-->
-        <!--                    </b-button-->
-        <!--                    >-->
-        <!--                    <b-button-->
-        <!--                            class=""-->
-        <!--                            v-bind:class="{    active:isRxPlusSelected   }"-->
-        <!--                            v-if="hasPlannedForLevel(2)"-->
-        <!--                            v-on:click="setSelectedPlanned(2)"-->
-        <!--                            variant="outline-info"-->
-        <!--                    >-->
-        <!--                        <span class="text-left">-->
-        <!--                            <font-awesome-icon :icon="['fas', 'dog']" class="mr-1" size="lg"/>  -->
-        <!--                        </span>-->
-        <!--                        <span>-->
-        <!--                            Rx+-->
-        <!--                        </span>-->
-        <!--                    </b-button-->
-        <!--                    >-->
-        <!--                </b-button-group>-->
-        <!--            </div>-->
-        <!--        </div>-->
-
-
         <b-modal ref="logWorkoutModal" title="Log workout">
             <div class="log-workout" v-if="selectedWorkout">
                 <div class="log-workout-container">

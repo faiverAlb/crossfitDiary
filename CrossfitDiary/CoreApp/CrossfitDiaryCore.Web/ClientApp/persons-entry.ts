@@ -33,31 +33,20 @@ let vue = new Vue({
                     <ErrorAlertComponent :errorAlertModel="errorAlertModel"/>
                 </div>
             </div>
-            
+
             <div v-if="isPlannedWodsLoaded">
-                
-                <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts"
+
+                <PlannedWorkoutDisplayComponent :planned-workouts="plannedWorkouts"
                                                 @deletePlannedWorkout="deletePlannedWorkout"
                                                 @logWorkout="logWorkout"/>
             </div>
 
-            
-            
+
             <div class="container person-setting">
                 <div
                         class="row"
                         v-if="activities"
                 >
-
-<!--                    <div class="offset-lg-3 col col-lg-5 pl-0" v-if="false">-->
-<!--                        <b-form-checkbox-->
-<!--                                id="showOnlyUserWods"-->
-<!--                                name="shouShowOnlyUserWods"-->
-<!--                                v-model="showOnlyUserWods"-->
-<!--                                @change="changeShowUserWods">-->
-<!--                            Show only my wods-->
-<!--                        </b-form-checkbox>-->
-<!--                    </div>-->
 
                 </div>
                 <div class="row mt-4 mb-2" v-if="activities">
@@ -75,7 +64,6 @@ let vue = new Vue({
                         </div>
                     </div>
                 </div>
-
 
 
                 <div class="row">
@@ -108,7 +96,8 @@ let vue = new Vue({
             spinner: new SpinnerModel(true),
             errorAlertModel: new ErrorAlertModel(),
             showOnlyUserWods: false,
-            isPlannedWodsLoaded: false
+            isPlannedWodsLoaded: false,
+            doneWodsToday: []
         };
     },
     mounted() {
@@ -123,6 +112,18 @@ let vue = new Vue({
             .catch(data => {
                 this.errorAlertModel.setError(data.response.statusText);
             });
+        apiService.getDoneWodsForToday()
+            .then(data => {
+                debugger;
+                this.doneWodsToday = data;
+                this.spinner.disable();
+            })
+            .catch(data => {
+                debugger;
+
+                this.errorAlertModel.setError(data.response.statusText);
+                this.spinner.disable();
+            });
         apiService
             .getAllCrossfittersWorkouts()
             .then(data => {
@@ -135,6 +136,11 @@ let vue = new Vue({
             });
     },
     methods: {
+
+        calculateDoneWods(allWods: ToLogWorkoutViewModel[]){
+            debugger;
+            
+        },
         logWorkout(logModel: ToLogWorkoutViewModel, workoutModel: WorkoutViewModel): void {
             this.spinner.activate();
             const model = {

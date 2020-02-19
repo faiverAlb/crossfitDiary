@@ -336,5 +336,16 @@ namespace CrossfitDiaryCore.BL.Services
             // return new LeaderboardItemModel(plannedWorkout.PlanningLevel.ToString(),crossfitterWorkout.Crossfitter.FullName, result);
         }
 
+        public List<int> GetDoneWodsForToday(string userId)
+        {
+            List<int> workoutsIds =
+                _context.CrossfitterWorkouts
+                    .Include(x => x.Crossfitter)
+                    .Where(x => x.Crossfitter.Id == userId && x.Date.Date == DateTime.Today)
+                    .Select(x => x.RoutineComplexId)
+                    .ToList();
+
+            return workoutsIds;
+        }
     }
 }
