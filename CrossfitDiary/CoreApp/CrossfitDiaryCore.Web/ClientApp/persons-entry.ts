@@ -81,7 +81,7 @@ let vue = new Vue({
                 </div>
 
             </div>
-            <PersonsActivitiesComponent :activities="activities"/>
+            <PersonsActivitiesComponent :activities="activities" @onRemoveActivity="updateDoneItems"/>
         </div>
     `,
     components: {
@@ -130,6 +130,17 @@ let vue = new Vue({
             });
     },
     methods: {
+        updateDoneItems() {
+            apiService.getDoneWodsForToday()
+                .then(data => {
+                    this.doneWodsToday = data;
+                    this.spinner.disable();
+                })
+                .catch(data => {
+                    this.spinner.disable();
+                    this.errorAlertModel.setError(data.response.statusText);
+                });
+        },
         logWorkout(logModel: ToLogWorkoutViewModel, workoutModel: WorkoutViewModel): void {
             this.spinner.activate();
             const model = {
