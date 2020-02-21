@@ -1,4 +1,4 @@
-import { PlanningWorkoutLevel, WorkoutViewModel } from "./WorkoutViewModel";
+import { WorkoutViewModel } from "./WorkoutViewModel";
 import { WodSubType } from "./WodSubType";
 var PlanningWorkoutViewModel = /** @class */ (function () {
     function PlanningWorkoutViewModel(input) {
@@ -17,45 +17,6 @@ var PlanningWorkoutViewModel = /** @class */ (function () {
         }
         Object.assign(this, input);
     }
-    Object.defineProperty(PlanningWorkoutViewModel.prototype, "workoutSubTypeDisplayValue", {
-        get: function () {
-            this.subTypeClass = this.getSubTypeClass();
-            switch (this.wodSubType) {
-                case WodSubType.Skill:
-                    return "Skill";
-                case WodSubType.Wod:
-                    return "WOD";
-                case WodSubType.AccessoryWork:
-                    return "Accessory";
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PlanningWorkoutViewModel.prototype, "planningLevelDisplayValue", {
-        get: function () {
-            switch (this.planningWorkoutLevel) {
-                case PlanningWorkoutLevel.Scaled:
-                    return "Scaled";
-                case PlanningWorkoutLevel.Rx:
-                    return "Rx";
-                case PlanningWorkoutLevel.RxPlus:
-                    return "Rx+";
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    PlanningWorkoutViewModel.prototype.getSubTypeClass = function () {
-        switch (this.wodSubType) {
-            case WodSubType.Skill:
-                return 'bg-info text-white';
-            case WodSubType.Wod:
-                return 'bg-danger text-white';
-            case WodSubType.AccessoryWork:
-                return 'bg-warning text-white';
-        }
-    };
     PlanningWorkoutViewModel.prototype.deserialize = function (input) {
         if (input == null) {
             return;

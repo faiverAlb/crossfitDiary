@@ -26,8 +26,13 @@ namespace CrossfitDiaryCore.Web.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMemoryCache _memoryCache;
-            
-        private string _allMainpageResultsConst = "all-mainpage-results";
+
+        private string ALL_MAIN_PAGE_RESULT_CONST = "all-mainpage-results";
+
+        private string GetDoneMixedItemsKey(string userId)
+        {
+            return $"done-items_{userId}";
+        }
         // private string _plannedWorkouts = ;
 
         public WorkoutController(ReadWorkoutsService readWorkoutsService
@@ -63,11 +68,13 @@ namespace CrossfitDiaryCore.Web.Controllers
             ViewBag.canUserPlanWorkouts = _readUsersService.CanUserPlanWorkouts(userId);
             if (crossfitterWorkoutId.HasValue) // AND HAS RIGHTS!
             {
-                CrossfitterWorkout crossfitterWorkout = _readWorkoutsService.GetCrossfitterWorkout(userId, crossfitterWorkoutId.Value);
+                CrossfitterWorkout crossfitterWorkout =
+                    _readWorkoutsService.GetCrossfitterWorkout(userId, crossfitterWorkoutId.Value);
                 if (crossfitterWorkout == null)
                 {
                     return View();
                 }
+
                 ToLogWorkoutViewModel toLogWorkoutViewModel = _mapper.Map<ToLogWorkoutViewModel>(crossfitterWorkout);
                 ViewBag.toLogWorkoutViewModel = toLogWorkoutViewModel;
                 return View();
@@ -96,18 +103,19 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts</returns>
         [HttpGet]
         [Route("api/getAllCrossfittersWorkouts")]
-        public  List<ToLogWorkoutViewModel> GetAllCrossfittersWorkoutsAsync(int page = 1, int pageSize = 50)
+        public List<ToLogWorkoutViewModel> GetAllCrossfittersWorkoutsAsync(int page = 1, int pageSize = 50)
         {
 //            List<ToLogWorkoutViewModel> crossfitersWorkouts = await _memoryCache.GetOrCreate(_allMainpageResultsConst, async entry =>
-             {
-                 string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                 
-                 List<CrossfitterWorkout> crossfitterWorkouts = _readWorkoutsService.GetAllCrossfittersWorkouts(userId, page, pageSize);
-                 List<ToLogWorkoutViewModel> allResults = crossfitterWorkouts
-                     .Select(_mapper.Map<ToLogWorkoutViewModel>)
-                     .ToList();
-                 return allResults;
-             }
+            {
+                string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                List<CrossfitterWorkout> crossfitterWorkouts =
+                    _readWorkoutsService.GetAllCrossfittersWorkouts(userId, page, pageSize);
+                List<ToLogWorkoutViewModel> allResults = crossfitterWorkouts
+                    .Select(_mapper.Map<ToLogWorkoutViewModel>)
+                    .ToList();
+                return allResults;
+            }
 //            );
 
 
@@ -120,10 +128,14 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts</returns>
         [HttpGet]
         [Route("api/getDoneWodsForToday")]
-        public  List<int> GetDoneWodsForToday()
+        public List<int> GetDoneWodsForToday()
         {
             string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             List<int> crossfitterWorkoutsIds = _readWorkoutsService.GetDoneWodsForToday(userId);
+
+            List<KeyValuePair<int, int>> cachedItems = _memoryCache.Get<List<KeyValuePair<int, int>>>(GetDoneMixedItemsKey(userId)) ?? new List<KeyValuePair<int, int>>();
+            crossfitterWorkoutsIds.AddRange(cachedItems.Select(x => x.Key));
+            crossfitterWorkoutsIds.AddRange(cachedItems.Select(x => x.Value));
             return crossfitterWorkoutsIds;
         }
 
@@ -133,16 +145,19 @@ namespace CrossfitDiaryCore.Web.Controllers
         /// <returns>All available workouts to do</returns>
         [HttpGet]
         [Route("api/getPlannedWorkoutsForToday")]
-        public async Task<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>> GetPlannedWorkoutsForToday()
+        public async Task<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>>
+            GetPlannedWorkoutsForToday()
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
             // IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> crossfitersWorkouts = await _memoryCache.GetOrCreate(PlannedWorkoutsCacheConstant,
-                // async entry =>
-                // {
-                    IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> workouts = _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
-                    IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> allResults = _mapper.Map<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>>(workouts);
-                    return allResults;
-                // });
+            // async entry =>
+            // {
+            IEnumerable<KeyValuePair<PlanningLevel, List<PlanningHistory>>> workouts =
+                _readWorkoutsService.GetPlannedWorkouts(DateTime.Today, user);
+            IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>> allResults =
+                _mapper.Map<IEnumerable<KeyValuePair<PlanningWorkoutLevel, List<PlanningWorkoutViewModel>>>>(workouts);
+            return allResults;
+            // });
             // return crossfitersWorkouts;
         }
 
@@ -173,7 +188,8 @@ namespace CrossfitDiaryCore.Web.Controllers
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
 
-            List<LeaderboardItemModel> leaderboardItemModels = _readWorkoutsService.GetLeaderboardByWorkout(crossfitterWorkoutId, user);
+            List<LeaderboardItemModel> leaderboardItemModels =
+                _readWorkoutsService.GetLeaderboardByWorkout(crossfitterWorkoutId, user);
             return _mapper.Map<List<LeaderboardItemViewModel>>(leaderboardItemModels);
         }
 
@@ -193,7 +209,16 @@ namespace CrossfitDiaryCore.Web.Controllers
             //            _memoryCache.Remove(_allMainpageResultsConst);
             //TODO: Add check rights!
             // _memoryCache.Remove(PlannedWorkoutsCacheConstant);
-            _manageWorkoutsService.RemoveWorkoutResult(crossfitterWorkoutId, userId);
+            int deletedWodId = _manageWorkoutsService.RemoveWorkoutResult(crossfitterWorkoutId, userId);
+
+
+            List<KeyValuePair<int, int>> cachedItems = _memoryCache.Get<List<KeyValuePair<int, int>>>(GetDoneMixedItemsKey(userId)) ?? new List<KeyValuePair<int, int>>();
+            if (cachedItems.Any(x => x.Value == deletedWodId))
+            {
+                var toDelete = cachedItems.Where(x => x.Value == deletedWodId);
+                List<KeyValuePair<int, int>> keyValuePairs = cachedItems.Except(toDelete).ToList();
+                  _memoryCache.Set(GetDoneMixedItemsKey(userId), keyValuePairs);
+            }
         }
 
         /// <summary>
@@ -204,7 +229,7 @@ namespace CrossfitDiaryCore.Web.Controllers
         public void RemovePlannedWod(int plannedWodId)
         {
             string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            
+
 //            _memoryCache.Remove(_allMainpageResultsConst);
             //TODO: Add check rights!
             DateTime date = DateTime.Today;
@@ -226,12 +251,41 @@ namespace CrossfitDiaryCore.Web.Controllers
             crossfitterWorkout.Crossfitter = user;
             RoutineComplex newWorkoutRoutine = _mapper.Map<RoutineComplex>(model.NewWorkoutViewModel);
             newWorkoutRoutine.CreatedBy = user;
-            // _memoryCache.Remove(PlannedWorkoutsCacheConstant);
-            _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
-//                _memoryCache.Remove(_allMainpageResultsConst);
-            
+
+            int workoutId = _manageWorkoutsService.CreateAndLogNewWorkout(newWorkoutRoutine, crossfitterWorkout, user);
+
+            UpdateTrickyWodCache(model.NewWorkoutViewModel.Id, workoutId,user.Id);
         }
-        
+
+        private void UpdateTrickyWodCache(int baseWodId, int newWorkoutId, string userId)
+        {
+            if (baseWodId == 0)
+            {
+                return;
+            }
+
+            if (baseWodId == newWorkoutId) // new wod is not based on existing old one
+            {
+                return;
+            }
+
+            List<KeyValuePair<int, int>> res = _memoryCache.GetOrCreate(GetDoneMixedItemsKey(userId), entry =>
+            {
+                DateTime expirationDate = DateTime.Today.Date.AddDays(1).Subtract(TimeSpan.FromMinutes(1));
+                entry.SetAbsoluteExpiration(expirationDate);
+
+                var items = new List<KeyValuePair<int, int>>
+                {
+                    new KeyValuePair<int, int>(baseWodId, newWorkoutId)
+                };
+                return items;
+            });
+
+
+            res.Add(new KeyValuePair<int, int>(baseWodId, newWorkoutId));
+            _memoryCache.Set(GetDoneMixedItemsKey(userId), res);
+        }
+
         [HttpPost]
         [Route("api/createAndPlanWorkout")]
         public async Task CreateAndPlanWorkout([FromBody] PlanningWorkoutViewModel planningWorkoutView)

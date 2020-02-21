@@ -14,17 +14,16 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 :key="levelPlanningWod.id"
                 class="row mt-1"
                 v-for="levelPlanningWod in selectedLevelPlanningWorkouts">
-            <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters justify-content-between">
+            <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters justify-content-between" v-bind:class="{'done-planned-wod':isWodDone(levelPlanningWod.workoutViewModel.id)}">
                 <div class="workout-sub-type-display mr-2 py-1 rounded-left"
-                     v-bind:class="levelPlanningWod.subTypeClass">
-                    {{levelPlanningWod.workoutSubTypeDisplayValue}}
+                     v-bind:class="getSubTypeClass(levelPlanningWod)">
+                    {{getWorkoutSubTypeDisplayValue(levelPlanningWod)}}
                 </div>
                 <div class="col-10 p-1">
                     <div class="item-header d-flex flex-row justify-content-between">
                         <div class="username">
                             <span class="text-info">
-                              {{levelPlanningWod.planningLevelDisplayValue}}
-                                <span v-if="isWodDone(levelPlanningWod.workoutViewModel.id)">DONE!</span>
+                              {{getPlanningLevelDisplayValue(levelPlanningWod)}}
                             </span>
                         </div>
                         <div class="">
@@ -380,6 +379,50 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
             });
 
         }
+
+        getWorkoutSubTypeDisplayValue(levelPlanningWod:PlanningWorkoutViewModel) {
+            if (this.isWodDone(levelPlanningWod.workoutViewModel.id))
+            {
+                return "Finished!";
+            }
+            switch (levelPlanningWod.wodSubType) {
+                case WodSubType.Skill:
+                    return "Skill";
+                case WodSubType.Wod:
+                    return "WOD";
+                case WodSubType.AccessoryWork:
+                    return "Accessory";
+            }
+        }
+        
+        getSubTypeClass(levelPlanningWod:PlanningWorkoutViewModel) {
+            if (this.isWodDone(levelPlanningWod.workoutViewModel.id))
+            {
+                return 'bg-success text-white';
+            }
+            switch (levelPlanningWod.wodSubType) {
+                case WodSubType.Skill:
+                    return 'bg-info text-white';
+                case WodSubType.Wod:
+                    return 'bg-danger text-white';
+                case WodSubType.AccessoryWork:
+                    return 'bg-warning text-white';
+            }
+        }
+
+        getPlanningLevelDisplayValue(levelPlanningWod:PlanningWorkoutViewModel)
+        {
+            switch (levelPlanningWod.planningWorkoutLevel) {
+                case PlanningWorkoutLevel.Scaled:
+                    return "Scaled";
+                case PlanningWorkoutLevel.Rx:
+                    return "Rx";
+                case PlanningWorkoutLevel.RxPlus:
+                    return "Rx+";
+            }
+        }
+
+
 
         setVisibilityByLevel(planningWorkoutLevel: PlanningWorkoutLevel) {
             this.isScaledSelected = this.isRxSelected = this.isRxPlusSelected = false;
