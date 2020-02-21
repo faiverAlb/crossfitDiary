@@ -14,17 +14,16 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 :key="levelPlanningWod.id"
                 class="row mt-1"
                 v-for="levelPlanningWod in selectedLevelPlanningWorkouts">
-            <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters justify-content-between">
-                
+            <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters justify-content-between" v-bind:class="{'done-planned-wod':isWodDone(levelPlanningWod.workoutViewModel.id)}">
                 <div class="workout-sub-type-display mr-2 py-1 rounded-left"
-                     v-bind:class="levelPlanningWod.subTypeClass">
-                    {{levelPlanningWod.workoutSubTypeDisplayValue}}
+                     v-bind:class="getSubTypeClass(levelPlanningWod)">
+                    {{getWorkoutSubTypeDisplayValue(levelPlanningWod)}}
                 </div>
                 <div class="col-10 p-1">
                     <div class="item-header d-flex flex-row justify-content-between">
                         <div class="username">
                             <span class="text-info">
-                              {{levelPlanningWod.planningLevelDisplayValue}}
+                              {{getPlanningLevelDisplayValue(levelPlanningWod)}}
                             </span>
                         </div>
                         <div class="">
@@ -57,7 +56,8 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                         </div>
                     </div>
                 </div>
-                <div class="workout-sub-type-display py-1 rounded-left text-white planning-label" v-bind:class="[levelPlanningWod.isPrivatePlanning?'bg-primary':'bg-secondary']">
+                <div class="workout-sub-type-display py-1 rounded-left text-white planning-label"
+                     v-bind:class="[levelPlanningWod.isPrivatePlanning?'bg-primary':'bg-secondary']">
                     {{levelPlanningWod.isPrivatePlanning == true? "Private planning":"Public planning"}}
                 </div>
             </div>
@@ -77,52 +77,6 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 /></span>
             </div>
         </div>
-
-        <!--        <div class="row">-->
-        <!--            <div class="col-sm mb-1 offset-lg-3 col col-lg-5 px-0 ">-->
-        <!--                <b-button-group class="btn-group d-flex" size="sm">-->
-        <!--                    <b-button-->
-        <!--                            class=" "-->
-        <!--                            v-bind:class="{active:isScaledSelected}"-->
-        <!--                            v-if="hasPlannedForLevel(0)"-->
-        <!--                            v-on:click="setSelectedPlanned(0)"-->
-        <!--                            variant="outline-info"-->
-        <!--                    >-->
-        <!--                        <font-awesome-icon :icon="['fas', 'cat']" class="" size="lg"/>-->
-        <!--                        Scaled-->
-        <!--                    </b-button-->
-        <!--                    >-->
-        <!--                    <b-button-->
-        <!--                            class=""-->
-        <!--                            v-bind:class="{  active:isRxSelected  }"-->
-        <!--                            v-if="hasPlannedForLevel(1)"-->
-        <!--                            v-on:click="setSelectedPlanned(1)"-->
-        <!--                            variant="outline-info"-->
-        <!--                    >-->
-        <!--                        <font-awesome-icon :icon="['fas', 'horse']" size="lg"/>-->
-        <!--                        Rx-->
-        <!--                    </b-button-->
-        <!--                    >-->
-        <!--                    <b-button-->
-        <!--                            class=""-->
-        <!--                            v-bind:class="{    active:isRxPlusSelected   }"-->
-        <!--                            v-if="hasPlannedForLevel(2)"-->
-        <!--                            v-on:click="setSelectedPlanned(2)"-->
-        <!--                            variant="outline-info"-->
-        <!--                    >-->
-        <!--                        <span class="text-left">-->
-        <!--                            <font-awesome-icon :icon="['fas', 'dog']" class="mr-1" size="lg"/>  -->
-        <!--                        </span>-->
-        <!--                        <span>-->
-        <!--                            Rx+-->
-        <!--                        </span>-->
-        <!--                    </b-button-->
-        <!--                    >-->
-        <!--                </b-button-group>-->
-        <!--            </div>-->
-        <!--        </div>-->
-
-
         <b-modal ref="logWorkoutModal" title="Log workout">
             <div class="log-workout" v-if="selectedWorkout">
                 <div class="log-workout-container">
@@ -341,6 +295,9 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
     export default class PlannedWorkoutDisplayComponent extends Vue {
         @Prop()
         plannedWorkouts: { planningWorkoutLevel: PlanningWorkoutLevel, planningWodItem: PlanningWorkoutViewModel[] };
+
+        @Prop()
+        doneWodsIds: [number];
         show: boolean = true;
         isScaledSelected: boolean = false;
         isRxSelected: boolean = false;
@@ -423,6 +380,50 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 
         }
 
+        getWorkoutSubTypeDisplayValue(levelPlanningWod:PlanningWorkoutViewModel) {
+            if (this.isWodDone(levelPlanningWod.workoutViewModel.id))
+            {
+                return "Finished!";
+            }
+            switch (levelPlanningWod.wodSubType) {
+                case WodSubType.Skill:
+                    return "Skill";
+                case WodSubType.Wod:
+                    return "WOD";
+                case WodSubType.AccessoryWork:
+                    return "Accessory";
+            }
+        }
+        
+        getSubTypeClass(levelPlanningWod:PlanningWorkoutViewModel) {
+            if (this.isWodDone(levelPlanningWod.workoutViewModel.id))
+            {
+                return 'bg-success text-white';
+            }
+            switch (levelPlanningWod.wodSubType) {
+                case WodSubType.Skill:
+                    return 'bg-info text-white';
+                case WodSubType.Wod:
+                    return 'bg-danger text-white';
+                case WodSubType.AccessoryWork:
+                    return 'bg-warning text-white';
+            }
+        }
+
+        getPlanningLevelDisplayValue(levelPlanningWod:PlanningWorkoutViewModel)
+        {
+            switch (levelPlanningWod.planningWorkoutLevel) {
+                case PlanningWorkoutLevel.Scaled:
+                    return "Scaled";
+                case PlanningWorkoutLevel.Rx:
+                    return "Rx";
+                case PlanningWorkoutLevel.RxPlus:
+                    return "Rx+";
+            }
+        }
+
+
+
         setVisibilityByLevel(planningWorkoutLevel: PlanningWorkoutLevel) {
             this.isScaledSelected = this.isRxSelected = this.isRxPlusSelected = false;
             switch (planningWorkoutLevel) {
@@ -447,6 +448,13 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
         setSelectedPlanned(planningWorkoutLevel: PlanningWorkoutLevel) {
             this.selectedLevelPlanningWorkouts = this.plannedWorkouts[planningWorkoutLevel];
             this.setVisibilityByLevel(planningWorkoutLevel);
+        }
+
+        isWodDone(id: number) {
+            if (this.doneWodsIds.indexOf(id) != -1){
+                return true;
+            }
+            return false;
         }
     }
 </script>
