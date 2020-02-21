@@ -16,6 +16,9 @@ import {SpinnerModel} from "./models/viewModels/SpinnerModel";
 import {ErrorAlertModel} from "./models/viewModels/ErrorAlertModel";
 import {WorkoutViewModel} from "./models/viewModels/WorkoutViewModel";
 import {PlanningWorkoutViewModel} from "./models/viewModels/PlanningWorkoutViewModel";
+import VueScrollTo  from 'vue-scrollto';
+
+Vue.use(VueScrollTo);
 
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver 
 const apiService: CrossfitterService = new CrossfitterService();
@@ -142,7 +145,9 @@ let vue = new Vue({
                 });
         },
         logWorkout(logModel: ToLogWorkoutViewModel, workoutModel: WorkoutViewModel): void {
+            VueScrollTo.scrollTo(".person-setting", 500, {});
             this.spinner.activate();
+
             const model = {
                 newWorkoutViewModel: workoutModel,
                 logWorkoutViewModel: logModel
