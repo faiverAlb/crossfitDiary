@@ -159,6 +159,10 @@ let vue = new Vue({
                     this.doneWodsToday = data;
                     this.spinner.disable();
                 })
+                .then(() => apiService.getPlannedWorkoutsForToday())
+                .then(data => {
+                    this.plannedWorkouts = data;
+                })
                 .catch(data => {
                     this.spinner.disable();
                     this.errorAlertModel.setError(data.response.statusText);
