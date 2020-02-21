@@ -65,7 +65,12 @@ namespace CrossfitDiaryCore.BL.Services
                 .AsNoTracking()
                 .Include(x => x.RoutineSimple)
                 .ThenInclude(x => x.Exercise)
-                .ThenInclude(x => x.ExerciseMeasures).ToList();
+                .ThenInclude(x => x.ExerciseMeasures)
+                .Include(x => x.Children)
+                .ThenInclude(x => x.RoutineSimple)
+                .ThenInclude(x => x.Exercise)
+                .ThenInclude(x => x.ExerciseMeasures)
+                .ToList();
             return CheckWodOnExistingOne(workoutsToCheck, routineComplexToSave);
         }
 
@@ -336,5 +341,17 @@ namespace CrossfitDiaryCore.BL.Services
             // return new LeaderboardItemModel(plannedWorkout.PlanningLevel.ToString(),crossfitterWorkout.Crossfitter.FullName, result);
         }
 
+        public List<int> GetDoneWodsForToday(string userId)
+        {
+            List<int> workoutsIds =
+                _context.CrossfitterWorkouts
+                    .Include(x => x.Crossfitter)
+                    .Where(x => x.Crossfitter.Id == userId && x.Date.Date == DateTime.Today)
+                    .Select(x => x.RoutineComplexId)
+                    .Distinct()
+                    .ToList();
+
+            return workoutsIds;
+        }
     }
 }

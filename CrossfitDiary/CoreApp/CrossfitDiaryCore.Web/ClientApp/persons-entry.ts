@@ -16,6 +16,9 @@ import {SpinnerModel} from "./models/viewModels/SpinnerModel";
 import {ErrorAlertModel} from "./models/viewModels/ErrorAlertModel";
 import {WorkoutViewModel} from "./models/viewModels/WorkoutViewModel";
 import {PlanningWorkoutViewModel} from "./models/viewModels/PlanningWorkoutViewModel";
+import VueScrollTo  from 'vue-scrollto';
+
+Vue.use(VueScrollTo);
 
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver 
 const apiService: CrossfitterService = new CrossfitterService();
@@ -33,31 +36,21 @@ let vue = new Vue({
                     <ErrorAlertComponent :errorAlertModel="errorAlertModel"/>
                 </div>
             </div>
-            
+
             <div v-if="isPlannedWodsLoaded">
-                
-                <PlannedWorkoutDisplayComponent :plannedWorkouts="plannedWorkouts"
+
+                <PlannedWorkoutDisplayComponent :planned-workouts="plannedWorkouts"
+                                                :done-wods-ids="doneWodsToday"
                                                 @deletePlannedWorkout="deletePlannedWorkout"
                                                 @logWorkout="logWorkout"/>
             </div>
 
-            
-            
+
             <div class="container person-setting">
                 <div
                         class="row"
                         v-if="activities"
                 >
-
-<!--                    <div class="offset-lg-3 col col-lg-5 pl-0" v-if="false">-->
-<!--                        <b-form-checkbox-->
-<!--                                id="showOnlyUserWods"-->
-<!--                                name="shouShowOnlyUserWods"-->
-<!--                                v-model="showOnlyUserWods"-->
-<!--                                @change="changeShowUserWods">-->
-<!--                            Show only my wods-->
-<!--                        </b-form-checkbox>-->
-<!--                    </div>-->
 
                 </div>
                 <div class="row mt-4 mb-2" v-if="activities">
@@ -77,7 +70,6 @@ let vue = new Vue({
                 </div>
 
 
-
                 <div class="row">
                     <div class="offset-5">
                         <spinner
@@ -92,7 +84,7 @@ let vue = new Vue({
                 </div>
 
             </div>
-            <PersonsActivitiesComponent :activities="activities"/>
+            <PersonsActivitiesComponent :activities="activities" @onRemoveActivity="updateDoneItems"/>
         </div>
     `,
     components: {
@@ -108,7 +100,8 @@ let vue = new Vue({
             spinner: new SpinnerModel(true),
             errorAlertModel: new ErrorAlertModel(),
             showOnlyUserWods: false,
-            isPlannedWodsLoaded: false
+            isPlannedWodsLoaded: false,
+            doneWodsToday: []
         };
     },
     mounted() {
@@ -120,11 +113,16 @@ let vue = new Vue({
                 this.isPlannedWodsLoaded = true;
                 this.plannedWorkouts = data;
             })
+            .then(() => apiService.getDoneWodsForToday())
+            .then(data => {
+                this.doneWodsToday = data;
+                this.spinner.disable();
+            })
             .catch(data => {
                 this.errorAlertModel.setError(data.response.statusText);
+                this.spinner.disable();
             });
-        apiService
-            .getAllCrossfittersWorkouts()
+        apiService.getAllCrossfittersWorkouts()
             .then(data => {
                 this.activities = data;
                 this.spinner.disable();
@@ -135,8 +133,21 @@ let vue = new Vue({
             });
     },
     methods: {
+        updateDoneItems() {
+            apiService.getDoneWodsForToday()
+                .then(data => {
+                    this.doneWodsToday = data;
+                    this.spinner.disable();
+                })
+                .catch(data => {
+                    this.spinner.disable();
+                    this.errorAlertModel.setError(data.response.statusText);
+                });
+        },
         logWorkout(logModel: ToLogWorkoutViewModel, workoutModel: WorkoutViewModel): void {
+            VueScrollTo.scrollTo(".person-setting", 500, {});
             this.spinner.activate();
+
             const model = {
                 newWorkoutViewModel: workoutModel,
                 logWorkoutViewModel: logModel
@@ -147,6 +158,15 @@ let vue = new Vue({
                 .then(data => {
                     this.activities = data;
                     this.spinner.disable();
+                })
+                .then(() => apiService.getDoneWodsForToday())
+                .then(data => {
+                    this.doneWodsToday = data;
+                    this.spinner.disable();
+                })
+                .then(() => apiService.getPlannedWorkoutsForToday())
+                .then(data => {
+                    this.plannedWorkouts = data;
                 })
                 .catch(data => {
                     this.spinner.disable();

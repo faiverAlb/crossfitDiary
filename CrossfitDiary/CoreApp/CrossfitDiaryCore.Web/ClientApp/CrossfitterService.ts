@@ -51,6 +51,12 @@ export default class CrossfitterService {
       return jsonData.data.map(x => new WorkoutViewModel().deserialize(x));
     });
   };
+  public getDoneWodsForToday = (): Promise<number[]> => {
+    return axios.get(`api/getDoneWodsForToday`).then(jsonData => {
+      return jsonData.data.map(x => Number.parseInt(x));
+    });
+  };
+  
   public getExercises = (): Promise<ExerciseViewModel[]> => {
     return axios.get<ExerciseViewModel[]>("api/getExercises").then(jsonData => {
       return jsonData.data.map(x => new ExerciseViewModel().deserialize(x));

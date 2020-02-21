@@ -57,6 +57,9 @@ namespace CrossfitDiaryCore.DAL.EF
             new Exercise {Id = 175, Abbreviation = "Barbell cuban rotation", Title = "Barbell cuban rotation"},
             new Exercise {Id = 176, Abbreviation = "German hang", Title = "German hang"},
             new Exercise {Id = 177, Abbreviation = "Prowler push", Title = "Prowler push"},
+            new Exercise {Id = 178, Abbreviation = "Power jerk", Title = "Power jerk"},
+            new Exercise {Id = 179, Abbreviation = "Front rack lunge", Title = "Front rack lunge"},
+            new Exercise {Id = 180, Abbreviation = "Skin the cat", Title = "Skin the cat"},
         };
 
         private static readonly List<ExerciseMeasure[]> _measures = new List<ExerciseMeasure[]>()
@@ -321,6 +324,22 @@ namespace CrossfitDiaryCore.DAL.EF
                 new ExerciseMeasure {Id = 425, ExerciseMeasureTypeId = MeasureType.Time, ExerciseId = 177},
                 new ExerciseMeasure {Id = 426, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 177},
                 new ExerciseMeasure {Id = 427, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 177},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 428, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 178},
+                new ExerciseMeasure {Id = 429, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 178},
+                new ExerciseMeasure {Id = 430, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 178},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 431, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 179},
+                new ExerciseMeasure {Id = 432, ExerciseMeasureTypeId = MeasureType.Weight, ExerciseId = 179},
+                new ExerciseMeasure {Id = 433, ExerciseMeasureTypeId = MeasureType.AlternativeWeight, ExerciseId = 179},
+            },
+            new[]
+            {
+                new ExerciseMeasure {Id = 434, ExerciseMeasureTypeId = MeasureType.Count, ExerciseId = 180},
             },
 
         };
