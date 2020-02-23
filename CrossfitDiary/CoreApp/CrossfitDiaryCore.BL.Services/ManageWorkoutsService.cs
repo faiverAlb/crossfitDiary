@@ -26,13 +26,16 @@ namespace CrossfitDiaryCore.BL.Services
             _maximumsUpdater = maximumsUpdater;
         }
 
-        public void RemoveWorkoutResult(int crossfitterWorkoutId, string userId)
+        public int RemoveWorkoutResult(int crossfitterWorkoutId, string userId)
         {
             CrossfitterWorkout toRemove = _context.CrossfitterWorkouts.Include(x => x.RoutineComplex).Single(x => x.Id == crossfitterWorkoutId && x.Crossfitter.Id == userId);
             _context.CrossfitterWorkouts.Remove(toRemove);
             _context.SaveChanges();
 
-            RemoveObsoleteWorkoutIfUserAuthor(toRemove.RoutineComplexId, userId);
+            int routineComplexIdToDelete = toRemove.RoutineComplexId;
+            RemoveObsoleteWorkoutIfUserAuthor(routineComplexIdToDelete, userId);
+
+            return routineComplexIdToDelete;
         }
 
         /// <summary>
@@ -79,7 +82,7 @@ namespace CrossfitDiaryCore.BL.Services
         }
 
 
-        public void CreateAndLogNewWorkout(RoutineComplex workoutRoutine, CrossfitterWorkout logWorkoutModel, ApplicationUser user)
+        public int CreateAndLogNewWorkout(RoutineComplex workoutRoutine, CrossfitterWorkout logWorkoutModel, ApplicationUser user)
         {
             //todo: precheck rights for workout + log
             _maximumsUpdater.CalculateWeightBasedOnWeightsPercent(workoutRoutine, user.Id, logWorkoutModel.Date);
@@ -122,7 +125,8 @@ namespace CrossfitDiaryCore.BL.Services
             logWorkoutModel.Id = 0;
             _context.CrossfitterWorkouts.Add(logWorkoutModel);
             _context.SaveChanges();
-        
+
+            return workoutId;
         }
 
 

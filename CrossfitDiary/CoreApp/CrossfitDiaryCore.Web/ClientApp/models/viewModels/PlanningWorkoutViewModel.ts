@@ -11,44 +11,9 @@ export class PlanningWorkoutViewModel implements Deserializable {
     subTypeClass: string = "";
     isPrivatePlanning:boolean = false;
 
-    get workoutSubTypeDisplayValue() {
-        this.subTypeClass = this.getSubTypeClass();
-        switch (this.wodSubType) {
-            case WodSubType.Skill:
-                return "Skill";
-            case WodSubType.Wod:
-                return "WOD";
-            case WodSubType.AccessoryWork:
-                return "Accessory";
-        }
 
 
-    }
 
-
-    get planningLevelDisplayValue() {
-        switch (this.planningWorkoutLevel) {
-            case PlanningWorkoutLevel.Scaled:
-                return "Scaled";
-            case PlanningWorkoutLevel.Rx:
-                return "Rx";
-            case PlanningWorkoutLevel.RxPlus:
-                return "Rx+";
-        }
-    }
-
-
-    getSubTypeClass() {
-        switch (this.wodSubType) {
-            case WodSubType.Skill:
-                return 'bg-info text-white';
-            case WodSubType.Wod:
-                return 'bg-danger text-white';
-            case WodSubType.AccessoryWork:
-                return 'bg-warning text-white';
-        }
-
-    }
 
     getDefaultDate = (): string => {
         let date: Date = new Date();

@@ -224,7 +224,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
                 string sql = @"SELECT [x].*
                                 FROM [CrossfitterWorkout] AS [x]
                                 INNER JOIN [RoutineComplex] AS [x.RoutineComplex] ON [x].[RoutineComplexId] = [x.RoutineComplex].[Id]
-                                WHERE (((([x.RoutineComplex].[FindMaxWeight] = 1) AND ([x].[Date] < @date)) 
+                                WHERE (((([x.RoutineComplex].[FindMaxWeight] = 1) AND ([x].[Date] <= @date)) 
                                 AND ([x].[CrossfitterId] = @userId)) AND 
                                 EXISTS (
 		                                SELECT 1
@@ -232,7 +232,7 @@ namespace CrossfitDiaryCore.BL.Services.DapperStuff
 		                                WHERE [y].[ExerciseId] = @exerciseId 	AND ([x.RoutineComplex].[Id] = [y].[RoutineComplexId]))
 	                                ) 
 	                                AND [x].[Weight] IS NOT NULL
-                                ORDER BY x.Date";
+                                ORDER BY x.Date DESC";
                 return db.QueryFirstOrDefault<CrossfitterWorkout>(sql, new { userId = userId, date = date, exerciseId = exerciseId });
             }
 

@@ -85,6 +85,8 @@
                         .map(item => item.id)
                         .indexOf(this._toDeleteCrossfitWorkoutId);
                     this.activities.splice(indexOfWorkout, 1);
+                    this.$emit("onRemoveActivity");
+
                 });
         }
         showLeaderBoardModal(crossfitterWorkoutId: number) {
