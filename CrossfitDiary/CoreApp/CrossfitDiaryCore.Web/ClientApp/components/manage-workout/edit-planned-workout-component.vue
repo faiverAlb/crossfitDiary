@@ -19,9 +19,9 @@
         </div>
         <div class="d-flex justify-content-end">
             <b-form-checkbox
+                    :disabled="isPrivatePlanningFixed"
                     id="isPrivatePlanning"
                     name="isPrivatePlanning"
-                    :disabled="isPrivatePlanningFixed"
                     v-model="planningWorkout.isPrivatePlanning">
                 Plan as private session
             </b-form-checkbox>
@@ -117,21 +117,18 @@
         $refs: {
             planWorkoutModal: HTMLFormElement;
         };
-
-        mounted(){
-            debugger;
-            this.isPrivatePlanningFixed = workouter.canUserPlanWorkouts == false;
-            if (workouter.canUserPlanWorkouts == false)
-            {
-                this.planningWorkout.isPrivatePlanning = true;
-            }
-        }
-
         wodSubTypes = [
             {text: 'Skill', value: WodSubType.Skill},
             {text: 'Workout', value: WodSubType.Wod},
             {text: 'Accessory', value: WodSubType.AccessoryWork}
         ];
+
+        mounted() {
+            this.isPrivatePlanningFixed = workouter.canUserPlanWorkouts == false;
+            if (workouter.canUserPlanWorkouts == false) {
+                this.planningWorkout.isPrivatePlanning = true;
+            }
+        }
 
         showPlanWorkoutModal(type: PlanningWorkoutLevel): void {
             this.selectedPlanningLevel = type;

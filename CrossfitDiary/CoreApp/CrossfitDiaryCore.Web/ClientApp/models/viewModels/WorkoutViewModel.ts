@@ -59,6 +59,9 @@ export class WorkoutViewModel implements Deserializable {
     public IsFindMaxWeight = () => {
         return this.workoutType === WorkoutType.NotForTime && this.findMaxWeight == true;
     };
+    public IsNotForTime = () => {
+        return this.workoutType === WorkoutType.NotForTime;
+    };
 
     private getHaveCollapsedVersion = (exercisedToUse: ExerciseViewModel[], distinctFirst: ExerciseViewModel[]): boolean => {
         let canBeCollapsed: boolean = true;

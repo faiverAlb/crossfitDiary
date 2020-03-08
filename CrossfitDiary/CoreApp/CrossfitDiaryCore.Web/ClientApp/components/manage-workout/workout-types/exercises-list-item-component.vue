@@ -110,6 +110,7 @@
     /* public components */
     import {Component, Prop, Vue, Watch} from "vue-property-decorator";
     import {
+        BBadge,
         BButton,
         BDropdown,
         BDropdownDivider,
@@ -118,7 +119,6 @@
         BDropdownItemButton,
         BFormGroup,
         BFormInput,
-        BBadge,
         InputGroupPlugin,
     } from "bootstrap-vue";
     /* models and styles */
