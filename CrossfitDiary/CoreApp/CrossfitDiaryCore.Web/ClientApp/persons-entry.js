@@ -15,6 +15,8 @@ import { ToLogWorkoutViewModel } from "./models/viewModels/ToLogWorkoutViewModel
 import { SpinnerModel } from "./models/viewModels/SpinnerModel";
 import { ErrorAlertModel } from "./models/viewModels/ErrorAlertModel";
 import { PlanningWorkoutViewModel } from "./models/viewModels/PlanningWorkoutViewModel";
+import VueScrollTo from 'vue-scrollto';
+Vue.use(VueScrollTo);
 dom.watch(); // This will kick of the initial replacement of i to svg tags and configure a MutationObserver 
 var apiService = new CrossfitterService();
 Vue.component("b-form-checkbox", BFormCheckbox);
@@ -82,6 +84,7 @@ var vue = new Vue({
         },
         logWorkout: function (logModel, workoutModel) {
             var _this = this;
+            VueScrollTo.scrollTo(".person-setting", 500, {});
             this.spinner.activate();
             var model = {
                 newWorkoutViewModel: workoutModel,
@@ -98,6 +101,10 @@ var vue = new Vue({
                 .then(function (data) {
                 _this.doneWodsToday = data;
                 _this.spinner.disable();
+            })
+                .then(function () { return apiService.getPlannedWorkoutsForToday(); })
+                .then(function (data) {
+                _this.plannedWorkouts = data;
             })
                 .catch(function (data) {
                 _this.spinner.disable();
