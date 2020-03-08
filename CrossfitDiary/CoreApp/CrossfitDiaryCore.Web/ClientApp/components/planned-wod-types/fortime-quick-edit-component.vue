@@ -68,7 +68,7 @@
                             >
                                 <div class="simple-routine-item">
                                     <div class="form-row">
-                                        <div class="form-group my-1 col-2">
+                                        <div class="form-group my-1 col-lg-auto">
                                             <b-input-group size="sm">
                                                 <b-input-group-prepend class="form-control exercise-title" is-text
                                                                        size="sm">
