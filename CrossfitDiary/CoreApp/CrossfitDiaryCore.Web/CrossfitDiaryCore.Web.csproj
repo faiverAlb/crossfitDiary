@@ -7,9 +7,9 @@
 
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
-    <Version>0.5.6</Version>
-    <AssemblyVersion>0.5.6.0</AssemblyVersion>
-    <FileVersion>0.5.5.0</FileVersion>
+    <Version>0.5.7</Version>
+    <AssemblyVersion>0.5.7.0</AssemblyVersion>
+    <FileVersion>0.5.7.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

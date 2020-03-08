@@ -14,7 +14,8 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                 :key="levelPlanningWod.id"
                 class="row mt-1"
                 v-for="levelPlanningWod in selectedLevelPlanningWorkouts">
-            <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters justify-content-between" v-bind:class="{'done-planned-wod':isWodDone(levelPlanningWod.workoutViewModel.id)}">
+            <div class="done-item offset-lg-3 col col-lg-5 p-0 rounded row no-gutters justify-content-between"
+                 v-bind:class="{'done-planned-wod':isWodDone(levelPlanningWod.workoutViewModel.id)}">
                 <div class="workout-sub-type-display mr-2 py-1 rounded-left"
                      v-bind:class="getSubTypeClass(levelPlanningWod)">
                     {{getWorkoutSubTypeDisplayValue(levelPlanningWod)}}
@@ -80,15 +81,36 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
         <b-modal ref="logWorkoutModal" title="Log workout">
             <div class="log-workout" v-if="selectedWorkout">
                 <div class="log-workout-container">
+                    <div class="row" v-if="selectedWorkout.IsForTime()">
+                        <div class="col">
+                            <b-button size="sm" v-b-toggle.collapse-for-time-quick variant="outline-primary">Edit
+                                workout
+                            </b-button>
+                            <b-collapse class="mt-2" id="collapse-for-time-quick">
+                                <FortimeQuickEditComponent :model="selectedWorkout"/>
+                            </b-collapse>
+                        </div>
+
+                    </div>
+                    <div class="row" v-if="selectedWorkout.IsNotForTime()">
+                        <div class="col">
+                            <b-button size="sm" v-b-toggle.collapse-nft-quick variant="outline-primary">Edit
+                                workout
+                            </b-button>
+                            <b-collapse class="mt-2" id="collapse-nft-quick">
+                                <NftQuickEditComponent :model="selectedWorkout"/>
+                            </b-collapse>
+                        </div>
+
+                    </div>
+                    <br/>
                     <div v-if="selectedWorkout.IsHaveCapTime()">
                         <div class="row">
                             <div class="col-sm-12">
                                 <b-input-group class="mb-2">
                                     <b-input-group-prepend>
                                         <b-input-group-text tag="span">
-                                            <font-awesome-icon
-                                                    :icon="['far', 'clock']"
-                                            />
+                                            <font-awesome-icon :icon="['far', 'clock']"/>
                                         </b-input-group-text>
                                     </b-input-group-prepend>
                                     <b-form-input
@@ -248,7 +270,15 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
     /* public components */
     import {Component, Prop, Vue, Watch} from "vue-property-decorator";
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-    import {BButton, BButtonGroup, BFormInput, BFormTextarea, BModal, InputGroupPlugin} from "bootstrap-vue";
+    import {
+        BButton,
+        BButtonGroup,
+        BFormInput,
+        BFormTextarea,
+        BModal,
+        CollapsePlugin,
+        InputGroupPlugin
+    } from "bootstrap-vue";
     import datePicker from "vue-bootstrap-datetimepicker";
     import "pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css";
     import {mask} from "vue-the-mask";
@@ -262,6 +292,8 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
     import {PlanningWorkoutLevel, WorkoutViewModel} from "../models/viewModels/WorkoutViewModel";
     import {PlanningWorkoutViewModel} from "../models/viewModels/PlanningWorkoutViewModel";
     import {WodSubType} from "../models/viewModels/WodSubType";
+    import FortimeQuickEditComponent from "./planned-wod-types/fortime-quick-edit-component.vue";
+    import NftQuickEditComponent from "./planned-wod-types/nft-quick-edit-component.vue";
 
     library.add(
         faGrinBeam,
@@ -277,10 +309,13 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
     );
 
     Vue.use(InputGroupPlugin);
+    Vue.use(CollapsePlugin);
     Vue.use(VeeValidate);
 
     @Component({
         components: {
+            NftQuickEditComponent,
+            FortimeQuickEditComponent,
             FontAwesomeIcon,
             WorkoutDisplayComponent,
             BButtonGroup,
@@ -288,7 +323,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
             BModal,
             BFormInput,
             datePicker,
-            BFormTextarea
+            BFormTextarea,
         },
         directives: {mask}
     })
@@ -380,9 +415,8 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
 
         }
 
-        getWorkoutSubTypeDisplayValue(levelPlanningWod:PlanningWorkoutViewModel) {
-            if (this.isWodDone(levelPlanningWod.workoutViewModel.id))
-            {
+        getWorkoutSubTypeDisplayValue(levelPlanningWod: PlanningWorkoutViewModel) {
+            if (this.isWodDone(levelPlanningWod.workoutViewModel.id)) {
                 return "Finished!";
             }
             switch (levelPlanningWod.wodSubType) {
@@ -394,10 +428,9 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                     return "Accessory";
             }
         }
-        
-        getSubTypeClass(levelPlanningWod:PlanningWorkoutViewModel) {
-            if (this.isWodDone(levelPlanningWod.workoutViewModel.id))
-            {
+
+        getSubTypeClass(levelPlanningWod: PlanningWorkoutViewModel) {
+            if (this.isWodDone(levelPlanningWod.workoutViewModel.id)) {
                 return 'bg-success text-white';
             }
             switch (levelPlanningWod.wodSubType) {
@@ -410,8 +443,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
             }
         }
 
-        getPlanningLevelDisplayValue(levelPlanningWod:PlanningWorkoutViewModel)
-        {
+        getPlanningLevelDisplayValue(levelPlanningWod: PlanningWorkoutViewModel) {
             switch (levelPlanningWod.planningWorkoutLevel) {
                 case PlanningWorkoutLevel.Scaled:
                     return "Scaled";
@@ -421,7 +453,6 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
                     return "Rx+";
             }
         }
-
 
 
         setVisibilityByLevel(planningWorkoutLevel: PlanningWorkoutLevel) {
@@ -451,7 +482,7 @@ import {PlanningWorkoutLevel} from "../models/viewModels/WorkoutViewModel";
         }
 
         isWodDone(id: number) {
-            if (this.doneWodsIds.indexOf(id) != -1){
+            if (this.doneWodsIds.indexOf(id) != -1) {
                 return true;
             }
             return false;
